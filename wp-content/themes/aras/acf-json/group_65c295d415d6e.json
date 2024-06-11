@@ -1,0 +1,209 @@
+{
+    "key": "group_65c295d415d6e",
+    "title": "Footer CTA",
+    "fields": [
+        {
+            "key": "field_65e0b10518f81",
+            "label": "Include Footer CTA",
+            "name": "include_footer_cta",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_65d3cac4a245f",
+            "label": "Use Global Content",
+            "name": "use_global_content",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_65e0b10518f81",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "Use Global",
+            "ui_off_text": "Customize",
+            "ui": 1
+        },
+        {
+            "key": "field_65f0ce0e0c063",
+            "label": "CTA Style",
+            "name": "cta_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_65e0b10518f81",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_65d3cac4a245f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "pattern": "Left Aligned CTA on a white patterned background",
+                "simple": "Centered CTA on a light grey background"
+            },
+            "default_value": "pattern",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_65f07c55f27cb",
+            "label": "CTA Headline",
+            "name": "cta_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_65d3cac4a245f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_65c296b1b4b28",
+            "label": "CTA Content",
+            "name": "cta_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_65e0b10518f81",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_65d3cac4a245f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_65c296c5b4b29",
+            "label": "CTA Button",
+            "name": "cta_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_65e0b10518f81",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_65d3cac4a245f",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": ""
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1714490211
+}

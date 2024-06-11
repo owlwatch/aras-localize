@@ -1,0 +1,145 @@
+{
+    "key": "group_663baef280aca",
+    "title": "Label Translations",
+    "fields": [
+        {
+            "key": "field_663baef351b57",
+            "label": "Label - French",
+            "name": "cat_label_french",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_663bb12a51b58",
+            "label": "Label - German",
+            "name": "cat_label_german",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_663bb13451b59",
+            "label": "Label - Japanese",
+            "name": "cat_label_japanese",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "post_tag"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "industry"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "application"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "topic"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "format"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "event_region"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "event_type"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "news_type"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1715190376
+}

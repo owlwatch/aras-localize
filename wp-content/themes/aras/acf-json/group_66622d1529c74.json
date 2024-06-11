@@ -1,0 +1,47 @@
+{
+    "key": "group_66622d1529c74",
+    "title": "Comment Moderation",
+    "fields": [
+        {
+            "key": "field_66622d15eeb9b",
+            "label": "Comment Moderation Emails",
+            "name": "comment_moderation_emails",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Enter in the email addresses that should receive comment moderation emails. enter emails in a comma separated list.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "email@aras.com, email2@aras.com",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-blog-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1717710955
+}

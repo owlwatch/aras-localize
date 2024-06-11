@@ -1,0 +1,196 @@
+.partners-hero-banner {
+    position: relative;
+
+    .grid-container {
+        position: relative;
+        z-index: 1;
+
+        .hero-content {
+            &>*:last-child {
+                margin-bottom: 0;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+                margin-bottom: .5rem;
+
+                @include breakpoint(medium only) {
+                    font-size: 1.75rem;
+                }
+
+                @include breakpoint(small only) {
+                    font-size: 1.35rem;
+                }
+            }
+
+            p {
+                font-size: 1.3rem;
+                line-height: 1.3;
+
+                @include breakpoint(medium only) {
+                    font-size: 1.15rem;
+                }
+
+                @include breakpoint(small only) {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    &::after {
+        content: '';
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-image: url(../images/backgrounds/partner-hero-background.svg);
+        z-index: 0;
+    }
+}
+
+#partners-section {
+
+    .partners-filter {
+        fieldset {
+            margin-top: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        select {
+            padding-left: 15px;
+            color: $dblue;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 0;
+            height: 40px;
+
+            &:active,
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        #clear-button {
+            display: block;
+            background-color: $black;
+            color: $white;
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 0;
+            height: 40px;
+        }
+    }
+
+    .partner-archive {
+        .partner-post-loop {
+            margin-left: -1rem;
+            margin-right: -1rem;
+            width: calc(100% + 2rem);
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+
+            .partner-item {
+                flex: 0 0 calc((100% / 6) - 1rem);
+                //max-width: calc((100% / 6) - 1rem);
+                //flex-grow: 1;
+                width: calc((100% / 6) - 1rem);
+                min-width: 150px;
+                height: 130px;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    filter: grayscale(1);
+                    transform: scale(.95);
+                    transition: .25s ease-in-out;
+
+                    height: 130px;
+
+
+                    &:hover,
+                    &:focus {
+                        transform: scale(1);
+                        filter: grayscale(0);
+                    }
+
+
+                    img {
+                        width: max-content;
+                        max-height: 100%;
+                        height: auto;
+                        padding: 0 10%;
+                    }
+                }
+            }
+        }
+
+        #no-posts-text {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.partners-post-content {
+    .partner-image {
+        max-width: 200px;
+        max-height: 125px;
+        width: auto;
+        height: auto;
+        margin-top: .5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .postsidebar {
+
+        @media print,
+        screen and (max-width: 923px) {
+            width: 320px !important;
+        }
+
+        @media print,
+        screen and (max-width: 800px) {
+            margin-top: 2rem;
+            width: 100% !important;
+        }
+
+        .filters-item {
+            border-bottom: solid 2px $lightgrey;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+
+            h6 {
+                margin-bottom: .5rem;
+                font-size: 14.5px;
+            }
+
+            p {
+                margin-bottom: 0;
+                font-size: 13.5px;
+            }
+
+            &:nth-child(1) {
+                padding-top: 0;
+            }
+        }
+    }
+}

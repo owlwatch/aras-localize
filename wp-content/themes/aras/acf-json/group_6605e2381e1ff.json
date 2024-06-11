@@ -1,0 +1,382 @@
+{
+    "key": "group_6605e2381e1ff",
+    "title": "Resource List Page",
+    "fields": [
+        {
+            "key": "field_6605e239a0470",
+            "label": "Hero Banner",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6605e24ba0471",
+            "label": "Hero Headline",
+            "name": "hero_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6605e256a0472",
+            "label": "Resource Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6605e269a0473",
+            "label": "Resource Types",
+            "name": "resource_types",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "format",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6607193611a99",
+            "label": "Additional Filter Options",
+            "name": "additional_filter_options",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "upcoming": "Future Event Resources Only"
+            },
+            "default_value": [],
+            "return_format": "value",
+            "allow_custom": 0,
+            "layout": "vertical",
+            "toggle": 0,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_6605e2eaa0474",
+            "label": "Filter Types",
+            "name": "filter_types",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "industry": "Industries",
+                "application": "Applications",
+                "topic": "Topics",
+                "location": "Locations",
+                "format": "Format"
+            },
+            "default_value": [],
+            "return_format": "value",
+            "allow_custom": 0,
+            "layout": "vertical",
+            "toggle": 0,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_6605e369a0475",
+            "label": "Industry Filter",
+            "name": "industry_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6605e2eaa0474",
+                        "operator": "==",
+                        "value": "industry"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "industry",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6605e4da15a20",
+            "label": "Application Filter",
+            "name": "application_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6605e2eaa0474",
+                        "operator": "==",
+                        "value": "application"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "application",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6605e4f015a21",
+            "label": "Topic Filter",
+            "name": "topic_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6605e2eaa0474",
+                        "operator": "==",
+                        "value": "topic"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "topic",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6605e4fd15a22",
+            "label": "Location Filter",
+            "name": "location_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6605e2eaa0474",
+                        "operator": "==",
+                        "value": "location"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "location",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6605e52915a23",
+            "label": "Format Filter",
+            "name": "format_filter",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6605e2eaa0474",
+                        "operator": "==",
+                        "value": "format"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "taxonomy": "format",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6605e54915a24",
+            "label": "Footer CTA",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6605e55415a25",
+            "label": "Footer CTA",
+            "name": "footer_cta",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "clone": [
+                "group_65c295d415d6e"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "templates\/resource_page.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "comments",
+        "author",
+        "categories",
+        "tags"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1714059612
+}

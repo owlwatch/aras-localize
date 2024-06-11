@@ -1,0 +1,128 @@
+.roadmap-filter-section,
+.roadmap-releases {
+    h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+    }
+}
+
+.roadmap-filter-section {
+    .roadmap-filter-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .product-area {
+        flex: 1;
+
+        select {
+            margin: 0;
+            border: solid 1px $bordergrey;
+        }
+    }
+
+    select,
+    button {
+        height: 39px;
+    }
+}
+
+.product-roadmap-section {
+    .roadmap-state {
+        background-color: $lightestgrey;
+        border: solid $bordergrey 1px;
+        margin-bottom: 1rem;
+
+        h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            padding: 0.75rem 0.75rem 0 0.75rem;
+        }
+
+        .roadmap-container {
+            max-height: 430px;
+            overflow-y: scroll;
+            padding: 0 0.75rem;
+            margin-top: 0.75rem;
+
+            &::-webkit-scrollbar {
+                width: 0.5rem;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: rgba($color: $lightgrey, $alpha: 0.25);
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: $bordergrey;
+
+                &:hover {
+                    background: $midgrey;
+                }
+            }
+        }
+
+        .state-item {
+            cursor: pointer;
+            display: block;
+            padding: 9px;
+            margin: 0 0 0.75rem 0;
+            border: solid $bordergrey 1px;
+            background-color: $white;
+
+            &:hover {
+                border: solid $red 1px;
+            }
+
+            &.highlighted {
+                border: solid $red 3px;
+                padding: 7px;
+
+                &:hover {
+                    border: solid $red 3px;
+                }
+            }
+
+            h4 {
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 1.35;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 1.35;
+            }
+
+            p.product-area {
+                margin-top: 0.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            p.product-date {
+                margin-top: 0.25rem;
+                margin-bottom: 0.25rem;
+
+                strong {
+                    font-weight: 400;
+                    color: $red;
+                }
+            }
+
+            .product-desc {
+                padding-top: 0.75rem;
+                margin-top: 0.75rem;
+                border-top: solid 1px $bordergrey;
+
+                p {
+                    margin-bottom: 0.5rem;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

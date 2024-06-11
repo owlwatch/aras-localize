@@ -1,0 +1,137 @@
+////Maintain Query Parameters
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the current URL and its query parameters
+  var currentUrl = new URL(window.location.href);
+  var params = new URLSearchParams(currentUrl.search);
+  // Exclude the following parameters:
+  var excludeParams = ['application', 'format', 'industry', 'topic', 'language', 'post_type', 's'];
+  excludeParams.forEach(function(param) {
+      params.delete(param);
+  });
+  // If there are remaining query parameters, process the links
+  if (params.toString()) {
+      // Select all anchor tags
+      var links = document.querySelectorAll("a");
+      // Loop through each link
+      links.forEach(function(link) {
+          // Get the href attribute of the link
+          var linkHref = link.getAttribute("href");
+          // Check if the link is not empty or just a hash and if it's not already an anchor link (href="#something")
+          if (linkHref && !linkHref.startsWith("#")) {
+              // Create a URL object from the link href
+              var linkUrl = new URL(linkHref, window.location.origin);
+              // Append the current page's query parameters to the link's query parameters
+              linkUrl.search += (linkUrl.search ? '&' : '') + params.toString();
+              // Set the modified URL back to the link's href attribute
+              link.setAttribute("href", linkUrl.toString());
+          }
+      });
+  }
+});
+////Smooth Scrolling
+jQuery(document).ready(function() {
+  // Check window height
+  if (jQuery(window).height() >= 600) {
+      // Function to handle scrolling to target element
+      function scrollToTarget(target) {
+          if (target.length) {
+              // Offset scroll position to account for fixed header
+              var offsetTop = target.offset().top - jQuery(".header").outerHeight();
+              jQuery('html, body').stop().animate({
+                  scrollTop: offsetTop
+              }, 600);
+          }
+      }
+      // Check if there's an anchor link in the URL
+      var hash = window.location.hash;
+      if (hash) {
+          scrollToTarget(jQuery(hash));
+      }
+      // Handle click events on anchor links by delegating to a parent element
+      jQuery(document).on('click', 'a[href*="#"]', function(event) {
+          var href = jQuery(this).attr('href');
+          var hashIndex = href.indexOf('#');
+          if (hashIndex !== -1) {
+              var hash = href.slice(hashIndex);
+              var target = jQuery(hash);
+              console.log('Hash:', hash);
+              console.log('Target:', target);
+              scrollToTarget(target);
+              // Prevent default behavior of anchor links
+              event.preventDefault();
+          }
+      });
+  }
+});
+
+
+////Copy function for <pre>
+window.addEventListener("DOMContentLoaded", function() {
+  var preElements = document.getElementsByTagName("pre");
+  if (preElements && preElements.length > 0) {
+      for (var i = 0; i < preElements.length; i++) {
+          var preElement = preElements[i];
+          var spanElement = document.createElement("span");
+          spanElement.classList.add("copy-container");
+
+          var buttonElement = document.createElement("button");
+          buttonElement.textContent = "Copy Snippet";
+          buttonElement.classList.add("copy-button");
+          buttonElement.addEventListener("click", createCopyTextHandler(preElement));
+
+          spanElement.appendChild(preElement.cloneNode(true));
+          spanElement.appendChild(buttonElement);
+          preElement.parentNode.replaceChild(spanElement, preElement);
+      }
+  }
+});
+function createCopyTextHandler(element) {
+  return function() {
+      var text = element.textContent;
+      var tempInput = document.createElement("textarea");
+      tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+  };
+}
+
+
+//// Language dropdown functionality
+var buttons = document.querySelectorAll('.language-dropdown-button');
+var dropdownPanes = document.querySelectorAll('.language-dropdown-container');
+buttons.forEach(function(button, index) {
+  button.addEventListener('click', function() {
+      if (dropdownPanes[index].classList.contains('is-open')) {
+          dropdownPanes[index].classList.remove('is-open');
+      } else {
+          dropdownPanes.forEach(function(pane) {
+              pane.classList.remove('is-open');
+          });
+          dropdownPanes[index].classList.add('is-open');
+      }
+  });
+});
+
+//// Skip link functionality for ADA compliancy
+document.addEventListener("DOMContentLoaded", function() {
+  var skipLink = document.getElementById("skip-link");
+  var targetSection = document.getElementById(skipLink.getAttribute("href").substring(1)); // Remove '#' from href to get section ID
+
+  skipLink.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent default behavior of the link
+
+      // Change focus to the target section
+      targetSection.tabIndex = -1;
+      targetSection.focus();
+      targetSection.tabIndex = 0; // Restore tabindex to make section focusable by default
+
+      // Optionally, you can visually highlight the target section for better accessibility
+      targetSection.style.outline = "2px solid blue";
+      setTimeout(function() {
+          targetSection.style.outline = ""; // Remove outline after a short delay
+      }, 2000); // Adjust the delay as needed
+  });
+});

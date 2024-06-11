@@ -1,0 +1,193 @@
+.side-tabs-section {
+    position: relative;
+
+    .side-tabs {
+        display: block;
+        border: none;
+        background: transparent;
+
+        @include breakpoint(small only) {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0 1rem;
+            justify-content: left;
+            margin-bottom: 1.5rem;
+        }
+
+        &.two-col {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0 1rem;
+
+            @include breakpoint(medium only) {
+                flex-direction: column;
+            }
+
+            @include breakpoint(small only) {
+                flex-direction: row;
+            }
+
+            .tabs-title {
+                width: calc(50% - .5rem);
+                align-items: end;
+                justify-content: left;
+                display: flex;
+
+                @include breakpoint(medium only) {
+                    width: 100%;
+                }
+
+                @include breakpoint(small only) {
+                    width: calc(50% - .5rem);
+                }
+            }
+        }
+
+        .tabs-title {
+            display: block;
+            float: none;
+            background: transparent;
+            border-bottom: solid 2px $midgrey;
+            margin-bottom: .8rem;
+
+            @include breakpoint(medium only) {
+                width: 100%;
+            }
+
+            @include breakpoint(small only) {
+                width: calc(50% - .5rem);
+            }
+
+            &.is-active {
+                a {
+                    &::after {
+                        content: '';
+                        width: 100%;
+                        min-width: 130px;
+                        height: 5px;
+                        position: absolute;
+                        bottom: -4px;
+                        left: 0;
+                        background: linear-gradient(90deg, rgba(212, 150, 35, 1) 0%, rgba(206, 35, 39, 1) 100%);
+
+                        @include breakpoint(medium only) {
+                            min-width: 100px;
+                        }
+
+                        @include breakpoint(small only) {
+                            //  min-width: 100%;
+                            //  padding-left: 6px;
+                            //  padding-right: 6px;
+                        }
+
+                    }
+                }
+            }
+
+            a {
+                position: relative;
+                display: inline-block;
+                padding: 0 0 .6rem 0;
+                text-decoration: none;
+                color: $midgrey;
+                background: transparent;
+                font-size: .9rem;
+                font-weight: 400;
+                line-height: 1.2;
+
+                &:hover,
+                &:focus {
+                    color: $midgrey;
+                }
+
+                @include breakpoint(medium only) {
+                    font-size: .825rem;
+                }
+
+                @include breakpoint(small only) {
+                    //  font-size: .825rem;
+                    //  min-width: 100px;
+                }
+
+                &.label-upper {
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+    }
+
+    .side-tabs-content {
+        border: none;
+        background: transparent;
+
+        .tabs-panel {
+            padding: 0;
+
+            h6 {
+                margin-bottom: .5rem;
+            }
+
+            h3 {
+                margin-bottom: .75rem;
+            }
+
+            .tab-content-content {
+                margin-bottom: 1rem;
+            }
+
+            .tab-visual {
+                margin-bottom: 1.5rem;
+            }
+
+            &.tab-location-panel {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+
+                .tab-location-window {
+                    width: 100%;
+                    min-height: auto;
+                    padding: 1.5rem;
+                    position: relative;
+                    z-index: 1;
+                    aspect-ratio: 2 / 1;
+
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p {
+                        color: $white;
+                    }
+
+                    h4 {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        margin-bottom: 2px;
+                    }
+
+                    p {
+                        font-size: 1.1rem;
+                        margin-bottom: 8px;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background: linear-gradient(90deg, rgba(41, 41, 41, 0.9) 0%, rgba(41, 41, 41, 0.5) 100%);
+                        z-index: -1;
+                    }
+                }
+            }
+        }
+    }
+}

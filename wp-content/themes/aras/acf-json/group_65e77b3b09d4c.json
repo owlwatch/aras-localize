@@ -1,0 +1,57 @@
+{
+    "key": "group_65e77b3b09d4c",
+    "title": "_Background Color - Default Dark Blue",
+    "fields": [
+        {
+            "key": "field_65e77b3b0ccb1",
+            "label": "Background Color",
+            "name": "background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "transparent": "Transparent",
+                "white": "White",
+                "grey": "Grey",
+                "whitetogrey": "White to Grey Gradient",
+                "greytowarm": "Grey to Warm Gradient",
+                "dblue": "Dark Blue"
+            },
+            "default_value": "dblue",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": ""
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1714055733
+}

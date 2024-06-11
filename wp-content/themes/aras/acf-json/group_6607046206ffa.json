@@ -1,0 +1,150 @@
+{
+    "key": "group_6607046206ffa",
+    "title": "Event Details",
+    "fields": [
+        {
+            "key": "field_6607046215b9e",
+            "label": "Event Date",
+            "name": "event_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "display_format": "F j, Y",
+            "return_format": "F j, Y",
+            "first_day": 0
+        },
+        {
+            "key": "field_664f68bfd8681",
+            "label": "Hide Date on Listing",
+            "name": "hide_date_on_listing",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_6607069aaafdb",
+            "label": "Event Detail",
+            "name": "event_time",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Short detail about event to show on listing. Examples: Time, Location",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66201c8289684",
+            "label": "Event Content Type",
+            "name": "event_content_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "internal": "Internal",
+                "external": "External"
+            },
+            "default_value": "internal",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_66201a4a89683",
+            "label": "External URL",
+            "name": "external_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "If the event links to an external page instead of an internal page, add the URL here.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66201c8289684",
+                        "operator": "==",
+                        "value": "external"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "event"
+            }
+        ]
+    ],
+    "menu_order": -2,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "author",
+        "page_attributes",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1716480801
+}

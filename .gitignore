@@ -1,0 +1,74 @@
+*~
+.DS_Store
+.svn
+.cvs
+*.bak
+*.swp
+.cache
+Thumbs.db
+*.code-workspace
+site-archive*
+
+node_modules
+.htaccess
+
+
+# large/disallowed file types
+# a CDN should be used for these
+*.hqx
+*.bin
+*.exe
+*.dll
+*.deb
+*.dmg
+*.iso
+*.img
+*.msi
+*.msp
+*.msm
+*.mid
+*.midi
+*.kar
+*.mp3
+*.ogg
+*.m4a
+*.ra
+*.3gpp
+*.3gp
+*.mp4
+*.mpeg
+*.mpg
+*.mov
+*.webm
+*.flv
+*.m4v
+*.mng
+*.asx
+*.asf
+*.wmv
+*.avi
+
+/*
+!.gitignore
+
+!wp-content
+wp-content/*
+
+!wp-content/themes
+wp-content/themes/*
+!wp-content/themes/aras
+
+
+!wp-content/plugins
+wp-content/plugins/*
+!wp-content/plugins/aras-*
+
+# This plugin needs this version
+
+# If you want to include a plugin in the git repository,
+# call it out here. For example:
+#
+# !wp-content/plugins/aras-plugin
+wp-content/themes/*/node_modules
+wp-content/themes/*/.cache
+wp-content/themes/*/.parcel-cache

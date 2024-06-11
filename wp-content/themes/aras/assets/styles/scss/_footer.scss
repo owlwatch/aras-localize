@@ -1,0 +1,265 @@
+.footer-cta {
+    position: relative;
+    padding-bottom: 8rem;
+
+    @include breakpoint(medium only) {
+        padding-bottom: 6rem;
+    }
+
+    @include breakpoint(small only) {
+        padding-bottom: 3rem;
+    }
+
+    &:after {
+        content: '';
+        width: 48%;
+        height: 200%;
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 52%;
+        right: 0;
+        background-image: url(../images/backgrounds/footer-cta-background.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        z-index: -2;
+
+        @include breakpoint(medium only) {
+            width: 40%;
+            left: 60%;
+        }
+
+        @include breakpoint(small only) {
+            width: 50%;
+            left: 50%;
+            opacity: .5;
+        }
+    }
+}
+
+.simple-footer-cta {
+    .footer-cta-content {
+        max-width: 600px;
+
+        @include breakpoint(small only) {
+            max-width: 400px;
+            margin: auto;
+        }
+
+    }
+}
+
+.simple-footer-cta,
+.footer-cta {
+    .footer-cta-content {
+        h2.footer-cta-headline {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+
+            @include breakpoint(medium only) {
+                font-size: 2.125rem;
+            }
+
+            @include breakpoint(small only) {
+                font-size: 1.75rem;
+            }
+
+        }
+
+        &>*:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .aras-button {
+        margin-top: 1rem;
+    }
+}
+
+/** FOOTER **/
+.footer {
+    background-color: $lightestgrey;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    position: relative;
+    overflow: visible;
+    z-index: 10;
+
+    @include breakpoint(medium only) {
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+    }
+
+    @include breakpoint(small only) {
+        padding-top: 2.5rem;
+        padding-bottom: 1rem;
+    }
+
+    h6 {
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: $red;
+    }
+
+
+    .footer-intro {
+        max-width: 280px;
+        padding-right: 3rem;
+
+        @include breakpoint(medium only) {
+            padding-right: 1.5rem;
+        }
+
+        @include breakpoint(small only) {
+            max-width: 100%;
+            margin: 0 auto 1.5rem auto;
+            text-align: center;
+            padding-right: 0;
+            max-width: 400px;
+        }
+
+        p {
+            color: $grey;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .nav-logo {
+            width: 100%;
+            max-width: 130px;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: left;
+        margin-top: 1.75rem;
+
+        @include breakpoint(medium only) {
+            justify-content: start;
+        }
+
+        @include breakpoint(small only) {
+            justify-content: start;
+            flex-direction: row;
+            padding-top: 0;
+            margin-top: 0;
+            border-top: 2px rgba($color: $white, $alpha: 0.1) solid;
+        }
+
+        @media print,
+        screen and (max-width: 380px) {
+            flex-direction: column;
+        }
+
+        .footer-column {
+            width: calc(33.3333% - .6666rem);
+            min-width: 100px;
+
+            @include breakpoint(medium only) {
+                width: calc(25% - .75rem);
+            }
+
+            @media screen and (max-width: 800px) {
+                width: calc(33.3333% - .6666rem);
+            }
+
+            @include breakpoint(small only) {
+                margin-bottom: 1rem;
+                width: calc(50% - .5rem);
+            }
+
+            @media print,
+            screen and (max-width: 380px) {
+                width: 100%;
+            }
+
+            .footer-linkitem {
+                display: block;
+                margin-bottom: .75rem;
+                padding-right: 10px;
+                text-decoration: none;
+                line-height: 1.2;
+                font-weight: 500;
+                font-size: 14px;
+                color: $grey;
+
+                &:hover,
+                &:focus {
+                    text-decoration: none;
+                    color: $midgrey;
+                }
+            }
+        }
+    }
+
+    .footer-social {
+        margin-top: 1.75rem;
+        margin-left: 0;
+        max-width: 175px;
+
+        @include breakpoint(medium only) {
+            max-width: 100%;
+            margin-left: 15px;
+        }
+
+        @include breakpoint(small only) {
+            max-width: calc(100% - 25px);
+            margin-left: 15px;
+            text-align: center;
+        }
+
+
+        .footer-socials {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            @include breakpoint(small only) {
+                justify-content: center;
+            }
+
+            img {
+                width: 19px;
+            }
+        }
+    }
+
+    .copyrightinfo {
+        margin-top: 4rem;
+
+        @include breakpoint(medium only) {
+            margin-top: 3rem;
+        }
+
+        @include breakpoint(small only) {
+            margin-top: 2rem;
+        }
+
+        p {
+            font-size: 13px;
+            font-weight: 400;
+            color: $grey;
+
+            @include breakpoint(small only) {
+                text-align: center;
+            }
+
+            a {
+                color: $red;
+
+                &:hover,
+                &:focus {
+                    color: $red;
+                }
+            }
+        }
+    }
+}

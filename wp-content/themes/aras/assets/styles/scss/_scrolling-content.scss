@@ -1,0 +1,739 @@
+/*
+.scrolling-content-section {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+
+  .grid-container {
+    z-index: 1;
+    position: relative;
+  }
+
+  .para-start-flag {
+    position: absolute;
+    top: -25vh;
+    height: 1px;
+    width: 1px;
+    background: transparent;
+  }
+
+  .para-flag {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    height: 1px;
+    width: 100px;
+    background-color: transparent;
+  }
+
+  .para-flag-last {
+    top: 0;
+    transform: translateY(-50vh);
+    background-color: transparent;
+  }
+
+
+  &.label-scrolling {
+    .para-start-flag {
+      top: 0;
+    }
+
+    .para-flag-last {
+      top: 0;
+      bottom: 0;
+      transform: translateY(-50vh);
+      background-color: transparent;
+      width: 100px;
+      height: 1px;
+    }
+
+    .parallax-tabbing {
+      position: fixed;
+      opacity: 1;
+      top: 0;
+      width: 100%;
+      z-index: 5;
+
+      &.pre-tabbing {
+        top: 4rem;
+        position: absolute !important;
+      }
+
+      &.post-tabbing {
+        top: auto;
+        bottom: calc(80vh + 4rem);
+        position: absolute !important;
+      }
+
+      .cell {
+        position: relative;
+        min-height: 100px;
+        height: 20vh;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        align-content: end;
+        align-items: end;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        //&::after {
+        //  content: '';
+        //  top: -10px;
+        //  bottom: -10px;
+        //  left: -10px;
+        //  right: -10px;
+        //  height: calc(100% + 20px);
+        //  width: calc(100% + 20px);
+        //  width: 100%;
+        //  background-color: white;
+        //  position: absolute;
+        //  z-index: -1;
+        //}
+
+        a {
+          text-decoration: none;
+          font-size: .85rem;
+          font-weight: 400;
+          line-height: 1.2;
+          letter-spacing: .5px;
+          text-transform: uppercase;
+          font-weight: 500;
+          color: $midgrey;
+
+          @include breakpoint(medium only) {
+            font-size: .825rem;
+          }
+
+          @include breakpoint(small only) {
+            font-size: .825rem;
+          }
+
+          &.tabbing-active {
+            color: $red;
+          }
+
+          &:active,
+          &:hover {
+            color: $red;
+          }
+
+          &:after {
+            content: '→';
+            padding-left: 6px;
+          }
+
+          &:nth-last-child(1) {
+            &:after {
+              content: ''
+            }
+          }
+        }
+      }
+
+      &.bg-whitetogrey {
+        background: rgba($color: $white, $alpha: 0.8);
+      }
+    }
+
+    .parallax-scroll-grid {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      min-height: 100vh;
+      position: relative;
+
+      @include breakpoint(medium only) {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      @include breakpoint(small only) {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        min-height: 10px;
+
+        .cell {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .parallax-content {
+        position: relative;
+
+        h6 {
+          color: $red;
+          font-weight: 500;
+        }
+
+        li {
+          color: $black;
+          font-weight: 300;
+          font-size: 1rem;
+          list-style: square;
+
+          & strong {
+            font-weight: 700;
+          }
+
+          &::marker {
+            color: $red;
+            font-size: 90%;
+          }
+
+          @include breakpoint(medium only) {
+            font-size: 1.075rem;
+          }
+
+          @include breakpoint(small only) {
+            font-size: 1rem;
+          }
+        }
+
+        ul {
+          margin-left: 1rem;
+        }
+
+        .para-content-cont {
+          &>*:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      #parallax-image-1.pre-scroll,
+      .post-scroll {
+        opacity: 1 !important;
+        position: absolute !important;
+
+        @include breakpoint(small only) {
+          position: relative !important;
+        }
+      }
+
+      .parallax-image {
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        max-height: 60vh;
+        max-width: 540px;
+        left: calc(50% + 20px);
+        transition: .2s ease-in-out;
+
+        @media print,
+        screen and (max-width: 1160px) {
+          max-width: calc(50% - 20px);
+          left: auto;
+          right: 20px;
+        }
+
+        @include breakpoint(medium only) {}
+
+        @include breakpoint(small only) {
+          max-width: 300px;
+          margin-bottom: 2.5rem;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          left: 0;
+          opacity: 1;
+          position: relative;
+        }
+
+        @media print,
+        screen and (max-width: 400px) {
+          max-width: 250px;
+        }
+
+        &.parallax-active {
+          opacity: 1;
+          transition: .2s ease-in-out;
+        }
+      }
+    }
+  }
+
+
+
+  &.dot-scrolling {
+    .parallax-tabbing {
+      position: fixed;
+      opacity: 1;
+      top: 50vh;
+      height: 0;
+      width: 30px;
+      z-index: 5;
+
+      .parallax-tabbing-location {
+        z-index: 100;
+        transform: translateY(-50%);
+      }
+
+      @media print,
+      screen and (max-width: 1160px) {}
+
+      @include breakpoint(medium only) {}
+
+      @include breakpoint(small only) {}
+
+      &.pre-tabbing {
+        top: 25vh;
+        position: absolute !important;
+      }
+
+      &.post-tabbing {
+        bottom: 37vh;
+        top: auto;
+        position: absolute !important;
+      }
+
+      a {
+        margin-bottom: 10px;
+        width: 25px;
+        height: 25px;
+        border: solid 3px $midgrey;
+        background-color: rgba($color: $midgrey, $alpha: 0.0);
+        display: block;
+        float: none;
+
+        &.tabbing-active {
+          border: solid 3px $red;
+          background-color: $red;
+        }
+
+        &:active,
+        &:hover {
+          border: solid 3px $red;
+          background-color: $red;
+        }
+      }
+    }
+
+    .parallax-scroll-grid {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      min-height: 70vh;
+      position: relative;
+
+      @include breakpoint(medium only) {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      @include breakpoint(small only) {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        min-height: 10px;
+
+        .cell {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .cell {
+        &.medium-7 {
+          padding-left: 70px;
+
+          @include breakpoint(small only) {
+            padding-left: 10px;
+          }
+
+        }
+      }
+
+      .parallax-content {
+        position: relative;
+
+        h6 {
+          color: $red;
+          font-weight: 500;
+        }
+      }
+
+      #parallax-image-1.pre-scroll,
+      .post-scroll {
+        opacity: 1 !important;
+        position: absolute !important;
+
+        @include breakpoint(small only) {
+          position: relative !important;
+        }
+      }
+
+      .parallax-image {
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        max-height: 100vh;
+        width: 448px;
+        left: auto;
+        right: auto;
+        transition: .2s ease-in-out;
+
+        @media print,
+        screen and (max-width: 1160px) {
+          width: calc(41.666666vw - 35px);
+          left: auto;
+          right: auto;
+        }
+
+        @include breakpoint(medium only) {}
+
+        @include breakpoint(small only) {
+          margin-bottom: 2.5rem;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          left: 0;
+          opacity: 1;
+          position: relative !important;
+          width: 100%;
+        }
+
+        @media print,
+        screen and (max-width: 400px) {}
+
+        &.parallax-active {
+          opacity: 1;
+          transition: .2s ease-in-out;
+        }
+      }
+    }
+
+  }
+}
+*/
+
+
+.scrolling-content-section {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  flex-direction: column;
+
+  .bg-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .slick-list {
+      height: 100%;
+
+      .slick-track {
+        height: 100%;
+
+
+        .bg-slider-item {
+          position: relative;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .scrolling-bg-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: auto;
+    right: auto;
+    width: 60%;
+    z-index: 2;
+
+    @include breakpoint(medium only) {
+      width: 60%;
+    }
+
+    @include breakpoint(small only) {
+      width: 90%;
+    }
+
+    &.background-left-img {
+      left: 0;
+    }
+
+    &.background-right-img {
+      right: 0;
+    }
+  }
+
+  &.bg-white {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(medium only) {}
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  &.bg-dblue {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  &.bg-grey,
+  &.bg-whitetogrey {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  .scrolling-bg-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: auto;
+    right: auto;
+    width: 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 1;
+
+    @include breakpoint(medium only) {
+      width: 60%;
+    }
+
+    @include breakpoint(small only) {
+      width: 90%;
+    }
+
+    &.background-left-img {
+      left: 0;
+    }
+
+    &.background-right-img {
+      right: 0;
+    }
+  }
+
+
+  .scroll-nav-dots {
+    margin-bottom: 2rem;
+    width: 100%;
+
+    .scroll-labeled {
+      .slick-dots {
+        display: block;
+        position: relative;
+        bottom: 0;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+
+        li {
+          position: relative;
+          display: inline-block;
+          height: auto;
+          width: auto;
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+
+          &.slick-active {
+            button {
+              color: $red;
+            }
+          }
+
+          &:nth-last-child(1) {
+            button {
+              &:after {
+                display: none;
+              }
+            }
+          }
+
+          button {
+            background: transparent;
+            display: block;
+            height: auto;
+            width: auto;
+            outline: none;
+            line-height: 1.2;
+            font-size: .85rem;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: $midgrey;
+            padding: 0 6px 0 0;
+            margin: 0;
+
+            &:before {
+              display: none;
+              content: none;
+            }
+
+            &:after {
+              content: '→';
+              padding-left: 6px;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll-dots {
+      .slick-dots {
+        height: 1.125rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        position: relative;
+        bottom: 0;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+        gap: .75rem;
+
+        li {
+          position: relative;
+          display: inline-block;
+          height: auto;
+          width: auto;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+
+          &.slick-active {
+            button {
+              background: $red;
+            }
+          }
+
+          button {
+            background: $midgrey;
+            display: block;
+            height: 1.125rem;
+            width: 1.125rem;
+            outline: none;
+            line-height: 0;
+            font-size: 0;
+            padding: 0;
+            margin: 0;
+
+            &:before {
+              display: none;
+              content: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .scroll-content-section-slick {
+    display: block;
+    margin: 0;
+
+    .slick-track {
+      display: flex !important;
+    }
+
+    .scroll-content-section-item {
+      height: inherit !important;
+      width: 100%;
+
+      .grid-container {
+        height: 100% !important;
+
+        .grid-x {
+          height: 100% !important;
+
+          .wysiwyg-content {
+            max-width: 480px;
+            font-weight: 500;
+
+            h6 {
+              color: $red;
+              margin-bottom: .25rem;
+              font-weight: 500;
+            }
+
+            h2 {
+              font-size: 2.25rem;
+              margin-bottom: .75rem;
+              line-height: 1.25;
+            }
+
+            li {
+              margin-bottom: .35rem;
+            }
+
+            .aras-button {
+              margin-top: .75rem;
+            }
+          }
+
+          .image-block {
+            @include breakpoint(small only) {
+
+              .image-container {
+                text-align: center;
+              }
+            }
+
+            img {
+              width: 100%;
+              max-width: auto;
+              height: auto;
+              max-height: 500px;
+
+              @include breakpoint(small only) {
+                max-height: 300px;
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

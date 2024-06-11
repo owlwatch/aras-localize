@@ -1,0 +1,70 @@
+.logo-section {
+    position: relative;
+
+    .logo-slider-slick {
+        display: block;
+        opacity: 0;
+        height: 114px;
+        visibility: hidden;
+        transition: opacity 1s ease;
+        -webkit-transition: opacity 1s ease;
+
+        &.slick-initialized {
+            visibility: visible;
+            opacity: 1;
+            height: fit-content;
+        }
+    }
+
+    .slick-track {
+        display: flex;
+        align-items: center;
+    }
+
+    .slick-slide {
+        margin: 1rem 1.5rem;
+
+        img {
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            margin: auto;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+
+            @include breakpoint(medium only) {
+                max-height: 80px;
+            }
+
+            @include breakpoint(small only) {
+                max-height: 70px;
+            }
+        }
+    }
+
+    .greyscale-logos {
+        .slick-slide {
+            filter: brightness(0);
+            opacity: .28;
+
+            &.logolink:hover {
+                filter: brightness(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    &.bg-dblue {
+        .greyscale-logos {
+            .slick-slide {
+                filter: brightness(0)invert(1);
+                opacity: .75;
+
+                &.logolink:hover {
+                    filter: brightness(1)invert(0);
+                }
+            }
+        }
+    }
+}
