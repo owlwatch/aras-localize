@@ -37,12 +37,13 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
-            "key": "field_65fa066f12ec0",
+            "key": "field_666881766b2bc",
             "label": "Partner Archive Headline",
-            "name": "partner_archive_headline",
+            "name": "partners_archive_title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -61,9 +62,9 @@
             "append": ""
         },
         {
-            "key": "field_65fa06d43f90d",
+            "key": "field_666880ec5498b",
             "label": "Partner Archive Description",
-            "name": "partner_archive_description",
+            "name": "partners_archive_description",
             "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
@@ -238,7 +239,8 @@
             },
             "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_664f595bd308b",
@@ -424,7 +426,8 @@
             },
             "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_664f5792b8e7e",
@@ -593,5 +596,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1717688170
+    "modified": 1718124982
 }

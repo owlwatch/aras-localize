@@ -210,7 +210,6 @@
 							$tag_terms = array();
 							foreach ($terms as $term) {
 								$tag_terms[] = $term->slug;
-								echo $term->slug;
 							}
 							$tax_query[] = array(
 								'taxonomy' => 'post_tag',
