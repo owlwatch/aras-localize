@@ -88,17 +88,12 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Function to extract UTM parameters from the URL
     function getUTMParameters() {
-      var params = new URLSearchParams(window.location.search);
-      console.log(window.location.search);
-      var utmParameters = {};
-      // Loop through each form field
-      var formFields = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
-      formFields.forEach(function(field) {
-        var utmParameterName = field.placeholder.replace('utm_', ''); // Remove 'utm_' from placeholder
-        var utmParameterValue = params.get('utm_' + utmParameterName) || ''; // Get UTM parameter value from URL
-        utmParameters[utmParameterName] = utmParameterValue; // Store in object
-      });
-      return utmParameters;
+      // lets use the localStorage object we saved
+      var utmJson = localStorage.getItem('aras_utm');
+      if( utmJson ){
+        return JSON.parse(utmJson);
+      }
+      return {};
     }
     // Function to autofill form fields with UTM parameters
     function autofillFormFields() {
