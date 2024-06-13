@@ -9,6 +9,7 @@ Thumbs.db
 *.code-workspace
 site-archive*
 
+api-json
 node_modules
 .htaccess
 
@@ -69,6 +70,8 @@ wp-content/plugins/*
 # call it out here. For example:
 #
 # !wp-content/plugins/aras-plugin
+
+wp-content/themes/*/api-json
 wp-content/themes/*/node_modules
 wp-content/themes/*/.cache
 wp-content/themes/*/.parcel-cache
