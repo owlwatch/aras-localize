@@ -137,7 +137,7 @@ $tags = get_the_tags($current_post_id);
 		<?php endwhile; ?>
 	<?php endif; ?>
 
-	<?php  //comments_template(); 
+	<?php comments_template();
 	?>
 
 	<?php get_template_part('parts/posttypes/blog_recommended_blogs'); ?>
