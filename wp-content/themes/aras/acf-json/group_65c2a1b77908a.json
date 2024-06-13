@@ -18,7 +18,8 @@
             },
             "placement": "top",
             "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "selected": 0
         },
         {
             "key": "field_65c2a1b77c47d",
@@ -384,8 +385,8 @@
             "wpml_cf_preferences": 1,
             "taxonomy": "post_tag",
             "add_term": 0,
-            "save_terms": 1,
-            "load_terms": 1,
+            "save_terms": 0,
+            "load_terms": 0,
             "return_format": "object",
             "field_type": "multi_select",
             "allow_null": 0,
@@ -831,7 +832,8 @@
             },
             "placement": "top",
             "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "selected": 0
         },
         {
             "key": "field_65c2a1b77c497",
@@ -1062,5 +1064,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714058013
+    "modified": 1718289629
 }
