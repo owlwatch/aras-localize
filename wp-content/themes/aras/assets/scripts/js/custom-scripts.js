@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     // save our updated UTM object to localStorage
     if( found ){
-        console.log( utm );
         window.localStorage.setItem('aras_utm', JSON.stringify(utm) )
     }
 });
