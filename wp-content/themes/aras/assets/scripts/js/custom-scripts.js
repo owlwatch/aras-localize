@@ -1,25 +1,32 @@
 ////Maintain Query Parameters
 document.addEventListener("DOMContentLoaded", function() {
-    
-    var currentUrl = new URL(window.location.href);
-    var params = new URLSearchParams(currentUrl.search);
-    var utm = {};
-    var found = false;
-
-    // look for UTM parameters
-    params.forEach( (value, key) => {
-        if( key.match(/^utm_/) && value ){
-            var shortKey = key.replace(/^utm_/,'');
-            utm[shortKey] = value;
-            found = true;
-        }
-    });
-    // save the UTM object to localStorage if found
-    if( found ){
-        console.log( utm );
-        window.localStorage.setItem('aras_utm', JSON.stringify(utm) )
-    }
-
+  // Get the current URL and its query parameters
+  var currentUrl = new URL(window.location.href);
+  var params = new URLSearchParams(currentUrl.search);
+  // Exclude the following parameters:
+  var excludeParams = ['application', 'format', 'industry', 'topic', 'language', 'post_type', 's'];
+  excludeParams.forEach(function(param) {
+      params.delete(param);
+  });
+  // If there are remaining query parameters, process the links
+  if (params.toString()) {
+      // Select all anchor tags
+      var links = document.querySelectorAll("a");
+      // Loop through each link
+      links.forEach(function(link) {
+          // Get the href attribute of the link
+          var linkHref = link.getAttribute("href");
+          // Check if the link is not empty or just a hash and if it's not already an anchor link (href="#something")
+          if (linkHref && !linkHref.startsWith("#")) {
+              // Create a URL object from the link href
+              var linkUrl = new URL(linkHref, window.location.origin);
+              // Append the current page's query parameters to the link's query parameters
+              linkUrl.search += (linkUrl.search ? '&' : '') + params.toString();
+              // Set the modified URL back to the link's href attribute
+              link.setAttribute("href", linkUrl.toString());
+          }
+      });
+  }
 });
 ////Smooth Scrolling
 jQuery(document).ready(function() {
