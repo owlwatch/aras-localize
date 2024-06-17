@@ -46,6 +46,17 @@
 
   }
 
+  textarea.small {
+    height: 2.5em;
+  }
+
+  textarea.medium {
+    height: 5em;
+  }
+  textarea.large {
+    height: 7em;
+  }
+
   [type=checkbox] {
     accent-color: $red !important;
     border-radius: 0px !important;
