@@ -45,7 +45,7 @@ endif;
 		<?php $href = get_field('external_url'); ?>
 		<?php $target = '_blank' ?>
 	<?php else : ?>
-		<?php $href = the_permalink() ?>
+		<?php $href = get_the_permalink() ?>
 		<?php $target = '_self' ?>
 	<?php endif; ?>
 <?php else : ?>
