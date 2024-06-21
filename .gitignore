@@ -9,7 +9,7 @@ Thumbs.db
 *.code-workspace
 site-archive*
 
-api-json
+api_json
 node_modules
 .htaccess
 
@@ -71,7 +71,7 @@ wp-content/plugins/*
 #
 # !wp-content/plugins/aras-plugin
 
-wp-content/themes/*/api-json
+wp-content/themes/*/api_json
 wp-content/themes/*/node_modules
 wp-content/themes/*/.cache
 wp-content/themes/*/.parcel-cache

@@ -398,7 +398,7 @@ function update_gotowebinar_refresh_token()
 {
 	error_log('running update_gotowebinar_refresh_token at interval of one day');
 
-	$refresh_token_file_path = get_template_directory() . '/api-json/gotowebinar_refresh.json';
+	$refresh_token_file_path = get_template_directory() . '/api_json/gotowebinar_refresh.json';
 	if (file_exists($refresh_token_file_path)) {
 		$refresh_token_data = file_get_contents($refresh_token_file_path);
 		$refresh_token_json = json_decode($refresh_token_data, true);
@@ -435,7 +435,7 @@ function update_gotowebinar_refresh_token()
 			$tokens = array(
 				'refresh_token' => $data['refresh_token'],
 			);
-			$go_to_webinar_refresh_file = get_template_directory() . '/api-json/gotowebinar_refresh.json';
+			$go_to_webinar_refresh_file = get_template_directory() . '/api_json/gotowebinar_refresh.json';
 			file_put_contents($go_to_webinar_refresh_file, json_encode($tokens));
 		}
 	}
@@ -474,7 +474,7 @@ function post_to_third_party_10($entry, $form)
 		//			)
 		//		)
 	);
-	$refresh_token_file_path = get_template_directory() . '/api-json/gotowebinar_refresh.json';
+	$refresh_token_file_path = get_template_directory() . '/api_json/gotowebinar_refresh.json';
 	if (file_exists($refresh_token_file_path)) {
 		$refresh_token_data = file_get_contents($refresh_token_file_path);
 		$refresh_token_json = json_decode($refresh_token_data, true);
