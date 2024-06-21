@@ -70,7 +70,7 @@
 
 	<section class="scrolling-content-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
 		<?php if (have_rows('scrolling_content_blocks')) : ?>
-			<div class="bg-slider">
+			<div class="bg-slider bg-slider-<?php echo $modnum; ?>">
 				<?php while (have_rows('scrolling_content_blocks')) : the_row(); ?>
 					<div class="bg-slider-item">
 						<?php if (get_sub_field('background_image')) : ?>
@@ -99,7 +99,7 @@
 			</div>
 		<?php endif; ?>
 		<?php if (have_rows('scrolling_content_blocks')) : ?>
-			<section class="scroll-content-section-slick">
+			<section class="scroll-content-section-slick  scroll-content-section-slick-<?php echo $modnum; ?>">
 
 
 
@@ -335,9 +335,11 @@
 		$speed = '5000';
 		$autoplay = 'true';
 	} ?>
+
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 	<script>
 		jQuery(document).ready(function() {
-			jQuery('.scroll-content-section-slick').slick({
+			jQuery('.scroll-content-section-slick-<?php echo $modnum; ?>').slick({
 				<?php if (get_sub_field('navigation_style') == 'dots') : ?>
 					appendDots: jQuery('.scroll-dots'),
 					dots: true,
@@ -362,13 +364,13 @@
 				slidesToScroll: 1,
 				speed: 500,
 				swipeToSlide: true,
-				asNavFor: '.bg-slider',
+				asNavFor: '.bg-slider-<?php echo $modnum; ?>',
 			});
 
-			jQuery('.bg-slider').slick({
+			jQuery('.bg-slider-<?php echo $modnum; ?>').slick({
 				slidesToShow: 1,
 				slidesToScroll: 1,
-				asNavFor: '.scroll-content-section-slick',
+				asNavFor: '.scroll-content-section-slick-<?php echo $modnum; ?>',
 				arrows: false,
 				dots: false,
 				fade: true,

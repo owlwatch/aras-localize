@@ -25,6 +25,7 @@
   input[type=text],
   input[type=email],
   input[type=tel],
+  textarea,
   select {
     border: solid 1px $bordergrey !important;
     border-radius: 0px !important;
@@ -43,6 +44,17 @@
       box-shadow: none;
     }
 
+  }
+
+  textarea.small {
+    height: 2.5em;
+  }
+
+  textarea.medium {
+    height: 5em;
+  }
+  textarea.large {
+    height: 7em;
   }
 
   [type=checkbox] {
