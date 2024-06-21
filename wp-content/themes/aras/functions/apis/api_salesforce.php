@@ -99,14 +99,14 @@ function fetch_data_from_salesforce_api($url)
 // Save API calls to files
 function save_salesforce_data_to_file($data, $filename)
 {
-	$full_filename = get_template_directory() . '/api-json/' . $filename;
+	$full_filename = get_template_directory() . '/api_json/' . $filename;
 	$data['last_update_time'] = time();
 	file_put_contents($full_filename, json_encode($data));
 }
 // Function to load data from file
 function load_salesforce_data_from_file($filename)
 {
-	$full_filename = get_template_directory() . '/api-json/' . $filename;
+	$full_filename = get_template_directory() . '/api_json/' . $filename;
 	if (file_exists($full_filename)) {
 		$data = file_get_contents($full_filename);
 		return json_decode($data, true);
@@ -248,7 +248,7 @@ function update_partners_from_file()
 		'Partner_Integrations__c' => $unique_Partner_Integrations__c
 	);
 	// And now save the mega-array as a file to be accessed for the filters
-	$api_folder = get_template_directory() . '/api-json/';
+	$api_folder = get_template_directory() . '/api_json/';
 	file_put_contents($api_folder . 'Partner_Categories.json', json_encode($merged_partner_cat_array));
 
 
