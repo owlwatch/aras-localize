@@ -97,3 +97,6 @@ require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
 
 //LP CPT
 require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
+
+//WPML DB Insert
+require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
