@@ -98,5 +98,5 @@ require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
 //LP CPT
 require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
 
-//WPML DB Insert
-require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
+//WPML DB Insert - complete, keeping this here and commented out for history. Associated folder - "./functions/wpml-resources"
+//require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
