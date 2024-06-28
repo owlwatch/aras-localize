@@ -304,20 +304,21 @@
 							<?php if (have_rows('form_block')) : ?>
 								<div class="cell form-block small-12 medium-order-1 <?= "$leftsize $leftmobile" ?>">
 									<?php while (have_rows('form_block')) : the_row(); ?>
+
 										<div id="" class="hero-form-container form-left">
-											<?php if (get_field('form_shortcode')) : ?>
+											<?php if (get_sub_field('form_shortcode')) : ?>
 												<div class="hero-form bg-white">
-													<?php if (get_field('form_headline')) : ?>
-														<h4 class="hero-form-headline"><?php echo get_field('form_headline')  ?></h4>
+													<?php if (get_sub_field('form_headline')) : ?>
+														<h4 class="hero-form-headline"><?php echo get_sub_field('form_headline')  ?></h4>
 													<?php endif; ?>
-													<?php $gravity_form_id = get_field('form_shortcode');
+													<?php $gravity_form_id = get_sub_field('form_shortcode');
 													echo do_shortcode('[gravityform id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
 												</div>
 												<?php get_template_part('parts/_template_parts/gform_variables'); ?>
 											<?php endif; ?>
-											<?php if (get_field('content_below_form')) : ?>
+											<?php if (get_sub_field('content_below_form')) : ?>
 												<div class="hero-form-end">
-													<?php echo get_field('content_below_form'); ?>
+													<?php echo get_sub_field('content_below_form'); ?>
 												</div>
 											<?php endif; ?>
 										</div>
@@ -536,19 +537,19 @@
 								<div class="cell form-block small-12 medium-order-1 <?= "$leftsize $leftmobile" ?>">
 									<?php while (have_rows('form_block')) : the_row(); ?>
 										<div id="" class="hero-form-container">
-											<?php if (get_field('form_shortcode')) : ?>
+											<?php if (get_sub_field('form_shortcode')) : ?>
 												<div class="hero-form bg-white">
-													<?php if (get_field('form_headline')) : ?>
-														<h4 class="hero-form-headline"><?php echo get_field('form_headline')  ?></h4>
+													<?php if (get_sub_field('form_headline')) : ?>
+														<h4 class="hero-form-headline"><?php echo get_sub_field('form_headline')  ?></h4>
 													<?php endif; ?>
-													<?php $gravity_form_id = get_field('form_shortcode');
+													<?php $gravity_form_id = get_sub_field('form_shortcode');
 													echo do_shortcode('[gravityform id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
 												</div>
 												<?php get_template_part('parts/_template_parts/gform_variables'); ?>
 											<?php endif; ?>
-											<?php if (get_field('content_below_form')) : ?>
+											<?php if (get_sub_field('content_below_form')) : ?>
 												<div class="hero-form-end">
-													<?php echo get_field('content_below_form'); ?>
+													<?php echo get_sub_field('content_below_form'); ?>
 												</div>
 											<?php endif; ?>
 										</div>
