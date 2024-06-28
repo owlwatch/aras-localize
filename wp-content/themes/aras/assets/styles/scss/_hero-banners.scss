@@ -164,7 +164,6 @@
     .hero-background-overlay {
       display: none;
     }
-
   }
 
   .hero-background-overlay {
@@ -242,8 +241,6 @@
       }
     }
 
-
-
     .grid-x {
       .hero-content-inner {
         margin-right: auto;
@@ -258,7 +255,6 @@
           font-size: 1.4rem;
           line-height: 1.2;
           font-weight: 300;
-          color: $grey;
         }
 
         &>*:last-child {
@@ -266,8 +262,101 @@
         }
       }
     }
+
+    &.bg-norm {
+      .hero-content-inner {
+        p {
+          color: $grey;
+        }
+      }
+    }
   }
 
+
+  &.lp-hero {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+
+    @include breakpoint(medium only) {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    @media print,
+    screen and (max-width: 923px) {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    @include breakpoint(small only) {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    &.toppadded {
+      padding-top: calc(6rem + 97px);
+
+      @include breakpoint(medium only) {
+        padding-top: calc(4.5rem + 97px);
+      }
+
+      @media print,
+      screen and (max-width: 923px) {
+        padding-top: calc(3.5rem + 89.625px);
+      }
+
+      @include breakpoint(small only) {
+        padding-top: calc(2rem + 84.375px);
+      }
+
+    }
+
+    &.bg-white {
+      background-color: white;
+    }
+
+    &.bg-grey {
+      background-color: $lightestgrey;
+    }
+
+    &.bg-dblue {
+      background-color: $dblue;
+    }
+
+    &.bg-whitetogrey {
+      background: linear-gradient(0deg,
+          rgba($color: $lightestgrey, $alpha: 1) 0%,
+          rgba($color: $lightestgrey, $alpha: 0) 100%);
+    }
+
+    &.bg-greytowarm {
+      position: relative;
+      background: linear-gradient(0deg,
+          rgba($color: $lightestgrey, $alpha: 0.35) 0%,
+          rgba($color: $lightestgrey, $alpha: 0.9) 66%,
+          rgba($color: $lightestgrey, $alpha: 1) 100%);
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(206, 33, 39, 1) 0%, rgba(212, 150, 35, 1) 100%);
+        z-index: -1;
+      }
+    }
+
+    .image-block,
+    .video-block {
+      @include breakpoint(small only) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
 
   &.cs-hero {
     padding-top: 4rem;
@@ -381,88 +470,15 @@
       }
     }
 
+    .intro-content {
+      margin-top: 1rem;
+    }
+
     @include breakpoint(small only) {
       .hero-content-inner {
         max-width: 425px;
         margin-left: auto;
         margin-right: auto;
-      }
-    }
-
-    .hero-form-side {
-      height: 10px;
-
-      @include breakpoint(small only) {
-        height: auto;
-        margin-top: 2rem;
-      }
-    }
-
-    .hero-form-container {
-      max-width: 425px;
-      margin-left: auto;
-      display: block;
-      padding-bottom: 3rem;
-
-      @include breakpoint(small only) {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-form {
-        min-height: 10px;
-        padding: 2rem;
-        background-color: $white;
-        border: solid 1px $bordergrey;
-        box-shadow: -8px 8px 30px rgba($color: $black, $alpha: 0.2);
-
-        @include breakpoint(medium only) {
-          padding: 1.5rem;
-        }
-
-        @include breakpoint(small only) {
-          padding: 1.5rem;
-        }
-
-        .hero-form-headline {
-          margin-bottom: 1.25rem;
-        }
-      }
-
-      .hero-form-end {
-        margin-top: 1.5rem;
-        text-align: center;
-
-        &>*:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    &:after {
-      content: '';
-      width: 48%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 52%;
-      right: 0;
-      background-image: url(../images/backgrounds/hero-cta-background.svg);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: left center;
-
-      @include breakpoint(medium only) {}
-
-      @include breakpoint(small only) {
-        top: auto;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 50%;
-        background-image: url(../images/backgrounds/hero-cta-background-mobile.svg);
-        background-position: top center;
       }
     }
   }

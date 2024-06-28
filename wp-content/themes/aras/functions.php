@@ -97,3 +97,6 @@ require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
 
 //LP CPT
 require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
+
+//Speakers CPT
+require_once(get_template_directory() . '/functions/post_types/aras_speakers.php');

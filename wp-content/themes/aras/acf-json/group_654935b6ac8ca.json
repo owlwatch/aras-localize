@@ -3,7 +3,7 @@
     "title": "Hero Banner",
     "fields": [
         {
-            "key": "field_65493627fdb11",
+            "key": "field_667c408e59c22",
             "label": "Hero Content",
             "name": "",
             "aria-label": "",
@@ -22,7 +22,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_654935b7fdb0e",
+            "key": "field_667c408e59c2a",
             "label": "Hero Headline",
             "name": "hero_headline",
             "aria-label": "",
@@ -43,7 +43,7 @@
             "append": ""
         },
         {
-            "key": "field_65d786b16d905",
+            "key": "field_667c408e59c2f",
             "label": "Headline Color",
             "name": "headline_color",
             "aria-label": "",
@@ -70,7 +70,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_654935e4fdb0f",
+            "key": "field_667c408e59c35",
             "label": "Hero Content",
             "name": "hero_content",
             "aria-label": "",
@@ -91,7 +91,7 @@
             "delay": 0
         },
         {
-            "key": "field_65493602fdb10",
+            "key": "field_667c408e59c39",
             "label": "Hero Button",
             "name": "hero_button",
             "aria-label": "",
@@ -108,7 +108,7 @@
             "return_format": "array"
         },
         {
-            "key": "field_65afff51393e6",
+            "key": "field_667c408e59c3d",
             "label": "Hero Visual",
             "name": "",
             "aria-label": "",
@@ -127,7 +127,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_65afff59393e7",
+            "key": "field_667c408e59c42",
             "label": "Hero Image",
             "name": "hero_image",
             "aria-label": "",
@@ -153,7 +153,7 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_65b0038f31511",
+            "key": "field_667c408e59c46",
             "label": "End",
             "name": "",
             "aria-label": "",
@@ -205,18 +205,6 @@
                 "operator": "==",
                 "value": "templates\/roadmap.php"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "lp"
-            },
-            {
-                "param": "post_template",
-                "operator": "==",
-                "value": "default"
-            }
         ]
     ],
     "menu_order": -1,
@@ -234,5 +222,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1717772394
+    "modified": 1719428876
 }

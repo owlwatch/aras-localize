@@ -12,7 +12,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "100",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -26,6 +26,182 @@
                 "dblue": "Dark Blue"
             },
             "default_value": "dblue",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_667dcda82621d",
+            "label": "Background Visual Style",
+            "name": "background_visual_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "none": "No background visual",
+                "left": "Left half background image",
+                "right": "Right half background image",
+                "full": "Full screen background image",
+                "video": "Full screen video background"
+            },
+            "default_value": "none",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_667dcdc42621e",
+            "label": "Background Image",
+            "name": "background_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_667dcda82621d",
+                        "operator": "!=",
+                        "value": "none"
+                    },
+                    {
+                        "field": "field_667dcda82621d",
+                        "operator": "!=",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_667dce0e26220",
+            "label": "Background Image Position",
+            "name": "background_image_position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_667dcda82621d",
+                        "operator": "==",
+                        "value": "full"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "topleft": "Top Left",
+                "topcenter": "Top Center",
+                "topright": "Top Right",
+                "middleleft": "Middle Left",
+                "middlecenter": "Middle Center",
+                "middleright": "Middle Right",
+                "bottomleft": "Bottom Left",
+                "bottomcenter": "Bottom Center",
+                "bottomright": "Bottom Right"
+            },
+            "default_value": "middlecenter",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_667dce3026221",
+            "label": "Background Vidyard Video ID",
+            "name": "background_vidyard_video_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_667dcda82621d",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_667dce8126222",
+            "label": "Background Overlay",
+            "name": "background_overlay",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_667dcda82621d",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "nooverlay": "No overlay",
+                "lightoverlay": "Light overlay over background image",
+                "darkoverlay": "Dark overlay over background image"
+            },
+            "default_value": "nooverlay",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -53,5 +229,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714055733
+    "modified": 1719590294
 }

@@ -67,7 +67,14 @@
 			$bottompadding = 'mediumbottompadding';
 	}
 	?>
-
+	<?php if (get_sub_field('background_visual') == 'custom') : ?>
+		<?php $image = get_sub_field('custom_background_visual'); ?>
+		<style>
+			.quote-section .grid-container::after {
+				background-image: url(<?php echo esc_url($image['url']); ?>);
+			}
+		</style>
+	<?php endif; ?>
 	<section class="quote-section <?= "$bg_color" ?>" <?= "$anchor" ?>>
 		<div class="grid-container <?= "$toppadding $bottompadding" ?>">
 			<div class="grid-x grid-margin-x">

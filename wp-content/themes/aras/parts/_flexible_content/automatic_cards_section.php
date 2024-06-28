@@ -115,6 +115,7 @@
 	<?php endif; ?>
 
 	<section class="cards-section automatic-cards-section <?= "$toppadding $bottompadding $bg_color $connector $include_images $highlight_type" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 			<?php if (get_sub_field('content_before')) : ?>
 				<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">

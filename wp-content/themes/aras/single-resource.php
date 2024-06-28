@@ -5,14 +5,12 @@ Template Post Type: resource
 //The template label has been replaced from 'Default' to 'Gated Resource'
 */
 get_header();
-$form_submitted = isset($_SESSION['form_submitted']) ? $_SESSION['form_submitted'] : false;
-// Unset the session variable to ensure it doesn't persist beyond this page
-unset($_SESSION['form_submitted']);
+$current_post_id = get_the_ID();
 ?>
 
 <?php if (get_field('post_submission_action') == 'update') : ?>
 
-  <?php if ($form_submitted || isset($_GET['pi_list_email'])) : ?>
+  <?php if (isset($_GET['id']) && intval($_GET['id']) === $current_post_id) : /* Checks if submission URL has ID in it */ ?>
     <section class="gated-hero hero-banner">
       <div class="grid-container">
         <div class="grid-x grid-padding-x align-top">
@@ -56,25 +54,23 @@ unset($_SESSION['form_submitted']);
         </div>
       </div>
     </section>
-  <?php else : //not submitted
-  ?>
-    <?php get_template_part('parts/_template_parts/gated_hero_banner'); ?>
+  <?php else : /* if not submitted */  ?>
+    <?php get_template_part('parts/_template_parts/hero_banner_gated'); ?>
     <?php if (have_posts()) :
       while (have_posts()) : the_post(); ?>
         <?php get_template_part('parts/_flexible_content/_flexible_content'); ?>
     <?php endwhile;
     endif; ?>
   <?php endif; ?>
-<?php elseif (get_field('post_submission_action') == 'redirect') : ?>
 
+<?php elseif (get_field('post_submission_action') == 'redirect') : ?>
   <?php if ($form_submitted || isset($_GET['pi_list_email'])) : ?>
     <?php if (get_field('post-submission_redirect_url')) : ?>
       <?php $redirect_url = get_field('post-submission_redirect_url'); ?>
       <?php header("Location: $redirect_url"); ?>
     <?php endif; ?>
-  <?php else : //not submitted
-  ?>
-    <?php get_template_part('parts/_template_parts/gated_hero_banner'); ?>
+  <?php else : /* if not submitted */ ?>
+    <?php get_template_part('parts/_template_parts/hero_banner_gated'); ?>
     <?php if (have_posts()) :
       while (have_posts()) : the_post(); ?>
         <?php get_template_part('parts/_flexible_content/_flexible_content'); ?>
@@ -83,38 +79,17 @@ unset($_SESSION['form_submitted']);
 
   <?php endif; ?>
 
-<?php else : //post_submission_action != update
-?>
-  <?php get_template_part('parts/_template_parts/gated_hero_banner'); ?>
+<?php else : /* post_submission_action is default */ ?>
+  <?php get_template_part('parts/_template_parts/hero_banner_gated'); ?>
   <?php if (have_posts()) :
     while (have_posts()) : the_post(); ?>
       <?php get_template_part('parts/_flexible_content/_flexible_content'); ?>
   <?php endwhile;
   endif; ?>
 <?php endif; ?>
+
 <?php get_template_part('parts/_template_parts/footer_cta'); ?>
 
-<script>
-  jQuery(document).ready(function() {
-    function adjustMinHeight() {
-      var heroHeight = jQuery('#gated-hero').outerHeight();
-      var heroFormHeight = jQuery('#hero-form-container').outerHeight();
-      var heroPaddingTop = parseInt(jQuery('#gated-hero').css('padding-top'));
-
-      var minHeight = heroFormHeight - heroHeight + heroPaddingTop;
-
-      if (jQuery(window).width() <= 639) {
-        jQuery('#gated-intro').css('min-height', 'auto');
-      } else {
-        jQuery('#gated-intro').css('min-height', minHeight + 'px');
-      }
-    }
-    adjustMinHeight();
-    jQuery(window).resize(function() {
-      adjustMinHeight();
-    });
-  });
-</script>
 
 <script>
   jQuery(document).ready(function() {

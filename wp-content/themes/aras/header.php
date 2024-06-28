@@ -97,8 +97,42 @@
 
 	<div class="off-canvas-wrapper">
 		<!-- Load off-canvas container -->
-		<?php get_template_part('parts/content', 'offcanvas'); ?>
+		<?php get_template_part('parts/nav', 'offcanvas-content-mobile'); ?>
 		<div class="off-canvas-content" data-off-canvas-content>
-			<header class="header" role="banner">
-				<?php get_template_part('parts/nav', 'offcanvas-topbar'); ?>
-			</header> <!-- end .header -->
+
+
+			<?php if (get_field('header_type') == 'logo') : ?>
+				<?php if (get_field('header_placement') == 'overlap') : ?>
+					<?php $navformat = 'overlapnav'; ?>
+				<?php elseif (get_field('header_placement') == 'top') : ?>
+					<?php $navformat = 'toponlynav'; ?>
+				<?php else : ?>
+					<?php $navformat = ''; ?>
+				<?php endif; ?>
+				<?php if (get_field('logo_image_type') != 'none') : ?>
+					<header class="header header-simplenav <?php echo $navformat; ?>" role="banner">
+						<?php get_template_part('parts/nav', 'offcanvas-logonav'); ?>
+					</header>
+				<?php else : ?>
+					<header class="header header-none" role="banner">
+					</header>
+				<?php endif; ?>
+			<?php elseif (get_field('header_type') == 'simplenav') : ?>
+				<?php if (get_field('header_placement') == 'overlap') : ?>
+					<?php $navformat = 'overlapnav'; ?>
+				<?php elseif (get_field('header_placement') == 'top') : ?>
+					<?php $navformat = 'toponlynav'; ?>
+				<?php else : ?>
+					<?php $navformat = ''; ?>
+				<?php endif; ?>
+				<header class="header header-simplenav <?php echo $navformat; ?>" role="banner">
+					<?php get_template_part('parts/nav', 'offcanvas-simplenav'); ?>
+				</header>
+			<?php elseif (get_field('header_type') == 'none') : ?>
+				<header class="header header-none" role="banner">
+				</header>
+			<?php else : ?>
+				<header class="header" role="banner">
+					<?php get_template_part('parts/nav', 'offcanvas-global'); ?>
+				</header>
+			<?php endif; ?>

@@ -68,6 +68,7 @@
 	}
 	?>
 	<section class="leadership-tabs-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (get_sub_field('content_before')) : ?>
 			<div class="grid-container">
 				<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">

@@ -3,7 +3,7 @@
 	<?php if (get_sub_field('anchor_link')) : ?>
 		<?php $anchor = ('id="' . get_sub_field('anchor_link') . '"'); ?>
 	<?php else : ?>
-		<?php $anchor = ('id="logo-section-' . $modnum . '"'); ?>
+		<?php $anchor = ('id="quote-section-' . $modnum . '"'); ?>
 	<?php endif; ?>
 	<?php
 	$background_color = get_sub_field('background_color');
@@ -68,17 +68,9 @@
 	}
 	?>
 
-	<?php if (get_sub_field('logo_style') == 'greyscale') : ?>
-		<?php $logostyle = 'greyscale-logos'; ?>
-	<?php else : ?>
-		<?php $logostyle = ''; ?>
-	<?php endif; ?>
-
-
-	<section class="logo-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+	<section class="full-width-form-section <?= "$bg_color $toppadding $bottompadding" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
-
 			<?php if (get_sub_field('content_before')) : ?>
 				<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">
 					<div class="cell small-12 medium-11 large-10 content-before">
@@ -87,32 +79,29 @@
 				</div>
 			<?php endif; ?>
 
-			<?php if (have_rows('logos')) : ?>
-				<div class="grid-x grid-padding-x logo-slider-slick <?php echo $logostyle; ?>">
-					<?php while (have_rows('logos')) : the_row(); ?>
-
-						<?php $image = get_sub_field('logo_image');
-						if (!empty($image)) : ?>
-
-							<?php $link = get_sub_field('logo_link');
-							if ($link) : $link_url = $link['url'];
-								$link_title = $link['title'];
-								$link_target = $link['target'] ? $link['target'] : '_self';
-							?>
-								<a aria-label="<?php echo esc_html($link_title); ?>" class="logolink" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-									<img class="logoimg" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-								</a>
-							<?php else : ?>
-								<div class="">
-									<img class="logoimg" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-								</div>
-							<?php endif; ?>
-
+			<div class="grid-x grid-margin-x align-center">
+				<div class="cell small-12 medium-10 large-7">
+					<div id="hero-form-container" class="full-form-container">
+						<?php if (get_field('form_shortcode')) : ?>
+							<div class="hero-form bg-white">
+								<?php if (get_field('form_headline')) : ?>
+									<h4 class="hero-form-headline"><?php echo get_field('form_headline')  ?></h4>
+								<?php endif; ?>
+								<?php $gravity_form_id = get_field('form_shortcode');
+								echo do_shortcode('[gravityform id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
+							</div>
+							<?php get_template_part('parts/_template_parts/gform_variables'); ?>
 						<?php endif; ?>
-
-					<?php endwhile; ?>
+						<?php if (get_field('content_below_form')) : ?>
+							<div class="hero-form-end">
+								<?php echo get_field('content_below_form'); ?>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</section>
+
+
 <?php endif; ?>

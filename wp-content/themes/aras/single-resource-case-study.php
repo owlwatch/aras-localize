@@ -5,7 +5,7 @@ Template Post Type: resource
 */
 get_header(); ?>
 
-<?php get_template_part('parts/_template_parts/cs_hero_banner'); ?>
+<?php get_template_part('parts/_template_parts/hero_banner_cs'); ?>
 <section class="blog-share smalltoppadding nobottompadding">
   <div class="grid-container">
     <div class="grid-x grid-padding-x align-middle">

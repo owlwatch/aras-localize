@@ -18,7 +18,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "left",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65e0b00fefd73",
@@ -159,7 +160,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "left",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_6500ac36795b4",
@@ -276,11 +278,11 @@
         },
         {
             "key": "field_655e667de3a02",
-            "label": "Content Before Copyright",
+            "label": "Simplified Footer Right Content",
             "name": "footer_copyright_content",
             "aria-label": "",
             "type": "wysiwyg",
-            "instructions": "",
+            "instructions": "This additional footer content will appear on landing pages that use the 'Simplified Footer' option.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -311,7 +313,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_6500ac4a795b5",
@@ -423,5 +426,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714669158
+    "modified": 1719585214
 }

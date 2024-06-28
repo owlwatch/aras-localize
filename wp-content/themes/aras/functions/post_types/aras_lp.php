@@ -43,7 +43,6 @@ function cptui_register_my_cpts_lp()
 		'show_ui'               => true,
 		'show_in_nav_menus'     => true,
 		"show_in_rest"          => false,
-		'menu_position'         => 4,
 		'has_archive'           => false,
 		'menu_icon'             => 'dashicons-format-aside',
 		'exclude_from_search'   => false,

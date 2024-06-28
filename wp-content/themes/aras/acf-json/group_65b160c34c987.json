@@ -18,7 +18,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65b160c34fbde",
@@ -55,7 +56,8 @@
                     "choices": {
                         "text": "Text Block",
                         "image": "Image",
-                        "video": "Video"
+                        "video": "Video",
+                        "form": "Form"
                     },
                     "default_value": "text",
                     "return_format": "value",
@@ -388,6 +390,48 @@
                             "prefix_name": 0
                         }
                     ]
+                },
+                {
+                    "key": "field_667db4a83a67e",
+                    "label": "Form Block",
+                    "name": "form_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667db4c23a67f",
+                            "label": "Form Details",
+                            "name": "form_details",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d7788d7519"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
                 }
             ]
         },
@@ -407,7 +451,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65b2e4d9825e4",
@@ -444,7 +489,8 @@
                     "choices": {
                         "text": "Text Block",
                         "image": "Image",
-                        "video": "Video"
+                        "video": "Video",
+                        "form": "Form"
                     },
                     "default_value": "text",
                     "return_format": "value",
@@ -777,6 +823,48 @@
                             "prefix_name": 0
                         }
                     ]
+                },
+                {
+                    "key": "field_667db5053a680",
+                    "label": "Form Block",
+                    "name": "form_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667db50e3a681",
+                            "label": "Form Details",
+                            "name": "form_details",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d7788d7519"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
                 }
             ]
         },
@@ -796,7 +884,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65b2e60a950e4",
@@ -962,5 +1051,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714664076
+    "modified": 1719516414
 }
