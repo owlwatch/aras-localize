@@ -128,6 +128,10 @@
 
       }
 
+      img {
+        z-index: 1;
+      }
+
       &::after {
         position: absolute;
         content: '';
@@ -199,6 +203,10 @@
 
   .grid-container {
     position: relative;
+    z-index: 1;
+  }
+
+  img {
     z-index: 1;
   }
 
