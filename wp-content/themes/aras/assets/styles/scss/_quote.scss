@@ -5,7 +5,7 @@
     .grid-container {
         position: relative;
 
-        &:after {
+        &::after {
             content: '';
             position: absolute;
             top: 4rem;
