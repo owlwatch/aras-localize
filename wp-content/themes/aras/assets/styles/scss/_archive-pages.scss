@@ -130,6 +130,7 @@
 
       img {
         z-index: 1;
+        position: relative;
       }
 
       &::after {
@@ -208,6 +209,7 @@
 
   img {
     z-index: 1;
+    position: relative;
   }
 
   &::after {
