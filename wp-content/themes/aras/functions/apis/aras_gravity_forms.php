@@ -123,59 +123,6 @@ function handle_form_submission($entry, $form)
 
 
 
-//			// Hook into Gravity Forms after submission for form 10 (Webinar Registration Form)
-//			add_action('gform_after_submission_10', 'handle_form10_submission', 10, 2);
-//			function handle_form10_submission($entry, $form)
-//			{
-//				$current_page_id = get_queried_object_id();
-//				if (get_field('includes_gotowebinar', $current_page_id)) {
-//					// Call the appropriate function based on the form ID
-//					if ($form['id'] == 10) {
-//						post_to_third_party_10($entry, $form);
-//					}
-//				}
-//			}
-//     // Hook into Gravity Forms after submission for form 14 (License Key)
-//     add_action('gform_after_submission_14', 'handle_form14_submission', 10, 2);
-//     function handle_form14_submission($entry, $form)
-//     {
-//     	// Call the appropriate function based on the form ID
-//     	if ($form['id'] == 14) {
-//     		post_to_third_party_14($entry, $form);
-//     	}
-//     }
-//		 // Hook into Gravity Forms after submission for form 9 (Training)
-//		 add_action('gform_after_submission_9', 'handle_form9_submission', 10, 2);
-//		 function handle_form9_submission($entry, $form)
-//		 {
-//		 	// Call the appropriate function based on the form ID
-//		 	if ($form['id'] == 9) {
-//		 		post_to_third_party_9($entry, $form);
-//		 	}
-//		 }
-//			// Hook into Gravity Forms after submission for generic resource form
-//			add_action('gform_after_submission', 'handle_other_forms_submission', 10, 2);
-//			function handle_other_forms_submission($entry, $form)
-//			{
-//				// Call the appropriate function based on the form ID
-//				if ($form['id'] == 7) {
-//			
-//					//////AFTER SUBMISSION ACTIONS
-//					//Create a session to allow the page to redirect while also keeping the form submission variable updated.
-//					add_action('init', 'start_session', 1);
-//					function start_session()
-//					{
-//						if (!session_id()) {
-//							session_start();
-//						}
-//					}
-//					// Define the global variable
-//					global $form_submitted;
-//					$form_submitted = false;
-//			
-//					gated_res_submission($entry, $form);
-//				}
-//			}
 
 
 

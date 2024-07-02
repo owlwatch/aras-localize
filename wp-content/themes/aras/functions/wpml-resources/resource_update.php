@@ -1,27 +1,18 @@
 <?php
-function var_error_log($object = null)
-{
-    ob_start();                    // start buffer capture
-    var_dump($object);           // dump the values
-    $contents = ob_get_contents(); // put the buffer into a variable
-    ob_end_clean();                // end capture
-    error_log($contents);        // log contents of the result of var_dump( $object )
-}
-$path = get_template_directory() . '/functions/wpml-resources/resource_updates_232.json';
+
+$path = get_template_directory() . '/functions/wpml-resources/resource_updates_189.json';
 $jsonstring = file_get_contents($path);
 $jsondata = json_decode($jsonstring, true);
 
-$count = true;
 
 add_action('wp_footer', 'update_resource');
 
 function update_resource()
 {
-    $start = microtime(true);
-    global $jsondata;
-    global $count;
-    foreach ($jsondata as $data) {
-        if ($count) {
+    $current_user = wp_get_current_user();
+    if ($current_user->user_email == 'jake@receptor.design') {
+        global $jsondata;
+        foreach ($jsondata as $data) {
             $en = null;
             $de = null;
             $jp = null;
@@ -67,17 +58,9 @@ function update_resource()
                         'language_code'   => $translation_post_language_info->language_code,
                         'source_language_code' => $original_post_language_info->language_code
                     );
-                    $current_user = wp_get_current_user();
-                    if ($current_user->user_email == 'jake@receptor.design') {
-                        do_action('wpml_set_element_language_details', $set_language_args);
-                    }
+                    do_action('wpml_set_element_language_details', $set_language_args);
                 }
             }
-            $count += 1;
-        } else {
-            break;
         }
     }
-    $time_elapsed_secs = microtime(true) - $start;
-    error_log($time_elapsed_secs);
 }
