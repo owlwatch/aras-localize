@@ -51,4 +51,5 @@
       <div class="hero-background-image" style="background-image:url(<?php echo esc_url($image['url']); ?>);" title="<?php echo esc_attr($image['alt']); ?>"></div>
     <?php endif; ?>
   <?php endif; ?>
+  */ ?>
 </section>
