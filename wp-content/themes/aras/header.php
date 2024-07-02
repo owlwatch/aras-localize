@@ -132,7 +132,7 @@
 				<header class="header header-none" role="banner">
 				</header>
 			<?php else : ?>
-				<header class="header" role="banner">
+				<header class="header header-base" role="banner">
 					<?php get_template_part('parts/nav', 'offcanvas-global'); ?>
 				</header>
 			<?php endif; ?>

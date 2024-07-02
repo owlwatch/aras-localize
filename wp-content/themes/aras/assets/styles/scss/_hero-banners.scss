@@ -311,6 +311,98 @@
 
     }
 
+
+    &.hb-partial-fullscreen,
+    &.hb-fullscreen {
+      .grid-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        .grid-x {
+          height: 100%;
+        }
+      }
+    }
+
+    &.hb-partial-fullscreen {
+      min-height: 75vh;
+
+      &.globalbuffer {
+        min-height: calc(75vh - 136px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(75vh - 115px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(75vh - 106px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(75vh - 92.5px);
+        }
+      }
+
+      &.shortbuffer {
+        min-height: calc(75vh - 97px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(75vh - 97px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(75vh - 89.625px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(75vh - 84.375px);
+        }
+      }
+    }
+
+    &.hb-fullscreen {
+      min-height: 100vh;
+
+      &.globalbuffer {
+        min-height: calc(100vh - 136px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(100vh - 115px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(100vh - 106px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(100vh - 92.5px);
+        }
+      }
+
+      &.shortbuffer {
+        min-height: calc(100vh - 97px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(100vh - 97px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(100vh - 89.625px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(100vh - 84.375px);
+        }
+      }
+    }
+
     &.bg-white {
       background-color: white;
     }

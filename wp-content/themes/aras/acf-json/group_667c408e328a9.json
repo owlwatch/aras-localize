@@ -58,7 +58,7 @@
             },
             "wpml_cf_preferences": 3,
             "choices": {
-                "black": "default",
+                "black": "Default",
                 "red": "Red"
             },
             "default_value": "black",
@@ -340,6 +340,34 @@
             "selected": 0
         },
         {
+            "key": "field_66840df4df57e",
+            "label": "Hero Height",
+            "name": "hero_height",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "fit": "Fit to content",
+                "partial": "75% screen height",
+                "full": "Full screen"
+            },
+            "default_value": "fit",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_667c67e6dc908",
             "label": "Hero Background",
             "name": "hero_background",
@@ -608,5 +636,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1719434075
+    "modified": 1719930703
 }

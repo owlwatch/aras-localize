@@ -1,8 +1,27 @@
+<?php if (get_field('header_type') == 'global') : ?>
+  <?php $positionbuffer = 'globalbuffer'; ?>
+<?php else : ?>
+  <?php if (get_field('header_placement') == 'overlap') : ?>
+    <?php $positionbuffer = ''; ?>
+  <?php else : ?>
+    <?php $positionbuffer = 'shortbuffer'; ?>
+  <?php endif; ?>
+<?php endif; ?>
+
 <?php if (get_field('header_placement') == 'overlap') : ?>
   <?php $navformat = 'toppadded'; ?>
 <?php else : ?>
   <?php $navformat = ''; ?>
 <?php endif; ?>
+
+<?php if (get_field('hero_height') == 'partial') : ?>
+  <?php $minheight = 'hb-partial-fullscreen'; ?>
+<?php elseif (get_field('hero_height') == 'full') : ?>
+  <?php $minheight = 'hb-fullscreen'; ?>
+<?php else : ?>
+  <?php $minheight = ''; ?>
+<?php endif; ?>
+
 
 <?php if (have_rows('hero_background')) : ?>
   <?php while (have_rows('hero_background')) : the_row(); ?>
@@ -15,7 +34,6 @@
       <?php else : ?>
         <?php $bg_color = 'bg-norm'; ?>
       <?php endif; ?>
-
     <?php else : ?>
       <?php
       $background_color = get_sub_field('background_color');
@@ -44,13 +62,11 @@
       }
       ?>
     <?php endif; ?>
-
-
   <?php endwhile; ?>
 <?php endif; ?>
 
 
-<section class="hero-banner lp-hero <? echo $bg_color; ?> <? echo $navformat; ?> " id="page-intro">
+<section class="hero-banner lp-hero <? echo $minheight; ?> <? echo $positionbuffer; ?> <? echo $bg_color; ?> <? echo $navformat; ?> " id="page-intro">
 
   <?php if (have_rows('hero_background')) : ?>
     <?php while (have_rows('hero_background')) : the_row(); ?>
