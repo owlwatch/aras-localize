@@ -150,7 +150,9 @@
                                 "field": "field_6679d2ac959a5",
                                 "operator": "==",
                                 "value": "customside"
-                            },
+                            }
+                        ],
+                        [
                             {
                                 "field": "field_6679d2ac959a5",
                                 "operator": "==",
@@ -1247,5 +1249,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1720466818
+    "modified": 1720471727
 }
