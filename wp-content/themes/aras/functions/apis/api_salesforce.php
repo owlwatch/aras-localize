@@ -403,10 +403,9 @@ function update_academic_users_from_file()
 add_action('save_post', 'update_salesforce_campaign_on_resource_publish');
 function update_salesforce_campaign_on_resource_publish($post_id)
 {
-	if (get_field('create_salesforce_campaign', $post_id) || get_sub_field('create_salesforce_campaign', $post_id)) {
+	if (get_field('create_salesforce_campaign', $post_id)) {
 		// Check if the field 'salesforce_campaign' exists and is empty
 		$salesforce_campaign = get_field('salesforce_campaign', $post_id);
-		$salesforce_campaign = get_sub_field('salesforce_campaign', $post_id);
 		if (!$salesforce_campaign) {
 			$title_of_page = get_the_title($post_id);
 			$url_of_page = get_permalink($post_id);
@@ -415,16 +414,96 @@ function update_salesforce_campaign_on_resource_publish($post_id)
 			$format_resource_type = '';
 			if (!empty($format_terms) && !is_wp_error($format_terms) && isset($format_terms[0])) {
 				$format_resource_type = get_field('salesforce_campaign_resource_type', $format_terms[0]);
-				$format_resource_type = get_sub_field('salesforce_campaign_resource_type', $format_terms[0]);
 			}
-
-
 			// Perform API call to Salesforce to create a new campaign
 			$new_campaign_id = create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type);
 			// Update the 'salesforce_campaign' field with the new campaign ID
 			update_field('salesforce_campaign', $new_campaign_id, $post_id);
 		}
 	}
+
+
+
+
+
+	if (have_rows('flexible_content', $post_id)) :
+		while (have_rows('flexible_content', $post_id)) : the_row();
+			if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
+
+				if (get_sub_field('create_salesforce_campaign', $post_id)) {
+					// Check if the field 'salesforce_campaign' exists and is empty
+					$salesforce_campaign = get_sub_field('salesforce_campaign', $post_id);
+					if (!$salesforce_campaign) {
+						$title_of_page = get_the_title($post_id);
+						$url_of_page = get_permalink($post_id);
+						$language = isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : '';
+						$format_terms = wp_get_post_terms($post_id, 'format');
+						$format_resource_type = '';
+						if (!empty($format_terms) && !is_wp_error($format_terms) && isset($format_terms[0])) {
+							$format_resource_type = get_sub_field('salesforce_campaign_resource_type', $format_terms[0]);
+						}
+						// Perform API call to Salesforce to create a new campaign
+						$new_campaign_id = create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type);
+						// Update the 'salesforce_campaign' field with the new campaign ID
+						update_field('salesforce_campaign', $new_campaign_id, $post_id);
+					}
+				}
+
+				if (have_rows('right_content', $post_id)) :
+					while (have_rows('right_content', $post_id)) : the_row();
+						if (have_rows('form_block', $post_id)) :
+							while (have_rows('form_block', $post_id)) : the_row();
+								if (get_sub_field('create_salesforce_campaign', $post_id)) {
+									// Check if the field 'salesforce_campaign' exists and is empty
+									$salesforce_campaign = get_sub_field('salesforce_campaign', $post_id);
+									if (!$salesforce_campaign) {
+										$title_of_page = get_the_title($post_id);
+										$url_of_page = get_permalink($post_id);
+										$language = isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : '';
+										$format_terms = wp_get_post_terms($post_id, 'format');
+										$format_resource_type = '';
+										if (!empty($format_terms) && !is_wp_error($format_terms) && isset($format_terms[0])) {
+											$format_resource_type = get_sub_field('salesforce_campaign_resource_type', $format_terms[0]);
+										}
+										// Perform API call to Salesforce to create a new campaign
+										$new_campaign_id = create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type);
+										// Update the 'salesforce_campaign' field with the new campaign ID
+										update_field('salesforce_campaign', $new_campaign_id, $post_id);
+									}
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+				if (have_rows('left_content', $post_id)) :
+					while (have_rows('left_content', $post_id)) : the_row();
+						if (have_rows('form_block', $post_id)) :
+							while (have_rows('form_block', $post_id)) : the_row();
+								if (get_sub_field('create_salesforce_campaign', $post_id)) {
+									// Check if the field 'salesforce_campaign' exists and is empty
+									$salesforce_campaign = get_sub_field('salesforce_campaign', $post_id);
+									if (!$salesforce_campaign) {
+										$title_of_page = get_the_title($post_id);
+										$url_of_page = get_permalink($post_id);
+										$language = isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : '';
+										$format_terms = wp_get_post_terms($post_id, 'format');
+										$format_resource_type = '';
+										if (!empty($format_terms) && !is_wp_error($format_terms) && isset($format_terms[0])) {
+											$format_resource_type = get_sub_field('salesforce_campaign_resource_type', $format_terms[0]);
+										}
+										// Perform API call to Salesforce to create a new campaign
+										$new_campaign_id = create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type);
+										// Update the 'salesforce_campaign' field with the new campaign ID
+										update_field('salesforce_campaign', $new_campaign_id, $post_id);
+									}
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+			endif;
+		endwhile;
+	endif;
 }
 
 function create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type)

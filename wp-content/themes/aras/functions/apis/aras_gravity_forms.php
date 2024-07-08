@@ -93,7 +93,8 @@ function handle_form_submission($entry, $form)
 {
 
 	$current_page_id = get_queried_object_id();
-	if (get_field('includes_gotowebinar', $current_page_id) || get_sub_field('includes_gotowebinar', $current_page_id)) {
+
+	if (get_field('includes_gotowebinar', $current_page_id)) {
 		if ($form['id'] == 10) {
 			post_to_third_party_10($entry, $form);
 		}
@@ -110,7 +111,7 @@ function handle_form_submission($entry, $form)
 	if ($form['id'] == 7) {
 		gated_res_submission($entry, $form);
 	} else {
-		if (get_field('post_submission_action', $current_page_id) == 'update' || get_sub_field('post_submission_action', $current_page_id) == 'update') {
+		if (get_field('post_submission_action', $current_page_id) == 'update') {
 			$redirect_url = $_SERVER['REQUEST_URI'];
 			$post_id = $current_page_id;
 			$redirect_url = add_query_arg('id', $post_id, $redirect_url);
@@ -118,6 +119,56 @@ function handle_form_submission($entry, $form)
 			wp_redirect($redirect_url);
 			exit();
 		}
+
+		if (have_rows('flexible_content', $current_page_id)) :
+			while (have_rows('flexible_content', $current_page_id)) : the_row();
+				if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
+					$post_submission_id_set = false;
+
+					if (get_sub_field('post_submission_action', $current_page_id) == 'update' && !$post_submission_id_set) {
+						$redirect_url = $_SERVER['REQUEST_URI'];
+						$post_id = $current_page_id;
+						$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+						// Redirect to the new URL with the post_id parameter
+						wp_redirect($redirect_url);
+						$post_submission_id_set = true;
+					}
+
+					if (have_rows('right_content', $current_page_id)) :
+						while (have_rows('right_content', $current_page_id)) : the_row();
+							if (have_rows('form_block', $current_page_id)) :
+								while (have_rows('form_block', $current_page_id)) : the_row();
+									if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
+										$redirect_url = $_SERVER['REQUEST_URI'];
+										$post_id = $current_page_id;
+										$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+										// Redirect to the new URL with the post_id parameter
+										wp_redirect($redirect_url);
+										$post_submission_id_set = true;
+									}
+								endwhile;
+							endif;
+						endwhile;
+					endif;
+					if (have_rows('left_content', $current_page_id)) :
+						while (have_rows('left_content', $current_page_id)) : the_row();
+							if (have_rows('form_block', $current_page_id)) :
+								while (have_rows('form_block', $current_page_id)) : the_row();
+									if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
+										$redirect_url = $_SERVER['REQUEST_URI'];
+										$post_id = $current_page_id;
+										$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+										// Redirect to the new URL with the post_id parameter
+										wp_redirect($redirect_url);
+										$post_submission_id_set = true;
+									}
+								endwhile;
+							endif;
+						endwhile;
+					endif;
+				endif;
+			endwhile;
+		endif;
 	}
 }
 
@@ -401,11 +452,57 @@ function gated_res_submission($entry, $form)
 	}
 
 	// Check for post_submission_action
-	if (get_field('post_submission_action', $current_page_id) == 'update' || get_sub_field('post_submission_action', $current_page_id) == 'update') {
+	if ((get_field('post_submission_action', $current_page_id) == 'update')) {
+		// GFCommon::log_debug('post_submission_action...... the page id is ' . $current_page_id . ' and the post submission action is update');
 		$post_id = $current_page_id;
 		// Append the post_id parameter to the URL
 		$redirect_url = add_query_arg('id', $post_id, $redirect_url);
 	}
+
+	if (have_rows('flexible_content', $current_page_id)) :
+		while (have_rows('flexible_content', $current_page_id)) : the_row();
+			if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
+				$post_submission_id_set = false;
+
+				if (get_sub_field('post_submission_action', $current_page_id) == 'update' && !$post_submission_id_set) {
+					$post_id = $current_page_id;
+					// Append the post_id parameter to the URL
+					$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+					$post_submission_id_set = true;
+				}
+
+				if (have_rows('right_content', $current_page_id)) :
+					while (have_rows('right_content', $current_page_id)) : the_row();
+						if (have_rows('form_block', $current_page_id)) :
+							while (have_rows('form_block', $current_page_id)) : the_row();
+								if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
+									$post_id = $current_page_id;
+									// Append the post_id parameter to the URL
+									$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+									$post_submission_id_set = true;
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+				if (have_rows('left_content', $current_page_id)) :
+					while (have_rows('left_content', $current_page_id)) : the_row();
+						if (have_rows('form_block', $current_page_id)) :
+							while (have_rows('form_block', $current_page_id)) : the_row();
+								if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
+									$post_id = $current_page_id;
+									// Append the post_id parameter to the URL
+									$redirect_url = add_query_arg('id', $post_id, $redirect_url);
+									$post_submission_id_set = true;
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+			endif;
+		endwhile;
+	endif;
+
 	// Redirect to the new URL
 	wp_redirect($redirect_url);
 	exit;
