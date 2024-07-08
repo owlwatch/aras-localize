@@ -308,9 +308,7 @@
       @include breakpoint(small only) {
         padding-top: calc(2rem + 84.375px);
       }
-
     }
-
 
     &.hb-partial-fullscreen,
     &.hb-fullscreen {
@@ -554,6 +552,19 @@
     @include breakpoint(small only) {
       padding-top: 2rem;
       padding-bottom: 0;
+    }
+
+
+    &.toppadded {
+      padding-top: calc(4rem + 60px);
+
+      @include breakpoint(medium only) {
+        padding-top: calc(3rem + 60px);
+      }
+
+      @include breakpoint(small only) {
+        padding-top: calc(2rem + 80px);
+      }
     }
 
     .grid-container {

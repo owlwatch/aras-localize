@@ -1,4 +1,10 @@
 <?php $bgcolor = ''; ?>
+<?php if (get_field('header_placement') == 'overlap') : ?>
+  <?php $navformat = 'toppadded'; ?>
+<?php else : ?>
+  <?php $navformat = ''; ?>
+<?php endif; ?>
+
 <?php if (have_rows('hero_background')) : ?>
   <?php while (have_rows('hero_background')) : the_row(); ?>
 
@@ -14,23 +20,30 @@
 
 <?php if (get_field('form_hero_style') == 'block') : ?>
   <main class="gated-top">
-    <section id="gated-hero" class="gated-hero hero-banner <?php echo $bgcolor; ?>">
+    <section id="gated-hero" class="gated-hero hero-banner <?php echo $bgcolor; ?> <? echo $navformat; ?>">
       <?php if (have_rows('hero_background')) : ?>
         <?php while (have_rows('hero_background')) : the_row(); ?>
+
           <?php if (get_sub_field('background_style') == 'customside') : ?>
             <?php $image = get_sub_field('background_visual'); ?>
             <div class="background-pattern-half" title="<?php echo esc_attr($image['alt']); ?>" style="background-image: url(<?php echo esc_url($image['url']); ?>);"></div>
           <?php elseif (get_sub_field('background_style') == 'customfull') : ?>
             <?php $image = get_sub_field('background_visual'); ?>
             <div class="background-pattern-full" title="<?php echo esc_attr($image['alt']); ?>" style="background-image: url(<?php echo esc_url($image['url']); ?>);"></div>
+          <?php elseif (get_sub_field('background_style') == 'customvideo') : ?>
+            <?php if (get_sub_field('background_vidyard_video_id')) : ?>
+              <iframe class="vidyard-player-background" src="//play.vidyard.com/<?php echo get_sub_field('background_vidyard_video_id'); ?>/type/background" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
+            <?php endif; ?>
           <?php else : ?>
             <div class="background-pattern-half"></div>
           <?php endif; ?>
+
           <?php if (get_sub_field('full_screen_background_options') == 'darkoverlay') : ?>
-            <div class="gated-background-overlay-dark"></div>
+            <div class="background-overlay-dark"></div>
           <?php elseif (get_sub_field('full_screen_background_options') == 'lightoverlay') : ?>
             <div class="background-overlay-light"></div>
           <?php endif; ?>
+
         <?php endwhile; ?>
       <?php endif; ?>
       <div class="grid-container">
@@ -80,23 +93,31 @@
   </main>
 <?php else : ?>
   <main class="gated-top">
-    <section id="gated-hero" class="gated-hero hero-banner <?php echo $bgcolor; ?>">
+
+    <section id="gated-hero" class="gated-hero hero-banner <?php echo $bgcolor; ?> <? echo $navformat; ?>">
       <?php if (have_rows('hero_background')) : ?>
         <?php while (have_rows('hero_background')) : the_row(); ?>
+
           <?php if (get_sub_field('background_style') == 'customside') : ?>
             <?php $image = get_sub_field('background_visual'); ?>
             <div class="background-pattern-half" title="<?php echo esc_attr($image['alt']); ?>" style="background-image: url(<?php echo esc_url($image['url']); ?>);"></div>
           <?php elseif (get_sub_field('background_style') == 'customfull') : ?>
             <?php $image = get_sub_field('background_visual'); ?>
             <div class="background-pattern-full" title="<?php echo esc_attr($image['alt']); ?>" style="background-image: url(<?php echo esc_url($image['url']); ?>);"></div>
+          <?php elseif (get_sub_field('background_style') == 'customvideo') : ?>
+            <?php if (get_sub_field('background_vidyard_video_id')) : ?>
+              <iframe class="vidyard-player-background" src="//play.vidyard.com/<?php echo get_sub_field('background_vidyard_video_id'); ?>/type/background" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
+            <?php endif; ?>
           <?php else : ?>
             <div class="background-pattern-half"></div>
           <?php endif; ?>
+
           <?php if (get_sub_field('full_screen_background_options') == 'darkoverlay') : ?>
-            <div class="gated-background-overlay-dark"></div>
+            <div class="background-overlay-dark"></div>
           <?php elseif (get_sub_field('full_screen_background_options') == 'lightoverlay') : ?>
             <div class="background-overlay-light"></div>
           <?php endif; ?>
+
         <?php endwhile; ?>
       <?php endif; ?>
       <div class="grid-container">
