@@ -93,7 +93,7 @@ function handle_form_submission($entry, $form)
 {
 
 	$current_page_id = get_queried_object_id();
-	if (get_field('includes_gotowebinar', $current_page_id)) {
+	if (get_field('includes_gotowebinar', $current_page_id) || get_sub_field('includes_gotowebinar', $current_page_id)) {
 		if ($form['id'] == 10) {
 			post_to_third_party_10($entry, $form);
 		}
@@ -110,7 +110,7 @@ function handle_form_submission($entry, $form)
 	if ($form['id'] == 7) {
 		gated_res_submission($entry, $form);
 	} else {
-		if (get_field('post_submission_action', $current_page_id) == 'update') {
+		if (get_field('post_submission_action', $current_page_id) == 'update' || get_sub_field('post_submission_action', $current_page_id) == 'update') {
 			$redirect_url = $_SERVER['REQUEST_URI'];
 			$post_id = $current_page_id;
 			$redirect_url = add_query_arg('id', $post_id, $redirect_url);
@@ -401,7 +401,7 @@ function gated_res_submission($entry, $form)
 	}
 
 	// Check for post_submission_action
-	if (get_field('post_submission_action', $current_page_id) == 'update') {
+	if (get_field('post_submission_action', $current_page_id) == 'update' || get_sub_field('post_submission_action', $current_page_id) == 'update') {
 		$post_id = $current_page_id;
 		// Append the post_id parameter to the URL
 		$redirect_url = add_query_arg('id', $post_id, $redirect_url);
