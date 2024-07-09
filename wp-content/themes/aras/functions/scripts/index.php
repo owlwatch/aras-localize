@@ -21,7 +21,7 @@ add_action('init', function(){
 
 function aras_export_resources()
 {
-	header('content-type: text/plain; charset=utf-8');
+	header('content-type: text/csv; charset=utf-8');
 	$out = fopen('php://output', 'w');
 	// query all resources
 	
