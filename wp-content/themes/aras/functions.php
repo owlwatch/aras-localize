@@ -103,3 +103,5 @@ require_once(get_template_directory() . '/functions/post_types/aras_speakers.php
 
 //WPML DB Insert - complete, keeping this here and commented out for history. Associated folder - "./functions/wpml-resources"
 //require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
+
+require_once(get_template_directory() . '/functions/scripts/index.php');
