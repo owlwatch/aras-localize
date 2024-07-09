@@ -34,13 +34,26 @@ function aras_export_resources()
 	while( $resource_query->have_posts() ){
 		$resource_query->the_post();
 		$button = get_field('post_submission_button');
+
+		$formats = get_the_terms( get_the_ID(), 'format' );
+		$all_formats = is_array( $formats ) ? implode(', ', array_map(function($term){
+			return $term->name;
+		}, $formats)) : '';
+
+		$topics = get_the_terms( get_the_ID(), 'topic' );
+		$all_topics = is_array($topics) ? implode(', ', array_map(function($term){
+			return $term->name;
+		}, $topics)) : '';
 		
 		fputcsv( $out, [
+			get_the_ID(),
 			get_the_title(),
 			get_permalink(),
 			get_edit_post_link(),
-			get_the_date(),
-			$button ? $button['url'] : 'no file'
+			get_the_date('Y-m-d H:i:s'),
+			$button ? $button['url'] : 'no file',
+			$all_formats,
+			$all_topics
 		]);
 	}
 	fclose($out);
