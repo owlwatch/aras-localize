@@ -1,4 +1,9 @@
-<div class="nav-bar">
+<?php
+$eyebrow_enabled = get_field('eyebrow_enabled', 'option');
+$eyebrow_content = get_field('eyebrow_content', 'option');
+$has_eyebrow = $eyebrow_enabled && $eyebrow_content;
+?>
+<div class="nav-bar<?php if( $has_eyebrow){ ?> has-eyebrow<?php } ?>">
 	<div class="grid-container">
 		<div class="hidden-nav">
 			<a aria-label="Skip to Intro" id="skip-link" href="#page-intro">Skip to Intro</a>
@@ -211,4 +216,9 @@
 			</div>
 		</div>
 	</div>
+	<?php
+	if( $has_eyebrow ){ 
+		get_template_part('parts/nav', 'offcanvas-eyebrow');
+	}
+	?>
 </div>

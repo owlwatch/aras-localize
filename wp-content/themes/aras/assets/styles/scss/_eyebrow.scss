@@ -1,0 +1,57 @@
+.nav-bar.has-eyebrow {
+	padding-top: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.6em;
+
+	>* {
+		width: 100%;
+	}
+}
+
+.eyebrow {
+	order: -1;
+	font-size: 1rem;
+	padding: 0.5em 0;
+	position: relative;
+	width: 100%;
+
+	display: grid; 
+	grid-template-rows: 1fr;
+	transition: 250ms grid-template-rows ease;
+
+	&.is-closed {
+		grid-template-rows: 0fr;
+	}
+	
+	&__container {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1em;
+		overflow: hidden;
+	}
+
+	&__copy {
+		flex: 1;
+		text-align: center;
+		p {
+			margin: 0;
+			padding: 0;
+			font-weight: 400;
+		}
+		a {
+			color: $gold;
+		}
+	}
+
+	&__close {
+		height: auto;
+		color: #fff;
+		svg {
+			width: auto !important;
+			height: 1.5rem !important;
+		}
+	}
+}
