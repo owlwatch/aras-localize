@@ -302,7 +302,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -1180,6 +1180,91 @@
             "selected": 0
         },
         {
+            "key": "field_668f078724277",
+            "label": "Post Submission Content Behavior",
+            "name": "post_submission_content_behavior",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "sametab": "Open in the same window",
+                "newtab": "Custom confirmation message with button to open in a new tab"
+            },
+            "default_value": "sametab",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_668f079c24278",
+            "label": "Custom Confirmation Message",
+            "name": "custom_confirmation_message",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_668f078724277",
+                        "operator": "==",
+                        "value": "newtab"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_668f07b224279",
+            "label": "Custom Confirmation Button Label",
+            "name": "custom_confirmation_button_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_668f078724277",
+                        "operator": "==",
+                        "value": "newtab"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_66018f6119df7",
             "label": "Post Submission Content",
             "name": "post_submission_content",
@@ -1270,5 +1355,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1720496868
+    "modified": 1720649706
 }

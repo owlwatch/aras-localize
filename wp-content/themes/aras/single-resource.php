@@ -11,49 +11,7 @@ $current_post_id = get_the_ID();
 <?php if (get_field('post_submission_action') == 'update') : ?>
 
   <?php if (isset($_GET['id']) && intval($_GET['id']) === $current_post_id) : /* Checks if submission URL has ID in it */ ?>
-    <section class="gated-hero hero-banner">
-      <div class="grid-container">
-        <div class="grid-x grid-padding-x align-top">
-          <div class="cell small-12 medium-6 large-7 hero-content">
-            <div class="hero-content-inner">
-              <?php if (get_field('headline_color') == 'red') : ?>
-                <?php $h1color = 'color-red'; ?>
-              <?php else : ?>
-                <?php $h1color = ''; ?>
-              <?php endif; ?>
-              <?php if (get_field('hero_headline')) : ?>
-                <h1 class="hero-headline <?php echo $h1color; ?>"><?php echo get_field('hero_headline'); ?></h1>
-              <?php else : ?>
-                <h1 class="hero-headline <?php echo $h1color; ?>"><?php the_title(''); ?></h1>
-              <?php endif; ?>
-              <?php if (get_field('hero_content')) : ?>
-                <?php echo get_field('hero_content'); ?>
-              <?php endif; ?>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="post-submission-content mediumtoppadding largebottompadding box-bg-white">
-      <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-          <div class="cell small-12">
-            <?php if (get_field('post_submission_content')) : ?>
-              <?php echo get_field('post_submission_content'); ?>
-            <?php endif; ?>
-            <?php $link = get_field('post_submission_button');
-            if ($link) : $link_url = $link['url'];
-              $link_title = $link['title'];
-              $link_target = $link['target'] ? $link['target'] : '_self';
-            ?>
-              <a aria-label="<?php echo esc_html($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-                <?php echo esc_html($link_title); ?>
-              </a>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
-    </section>
+    <?php get_template_part('parts/_template_parts/hero_banner_gated_ungated'); ?>
   <?php else : /* if not submitted */  ?>
     <?php get_template_part('parts/_template_parts/hero_banner_gated'); ?>
     <?php if (have_posts()) :
@@ -62,7 +20,6 @@ $current_post_id = get_the_ID();
     <?php endwhile;
     endif; ?>
   <?php endif; ?>
-
 <?php elseif (get_field('post_submission_action') == 'redirect') : ?>
   <?php if ($form_submitted || isset($_GET['pi_list_email'])) : ?>
     <?php if (get_field('post-submission_redirect_url')) : ?>
@@ -76,7 +33,6 @@ $current_post_id = get_the_ID();
         <?php get_template_part('parts/_flexible_content/_flexible_content'); ?>
     <?php endwhile;
     endif; ?>
-
   <?php endif; ?>
 
 <?php else : /* post_submission_action is default */ ?>

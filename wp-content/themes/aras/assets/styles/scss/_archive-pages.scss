@@ -545,6 +545,12 @@
   .gform_confirmation_message {
     color: $white;
   }
+
+  .bg-white {
+    .gform_confirmation_message {
+      color: $black !important;
+    }
+  }
 }
 
 .gform_wrapper .gform_ajax_spinner {

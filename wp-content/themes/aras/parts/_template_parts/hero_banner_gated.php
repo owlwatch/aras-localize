@@ -7,7 +7,6 @@
 
 <?php if (have_rows('hero_background')) : ?>
   <?php while (have_rows('hero_background')) : the_row(); ?>
-
     <?php if (get_sub_field('full_screen_background_options') == 'darkoverlay') : ?>
       <?php $bgcolor = 'bg-dblue'; ?>
     <?php elseif (get_sub_field('full_screen_background_options') == 'nooverlaywhite') : ?>

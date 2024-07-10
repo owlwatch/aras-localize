@@ -1,4 +1,5 @@
 <?php
+$term = '';
 if (get_sub_field('content_item')) :
 	$post = get_sub_field('content_item');
 	if ($post) :
