@@ -7,7 +7,7 @@ Template Post Type: lp
 */
 get_header(); ?>
 
-<?php get_template_part('parts/_template_parts/hero_banner'); ?>
+<?php get_template_part('parts/_template_parts/hero_banner_lp'); ?>
 
 <?php if (have_posts()) :
   while (have_posts()) : the_post(); ?>

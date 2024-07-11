@@ -43,7 +43,6 @@ function cptui_register_my_cpts_academic_users()
 		'show_ui'               => true,
 		'show_in_nav_menus'     => true,
 		"show_in_rest"          => false,
-		'menu_position'         => 4,
 		'has_archive'           => 'academic-program/academic-users',
 		'menu_icon'             => 'dashicons-format-aside',
 		'exclude_from_search'   => true,
@@ -54,6 +53,7 @@ function cptui_register_my_cpts_academic_users()
 			'slug' => 'academic-program/academic-users',
 			'with_front' => false,
 		),
+		'show_in_menu'     => false,
 	);
 	register_post_type('sf-academic-users', $args);
 }
@@ -101,7 +101,6 @@ function cptui_register_my_cpts_partner()
 		'show_ui'               => true,
 		'show_in_nav_menus'     => true,
 		"show_in_rest"          => false,
-		'menu_position'         => 4,
 		'has_archive'           => 'partners/find-a-partner',
 		'with_front'						=> false,
 		'menu_icon'             => 'dashicons-format-aside',
@@ -113,6 +112,7 @@ function cptui_register_my_cpts_partner()
 			'slug' => 'partners/find-a-partner/all',
 			'with_front' => false,
 		),
+		'show_in_menu'     => false,
 	);
 	register_post_type('partners', $args);
 }

@@ -95,6 +95,7 @@
 </section>
 
 <?php if (have_rows('overview_section')) : ?>
+<?php while (have_rows('overview_section')) : the_row(); ?>
   <?php $modnum = get_row_index(); ?>
   <?php if (get_sub_field('anchor_link')) : ?>
     <?php $anchor = ('id="' . get_sub_field('anchor_link') . '"'); ?>
@@ -117,7 +118,6 @@
   <?php else : ?>
     <?php $itemalignment = ''; ?>
   <?php endif; ?>
-  <?php while (have_rows('overview_section')) : the_row(); ?>
     <?php if (have_rows('content_items')) : ?>
       <section class="cs-overview-section bg-dblue mediumtoppadding mediumbottompadding" <?= "$anchor" ?>>
         <div class="grid-container" style="padding-top: 1rem;">

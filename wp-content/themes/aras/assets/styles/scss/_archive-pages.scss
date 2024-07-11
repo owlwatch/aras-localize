@@ -96,7 +96,6 @@
   }
 }
 
-
 .resource-archive-feat {
   .feat-card {
     .feat-img-container {
@@ -127,6 +126,11 @@
         background: $red;
         background: linear-gradient(90deg, rgba(206, 33, 39, 1) 0%, rgba(208, 66, 38, 1) 50%, rgba(212, 150, 35, 1) 100%);
 
+      }
+
+      img {
+        z-index: 1;
+        position: relative;
       }
 
       &::after {
@@ -203,6 +207,11 @@
     z-index: 1;
   }
 
+  img {
+    z-index: 1;
+    position: relative;
+  }
+
   &::after {
     content: '';
     width: 30%;
@@ -271,6 +280,187 @@
     }
   }
 }
+
+
+.blog-filter {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  form {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  #filter-form {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    @include breakpoint(medium only) {
+      //flex-wrap: wrap;
+    }
+
+    @include breakpoint(small only) {
+      flex-direction: column;
+    }
+
+    select {
+      margin: 0;
+      background-color: $filterblue;
+      border-color: $filterblue;
+      color: $white;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      padding-left: 0.8rem;
+      height: 40px;
+      background-image: url(../images/icons/downarrow-white.svg);
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      option {
+        padding: 5px;
+      }
+    }
+  }
+
+  .blog-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 4px;
+
+    .blog-filter-button {
+      background-color: transparent;
+      border: solid 1px $white;
+      color: $white;
+
+      cursor: pointer;
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1;
+      padding: 6px 10px;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: 0.2s ease-in-out;
+      z-index: 2;
+
+      @include breakpoint(medium only) {}
+
+      @include breakpoint(small only) {}
+
+      &:hover,
+      &:focus {
+        background-color: $white;
+        border: solid 1px $white;
+        color: $black;
+      }
+
+      &.active {
+        background-color: $white;
+        border: solid 1px $white;
+        color: $black;
+      }
+    }
+  }
+}
+
+.short-hero .blog-search-form {
+  margin-top: 1.5rem;
+}
+
+.blog-search-form {
+  width: 300px;
+  border-bottom: solid 1px #8f8f8f;
+
+  @include breakpoint(medium only) {
+    width: 225px;
+  }
+
+  @include breakpoint(small only) {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .search-field {
+    color: $white !important;
+    font-size: 14px;
+    height: 39px !important;
+
+
+    &::placeholder {
+      color: $white !important;
+    }
+  }
+
+  .search-arrow-icon {
+    filter: brightness(10);
+    height: 39px !important;
+    background-size: 65% !important;
+  }
+}
+
+.news-filter {
+  .news-filter-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    @include breakpoint(medium only) {
+      gap: 1rem;
+    }
+
+    @include breakpoint(small only) {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  #news-type-dropdown {
+    flex: 1;
+    height: 36px;
+    font-size: 15px;
+    margin: 0;
+    border: 1px solid $bordergrey;
+  }
+
+  .news-search-form {
+    flex: 0.5;
+
+    @include breakpoint(medium only) {
+      flex: 0.75;
+    }
+
+    @include breakpoint(small only) {
+      flex: 1;
+    }
+
+    .search-field {
+      width: calc(100% - 30px);
+      height: 35px;
+      color: $black;
+
+      &::placeholder {
+        color: $black;
+      }
+    }
+
+    .search-arrow-icon {
+      width: 30px;
+      height: 35px;
+      background-size: 60%;
+    }
+  }
+}
+
+
 
 .blog-archive-cta {
   .cta-form {
@@ -354,6 +544,12 @@
 .bg-dblue {
   .gform_confirmation_message {
     color: $white;
+  }
+
+  .bg-white {
+    .gform_confirmation_message {
+      color: $black !important;
+    }
   }
 }
 

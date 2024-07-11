@@ -18,7 +18,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_647e32cb7b405",
@@ -736,7 +737,8 @@
             },
             "placement": "top",
             "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "selected": 0
         },
         {
             "key": "field_64fa1243295b9",
@@ -771,23 +773,31 @@
             "label": "Background Color",
             "name": "background_color",
             "aria-label": "",
-            "type": "clone",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "clone": [
-                "group_654a99c975efb"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "transparent": "Transparent",
+                "white": "White",
+                "grey": "Grey",
+                "whitetogrey": "White to Grey Gradient",
+                "greytowarm": "Grey to Warm Gradient",
+                "dblue": "Dark Blue"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         },
         {
             "key": "field_65c2a5996505d",
@@ -799,10 +809,11 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "return_format": "array",
             "library": "all",
             "min_width": "",
@@ -812,8 +823,7 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "preview_size": "medium",
-            "wpml_cf_preferences": 1
+            "preview_size": "medium"
         },
         {
             "key": "field_65c2a5ab6505e",
@@ -914,5 +924,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714490068
+    "modified": 1719521209
 }

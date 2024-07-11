@@ -77,6 +77,7 @@
 	<?php endif; ?>
 
 	<section class="customer-story-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (get_sub_field('background_image')) : ?>
 			<?php $image = get_sub_field('background_image'); ?>
 			<div class="customer-bg-overlay <?php echo $imageside; ?>"></div>

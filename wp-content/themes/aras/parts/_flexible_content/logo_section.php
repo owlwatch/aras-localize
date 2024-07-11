@@ -76,6 +76,7 @@
 
 
 	<section class="logo-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 
 			<?php if (get_sub_field('content_before')) : ?>

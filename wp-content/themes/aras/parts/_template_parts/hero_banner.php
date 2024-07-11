@@ -8,6 +8,7 @@
   $herocontent = 'small-12 medium-11';
 }
 ?>
+
 <section class="hero-banner <?= "$heropadding" ?>" id="page-intro">
   <div class="grid-container">
     <div class="<?= "$heroheight" ?> grid-x grid-padding-x align-middle">
@@ -27,7 +28,27 @@
           <?php endif; ?>
           <?php if (get_field('hero_content')) : ?>
             <div role="heading" role="heading" aria-level="2">
-              <?php echo get_field('hero_content'); ?>
+              <?php
+              $hero_content = get_field('hero_content');
+              $trimmed_content = trim($hero_content);
+
+              // Define the tags to check
+              $tags = ['<p>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>', '<ol>', '<ul>'];
+              $starts_with_tag = false;
+
+              // Check if the content starts with any of the defined tags
+              foreach ($tags as $tag) {
+                if (strpos($trimmed_content, $tag) === 0) {
+                  $starts_with_tag = true;
+                  break;
+                }
+              }
+              if ($starts_with_tag) {
+                echo $hero_content;
+              } else {
+                echo '<p>' . $hero_content . '</p>';
+              }
+              ?>
             </div>
           <?php endif; ?>
           <?php $link = get_field('hero_button');
@@ -44,9 +65,9 @@
     </div>
   </div>
 
-  <?php $image = get_field('hero_image');
-  if (!empty($image)) : ?>
+  <?php $image = get_field('hero_image');  ?>
+  <?php if (!empty($image)) : ?>
     <div class="hero-background-overlay"></div>
-    <div class="hero-background-image" style="background-image:url(<?php echo esc_url($image['url']); ?>);" title="<?php echo esc_attr($image['alt']); ?>"></div>
+    <div class="hero-background-image" style="background-image:url(<?php echo wp_get_attachment_image_url($image, 'full'); ?>);" title="<?php echo wp_get_attachment_image($image, 'alt'); ?>"></div>
   <?php endif; ?>
 </section>

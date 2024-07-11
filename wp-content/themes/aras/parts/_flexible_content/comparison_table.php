@@ -85,6 +85,7 @@ switch ($bottom_padding) {
 
 ?>
 <section class="comparison__table <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+    <?php get_template_part('parts/_template_parts/background_visual'); ?>
     <div class="grid-container">
         <div class="grid-x grid-margin-x">
             <div class="cell small-12 fullwidthblock comparison__table--body">

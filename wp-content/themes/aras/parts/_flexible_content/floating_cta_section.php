@@ -101,6 +101,7 @@
 		<?php $imgorient = ''; ?>
 	<?php endif; ?>
 	<section class="floating-cta-section <?= "$bg_color $toppadding $bottompadding" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 			<div class="grid-x grid-margin-x">
 				<div class="cell small-12 floating-cta <?= "$cta_boxcolor $imgplace" ?>">

@@ -18,7 +18,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65b28f89bb5e3",
@@ -473,8 +474,8 @@
                     "sub_fields": [
                         {
                             "key": "field_662c35231af63",
-                            "label": "",
-                            "name": "",
+                            "label": "Comparison Table",
+                            "name": "comparison_table",
                             "aria-label": "",
                             "type": "clone",
                             "instructions": "",
@@ -488,6 +489,72 @@
                             "wpml_cf_preferences": 3,
                             "clone": [
                                 "group_662baf5217217"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6679cfab5d709": {
+                    "key": "layout_6679cfab5d709",
+                    "name": "featured_speakers_section",
+                    "label": "Featured Speakers Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6679cfb45d70c",
+                            "label": "Featured Speakers Section",
+                            "name": "featured_speakers_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_6679cf0df1e86"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_667d7e59d5139": {
+                    "key": "layout_667d7e59d5139",
+                    "name": "full_width_form_section",
+                    "label": "Full Width Form Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667d7e8cd513c",
+                            "label": "Full Width Form Section",
+                            "name": "full_width_form_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d76a98c422"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -519,7 +586,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_65d3c9b8db4ca",
@@ -616,5 +684,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1717772319
+    "modified": 1719501178
 }

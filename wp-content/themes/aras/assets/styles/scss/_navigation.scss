@@ -23,6 +23,36 @@
   @include breakpoint(small only) {
     height: 92.5px;
   }
+
+  &.header-none {
+    height: 0px !important;
+  }
+
+  &.overlapnav {
+    height: 0px !important;
+
+    .nav-bar,
+    .navigation {
+      background-color: transparent !important;
+    }
+  }
+
+  &.header-simplenav {
+    height: 97px;
+
+    @include breakpoint(medium only) {
+      height: 97px;
+    }
+
+    @media print,
+    screen and (max-width: 923px) {
+      height: 89.625px;
+    }
+
+    @include breakpoint(small only) {
+      height: 84.375px;
+    }
+  }
 }
 
 /** ANNOUNCEMENT BAR **/
@@ -51,6 +81,11 @@
 
 /** NAVIGATION **/
 
+.overlapnav .nav-bar,
+.toponlynav .nav-bar {
+  position: relative !important;
+}
+
 .nav-bar {
   //position: relative;
   position: fixed;
@@ -73,6 +108,12 @@
   @include breakpoint(small only) {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+
+  &.nav-bar-logo {
+    padding-top: .75rem !important;
+    padding-bottom: .75rem !important;
   }
 
   .grid-container {
@@ -108,7 +149,36 @@
         }
       }
     }
+
+    &.logo-only-container {
+      .nav-logo-link {
+        .nav-logo {
+          width: 140px;
+          height: auto;
+          margin-top: 0;
+          margin-bottom: 0;
+
+          @include breakpoint(medium only) {
+            width: 140px;
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          @media print,
+          screen and (max-width: 923px) {
+            width: 125px;
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          @include breakpoint(small only) {
+            width: 115px;
+          }
+        }
+      }
+    }
   }
+
 
   .desktop-nav-sizing {
     display: block;
@@ -130,6 +200,11 @@
 
   .navigation {
     background-color: $white;
+    text-align: right;
+
+    .submenu {
+      text-align: left;
+    }
 
     a,
     .nav-toplevel {
@@ -213,6 +288,78 @@
           }
         }
       }
+    }
+
+    .simplenav {
+      margin-top: 0;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: end;
+      align-items: center;
+      position: static;
+
+      @include breakpoint(medium only) {
+        gap: 0.75rem;
+      }
+
+      &.lightnav {
+        .language-dropdown-button {
+          background-color: $red;
+          color: $white;
+        }
+      }
+
+      .simplenav-toplevel {
+        position: relative;
+        text-decoration: none;
+        color: $grey;
+        cursor: pointer;
+        padding: 0.5rem 0 0.5rem 0;
+        margin: 0 0 0 0;
+        line-height: 1;
+        display: block;
+        text-transform: uppercase;
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+
+        @include breakpoint(medium only) {
+          padding: 10px 0 10px 0;
+          margin: 0 0 0 0;
+        }
+
+        &.lightnav {
+          color: $white;
+        }
+
+        &:hover,
+        &:focus {
+          color: $red;
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+
+      .simplenav-button {
+        //margin-bottom: calc(-0.7rem - 2px);
+        padding: .5rem 1rem;
+        min-width: 60px;
+
+        @include breakpoint(medium only) {
+          padding: 10px;
+          margin-bottom: 0;
+          font-size: 14px;
+        }
+
+        &.lightnav {
+          background-color: $gold;
+          border: solid 2px $gold;
+          color: $dblue;
+        }
+      }
+
     }
 
     .meganav {
@@ -498,6 +645,7 @@
       cursor: pointer;
     }
 
+
     .menu-icon:after {
       position: absolute;
       top: 0;
@@ -510,6 +658,13 @@
         0 8px 0 $grey,
         0 16px 0 $grey;
       content: "";
+    }
+
+    .lightnav.menu-icon:after {
+      background: $white !important;
+      box-shadow:
+        0 8px 0 $white,
+        0 16px 0 $white !important;
     }
 
     .menu-icon[aria-expanded="true"]:after {
@@ -529,6 +684,12 @@
   color: $red;
   text-align: center;
   cursor: pointer;
+}
+
+.lightnav .language-dropdown {
+  background-color: $red;
+  border: solid 2px $red;
+  color: $white;
 }
 
 .language-dropdown-pane {
@@ -560,6 +721,7 @@
     color: $black;
     padding: 2px 0;
     height: min-content;
+    line-height: 1.5;
 
     &:hover,
     &:focus {
@@ -639,6 +801,65 @@
         }
       }
     }
+  }
+
+  .simplenav {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: end;
+    align-items: center;
+    position: static;
+
+    @include breakpoint(medium only) {
+      gap: 0.75rem;
+    }
+
+
+    .simplenav-toplevel {
+      position: relative;
+      text-decoration: none;
+      color: $white;
+      cursor: pointer;
+      padding: 0.5rem 0 0.5rem 0;
+      margin: 0 0 0 0;
+      line-height: 1;
+      display: block;
+      text-transform: uppercase;
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+
+      @include breakpoint(medium only) {
+        padding: 10px 0 10px 0;
+        margin: 0 0 0 0;
+      }
+
+      &:hover,
+      &:focus {
+        color: $white;
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+
+    .simplenav-button {
+      //margin-bottom: calc(-0.7rem - 2px);
+      padding: .5rem 1rem;
+      min-width: 60px;
+      border: solid 2px $white;
+      color: $white;
+      background-color: $dblue;
+
+      @include breakpoint(medium only) {
+        padding: 10px;
+        margin-bottom: 0;
+        font-size: 14px;
+      }
+    }
+
   }
 
   .meganav {

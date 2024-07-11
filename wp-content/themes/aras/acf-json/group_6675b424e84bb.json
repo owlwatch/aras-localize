@@ -1,6 +1,6 @@
 {
     "key": "group_6675b424e84bb",
-    "title": "Header and Footer Options ( In Development )",
+    "title": "Header and Footer Options",
     "fields": [
         {
             "key": "field_6675b4253e7d1",
@@ -43,6 +43,49 @@
                 "none": "No header"
             },
             "default_value": "global",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_667c7b7b64208",
+            "label": "Header Placement",
+            "name": "header_placement",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6675b4443e7d2",
+                        "operator": "==",
+                        "value": "logo"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_6675b4443e7d2",
+                        "operator": "==",
+                        "value": "simplenav"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "overlap": "Overlap Hero Banner",
+                "top": "Above Hero Banner",
+                "sticky": "Above Hero Banner, Sticky"
+            },
+            "default_value": "overlap",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -373,6 +416,53 @@
                     "placeholder": ""
                 }
             ]
+        },
+        {
+            "key": "field_6675c7ee3d61e",
+            "label": "Footer",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6675c7f63d61f",
+            "label": "Footer Type",
+            "name": "footer_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "global": "Global website footer",
+                "simplefoot": "Simplified footer",
+                "none": "No footer"
+            },
+            "default_value": "global",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -400,5 +490,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1718991065
+    "modified": 1719435506
 }

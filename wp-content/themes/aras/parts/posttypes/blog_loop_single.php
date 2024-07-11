@@ -15,7 +15,7 @@ $tags = get_the_tags($current_post_id);
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<?php get_template_part('parts/_template_parts/blog_hero_banner'); ?>
+	<?php get_template_part('parts/_template_parts/hero_banner_blog'); ?>
 	<section class="post-content mediumtoppadding mediumbottompadding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
@@ -137,7 +137,7 @@ $tags = get_the_tags($current_post_id);
 		<?php endwhile; ?>
 	<?php endif; ?>
 
-	<?php  //comments_template(); 
+	<?php comments_template();
 	?>
 
 	<?php get_template_part('parts/posttypes/blog_recommended_blogs'); ?>

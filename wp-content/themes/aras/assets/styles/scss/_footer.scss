@@ -263,3 +263,43 @@
         }
     }
 }
+
+
+.simple-footer {
+    background-color: $lightestgrey;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    position: relative;
+    overflow: visible;
+    z-index: 10;
+
+    .copyrightinfo {
+        margin-top: 0;
+
+        @include breakpoint(small only) {
+            &.medium-auto {
+                margin-top: .5rem;
+            }
+        }
+
+        p {
+            font-size: 13px;
+            font-weight: 400;
+            color: $grey;
+            margin-bottom: 0;
+
+            @include breakpoint(small only) {
+                text-align: center !important;
+            }
+
+            a {
+                color: $grey;
+
+                &:hover,
+                &:focus {
+                    color: $red;
+                }
+            }
+        }
+    }
+}

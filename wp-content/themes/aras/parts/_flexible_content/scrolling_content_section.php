@@ -69,6 +69,8 @@
 	?>
 
 	<section class="scrolling-content-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+		<?php get_template_part('parts/_template_parts/background_visual'); ?>
+
 		<?php if (have_rows('scrolling_content_blocks')) : ?>
 			<div class="bg-slider bg-slider-<?php echo $modnum; ?>">
 				<?php while (have_rows('scrolling_content_blocks')) : the_row(); ?>
@@ -157,7 +159,7 @@
 											<?php endif; ?>
 											<?php $image = get_sub_field('image_beside_content');
 											if (!empty($image)) : ?>
-												<div class="cell image-block small-12 medium-6 large-6 small-order-1 medium-order-2">
+												<div class="cell scrolling-image-block small-12 medium-6 large-6 small-order-1 medium-order-2">
 													<div class="image-container <?= "$greyscale $overlay $shadow" ?>">
 														<?php if ($overlay == 'overlay') : ?>
 															<img class="image-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />

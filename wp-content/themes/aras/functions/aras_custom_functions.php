@@ -127,3 +127,25 @@ function custom_comment_column_content($column, $comment_ID)
 	}
 }
 add_action('manage_comments_custom_column', 'custom_comment_column_content', 10, 2);
+
+function aras_gravity_forms_submit_button_override( $input, $form )
+{
+	if( !is_singular() ){
+		return $input;
+	}
+	
+	$shortcode = get_field('form_shortcode');
+	if( !$shortcode ){
+		return $input;
+	}
+	
+	if( $shortcode == $form['id'] ){
+		$override = get_field('form_button_text');
+		if( $override ){
+			$input = preg_replace("/value='.+?'/", "value='".esc_attr( $override )."'", $input );
+		}
+	}
+	return $input;
+
+}
+add_filter('gform_submit_button', 'aras_gravity_forms_submit_button_override', 10, 2);
