@@ -10,7 +10,7 @@
 }
 
 .eyebrow {
-	
+
 	order: -1;
 	font-size: 1rem;
 	padding: 0.5em 0;
@@ -37,6 +37,8 @@
 	&__copy {
 		flex: 1;
 		text-align: center;
+		opacity: 0;
+		animation: announcement-slide-up 1s forwards 0.5s;
 		p {
 			margin: 0;
 			padding: 0;
@@ -54,5 +56,17 @@
 			width: auto !important;
 			height: 1.5rem !important;
 		}
+	}
+}
+
+@keyframes announcement-slide-up {
+	0% {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0%);
 	}
 }
