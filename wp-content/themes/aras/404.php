@@ -1,6 +1,6 @@
 <?php
 
-$request_uri = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$request_uri = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 if (strpos($request_uri, '/news/press-releases/') !== false && strpos($request_uri, 'link.aspx') !== false) {
 	wp_redirect(home_url('/news'));
 	exit;

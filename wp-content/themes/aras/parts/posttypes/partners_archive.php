@@ -1,5 +1,5 @@
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts'));
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
 <section class="partners-hero-banner largetoppadding largebottompadding bg-dblue">
   <div class="grid-container">

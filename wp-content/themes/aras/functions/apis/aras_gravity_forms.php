@@ -57,7 +57,7 @@ function populate_fields($value, $field, $name)
 add_filter('gform_field_value_autocountry', 'autocomplete_country_by_lang');
 function autocomplete_country_by_lang($value)
 {
-	$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	if (str_contains($site_url, '/en/')) {
 		return 'United States';
 	} elseif (str_contains($site_url, '/fr-fr/')) {

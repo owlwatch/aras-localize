@@ -104,7 +104,7 @@ endif;
 <?php elseif ($post_type == 'resource') : ?>
 
 	<?php
-	$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$labelterms = get_the_terms(get_the_ID(), 'format');
 	$cta_label = '';
 	if ($labelterms && !is_wp_error($labelterms)) {
@@ -219,7 +219,7 @@ endif;
 
 <?php elseif ($post_type == 'event') : ?>
 	<?php
-	$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$labelterms = get_the_terms(get_the_ID(), 'event_type');
 	$cta_label = '';
 	if ($labelterms && !is_wp_error($labelterms)) {

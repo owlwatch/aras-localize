@@ -1,7 +1,7 @@
 <?php
 $default_partners_archive_url = get_post_type_archive_link('partners');
 $post_id = get_the_ID();
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $partner_title = '';
 $partner_info = '';
 if (str_contains($site_url, '/ja-jp/')) {

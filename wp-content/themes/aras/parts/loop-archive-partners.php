@@ -45,7 +45,7 @@ if ($partner_integrations) {
 <?php if (get_field('partner_icon_for_website__c')) {
 	$thumbnail_url = get_field('partner_icon_for_website__c');
 	$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-	$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	if (str_contains($site_url, '/ja-jp/')) {
 		if (get_field('partner_name_for_website_japan__c')) {
 			$partner_title = get_field('partner_name_for_website_japan__c');

@@ -29,7 +29,11 @@ get_header(); ?>
     <div class="grid-x grid-padding-x">
       <div class="cell small-12 medium-shrink postsidebar">
         <div id="toc-container" class="tableofcontents">
-          <h2>Explore this Story</h2>
+          <?php if (get_field('resources_customer_story_toc_headline', 'option')) : ?>
+            <h2><?php echo get_field('resources_customer_story_toc_headline', 'option'); ?></h2>
+          <?php else : ?>
+            <h2>Explore this Story</h2>
+          <?php endif; ?>
           <ul id="toc"></ul>
         </div>
       </div>

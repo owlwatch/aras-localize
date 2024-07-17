@@ -68,6 +68,11 @@ if (function_exists('acf_add_options_page')) {
 		'parent_slug'    => 'edit.php?post_type=resource',
 	));
 	acf_add_options_sub_page(array(
+		'page_title'     => 'Events Settings',
+		'menu_title'    => 'Events Settings',
+		'parent_slug'    => 'edit.php?post_type=event',
+	));
+	acf_add_options_sub_page(array(
 		'page_title'     => 'Glossary Settings',
 		'menu_title'    => 'Glossary Settings',
 		'parent_slug'    => 'edit.php?post_type=glossary',

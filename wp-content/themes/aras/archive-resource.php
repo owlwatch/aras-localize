@@ -1,7 +1,7 @@
 <?php
 get_header();
 $default_resource_archive_url = get_post_type_archive_link('resource');
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
 <section class="archive-hero-banner">
   <div class="grid-container">
@@ -530,7 +530,7 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 </script>
 <?php
 // Get the current URL parameters
-$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $query_string = parse_url($current_url, PHP_URL_QUERY);
 parse_str($query_string, $variables); ?>
 <?php

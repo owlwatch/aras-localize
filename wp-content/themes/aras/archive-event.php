@@ -1,9 +1,8 @@
 <?php
 get_header();
 $default_event_archive_url = get_post_type_archive_link('event');
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
-
 <section id="short-hero" class="short-hero hero-banner bg-dblue">
   <div class="grid-container">
     <div class="grid-x grid-padding-x align-top">
@@ -19,12 +18,10 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     </div>
   </div>
 </section>
-
 <section class="news-filter bg-grey smalltoppadding smallbottompadding">
   <div class="grid-container">
     <div class="grid-x grid-margin-x align-center">
       <div class="cell small-12 news-filter-flex">
-
         <?php function get_terms_with_posts($taxonomy)
         {
           $terms = get_terms(array(
@@ -101,27 +98,22 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     function reloadPage() {
       var url = '<?php echo esc_url($default_event_archive_url); ?>';
       var params = new URLSearchParams(window.location.search);
-
       var eventType = eventTypeFilter.value;
       if (params.has('event_type') && !eventType) {
         params.delete('event_type');
       } else if (eventType) {
         params.set('event_type', eventType);
       }
-
       var eventRegion = eventRegionFilter.value;
       if (params.has('event_region') && !eventRegion) {
         params.delete('event_region');
       } else if (eventRegion) {
         params.set('event_region', eventRegion);
       }
-
       window.location.href = url + (params.toString() ? '?' + params.toString() : '');
     }
-
     eventTypeFilter.addEventListener('change', reloadPage);
     eventRegionFilter.addEventListener('change', reloadPage);
-
     // Set default values based on URL parameters
     var params = new URLSearchParams(window.location.search);
     var eventTypeParam = params.get('event_type');
@@ -131,7 +123,6 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         eventTypeOption.selected = true;
       }
     }
-
     var eventRegionParam = params.get('event_region');
     if (eventRegionParam) {
       var eventRegionOption = document.querySelector('#event-region-filter option[value="' + eventRegionParam + '"]');
@@ -139,7 +130,6 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         eventRegionOption.selected = true;
       }
     }
-
     // Clear button
     clearButton.addEventListener('click', function(event) {
       event.preventDefault();
@@ -188,8 +178,6 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           }
           h.click();
           reloadPage()
-
-
         });
         b.appendChild(c);
       }
@@ -236,14 +224,12 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     <section class="grid-x grid-margin-x blog-post-loop">
       <?php
       // Get the current URL parameters
-      $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+      $current_url = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
       $query_string = parse_url($current_url, PHP_URL_QUERY);
       parse_str($query_string, $variables);
       // Retrieve the variables
       $typetax = $variables['event_type'] ?? null;
       $regiontax = $variables['event_region'] ?? null;
-
-
       $tax_queries = array();
       if ($typetax !== null) {
         $tax_queries[] = array(
@@ -276,7 +262,6 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           );
         }
       }
-
       $args = array(
         'post_type' => 'event',
         'posts_per_page' => -1,
@@ -287,13 +272,7 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         'order' => 'ASC',
       );
       $args['tax_query'] = $main_tax_query;
-
-
-
-
-
       $event_query = new WP_Query($args);
-
       ?>
 
       <?php if ($event_query->have_posts()) : $postCount = 0;

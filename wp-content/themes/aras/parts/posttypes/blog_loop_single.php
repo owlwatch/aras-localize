@@ -6,7 +6,7 @@
 ?>
 
 <?php
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $default_post_archive_url = get_permalink(get_option('page_for_posts'));
 $author_id = get_the_author_meta('ID');
 $current_post_id = get_the_ID();

@@ -1,5 +1,5 @@
 <?php
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $current_url = esc_url(home_url(add_query_arg(array(), $wp->request)));
 //if (get_the_term_list(get_the_ID(), 'category')) :
 //	$nameterms = wp_get_post_terms(get_the_ID(), 'category');

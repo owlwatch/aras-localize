@@ -242,14 +242,7 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
         }
-    }
 
-    .gloss-tableofcontents {
-        margin-bottom: 2.5rem;
-    }
-
-    .tableofcontents,
-    .gloss-tableofcontents {
         ul {
             list-style: none;
             margin: 0;
@@ -288,6 +281,11 @@
                 }
             }
         }
+    }
+
+    .gloss-tableofcontents {
+        margin-bottom: 2.5rem;
+        z-index: 1111;
     }
 
     .gloss-related {

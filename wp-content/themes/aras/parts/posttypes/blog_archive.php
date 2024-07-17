@@ -1,5 +1,5 @@
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts'));
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $blog_backlink = 'Back to Blog';
 $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
 ?>

@@ -121,7 +121,7 @@ function custom_language_dropdown_filter()
 	<?php
 	// Get the current language
 	$current_language = apply_filters('wpml_current_language', NULL);
-	$currentURL = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$currentURL = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	//if ($_SERVER['QUERY_STRING']) {
 	//	$currentURL .= "?" . $_SERVER['QUERY_STRING'];
 	//}

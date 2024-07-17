@@ -1,5 +1,5 @@
 <?php
-$site_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $data = load_data_from_file('Web_Get_Class_Data.json');
 if ($data != null) {
 	$timezones = array(

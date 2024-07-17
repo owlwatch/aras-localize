@@ -25,8 +25,13 @@ $tags = get_the_tags($current_post_id);
 
 				<div class="cell small-12 medium-shrink postsidebar">
 					<?php if (get_field('include_table_of_contents') == 'show') : ?>
-						<div id="toc-container" class="gloss-tableofcontents">
-							<h6>In this article:</h6>
+						<div id="toc-container" class="tableofcontents gloss-tableofcontents">
+
+							<?php if (get_field('glossary_toc_headline', 'option')) : ?>
+								<h2><?php echo get_field('glossary_toc_headline', 'option'); ?></h2>
+							<?php else : ?>
+								<h2>In this article:</h2>
+							<?php endif; ?>
 							<ul id="toc"></ul>
 						</div>
 					<?php endif; ?>
