@@ -91,15 +91,9 @@ add_filter('gform_confirmation', 'custom_confirmation', 10, 3);
 function custom_confirmation($confirmation, $form, $entry)
 {
 	GFCommon::log_debug('gform_confirmation');
-	GFCommon::log_debug('gform_confirmation');
-	GFCommon::log_debug('gform_confirmation');
-	GFCommon::log_debug('gform_confirmation');
-	GFCommon::log_debug('gform_confirmation');
-	GFCommon::log_debug('gform_confirmation');
 
 	$current_page_id = get_queried_object_id();
 	$redirect_url = $_SERVER['REQUEST_URI'];
-
 
 	if (get_field('post_submission_action', $current_page_id) == 'update') {
 		GFCommon::log_debug('post_submission_action is update');
@@ -269,6 +263,15 @@ function handle_form_submission($entry, $form)
 	if ($form['id'] == 7) {
 		gated_res_submission($entry, $form);
 	} else {
+
+		if (get_field('post_submission_action', $current_page_id) == 'redirect') {
+			if (get_field('post-submission_redirect_url', $current_page_id)) {
+				$redirect_url = get_field('post-submission_redirect_url', $current_page_id);
+				wp_redirect($redirect_url);
+				exit();
+			}
+		}
+
 		if (get_field('post_submission_action', $current_page_id) == 'update') {
 			if (get_field('post_submission_content_behavior', $current_page_id) != 'newtab') {
 				$redirect_url = $_SERVER['REQUEST_URI'];
@@ -282,6 +285,15 @@ function handle_form_submission($entry, $form)
 			while (have_rows('flexible_content', $current_page_id)) : the_row();
 				if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
 					$post_submission_id_set = false;
+
+					if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+						if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+							$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+							wp_redirect($redirect_url);
+							exit();
+							$post_submission_id_set = true;
+						}
+					}
 
 					if (get_sub_field('post_submission_action', $current_page_id) == 'update' && !$post_submission_id_set) {
 						if (get_sub_field('post_submission_content_behavior', $current_page_id) != 'newtab') {
@@ -297,6 +309,16 @@ function handle_form_submission($entry, $form)
 						while (have_rows('right_content', $current_page_id)) : the_row();
 							if (have_rows('form_block', $current_page_id)) :
 								while (have_rows('form_block', $current_page_id)) : the_row();
+
+									if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+										if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+											$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+											wp_redirect($redirect_url);
+											exit();
+											$post_submission_id_set = true;
+										}
+									}
+
 									if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
 										if (get_sub_field('post_submission_content_behavior', $current_page_id) != 'newtab') {
 											$redirect_url = $_SERVER['REQUEST_URI'];
@@ -314,6 +336,16 @@ function handle_form_submission($entry, $form)
 						while (have_rows('left_content', $current_page_id)) : the_row();
 							if (have_rows('form_block', $current_page_id)) :
 								while (have_rows('form_block', $current_page_id)) : the_row();
+
+									if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+										if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+											$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+											wp_redirect($redirect_url);
+											exit();
+											$post_submission_id_set = true;
+										}
+									}
+
 									if (get_sub_field('post_submission_action', $current_page_id) == 'update'  && !$post_submission_id_set) {
 										if (get_sub_field('post_submission_content_behavior', $current_page_id) != 'newtab') {
 											$redirect_url = $_SERVER['REQUEST_URI'];
@@ -332,8 +364,6 @@ function handle_form_submission($entry, $form)
 		endif;
 	}
 }
-
-
 
 
 
@@ -591,8 +621,72 @@ function post_to_third_party_14($entry, $form)
 
 function gated_res_submission($entry, $form)
 {
+
+
 	$current_page_id = get_queried_object_id();
 	$redirect_url = $_SERVER['REQUEST_URI'];
+
+
+
+	if (get_field('post_submission_action', $current_page_id) == 'redirect') {
+		if (get_field('post-submission_redirect_url', $current_page_id)) {
+			$redirect_url = get_field('post-submission_redirect_url', $current_page_id);
+			wp_redirect($redirect_url);
+			exit();
+		}
+	}
+	if (have_rows('flexible_content', $current_page_id)) :
+		while (have_rows('flexible_content', $current_page_id)) : the_row();
+			if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
+				$post_submission_id_set = false;
+
+				if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+					if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+						$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+						wp_redirect($redirect_url);
+						exit();
+						$post_submission_id_set = true;
+					}
+				}
+				if (have_rows('right_content', $current_page_id)) :
+					while (have_rows('right_content', $current_page_id)) : the_row();
+						if (have_rows('form_block', $current_page_id)) :
+							while (have_rows('form_block', $current_page_id)) : the_row();
+								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+										wp_redirect($redirect_url);
+										exit();
+										$post_submission_id_set = true;
+									}
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+				if (have_rows('left_content', $current_page_id)) :
+					while (have_rows('left_content', $current_page_id)) : the_row();
+						if (have_rows('form_block', $current_page_id)) :
+							while (have_rows('form_block', $current_page_id)) : the_row();
+
+								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+										wp_redirect($redirect_url);
+										exit();
+										$post_submission_id_set = true;
+									}
+								}
+							endwhile;
+						endif;
+					endwhile;
+				endif;
+			endif;
+		endwhile;
+	endif;
+
+
+
 	foreach ($form['fields'] as $field) {
 		if ($field->type == 'email') {
 			$email = rgar($entry, $field->id);

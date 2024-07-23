@@ -25,7 +25,7 @@ $current_post_id = get_the_ID();
   <?php endif; ?>
 
 <?php elseif (get_field('post_submission_action') == 'redirect') : ?>
-  <?php if ($form_submitted) : ?>
+  <?php if (isset($_GET['id']) && intval($_GET['id']) === $current_post_id) : /* Checks if submission URL has ID in it */ ?>
     <?php if (get_field('post-submission_redirect_url')) : ?>
       <?php $redirect_url = get_field('post-submission_redirect_url'); ?>
       <?php header("Location: $redirect_url"); ?>
