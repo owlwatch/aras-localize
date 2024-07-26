@@ -2,6 +2,10 @@
 get_header();
 $default_resource_archive_url = get_post_type_archive_link('resource');
 $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$labels = get_field('resource_labels', 'option');
+if( !is_array($labels) ){
+  $labels = [];
+}
 ?>
 <section class="archive-hero-banner">
   <div class="grid-container">
@@ -128,11 +132,13 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
       <div class="cell small-12">
         <form id="filter-form">
-
+          
           <?php if (have_rows('resource_format_filter', 'option')) : ?>
             <div class="custom-select">
               <select id="format-filter" name="format">
-                <option value="">All Formats</option>
+                <option value="">
+                  <?php echo $labels['all_formats'] ?: 'All Formats'; ?>
+                </option>
                 <?php while (have_rows('resource_format_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
                   if ($term) : ?>
@@ -156,7 +162,9 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           <?php if (have_rows('resource_application_filter', 'option')) : ?>
             <div class="custom-select">
               <select id="application-filter" name="application">
-                <option value="">All Applications</option>
+                <option value="">
+                  <?php echo $labels['all_applications'] ?: 'All Applications'; ?>
+                </option>
                 <?php while (have_rows('resource_application_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
                   if ($term) : ?>
@@ -179,7 +187,9 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           <?php if (have_rows('resource_industry_filter', 'option')) : ?>
             <div class="custom-select">
               <select id="industry-filter" name="industry">
-                <option value="">All Industries</option>
+                <option value="">
+                  <?php echo $labels['all_industries'] ?: 'All Industries'; ?>
+                </option>
                 <?php while (have_rows('resource_industry_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
                   if ($term) : ?>
@@ -202,7 +212,9 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           <?php if (have_rows('resource_topic_filter', 'option')) : ?>
             <div class="custom-select">
               <select id="topic-filter" name="topic">
-                <option value="">All Topics</option>
+                <option value="">
+                  <?php echo $labels['all_topics'] ?: 'All Topics'; ?>
+                </option>
                 <?php while (have_rows('resource_topic_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
                   if ($term) : ?>
