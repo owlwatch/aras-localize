@@ -345,8 +345,10 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
                 <?php endwhile; ?>
               <?php endif; ?>
             </div>
-            <?php if (get_field('blog_clear_button_label', 'option')) : ?>
-              <button aria-label="<?php echo get_field('blog_clear_button_label', 'option'); ?>" class="aras-button" id="clear-filters"><?php echo get_field('blog_clear_button_label', 'option'); ?></button>
+            <?php if (get_field('blog_filter_clear_button_label', 'option')) : ?>
+              <button aria-label="<?php echo esc_attr( get_field('blog_filter_clear_button_label', 'option') ); ?>" class="aras-button" id="clear-filters">
+                <?php echo get_field('blog_filter_clear_button_label', 'option'); ?>
+              </button>
             <?php else : ?>
               <button aria-label="<?php esc_attr__('Clear Filters', 'aras'); ?>" class="aras-button" id="clear-filters">
                 <?php _e('Clear', 'aras'); ?>
