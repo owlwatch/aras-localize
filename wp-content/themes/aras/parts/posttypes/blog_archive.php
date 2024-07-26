@@ -197,7 +197,9 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
               <?php if (!(strpos($site_url, '/blog/tag/') !== false || strpos($site_url, '/blog/author/') !== false)) : ?>
                 <div class="custom-select">
                   <select id="category-filter" name="category-filter">
-                    <option value="all">All Categories</option>
+                    <option value="all">
+                      <?php echo get_field('all_categories_label', 'option'); ?>
+                    </option>
                     <?php while (have_rows('blog_category_filter', 'option')) : the_row(); ?>
                       <?php $term = get_sub_field('category_item', 'option');
                       if ($term) : ?>
