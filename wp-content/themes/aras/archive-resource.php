@@ -234,7 +234,9 @@ if( !is_array($labels) ){
             </div>
           <?php endif; ?>
 
-          <button aria-label="clear filters" class="aras-button" id="clear-filters">Clear</button>
+          <button aria-label="<?php esc_attr__('Clear Filters', 'aras'); ?>" class="aras-button" id="clear-filters">
+            <?php _e('Clear', 'aras'); ?>
+          </button>
         </form>
 
         <script>
