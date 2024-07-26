@@ -18,6 +18,26 @@ document.addEventListener("DOMContentLoaded", function() {
         window.localStorage.setItem('aras_utm', JSON.stringify(utm) )
     }
 });
+
+////Eyebrow Logic
+document.addEventListener("DOMContentLoaded", function() {
+    const eyebrow = document.querySelector('.eyebrow');
+    if( !eyebrow ){
+        return false;
+    }
+    const close = eyebrow.querySelector('.eyebrow__close');
+
+    function closeEyebrow()
+    {
+        eyebrow.classList.add('is-closed');
+        sessionStorage.setItem('eyebrow-closed', '1');
+    }
+    if( close ){
+        close.addEventListener('click', closeEyebrow);
+    }
+    
+});
+
 ////Smooth Scrolling
 jQuery(document).ready(function() {
   // Check window height

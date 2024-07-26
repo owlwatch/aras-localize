@@ -9,6 +9,7 @@ Thumbs.db
 *.code-workspace
 site-archive*
 
+api-json
 api_json
 node_modules
 .htaccess
