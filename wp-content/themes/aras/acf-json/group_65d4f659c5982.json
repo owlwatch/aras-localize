@@ -811,7 +811,7 @@
             "name": "eyebrow_enabled",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "<a target=\"_blank\" href=\"\/en\/?test-announcement\">Test the announcement without enabling →<\/a> (replace the language-code to test another language)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -834,15 +834,7 @@
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_668bfb32f9bad",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -890,11 +882,11 @@
     "position": "normal",
     "style": "default",
     "label_placement": "top",
-    "instruction_placement": "label",
+    "instruction_placement": "field",
     "hide_on_screen": "",
     "active": true,
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1720452429
+    "modified": 1722015046
 }

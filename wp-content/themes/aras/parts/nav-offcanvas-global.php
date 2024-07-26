@@ -1,6 +1,11 @@
 <?php
 $eyebrow_enabled = get_field('eyebrow_enabled', 'option');
 $eyebrow_content = get_field('eyebrow_content', 'option');
+
+// lets allow eyebrow testing
+if( isset( $_REQUEST['test-announcement']) ){
+	$eyebrow_enabled = true;
+}
 $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 ?>
 <div class="nav-bar<?php if( $has_eyebrow){ ?> has-eyebrow<?php } ?>">

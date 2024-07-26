@@ -18,7 +18,7 @@
 	</div>
 </div>
 <?php
-if( get_field('eyebrow_close_enabled', 'option') ){
+if( get_field('eyebrow_close_enabled', 'option') && !isset( $_REQUEST['test-announcement']) ){
 	?>
 <script>
 	// check if this has been closed by the user
