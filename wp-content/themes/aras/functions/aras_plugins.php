@@ -182,3 +182,15 @@ add_filter('Yoast\WP\SEO\enable_notification_post_slug_change', '__return_false'
 add_filter('Yoast\WP\SEO\enable_notification_term_delete', '__return_false');
 //Notification: Tax URL changed
 add_filter('Yoast\WP\SEO\enable_notification_term_slug_change', '__return_false');
+
+/*
+ * Remove Yoast SEO Filters
+ */
+function aras_remove_yoast_seo_admin_filters() {
+	global $wpseo_meta_columns;
+	if ($wpseo_meta_columns) {
+		remove_action('restrict_manage_posts', array($wpseo_meta_columns, 'posts_filter_dropdown'));
+		remove_action('restrict_manage_posts', array($wpseo_meta_columns, 'posts_filter_dropdown_readability'));
+	}
+}
+add_action('admin_init', 'aras_remove_yoast_seo_admin_filters', 20);
