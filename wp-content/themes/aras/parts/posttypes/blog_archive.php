@@ -187,7 +187,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
     <div class="grid-x grid-margin-x align-right">
 
       <?php if (!(strpos($site_url, '/blog/tag/') !== false || strpos($site_url, '/blog/author/') !== false)) : ?>
-        <div class="cell small-12 medium-12 large-auto">
+        <div class="cell small-12 medium-auto">
         <?php else : ?>
           <div class="cell small-12 medium-auto">
           <?php endif; ?>
@@ -222,128 +222,73 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
 
             <div class="custom-select">
 
+              <?php 
+              $language_filter = get_field( 'blog_language_filter', 'option' );
+              ?>
+              <select id="language-filter" name="language-filter">
+                <option value="">
+                  <?php echo $language_filter['all_languages_label'] ?: __('All Languages', 'aras'); ?>
+                </option>
+                  
+                <?php if (str_contains($site_url, '/ja-jp/')) { ?>
+                  
+                  <option value="en__ja-jp">
+                    <?php echo $language_filter['combined_label'] ?: __('Japanese + English', 'aras'); ?>
+                  </option>
+                  <option value="en">
+                    <?php echo $language_filter['english_label'] ?: __('English', 'aras'); ?>
+                  </option>
+                  <option value="de-de">
+                    <?php echo $language_filter['german_label'] ?: __('German', 'aras'); ?>
+                  </option>
+                  <option value="ja-jp">
+                    <?php echo $language_filter['japanese_label'] ?: __('Japanese', 'aras'); ?>
+                  </option>
 
-              <?php if (have_rows('blog_language_filter', 'option')) : ?>
-                <?php while (have_rows('blog_language_filter', 'option')) : the_row(); ?>
-                  <select id="language-filter" name="language-filter">
-                    <?php if (get_field('all_languages_label', 'option')) : ?>
-                      <option value=""><?php echo get_field('all_languages_label', 'option'); ?></option>
-                    <?php else : ?>
-                      <option value="">All Languages</option>
-                    <?php endif; ?>
+                <?php } elseif (str_contains($site_url, '/fr-fr/')) { ?>
 
-                    <?php if (str_contains($site_url, '/ja-jp/')) { ?>
-                      <?php if (get_field('combined_label', 'option')) : ?>
-                        <option value="en__ja-jp"><?php echo get_field('combined_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="en__ja-jp">Japanese + English</option>
-                      <?php endif; ?>
-                      <?php if (get_field('english_label', 'option')) : ?>
-                        <option value="en"><?php echo get_field('english_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="en">English</option>
-                      <?php endif; ?>
-                      <?/*
-                      <?php if (get_field('french_label', 'option')) : ?>
-                        <option selected value="fr-fr"><?php echo get_field('french_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="fr-fr">French</option>
-                      <?php endif; ?>
-                      */ ?>
-                      <?php if (get_field('german_label', 'option')) : ?>
-                        <option selected value="de-de"><?php echo get_field('german_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="de-de">German</option>
-                      <?php endif; ?>
-                      <?php if (get_field('japanese_label', 'option')) : ?>
-                        <option selected value="ja-jp"><?php echo get_field('japanese_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="ja-jp">Japanese</option>
-                      <?php endif; ?>
-                    <?php } elseif (str_contains($site_url, '/fr-fr/')) { ?>
-                      <?php if (get_field('combined_label', 'option')) : ?>
-                        <option selected value="en__fr-fr"><?php echo get_field('combined_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="en__fr-fr">French + English</option>
-                      <?php endif; ?>
-                      <?php if (get_field('english_label', 'option')) : ?>
-                        <option value="en"><?php echo get_field('english_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="en">English</option>
-                      <?php endif; ?>
-                      <?/*
-                      <?php if (get_field('french_label', 'option')) : ?>
-                        <option value="fr-fr"><?php echo get_field('french_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="fr-fr">French</option>
-                      <?php endif; ?>
-                      */ ?>
-                      <?php if (get_field('german_label', 'option')) : ?>
-                        <option value="de-de"><?php echo get_field('german_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="de-de">German</option>
-                      <?php endif; ?>
-                      <?php if (get_field('japanese_label', 'option')) : ?>
-                        <option value="ja-jp"><?php echo get_field('japanese_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="ja-jp">Japanese</option>
-                      <?php endif; ?>
+                  <option value="en__fr-fr">
+                    <?php echo $language_filter['combined_label'] ?: __('French + English', 'aras'); ?>
+                  </option>
+                  <option value="en">
+                    <?php echo $language_filter['english_label'] ?: __('English', 'aras'); ?>
+                  </option>
+                  <option value="de-de">
+                    <?php echo $language_filter['german_label'] ?: __('German', 'aras'); ?>
+                  </option>
+                  <option value="ja-jp">
+                    <?php echo $language_filter['japanese_label'] ?: __('Japanese', 'aras'); ?>
+                  </option>
 
-                    <?php } elseif (str_contains($site_url, '/de-de/')) { ?>
-                      <?php if (get_field('combined_label', 'option')) : ?>
-                        <option selected value="en__de-de"><?php echo get_field('combined_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="en__de-de">German + English</option>
-                      <?php endif; ?>
-                      <?php if (get_field('english_label', 'option')) : ?>
-                        <option value="en"><?php echo get_field('english_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="en">English</option>
-                      <?php endif; ?>
-                      <?/*
-                      <?php if (get_field('french_label', 'option')) : ?>
-                        <option value="fr-fr"><?php echo get_field('french_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="fr-fr">French</option>
-                      <?php endif; ?>
-                      */ ?>
-                      <?php if (get_field('german_label', 'option')) : ?>
-                        <option value="de-de"><?php echo get_field('german_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="de-de">German</option>
-                      <?php endif; ?>
-                      <?php if (get_field('japanese_label', 'option')) : ?>
-                        <option value="ja-jp"><?php echo get_field('japanese_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="ja-jp">Japanese</option>
-                      <?php endif; ?>
-                    <?php } elseif (str_contains($site_url, '/en/')) { ?>
-                      <?php if (get_field('english_label', 'option')) : ?>
-                        <option selected value="en"><?php echo get_field('english_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option selected value="en">English</option>
-                      <?php endif; ?>
-                      <?/*
-                      <?php if (get_field('french_label', 'option')) : ?>
-                        <option value="fr-fr"><?php echo get_field('french_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="fr-fr">French</option>
-                      <?php endif; ?>
-                      */ ?>
-                      <?php if (get_field('german_label', 'option')) : ?>
-                        <option value="de-de"><?php echo get_field('german_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="de-de">German</option>
-                      <?php endif; ?>
-                      <?php if (get_field('japanese', 'option')) : ?>
-                        <option value="ja-jp"><?php echo get_field('japanese_label', 'option'); ?></option>
-                      <?php else : ?>
-                        <option value="ja-jp">Japanese</option>
-                      <?php endif; ?>
-                    <?php } ?>
-                  </select>
-                <?php endwhile; ?>
-              <?php endif; ?>
+                <?php } elseif (str_contains($site_url, '/de-de/')) { ?>
+
+                  <option value="en__de-de">
+                    <?php echo $language_filter['combined_label'] ?: __('German + English', 'aras'); ?>
+                  </option>
+                  <option value="en">
+                    <?php echo $language_filter['english_label'] ?: __('English', 'aras'); ?>
+                  </option>
+                  <option value="de-de">
+                    <?php echo $language_filter['german_label'] ?: __('German', 'aras'); ?>
+                  </option>
+                  <option value="ja-jp">
+                    <?php echo $language_filter['japanese_label'] ?: __('Japanese', 'aras'); ?>
+                  </option>
+
+                  
+                <?php } elseif (str_contains($site_url, '/en/')) { ?>
+
+                  <option value="en">
+                    <?php echo $language_filter['english_label'] ?: __('English', 'aras'); ?>
+                  </option>
+                  <option value="de-de">
+                    <?php echo $language_filter['german_label'] ?: __('German', 'aras'); ?>
+                  </option>
+                  <option value="ja-jp">
+                    <?php echo $language_filter['japanese_label'] ?: __('Japanese', 'aras'); ?>
+                  </option>
+                <?php } ?>
+              </select>
             </div>
             <?php if (get_field('blog_filter_clear_button_label', 'option')) : ?>
               <button aria-label="<?php echo esc_attr( get_field('blog_filter_clear_button_label', 'option') ); ?>" class="aras-button" id="clear-filters">

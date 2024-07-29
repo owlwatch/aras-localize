@@ -297,6 +297,11 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
+    .custom-select {
+      flex: 1;
+      width: auto;
+    }
+
     @include breakpoint(medium only) {
       //flex-wrap: wrap;
     }
