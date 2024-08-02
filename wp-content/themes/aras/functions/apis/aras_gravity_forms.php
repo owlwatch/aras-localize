@@ -95,6 +95,7 @@ function custom_confirmation($confirmation, $form, $entry)
 	$current_page_id = get_queried_object_id();
 	$redirect_url = $_SERVER['REQUEST_URI'];
 
+
 	if (get_field('post_submission_action', $current_page_id) == 'update') {
 		GFCommon::log_debug('post_submission_action is update');
 		if (get_field('post_submission_content_behavior', $current_page_id) == 'newtab') {
@@ -125,6 +126,8 @@ function custom_confirmation($confirmation, $form, $entry)
 			$confirmation = '<p>' . $message . '</p><a class="aras-button" href="' . esc_url($redirect_url) . '" target="_blank">' . $label . '</a>';
 			return $confirmation;
 		}
+	} else {
+		return $confirmation;
 	}
 
 
@@ -160,7 +163,11 @@ function custom_confirmation($confirmation, $form, $entry)
 						}
 						$confirmation = '<p>' . $message . '</p><a class="aras-button" href="' . esc_url($redirect_url) . '" target="_blank">' . $label . '</a>';
 						return $confirmation;
+					} else {
+						return $confirmation;
 					}
+				} else {
+					return $confirmation;
 				}
 
 				if (have_rows('right_content', $current_page_id)) :
@@ -193,7 +200,11 @@ function custom_confirmation($confirmation, $form, $entry)
 										}
 										$confirmation = '<p>' . $message . '</p><a class="aras-button" href="' . esc_url($redirect_url) . '" target="_blank">' . $label . '</a>';
 										return $confirmation;
+									} else {
+										return $confirmation;
 									}
+								} else {
+									return $confirmation;
 								}
 							endwhile;
 						endif;
@@ -229,7 +240,11 @@ function custom_confirmation($confirmation, $form, $entry)
 										}
 										$confirmation = '<p>' . $message . '</p><a class="aras-button" href="' . esc_url($redirect_url) . '" target="_blank">' . $label . '</a>';
 										return $confirmation;
+									} else {
+										return $confirmation;
 									}
+								} else {
+									return $confirmation;
 								}
 							endwhile;
 						endif;
@@ -809,7 +824,6 @@ function update_gotowebinar_refresh_token()
 		)
 	);
 	if (is_wp_error($response)) {
-		error_log('error refreshing gotowebinar token: '.$response->get_error_message() );
 	} else {
 		$response_body = wp_remote_retrieve_body($response);
 		$data = json_decode($response_body, true);
@@ -819,10 +833,6 @@ function update_gotowebinar_refresh_token()
 			);
 			$go_to_webinar_refresh_file = get_template_directory() . '/api_json/gotowebinar_refresh.json';
 			file_put_contents($go_to_webinar_refresh_file, json_encode($tokens));
-		}
-		else {
-			
-			error_log('error refreshing gotowebinar token: '.print_r($data,1) );
 		}
 	}
 }
