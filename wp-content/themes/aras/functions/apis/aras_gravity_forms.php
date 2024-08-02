@@ -809,6 +809,7 @@ function update_gotowebinar_refresh_token()
 		)
 	);
 	if (is_wp_error($response)) {
+		error_log('error error refreshing gotowebinar token: '.$response->get_error_message() );
 	} else {
 		$response_body = wp_remote_retrieve_body($response);
 		$data = json_decode($response_body, true);
