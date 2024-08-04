@@ -682,6 +682,12 @@ blockquote,
 }
 
 .bg-dblue {
+  a {
+    color: $gold;
+    &:hover {
+      color: lighten($gold, 20%);
+    }
+  }
   .aras-button {
     background-color: $gold;
     border: solid 2px $gold;
