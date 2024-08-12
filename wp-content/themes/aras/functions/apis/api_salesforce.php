@@ -140,7 +140,7 @@ add_action('update_partners_event', 'update_partners_from_file');
 function update_partners_from_file()
 {
 	error_log('running update_partners_from_file at interval of one 7201s');
-
+	
 	$partners_data = load_salesforce_data_from_file('Salesforce_Partners_00BUM000000arH72AI.json');
 	// Check if decoding was successful
 	if ($partners_data === null) {
