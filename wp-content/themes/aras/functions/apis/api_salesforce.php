@@ -59,8 +59,8 @@ function fetch_data_from_salesforce_api($url)
 	$clientId = '3MVG9p1Q1BCe9GmDMzV_B995ILaTLlcH62_4FqAiYF2ABC0hVjOWWF1i8ix5_QdB0rb7w1c3ufX0sCzvgGxVV';
 	$clientSecret = '9FF1DFB9ED3DFC62E5528995CB23C6F4F4101D2C654586F58E9C151392658679';
 	$username = 'markopsintegrations@aras.com';
-	$password = 'Pardotaras4!';
-	$securityToken = 'EGeQjvdr1EatbBxECPtNG40mW';
+	$password = 'Marketoaras3!';
+	$securityToken = 'cva4c2grSkQ4cEeltAR4CQei';
 	$loginUrl = 'https://login.salesforce.com/services/oauth2/token';
 	$params = [
 		'grant_type' => 'password',

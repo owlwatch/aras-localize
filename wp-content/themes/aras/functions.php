@@ -77,7 +77,7 @@ require_once(get_template_directory() . '/functions/apis/aras_gravity_forms.php'
 //AJAX load settings
 require_once(get_template_directory() . '/functions/post_types/aras_ajax.php');
 
-//Salseforce Post Types (Partners, Academic Users)
+// Salseforce Post Types (Partners, Academic Users)
 require_once(get_template_directory() . '/functions/post_types/aras_sf_post_types.php');
 
 //Resources CPT and Tax
