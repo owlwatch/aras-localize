@@ -632,7 +632,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       /// FINALLY, the post query
       // $posts_query = new WP_Query($args);
       if( count($lang_codes) > 1 ){
-        error_log( 'using wpml helper' );
         $posts_query = Aras\WPML\get_wp_query( $args, $lang_codes );
       }
       else {
