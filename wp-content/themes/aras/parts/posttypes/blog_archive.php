@@ -98,6 +98,12 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
           );
         } elseif (str_contains($site_url, '/fr-fr/')) {
           $fargs['meta_query'] = array(
+            'relation' => 'OR',
+            array(
+              'key'     => 'post_lang_code',
+              'value'   => 'en',
+              'compare' => 'IN',
+            ),
             array(
               'key'     => 'post_lang_code',
               'value'   => 'fr-fr',
@@ -106,6 +112,12 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
           );
         } elseif (str_contains($site_url, '/de-de/')) {
           $fargs['meta_query'] = array(
+            'relation' => 'OR',
+            array(
+              'key'     => 'post_lang_code',
+              'value'   => 'en',
+              'compare' => 'IN',
+            ),
             array(
               'key'     => 'post_lang_code',
               'value'   => 'de-de',
