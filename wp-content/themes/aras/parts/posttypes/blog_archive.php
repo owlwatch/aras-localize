@@ -1,4 +1,8 @@
-<?php $default_post_archive_url = get_permalink(get_option('page_for_posts'));
+<?php
+
+use Aras\WPML\WPML_Helper;
+
+ $default_post_archive_url = get_permalink(get_option('page_for_posts'));
 $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $blog_backlink = 'Back to Blog';
 $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
@@ -94,12 +98,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
           );
         } elseif (str_contains($site_url, '/fr-fr/')) {
           $fargs['meta_query'] = array(
-            'relation' => 'OR',
-            array(
-              'key'     => 'post_lang_code',
-              'value'   => 'en',
-              'compare' => 'IN',
-            ),
             array(
               'key'     => 'post_lang_code',
               'value'   => 'fr-fr',
@@ -108,12 +106,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
           );
         } elseif (str_contains($site_url, '/de-de/')) {
           $fargs['meta_query'] = array(
-            'relation' => 'OR',
-            array(
-              'key'     => 'post_lang_code',
-              'value'   => 'en',
-              'compare' => 'IN',
-            ),
             array(
               'key'     => 'post_lang_code',
               'value'   => 'de-de',
@@ -374,8 +366,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
     // Get the slug from the URL
     var pgurl = new URL(window.location.href);
     var postCatParam = pgurl.pathname.split('/').pop();
-    console.log(pgurl.href);
-    console.log(postCatParam);
     if (postCatParam) {
       var postCatOption = document.querySelector('#category-filter option[value="' + postCatParam + '"]');
       if (postCatOption) {
@@ -488,6 +478,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       $category_switcher = '';
       $tag_switcher = '';
       $author_switcher = '';
+      $lang_codes = [];
       $lang_switcher = $variables['language'] ?? null;
 
       $args = array(
@@ -588,6 +579,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
             )
           );
         } elseif (str_contains($site_url, '/fr-fr/')) {
+          $lang_codes = ['fr-fr', 'en'];
           $args['meta_query'] = array(
             'relation' => 'OR',
             array(
@@ -602,6 +594,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
             ),
           );
         } elseif (str_contains($site_url, '/de-de/')) {
+          $lang_codes = ['de-de', 'en'];
           $args['meta_query'] = array(
             'relation' => 'OR',
             array(
@@ -633,8 +626,20 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         $args['paged'] = $page_number;
       }
 
+      // Fix duplicate posts (only one should be returned per language)
+      
+
       /// FINALLY, the post query
-      $posts_query = new WP_Query($args);
+      // $posts_query = new WP_Query($args);
+      if( count($lang_codes) > 1 ){
+        error_log( 'using wpml helper' );
+        $posts_query = Aras\WPML\get_wp_query( $args, $lang_codes );
+      }
+      else {
+        $posts_query = new WP_Query($args);
+      }
+      
+      error_log( print_r($posts_query->request, 1) );
       if ($posts_query->have_posts()) : $postCount = 0;
         while ($posts_query->have_posts()) :  $posts_query->the_post();
           $postCount++;
