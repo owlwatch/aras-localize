@@ -88,6 +88,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
             ),
           ),
         );
+        $lang_codes = [];
         if (str_contains($site_url, '/ja-jp/')) {
           $fargs['meta_query'] = array(
             array(
@@ -110,6 +111,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
               'compare' => 'IN',
             ),
           );
+          $lang_codes = ['fr-fr', 'en'];
         } elseif (str_contains($site_url, '/de-de/')) {
           $fargs['meta_query'] = array(
             'relation' => 'OR',
@@ -124,6 +126,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
               'compare' => 'IN',
             ),
           );
+          $lang_codes = ['de-de', 'en'];
         } else {
           $fargs['meta_query'] = array(
             array(
@@ -133,7 +136,12 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
             )
           );
         }
-        $featposts = new WP_Query($fargs);
+        if( count($lang_codes) > 1 ){
+          $featposts = Aras\WPML\get_wp_query( $fargs, $lang_codes );
+        }
+        else {
+          $featposts = new WP_Query($fargs);
+        }
         if ($featposts->have_posts()) : ?>
           <?php while ($featposts->have_posts()) : $featposts->the_post();
             $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
