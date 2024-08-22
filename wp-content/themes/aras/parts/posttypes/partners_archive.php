@@ -199,7 +199,6 @@ function generate_slug($termname)
       var mixer = mixitup(thisContainer, {
         callbacks: {
           onMixStart: function(state, futureState) {
-            console.log(futureState)
             if (futureState.hasFailed) {
               jQuery('#no-posts-text').css('display', 'block');
             } else {
@@ -290,8 +289,7 @@ function generate_slug($termname)
           h.click();
           const filter_value = this.dataset.targetclass;
           const filter_class = filter_value ? filter_value : 'all'
-          mixer.filter(filter_class);
-
+          updateFilters();
         });
         b.appendChild(c);
       }
@@ -304,6 +302,19 @@ function generate_slug($termname)
         this.nextSibling.classList.toggle("select-hide");
         this.classList.toggle("select-arrow-active");
       });
+    }
+
+    function updateFilters(){
+      let selects = document.querySelectorAll('.custom-select select');
+      let filters = '';
+      selects.forEach( s => {
+        if( s.value ){
+          filters += s.value;
+        }
+      });
+
+      mixer.filter( filters );
+      
     }
 
     function closeAllSelect(elmnt) {
