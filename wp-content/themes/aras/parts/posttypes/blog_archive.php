@@ -60,7 +60,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
     </div>
   </div>
 </section>
-<?php if (is_author() || is_category() || is_tag()) : ?>
+<?php if (is_author() || is_category() || is_tag() || is_paged()) : ?>
 <?php else : ?>
   <section class="blogs-archive-feat mediumtoppadding largebottompadding">
     <div class="grid-container">
@@ -672,11 +672,20 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       ?>
     </section>
     <section class="grid-x grid-margin-x text-center align-center">
+      <!--
       <?php if (get_field('load_more_blogs_label', 'option')) : ?>
         <button aria-label="<?php echo get_field('load_more_blogs_label', 'option'); ?>" class="aras-button" id="load-more-posts"><?php echo get_field('load_more_blogs_label', 'option'); ?></button>
       <?php else : ?>
         <button aria-label="Load More Posts" class="aras-button" id="load-more-posts">Load More</button>
       <?php endif; ?>
+      -->
+      <?php
+      the_posts_pagination( array(
+        'mid_size' => 2,
+        'prev_text' => __( '←', 'aras' ),
+        'next_text' => __( '→', 'aras' ),
+        ) );
+      ?>
     </section>
   </div>
   </div>

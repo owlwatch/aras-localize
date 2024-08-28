@@ -19,7 +19,7 @@ add_action('wp_enqueue_scripts', 'site_scripts', 999);
 add_action('init', 'add_editor_styles');
 function add_editor_styles()
 {
-  add_editor_style(get_template_directory_uri() . '/assets/styles/style_0717.css');
+  add_editor_style(get_template_directory_uri() . '/assets/styles/style.css');
 }
 // Adds your styles to the Admin
 function add_admin_styles()
