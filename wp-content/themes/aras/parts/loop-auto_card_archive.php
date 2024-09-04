@@ -13,7 +13,7 @@ endif;
 
 <?php if ($post_type == 'post') : ?>
 	<?php
-	if (get_field('post_cta_label', $term)) {
+	if (get_field('post_cta_label', 'option')) {
 		$cta_label = get_field('post_cta_label', 'option');
 	} else {
 		$cta_label = '';
@@ -105,10 +105,11 @@ endif;
 
 	<?php
 	$site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-	$labelterms = get_the_terms(get_the_ID(), 'format');
 	$cta_label = '';
+	$cat_label = '';
+	$labelterms = get_the_terms(get_the_ID(), 'format');
 	if ($labelterms && !is_wp_error($labelterms)) {
-		$term = array_shift($labelterms);
+		$term = reset($labelterms);
 		if (get_field('format_cta_label', $term)) {
 			$cta_label = get_field('format_cta_label', $term);
 			if (str_contains($site_url, '/ja-jp/')) {
@@ -121,7 +122,17 @@ endif;
 		} else {
 			$cta_label = '';
 		}
+
+		$cat_label = $term->name;
+		if (str_contains($site_url, '/ja-jp/')) {
+			$cat_label = get_field('cat_label_japanese', $term) ?: $cat_label;
+		} elseif (str_contains($site_url, '/fr-fr/')) {
+			$cat_label = get_field('cat_label_french', $term) ?: $cat_label;
+		} elseif (str_contains($site_url, '/de-de/')) {
+			$cat_label = get_field('cat_label_german', $term) ?: $cat_label;
+		}
 	}
+
 	?>
 	<div class="card-container">
 		<?php if (get_field('external_url')) : ?>
@@ -174,7 +185,7 @@ endif;
 		<div class="card-content-container">
 			<?php if (get_the_term_list(get_the_ID(), 'format')) : ?>
 				<h6 class="card-subhead">
-					<?php echo get_the_term_list(get_the_ID(), 'format', '', ', ', ''); ?>
+					<?php echo $cat_label; ?>
 				</h6>
 			<?php endif; ?>
 			<?php if (get_field('external_url')) : ?>
@@ -227,7 +238,7 @@ endif;
 		if (get_field('format_cta_label', $term)) {
 			$cta_label = get_field('format_cta_label', $term);
 			if (str_contains($site_url, '/ja-jp/')) {
-				$cta_label = get_field('format_cta_label_japanese', $term) ?: $cta_label;
+				$cta_label = get_field('cat_label_japanese', $term) ?: $cta_label;
 			} elseif (str_contains($site_url, '/fr-fr/')) {
 				$cta_label = get_field('format_cta_label_french', $term) ?: $cta_label;
 			} elseif (str_contains($site_url, '/de-de/')) {
