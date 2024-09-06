@@ -117,7 +117,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   var loadMoreAjaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
   var page = <?php echo max(2, get_query_var('paged') ? get_query_var('paged') + 1 : 2); ?>;
   var canLoadMore = true;
-  
+  jQuery(document).ready(function($) {
     jQuery('#load-more-posts').on('click', function() {
       if (canLoadMore) {
         jQuery.ajax({
@@ -169,7 +169,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         });
       }
     });
-  
+  });
 </script>
 
 
