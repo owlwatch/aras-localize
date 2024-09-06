@@ -169,9 +169,6 @@ if (have_posts()) : while (have_posts()) : the_post();
 						<?php endif; ?>
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
-							console.log('before logo-slider-slick init');
-							jQuery(document).ready(function() {
-								console.log('in logo-slider-slick init');
 								jQuery('.logo-slider-slick').slick({
 									infinite: true,
 									slidesToShow: <?php echo $count; ?>,
@@ -206,7 +203,6 @@ if (have_posts()) : while (have_posts()) : the_post();
 										}
 									]
 								});
-							});
 						</script>
 						<?php $logo_slider_shown = true;  ?>
 					<?php endif; ?>
