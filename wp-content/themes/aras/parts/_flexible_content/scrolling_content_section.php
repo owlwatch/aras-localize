@@ -340,7 +340,6 @@
 
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 	<script>
-		jQuery(document).ready(function() {
 			jQuery('.scroll-content-section-slick-<?php echo $modnum; ?>').slick({
 				<?php if (get_sub_field('navigation_style') == 'dots') : ?>
 					appendDots: jQuery('.scroll-dots'),
@@ -379,6 +378,6 @@
 				infinite: true,
 			});
 
-		});
+		
 	</script>
 <?php endif; ?>
