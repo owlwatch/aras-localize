@@ -103,7 +103,6 @@ if (have_posts()) : while (have_posts()) : the_post();
 					<?php if (get_sub_field('cards_per_row') == 'slider' && !$card_slider_shown) : ?>
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
-							jQuery(document).ready(function() {
 								jQuery('.card-slider-slick').slick({
 									infinite: true,
 									slidesToShow: 3,
@@ -139,7 +138,6 @@ if (have_posts()) : while (have_posts()) : the_post();
 										}
 									]
 								});
-							});
 						</script>
 						<?php $card_slider_shown = true;  ?>
 					<?php endif; ?>
