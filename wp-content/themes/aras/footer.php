@@ -170,6 +170,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
 							jQuery(document).ready(function() {
+								console.log('hello');
 								jQuery('.logo-slider-slick').slick({
 									infinite: true,
 									slidesToShow: <?php echo $count; ?>,
