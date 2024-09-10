@@ -273,13 +273,36 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66da789c6098f",
+            "label": "All Types Label",
+            "name": "partner_type_label_all",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "All Types",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -294,13 +317,36 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66da78d060990",
+            "label": "All Regions Label",
+            "name": "partner_region_filter_label_all",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "All Regions",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -315,13 +361,36 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66da78f560991",
+            "label": "All Industries Label",
+            "name": "partner_industry_filter_label_all",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "All Industries",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -336,13 +405,36 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66da793260992",
+            "label": "All Integrations Label",
+            "name": "partner_integration_filter_label_copy",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "All Integrations",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -357,13 +449,36 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66da795060993",
+            "label": "All Solutions Label",
+            "name": "partner_solution_filter_label_all",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "All Solutions",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -378,13 +493,14 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "",
                 "class": "",
                 "id": ""
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -596,5 +712,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1718124982
+    "modified": 1725593963
 }

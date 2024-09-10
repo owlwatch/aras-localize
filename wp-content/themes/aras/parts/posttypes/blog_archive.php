@@ -658,7 +658,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         $posts_query = new WP_Query($args);
       }
       
-      error_log( print_r($posts_query->request, 1) );
       if ($posts_query->have_posts()) : $postCount = 0;
         while ($posts_query->have_posts()) :  $posts_query->the_post();
           $postCount++;
