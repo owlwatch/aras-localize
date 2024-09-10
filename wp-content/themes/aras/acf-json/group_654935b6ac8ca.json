@@ -205,6 +205,13 @@
                 "operator": "==",
                 "value": "templates\/roadmap.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "templates\/page-with-table-of-contents.php"
+            }
         ]
     ],
     "menu_order": -1,
@@ -222,5 +229,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1719952968
+    "modified": 1725934356
 }

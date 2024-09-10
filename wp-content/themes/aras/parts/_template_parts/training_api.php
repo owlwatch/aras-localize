@@ -335,7 +335,7 @@ if ($data != null) {
 					$uniqueItems = array();
 					foreach ($trainingItems as $item) {
 
-						$uniqueIdentifier = $item['_class_name'] . '_' . $item['startdatelong'] . '_' . $item['_delivery_method'];
+						$uniqueIdentifier = $item['_class_language'].'_'.$item['_class_name'] . '_' . $item['startdatelong'] . '_' . $item['_delivery_method'];
 						if (!isset($uniqueItems[$uniqueIdentifier])) {
 							$uniqueItems[$uniqueIdentifier] = true;
 					?>
