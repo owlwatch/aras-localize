@@ -60,7 +60,7 @@ function fetch_data_from_salesforce_api($url)
 	$clientSecret = '9FF1DFB9ED3DFC62E5528995CB23C6F4F4101D2C654586F58E9C151392658679';
 	$username = 'markopsintegrations@aras.com';
 	$password = 'Marketoaras3!';
-	$securityToken = 'EGeQjvdr1EatbBxECPtNG40mW';
+	$securityToken = 'cva4c2grSkQ4cEeltAR4CQei';
 	$loginUrl = 'https://login.salesforce.com/services/oauth2/token';
 	$params = [
 		'grant_type' => 'password',
@@ -398,11 +398,11 @@ function update_academic_users_from_file()
 //	}
 //}
 
+
 // Hook into the post update and publish actions
 add_action('save_post', 'update_salesforce_campaign_on_resource_publish');
 function update_salesforce_campaign_on_resource_publish($post_id)
 {
-	
 	if (get_field('create_salesforce_campaign', $post_id)) {
 		// Check if the field 'salesforce_campaign' exists and is empty
 		$salesforce_campaign = get_field('salesforce_campaign', $post_id);
@@ -417,7 +417,6 @@ function update_salesforce_campaign_on_resource_publish($post_id)
 			}
 			// Perform API call to Salesforce to create a new campaign
 			$new_campaign_id = create_new_salesforce_campaign($title_of_page, $url_of_page, $language, $format_resource_type);
-			error_log( "new campaign id: $new_campaign_id" );
 			// Update the 'salesforce_campaign' field with the new campaign ID
 			update_field('salesforce_campaign', $new_campaign_id, $post_id);
 		}
@@ -513,7 +512,7 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 	$clientSecret = '9FF1DFB9ED3DFC62E5528995CB23C6F4F4101D2C654586F58E9C151392658679';
 	$username = 'markopsintegrations@aras.com';
 	$password = 'Marketoaras3!';
-	$securityToken = 'EGeQjvdr1EatbBxECPtNG40mW';
+	$securityToken = 'cva4c2grSkQ4cEeltAR4CQei';
 	$loginUrl = 'https://login.salesforce.com/services/oauth2/token';
 	$params = [
 		'grant_type' => 'password',
@@ -622,7 +621,6 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 	if (isset($response_data['success']) && $response_data['success'] === true) {
 		return $response_data['id'];
 	} else {
-		error_log( print_r( $response_data, 1 ) );
 		return false;
 	}
 }
