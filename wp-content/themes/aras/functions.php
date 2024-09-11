@@ -1,5 +1,4 @@
 <?php
-
 /** 
  * For more info: https://developer.wordpress.org/themes/basics/theme-functions/
  */
