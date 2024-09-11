@@ -104,11 +104,11 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
       <?php endif; ?>
     </section>
     <section class="grid-x grid-margin-x text-center align-center">
-      <?php if (get_field('load_more_news_label', 'option')) : ?>
-        <button aria-label="<?php echo get_field('load_more_news_label', 'option'); ?>" class="aras-button" id="load-more-posts"><?php echo get_field('load_more_news_label', 'option'); ?></button>
-      <?php else : ?>
-        <button aria-label="load more news" class="aras-button" id="load-more-posts">Load More</button>
-      <?php endif; ?>
+      <?php
+      $load_more_label = get_field('load_more_news_label', 'option') ?: 'Load More';
+      $next_link = next_posts(0, false);
+      ?>
+        <a href="<?php echo $next_link ?>" aria-label="<?php echo esc_attr( $load_more_label ) ?>" class="aras-button" id="load-more-posts"><?php echo $load_more_label ?></a>
     </section>
   </div>
 </main>
@@ -118,7 +118,8 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   var page = <?php echo max(2, get_query_var('paged') ? get_query_var('paged') + 1 : 2); ?>;
   var canLoadMore = true;
   jQuery(document).ready(function($) {
-    jQuery('#load-more-posts').on('click', function() {
+    jQuery('#load-more-posts').on('click', function(e) {
+      e.preventDefault();
       if (canLoadMore) {
         jQuery.ajax({
           type: 'POST',
@@ -159,10 +160,11 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                 newUrl += '' + languageParam;
               }
 
+              var nextUrl = baseUrl + '/page/' + page;
+              jQuery('#load-more-posts').attr('href', nextUrl );
+
               // Update browser URL with new page
               history.pushState(null, null, newUrl);
-
-
 
             }
           },

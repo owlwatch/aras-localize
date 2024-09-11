@@ -462,12 +462,13 @@ if( !is_array($labels) ){
       <?php endif; ?>
     </section>
     <section class="grid-x grid-margin-x text-center align-center">
-      <?php if (get_field('load_more_resources_label', 'option')) : ?>
-        <button aria-label="<?php echo get_field('load_more_resources_label', 'option'); ?>" class="aras-button" id="load-more-posts"><?php echo get_field('load_more_resources_label', 'option'); ?></button>
-      <?php else : ?>
-        <button aria-label="load more resources" class="aras-button" id="load-more-posts">Load More</button>
-      <?php endif; ?>
+      <?php
 
+      $load_more_label = get_field('load_more_resources_label', 'option') ?: 'Load More';
+      // get next page
+      $next_link = next_posts(0, false);
+      ?>
+        <a href="<?php echo $next_link ?>" aria-label="<?php echo esc_attr( $load_more_label ) ?>" class="aras-button" id="load-more-posts"><?php echo $load_more_label ?></a>
     </section>
   </div>
 </main>
@@ -595,7 +596,8 @@ if ($topictax !== null) {
     var page = <?php echo max(2, get_query_var('paged') ? get_query_var('paged') + 1 : 2); ?>;
     var canLoadMore = true;
     jQuery(document).ready(function($) {
-      jQuery('#load-more-posts').on('click', function() {
+      jQuery('#load-more-posts').on('click', function(e) {
+        e.preventDefault();
         if (canLoadMore) {
           jQuery.ajax({
             type: 'POST',
@@ -637,6 +639,9 @@ if ($topictax !== null) {
                   newUrl += '' + languageParam;
                 }
 
+                var nextUrl = baseUrl + '/page/' + page;
+                jQuery('#load-more-posts').attr('href', nextUrl );
+
                 // Update browser URL with new page
                 history.pushState(null, null, newUrl);
               }
@@ -654,7 +659,9 @@ if ($topictax !== null) {
     var tax_queries = <?php echo json_encode($tax_queries); ?>;
 
     jQuery(document).ready(function($) {
-      jQuery('#load-more-posts').on('click', function() {
+      jQuery('#load-more-posts').on('click', function(e) {
+        e.preventDefault();
+        
         if (canLoadMore) {
           jQuery.ajax({
             type: 'POST',
@@ -665,6 +672,7 @@ if ($topictax !== null) {
               tax_queries: tax_queries,
             },
             success: function(response) {
+              console.log( response );
               jQuery('.blog-post-loop').append(response);
               page++;
               // Check if there are more posts to load
@@ -674,9 +682,6 @@ if ($topictax !== null) {
               } else {
                 // Update browser URL with new page
                 //history.pushState(null, null, '?paged=' + (page - 1));
-
-
-
 
                 // Get the current URL
                 var currentUrl = window.location.href;
