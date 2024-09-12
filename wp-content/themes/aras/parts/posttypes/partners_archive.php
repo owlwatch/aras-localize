@@ -48,7 +48,7 @@ function generate_slug($termname)
 
           </h2>
           <div class="partner-filters__clear">
-            <button aria-label="Clear Filters" id="clear-button" type="reset">
+            <button aria-label="Clear Filters" id="clear-button" type="reset" disabled>
               <?php if (get_field('partner_clear_filters_label', 'option')) : ?>
                 <?php echo get_field('partner_clear_filters_label', 'option'); ?>
               <?php else : ?>
@@ -262,11 +262,11 @@ function generate_slug($termname)
       });
 
       if( filters ){
-        jQuery('#clear-button').css({display: 'block'});
+        jQuery('#clear-button').prop('disabled', false);
         mixer.filter( filters );
       }
       else {
-        jQuery('#clear-button').css({display: 'none'});
+        jQuery('#clear-button').prop('disabled', true);
         mixer.show();
       }
       

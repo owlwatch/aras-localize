@@ -97,7 +97,6 @@
         }
 
         #clear-button {
-            display: none;
             background-color: $black;
             color: $white;
             width: 100%;
@@ -109,6 +108,9 @@
             font-weight: 500;
             margin-bottom: 0;
             height: 40px;
+            &:disabled {
+                opacity: 0.25;
+            }
         }
     }
 
