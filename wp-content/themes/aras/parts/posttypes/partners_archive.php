@@ -96,7 +96,23 @@ function generate_slug($termname)
             <?php endforeach; ?>
           </select>
         </fieldset>
-       
+        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-integration" data-logic="and">
+          <select id="partner-integration">
+            <option value="">
+              <?php if (get_field('partner_integration_filter_label', 'option')) : ?>
+                <?php echo get_field('partner_integration_filter_label', 'option'); ?>
+              <?php else : ?>
+                Choose Integration
+              <?php endif; ?>
+            </option>
+            <?php foreach ($filter_data['Partner_Integrations__c'] as $termname) : ?>
+              <?php if (!empty($termname)) : ?>
+                <?php $termslug = generate_slug($termname); ?>
+                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </fieldset>
         <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-solution" data-logic="and">
           <select id="partner-solution">
             <option value="">
@@ -297,7 +313,12 @@ function generate_slug($termname)
         }
       });
 
-      mixer.filter( filters );
+      if( filters ){
+        mixer.filter( filters );
+      }
+      else {
+        mixer.show();
+      }
       
     }
 
