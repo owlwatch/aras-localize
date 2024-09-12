@@ -36,33 +36,32 @@ function generate_slug($termname)
 <main id="partners-section" data-sort-by="">
   <section class="partners-filter bg-grey smalltoppadding smallbottompadding">
     <div class="grid-container">
-      <div class="partner-filters__heading">
-        <h2>
-          <?php if (get_field('partner_filter_headline', 'option')) : ?>
-            <?php echo get_field('partner_filter_headline', 'option'); ?>
-          <?php else : ?>
-            Filter
-          <?php endif; ?>
-
-        </h2>
-        <div class="partner-filters__clear">
-          <button aria-label="Clear Filters" id="clear-button" type="reset">
-            <?php if (get_field('partner_clear_filters_label', 'option')) : ?>
-              <?php echo get_field('partner_clear_filters_label', 'option'); ?>
-            <?php else : ?>
-              Clear Filters
-            <?php endif; ?>
-          </button>
-        </div>
-      </div>
       
       <form id="multifilter-controls">
+        <div class="partner-filters__heading">
+          <h2>
+            <?php if (get_field('partner_filter_headline', 'option')) : ?>
+              <?php echo get_field('partner_filter_headline', 'option'); ?>
+            <?php else : ?>
+              Filter
+            <?php endif; ?>
+
+          </h2>
+          <div class="partner-filters__clear">
+            <button aria-label="Clear Filters" id="clear-button" type="reset">
+              <?php if (get_field('partner_clear_filters_label', 'option')) : ?>
+                <?php echo get_field('partner_clear_filters_label', 'option'); ?>
+              <?php else : ?>
+                Clear Filters
+              <?php endif; ?>
+            </button>
+          </div>
+        </div>
         <div  class="partner-filters">
           <fieldset class="partner-filters__item" data-filter-group="partner-type" data-logic="and">
             <label for="partner-type">
                 <?php echo get_field('partner_type_label', 'option') ?: 'Type' ?>
             </label>
-            <div class="custom-select partners">
               <select id="partner-type">
                 <option value="">
                   <?php echo get_field('partner_type_label_all', 'option') ?: 'All Types' ?>
@@ -74,26 +73,23 @@ function generate_slug($termname)
                   <?php endif; ?>
                 <?php endforeach; ?>
               </select>
-            </div>
           </fieldset>
 
           <fieldset class="partner-filters__item" style="display: none;" data-filter-group="partner-solution" data-logic="and">
             <label for="partner-solution">
               <?php echo get_field('partner_solution_label', 'option') ?: 'Solution' ?>
             </label>
-            <div class="custom-select partners">
-              <select id="partner-solution">
-                <option value="">
-                  <?php echo get_field('partner_solution_filter_label_all', 'option') ?: 'All Solutions'; ?>
-                </option>
-                <?php foreach ($filter_data['Partner_Solutions__c'] as $termname) : ?>
-                  <?php if (!empty($termname)) : ?>
-                    <?php $termslug = generate_slug($termname); ?>
-                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-                  <?php endif; ?>
-                <?php endforeach; ?>
-              </select>
-            </div>
+            <select id="partner-solution">
+              <option value="">
+                <?php echo get_field('partner_solution_filter_label_all', 'option') ?: 'All Solutions'; ?>
+              </option>
+              <?php foreach ($filter_data['Partner_Solutions__c'] as $termname) : ?>
+                <?php if (!empty($termname)) : ?>
+                  <?php $termslug = generate_slug($termname); ?>
+                  <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </select>
           </fieldset>
 
           <fieldset class="partner-filters__item" data-filter-group="partner-region" data-logic="and">
@@ -102,19 +98,17 @@ function generate_slug($termname)
               <?php echo get_field('partner_region_label', 'option') ?: 'Region' ?>
             </label>
 
-            <div class="custom-select partners">
-              <select id="partner-region">
-                <option value="">
-                <?php echo get_field('partner_region_label_all', 'option') ?: 'All Regions' ?>
-                </option>
-                <?php foreach ($filter_data['Regions_Partner__c'] as $termname) : ?>
-                  <?php if (!empty($termname)) : ?>
-                    <?php $termslug = generate_slug($termname); ?>
-                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-                  <?php endif; ?>
-                <?php endforeach; ?>
-              </select>
-            </div>
+            <select id="partner-region">
+              <option value="">
+              <?php echo get_field('partner_region_label_all', 'option') ?: 'All Regions' ?>
+              </option>
+              <?php foreach ($filter_data['Regions_Partner__c'] as $termname) : ?>
+                <?php if (!empty($termname)) : ?>
+                  <?php $termslug = generate_slug($termname); ?>
+                  <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </select>
           </fieldset>
 
 
@@ -122,19 +116,19 @@ function generate_slug($termname)
             <label for="partner-industry">
               <?php echo get_field('partner_industry_label', 'option') ?: 'Industry' ?>
             </label>
-            <div class="custom-select partners">
-              <select id="partner-industry">
-                <option value="">
-                  <?php echo get_field('partner_industry_label_all', 'option') ?: 'All Industries' ?>
-                </option>
-                <?php foreach ($filter_data['Industries_Partner__c'] as $termname) : ?>
-                  <?php if (!empty($termname)) : ?>
-                    <?php $termslug = generate_slug($termname); ?>
-                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-                  <?php endif; ?>
-                <?php endforeach; ?>
-              </select>
-            </div>
+            
+            <select id="partner-industry">
+              <option value="">
+                <?php echo get_field('partner_industry_label_all', 'option') ?: 'All Industries' ?>
+              </option>
+              <?php foreach ($filter_data['Industries_Partner__c'] as $termname) : ?>
+                <?php if (!empty($termname)) : ?>
+                  <?php $termslug = generate_slug($termname); ?>
+                  <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </select>
+            
           </fieldset>
         </div>
       </form>
@@ -242,69 +236,13 @@ function generate_slug($termname)
         jQuery("#partner-solution").val(hash).change();
       }
     }
-    /*Custom Select Script
-			  var x, i, j, l, ll, selElmnt, a, b, c;
-			  /* Look for any elements with the class "custom-select": */
-    x = document.getElementsByClassName("custom-select");
-    l = x.length;
-    for (i = 0; i < l; i++) {
-      selElmnt = x[i].getElementsByTagName("select")[0];
-      ll = selElmnt.length;
-      /* For each element, create a new DIV that will act as the selected item: */
-      a = document.createElement("DIV");
-      a.setAttribute("class", "select-selected");
-      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-      x[i].appendChild(a);
-      /* For each element, create a new DIV that will contain the option list: */
-      b = document.createElement("DIV");
-      b.setAttribute("class", "select-items select-hide");
-      for (j = 0; j < ll; j++) {
-        /* For each option in the original select element,
-        create a new DIV that will act as an option item: */
-        c = document.createElement("DIV");
-        c.innerHTML = selElmnt.options[j].innerHTML;
-        c.dataset.targetclass = selElmnt.options[j].value;
-        c.addEventListener("click", function(e) {
-          /* When an item is clicked, update the original select box,
-          and the selected item: */
-          var y, i, k, s, h, sl, yl;
-          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-          sl = s.length;
-          h = this.parentNode.previousSibling;
-          for (i = 0; i < sl; i++) {
-            if (s.options[i].innerHTML == this.innerHTML) {
-              s.selectedIndex = i;
-              h.innerHTML = this.innerHTML;
-              y = this.parentNode.getElementsByClassName("same-as-selected");
-              yl = y.length;
-              for (k = 0; k < yl; k++) {
-                y[k].removeAttribute("class");
-              }
-              this.setAttribute("class", "same-as-selected");
-              break;
-            }
-          }
-          h.click();
-          const filter_value = this.dataset.targetclass;
-          const filter_class = filter_value ? filter_value : 'all'
-          updateFilters();
-        });
-        b.appendChild(c);
-      }
-      x[i].appendChild(b);
-      a.addEventListener("click", function(e) {
-        /* When the select box is clicked, close any other select boxes,
-        and open/close the current select box: */
-        e.stopPropagation();
-        closeAllSelect(this);
-        this.nextSibling.classList.toggle("select-hide");
-        this.classList.toggle("select-arrow-active");
-      });
-    }
+    
 
     function updateFilters(){
-      let selects = document.querySelectorAll('.custom-select select');
+      let selects = document.querySelectorAll('.partner-filters select');
       let filters = '';
+
+      jQuery('.partner-filters select').off('change', updateFilters );
 
       // check for solutions
       if( jQuery('#partner-type').val() == '.solutions' ){
@@ -312,10 +250,10 @@ function generate_slug($termname)
       }
       else {
         jQuery('fieldset[data-filter-group="partner-solution"]')
-          .find('select').val('');
-        jQuery('fieldset[data-filter-group="partner-solution"]')
-          .hide()
+          .hide().find('select').val('');
       }
+
+      jQuery('.partner-filters select').on('change', updateFilters );
 
       selects.forEach( s => {
         if( s.value ){
@@ -324,38 +262,26 @@ function generate_slug($termname)
       });
 
       if( filters ){
+        jQuery('#clear-button').css({display: 'block'});
         mixer.filter( filters );
       }
       else {
+        jQuery('#clear-button').css({display: 'none'});
         mixer.show();
       }
       
     }
 
-    function closeAllSelect(elmnt) {
-      /* A function that will close all select boxes in the document,
-      except the current select box: */
-      var x, y, i, xl, yl, arrNo = [];
-      x = document.getElementsByClassName("select-items");
-      y = document.getElementsByClassName("select-selected");
-      xl = x.length;
-      yl = y.length;
-      for (i = 0; i < yl; i++) {
-        if (elmnt == y[i]) {
-          arrNo.push(i)
-        } else {
-          y[i].classList.remove("select-arrow-active");
-        }
-      }
-      for (i = 0; i < xl; i++) {
-        if (arrNo.indexOf(i)) {
-          x[i].classList.add("select-hide");
-        }
-      }
+    jQuery('.partner-filters select').on('change', updateFilters );
+
+    document.querySelector('#clear-button').addEventListener('click', onClear);
+    document.querySelector('#multifilter-controls').addEventListener('reset', onClear);
+    function onClear(){
+      setTimeout( updateFilters, 100)
     }
 
-    /* If the user clicks anywhere outside the select box,
-    then close all select boxes: */
-    document.addEventListener("click", closeAllSelect);
+
+
+    
   });
 </script>

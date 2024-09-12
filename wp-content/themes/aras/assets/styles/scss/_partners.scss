@@ -72,21 +72,20 @@
     &__heading {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 1em;
+    }
+    select {
+        text-transform: none;
     }
 }
 
 #partners-section {
 
     .partners-filter {
-        fieldset {
-        }
-
+        
         select {
             padding-left: 15px;
             color: $dblue;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 13px;
             font-weight: 500;
             margin-bottom: 0;
             height: 40px;
@@ -98,7 +97,7 @@
         }
 
         #clear-button {
-            display: block;
+            display: none;
             background-color: $black;
             color: $white;
             width: 100%;
