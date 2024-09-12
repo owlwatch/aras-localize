@@ -171,11 +171,11 @@ function update_partners_from_file()
 		$Partner_Icon_For_Website__c = $record['fields']['Partner_Icon_For_Website__c']['value'];
 		$Partners_URL_Link__c = $record['fields']['Partners_URL_Link__c']['value'];
 		$Partner_Info__c = $record['fields']['Partner_Info__c']['value'];
-		$Industries_Partner__c = $record['fields']['Industries_Partner__c']['value'];
-		$Partner_Solutions__c = $record['fields']['Partner_Solutions__c']['value'];
-		$Type_Partner__c = $record['fields']['Type_Partner__c']['value'];
-		$Regions_Partner__c = $record['fields']['Regions_Partner__c']['value'];
-		$Partner_Integrations__c = $record['fields']['Partner_Integrations__c']['value'];
+		$Industries_Partner__c = $record['fields']['Industries_Partner__c']['displayValue'];
+		$Partner_Solutions__c = $record['fields']['Partner_Solutions__c']['displayValue'];
+		$Type_Partner__c = $record['fields']['Type_Partner__c']['displayValue'];
+		$Regions_Partner__c = $record['fields']['Regions_Partner__c']['displayValue'];
+		$Partner_Integrations__c = $record['fields']['Partner_Integrations__c']['displayValue'];
 		//$formatted_Industries_Partner__c = formatCatString($Industries_Partner__c);
 		//$formatted_Partner_Solutions__c = formatCatString($Partner_Solutions__c);
 		//$formatted_Type_Partner__c = formatCatString($Type_Partner__c);
