@@ -19,6 +19,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 </section>
 
 <?php $filter_data = load_data_from_file('Partner_Categories.json');
+
 // Function to generate slug from termname
 function generate_slug($termname)
 {
@@ -35,102 +36,16 @@ function generate_slug($termname)
 <main id="partners-section" data-sort-by="">
   <section class="partners-filter bg-grey smalltoppadding smallbottompadding">
     <div class="grid-container">
-      <form id="multifilter-controls" class="grid-x grid-margin-x align-center">
-        <div class="cell small-12">
-          <h2>
-            <?php if (get_field('partner_filter_headline', 'option')) : ?>
-              <?php echo get_field('partner_filter_headline', 'option'); ?>
-            <?php else : ?>
-              Filter
-            <?php endif; ?>
-          </h2>
-        </div>
-        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-type" data-logic="and">
-          <select id="partner-type">
-            <option value="">
-              <?php if (get_field('partner_type_label', 'option')) : ?>
-                <?php echo get_field('partner_type_label', 'option'); ?>
-              <?php else : ?>
-                Choose Type
-              <?php endif; ?>
-            </option>
-            <?php foreach ($filter_data['Type_Partner__c'] as $termname) : ?>
-              <?php if (!empty($termname)) : ?>
-                <?php $termslug = generate_slug($termname); ?>
-                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </select>
-        </fieldset>
-        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-region" data-logic="and">
-          <select id="partner-region">
-            <option value="">
-              <?php if (get_field('partner_region_filter_label', 'option')) : ?>
-                <?php echo get_field('partner_region_filter_label', 'option'); ?>
-              <?php else : ?>
-                Choose Region
-              <?php endif; ?>
-            </option>
-            <?php foreach ($filter_data['Regions_Partner__c'] as $termname) : ?>
-              <?php if (!empty($termname)) : ?>
-                <?php $termslug = generate_slug($termname); ?>
-                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </select>
-        </fieldset>
-        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-industry" data-logic="and">
-          <select id="partner-industry">
-            <option value="">
-              <?php if (get_field('partner_industry_filter_label', 'option')) : ?>
-                <?php echo get_field('partner_industry_filter_label', 'option'); ?>
-              <?php else : ?>
-                Choose Industry
-              <?php endif; ?>
-            </option>
-            <?php foreach ($filter_data['Industries_Partner__c'] as $termname) : ?>
-              <?php if (!empty($termname)) : ?>
-                <?php $termslug = generate_slug($termname); ?>
-                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </select>
-        </fieldset>
-        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-integration" data-logic="and">
-          <select id="partner-integration">
-            <option value="">
-              <?php if (get_field('partner_integration_filter_label', 'option')) : ?>
-                <?php echo get_field('partner_integration_filter_label', 'option'); ?>
-              <?php else : ?>
-                Choose Integration
-              <?php endif; ?>
-            </option>
-            <?php foreach ($filter_data['Partner_Integrations__c'] as $termname) : ?>
-              <?php if (!empty($termname)) : ?>
-                <?php $termslug = generate_slug($termname); ?>
-                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </select>
-        </fieldset>
-        <fieldset class="cell small-12 medium-6 large-4 custom-select partners" data-filter-group="partner-solution" data-logic="and">
-          <select id="partner-solution">
-            <option value="">
-              <?php if (get_field('partner_solution_filter_label', 'option')) : ?>
-                <?php echo get_field('partner_solution_filter_label', 'option'); ?>
-              <?php else : ?>
-                Choose Solution
-              <?php endif; ?>
-            </option>
-            <?php foreach ($filter_data['Partner_Solutions__c'] as $termname) : ?>
-              <?php if (!empty($termname)) : ?>
-                <?php $termslug = generate_slug($termname); ?>
-                <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </select>
-        </fieldset>
-        <fieldset class="cell small-12 medium-6 large-4">
+      <div class="partner-filters__heading">
+        <h2>
+          <?php if (get_field('partner_filter_headline', 'option')) : ?>
+            <?php echo get_field('partner_filter_headline', 'option'); ?>
+          <?php else : ?>
+            Filter
+          <?php endif; ?>
+
+        </h2>
+        <div class="partner-filters__clear">
           <button aria-label="Clear Filters" id="clear-button" type="reset">
             <?php if (get_field('partner_clear_filters_label', 'option')) : ?>
               <?php echo get_field('partner_clear_filters_label', 'option'); ?>
@@ -138,7 +53,90 @@ function generate_slug($termname)
               Clear Filters
             <?php endif; ?>
           </button>
-        </fieldset>
+        </div>
+      </div>
+      
+      <form id="multifilter-controls">
+        <div  class="partner-filters">
+          <fieldset class="partner-filters__item" data-filter-group="partner-type" data-logic="and">
+            <label for="partner-type">
+                <?php echo get_field('partner_type_label', 'option') ?: 'Type' ?>
+            </label>
+            <div class="custom-select partners">
+              <select id="partner-type">
+                <option value="">
+                  <?php echo get_field('partner_type_label_all', 'option') ?: 'All Types' ?>
+                </option>
+                <?php foreach ($filter_data['Type_Partner__c'] as $termname) : ?>
+                  <?php if (!empty($termname)) : ?>
+                    <?php $termslug = generate_slug($termname); ?>
+                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="partner-filters__item" style="display: none;" data-filter-group="partner-solution" data-logic="and">
+            <label for="partner-solution">
+              <?php echo get_field('partner_solution_label', 'option') ?: 'Solution' ?>
+            </label>
+            <div class="custom-select partners">
+              <select id="partner-solution">
+                <option value="">
+                  <?php echo get_field('partner_solution_filter_label_all', 'option') ?: 'All Solutions'; ?>
+                </option>
+                <?php foreach ($filter_data['Partner_Solutions__c'] as $termname) : ?>
+                  <?php if (!empty($termname)) : ?>
+                    <?php $termslug = generate_slug($termname); ?>
+                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="partner-filters__item" data-filter-group="partner-region" data-logic="and">
+            
+            <label for="partner-region">
+              <?php echo get_field('partner_region_label', 'option') ?: 'Region' ?>
+            </label>
+
+            <div class="custom-select partners">
+              <select id="partner-region">
+                <option value="">
+                <?php echo get_field('partner_region_label_all', 'option') ?: 'All Regions' ?>
+                </option>
+                <?php foreach ($filter_data['Regions_Partner__c'] as $termname) : ?>
+                  <?php if (!empty($termname)) : ?>
+                    <?php $termslug = generate_slug($termname); ?>
+                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </fieldset>
+
+
+          <fieldset class="partner-filters__item" data-filter-group="partner-industry" data-logic="and">
+            <label for="partner-industry">
+              <?php echo get_field('partner_industry_label', 'option') ?: 'Industry' ?>
+            </label>
+            <div class="custom-select partners">
+              <select id="partner-industry">
+                <option value="">
+                  <?php echo get_field('partner_industry_label_all', 'option') ?: 'All Industries' ?>
+                </option>
+                <?php foreach ($filter_data['Industries_Partner__c'] as $termname) : ?>
+                  <?php if (!empty($termname)) : ?>
+                    <?php $termslug = generate_slug($termname); ?>
+                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </fieldset>
+        </div>
       </form>
     </div>
   </section>
@@ -307,6 +305,18 @@ function generate_slug($termname)
     function updateFilters(){
       let selects = document.querySelectorAll('.custom-select select');
       let filters = '';
+
+      // check for solutions
+      if( jQuery('#partner-type').val() == '.solutions' ){
+        jQuery('fieldset[data-filter-group="partner-solution"]').show()
+      }
+      else {
+        jQuery('fieldset[data-filter-group="partner-solution"]')
+          .find('select').val('');
+        jQuery('fieldset[data-filter-group="partner-solution"]')
+          .hide()
+      }
+
       selects.forEach( s => {
         if( s.value ){
           filters += s.value;

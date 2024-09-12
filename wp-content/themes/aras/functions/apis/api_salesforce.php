@@ -38,6 +38,10 @@ function update_salesforce_data()
 		save_salesforce_data_to_file($partners_data, 'Salesforce_Partners_00BUM000000arH72AI.json');
 	}
 
+	else {
+		error_log("can't retrieve partner data: ".$partners_data );
+	}
+
 	// academic users data
 	$academic_users_url = 'https://aras1.my.salesforce.com/services/data/v60.0/ui-api/list-records/00BUM000000bkYX2AY';
 	$au_query_params = array(
