@@ -246,6 +246,9 @@ function generate_slug($termname)
     
 
     function updateFilters(){
+
+      console.trace();
+
       let selects = document.querySelectorAll('.partner-filters select');
       let filters = '';
 
@@ -260,22 +263,24 @@ function generate_slug($termname)
           .hide().find('select').val('');
       }
 
-      jQuery('.partner-filters select').on('change', updateFilters );
+      setTimeout( () => {
+        
+        selects.forEach( s => {
+          if( s.value ){
+            filters += s.value;
+          }
+        });
 
-      selects.forEach( s => {
-        if( s.value ){
-          filters += s.value;
+        if( filters ){
+          jQuery('#clear-button').prop('disabled', false);
+          mixer.filter( filters );
         }
-      });
-
-      if( filters ){
-        jQuery('#clear-button').prop('disabled', false);
-        mixer.filter( filters );
-      }
-      else {
-        jQuery('#clear-button').prop('disabled', true);
-        mixer.show();
-      }
+        else {
+          jQuery('#clear-button').prop('disabled', true);
+          mixer.show();
+        }
+        jQuery('.partner-filters select').on('change', updateFilters );
+      },1);
       
     }
 
