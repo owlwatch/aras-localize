@@ -20,6 +20,13 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 <?php $filter_data = load_data_from_file('Partner_Categories.json');
 
+// lets go through each of these and sort them alphabetically
+foreach( $filter_data as $key => &$values ){
+  if( is_array($values) ){
+    sort( $values );
+  }
+}
+
 // Function to generate slug from termname
 function generate_slug($termname)
 {
