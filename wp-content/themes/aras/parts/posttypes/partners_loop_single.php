@@ -73,6 +73,10 @@ if (str_contains($site_url, '/ja-jp/')) {
 					<?php endif; ?>
 				</div>
 				<div class="cell small-12 medium-shrink postsidebar">
+					<?php
+					$types = array_map('trim', explode( ';', get_field('type_partner__c')));
+					$is_solution = in_array('Solutions', $types);
+					?>
 					<?php if (get_field('type_partner__c')) : ?>
 						<?php $partner_type = get_field('type_partner__c');
 						$partner_type_formatted = str_replace(';', ', ', $partner_type); ?>
@@ -109,26 +113,14 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<p><?= "$partner_industries_formatted" ?></p>
 						</div>
 					<?php endif; ?>
-					<?php if (get_field('partner_integrations__c')) : ?>
-						<?php $partner_integrations = get_field('partner_integrations__c');
-						$partner_integrations_formatted = str_replace(';', ', ', $partner_integrations); ?>
-						<div class="filters-item">
-							<?php if (get_field('partner_single_integrations_label', 'option')) : ?>
-								<h6><?php echo get_field('partner_single_integrations_label', 'option'); ?></h6>
-							<?php else : ?>
-								<h6>Integrations</h6>
-							<?php endif; ?>
-							<p><?= "$partner_integrations_formatted" ?></p>
-						</div>
-					<?php endif; ?>
-					<?php if (get_field('partner_solutions__c')) : ?>
+					<?php if ( $is_solution && get_field('partner_solutions__c')) : ?>
 						<?php $partner_solutions = get_field('partner_solutions__c');
 						$partner_solutions_formatted = str_replace(';', ', ', $partner_solutions); ?>
 						<div class="filters-item">
 							<?php if (get_field('partner_single_solutions_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_solutions_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Solutions</h6>
+								<h6>Solution Types</h6>
 							<?php endif; ?>
 							<p><?= "$partner_solutions_formatted" ?></p>
 						</div>
