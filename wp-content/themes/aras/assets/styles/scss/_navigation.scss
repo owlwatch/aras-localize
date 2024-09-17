@@ -10,7 +10,6 @@
   transition: 0.5s ease;
 
   height: 136px;
-
   @include breakpoint(medium only) {
     height: 115px;
   }
@@ -1067,5 +1066,23 @@
 
   @include breakpoint(small only) {
     width: calc(100vw - 50px);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 166px;
+  
+  @include breakpoint(medium only) {
+    scroll-padding-top: 145px;
+  }
+
+  @media print,
+  screen and (max-width: 923px) {
+    scroll-padding-top: 106px;
+  }
+
+  @include breakpoint(small only) {
+    scroll-padding-top: 92.5px;
   }
 }

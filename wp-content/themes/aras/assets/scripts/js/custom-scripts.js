@@ -47,9 +47,9 @@ jQuery(document).ready(function() {
           if (target.length) {
               // Offset scroll position to account for fixed header
               var offsetTop = target.offset().top - jQuery(".header").outerHeight();
-              jQuery('html, body').stop().animate({
-                  scrollTop: offsetTop
-              }, 600);
+            //   jQuery('html, body').stop().animate({
+            //       scrollTop: offsetTop
+            //   }, 600);
           }
       }
       // Check if there's an anchor link in the URL

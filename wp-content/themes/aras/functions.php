@@ -107,3 +107,5 @@ require_once(get_template_directory() . '/functions/post_types/aras_speakers.php
 //require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
 
 require_once(get_template_directory() . '/functions/scripts/index.php');
+
+require_once(get_template_directory() . '/functions/shortcodes.php');
