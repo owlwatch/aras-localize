@@ -7,12 +7,15 @@ function aras_anchor_shortcode($atts=[], $content='', $tag='')
 	$atts = shortcode_atts([
 		'htmlTag'  => $content ? 'span' : 'div',
 		'class' => '',
+		'title' => '',
 		'id' => 'anchor'.(++$i),
 	], $atts, $tag );
 
 	
 	$htmlTag = $atts['htmlTag'];
 	unset( $atts['htmlTag'] );
+
+	$atts = array_filter($atts, function($v){ return !!$v; });
 	
 	$attributes = implode(' ', array_map( function($key, $value){
 		$escaped = esc_attr($value);
