@@ -54,4 +54,4 @@ function aras_add_ids_to_headings($content)
 	return preg_replace('~(?:<body>|</body>)~i', '', $content);
 };
 
-add_filter('the_content', 'aras_add_ids_to_headings', 20, 1);
+// add_filter('the_content', 'aras_add_ids_to_headings', 20, 1);
