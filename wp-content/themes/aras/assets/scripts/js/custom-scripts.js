@@ -55,22 +55,22 @@ jQuery(document).ready(function() {
       // Check if there's an anchor link in the URL
       var hash = window.location.hash;
       if (hash) {
-          scrollToTarget(jQuery(hash));
+        //   scrollToTarget(jQuery(hash));
       }
-      // Handle click events on anchor links by delegating to a parent element
-      jQuery(document).on('click', 'a[href*="#"]', function(event) {
-          var href = jQuery(this).attr('href');
-          var hashIndex = href.indexOf('#');
-          if (hashIndex !== -1) {
-              var hash = href.slice(hashIndex);
-              var target = jQuery(hash);
-              console.log('Hash:', hash);
-              console.log('Target:', target);
-              scrollToTarget(target);
-              // Prevent default behavior of anchor links
-              event.preventDefault();
-          }
-      });
+    //   // Handle click events on anchor links by delegating to a parent element
+    //   jQuery(document).on('click', 'a[href*="#"]', function(event) {
+    //       var href = jQuery(this).attr('href');
+    //       var hashIndex = href.indexOf('#');
+    //       if (hashIndex !== -1) {
+    //           var hash = href.slice(hashIndex);
+    //           var target = jQuery(hash);
+    //           console.log('Hash:', hash);
+    //           console.log('Target:', target);
+    //           scrollToTarget(target);
+    //           // Prevent default behavior of anchor links
+    //           event.preventDefault();
+    //       }
+    //   });
   }
 });
 
