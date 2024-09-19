@@ -71,7 +71,7 @@ endif;
 
 		<div class="card-content-container">
 			<h6 class="card-subhead">
-				<a aria-label="Blog" href="<?php echo get_post_type_archive_link('post'); ?>">Blog</a>
+				Blog
 			</h6>
 			<a aria-label="<?php the_title_attribute() ?>" class="card-headline-a" title="<?php the_title_attribute() ?>" href="<?php the_permalink() ?>">
 				<?php if (get_field('hero_headline')) : ?>
