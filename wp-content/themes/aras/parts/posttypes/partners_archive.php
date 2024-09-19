@@ -84,7 +84,7 @@ function generate_slug($termname)
 
           <fieldset class="partner-filters__item" style="display: none;" data-filter-group="partner-solution" data-logic="and">
             <label for="partner-solution">
-              <?php echo get_field('partner_solution_label', 'option') ?: 'Solution' ?>
+              <?php echo get_field('partner_solution_filter_label', 'option') ?: 'Solution' ?>
             </label>
             <select id="partner-solution">
               <option value="">
@@ -102,12 +102,12 @@ function generate_slug($termname)
           <fieldset class="partner-filters__item" data-filter-group="partner-region" data-logic="and">
             
             <label for="partner-region">
-              <?php echo get_field('partner_region_label', 'option') ?: 'Region' ?>
+              <?php echo get_field('partner_region_filter_label', 'option') ?: 'Region' ?>
             </label>
 
             <select id="partner-region">
               <option value="">
-              <?php echo get_field('partner_region_label_all', 'option') ?: 'All Regions' ?>
+              <?php echo get_field('partner_region_filter_label_all', 'option') ?: 'All Regions' ?>
               </option>
               <?php foreach ($filter_data['Regions_Partner__c'] as $termname) : ?>
                 <?php if (!empty($termname)) : ?>
@@ -121,12 +121,12 @@ function generate_slug($termname)
 
           <fieldset class="partner-filters__item" data-filter-group="partner-industry" data-logic="and">
             <label for="partner-industry">
-              <?php echo get_field('partner_industry_label', 'option') ?: 'Industry' ?>
+              <?php echo get_field('partner_industry_filter_label', 'option') ?: 'Industry' ?>
             </label>
             
             <select id="partner-industry">
               <option value="">
-                <?php echo get_field('partner_industry_label_all', 'option') ?: 'All Industries' ?>
+                <?php echo get_field('partner_industry_filter_label_all', 'option') ?: 'All Industries' ?>
               </option>
               <?php foreach ($filter_data['Industries_Partner__c'] as $termname) : ?>
                 <?php if (!empty($termname)) : ?>
@@ -246,8 +246,6 @@ function generate_slug($termname)
     
 
     function updateFilters(){
-
-      console.trace();
 
       let selects = document.querySelectorAll('.partner-filters select');
       let filters = '';
