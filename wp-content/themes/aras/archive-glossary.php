@@ -1,4 +1,13 @@
 <?php
+function aras_custom_japanese_excerpt_length($length) {
+  // Check if the current language is Japanese
+  if (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE == 'ja-jp') {
+
+      return 3; // Set the number of words you want for Japanese excerpts
+  }
+  return $length; // Default excerpt length for other languages
+}
+add_filter('excerpt_length', 'aras_custom_japanese_excerpt_length', 999999999);
 get_header(); ?>
 
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts')); ?>
