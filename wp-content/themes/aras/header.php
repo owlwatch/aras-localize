@@ -1,6 +1,8 @@
 <?php
 // The template for displaying the header
 // This is the template that displays all of the <head> section
+$blog_gtm_id = get_field('blog_tag_manager_id', 'option');
+$main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
@@ -22,7 +24,7 @@
 				j.src =
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 				f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', 'GTM-KPZ42NS');
+			})(window, document, 'script', 'dataLayer', '<?php echo $blog_gtm_id ?>');
 		</script>
 		<!-- End Google Tag Manager -->
 	<?php else : ?>
@@ -41,7 +43,7 @@
 				j.src =
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 				f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', 'GTM-KGRRTXN');
+			})(window, document, 'script', 'dataLayer', '<?php echo $main_site_gtm_id ?>');
 		</script>
 		<!-- End Google Tag Manager -->
 	<?php endif; ?>
