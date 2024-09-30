@@ -24,6 +24,7 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 			</div>
 			<nav class="cell auto desktop-nav-sizing navigation">
 				<div class="upper-nav">
+				<?php if( get_current_user_id() == 46 ){ wp_die('before search form'); } ?>
 					<?php if (get_field('nav_site_search', 'option') == 'enable') : ?>
 						<?php get_template_part('parts/search/nav-searchform'); ?>
 					<?php endif; ?>
@@ -40,7 +41,6 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 							<?php endif; ?>
 						<?php endwhile; ?>
 					<?php endif; ?>
-					<?php if( get_current_user_id() == 46 ){ wp_die('before custom language dropdown'); } ?>
 					<?php echo do_shortcode('[custom_language_dropdown]'); ?>
 				</div>
 				<?php if (have_rows('meganav', 'option')) : ?>
