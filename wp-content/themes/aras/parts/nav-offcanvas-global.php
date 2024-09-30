@@ -40,9 +40,9 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 							<?php endif; ?>
 						<?php endwhile; ?>
 					<?php endif; ?>
+					<?php if( get_current_user_id() == 46 ){ wp_die('before custom language dropdown'); } ?>
 					<?php echo do_shortcode('[custom_language_dropdown]'); ?>
 				</div>
-				<?php if( get_current_user_id() == 46 ){ wp_die('before before meganav'); } ?>
 				<?php if (have_rows('meganav', 'option')) : ?>
 					<ul class="dropdown menu meganav" data-dropdown-menu>
 						<?php while (have_rows('meganav', 'option')) : the_row(); ?>
