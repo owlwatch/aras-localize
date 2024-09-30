@@ -1,3 +1,4 @@
+<?php if( get_current_user_id() == 46 ){ wp_die('nav-offcanvas-global'); } ?>
 <?php
 $eyebrow_enabled = get_field('eyebrow_enabled', 'option');
 $eyebrow_content = get_field('eyebrow_content', 'option');
@@ -24,7 +25,6 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 			</div>
 			<nav class="cell auto desktop-nav-sizing navigation">
 				<div class="upper-nav">
-				<?php if( get_current_user_id() == 46 ){ wp_die('before search form'); } ?>
 					<?php if (get_field('nav_site_search', 'option') == 'enable') : ?>
 						<?php get_template_part('parts/search/nav-searchform'); ?>
 					<?php endif; ?>
