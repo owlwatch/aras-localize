@@ -85,10 +85,10 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 <body <?php body_class(); ?>>
 	<?php if (is_singular('post') || is_home() || is_category() || is_author() || is_tag()) : ?>
 		<!-- GTM - Blog -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPZ42NS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $blog_gtm_id ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<?php else : ?>
 		<!-- GTM - Main Site -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGRRTXN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $main_site_gtm_id ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<?php endif; ?>
 	<script>
 		async function trackView(theHref, message) {
@@ -96,6 +96,8 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 			piTracker(message + ':  ' + thisHref);
 		}
 	</script>
+
+<?php if( get_current_user_id() == 46 ){ wp_die('before off-canvas-wrapper'); } ?>
 
 	<div class="off-canvas-wrapper">
 		<!-- Load off-canvas container -->

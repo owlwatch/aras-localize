@@ -1,4 +1,3 @@
-<?php if( get_current_user_id() == 46 ){ wp_die('nav-offcanvas-global'); } ?>
 <?php
 $eyebrow_enabled = get_field('eyebrow_enabled', 'option');
 $eyebrow_content = get_field('eyebrow_content', 'option');
