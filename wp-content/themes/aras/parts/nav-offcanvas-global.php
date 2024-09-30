@@ -222,6 +222,9 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 		</div>
 	</div>
 	<?php
+	if( get_current_user_id() == 46 ){
+		wp_die('before eyebrow');
+	}
 	if( $has_eyebrow ){ 
 		get_template_part('parts/nav', 'offcanvas-eyebrow');
 	}
