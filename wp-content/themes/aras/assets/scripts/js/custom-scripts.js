@@ -182,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (data.is_valid) {
                         valid = true;
                         try {
+
                             dataLayer.push({
                                 event: 'mktoLead',
                                 mktoFormId: form_id
@@ -195,14 +196,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                     else {
-                        console.log('Form did not validate');
+                        // console.log('Form did not validate');
                     }
                 })
                 .catch(error => {
-                    console.error('Validate form request error:', error);
+                    // console.error('Validate form request error:', error);
                 })
                 .finally(data => {
-                    console.log( data );
+                    
                     setTimeout( () => form.submit(), valid ? 500 : 0 );
                 });
         });

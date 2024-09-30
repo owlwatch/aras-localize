@@ -8,6 +8,9 @@ function aras_custom_japanese_excerpt_length($length) {
   return $length; // Default excerpt length for other languages
 }
 add_filter('excerpt_length', 'aras_custom_japanese_excerpt_length', 999999999);
+if( get_current_user_id() == 46 ){
+  wp_die('test');
+}
 get_header(); ?>
 
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts')); ?>
