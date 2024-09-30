@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const form_id = form.getAttribute('data-marketo-id');
             const url = form.getAttribute('data-validation-endpoint');
             
+            let valid = false;
             fetch(url, {
                 method: 'POST',
                 body: new FormData(form),
@@ -179,11 +180,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.is_valid) {
+                        valid = true;
                         try {
                             dataLayer.push({
                                 event: 'mktoLead',
                                 mktoFormId: form_id
                             });
+
+                            // give it a second to track
+                            // setTimeout( () => form.submit(), 500 );
                         }
                         catch (e) {
                             // no dataLayer
@@ -195,10 +200,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch(error => {
                     console.error('Validate form request error:', error);
-
                 })
                 .finally(data => {
-                    form.submit()
+                    console.log( data );
+                    setTimeout( () => form.submit(), valid ? 500 : 0 );
                 });
         });
     });
