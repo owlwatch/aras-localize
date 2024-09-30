@@ -12,6 +12,12 @@ get_header(); ?>
 
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts')); ?>
 
+<?php
+if( get_current_user_id() == 46 ){
+  wp_die('after header / before hero');
+}
+?>
+
 <section id="short-hero" class="short-hero hero-banner bg-dblue">
   <div class="grid-container">
     <div class="grid-x grid-padding-x align-top">
@@ -28,11 +34,6 @@ get_header(); ?>
   </div>
 </section>
 
-<?php
-if( get_current_user_id() == 46 ){
-  wp_die('before main');
-}
-?>
 <main class="glossary-archive mediumtoppadding largebottompadding bg-white" role="main">
   <div class="grid-container">
     <section class="grid-x grid-padding-x blog-post-loop">
