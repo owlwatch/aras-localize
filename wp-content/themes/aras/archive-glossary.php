@@ -10,13 +10,14 @@ function aras_custom_japanese_excerpt_length($length) {
 add_filter('excerpt_length', 'aras_custom_japanese_excerpt_length', 999999999);
 get_header(); ?>
 
-<?php $default_post_archive_url = get_permalink(get_option('page_for_posts')); ?>
-
 <?php
 if( get_current_user_id() == 46 ){
   wp_die('after header / before hero');
 }
 ?>
+
+
+<?php $default_post_archive_url = get_permalink(get_option('page_for_posts')); ?>
 
 <section id="short-hero" class="short-hero hero-banner bg-dblue">
   <div class="grid-container">
