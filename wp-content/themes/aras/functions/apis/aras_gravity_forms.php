@@ -836,3 +836,62 @@ function update_gotowebinar_refresh_token()
 		}
 	}
 }
+
+// lets alter the form output
+add_filter('gform_form_tag', function ($output, $form) {
+
+
+	global $vxg_marketo;
+	if (!isset($vxg_marketo)) {
+		return $output;
+	}
+
+	// get the marketo form id
+	$data_object = $vxg_marketo->get_data_object();
+
+	$feeds = $data_object->get_feed_by_form($form['id'], true);
+
+	if (empty($feeds)) {
+		return $output;
+	}
+
+	$feed = $feeds[0];
+	if (!isset($feed['meta'])) {
+		return $output;
+	}
+
+	$data = json_decode($feed['data']);
+	if (!$data || !isset($data->marketo_form)) {
+		return $output;
+	}
+
+	$form_title = str_replace("'", "\\'", $form['title']);
+
+	$validation_endpoint = rest_url('gf/v2/forms/'.$form['id'].'/submissions/validation');
+
+	$attrs = [
+		'data-marketo-id="'.esc_attr($data->marketo_form).'"',
+		'data-form-title="' . esc_attr($form_title) . '"',
+		'data-validation-endpoint="'.esc_attr($validation_endpoint).'"'
+	];
+
+	$form_tag = '<form '.implode(' ', $attrs);
+
+	$output = str_replace('<form', $form_tag, $output);
+	return $output;
+}, 10, 2);
+
+add_filter('gform_field_content', function ($field_content, $field, $value, $lead_id, $form_id) {
+	// Check if the field is set to be populated dynamically
+	if (!empty($field->allowsPrepopulate)) {
+		// Get the parameter name
+		$parameter_name = is_array($field->inputName) ? reset($field->inputName) : $field->inputName;
+		// Only proceed if the parameter name is not empty
+		if (!empty($parameter_name)) {
+			// Add the data-field-name attribute to the field container
+			$field_content = preg_replace('/(<[^>]*\bclass=["\'][^"\']*ginput_container[^"\']*["\'][^>]*)(>)/', '$1 data-field-name="' . esc_attr($parameter_name) . '"$2', $field_content);
+		}
+	}
+
+	return $field_content;
+}, 10, 5);

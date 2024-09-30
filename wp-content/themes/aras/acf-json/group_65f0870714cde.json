@@ -128,7 +128,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 3,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "shadow": "Outline Shadow"
             },
@@ -177,5 +177,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714491266
+    "modified": 1720023102
 }

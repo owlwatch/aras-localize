@@ -126,6 +126,7 @@
                     },
                     "wpml_cf_preferences": 3,
                     "layout": "block",
+                    "parent_repeater": "field_647e32cb7b405",
                     "sub_fields": [
                         {
                             "key": "field_647e34337b40b",
@@ -285,8 +286,7 @@
                             "delay": 0,
                             "wpml_cf_preferences": 2
                         }
-                    ],
-                    "parent_repeater": "field_647e32cb7b405"
+                    ]
                 },
                 {
                     "key": "field_65493bd0cffa1",
@@ -312,6 +312,7 @@
                     },
                     "wpml_cf_preferences": 3,
                     "layout": "block",
+                    "parent_repeater": "field_647e32cb7b405",
                     "sub_fields": [
                         {
                             "key": "field_647e34427b40c",
@@ -434,8 +435,7 @@
                             "save_custom": 0,
                             "custom_choice_button_text": "Add new choice"
                         }
-                    ],
-                    "parent_repeater": "field_647e32cb7b405"
+                    ]
                 },
                 {
                     "key": "field_65493c6acffa3",
@@ -461,6 +461,7 @@
                     },
                     "wpml_cf_preferences": 3,
                     "layout": "block",
+                    "parent_repeater": "field_647e32cb7b405",
                     "sub_fields": [
                         {
                             "key": "field_65ce706359ee7",
@@ -588,7 +589,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": 3,
+                            "wpml_cf_preferences": 2,
                             "choices": {
                                 "shadow": "Outline Shadow"
                             },
@@ -602,8 +603,7 @@
                             "save_custom": 0,
                             "custom_choice_button_text": "Add new choice"
                         }
-                    ],
-                    "parent_repeater": "field_647e32cb7b405"
+                    ]
                 },
                 {
                     "key": "field_65493b6ccff9f",
@@ -629,6 +629,7 @@
                     },
                     "wpml_cf_preferences": 3,
                     "layout": "block",
+                    "parent_repeater": "field_647e32cb7b405",
                     "sub_fields": [
                         {
                             "key": "field_647e34577b40d",
@@ -716,8 +717,7 @@
                             "ajax": 0,
                             "placeholder": ""
                         }
-                    ],
-                    "parent_repeater": "field_647e32cb7b405"
+                    ]
                 }
             ]
         },
@@ -924,5 +924,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1719521209
+    "modified": 1720023079
 }
