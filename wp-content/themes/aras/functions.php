@@ -112,15 +112,14 @@ require_once(get_template_directory() . '/functions/shortcodes.php');
 
 require_once(get_template_directory() . '/functions/filters.php');
 
-
-function aras_debug_wp_head() {
+function debug_wp_head() {
     // Get all functions hooked to wp_head
     global $wp_filter;
-    
+
     if (isset($wp_filter['wp_head'])) {
         $hooks = $wp_filter['wp_head']->callbacks;
 
-        // Sort by priority
+        // Sort hooks by priority
         ksort($hooks);
 
         // Iterate through each function hooked to wp_head
@@ -135,6 +134,10 @@ function aras_debug_wp_head() {
                     $callback = 'Closure or unknown function';
                 }
 
+				if( $callback == __FUNCTION__  ){
+					continue;
+				}
+
                 // Log the function name before calling it
                 error_log("Calling wp_head function: " . $callback . " with priority " . $priority);
 
@@ -144,11 +147,15 @@ function aras_debug_wp_head() {
                 }
             }
         }
+
+        // After iterating through, prevent the original wp_head functions from running again
+        remove_all_actions('wp_head');
     }
 }
+
+// Add our debug function with the highest priority
 add_action('init', function(){
 	if( get_current_user_id() == 46 ){
-		remove_all_actions('wp_head'); // Temporarily remove all wp_head actions
-		add_action('wp_head', 'aras_debug_wp_head', 0); // Hook debug function to wp_head
+		add_action('wp_head', 'debug_wp_head', -199);
 	}
 });
