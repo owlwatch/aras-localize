@@ -111,3 +111,44 @@ require_once(get_template_directory() . '/functions/scripts/index.php');
 require_once(get_template_directory() . '/functions/shortcodes.php');
 
 require_once(get_template_directory() . '/functions/filters.php');
+
+
+function aras_debug_wp_head() {
+    // Get all functions hooked to wp_head
+    global $wp_filter;
+    
+    if (isset($wp_filter['wp_head'])) {
+        $hooks = $wp_filter['wp_head']->callbacks;
+
+        // Sort by priority
+        ksort($hooks);
+
+        // Iterate through each function hooked to wp_head
+        foreach ($hooks as $priority => $functions) {
+            foreach ($functions as $function) {
+                // Determine the function name
+                if (is_array($function['function'])) {
+                    $callback = (is_object($function['function'][0]) ? get_class($function['function'][0]) : $function['function'][0]) . '::' . $function['function'][1];
+                } elseif (is_string($function['function'])) {
+                    $callback = $function['function'];
+                } else {
+                    $callback = 'Closure or unknown function';
+                }
+
+                // Log the function name before calling it
+                error_log("Calling wp_head function: " . $callback . " with priority " . $priority);
+
+                // Call the actual function
+                if (is_callable($function['function'])) {
+                    call_user_func($function['function']);
+                }
+            }
+        }
+    }
+}
+add_action('init', function(){
+	if( get_current_user_id() == 46 ){
+		remove_all_actions('wp_head'); // Temporarily remove all wp_head actions
+		add_action('wp_head', 'aras_debug_wp_head', 0); // Hook debug function to wp_head
+	}
+});
