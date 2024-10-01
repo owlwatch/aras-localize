@@ -64,6 +64,7 @@ wp-content/themes/*
 !wp-content/plugins
 wp-content/plugins/*
 !wp-content/plugins/aras-*
+!wp-content/plugins/custom-glossary
 
 # This plugin needs this version
 
