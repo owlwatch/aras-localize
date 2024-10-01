@@ -94,6 +94,7 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 	</script>
 
 	<div class="off-canvas-wrapper">
+	<?php if( get_current_user_id() == 46 ){ wp_die('before offcanvas-content-mobile'); } ?>
 		<!-- Load off-canvas container -->
 		<?php get_template_part('parts/nav', 'offcanvas-content-mobile'); ?>
 		<div class="off-canvas-content" data-off-canvas-content>
@@ -130,7 +131,6 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 				<header class="header header-none" role="banner">
 				</header>
 			<?php else : ?>
-				<?php if( get_current_user_id() == 46 ){ wp_die('before offcanvas-global'); } ?>
 				<header class="header header-base" role="banner">
 					<?php get_template_part('parts/nav', 'offcanvas-global'); ?>
 				</header>
