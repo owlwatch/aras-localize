@@ -130,6 +130,7 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 				<header class="header header-none" role="banner">
 				</header>
 			<?php else : ?>
+				<?php if( get_current_user_id() == 46 ){ wp_die('before offcanvas-global'); } ?>
 				<header class="header header-base" role="banner">
 					<?php get_template_part('parts/nav', 'offcanvas-global'); ?>
 				</header>
