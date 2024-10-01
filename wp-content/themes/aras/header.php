@@ -48,11 +48,6 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 		<!-- End Google Tag Manager -->
 	<?php endif; ?>
 
-
-
-
-
-
 	<meta charset="utf-8">
 	<!-- Force IE to use the latest rendering engine available -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,6 +73,8 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/slick/slick-theme.css" />
 	<!-- The script tag should live in the head of your page if at all possible -->
 	<script type="text/javascript" async src=https://play.vidyard.com/embed/v4.js></script>
+
+	<?php if( get_current_user_id() == 46 ){ wp_die('before wp_head'); } ?>
 	<?php wp_head(); ?>
 
 </head>
@@ -96,8 +93,6 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 			piTracker(message + ':  ' + thisHref);
 		}
 	</script>
-
-<?php if( get_current_user_id() == 46 ){ wp_die('before off-canvas-wrapper'); } ?>
 
 	<div class="off-canvas-wrapper">
 		<!-- Load off-canvas container -->
