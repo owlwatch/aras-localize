@@ -40,7 +40,7 @@ function isDev(string $entry): bool
     // it will fallback to load the production files from manifest
     // so you still navigate your site as you intended!
 
-    static $exists = null;
+    static $exists = false;
     if ($exists !== null) {
         return $exists;
     }
