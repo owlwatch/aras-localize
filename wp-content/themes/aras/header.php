@@ -74,7 +74,6 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 	<!-- The script tag should live in the head of your page if at all possible -->
 	<script type="text/javascript" async src=https://play.vidyard.com/embed/v4.js></script>
 
-	<?php if( get_current_user_id() == 46 ){ wp_die('before wp_head'); } ?>
 	<?php wp_head(); ?>
 
 </head>
