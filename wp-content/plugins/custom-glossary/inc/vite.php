@@ -45,7 +45,7 @@ function isDev(string $entry): bool
         return $exists;
     }
     $handle = curl_init(VITE_HOST . '/' . $entry);
-    curl_setopt($handle, CURLOPT_TIMEOUT, 0.1);
+    curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 0.1);
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($handle, CURLOPT_NOBODY, true);
 
