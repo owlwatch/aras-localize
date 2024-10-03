@@ -14,6 +14,42 @@ function custom_mac_address_validation($result, $value)
 	return $result;
 }
 
+// Add the custom merge tag to the merge tag dropdown
+add_filter( 'gform_merge_tags', 'aras_gf_add_format_term_merge_tag', 10, 2 );
+function aras_gf_add_format_term_merge_tag( $merge_tags, $form_id ) {
+    $merge_tags[] = array(
+        'label' => 'Resource Format',  // Label for the merge tag
+        'tag'   => '{format_term}' // Merge tag to insert
+    );
+    return $merge_tags;
+}
+
+
+add_filter( 'gform_replace_merge_tags', 'aras_gf_populate_format_taxonomy', 10, 3 );
+function aras_gf_populate_format_taxonomy( $text, $form, $entry ) {
+    // Check for the custom merge tag {format_term}
+    if ( strpos( $text, '{format_term}' ) === false ) {
+        return $text;
+    }
+
+    // Get the current post ID of the embedding page
+    global $post;
+    $post_id = $post->ID;
+
+    // Get the terms of the 'format' taxonomy for the current post
+    $terms = get_the_terms( $post_id, 'format' );
+
+    if ( $terms && ! is_wp_error( $terms ) ) {
+        // Get the first term from the 'format' taxonomy
+        $first_term = $terms[0]->name;
+
+        // Replace the {format_term} merge tag with the first term's name
+        $text = str_replace( '{format_term}', $first_term, $text );
+    }
+
+    return $text;
+}
+
 
 add_filter('gform_field_value', 'populate_fields', 10, 3);
 function populate_fields($value, $field, $name)
