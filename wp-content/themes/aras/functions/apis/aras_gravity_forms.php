@@ -65,6 +65,18 @@ function populate_fields($value, $field, $name)
 	} else {
 		$SecondaryCampaignID = '';
 	}
+
+	$resource_format = '';
+	if( is_singular('resource') ){
+		// Get the terms of the 'format' taxonomy for the current post
+		$terms = get_the_terms( get_the_ID(), 'format' );
+
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			// Get the first term from the 'format' taxonomy
+			$resource_format = $terms[0]->name;
+		}
+	}
+
 	$values = array(
 		'visitor_id'     			=> isset($_COOKIE['visitor_id']) ? $_COOKIE['visitor_id'] : $value,
 		'site_language'  			=> isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : $value,
@@ -86,6 +98,7 @@ function populate_fields($value, $field, $name)
 		'DB_employee_count'  				=> isset($_COOKIE['DB_employee_count']) ? $_COOKIE['DB_employee_count'] : $value,
 		'WebinarID' => $webinar_id,
 		'SecondaryCampaignID' => $SecondaryCampaignID,
+		'Asset_Type_Downloaded' => $resource_format
 	);
 	return isset($values[$name]) ? $values[$name] : $value;
 }
