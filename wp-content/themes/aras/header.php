@@ -46,6 +46,7 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 			})(window, document, 'script', 'dataLayer', '<?php echo $main_site_gtm_id ?>');
 		</script>
 		<!-- End Google Tag Manager -->
+		 
 	<?php endif; ?>
 
 	<meta charset="utf-8">
