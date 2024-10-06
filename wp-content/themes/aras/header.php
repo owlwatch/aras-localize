@@ -8,8 +8,10 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 <html class="no-js" <?php language_attributes(); ?>>
 
 <head>
+	<?php /* ?>
 	<?php if (is_singular('post') || is_home() || is_category() || is_author() || is_tag()) : ?>
 		<!-- Google Tag Manager: Blog -->
+		
 		<script>
 			(function(w, d, s, l, i) {
 				w[l] = w[l] || [];
@@ -46,8 +48,9 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 			})(window, document, 'script', 'dataLayer', '<?php echo $main_site_gtm_id ?>');
 		</script>
 		<!-- End Google Tag Manager -->
-		 
+
 	<?php endif; ?>
+	<?php */ ?>
 
 	<meta charset="utf-8">
 	<!-- Force IE to use the latest rendering engine available -->
