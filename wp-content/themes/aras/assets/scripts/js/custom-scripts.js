@@ -147,65 +147,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // function get_gacid() {
-    //     try {
-    //         return ga.getAll()[0].get('clientId');
-    //     }
-    //     catch (e) {
-    //         return 'n/a';
-    //     }
-    // }
+    function get_gacid() {
+        try {
+            return ga.getAll()[0].get('clientId');
+        }
+        catch (e) {
+            return 'n/a';
+        }
+    }
 
-    // const forms = document.querySelectorAll('form[data-marketo-id]');
-    // if (forms) forms.forEach(form => {
-    //     form.addEventListener('submit', e => {
+    const forms = document.querySelectorAll('form[data-marketo-id]');
+    if (forms) forms.forEach(form => {
+        form.addEventListener('submit', e => {
 
-    //         // we are going to handle some submission...
-    //         e.preventDefault();
+            // we are going to handle some submission...
+            e.preventDefault();
 
-    //         // populate the form
-    //         const input = form.querySelector('[data-field-name="gacid"] input');
-    //         if (input) {
-    //             input.value = get_gacid();
-    //         }
+            // populate the form
+            const input = form.querySelector('[data-field-name="gacid"] input');
+            if (input) {
+                input.value = get_gacid();
+            }
 
-    //         const form_id = form.getAttribute('data-marketo-id');
-    //         const url = form.getAttribute('data-validation-endpoint');
+            const form_id = form.getAttribute('data-marketo-id');
+            const url = form.getAttribute('data-validation-endpoint');
             
-    //         let valid = false;
-    //         fetch(url, {
-    //             method: 'POST',
-    //             body: new FormData(form),
-    //         })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 if (data.is_valid) {
-    //                     valid = true;
-    //                     try {
+            let valid = false;
+            fetch(url, {
+                method: 'POST',
+                body: new FormData(form),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_valid) {
+                        valid = true;
+                        try {
 
-    //                         dataLayer.push({
-    //                             event: 'mktoLead',
-    //                             mktoFormId: form_id
-    //                         });
+                            dataLayer.push({
+                                event: 'mktoLead',
+                                mktoFormId: form_id
+                            });
 
-    //                         // give it a second to track
-    //                         // setTimeout( () => form.submit(), 500 );
-    //                     }
-    //                     catch (e) {
-    //                         // no dataLayer
-    //                     }
-    //                 }
-    //                 else {
-    //                     // console.log('Form did not validate');
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 // console.error('Validate form request error:', error);
-    //             })
-    //             .finally(data => {
+                            // give it a second to track
+                            // setTimeout( () => form.submit(), 500 );
+                        }
+                        catch (e) {
+                            // no dataLayer
+                        }
+                    }
+                    else {
+                        // console.log('Form did not validate');
+                    }
+                })
+                .catch(error => {
+                    // console.error('Validate form request error:', error);
+                })
+                .finally(data => {
                     
-    //                 setTimeout( () => form.submit(), valid ? 500 : 0 );
-    //             });
-    //     });
-    // });
+                    setTimeout( () => form.submit(), valid ? 500 : 0 );
+                });
+        });
+    });
 });
