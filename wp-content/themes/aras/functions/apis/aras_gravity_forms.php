@@ -100,7 +100,8 @@ function populate_fields($value, $field, $name)
 		'SecondaryCampaignID' => $SecondaryCampaignID,
 		'Asset_Type_Downloaded' => $resource_format
 	);
-	return isset($values[$name]) ? $values[$name] : $value;
+	$value = isset($values[$name]) ? $values[$name] : $value;
+	return $value != $name ? trim($value) : '';
 }
 
 add_filter('gform_field_value_autocountry', 'autocomplete_country_by_lang');
