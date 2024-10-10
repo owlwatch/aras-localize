@@ -65,25 +65,19 @@ function get_wp_query( array $args, array $languages )
 	return WPML_Helper::get_instance()->get_wp_query( $args, $languages );
 }
 
-function adjust_canonical_for_non_translated_pages($canonical) {
-	if (function_exists('icl_object_id') && function_exists('wpml_get_language_information')) {
-        global $post;
+add_filter('wpseo_canonical', 'Aras\\WPML\\wpml_custom_canonical_url');
+
+function wpml_custom_canonical_url( $canonical ) {
+    if ( function_exists('wpml_permalink_filter') ) {
+        // Get the current post ID
+        $post_id = get_queried_object_id();
         
         // Get the current language
-        $language_info = wpml_get_language_information(null);
-        $current_language = $language_info['language_code'];
+        $current_language = apply_filters( 'wpml_current_language', NULL );
 
-        // Get the translated post ID in the current language
-        $translated_post_id = apply_filters('wpml_object_id', $post->ID, $post->post_type, false, $current_language);
-
-        // If the post does not exist in the current language, modify the canonical URL to retain the language code
-        if (!$translated_post_id) {
-            // Ensure the canonical URL keeps the language code
-            $canonical = add_query_arg('lang', $current_language, get_permalink($post->ID));
-        }
+        // Get the permalink for the current post in the current language
+        $canonical = apply_filters( 'wpml_permalink', get_permalink( $post_id ), $current_language );
     }
-
+    
     return $canonical;
 }
-
-add_filter('wpseo_canonical', 'Aras\\WPML\\adjust_canonical_for_non_translated_pages');
