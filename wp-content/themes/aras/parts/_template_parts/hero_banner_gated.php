@@ -137,6 +137,7 @@
               <?php if (get_field('hero_content')) : ?>
                 <?php echo get_field('hero_content'); ?>
               <?php endif; ?>
+              <?php if (get_field('event_date')) : ?><h6><?php if (!get_field('hide_date_on_listing')) : ?><?php echo get_field('event_date'); ?><?php endif; ?><?php if (get_field('event_time')) : ?><?php if (!get_field('hide_date_on_listing')) : ?>,<?php endif; ?> <?php echo get_field('event_time'); ?><?php endif; ?></h6><?php endif; ?>
             </div>
           </div>
           <div class="cell small-12 medium-6 large-5 hero-form-side">
