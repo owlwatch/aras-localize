@@ -64,3 +64,26 @@ function get_wp_query( array $args, array $languages )
 {
 	return WPML_Helper::get_instance()->get_wp_query( $args, $languages );
 }
+
+function adjust_canonical_for_non_translated_pages($canonical) {
+	if (function_exists('icl_object_id') && function_exists('wpml_get_language_information')) {
+        global $post;
+        
+        // Get the current language
+        $language_info = wpml_get_language_information(null);
+        $current_language = $language_info['language_code'];
+
+        // Get the translated post ID in the current language
+        $translated_post_id = apply_filters('wpml_object_id', $post->ID, $post->post_type, false, $current_language);
+
+        // If the post does not exist in the current language, modify the canonical URL to retain the language code
+        if (!$translated_post_id) {
+            // Ensure the canonical URL keeps the language code
+            $canonical = add_query_arg('lang', $current_language, get_permalink($post->ID));
+        }
+    }
+
+    return $canonical;
+}
+
+add_filter('wpseo_canonical', 'Aras\\WPML\\adjust_canonical_for_non_translated_pages');
