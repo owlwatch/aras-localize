@@ -111,3 +111,5 @@ require_once(get_template_directory() . '/functions/scripts/index.php');
 require_once(get_template_directory() . '/functions/shortcodes.php');
 
 require_once(get_template_directory() . '/functions/filters.php');
+
+require_once(get_template_directory() . '/functions/seo.php');
