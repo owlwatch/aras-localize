@@ -548,14 +548,17 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         );
       }
       // Extract author slug
-      $parts = explode('/author/', $current_url);
-      if (count($parts) === 2) {
-        $author_slug_with_query = $parts[1];
-        $author_slug_parts = explode('?', $author_slug_with_query);
-        $author_slug = rtrim($author_slug_parts[0], '/');
-        $author_switcher = $author_slug;
-      }
+      // $parts = explode('/author/', $current_url);
+      // if (count($parts) === 2) {
+      //   $author_slug_with_query = $parts[1];
+      //   $author_slug_parts = explode('?', $author_slug_with_query);
+      //   $author_slug = rtrim($author_slug_parts[0], '/');
+      //   $author_switcher = $author_slug;
+      // }
       // Taxonomy Query for Author Filter
+      if( is_author() ){
+        $args['author_name'] = get_query_var( 'author_name' );
+      }
       if (!empty($author_switcher)) {
         $user = get_user_by('slug', $author_switcher);
         if ($user) {
