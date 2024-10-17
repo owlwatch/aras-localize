@@ -68,7 +68,7 @@ function get_wp_query( array $args, array $languages )
 add_filter('wpseo_canonical', 'Aras\\WPML\\wpml_custom_canonical_url');
 
 function wpml_custom_canonical_url( $canonical ) {
-    if ( function_exists('wpml_permalink_filter') ) {
+    if ( is_singular() && function_exists('wpml_permalink_filter') ) {
         // Get the current post ID
         $post_id = get_queried_object_id();
         
