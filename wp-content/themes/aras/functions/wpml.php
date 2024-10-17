@@ -78,6 +78,12 @@ function wpml_custom_canonical_url( $canonical ) {
         // Get the permalink for the current post in the current language
         $canonical = apply_filters( 'wpml_permalink', get_permalink( $post_id ), $current_language );
     }
+
+	if( is_tax(['format', 'application', 'industry', 'topic']) ){
+		$link = get_post_type_archive_link('resource');
+		$tax = get_taxonomy( get_queried_object()->taxonomy );
+		$canonical = add_query_arg($tax->query_var, get_queried_object()->slug, $link );
+	}
     
     return $canonical;
 }
