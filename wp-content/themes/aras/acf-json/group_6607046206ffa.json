@@ -7,9 +7,9 @@
             "label": "Event Date",
             "name": "event_date",
             "aria-label": "",
-            "type": "date_picker",
+            "type": "date_time_picker",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -19,7 +19,8 @@
             "wpml_cf_preferences": 2,
             "display_format": "F j, Y",
             "return_format": "F j, Y",
-            "first_day": 0
+            "first_day": 1,
+            "allow_in_bindings": 1
         },
         {
             "key": "field_664f68bfd8681",
@@ -146,5 +147,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1716480801
+    "modified": 1729269915
 }
