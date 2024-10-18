@@ -144,7 +144,13 @@ if ($data != null) {
                         <p class="product-area pn"><?php echo $product_name; ?></p>
                       <?php endif; ?>
                       <?php if ($release_name != 'ZZZ' && $release_name != '') : ?>
-                        <p class="product-date"><strong><?php echo $release_name; ?></strong> - <?php echo date("F Y", strtotime($target_release_date)); ?></p>
+                        <?php
+                        $formattedTargetReleaseDate = date("F Y", strtotime($target_release_date));
+                        if( strpos( $formattedTargetReleaseDate, '2100' ) == -1 ){
+                          $formattedTargetReleaseDate = 'TBD';
+                        }
+                        ?>
+                        <p class="product-date"><strong><?php echo $release_name; ?></strong> - <?php echo $formattedTargetReleaseDate; ?></p>
                       <?php endif; ?>
                       <div class="product-desc">
                         <?php foreach ($group as $item) : ?>
