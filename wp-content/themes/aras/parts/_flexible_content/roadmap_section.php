@@ -267,6 +267,9 @@ if ($rrq_data != null) {
               } else {
                 $sa_is_released = '';
               };
+              if( strpos( $formattedReleaseDate, '2100' ) == -1 ){
+                $formattedReleaseDate = 'TBD';
+              }
               ?>
               <?php if ($sa_is_released == '0') : ?>
                 <tr>
