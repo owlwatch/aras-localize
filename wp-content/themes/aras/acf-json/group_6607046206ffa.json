@@ -17,7 +17,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "display_format": "F j, Y",
+            "display_format": "F j, Y g:i a",
             "return_format": "F j, Y",
             "first_day": 1,
             "allow_in_bindings": 1
@@ -147,5 +147,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1729269915
+    "modified": 1729798571
 }
