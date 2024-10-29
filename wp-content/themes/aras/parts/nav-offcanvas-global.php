@@ -66,6 +66,8 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 											<?php echo esc_html($link_title); ?>
 										</a>
 									<?php endif; ?>
+								<?php elseif (get_sub_field('top_level_type', 'option') == 'custom') : ?>
+									<?php echo get_sub_field('custom_html', 'option') ?>
 								<?php else : /*top_level_type == label*/ ?>
 									<?php if (get_sub_field('top_level_label', 'option')) : ?>
 										<button aria-label="<?php echo get_sub_field('top_level_label', 'option'); ?>" aria-haspopup="true" class="nav-toplevel"><?php echo get_sub_field('top_level_label', 'option'); ?></button>
