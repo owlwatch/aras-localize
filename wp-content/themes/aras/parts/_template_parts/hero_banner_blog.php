@@ -3,6 +3,7 @@
     <div class="grid-x grid-padding-x align-top">
       <div class="cell small-12 medium-6 large-7 hero-content">
         <div class="hero-content-inner">
+          <a class="card-link" href="<?php echo get_post_type_archive_link( 'post' ) ?>">Blog</a>
           <?php if (get_field('headline_color') == 'red') : ?>
             <?php $h1color = 'color-red'; ?>
           <?php else : ?>
