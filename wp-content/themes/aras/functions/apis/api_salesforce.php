@@ -621,10 +621,12 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 		$error_message = $response->get_error_message();
 		return false;
 	}
-	$response_data = json_decode(wp_remote_retrieve_body($response), true);
+	$response_string = wp_remote_retrieve_body($response);
+	$response_data = json_decode($response_string, true);
 	if (isset($response_data['success']) && $response_data['success'] === true) {
 		return $response_data['id'];
 	} else {
+		error_log('Error creating salesforce campaign: ' . $response_string);
 		return false;
 	}
 }
