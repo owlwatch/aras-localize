@@ -81,6 +81,11 @@ function wpml_custom_canonical_url( $canonical ) {
 
 	if( is_tax(['format', 'application', 'industry', 'topic']) ){
 		$link = get_post_type_archive_link('resource');
+		// are we on a paged url?
+		$paged = get_query_var('paged');
+		if( $paged ){
+			$link.= "/page/$paged";
+		}
 		$tax = get_taxonomy( get_queried_object()->taxonomy );
 		$canonical = add_query_arg($tax->query_var, get_queried_object()->slug, $link );
 	}
