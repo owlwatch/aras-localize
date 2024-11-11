@@ -72,31 +72,14 @@ if ($data != null) {
     }
     $grouped_items[$key][] = $record;
   }
+  // sort the unique states
+  $sort_order = ['Released', 'Implementing', 'Backlog', 'Analyzing'];
+  uksort( $unique_state, function($a,$b) use($sort_order){
+    $ai = array_search( $a, $sort_order );
+    $bi = array_search( $b, $sort_order );
+    return $ai - $bi;
+  });
   ?>
-
-  <?php
-  // Group items based on common criteria
-  $grouped_items = [];
-  foreach ($data['SOAP-ENV:Envelope']['SOAP-ENV:Body']['ApplyItemResponse']['Result']['Item'] as $record) {
-    $key = $record['product_name'] . $record['epic_name'] . $record['state'] . $record['release_name'] . $record['target_release_date'] . (isset($record['product_area']) ? $record['product_area'] : '');
-    if (!isset($grouped_items[$key])) {
-      $grouped_items[$key] = [];
-    }
-    $grouped_items[$key][] = $record;
-  }
-  ?>
-  <?php
-  // Group items based on common criteria
-  $grouped_items = [];
-  foreach ($data['SOAP-ENV:Envelope']['SOAP-ENV:Body']['ApplyItemResponse']['Result']['Item'] as $record) {
-    $key = $record['product_name'] . $record['epic_name'] . $record['state'] . $record['release_name'] . $record['target_release_date'] . (isset($record['product_area']) ? $record['product_area'] : '');
-    if (!isset($grouped_items[$key])) {
-      $grouped_items[$key] = [];
-    }
-    $grouped_items[$key][] = $record;
-  }
-  ?>
-
   <section class="product-roadmap-section smalltoppadding nobottompadding">
     <div class="grid-container">
       <div class="grid-x grid-margin-x">
