@@ -73,6 +73,9 @@ require_once(get_template_directory() . '/functions/apis/api_myi.php');
 //Gravity Forms Functions
 require_once(get_template_directory() . '/functions/apis/aras_gravity_forms.php');
 
+// Swoogo Functions
+require_once(get_template_directory() . '/functions/apis/api_swoogo.php');
+
 
 /*     POST TYPE CUSTOM FUNCTIONS     */
 
