@@ -513,10 +513,11 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       // Extract category slug
       $parts = explode('/category/', $current_url);
       if (count($parts) === 2) {
-        $category_slug_with_query = $parts[1];
-        $category_slug_parts = explode('?', $category_slug_with_query);
-        $category_slug = rtrim($category_slug_parts[0], '/');
-        $category_switcher = $category_slug;
+        // $category_slug_with_query = $parts[1];
+        // $category_slug_parts = explode('?', $category_slug_with_query);
+        // $category_slug = rtrim($category_slug_parts[0], '/');
+        // $category_switcher = $category_slug;
+        $category_slug = get_query_var('category');
       }
       // Taxonomy Query for Category Filter
       if (!empty($category_switcher)) {
@@ -650,7 +651,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       }
 
       // Fix duplicate posts (only one should be returned per language)
-      
 
       /// FINALLY, the post query
       // $posts_query = new WP_Query($args);
