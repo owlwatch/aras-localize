@@ -16,6 +16,7 @@ function custom_menu_order($menu_ord)
 		'edit.php?post_type=page', // page
 		'edit.php?post_type=lp', // lp
 		'edit.php', // Posts
+		'edit.php?post_type=demo', // lp
 		'edit.php?post_type=resource', // resource
 		'edit.php?post_type=event', // event
 		'edit.php?post_type=glossary', // glossary

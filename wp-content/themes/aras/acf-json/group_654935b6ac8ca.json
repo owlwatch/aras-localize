@@ -212,6 +212,13 @@
                 "operator": "==",
                 "value": "templates\/page-with-table-of-contents.php"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "demo"
+            }
         ]
     ],
     "menu_order": -1,
@@ -229,5 +236,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1725934356
+    "modified": 1732648533
 }

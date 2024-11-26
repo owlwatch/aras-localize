@@ -11,7 +11,9 @@ if( !is_array($labels) ){
   <div class="grid-container">
     <div class="grid-x grid-padding-x">
       <div class="cell small-12 medium-6 large-7 hero-content">
-        <?php if (get_field('resource_archive_title', 'option')) : ?>
+        <?php if( is_tax() ): ?>
+          <h1 class="hero-headline"><?php get_queried_object()->name ?> Resources</h1>
+        <?php elseif (get_field('resource_archive_title', 'option')) : ?>
           <h1 class="hero-headline"><?php echo get_field('resource_archive_title', 'option'); ?></h1>
         <?php else : ?>
           <h1 class="hero-headline">Resource Library</h1>

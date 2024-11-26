@@ -103,6 +103,9 @@ require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
 //LP CPT
 require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
 
+//Demo CPT
+require_once(get_template_directory() . '/functions/post_types/aras_demo.php');
+
 //Speakers CPT
 require_once(get_template_directory() . '/functions/post_types/aras_speakers.php');
 

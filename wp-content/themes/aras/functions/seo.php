@@ -27,3 +27,23 @@ function add_custom_event_schema_piece( $graph_pieces, $context ) {
 }
 
 add_filter( 'wpseo_schema_graph_pieces', 'Aras\\SEO\\add_custom_event_schema_piece', 10, 2 );
+
+
+function enforce_alt_text_in_media_library() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            // Attach an event to the 'Insert into Post' button
+            $(document).on('click', '.media-button-insert, .media-button-select', function() {
+                var altText = $('.attachment-details .setting[data-setting="alt"]').find('input').val();
+                
+                if (!altText) {
+                    alert('Please add alternative text for accessibility before inserting the image.');
+                    return false; // Prevents the image from being inserted
+                }
+            });
+        });
+    </script>
+    <?php
+}
+add_action('admin_footer', 'Aras\\SEO\\enforce_alt_text_in_media_library');
