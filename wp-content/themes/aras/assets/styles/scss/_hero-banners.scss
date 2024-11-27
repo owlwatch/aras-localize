@@ -618,7 +618,7 @@
 
     .hero-content-inner {
       max-width: 600px;
-      > * {
+      > *, [role="heading"] > *{
         &:first-child {
           margin-top: 0;
         }
