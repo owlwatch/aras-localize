@@ -230,7 +230,7 @@
     }
 
     .hero-height-shortened {
-      min-height: 9rem;
+      min-height: 0rem;
 
       @include breakpoint(medium only) {
         min-height: 7rem;
@@ -618,6 +618,14 @@
 
     .hero-content-inner {
       max-width: 600px;
+      > * {
+        &:first-child {
+          margin-top: 0;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
 
     .hero-headline {
