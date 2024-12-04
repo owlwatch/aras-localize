@@ -55,3 +55,10 @@ function aras_add_ids_to_headings($content)
 };
 
 // add_filter('the_content', 'aras_add_ids_to_headings', 20, 1);
+
+function aras_convert_gist_links_to_oembeds($content){
+	// parse for direct links
+	return preg_replace('/<a[^>]+href=[\'"](https:\/\/gist\.github\..+?)[\'"][^>]*?>gist[^<]+<\/a>/i', '$1', $content);
+}
+
+add_filter('the_content', 'aras_convert_gist_links_to_oembeds', 1, 1);
