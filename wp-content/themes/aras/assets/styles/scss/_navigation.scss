@@ -1,35 +1,23 @@
 /** HEADER **/
 .header {
-  position: relative;
+  position: sticky;
   width: 100%;
-  top: 0;
+  top: var( --wp-admin--admin-bar--height, 0 );
+  @media (max-width: 600px){
+    top: 0;
+  }
   left: 0;
-  right: 0;
   background-color: transparent;
   z-index: 200;
   transition: 0.5s ease;
-
-  height: 136px;
-  @include breakpoint(medium only) {
-    height: 115px;
-  }
-
-  @media print,
-  screen and (max-width: 923px) {
-    height: 106px;
-  }
-
-  @include breakpoint(small only) {
-    height: 92.5px;
-  }
 
   &.header-none {
     height: 0px !important;
   }
 
   &.overlapnav {
-    height: 0px !important;
-
+    position: absolute;
+    top: 0;
     .nav-bar,
     .navigation {
       background-color: transparent !important;
@@ -37,20 +25,7 @@
   }
 
   &.header-simplenav {
-    height: 97px;
-
-    @include breakpoint(medium only) {
-      height: 97px;
-    }
-
-    @media print,
-    screen and (max-width: 923px) {
-      height: 89.625px;
-    }
-
-    @include breakpoint(small only) {
-      height: 84.375px;
-    }
+    
   }
 }
 
@@ -86,8 +61,7 @@
 }
 
 .nav-bar {
-  //position: relative;
-  position: fixed;
+  position: relative;
   width: 100%;
   z-index: 100;
   padding-top: 2rem;

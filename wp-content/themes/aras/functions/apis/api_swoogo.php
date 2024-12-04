@@ -167,3 +167,15 @@ add_action('init', function () {
 	echo json_encode( get_custom_contact_fields() );
 	exit;
 });
+
+add_action('init', function(){
+	if (empty($_REQUEST['swoogo-sync'])) {
+		return;
+	}
+	$event_id = $_REQUEST['swoogo-sync'];
+	// how to sync?
+	
+	header('content-type: application/json; charset=utf-8');
+	echo json_encode( get_custom_contact_fields() );
+	exit;
+});

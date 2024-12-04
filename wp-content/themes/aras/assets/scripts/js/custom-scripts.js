@@ -34,7 +34,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (close) {
         close.addEventListener('click', closeEyebrow);
     }
+});
 
+//// aras-header-height
+document.addEventListener("DOMContentLoaded", function () {
+    // const header = document.querySelector('header.header');
+    // if (!header) {
+    //     return false;
+    // }
+    // const updateCssVariable = () => {
+    //     const rect = header.getBoundingClientRect();
+    //     console.log( rect.height );
+    //     document.documentElement.style.setProperty("--aras-header-height", rect.height + 'px' );
+    // }
+
+    // const observer = new ResizeObserver( updateCssVariable );
+    // observer.observe( header );
 });
 
 ////Smooth Scrolling

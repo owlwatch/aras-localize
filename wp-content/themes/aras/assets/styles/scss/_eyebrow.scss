@@ -13,16 +13,17 @@
 
 	order: -1;
 	font-size: 1rem;
-	padding: 0.5em 0;
 	position: relative;
 	width: 100%;
 
 	display: grid; 
 	grid-template-rows: 1fr;
-	transition: 250ms grid-template-rows ease;
+	transition: 250ms grid-template-rows ease, 250ms padding ease;
+	padding: 0.5em 0;
 
 	&.is-closed {
 		grid-template-rows: 0fr;
+		padding: 0;
 	}
 	
 	&__container {
