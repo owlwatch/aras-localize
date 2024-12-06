@@ -1,6 +1,6 @@
 function arasInitDemandBase(){
 
-	console.log( arasInitDemandBase )
+	console.log( 'arasInitDemandBase' );
 
 	// clean up the marketo form so we can style it...
 	const mkto_fields = document.querySelectorAll('.mktoField');
