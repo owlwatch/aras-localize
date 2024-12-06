@@ -67,8 +67,8 @@
 	letter-spacing: 0.15em;
 }
 
-label.mktoLabel[for="Accept_Privacy_Policy__c"] {
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: flex-end;
+label.mktoLabel[for="Accept_Privacy_Policy__c"] a {
+	color: #000;
+	margin: 0;
+	padding: 0;
 }

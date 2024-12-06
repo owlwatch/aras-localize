@@ -15,6 +15,10 @@ function arasInitDemandBase(){
 				if( label ){
 					label.innerHTML = label.innerHTML.replace("Privacy Policy", '<a href="https://aras.com/privacy-policy/" target="_blank" onclick="e => e.stopPropogation()">Privacy Policy</a>');
 					label.innerHTML = label.innerHTML.replace(':', '');
+					const asterix = label.querySelector('.mktoAsterix');
+					if( asterix ){
+						label.appendChild( asterix );
+					}
 				}
 			}
 		}
