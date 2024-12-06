@@ -69,14 +69,13 @@ function arasInitDemandBase(){
 		});
 	}
 
-	setTimeout( () => {
-		// clean up the marketo form so we can style it...
-		const mkto_fields = document.querySelectorAll('.mktoField');
-		mkto_fields.forEach( mkto_field => {
-			const col = mkto_field.closest('.mktoFormCol');
-			if( col && col.tagName && col.tagName == 'DIV' && mkto_field.getAttribute('type')){
-				col.classList.add('type_'+ mkto_field.getAttribute('type') );
-			}
-		});
-	}, 100 );
+	// clean up the marketo form so we can style it...
+	const mkto_fields = document.querySelectorAll('.mktoField');
+	mkto_fields.forEach( mkto_field => {
+		console.log( mkto_field );
+		const col = mkto_field.closest('.mktoFormCol');
+		if( col && col.tagName && col.tagName == 'DIV' && mkto_field.getAttribute('type')){
+			col.classList.add('type_'+ mkto_field.getAttribute('type') );
+		}
+	});
 }
