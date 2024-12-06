@@ -13,8 +13,9 @@ function arasInitDemandBase(){
 				// lets fix this for the privacy policy
 				const label = col.querySelector('label');
 				if( label ){
-					label.innerHTML = label.innerHTML.replace("Privacy Policy", '<a href="https://aras.com/privacy-policy/" target="_blank" onclick="e => e.stopPropogation()">Privacy Policy</a>');
-					label.innerHTML = label.innerHTML.replace(':', '');
+					label.innerHTML = label.innerHTML
+						.replace(':','')
+						.replace("Privacy Policy", '<a href="https://aras.com/privacy-policy/" target="_blank" onclick="e => e.stopPropogation()">Privacy Policy</a>');
 					const asterix = label.querySelector('.mktoAsterix');
 					if( asterix ){
 						label.appendChild( asterix );
