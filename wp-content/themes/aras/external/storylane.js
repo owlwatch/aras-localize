@@ -82,7 +82,7 @@ function arasInitDemandBase(){
 	}
 
 }
-
+console.log('loaded aras storylane.js')
 if( window._marketoLoaded ){
 	arasInitDemandBase();
 }
