@@ -72,3 +72,7 @@ label.mktoLabel[for="Accept_Privacy_Policy__c"] a {
 	margin: 0;
 	padding: 0;
 }
+
+label.mktoLabel[for="Accept_Privacy_Policy__c"] .mktoAsterix {
+	float: none !important;
+}
