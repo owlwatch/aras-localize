@@ -1,6 +1,5 @@
 function arasInitDemandBase(){
-	console.log('arasInitDemandBase');
-
+	
 	// add our demandbase form
 	const db_form = document.createElement('div');
 	db_form.innerHTML = `<form id="db_form" method="post">
@@ -38,7 +37,7 @@ function arasInitDemandBase(){
 	// append the aras stylesheet for storylane
 	(function(){
 		const typekitLink = document.createElement('link');
-		typekitLink.href='https://aras.com/wp-content/themes/aras/external/storylane.css';
+		typekitLink.href='https://aras.local/wp-content/themes/aras/external/storylane.css?v='+Date.now();
 		typekitLink.rel="stylesheet";
 		document.getElementsByTagName('head')[0].appendChild( typekitLink );
 	})();
@@ -54,12 +53,9 @@ function arasInitDemandBase(){
 	const updateField = field => {
 		// lets find the corresponding marketo field
 		let name = field.getAttribute('data-sc-field-name');
-		console.log( name );
 		// lets massage the name to salesforce field name
 		name = name.replace(/_([a-z])/g, matches => '_'+matches[1].toUpperCase()) + '__c';
-		console.log( [name, field, field.value] );
 		const mkto_field = document.querySelector('[name="'+name+'"]');
-		console.log( mkto_field );
 		if( mkto_field ){
 			mkto_field.value = field.value;
 		}
@@ -72,7 +68,6 @@ function arasInitDemandBase(){
 	db_fields.forEach( f => {
 		updateField(f);
 		f.addEventListener('change', e => {
-			console.log( 'updateField', f );
 			updateField( f );
 		});
 		fieldMutator.observe( f, {attributes: true, attributeFilter: ['value']} );
@@ -83,11 +78,19 @@ function arasInitDemandBase(){
 
 	if( email ){
 		email.addEventListener('change', e => {
-			console.log( '')
 			const db_field = document.querySelector('[data-sc-field-name="email"]');
 			if( db_field ){
 				db_field.value = email.value;
 			}
 		});
 	}
+
+	// clean up the marketo form so we can style it...
+	const mkto_fields = document.querySelectorAll('.mktoField');
+	mkto_fields.forEach( mkto_field => {
+		const col = mkto_field.closest('.mktoFormCol');
+		if( col && col.tagName && col.tagName == 'DIV' && mkto_field.getAttribute('type')){
+			col.classList.add('type_'+ mkto_field.getAttribute('type') );
+		}
+	});
 }
