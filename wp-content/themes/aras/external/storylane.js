@@ -37,7 +37,7 @@ function arasInitDemandBase(){
 	// append the aras stylesheet for storylane
 	(function(){
 		const typekitLink = document.createElement('link');
-		typekitLink.href='https://aras.local/wp-content/themes/aras/external/storylane.css?v='+Date.now();
+		typekitLink.href='https://aras.com/wp-content/themes/aras/external/storylane.css?v='+Date.now();
 		typekitLink.rel="stylesheet";
 		document.getElementsByTagName('head')[0].appendChild( typekitLink );
 	})();
