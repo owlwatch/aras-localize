@@ -9,6 +9,14 @@ function arasInitDemandBase(){
 		const col = mkto_field.closest('.mktoFormCol');
 		if( col && col.tagName && col.tagName == 'DIV' && mkto_field.getAttribute('type')){
 			col.classList.add('type_'+ mkto_field.getAttribute('type') );
+			if( mkto_field.getAttribute('type') == 'checkbox' ){
+				// lets fix this for the privacy policy
+				const label = col.querySelector('label');
+				if( label ){
+					label.innerHTML = label.innerHTML.replace("Privacy Policy", '<a href="https://aras.com/privacy-policy/" target="_blank" onclick="e => e.stopPropogation()">Privacy Policy</a>');
+					label.innerHTML = label.innerHTML.replace(':', '');
+				}
+			}
 		}
 	});
 	

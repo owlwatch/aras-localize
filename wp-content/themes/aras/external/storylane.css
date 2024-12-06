@@ -66,3 +66,9 @@
 	border-width: 0 !important;
 	letter-spacing: 0.15em;
 }
+
+label.mktoLabel[for="Accept_Privacy_Policy__c"] {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
