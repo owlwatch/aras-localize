@@ -26,22 +26,6 @@ function arasInitDemandBase(){
 	// append the demandbase form
 	document.body.appendChild( db_form );
 
-	// append the typekit font stylesheet
-	(function(){
-		const typekitLink = document.createElement('link');
-		typekitLink.href='https://use.typekit.net/pun6fdh.css';
-		typekitLink.rel="stylesheet";
-		document.getElementsByTagName('head')[0].appendChild( typekitLink );
-	})();
-
-	// append the aras stylesheet for storylane
-	(function(){
-		const typekitLink = document.createElement('link');
-		typekitLink.href='https://aras.com/wp-content/themes/aras/external/storylane.css?v='+Date.now();
-		typekitLink.rel="stylesheet";
-		document.getElementsByTagName('head')[0].appendChild( typekitLink );
-	})();
-
 	// append the demandbase script
 	(function(d,b,a,s,e){ var t = b.createElement(a),
 		fs = b.getElementsByTagName(a)[0]; t.async=1; t.id=e; t.src=s;
