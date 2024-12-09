@@ -352,11 +352,25 @@
       .meganav-top-level-button {
         margin-bottom: calc(-0.7rem - 2px);
 
+        padding-right: 1em;
+
+        &::after {
+          display: none;
+        }
+
+        &:hover, &:active, &:focus {
+          color: #000;
+        }
+
         @include breakpoint(medium only) {
           padding: 10px;
           margin-bottom: 0;
           font-size: 14px;
         }
+      }
+
+      .is-active > .meganav-top-level-button {
+        color: #000;
       }
 
       .nav-toplevel-mega {
