@@ -69,6 +69,7 @@
                     "return_format": "value",
                     "multiple": 0,
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
@@ -480,12 +481,14 @@
                             "wpml_cf_preferences": 3,
                             "choices": {
                                 "id": "Vidyard ID",
-                                "linked": "Linked Video"
+                                "linked": "Linked Video",
+                                "storylane": "Storylane"
                             },
                             "default_value": "id",
                             "return_format": "value",
                             "multiple": 0,
                             "allow_null": 0,
+                            "allow_in_bindings": 1,
                             "ui": 0,
                             "ajax": 0,
                             "placeholder": ""
@@ -541,6 +544,36 @@
                             "wpml_cf_preferences": 2,
                             "default_value": "",
                             "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_6756f6a04f89a",
+                            "label": "Storylane Share Link",
+                            "name": "storylane_share_link",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_65ce706359ee7",
+                                        "operator": "==",
+                                        "value": "storylane"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 1,
                             "placeholder": "",
                             "prepend": "",
                             "append": ""
@@ -924,5 +957,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1720023079
+    "modified": 1733752782
 }

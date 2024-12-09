@@ -257,8 +257,9 @@
 
 							<?php if (have_rows('video_block')) : ?>
 								<?php while (have_rows('video_block')) : the_row(); ?>
+									<?php $is_storylane = get_sub_field('video_type') == 'storylane' ?>
 									<?php $block_settings = get_sub_field('block_settings'); ?>
-									<?php if ($block_settings && in_array('shadow', $block_settings)) : ?>
+									<?php if ($block_settings && !$is_storylane && in_array('shadow', $block_settings)) : ?>
 										<?php $shadow = 'shadow' ?>
 									<?php else : ?>
 										<?php $shadow = '' ?>
@@ -290,6 +291,17 @@
 										<div class="video-container video-container-fullwidth <?= "$shadow" ?>">
 											<?php if (get_sub_field('video_type') == 'id') : ?>
 												<img style="width: 100%; margin: auto; display: block;" class="vidyard-player-embed" alt="vidyard video player" src="https://play.vidyard.com/<?php echo get_sub_field('vidyard_id'); ?>.jpg" data-uuid="<?php echo get_sub_field('vidyard_id'); ?>" data-v="4" data-type="inline" data-autoplay="<?= "$autoplay" ?>" data-loop="<?= "$loop" ?>" data-controls="<?= "$controls" ?>" />
+
+											<?php elseif (get_sub_field('video_type') == 'storylane') : ?>
+												<?php
+												$embed_url = add_query_arg('embed', 'inline', preg_replace('/\/share\//', '/demo/', get_sub_field('storylane_share_link')));
+												?>
+												<div>
+													<script async src="https://js.storylane.io/js/v2/storylane.js"></script>
+													<div class="sl-embed" style="position:relative;padding-bottom:56.25%;width:100%;height:0;transform:scale(1)">
+														<iframe loading="lazy" class="sl-demo" src="<?php echo $embed_url ?>" name="sl-embed" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:1px solid rgba(63,95,172,0.35);box-shadow: 0px 0px 18px rgba(26, 19, 72, 0.15);border-radius:10px;box-sizing:border-box;"></iframe>
+													</div>
+												</div>
 											<?php else : ?>
 												<?php
 												$iframe = get_sub_field('video_link');
