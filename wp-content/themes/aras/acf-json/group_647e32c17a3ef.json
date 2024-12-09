@@ -549,6 +549,36 @@
                             "append": ""
                         },
                         {
+                            "key": "field_67570448dc600",
+                            "label": "Heading",
+                            "name": "video_heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_65ce706359ee7",
+                                        "operator": "==",
+                                        "value": "storylane"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
                             "key": "field_6756f6a04f89a",
                             "label": "Storylane Share Link",
                             "name": "storylane_share_link",
@@ -586,7 +616,15 @@
                             "type": "checkbox",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_65ce706359ee7",
+                                        "operator": "!=",
+                                        "value": "storylane"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "50",
                                 "class": "",
@@ -603,6 +641,7 @@
                             ],
                             "return_format": "value",
                             "allow_custom": 0,
+                            "allow_in_bindings": 1,
                             "layout": "vertical",
                             "toggle": 0,
                             "save_custom": 0,
@@ -616,7 +655,15 @@
                             "type": "checkbox",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_65ce706359ee7",
+                                        "operator": "!=",
+                                        "value": "storylane"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "50",
                                 "class": "",
@@ -631,6 +678,7 @@
                             ],
                             "return_format": "value",
                             "allow_custom": 0,
+                            "allow_in_bindings": 1,
                             "layout": "vertical",
                             "toggle": 0,
                             "save_custom": 0,
@@ -957,5 +1005,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1733752782
+    "modified": 1733756024
 }

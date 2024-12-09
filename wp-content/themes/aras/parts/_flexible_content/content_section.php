@@ -294,8 +294,12 @@
 
 											<?php elseif (get_sub_field('video_type') == 'storylane') : ?>
 												<?php
+												$heading = get_sub_field('video_heading');
 												$embed_url = add_query_arg('embed', 'inline', preg_replace('/\/share\//', '/demo/', get_sub_field('storylane_share_link')));
 												?>
+												<?php if( $heading): ?>
+												<h3 style="text-align: center; max-width: 30em; margin: 0 auto 2em;"><?php echo $heading; ?></h3>
+												<?php endif; ?>
 												<div>
 													<script async src="https://js.storylane.io/js/v2/storylane.js"></script>
 													<div class="sl-embed" style="position:relative;padding-bottom:56.25%;width:100%;height:0;transform:scale(1)">
