@@ -21,18 +21,19 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
             <h1 class="hero-headline"><?php echo $author_intro . ' ' . $author->display_name ?></h1>
           <?php elseif (is_category()) : ?>
             <?php $category = get_queried_object();
-            $cat_label = single_cat_title('', false);
-            $cat_intro = 'Category:';
-            $cat_intro = get_field('category_page_heading', 'option') ?: $cat_intro;
-            if (str_contains($site_url, '/ja-jp/')) {
-              $cat_label = get_field('cat_label_japanese', $category) ?: $cat_label;
-            } elseif (str_contains($site_url, '/fr-fr/')) {
-              $cat_label = get_field('cat_label_french', $category) ?: $cat_label;
-            } elseif (str_contains($site_url, '/de-de/')) {
-              $cat_label = get_field('cat_label_german', $category) ?: $cat_label;
-            }
+            // $cat_label = single_cat_title('', false);
+            // $cat_intro = 'Category:';
+            // $cat_intro = get_field('category_page_heading', 'option') ?: $cat_intro;
+            // if (str_contains($site_url, '/ja-jp/')) {
+            //   $cat_label = get_field('cat_label_japanese', $category) ?: $cat_label;
+            // } elseif (str_contains($site_url, '/fr-fr/')) {
+            //   $cat_label = get_field('cat_label_french', $category) ?: $cat_label;
+            // } elseif (str_contains($site_url, '/de-de/')) {
+            //   $cat_label = get_field('cat_label_german', $category) ?: $cat_label;
+            // }
+            /* <h1 class="hero-headline"><?php echo $cat_intro . ' ' . $cat_label; ?></h1> */
             ?>
-            <h1 class="hero-headline"><?php echo $cat_intro . ' ' . $cat_label; ?></h1>
+            <h1 class="hero-headline"><?php echo $category->name . ' ' . __('Blog', 'aras'); ?></h1>
           <?php elseif (is_tag()) : ?>
 
             <?php $tag = get_queried_object();
