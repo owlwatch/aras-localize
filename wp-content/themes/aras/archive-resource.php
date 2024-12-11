@@ -30,7 +30,6 @@ if( !is_array($labels) ){
             }
             $field_name = implode('_', $field_parts);
             $cta_label = get_field($field_name, $term) ?: $term->name;
-            echo $field_name;
             ?>
             <?php echo $cta_label ?>
             <?php _e('Resources', 'aras') ?>
