@@ -14,19 +14,28 @@ if( !is_array($labels) ){
         <?php if( is_tax() ): ?>
           <h1 class="hero-headline">
             <?php
-            $cta_label = get_field('format_cta_label', $term);;
-            // Check if URL contains '/ja-jp/'
-            if (str_contains($site_url, '/ja-jp/')) {
-              $cta_label = get_field('format_cta_label_japanese', $term) ?: $cta_label;
+            $field_parts = [];
+            $term = get_queried_object();
+            if( $term->taxonomy == 'format' ){
+              $field_parts = ['format', 'cta'];
+            } else {
+              $field_parts = ['cat'];
             }
-            // Check if URL contains '/fr-fr/'
-            elseif (str_contains($site_url, '/fr-fr/')) {
-              $cta_label = get_field('format_cta_label_french', $term) ?: $cta_label;
+
+            $field_parts[] = 'label';
+            switch( true ){
+              case str_contains($site_url, '/ja-jp/'):
+                $field_parts[] = 'japanese';
+                break;
+              case str_contains($site_url, '/fr-fr/'):
+                $field_parts[] = 'french';
+                break;
+              case str_contains($site_url, '/de-de/'):
+                $field_parts[] = 'german';
+                break;
             }
-            // Check if URL contains '/de-de/'
-            elseif (str_contains($site_url, '/de-de/')) {
-              $cta_label = get_field('format_cta_label_german', $term) ?: $cta_label;
-            }
+            $field_name = implode('_', $field_parts);
+            $cta_label = get_field($field_name, $term) ?: $term->name;
             ?>
             <?php echo $cta_label ?>
             <?php _e('Resources', 'aras') ?>
