@@ -13,7 +13,22 @@ if( !is_array($labels) ){
       <div class="cell small-12 medium-6 large-7 hero-content">
         <?php if( is_tax() ): ?>
           <h1 class="hero-headline">
-            <?php echo get_queried_object()->name ?>
+            <?php
+            $cta_label = get_field('format_cta_label', $term);;
+            // Check if URL contains '/ja-jp/'
+            if (str_contains($site_url, '/ja-jp/')) {
+              $cta_label = get_field('format_cta_label_japanese', $term) ?: $cta_label;
+            }
+            // Check if URL contains '/fr-fr/'
+            elseif (str_contains($site_url, '/fr-fr/')) {
+              $cta_label = get_field('format_cta_label_french', $term) ?: $cta_label;
+            }
+            // Check if URL contains '/de-de/'
+            elseif (str_contains($site_url, '/de-de/')) {
+              $cta_label = get_field('format_cta_label_german', $term) ?: $cta_label;
+            }
+            ?>
+            <?php echo $cta_label ?>
             <?php _e('Resources', 'aras') ?>
         </h1>
         <?php elseif (get_field('resource_archive_title', 'option')) : ?>
