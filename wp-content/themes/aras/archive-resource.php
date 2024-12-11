@@ -14,15 +14,9 @@ if( !is_array($labels) ){
         <?php if( is_tax() ): ?>
           <h1 class="hero-headline">
             <?php
-            $field_parts = [];
             $term = get_queried_object();
-            if( $term->taxonomy == 'format' ){
-              $field_parts = ['format', 'cta'];
-            } else {
-              $field_parts = ['cat'];
-            }
-
-            $field_parts[] = 'label';
+            $field_parts = ['cat','label'];
+            
             switch( true ){
               case str_contains($site_url, '/ja-jp/'):
                 $field_parts[] = 'japanese';
@@ -36,6 +30,7 @@ if( !is_array($labels) ){
             }
             $field_name = implode('_', $field_parts);
             $cta_label = get_field($field_name, $term) ?: $term->name;
+            echo $field_name;
             ?>
             <?php echo $cta_label ?>
             <?php _e('Resources', 'aras') ?>
