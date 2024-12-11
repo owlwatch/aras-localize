@@ -309,3 +309,12 @@ function exclude_category($query)
 	}
 }
 add_action('pre_get_posts', 'exclude_category');
+
+function ensure_taxonomy_archive_takes_precedence_over_post_type_archive( $query ){
+	if( $query->is_post_type_archive('resource') && is_tax() ){
+		global $wp_query;
+		$wp_query->is_post_type_archive = false;
+	}
+}
+
+add_action('pre_get_posts', 'ensure_taxonomy_archive_takes_precedence_over_post_type_archive');

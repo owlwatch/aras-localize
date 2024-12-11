@@ -47,3 +47,28 @@ function enforce_alt_text_in_media_library() {
     <?php
 }
 add_action('admin_footer', 'Aras\\SEO\\enforce_alt_text_in_media_library');
+
+function add_custom_replacements($replacements, $args)
+{
+    if( !empty( $args->term_id ) ){
+        $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $term = get_queried_object();
+        $field_parts = ['cat','label'];
+        
+        switch( true ){
+            case str_contains($site_url, '/ja-jp/'):
+            $field_parts[] = 'japanese';
+            break;
+            case str_contains($site_url, '/fr-fr/'):
+            $field_parts[] = 'french';
+            break;
+            case str_contains($site_url, '/de-de/'):
+            $field_parts[] = 'german';
+            break;
+        }
+        $field_name = implode('_', $field_parts);
+        $replacements['%%term_title%%'] = get_field($field_name, $term) ?: $term->name;
+    }
+    return $replacements;
+}
+add_action('wpseo_replacements', 'Aras\\SEO\\add_custom_replacements', 10, 2);
