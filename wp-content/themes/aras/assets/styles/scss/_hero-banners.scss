@@ -254,6 +254,10 @@
           }
         }
 
+        [role="heading"] + .aras-button {
+          margin-top: 1.5rem;
+        }
+
         .hero-headline {
           &.color-red {
             color: $red;
