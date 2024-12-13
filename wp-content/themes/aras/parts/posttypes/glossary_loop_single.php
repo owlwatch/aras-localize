@@ -60,10 +60,13 @@ $tags = get_the_tags($current_post_id);
 						<?php wp_reset_postdata(); ?>
 					<?php endif; ?>
 
-
-
 					<?php if (have_rows('glossary_sidebar_cta', 'option')) : ?>
 						<?php while (have_rows('glossary_sidebar_cta', 'option')) : the_row(); ?>
+							<?php
+							if( !get_sub_field('cta_image', 'option') && !get_sub_field('cta_headline', 'option') && !get_sub_field('cta_description', 'option') && !get_sub_field('cta_button', 'option') ){
+								continue;
+							}
+							?>
 
 							<div class="sidebar-gloss-cta desktopsize">
 								<?php $image = get_sub_field('cta_image', 'option');
