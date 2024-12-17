@@ -50,6 +50,17 @@ function aras_gf_populate_format_taxonomy( $text, $form, $entry ) {
     return $text;
 }
 
+// Ensure values that start with db_ are set to '' before they are saved
+add_filter('gform_pre_submission', 'aras_gf_clear_db_fields');
+function aras_gf_clear_db_fields($form) {
+    foreach ($form['fields'] as $field) {
+        $field_id = $field->id;
+        $field_value = rgpost("input_{$field_id}");
+        if (preg_match('/^db_/i', $field_value)) {
+            $_POST["input_{$field_id}"] = '';
+        }
+    }
+}
 
 add_filter('gform_field_value', 'populate_fields', 10, 3);
 function populate_fields($value, $field, $name)
