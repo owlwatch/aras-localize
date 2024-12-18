@@ -519,6 +519,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         // $category_slug = rtrim($category_slug_parts[0], '/');
         // $category_switcher = $category_slug;
         $category_slug = get_query_var('category');
+        $category_switcher = $category_slug;
       }
       // Taxonomy Query for Category Filter
       if (!empty($category_switcher)) {
