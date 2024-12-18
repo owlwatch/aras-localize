@@ -512,14 +512,14 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       );
 
       // Extract category slug
+      $category_var = get_query_var('category_name');
       $parts = explode('/category/', $current_url);
-      if (count($parts) === 2) {
+      if ($category_var) {
         // $category_slug_with_query = $parts[1];
         // $category_slug_parts = explode('?', $category_slug_with_query);
         // $category_slug = rtrim($category_slug_parts[0], '/');
         // $category_switcher = $category_slug;
-        $category_slug = get_query_var('category');
-        $category_switcher = $category_slug;
+        $category_switcher = $category_var;
       }
       // Taxonomy Query for Category Filter
       if (!empty($category_switcher)) {
