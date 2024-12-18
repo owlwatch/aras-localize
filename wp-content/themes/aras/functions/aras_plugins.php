@@ -169,7 +169,8 @@ function featuredImageShortcode($atts)
 		'featured_image'
 	);
 
-	$image = get_the_post_thumbnail($post->ID, $atts['size'], array('alt' => $atts['alt'], 'title' => $atts['title']));
+	$image_id = get_post_thumbnail_id($post->ID);
+	$image = wp_get_attachment_image($image_id, $atts['size'], false, array('alt' => $atts['alt'], 'title' => $atts['title']));
 	return $image;
 }
 add_shortcode('featured_image', 'featuredImageShortcode');
