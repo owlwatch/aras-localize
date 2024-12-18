@@ -513,7 +513,6 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
 
       // Extract category slug
       $category_var = get_query_var('category_name');
-      $parts = explode('/category/', $current_url);
       if ($category_var) {
         // $category_slug_with_query = $parts[1];
         // $category_slug_parts = explode('?', $category_slug_with_query);
