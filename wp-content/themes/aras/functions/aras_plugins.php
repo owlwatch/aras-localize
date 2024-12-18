@@ -154,11 +154,23 @@ function custom_language_dropdown_filter()
 	return ob_get_clean();
 }
 add_shortcode('custom_language_dropdown', 'custom_language_dropdown_filter');
-// Add Shortcode
+
+// Add Shortcode with options
 function featuredImageShortcode($atts)
 {
 	global $post;
-	return get_the_post_thumbnail($post->ID, "full");
+	$atts = shortcode_atts(
+		array(
+			'size' => 'full',
+			'title' => get_the_title($post->ID),
+			'alt' => get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true),
+		),
+		$atts,
+		'featured_image'
+	);
+
+	$image = get_the_post_thumbnail($post->ID, $atts['size'], array('alt' => $atts['alt'], 'title' => $atts['title']));
+	return $image;
 }
 add_shortcode('featured_image', 'featuredImageShortcode');
 
