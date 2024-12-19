@@ -9,7 +9,7 @@
 				$logo_image_type = get_field('logo_image_type');
 				$logo_link_type = get_field('logo_link_type');
 				$image = $logo_image_type == 'custom' ? get_field('logo_image_override') : get_field('website_logo', 'option');
-				if (!empty($image)) :
+				if ($logo_image_type != 'none' && !empty($image)) :
 					$link = get_field('logo_link_override');
 					$link_url = $link['url'] ?? home_url();
 					$link_target = $link['target'] ?? '_self';
