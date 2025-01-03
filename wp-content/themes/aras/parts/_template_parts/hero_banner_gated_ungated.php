@@ -71,7 +71,9 @@
     <div class="grid-x grid-padding-x">
       <div class="cell small-12">
         <?php if (get_field('post_submission_content')) : ?>
-          <?php echo get_field('post_submission_content'); ?>
+          <div class="wysiwyg-content">
+            <?php echo get_field('post_submission_content'); ?>
+          </div>
         <?php endif; ?>
         <?php $link = get_field('post_submission_button');
         if ($link) : $link_url = $link['url'];
