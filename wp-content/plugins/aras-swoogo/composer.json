@@ -1,0 +1,16 @@
+{
+    "name": "owlwatch/aras-swoogo",
+    "description": "Swoogo integration for Aras",
+    "autoload": {
+        "psr-4": {
+            "Aras\\Swoogo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Owl Watch Consulting",
+            "email": "fabrizim@owlwatch.com"
+        }
+    ],
+    "require": {}
+}

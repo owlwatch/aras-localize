@@ -44,6 +44,11 @@ function isDev(string $entry): bool
     if ($exists !== null) {
         return $exists;
     }
+
+    // only dev if we are .local domains
+    if (strpos($_SERVER['HTTP_HOST'], '.local') === false) {
+        return $exists = false;
+    }
     $handle = curl_init(VITE_HOST . '/' . $entry);
     curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 0.1);
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);

@@ -1,0 +1,43 @@
+{
+    "key": "group_6770076c07dab",
+    "title": "Swoogo: Event Fields",
+    "fields": [
+        {
+            "key": "field_6770076f55ab3",
+            "label": "Swoogo Event Json",
+            "name": "swoogo_event_json",
+            "aria-label": "",
+            "type": "json",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "swoogo-event"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1735395349
+}
