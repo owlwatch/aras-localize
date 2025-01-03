@@ -122,6 +122,12 @@
 											<div class="cell small-12 medium-6 leader-container">
 												<?php $leadernum = get_row_index(); ?>
 
+												<?php
+												$bio = get_sub_field('bio');
+												$excerpt = wp_trim_words( $bio, 20, '...' );
+												$use_excerpt = $bio != $excerpt;
+												?>
+
 												<?php $image = get_sub_field('headshot');
 												if (!empty($image)) : ?>
 													<img class="leader-headshot" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
@@ -135,22 +141,23 @@
 													<?php endif; ?>
 													<?php if (get_sub_field('bio')) :
 														$bio = get_sub_field('bio');
-														$word_count = str_word_count($bio); ?>
-														<?php if ($word_count > 18) : ?>
-															<?php $words = explode(' ', $bio);
-															$truncated_bio = implode(' ', array_slice($words, 0, 18)) . '...';
-															echo $truncated_bio; ?><span class="bio-readmore" data-open="leader-<?php echo $contentnum; ?>-<?php echo $leadernum; ?>-<?php echo $modnum; ?>">READ&nbsp;BIO</span>
-														<?php else : ?>
-															<?php echo $bio; ?>
-														<?php endif; ?>
+														echo '<p>';
+														echo $excerpt;
+														echo '</p>';
+														if( $use_excerpt ){
+															?>
+															<span class="bio-readmore" data-open="leader-<?php echo $contentnum; ?>-<?php echo $leadernum; ?>-<?php echo $modnum; ?>">
+																READ&nbsp;BIO
+															</span>
+															<?php
+														}
+														?>
 													<?php endif; ?>
 												</div>
 											</div>
 
-											<?php if (get_sub_field('bio')) :
-												$bio = get_sub_field('bio');
-												$word_count = str_word_count($bio); ?>
-												<?php if ($word_count > 38) : ?>
+											<?php if (get_sub_field('bio')) : ?>
+												<?php if ($use_excerpt) : ?>
 													<div class="reveal leader-container" id="leader-<?php echo $contentnum; ?>-<?php echo $leadernum; ?>-<?php echo $modnum; ?>" data-reveal data-reset-on-close="true">
 														<?php $image = get_sub_field('headshot');
 														if (!empty($image)) : ?>
@@ -164,7 +171,6 @@
 																<h6><?php echo get_sub_field('position'); ?></h6>
 															<?php endif; ?>
 															<?php if (get_sub_field('bio')) :
-																$bio = get_sub_field('bio');
 																echo $bio; ?>
 															<?php endif; ?>
 														</div>

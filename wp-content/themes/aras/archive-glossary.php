@@ -49,7 +49,9 @@ get_header(); ?>
               </dt>
               <?php if (get_the_excerpt()) : ?>
                 <?php /* <p class="content"><?php echo wp_trim_words(get_the_excerpt(), 30); ?></p> */ ?>
+                <div class="content content-from-excerpt">
                 <?php the_excerpt() ?>
+                </div>
               <?php else : ?>
                 <?php if (get_field('hero_content')) : ?>
                   <p class="content"><?php echo wp_trim_words(get_field('hero_content'), 30); ?></p>

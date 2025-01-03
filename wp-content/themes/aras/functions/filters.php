@@ -26,7 +26,7 @@ function aras_add_ids_to_headings($content)
 	// Loop through all heading elements
 	foreach ($headings as $heading) {
 
-		if( $heading->hasAttribute('id') ){
+		if ($heading->hasAttribute('id')) {
 			continue;
 		}
 
@@ -56,19 +56,41 @@ function aras_add_ids_to_headings($content)
 
 // add_filter('the_content', 'aras_add_ids_to_headings', 20, 1);
 
-function aras_convert_gist_links_to_oembeds($content){
+function aras_convert_gist_links_to_oembeds($content)
+{
 	// parse for direct links
 	return preg_replace('/<a[^>]+href=[\'"](https:\/\/gist\.github\..+?)[\'"][^>]*?>gist[^<]+<\/a>/i', '$1', $content);
 }
 
 add_filter('the_content', 'aras_convert_gist_links_to_oembeds', 1, 1);
 
-function aras_custom_japanese_excerpt_length($length) {
+function aras_custom_japanese_excerpt_length($length)
+{
 	// Check if the current language is Japanese
 	if (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE == 'ja-jp') {
-  
+
 		return 3; // Set the number of words you want for Japanese excerpts
 	}
 	return $length; // Default excerpt length for other languages
-  }
-  add_filter('excerpt_length', 'aras_custom_japanese_excerpt_length', 999999999);
+}
+// add_filter('excerpt_length', 'aras_custom_japanese_excerpt_length', 999999999);
+
+function aras_wp_trim_words_for_japanese($text, $num_words, $more, $original_text)
+{
+	// Check if the content is in Japanese
+	$is_japanese = (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE == 'ja-jp');
+
+	if ($is_japanese) {
+		// $text = $original_text;
+		$characters_per_word = 4; // Japanese characters are double the size of English characters
+		$max_length = $num_words * $characters_per_word; // Adjust this number as needed for your site
+		// Custom length for Japanese excerpts
+		$text_length = mb_strlen($text, 'UTF-8');
+
+		if ($text_length > $max_length) {
+			$text = mb_substr($text, 0, $max_length, 'UTF-8') . $more;
+		}
+	}
+	return $text;
+}
+add_filter('wp_trim_words', 'aras_wp_trim_words_for_japanese', 10, 4);
