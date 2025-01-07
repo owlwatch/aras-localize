@@ -94,3 +94,26 @@ function aras_wp_trim_words_for_japanese($text, $num_words, $more, $original_tex
 	return $text;
 }
 add_filter('wp_trim_words', 'aras_wp_trim_words_for_japanese', 10, 4);
+
+// lets trim the value for gravity form fields
+// with the name of 'description'
+
+add_filter('vx_crm_post_fields', 'aras_trim_gravity_form_fields', 10, 4);
+
+function aras_trim_gravity_form_fields($entry, $entry_id, $gf, $form )
+{
+	// fields to limit to 255 characters
+	$fields = [
+		'Last Touch Conversion Page',
+		'Referrer'
+	];
+
+	// look for any fields in entry that have the name "Last Touch Conversion Page"
+	// and ensure the length is no longer than 255 characters
+	foreach( $form['fields'] as $field ) {
+		if( in_array( $field->label, $fields) ) {
+			$entry[ $field->id ] = substr( $entry[ $field->id ], 0, 255 );
+		}
+	}
+	return $entry;
+}
