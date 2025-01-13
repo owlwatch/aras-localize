@@ -175,5 +175,8 @@ sponsor-modal(
     margin: 0;
     padding: 0;
   }
+  &:hover {
+    color: var(--action);
+  }
 }
 </style>

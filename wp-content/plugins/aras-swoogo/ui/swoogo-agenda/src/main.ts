@@ -24,7 +24,7 @@ widgets?.forEach( async el => {
 	if( !widgetType ) return;
 
 	const configJSON = el.getAttribute('data-config');
-	const config = configJSON ? JSON.stringify( configJSON ) : {};
+	const config = configJSON ? JSON.parse( configJSON ) : {};
 
 	const json = el.textContent?.trim();
 	if( !json ) return;

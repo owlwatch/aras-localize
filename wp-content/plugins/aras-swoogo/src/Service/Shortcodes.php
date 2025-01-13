@@ -38,12 +38,13 @@ class Shortcodes
 	public function sponsors( $atts )
 	{
 		return $this->shortcode('sponsors', $atts, [
-			'useSponsorLevels' => true
+			'use_sponsor_levels' => "true"
 		]);
 	}
 
 	public function shortcode( $widget='agenda', $atts, $extra_defaults=[] )
 	{
+		
 		$atts = shortcode_atts( array_merge( array(
 			'event_id' => '',
 		), $extra_defaults), $atts );
@@ -51,6 +52,25 @@ class Shortcodes
 		$event_id = $atts['event_id'];
 
 		$config = $atts;
+
+
+		// make 'false' and 'true' boolean
+		// and convert keys from snake_case to camelCase
+		foreach( $config as $key => $value ){
+			if( $value === 'false' ){
+				$config[$key] = false;
+			}
+			if( $value === 'true' ){
+				$config[$key] = true;
+			}
+			$new_key = preg_replace_callback('/_([a-z])/', function($matches){
+				return strtoupper($matches[1]);
+			}, $key);
+			if( $new_key != $key ){
+				$config[$new_key] = $config[$key];
+				unset( $config[$key] );
+			}
+		}
 
 		// get the event from the API
 		$event = get_page_by_path( 'swoogo-event-' . $event_id, OBJECT, 'swoogo-event' );
