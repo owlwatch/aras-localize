@@ -23,6 +23,9 @@ widgets?.forEach( async el => {
 	const widgetType = el.getAttribute('data-aras-widget')?.replace('swoogo-', '');
 	if( !widgetType ) return;
 
+	const configJSON = el.getAttribute('data-config');
+	const config = configJSON ? JSON.stringify( configJSON ) : {};
+
 	const json = el.textContent?.trim();
 	if( !json ) return;
 	const data = JSON.parse( json );
@@ -32,7 +35,8 @@ widgets?.forEach( async el => {
 	if( !AsyncComponent ) return;
 	
 	const app = createApp(AsyncComponent, {
-		eventId: data.details.id
+		eventId: data.details.id,
+		config
 	});
 
 	app.use(createPinia());

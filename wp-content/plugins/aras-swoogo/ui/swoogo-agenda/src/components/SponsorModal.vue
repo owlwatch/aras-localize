@@ -6,10 +6,13 @@ import {onKeyStroke} from '@vueuse/core';
 import { onMounted, onUnmounted, ref, toRefs, computed } from 'vue';
 import Modal from './Modal.vue';
 
-const props = defineProps<{ sponsor: Sponsor }>();
+const props = defineProps<{
+	sponsor: Sponsor
+	showLevel: boolean
+}>();
 const emit = defineEmits(['close']);
 
-const {sponsor} = props;
+const {sponsor, showLevel} = props;
 const eventStore = useEventStore();
 
 
@@ -30,6 +33,7 @@ modal(
 	template(v-slot:header)
 		
 		span.swoogo-sponsor-modal__level.swoogo-pill(
+			v-if="showLevel"
 			:style="{color: `var(--color-${getSponsorLevelKey(sponsor.level?.value)})`}"
 		) {{ sponsor.level?.value }}
 		// modal header

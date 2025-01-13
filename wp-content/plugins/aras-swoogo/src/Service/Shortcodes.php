@@ -37,16 +37,20 @@ class Shortcodes
 
 	public function sponsors( $atts )
 	{
-		return $this->shortcode('sponsors', $atts);
+		return $this->shortcode('sponsors', $atts, [
+			'useSponsorLevels' => true
+		]);
 	}
 
-	public function shortcode( $widget='agenda', $atts )
+	public function shortcode( $widget='agenda', $atts, $extra_defaults=[] )
 	{
-		$atts = shortcode_atts( array(
+		$atts = shortcode_atts( array_merge( array(
 			'event_id' => '',
-		), $atts );
+		), $extra_defaults), $atts );
 
 		$event_id = $atts['event_id'];
+
+		$config = $atts;
 
 		// get the event from the API
 		$event = get_page_by_path( 'swoogo-event-' . $event_id, OBJECT, 'swoogo-event' );
@@ -76,7 +80,7 @@ class Shortcodes
 			echo '<p class="error">Event not found</a>';
 		}
 		$event_data = get_post_meta( $event->ID, 'swoogo_event', true );
-		?><script type="application/json" data-aras-widget="swoogo-<?php echo $widget ?>" data-post-id="<?php echo $event->ID ?>"><?php
+		?><script type="application/json" data-aras-widget="swoogo-<?php echo $widget ?>" data-post-id="<?php echo $event->ID ?>" data-config="<?php echo esc_attr( json_encode($config) ) ?>"><?php
 		echo json_encode($event_data);
 		?></script><div class="swoogo-loading">
 			<div>Loading...</div>

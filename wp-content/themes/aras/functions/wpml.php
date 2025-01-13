@@ -92,3 +92,15 @@ function wpml_custom_canonical_url( $canonical ) {
     
     return $canonical;
 }
+
+// add a hidden input for the "lang" to user edit forms
+add_action('show_user_profile', 'Aras\\WPML\\add_lang_to_user_profile');
+add_action('edit_user_profile', 'Aras\\WPML\\add_lang_to_user_profile');
+
+function add_lang_to_user_profile( $user )
+{
+	if (function_exists('icl_object_id')) {
+        $current_language = apply_filters('wpml_current_language', null);
+        echo '<input type="hidden" name="lang" value="' . esc_attr($current_language) . '">';
+    }
+}

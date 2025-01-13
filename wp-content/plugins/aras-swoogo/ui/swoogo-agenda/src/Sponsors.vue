@@ -6,7 +6,12 @@ import { storeToRefs } from 'pinia';
 import SponsorModal from './components/SponsorModal.vue';
 
 const eventStore = useEventStore();
-const props = defineProps<{ eventId: number }>();
+const props = defineProps<{
+  eventId: number
+  config?: {
+    useSponsorLevels: boolean
+  }
+}>();
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -16,11 +21,17 @@ const sponsors = computed( () => {
   // sort them by sponsor level.value The level.value is a string
   // that contains bronze, silver, gold and platinum, sort them in that order
   const sortOrder = [/bronze/i,/silver/i,/gold/i,/platinum/i];
+  if( !props.config?.useSponsorLevels ){
+    return all.sort( (a,b) => a.name.localeCompare(b.name) );
+  }
   return all.sort( (a,b) => {
     const aLevel = a.level?.value || 'bronze';
     const bLevel = b.level?.value || 'bronze';
     const aIndex = sortOrder.findIndex( (re) => re.test(aLevel) );
     const bIndex = sortOrder.findIndex( (re) => re.test(bLevel) );
+    if (aIndex === bIndex) {
+      return a.name.localeCompare(b.name);
+    }
     return aIndex - bIndex;
   }).reverse();
 });;
@@ -54,7 +65,9 @@ const activeModalSponsor = ref<Sponsor|null>(null);
 </script>
 
 <template lang="pug">
-.swoogo-sponsors
+.swoogo-sponsors(
+  v-if="config?.useSponsorLevels"
+)
   ul.swoogo-sponsors__levels
     li.swoogo-sponsors__level(
       v-for="group in sponsorsByLevel"
@@ -75,10 +88,26 @@ const activeModalSponsor = ref<Sponsor|null>(null);
           )
             img.swoogo-sponsor-card__logo(:src="sponsor.logo_id" :alt="sponsor.name")
             //- h3.swoogo-sponsor-card__name {{ sponsor.name }}
+
+ul.swoogo-sponsors__sponsors(
+  v-else
+)
+  li.swoogo-sponsors__sponsor(
+    v-for="sponsor in sponsors"
+    :key="`sponsor-${sponsor.id}`"
+  )
+    a.swoogo-sponsor-card(
+      href="#"
+      @click.prevent="activeModalSponsor=sponsor"
+    )
+      img.swoogo-sponsor-card__logo(:src="sponsor.logo_id" :alt="sponsor.name")
+      //- h3.swoogo-sponsor-card__name {{ sponsor.name }}
+
 sponsor-modal(
   v-if="activeModalSponsor"
   :key="`sponsor-modal-${activeModalSponsor.id}`"
   :sponsor="activeModalSponsor"
+  :showLevel="config?.useSponsorLevels"
   @close="activeModalSponsor = null"
 )
 </template>
