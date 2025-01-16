@@ -23,11 +23,26 @@ const event = eventStore.getEvent(props.eventId);
 const sponsors = computed( () => eventStore.getEventSponsors(event as Event) );
 
 const breakpoints = {
-  
+  450: {
+    slidesPerView: 3,
+    spaceBetween: 20
+  },
+  600: {
+    slidesPerView: 4,
+    spaceBetween: 20
+  },
+  750: {
+    slidesPerView: 5,
+    spaceBetween: 20
+  },
+  900: {
+    slidesPerView: 6,
+    spaceBetween: 20
+  },
 }
 
 const swiperOptions = {
-  slidesPerView: 'auto',
+  slidesPerView: 2,
   spaceBetween: 40,
   centeredSlides: true,
   autoplay: {
