@@ -31,10 +31,10 @@ const swiperOptions = {
   spaceBetween: 40,
   centeredSlides: true,
   autoplay: {
-    delay: 0,
+    delay: 1200,
     disableOnInteraction: false,
   },
-  speed: 3000,
+  speed: 1000,
   loop: true,
   breakpoints,
   navigation: true,
@@ -75,13 +75,12 @@ watch( swiperInst, (swiper) => {});
 @use "sass:color";
 .swoogo-sponsor-carousel { 
   &:deep(.swiper-wrapper) {
-    transition-timing-function: linear;
+    // transition-timing-function: linear;
   }
   &__swiper-slide {
     display: flex;
-    height: auto;
-    width: 180px;
-    aspect-ratio: 16 / 9;
+    height: 100px;
+    width: 146px;
     img {
       height: 100%;
       width: 100%;
