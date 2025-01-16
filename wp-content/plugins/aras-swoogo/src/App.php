@@ -52,8 +52,12 @@ class App {
 		// get our token and secret
 		$key = get_field('swoogo_api_key', 'option');
 		$secret = get_field('swoogo_api_secret', 'option');
-		$this->apiService = new Service\SwoogoApi( $key, $secret);
 
+		if( !$key || !$secret ){
+			return;
+		}
+
+		$this->apiService = new Service\SwoogoApi( $key, $secret);
 		$this->syncService = new Service\Sync( $this->apiService );
 
 		$this->agendaUI = new Service\ViteService(
