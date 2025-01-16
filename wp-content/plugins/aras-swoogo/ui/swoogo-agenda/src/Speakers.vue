@@ -5,9 +5,13 @@ import type {Session, Speaker, Event} from './stores/event';
 import { storeToRefs } from 'pinia';
 import SpeakerModal from './components/SpeakerModal.vue';
 import SessionModal from './components/SessionModal.vue';
+import SpeakerCard from './components/SpeakerCard.vue';
 
 const eventStore = useEventStore();
-const props = defineProps<{ eventId: number }>();
+const props = defineProps<{ 
+  eventId: number
+  config: any
+}>();
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -65,18 +69,9 @@ const formatDate = (date: string) => {
       v-for="speaker in speakers"
       :key="`speaker-${speaker.id}`"
     )
-      .swoogo-speaker-list__speaker
-        img.swoogo-speaker-list__speaker-image(
-          :src="speaker.profile_picture"
-          :alt="`image of ${speaker.first_name} ${speaker.last_name}`"
-        )
-        h3 {{ speaker.name }}
-        p(
-          v-if="speaker.bio"
-        ) {{ speaker.bio }}
-        button(
-          @click="activeModalSpeaker = speaker"
-        ) View Speaker
+      speaker-card(
+        :speaker="speaker"
+      )
 
 speaker-modal(
   v-if="activeModalSpeaker"
@@ -112,11 +107,29 @@ session-modal(
 		list-style: none;
 		display: flex;
 	}
+  &__speaker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--gray-border);
+    transition: 0.2s;
+    &:hover {
+      text-decoration: none;
+      border-color: var(--red);
+      box-shadow: 0 0 3px var(--red);
+    }
+  }
   &__speaker-image {
-    width: 90%;
-    max-width: 90px;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
+    margin: 0;
+    object-fit: cover;
+    aspect-ratio: 1;
+    width: 100%;
+    height: auto;
+  }
+  &__speaker-body {
+    padding: 1rem;
   }
 }
 </style>

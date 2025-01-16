@@ -7,16 +7,13 @@ import './assets/main.scss';
 
 let widgets = document.querySelectorAll('[data-aras-widget^="swoogo-"]');
 
-let widgetMap = {
-	'agenda' : () => import ('./Agenda.vue'),
-	'speakers' : () => import ('./Speakers.vue'),
-	'sponsors' : () => import ('./Sponsors.vue'),
-}
 let widgetPromises: Map<string, Component> = new Map();
 
 widgetPromises.set('agenda', defineAsyncComponent(() => import('./Agenda.vue')));
 widgetPromises.set('speakers', defineAsyncComponent(() => import('./Speakers.vue')));
+widgetPromises.set('speaker-carousel', defineAsyncComponent(() => import('./SpeakerCarousel.vue')));
 widgetPromises.set('sponsors', defineAsyncComponent(() => import('./Sponsors.vue')));
+widgetPromises.set('sponsor-carousel', defineAsyncComponent(() => import('./SponsorCarousel.vue')));
 
 widgets?.forEach( async el => {
 	// const widget type

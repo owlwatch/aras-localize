@@ -162,21 +162,27 @@ sponsor-modal(
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    height: auto;
   }
 }
 
 .swoogo-sponsor-card {
-  border-radius: 0.75rem;
+  // border-radius: 0.75rem;
   overflow: hidden;
-  border: 1px solid #ccc;
+  border: 1px solid var(--gray-border);
   display: flex;
+  transition: 0.2s;
+  height: auto;
   &__logo {
     display: block;
     margin: 0;
     padding: 0;
+    object-fit: contain;
   }
   &:hover {
-    color: var(--action);
+    border-color: var(--red);
+    box-shadow: 0 0 3px var(--red);
   }
 }
 </style>

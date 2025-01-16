@@ -22,7 +22,9 @@ class Shortcodes
 		$this->agendaUI = $agendaUI;
 		add_shortcode( 'swoogo-agenda', array( $this, 'agenda' ) );
 		add_shortcode( 'swoogo-speakers', array( $this, 'speakers' ) );
+		add_shortcode( 'swoogo-speaker-carousel', array( $this, 'speakerCarousel' ) );
 		add_shortcode( 'swoogo-sponsors', array( $this, 'sponsors' ) );
+		add_shortcode( 'swoogo-sponsor-carousel', array( $this, 'sponsorCarousel' ) );
 	}
 
 	public function agenda( $atts )
@@ -35,10 +37,24 @@ class Shortcodes
 		return $this->shortcode('speakers', $atts);
 	}
 
+	public function speakerCarousel( $atts )
+	{
+		return $this->shortcode('speaker-carousel', $atts, [
+			
+		]);
+	}
+
 	public function sponsors( $atts )
 	{
 		return $this->shortcode('sponsors', $atts, [
 			'use_sponsor_levels' => "true"
+		]);
+	}
+
+	public function sponsorCarousel( $atts )
+	{
+		return $this->shortcode('sponsor-carousel', $atts, [
+			
 		]);
 	}
 
@@ -111,21 +127,7 @@ class Shortcodes
 					align-items: center;
 					height: 400px;
 					animation: fading 1.5s infinite;
-					font-weight: bold;
-				}
-
-				@keyframes fading {
-					0% {
-						background-color: rgba(0,0,0,0.02);
-					}
-
-					50% {
-						background-color: rgba(0,0,0,0.06);
-					}
-
-					100% {
-						background-color: rgba(0,0,0,0.02);
-					}
+					font-weight: 400;
 				}
 			</style>
 		</div><?php

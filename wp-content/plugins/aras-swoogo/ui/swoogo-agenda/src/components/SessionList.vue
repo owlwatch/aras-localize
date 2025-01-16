@@ -11,7 +11,6 @@ import type { Swiper as SwiperInst } from 'swiper/types';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/scrollbar';
 
 const props = defineProps<{
 	sessions: Session[]
