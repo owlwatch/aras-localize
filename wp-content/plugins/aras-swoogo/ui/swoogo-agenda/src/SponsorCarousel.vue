@@ -28,7 +28,7 @@ const breakpoints = {
 
 const swiperOptions = {
   slidesPerView: 'auto',
-  spaceBetween: 20,
+  spaceBetween: 40,
   centeredSlides: true,
   autoplay: {
     delay: 0,
