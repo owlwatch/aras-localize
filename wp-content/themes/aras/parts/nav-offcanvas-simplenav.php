@@ -65,30 +65,30 @@
 			</div>
 			
 			<?php
-			$post_id = get_queried_object_id();
-			// check if 'use_parent_nav' is set to true
+			$nav_post_id = get_queried_object_id();
+			// check if 'use_parent_page_navigation' is set to true
 			$use_parent_nav = get_sub_field('use_parent_page_navigation');
 			if( $use_parent_nav ){
 				// get the parent page ID
-				$parent_id = wp_get_post_parent_id( $post_id );
+				$parent_id = wp_get_post_parent_id( $nav_post_id );
 				// if the parent ID is 0, then we are on the parent page
 				// so we can use the parent page ID
 				if( $parent_id == 0 ){
-					$post_id = $post_id;
+					$nav_post_id = $nav_post_id;
 				}
 				else {
-					$post_id = $parent_id;
+					$post_id = $nav_parent_id;
 				}
 			}
 			?>
 
-			<?php if (have_rows('simplified_navigation', $post_id)) : ?>
-				<?php while (have_rows('simplified_navigation', $post_id)) : the_row(); ?>
+			<?php if (have_rows('simplified_navigation', $nav_post_id)) : ?>
+				<?php while (have_rows('simplified_navigation', $nav_post_id)) : the_row(); ?>
 					<nav class="cell auto desktop-nav-sizing navigation">
 
-						<?php if (have_rows('navigation_items', $post_id)) : ?>
+						<?php if (have_rows('navigation_items', $nav_post_id)) : ?>
 							<ul class="dropdown menu simplenav <?php echo $lightnav; ?>" data-dropdown-menu>
-								<?php while (have_rows('navigation_items', $post_id)) : the_row(); ?>
+								<?php while (have_rows('navigation_items', $nav_post_id)) : the_row(); ?>
 									<li>
 
 										<?php $link = get_sub_field('navigation_link');
