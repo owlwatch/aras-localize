@@ -7,6 +7,13 @@ namespace Aras\Swoogo;
 class App {
 
 	/**
+	 * The instance of the class
+	 *
+	 * @var App
+	 */
+	private static $instance;
+
+	/**
 	 * acfService
 	 * @var Aras\Swoogo\Service\ACF
 	 */
@@ -25,16 +32,9 @@ class App {
 	public $syncService;
 
 	/**
-	 * The instance of the class
-	 *
-	 * @var App
-	 */
-	private static $instance;
-
-	/**
 	 * Agenda UI
 	 */
-	private static $agendaUI;
+	public $agendaUI;
 
 	/**
 	 * Shortcodes
