@@ -12,6 +12,8 @@ import type { Swiper as SwiperInst } from 'swiper/types';
 // Import Swiper styles
 import 'swiper/css';
 
+import SponsorModal from './components/SponsorModal.vue';
+
 const eventStore = useEventStore();
 const props = defineProps<{
   eventId: number,
@@ -52,8 +54,11 @@ const swiperOptions = {
   autoplay: {
     delay: 1200,
     disableOnInteraction: false,
+    pauseOnMouseEnter: true
   },
   speed: 1000,
+  simulateTouch: false,
+  allowTouchMove: false,
   loop: true,
   breakpoints,
   navigation: true,
@@ -71,8 +76,8 @@ const isEnd = ref(false);
 
 watch( swiperInst, (swiper) => {});
 
+const activeModalSponsor = ref<Sponsor|null>(null);
 </script>
-
 <template lang="pug">
 .swoogo-sponsor-carousel
   
@@ -84,10 +89,22 @@ watch( swiperInst, (swiper) => {});
       v-for="sponsor in sponsors"
       :key="sponsor.id"
     )
-      img(
-        :src="sponsor.logo_id"
-        :alt="sponsor.name"
+      a(
+        href="#"
+        @click.prevent="activeModalSponsor=sponsor"
       )
+        img(
+          :src="sponsor.logo_id"
+          :alt="sponsor.name"
+        )
+
+sponsor-modal(
+  v-if="activeModalSponsor"
+  :key="`sponsor-modal-${activeModalSponsor.id}`"
+  :sponsor="activeModalSponsor"
+  :showLevel="false"
+  @close="activeModalSponsor = null"
+)
 </template>
 
 <style scoped lang="scss">
