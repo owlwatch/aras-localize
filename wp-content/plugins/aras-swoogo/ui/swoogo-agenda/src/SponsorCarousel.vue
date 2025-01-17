@@ -25,26 +25,30 @@ const sponsors = computed( () => eventStore.getEventSponsors(event as Event) );
 const breakpoints = {
   450: {
     slidesPerView: 3,
-    spaceBetween: 20
+    spaceBetween: 40
   },
   600: {
     slidesPerView: 4,
-    spaceBetween: 20
+    spaceBetween: 40
   },
   750: {
     slidesPerView: 5,
-    spaceBetween: 20
+    spaceBetween: 40
   },
   900: {
     slidesPerView: 6,
-    spaceBetween: 20
+    spaceBetween: 40
   },
+  850: {
+    slidesPerView: 7,
+    spaceBetween: 40
+  }
 }
 
 const swiperOptions = {
   slidesPerView: 2,
   spaceBetween: 40,
-  centeredSlides: true,
+  // centeredSlides: true,
   autoplay: {
     delay: 1200,
     disableOnInteraction: false,
@@ -94,10 +98,11 @@ watch( swiperInst, (swiper) => {});
   }
   &__swiper-slide {
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100px;
-    width: 146px;
     img {
-      height: 100%;
+      max-height: 100px;
       width: 100%;
       object-fit: contain;
       object-position: 50% 50%;
