@@ -117,3 +117,13 @@ function aras_trim_gravity_form_fields($entry, $entry_id, $gf, $form )
 	}
 	return $entry;
 }
+
+add_filter( 'gform_field_validation', function ( $result, $value, $form, $field ) {
+    if ( $field->type === 'email' ) {
+        if ( ! filter_var( $value, FILTER_VALIDATE_EMAIL ) ) {
+            $result['is_valid'] = false;
+            $result['message']  = 'Please enter a valid email address.';
+        }
+    }
+    return $result;
+}, 10, 4 );
