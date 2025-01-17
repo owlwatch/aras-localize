@@ -1,6 +1,6 @@
 {
-  "_Modal-CKvc1Ic2.js": {
-    "file": "assets/Modal-CKvc1Ic2.js",
+  "_Modal-B2za1VYB.js": {
+    "file": "assets/Modal-B2za1VYB.js",
     "name": "Modal",
     "imports": [
       "src/main.ts",
@@ -18,8 +18,8 @@
     "file": "assets/SpeakerCard-BjWgRqWR.css",
     "src": "_SpeakerCard-BjWgRqWR.css"
   },
-  "_SpeakerCard-C8Hsrozc.js": {
-    "file": "assets/SpeakerCard-C8Hsrozc.js",
+  "_SpeakerCard-NiD3dweM.js": {
+    "file": "assets/SpeakerCard-NiD3dweM.js",
     "name": "SpeakerCard",
     "imports": [
       "src/main.ts",
@@ -33,12 +33,12 @@
     "file": "assets/SpeakerModal-DtOsYJI3.css",
     "src": "_SpeakerModal-DtOsYJI3.css"
   },
-  "_SpeakerModal-M_NNb7WO.js": {
-    "file": "assets/SpeakerModal-M_NNb7WO.js",
+  "_SpeakerModal-acI2QSvL.js": {
+    "file": "assets/SpeakerModal-acI2QSvL.js",
     "name": "SpeakerModal",
     "imports": [
       "src/main.ts",
-      "_Modal-CKvc1Ic2.js",
+      "_Modal-B2za1VYB.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -49,8 +49,8 @@
     "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
     "name": "_plugin-vue_export-helper"
   },
-  "_swiper-DFJLiTKV.js": {
-    "file": "assets/swiper-DFJLiTKV.js",
+  "_swiper-D1MnlrPK.js": {
+    "file": "assets/swiper-D1MnlrPK.js",
     "name": "swiper",
     "imports": [
       "src/main.ts"
@@ -64,30 +64,30 @@
     "src": "_swiper-DHBATib1.css"
   },
   "src/Agenda.vue": {
-    "file": "assets/Agenda-LbFhIyzb.js",
+    "file": "assets/Agenda-D3_0UZ98.js",
     "name": "Agenda",
     "src": "src/Agenda.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerModal-M_NNb7WO.js",
-      "_swiper-DFJLiTKV.js",
+      "_SpeakerModal-acI2QSvL.js",
+      "_swiper-D1MnlrPK.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-CKvc1Ic2.js"
+      "_Modal-B2za1VYB.js"
     ],
     "css": [
-      "assets/Agenda-ComeFF0O.css"
+      "assets/Agenda-ZKWsS22V.css"
     ]
   },
   "src/SpeakerCarousel.vue": {
-    "file": "assets/SpeakerCarousel-C3hFtXMK.js",
+    "file": "assets/SpeakerCarousel-CAWtfnqa.js",
     "name": "SpeakerCarousel",
     "src": "src/SpeakerCarousel.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerCard-C8Hsrozc.js",
-      "_swiper-DFJLiTKV.js",
+      "_SpeakerCard-NiD3dweM.js",
+      "_swiper-D1MnlrPK.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -95,29 +95,29 @@
     ]
   },
   "src/Speakers.vue": {
-    "file": "assets/Speakers-P11Qjs0z.js",
+    "file": "assets/Speakers-Cg0yusFM.js",
     "name": "Speakers",
     "src": "src/Speakers.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerModal-M_NNb7WO.js",
-      "_SpeakerCard-C8Hsrozc.js",
+      "_SpeakerModal-acI2QSvL.js",
+      "_SpeakerCard-NiD3dweM.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-CKvc1Ic2.js"
+      "_Modal-B2za1VYB.js"
     ],
     "css": [
       "assets/Speakers-KR6S1UbX.css"
     ]
   },
   "src/SponsorCarousel.vue": {
-    "file": "assets/SponsorCarousel-B-ISwFaK.js",
+    "file": "assets/SponsorCarousel-CQj0IbWb.js",
     "name": "SponsorCarousel",
     "src": "src/SponsorCarousel.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_swiper-DFJLiTKV.js",
+      "_swiper-D1MnlrPK.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -125,13 +125,13 @@
     ]
   },
   "src/Sponsors.vue": {
-    "file": "assets/Sponsors-Duq-1DW-.js",
+    "file": "assets/Sponsors-B_Z3phzE.js",
     "name": "Sponsors",
     "src": "src/Sponsors.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_Modal-CKvc1Ic2.js",
+      "_Modal-B2za1VYB.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -146,7 +146,7 @@
     "src": "src/assets/video-placeholder.jpg"
   },
   "src/main.ts": {
-    "file": "assets/main-B80B19YB.js",
+    "file": "assets/main-CWVyBTeN.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,

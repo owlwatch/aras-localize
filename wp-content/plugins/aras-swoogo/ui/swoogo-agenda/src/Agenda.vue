@@ -227,9 +227,10 @@ session-modal(
     margin-top: 2rem;
     @media (min-width: 768px) {
       margin-top: 0;
-      flex: 0 0 20  ch;
+      flex: 0 0 20ch;
       padding: 1rem;
-      border-bottom-width: 0;
+      border-width: 0;
+
       background-color: transparent;
       border-right: 1px solid #ccc;
     }
