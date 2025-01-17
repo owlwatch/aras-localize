@@ -65,6 +65,7 @@ modal(
 
 				a(
 					:href="sponsor.website"
+					target="_blank"
 				) Visit Website
 
 				// contact information
