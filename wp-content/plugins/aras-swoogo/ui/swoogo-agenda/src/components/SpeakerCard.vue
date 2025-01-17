@@ -35,9 +35,8 @@ a.swoogo-speaker-card(
 		:alt="`image of ${speaker.first_name} ${speaker.last_name}`"
 	)
 	.swoogo-speaker-card__body
-		.swoogo-speaker-card__name
-			| {{ speaker.company }} {{ speaker.job_title }}
-		h3 {{ speaker.first_name }} {{ speaker.last_name }}
+		h3.swoogo-speaker-card__name {{ speaker.first_name }} {{ speaker.last_name }}
+		.swoogo-speaker-card__title {{ speaker.company }} {{ speaker.job_title }}
 		
 </template>
 
@@ -67,5 +66,8 @@ a.swoogo-speaker-card(
   &__body {
     padding: 1rem;
   }
+	&__name {
+		font-size: 1.33rem;
+	}
 }
 </style>

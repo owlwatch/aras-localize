@@ -25,17 +25,24 @@ modal(
 )
 	template(v-slot:header)
 		
-		// modal header
-		h2.swoogo-speaker-modal__name {{ speaker.first_name }} {{ speaker.last_name }}
+		.swoogo-speaker-modal__header
+			.swoogo-speaker-modal__profile-pic
+				img(
+					:src="speaker.profile_picture"
+					:alt="speaker.first_name + ' ' + speaker.last_name"
+				)
+			.swoogo-speaker-modal__name-and-info
+				// modal header
+				h2.swoogo-speaker-modal__name {{ speaker.first_name }} {{ speaker.last_name }}
 
-		// speaker job title
-		div.swoogo-speaker-modal__company-and-title
-			div.swoogo-speaker-modal__label-and-value.swoogo-speaker-modal__company
-				span.swoogo-speaker-modal__label Company:
-				span.swoogo-speaker-modal__value {{ speaker.company }}
-			div.swoogo-speaker-modal__label-and-value.swoogo-speaker-modal__title
-				span.swoogo-speaker-modal__label Job Title:
-				span.swoogo-speaker-modal__value {{ speaker.job_title }}
+				// speaker job title
+				div.swoogo-speaker-modal__company-and-title
+					div.swoogo-speaker-modal__label-and-value.swoogo-speaker-modal__company
+						span.swoogo-speaker-modal__label Company:
+						span.swoogo-speaker-modal__value {{ speaker.company }}
+					div.swoogo-speaker-modal__label-and-value.swoogo-speaker-modal__title
+						span.swoogo-speaker-modal__label Job Title:
+						span.swoogo-speaker-modal__value {{ speaker.job_title }}
 
 	template(v-slot:body)
 		p.swoogo-speaker-modal__bio(
@@ -45,7 +52,10 @@ modal(
 		h4 Sessions
 		ul.swoogo-speaker-modal__sessions-list
 			li(v-for="session in sessions" :key="session.id")
-					SessionCard(:session="session")
+					session-card(
+						:session="session"
+						:show-speakers="false"
+					)
 			
 		
 </template>
@@ -54,6 +64,17 @@ modal(
 <!-- SCSS Style -->
 <style lang="scss" scoped>
 .swoogo-speaker-modal {
+	&__header {
+		display: flex;
+		align-items: flex-end;
+		gap: 1rem;
+	}
+	&__profile-pic {
+		aspect-ratio: 1;
+		object-fit: contain;
+		object-position: 50% 50%;
+		height: 100px;
+	}
 	&__sessions-list {
 		padding: 0;
 		margin: 0;

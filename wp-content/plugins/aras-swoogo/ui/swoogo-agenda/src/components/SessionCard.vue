@@ -8,11 +8,13 @@ import {watch} from 'vue';
 const props = withDefaults(defineProps<{
 	session: Session
 	showDate?: boolean
+	showSpeakers?: boolean
 }>(),{
-	showDate: true
+	showDate: true,
+	showSpeakers: true
 });
 
-const {session} = props;
+const {session, showSpeakers} = props;
 
 const eventStore = useEventStore();
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -51,7 +53,9 @@ function formatTime(time: string) {
 		) {{ session.name }}
 
 		p {{ shortDescription }}
-	.swoogo-session-card__speakers
+	.swoogo-session-card__speakers(
+		v-if="showSpeakers"
+	)
 		ul
 			li(v-for="speaker in session.speakers" :key="speaker.id")
 				a(
