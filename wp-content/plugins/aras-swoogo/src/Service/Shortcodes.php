@@ -34,7 +34,9 @@ class Shortcodes
 
 	public function speakers( $atts )
 	{
-		return $this->shortcode('speakers', $atts);
+		return $this->shortcode('speakers', $atts, [
+			'filter_by_track' => "",
+		]);
 	}
 
 	public function speakerCarousel( $atts )
@@ -47,14 +49,15 @@ class Shortcodes
 	public function sponsors( $atts )
 	{
 		return $this->shortcode('sponsors', $atts, [
-			'use_sponsor_levels' => "true"
+			'use_sponsor_levels' => "true",
+			'filter_by_level' => "",
 		]);
 	}
 
 	public function sponsorCarousel( $atts )
 	{
 		return $this->shortcode('sponsor-carousel', $atts, [
-			
+			'filter_by_level' => "",
 		]);
 	}
 

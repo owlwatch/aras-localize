@@ -17,12 +17,25 @@ import SponsorModal from './components/SponsorModal.vue';
 const eventStore = useEventStore();
 const props = defineProps<{
   eventId: number,
-  config: any
+  config?: {
+    filterByLevel: string
+  }
 }>();
 
 const event = eventStore.getEvent(props.eventId);
 
-const sponsors = computed( () => eventStore.getEventSponsors(event as Event) );
+const sponsors = computed( () => {
+  
+  let all = eventStore.getEventSponsors(event as Event);
+  if( props.config?.filterByLevel ){
+    // filterByLevel is a comma separated case insensitive string
+    const levels = props.config.filterByLevel.split(',').map( (level) => level.trim().toLowerCase() );
+    all = all.filter( (sponsor) => {
+      return sponsor.level && levels.includes(sponsor.level.value.toLowerCase())
+    });
+  }
+  return all;
+});
 
 const breakpoints = {
   450: {

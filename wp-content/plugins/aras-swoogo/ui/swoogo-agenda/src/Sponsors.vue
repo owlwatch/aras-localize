@@ -9,7 +9,8 @@ const eventStore = useEventStore();
 const props = defineProps<{
   eventId: number
   config?: {
-    useSponsorLevels: boolean
+    useSponsorLevels: boolean,
+    filterByLevel: string
   }
 }>();
 
@@ -17,7 +18,16 @@ const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
 
 const sponsors = computed( () => {
-  const all = eventStore.getEventSponsors(event as Event);
+  let all = eventStore.getEventSponsors(event as Event);
+
+  if( props.config?.filterByLevel ){
+    // filterByLevel is a comma separated case insensitive string
+    const levels = props.config.filterByLevel.split(',').map( (level) => level.trim().toLowerCase() );
+    all = all.filter( (sponsor) => {
+      return sponsor.level && levels.includes(sponsor.level.value.toLowerCase())
+    });
+  }
+
   // sort them by sponsor level.value The level.value is a string
   // that contains bronze, silver, gold and platinum, sort them in that order
   const sortOrder = [/bronze/i,/silver/i,/gold/i,/platinum/i];
