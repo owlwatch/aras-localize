@@ -44,8 +44,8 @@ function formatTime(time: string) {
 .swoogo-session-card
 	.swoogo-session-card__header
 		// show date
-		div(v-if="props.showDate")
-			strong {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
+		.swoogo-session-card__date(v-if="props.showDate")
+			| {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
 		span.swoogo-session-card__track.swoogo-pill {{ session.track.name}} 
 		a.swoogo-session-card__title(
 			href="#"
@@ -84,8 +84,12 @@ function formatTime(time: string) {
 		gap: 0.333rem;
 		flex-grow: 1;
 	}
+	&__date {
+		color: #666;
+		font-size: 0.9rem;
+	}
 	&__title {
-		font-size: 1.05rem;
+		font-size: 1.25rem;
 		font-weight: 500;
 		color: #000;
 	}

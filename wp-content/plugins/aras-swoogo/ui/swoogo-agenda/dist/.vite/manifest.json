@@ -1,6 +1,6 @@
 {
-  "_Modal-BHoXbtq-.js": {
-    "file": "assets/Modal-BHoXbtq-.js",
+  "_Modal-B73bqOEc.js": {
+    "file": "assets/Modal-B73bqOEc.js",
     "name": "Modal",
     "imports": [
       "src/main.ts",
@@ -14,8 +14,8 @@
     "file": "assets/Modal-Dx0zxcTv.css",
     "src": "_Modal-Dx0zxcTv.css"
   },
-  "_SpeakerCard-D7BpQS0o.js": {
-    "file": "assets/SpeakerCard-D7BpQS0o.js",
+  "_SpeakerCard-DnxkcvQj.js": {
+    "file": "assets/SpeakerCard-DnxkcvQj.js",
     "name": "SpeakerCard",
     "imports": [
       "src/main.ts",
@@ -29,32 +29,28 @@
     "file": "assets/SpeakerCard-QLUPUHMk.css",
     "src": "_SpeakerCard-QLUPUHMk.css"
   },
-  "_SpeakerModal-EyFV6t3m.js": {
-    "file": "assets/SpeakerModal-EyFV6t3m.js",
+  "_SpeakerModal-ClNPsEpR.css": {
+    "file": "assets/SpeakerModal-ClNPsEpR.css",
+    "src": "_SpeakerModal-ClNPsEpR.css"
+  },
+  "_SpeakerModal-wxAoZBk5.js": {
+    "file": "assets/SpeakerModal-wxAoZBk5.js",
     "name": "SpeakerModal",
     "imports": [
       "src/main.ts",
-      "_Modal-BHoXbtq-.js",
+      "_Modal-B73bqOEc.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
-      "assets/SpeakerModal-gYRJGqkG.css"
+      "assets/SpeakerModal-ClNPsEpR.css"
     ]
   },
-  "_SpeakerModal-gYRJGqkG.css": {
-    "file": "assets/SpeakerModal-gYRJGqkG.css",
-    "src": "_SpeakerModal-gYRJGqkG.css"
-  },
-  "_SponsorModal-C-dfmxXj.css": {
-    "file": "assets/SponsorModal-C-dfmxXj.css",
-    "src": "_SponsorModal-C-dfmxXj.css"
-  },
-  "_SponsorModal-CfRzyH_g.js": {
-    "file": "assets/SponsorModal-CfRzyH_g.js",
+  "_SponsorModal-B3reP3v7.js": {
+    "file": "assets/SponsorModal-B3reP3v7.js",
     "name": "SponsorModal",
     "imports": [
       "src/main.ts",
-      "_Modal-BHoXbtq-.js",
+      "_Modal-B73bqOEc.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -64,12 +60,20 @@
       "assets/video-placeholder-Cn5nVOpT.jpg"
     ]
   },
+  "_SponsorModal-C-dfmxXj.css": {
+    "file": "assets/SponsorModal-C-dfmxXj.css",
+    "src": "_SponsorModal-C-dfmxXj.css"
+  },
   "__plugin-vue_export-helper-DlAUqK2U.js": {
     "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
     "name": "_plugin-vue_export-helper"
   },
-  "_swiper-Bw8BA_ez.js": {
-    "file": "assets/swiper-Bw8BA_ez.js",
+  "_swiper-DHBATib1.css": {
+    "file": "assets/swiper-DHBATib1.css",
+    "src": "_swiper-DHBATib1.css"
+  },
+  "_swiper-D_mQaXhG.js": {
+    "file": "assets/swiper-D_mQaXhG.js",
     "name": "swiper",
     "imports": [
       "src/main.ts"
@@ -78,35 +82,31 @@
       "assets/swiper-DHBATib1.css"
     ]
   },
-  "_swiper-DHBATib1.css": {
-    "file": "assets/swiper-DHBATib1.css",
-    "src": "_swiper-DHBATib1.css"
-  },
   "src/Agenda.vue": {
-    "file": "assets/Agenda-BYK06H6u.js",
+    "file": "assets/Agenda-DqIbG3Hw.js",
     "name": "Agenda",
     "src": "src/Agenda.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerModal-EyFV6t3m.js",
-      "_swiper-Bw8BA_ez.js",
+      "_SpeakerModal-wxAoZBk5.js",
+      "_swiper-D_mQaXhG.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-BHoXbtq-.js"
+      "_Modal-B73bqOEc.js"
     ],
     "css": [
       "assets/Agenda-ZKWsS22V.css"
     ]
   },
   "src/SpeakerCarousel.vue": {
-    "file": "assets/SpeakerCarousel-CVcecXXW.js",
+    "file": "assets/SpeakerCarousel-mWou0WZd.js",
     "name": "SpeakerCarousel",
     "src": "src/SpeakerCarousel.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerCard-D7BpQS0o.js",
-      "_swiper-Bw8BA_ez.js",
+      "_SpeakerCard-DnxkcvQj.js",
+      "_swiper-D_mQaXhG.js",
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
@@ -114,47 +114,47 @@
     ]
   },
   "src/Speakers.vue": {
-    "file": "assets/Speakers-B2sNAH_E.js",
+    "file": "assets/Speakers-DfFs-HGG.js",
     "name": "Speakers",
     "src": "src/Speakers.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SpeakerModal-EyFV6t3m.js",
-      "_SpeakerCard-D7BpQS0o.js",
+      "_SpeakerModal-wxAoZBk5.js",
+      "_SpeakerCard-DnxkcvQj.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-BHoXbtq-.js"
+      "_Modal-B73bqOEc.js"
     ],
     "css": [
       "assets/Speakers-KR6S1UbX.css"
     ]
   },
   "src/SponsorCarousel.vue": {
-    "file": "assets/SponsorCarousel-Dj5i2dsn.js",
+    "file": "assets/SponsorCarousel-Ca5Tbg-T.js",
     "name": "SponsorCarousel",
     "src": "src/SponsorCarousel.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_swiper-Bw8BA_ez.js",
-      "_SponsorModal-CfRzyH_g.js",
+      "_swiper-D_mQaXhG.js",
+      "_SponsorModal-B3reP3v7.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-BHoXbtq-.js"
+      "_Modal-B73bqOEc.js"
     ],
     "css": [
       "assets/SponsorCarousel-DhZZEwLO.css"
     ]
   },
   "src/Sponsors.vue": {
-    "file": "assets/Sponsors-De8qHr6D.js",
+    "file": "assets/Sponsors-DFUpI5cF.js",
     "name": "Sponsors",
     "src": "src/Sponsors.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts",
-      "_SponsorModal-CfRzyH_g.js",
+      "_SponsorModal-B3reP3v7.js",
       "__plugin-vue_export-helper-DlAUqK2U.js",
-      "_Modal-BHoXbtq-.js"
+      "_Modal-B73bqOEc.js"
     ],
     "css": [
       "assets/Sponsors-EKHQHahq.css"
@@ -165,7 +165,7 @@
     "src": "src/assets/video-placeholder.jpg"
   },
   "src/main.ts": {
-    "file": "assets/main-BxtVsMlm.js",
+    "file": "assets/main-6sICUMmk.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
