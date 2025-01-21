@@ -86,12 +86,15 @@ function formatTime(time: string) {
 	}
 	&__date {
 		color: #666;
+		font-weight: 400;
 		font-size: 0.9rem;
+		order: 100;
 	}
 	&__title {
 		font-size: 1.25rem;
 		font-weight: 500;
 		color: #000;
+		flex-grow: 1;
 	}
 	&__speakers {
 		container: speakers / inline-size;
