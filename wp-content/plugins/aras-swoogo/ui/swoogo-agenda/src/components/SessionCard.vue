@@ -52,7 +52,7 @@ function formatTime(time: string) {
 			@click.prevent="activeModalSession = session"
 		) {{ session.name }}
 
-		p {{ shortDescription }}
+		// p {{ shortDescription }}
 	.swoogo-session-card__speakers(
 		v-if="showSpeakers"
 	)
