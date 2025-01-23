@@ -38,6 +38,7 @@ class EventSchema extends Abstract_Schema_Piece {
             '@type' => 'Event',
             'name' => get_the_title( $this->context->id ),
             'startDate' => $startDate_iso, // Use ISO 8601 date
+            "eventAttendanceMode" => "https://schema.org/OnlineEventAttendanceMode",
             'location' => [
                 '@type' => 'VirtualLocation',
                 'url' => $url,
