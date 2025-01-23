@@ -119,3 +119,5 @@ require_once(get_template_directory() . '/functions/shortcodes.php');
 require_once(get_template_directory() . '/functions/filters.php');
 
 require_once(get_template_directory() . '/functions/seo.php');
+
+require_once(get_template_directory() . '/functions/bitly.php');
