@@ -77,8 +77,8 @@ class App {
 		);
 
 		// allow for tests
-		// add_action('init', [$this, 'init']);
-		$this->init();
+		add_action('init', [$this, 'init']);
+		// $this->init();
 	}
 
 	/**
