@@ -1,0 +1,16 @@
+{
+    "name": "owlwatch/aras-marketplace",
+    "description": "Aras Marketplace",
+    "autoload": {
+        "psr-4": {
+            "Aras\\Marketplace\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Owl Watch Consulting",
+            "email": "fabrizim@owlwatch.com"
+        }
+    ],
+    "require": {}
+}
