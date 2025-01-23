@@ -37,6 +37,11 @@ class App {
 	public $agendaUI;
 
 	/**
+	 * Admin Service
+	 */
+	public $adminService;
+
+	/**
 	 * Shortcodes
 	 * @var Aras\Swoogo\Service\Shortcodes
 	 */
@@ -48,6 +53,7 @@ class App {
 	private function __construct() {
 		// lets set up our services
 		$this->acfService = new Service\ACF();
+		$this->adminService = new Service\Admin();
 
 		// get our token and secret
 		$key = get_field('swoogo_api_key', 'option');
@@ -72,6 +78,7 @@ class App {
 
 		// allow for tests
 		add_action('init', [$this, 'init']);
+		// $this->init();
 	}
 
 	/**
@@ -92,7 +99,10 @@ class App {
 	{
 		if( !empty( $_REQUEST['test-swoogo-sync-event'] ) ){
 			$event_id = $_REQUEST['test-swoogo-sync-event'];
-			$this->syncService->syncEvent( $event_id );
+			$post_id = $this->syncService->syncEvent( $event_id );
+			$data = get_post_meta( $post_id, 'swoogo_event', true );
+			header('Content-Type: application/json; charset=utf-8');
+			echo json_encode( $data );
 			exit;
 		}	
 	}
