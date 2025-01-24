@@ -160,7 +160,7 @@ export const useEventStore = defineStore('event', () => {
 			}
 		});
 
-		data.sessions.sort( (a,b) => {
+		sessions.value.sort( (a,b) => {
 			if( a.date < b.date ) return -1;
 			if( a.date > b.date ) return 1;
 			if( a.start_time < b.start_time ) return -1;
