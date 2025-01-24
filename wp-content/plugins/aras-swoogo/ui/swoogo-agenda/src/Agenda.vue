@@ -18,6 +18,8 @@ const sessionsByDay = ref<Record<string, Record<string, Session[]>>>({});
 const filteredSessions = computed( () => eventStore.getEventFilteredSessions(event as Event) );
 
 filteredSessions.value?.forEach( (session : Session) => {
+
+
   if (!sessionsByDay.value[session.date]) {
     sessionsByDay.value[session.date] = {};
   }
@@ -87,7 +89,10 @@ watch( activeModalSpeaker, (val) => {
 });
 
 const formatDate = (date: string) => {
-  const d = new Date(date);
+  const d = new Date();
+  d.setFullYear(parseInt(date.split('-')[0]));
+  d.setMonth(parseInt(date.split('-')[1]) - 1);
+  d.setDate(parseInt(date.split('-')[2]));
   return d.toLocaleDateString('en', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' });
 };
 
