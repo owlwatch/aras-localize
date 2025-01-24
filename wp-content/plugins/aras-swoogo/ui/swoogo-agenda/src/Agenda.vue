@@ -15,7 +15,24 @@ const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
 
 // we want to sort these into days and times...
 const sessionsByDay = ref<Record<string, Record<string, Session[]>>>({});
-const filteredSessions = computed( () => eventStore.getEventFilteredSessions(event as Event) );
+const filteredSessions = computed( () => {
+  const sessions = eventStore.getEventFilteredSessions(event as Event);
+  sessions.sort( (a,b) => {
+			if( a.date < b.date ) return -1;
+			if( a.date > b.date ) return 1;
+			if( a.start_time < b.start_time ) return -1;
+			if( a.start_time > b.start_time ) return 1;
+			// now sort by track name
+			let aTrack = eventStore.getSessionTrack(a);
+			let bTrack = eventStore.getSessionTrack(b);
+			if( aTrack && bTrack ){
+				if( aTrack.name < bTrack.name ) return -1;
+				if( aTrack.name > bTrack.name ) return 1;
+			}
+			return 0;
+		});
+    return sessions;
+});
 
 filteredSessions.value?.forEach( (session : Session) => {
 
@@ -43,7 +60,6 @@ const sessionList = ref<InstanceType<typeof SessionList>[] | null>(null);
 // watch the activeTab
 watch(activeTab, (newVal) => {
   // update all visible swipers
-
 
   sessionList.value?.forEach( list => {
     list.swiperInst?.update();
