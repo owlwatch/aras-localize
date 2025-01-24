@@ -1,5 +1,5 @@
 <?php
-namespace Aras\Swoogo\Service;
+namespace Aras\Marketplace\Service;
 
 // For a real-world example check here:
 // https://github.com/wp-bond/bond/blob/master/src/Tooling/Vite.php

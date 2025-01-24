@@ -20,11 +20,19 @@ class App {
 	public $acfService;
 
 	/**
+	 * acpService
+	 * @var Aras\Marketplace\Service\ACP
+	 */
+	public $acpService;
+
+	/**
 	 * The constructor
 	 */
 	private function __construct() {
-		// lets set up our services
+		
+		// lets set up our core services
 		$this->acfService = new Service\ACF();
+		$this->acpService = new Service\ACP();
 	}
 
 	/**

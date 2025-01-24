@@ -20,6 +20,7 @@ function custom_menu_order($menu_ord)
 		'edit.php?post_type=resource', // resource
 		'edit.php?post_type=event', // event
 		'edit.php?post_type=glossary', // glossary
+		'edit.php?post_type=mp-solution', // marketplace solution
 		'edit.php?post_type=news', // news
 		'edit.php?post_type=documentation', // documentation
 		'edit.php?post_type=partners', // salesforce

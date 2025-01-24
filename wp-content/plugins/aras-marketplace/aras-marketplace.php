@@ -5,7 +5,7 @@
  * Version: 1.0
  * Author: Owl Watch Consulting
  */
-namespace Aras\Swoogo;
+namespace Aras\Marketplace;
 
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.

@@ -9,8 +9,6 @@ class ACF {
 	 */
 	public function __construct() {
 
-		
-
 		// set up our configuration
 		// add_filter( 'acf/settings/save_json', array( $this, 'setSaveJson' ), 20 );
 		add_filter( 'acf/json/save_paths', array( $this, 'setSaveJsonPaths'), 20, 2 );
