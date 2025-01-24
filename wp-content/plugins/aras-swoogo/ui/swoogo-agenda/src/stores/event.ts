@@ -160,6 +160,21 @@ export const useEventStore = defineStore('event', () => {
 			}
 		});
 
+		data.sessions.sort( (a,b) => {
+			if( a.date < b.date ) return -1;
+			if( a.date > b.date ) return 1;
+			if( a.start_time < b.start_time ) return -1;
+			if( a.start_time > b.start_time ) return 1;
+			// now sort by track name
+			let aTrack = getSessionTrack(a);
+			let bTrack = getSessionTrack(b);
+			if( aTrack && bTrack ){
+				if( aTrack.name < bTrack.name ) return -1;
+				if( aTrack.name > bTrack.name ) return 1;
+			}
+			return 0;
+		});
+
 		events.value.push({
 			id: eventId,
 			sessionFields: data.sessionFields,
