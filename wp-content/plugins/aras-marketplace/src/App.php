@@ -26,6 +26,12 @@ class App {
 	public $acpService;
 
 	/**
+	 * templateService
+	 * @var Aras\Marketplace\Service\Template
+	 */
+	public $templateService;
+
+	/**
 	 * The constructor
 	 */
 	private function __construct() {
@@ -33,6 +39,7 @@ class App {
 		// lets set up our core services
 		$this->acfService = new Service\ACF();
 		$this->acpService = new Service\ACP();
+		$this->templateService = new Service\Template();
 	}
 
 	/**

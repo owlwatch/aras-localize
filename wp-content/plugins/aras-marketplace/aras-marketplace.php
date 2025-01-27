@@ -17,5 +17,21 @@ define( 'ARAS_MARKETPLACE_URL', plugin_dir_url( __FILE__ ) );
 
 require_once( __DIR__ . '/vendor/autoload.php' );
 
+
 // load the plugin
 $app = App::getInstance();
+
+function app(){
+	return App::getInstance();
+}
+
+function get_first_term($taxonomy, $post_id=null ){
+	if( $post_id === null ){
+		$post_id = get_the_ID();
+	}
+	$terms = get_the_terms($post_id, $taxonomy);
+	if( $terms && ! is_wp_error($terms) ){
+		return $terms[0];
+	}
+	return false;
+}
