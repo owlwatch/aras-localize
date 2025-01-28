@@ -29,7 +29,9 @@ class Shortcodes
 
 	public function agenda( $atts )
 	{
-		return $this->shortcode('agenda', $atts);
+		return $this->shortcode('agenda', $atts, [
+			'filter_by_track' => "",
+		]);
 	}
 
 	public function speakers( $atts )
