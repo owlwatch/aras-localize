@@ -62,7 +62,10 @@ function formatTime(time: string) {
 					href="#"
 					@click.prevent="openSpeakerModal(speaker)"
 				)
-					img.swoogo-session-card__speaker-image(:src="speaker.profile_picture" :alt="`image of ${speaker.first_name} ${speaker.last_name}`")
+					img.swoogo-session-card__speaker-image(
+						v-if="speaker.profile_picture"
+						:src="speaker.profile_picture" :alt="`image of ${speaker.first_name} ${speaker.last_name}`"
+					)
 					div
 						p 
 							strong {{ speaker.first_name }} {{ speaker.last_name }}
@@ -78,6 +81,7 @@ function formatTime(time: string) {
 	flex-direction: column;
 	min-height: 150px;
 	width: 100%;
+	gap: 1rem;
 	&__header {
 		display: flex;
 		flex-direction: column;

@@ -108,7 +108,10 @@ modal(@close="emit('close')" :show-close-button="false")
 							href="#"
 							@click.prevent="eventStore.activeModalSpeaker = speaker"
 						)
-							img.swoogo-session-modal__speaker-image(:src="speaker.profile_picture" :alt="`image of ${speaker.first_name} ${speaker.last_name}`")
+							img.swoogo-session-modal__speaker-image(
+								v-if="speaker.profile_picture"
+								:src="speaker.profile_picture" :alt="`image of ${speaker.first_name} ${speaker.last_name}`"
+							)
 							div
 								div 
 									strong {{ speaker.first_name }} {{ speaker.last_name }}
