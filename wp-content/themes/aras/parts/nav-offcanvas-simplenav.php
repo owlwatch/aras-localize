@@ -43,8 +43,8 @@
 
 				if ($logo_image_type != 'none' && !empty($image)) :
 					$link = get_field('logo_link_override');
-					$link_url = $link['url'] ?? home_url();
-					$link_target = $link['target'] ?? '_self';
+					$link_url = $link['url'] ?: home_url();
+					$link_target = $link['target'] ?: '_self';
 					$link_aria_label = $link_target != '_self' ? esc_attr($link_target) : 'Homepage';
 					$image_alt = !empty($image['alt']) ? esc_attr($image['alt']) : get_the_title();
 				?>
@@ -102,11 +102,11 @@
 										?>
 
 											<?php if (get_sub_field('navigation_link_type') == 'button') : ?>
-												<a class="aras-button simplenav-button <?php echo $lightnav; ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+												<a class="aras-button simplenav-button <?php echo $lightnav; ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target) ?: '_self'; ?>">
 													<?php echo esc_html($link_title); ?>
 												</a>
 											<?php else : ?>
-												<a class="simplenav-toplevel <?php echo $lightnav; ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+												<a class="simplenav-toplevel <?php echo $lightnav; ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target) ?: '_self'; ?>">
 													<?php echo esc_html($link_title); ?>
 												</a>
 											<?php endif; ?>
