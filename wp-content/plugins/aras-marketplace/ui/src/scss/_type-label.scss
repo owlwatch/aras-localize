@@ -1,0 +1,10 @@
+
+.mp-type-label {
+	display: flex;
+	gap: 0.5em;
+	align-items: center;
+	&__icon {
+		width: 1.2em;
+		height: 1.2em;
+	}
+}

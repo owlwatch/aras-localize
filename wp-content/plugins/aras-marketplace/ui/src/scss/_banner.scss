@@ -1,0 +1,35 @@
+
+.mp-banner {
+	background: var(--mp-dark-bg);
+	color: #fff;
+	padding: 1.5rem 0;
+	&__title {
+		margin: 0;
+		padding: 0;
+		color: #fff;
+		font-weight: 300;
+		font-size: 2.5rem;
+	}
+	&__logo {
+		width: auto;
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		transition: 0.2s all;
+		&:hover, &:active, &:focus {
+			color: #fff;
+			text-decoration: none;
+		}
+		img {
+			height: 1.4em;
+			width: auto;
+		}
+		span {
+			
+		}
+	}
+}

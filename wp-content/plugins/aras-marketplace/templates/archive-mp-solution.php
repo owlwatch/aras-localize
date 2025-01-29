@@ -1,30 +1,28 @@
 <?php
 namespace Aras\Marketplace;
+use function Aras\Marketplace\app;
 use Aras\Marketplace\Service\Template;
-
+app()->templateService->enqueue_style();
 get_header();
+
+Template::get_template_part('marketplace/banner');
+
 ?>
-<section>
+<section class="mediumtoppadding mediumbottompadding">
 	<div class="grid-container">
-		<div class="grid-x grid-padding-x">
-			<div class="cell">
-				<h1><?php echo get_the_archive_title(); ?></h1>
-			</div>
-		</div>
 		<div class="grid-x grid-padding-x">
 			<?php
 			if (have_posts()) {
-				while (have_posts()) {
-					the_post();
-					?>
-					<div class="cell small-12 medium-6 large-4">
-						<?php
-						Template::get_template_part('marketplace/card', 'solution');
-						?>
-					</div>
+				?>
+				<div class="mp-solution-grid">
 					<?php
-				}
-				the_posts_navigation();
+					while (have_posts()) {
+						the_post();
+						Template::get_template_part('marketplace/card', 'solution');
+					}
+					?>
+				</div>
+				<?php
 			} else {
 				?>
 				<div class="cell">

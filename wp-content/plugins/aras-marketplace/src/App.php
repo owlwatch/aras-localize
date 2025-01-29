@@ -32,14 +32,27 @@ class App {
 	public $templateService;
 
 	/**
+	 * @var Aras\Marketplace\Service\ViteService
+	 */
+	public $ui;
+
+	/**
 	 * The constructor
 	 */
 	private function __construct() {
+
+		$this->ui = new Service\ViteService(
+			ARAS_MARKETPLACE_PATH.'/ui/dist',
+			ARAS_MARKETPLACE_URL.'ui/dist/',
+			'http://localhost:6238'
+		);
 		
 		// lets set up our core services
 		$this->acfService = new Service\ACF();
 		$this->acpService = new Service\ACP();
-		$this->templateService = new Service\Template();
+		$this->templateService = new Service\Template( $this->ui );
+
+		
 	}
 
 	/**

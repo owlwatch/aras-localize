@@ -1,0 +1,13 @@
+@use 'banner';
+@use 'card';
+@use 'solution-grid';
+@use 'solution-page';
+@use 'type-label';
+
+// set some global css variables
+:root {
+	--mp-dark-bg: #1e212b;
+	--mp-light-border: #d8d8d8;
+	--mp-muted-text: #777;
+	--mp-solution-page-breakpoint: 900px;
+}

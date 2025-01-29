@@ -4,19 +4,17 @@ use function Aras\Marketplace\get_first_term;
 $contributor = get_first_term('mp-contributor');
 ?>
 <div class="mp-card mp-card--solution">
-	<div class="mp-card__header">
+	<a class="mp-card__header" href="<?php echo get_permalink(); ?>">
 		
-	<?php if( has_post_thumbnail() ){ ?>
-		<?php the_post_thumbnail('medium', ['class' => 'mp-card__header-image']); ?>
+		<?php if( has_post_thumbnail() ){ ?>
+			<?php the_post_thumbnail('medium', ['class' => 'mp-card__header-image']); ?>
 		<?php } ?>
 
-		<div class="mp-card__header-title">
-			<a href="<?php echo get_permalink(); ?>">
-				<?php the_title(); ?>
-			</a>
-		</div>
-		
-	</div>
+		<span class="mp-card__title">
+			<?php the_title(); ?>
+		</span>
+	</a>
+
 	<div class="mp-card__content">
 		<?php
 		if( $contributor ){
@@ -30,20 +28,31 @@ $contributor = get_first_term('mp-contributor');
 			<?php
 		}
 		?>
-		<div class="mp-card__excerpt">
+		<a class="mp-card__excerpt" href="<?php echo get_permalink(); ?>">
 			<?php
-			echo get_field('mp_brief_description');
+			echo get_field('brief_description');
 			?>
-		</div>
+		</a>
 		<div class="mp-card__meta">
 			<?php
 			// show the "type"
-			$type = get_first_term('mp-type');
+			$type = get_first_term('mp-solution-type');
 			if( $type ){
-				$logo = get_field('logo', $type);
-				if( $logo ){
-					echo wp_get_attachment_image( $logo->ID, 'medium');
-				}
+				?>
+				<div class="mp-type-label">
+					<?php
+					$icon = get_field('icon', $type);
+					if( $icon ){
+						echo wp_get_attachment_image( $icon['ID'], 'medium', false, [
+							'class' => 'mp-type-label__icon'
+						]);
+					}
+					?>
+					<span class="mp-type-label__name">
+						<?php echo $type->name; ?>
+					</span>
+				</div>
+				<?php
 			}
 			?>
 		</div>

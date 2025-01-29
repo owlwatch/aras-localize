@@ -2,6 +2,8 @@
 
 namespace Aras\Marketplace\Service;
 
+use Aras\Marketplace\Service\ViteService;
+
 /**
  * This class is responsible for adding archive and single templates
  * in the plugins "templates" directory
@@ -9,10 +11,16 @@ namespace Aras\Marketplace\Service;
 class Template {
 
 	/**
+	 * @var Aras\Marketplace\Service\ViteService
+	 */
+	public $ui;
+
+	/**
 	 * The constructor
 	 */
-	public function __construct()
+	public function __construct( ViteService $ui)
 	{
+		$this->ui = $ui;
 		add_filter( 'template_include', array( $this, 'template_include' ) );
 	}
 
@@ -74,6 +82,13 @@ class Template {
 				return false;
 			}
 		}
+	}
+
+	public function enqueue_style()
+	{
+		add_action('wp_footer', function(){
+			echo $this->ui->render('src/main.ts');
+		});
 	}
 
 }

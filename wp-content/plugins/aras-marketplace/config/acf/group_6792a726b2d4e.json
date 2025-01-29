@@ -142,8 +142,8 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "display_format": "d\/m\/Y",
-            "return_format": "d\/m\/Y",
+            "display_format": "m\/d\/Y",
+            "return_format": "Y-m-d",
             "first_day": 1,
             "allow_in_bindings": 0
         },
@@ -486,5 +486,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1737746659
+    "modified": 1738161929
 }
