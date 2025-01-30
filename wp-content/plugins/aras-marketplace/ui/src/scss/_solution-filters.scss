@@ -1,0 +1,11 @@
+.mp-solution-filters {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	label {
+		font-size: 0.8rem;
+	}
+	fieldset {
+		min-width: 250px;
+	}
+}

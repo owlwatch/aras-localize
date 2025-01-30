@@ -58,8 +58,9 @@
     "show_in_quick_edit": 1,
     "show_admin_column": 0,
     "rewrite": {
-        "permalink_rewrite": "taxonomy_key",
-        "with_front": "1",
+        "permalink_rewrite": "custom_permalink",
+        "slug": "marketplace\/category",
+        "with_front": "0",
         "rewrite_hierarchical": "0"
     },
     "query_var": "post_type_key",
@@ -71,5 +72,5 @@
     "meta_box": "disabled",
     "meta_box_cb": "",
     "meta_box_sanitize_cb": "",
-    "modified": 1737680978
+    "modified": 1738258715
 }

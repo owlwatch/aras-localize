@@ -6,10 +6,16 @@ app()->templateService->enqueue_style();
 get_header();
 
 Template::get_template_part('marketplace/banner');
-
 ?>
-<section class="mediumtoppadding mediumbottompadding">
+<section class="smalltoppadding mediumbottompadding">
 	<div class="grid-container">
+
+		<div class="mp-solution-filters">
+			<?php
+			Template::get_template_part('marketplace/solution', 'filters');
+			?>
+		</div>
+
 		<?php
 		if (have_posts()) {
 			?>

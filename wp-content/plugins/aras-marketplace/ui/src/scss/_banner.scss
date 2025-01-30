@@ -32,4 +32,18 @@
 			
 		}
 	}
+	&__content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	&__search {
+		margin: 0;
+		&-input {
+			width: 300px;
+			border-width: 0;
+			margin: 0;
+		}
+	}
 }

@@ -26,6 +26,12 @@ class Template {
 
 	public function template_include( $template )
 	{
+
+		// if the theme template is specific "mp-", just use that
+		if( strpos( basename($template), 'mp-' ) !== false ){
+			return $template;
+		}
+
 		$post_type = 'mp-solution';
 		
 		// Plugin template folder path
@@ -50,6 +56,12 @@ class Template {
 		if( is_tax() && strpos( get_queried_object()->taxonomy, 'mp-' ) === 0 ){
 			$taxonomy = get_queried_object()->taxonomy;
 			$plugin_template = $plugin_templates_path . "taxonomy-{$taxonomy}.php";
+			if (file_exists($plugin_template)) {
+				return $plugin_template;
+			}
+
+			// if not, we should just include our post type archive
+			$plugin_template = $plugin_templates_path . "archive-{$post_type}.php";
 			if (file_exists($plugin_template)) {
 				return $plugin_template;
 			}
