@@ -1,7 +1,7 @@
 <?php
 
 // is the request for a 'mkt.aras.com' url, or was it referred by a 'mkt.aras.com' url?
-if( !isset($_REQUEST['debug-bitly']) && strpos($_SERVER['HTTP_REFERER'], 'mkt.aras.com') === false && strpos($_SERVER['HTTP_HOST'], 'mkt.aras.com') === false ) {
+if( !isset($_REQUEST['debug-bitly']) && strpos($_SERVER['HTTP_HOST'], 'mkt.aras.com') === false ) {
 	return;
 }
 
