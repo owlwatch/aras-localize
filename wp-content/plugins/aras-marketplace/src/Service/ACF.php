@@ -12,7 +12,7 @@ class ACF {
 		// set up our configuration
 		// add_filter( 'acf/settings/save_json', array( $this, 'setSaveJson' ), 20 );
 		add_filter( 'acf/json/save_paths', array( $this, 'setSaveJsonPaths'), 20, 2 );
-		add_filter( 'acf/settings/load_json', array( $this, 'setLoadJson' ), 30 );
+		add_filter( 'acf/settings/load_json', array( $this, 'setLoadJson' ), 40 );
 	}
 
 	/**

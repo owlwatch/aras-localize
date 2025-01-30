@@ -18,4 +18,8 @@ define( 'ARAS_SWOOGO_URL', plugin_dir_url( __FILE__ ) );
 require_once( __DIR__ . '/vendor/autoload.php' );
 
 // load the plugin
-$app = App::getInstance();
+function app(){
+	return App::getInstance();
+}
+
+app(); // initialize the app
