@@ -14,12 +14,13 @@ class ACF {
 		add_filter( 'acf/json/save_paths', array( $this, 'setSaveJsonPaths'), 20, 2 );
 		add_filter( 'acf/json/load_paths', array( $this, 'setLoadJsonPaths' ), 40, 1 );
 	}
-	
+
 	/**
 	 * Set the load json path
 	 */
 	public function setLoadJsonPaths( $paths = []) {
 		$paths[] = ARAS_MARKETPLACE_PATH . 'config/acf';
+		error_log('load paths: ' . print_r($paths, true));
 		return $paths;
 	}
 
