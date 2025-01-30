@@ -70,6 +70,11 @@ function populate_fields($value, $field, $name)
 		$webinar_id = get_post_meta(get_the_ID(), 'gotowebinar_webinar_key', true);
 		$webinar_id = !empty($webinar_id) ? $webinar_id : $value;
 	}
+	$marketo_interactive_webinar_asset_id = '';
+	if (get_post_meta(get_the_ID(), 'includes_marketo_interactive_webinar', true)) {
+		$marketo_interactive_webinar_asset_id = get_post_meta(get_the_ID(), 'marketo_interactive_webinar_asset_id', true);
+		$marketo_interactive_webinar_asset_id = $marketo_interactive_webinar_asset_id ?: $value;
+	}
 	if (get_post_meta(get_the_ID(), 'salesforce_campaign', true)) {
 		$SecondaryCampaignID = get_post_meta(get_the_ID(), 'salesforce_campaign', true);
 		$SecondaryCampaignID = !empty($SecondaryCampaignID) ? $SecondaryCampaignID : $value;
@@ -109,7 +114,8 @@ function populate_fields($value, $field, $name)
 		'DB_employee_count'  				=> isset($_COOKIE['DB_employee_count']) ? $_COOKIE['DB_employee_count'] : $value,
 		'WebinarID' => $webinar_id,
 		'SecondaryCampaignID' => $SecondaryCampaignID,
-		'Asset_Type_Downloaded' => $resource_format
+		'Asset_Type_Downloaded' => $resource_format,
+		'Marketo_Interactive_Webinar_Asset_ID' => $marketo_interactive_webinar_asset_id,
 	);
 	$value = isset($values[$name]) ? $values[$name] : $value;
 	return $value != $name ? trim($value) : '';

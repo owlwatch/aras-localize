@@ -302,28 +302,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_668ca674765de",
-            "label": "Form Button Text Override",
-            "name": "form_button_text",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "Leave blank for default submit button text",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -452,6 +431,58 @@
             "default_value": "",
             "maxlength": "",
             "placeholder": 2740102162434152538,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_679b83f23c2b4",
+            "label": "Includes Marketo Interactive Webinar",
+            "name": "includes_marketo_interactive_webinar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "51",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_679b84083c2b5",
+            "label": "Marketo Interactive Webinar Asset ID",
+            "name": "marketo_interactive_webinar_asset_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_679b83f23c2b4",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "49",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
             "prepend": "",
             "append": ""
         },
@@ -1376,5 +1407,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1720496868
+    "modified": 1738245573
 }
