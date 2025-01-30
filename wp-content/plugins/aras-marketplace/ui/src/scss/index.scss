@@ -3,9 +3,11 @@
 @use 'solution-grid';
 @use 'solution-page';
 @use 'type-label';
+@use 'contributor-page';
 
 // set some global css variables
 :root {
+	--mp-color-brand: #ce2127;
 	--mp-dark-bg: #1e212b;
 	--mp-light-border: #d8d8d8;
 	--mp-muted-text: #777;

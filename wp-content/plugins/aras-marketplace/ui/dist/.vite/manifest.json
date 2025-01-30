@@ -1,11 +1,26 @@
 {
+  "src/components/Swiper.vue": {
+    "file": "assets/Swiper-BCD5lNS_.js",
+    "name": "Swiper",
+    "src": "src/components/Swiper.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.ts"
+    ],
+    "css": [
+      "assets/Swiper-Bt7vuCX6.css"
+    ]
+  },
   "src/main.ts": {
-    "file": "assets/main-BQsaw8z9.js",
+    "file": "assets/main-Cqg5E51c.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
+    "dynamicImports": [
+      "src/components/Swiper.vue"
+    ],
     "css": [
-      "assets/main-h-BEZ5kR.css"
+      "assets/main-DztQgplb.css"
     ]
   }
 }

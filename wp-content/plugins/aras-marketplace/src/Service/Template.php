@@ -91,4 +91,17 @@ class Template {
 		});
 	}
 
+	public static function getYoutubeThumbnailUrlFromVideoUrl($video_url)
+	{
+		$video_id = self::getYoutubeVideoIdFromUrl($video_url);
+		return "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+	}
+
+	public static function getYoutubeVideoIdFromUrl($url)
+	{
+		$pattern = '#^(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch\?v=|/watch\?.+&v=))([\w-]{11})(?:.+)?$#x';
+		preg_match($pattern, $url, $matches);
+		return (isset($matches[1])) ? $matches[1] : false;
+	}
+
 }

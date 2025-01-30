@@ -10,28 +10,26 @@ Template::get_template_part('marketplace/banner');
 ?>
 <section class="mediumtoppadding mediumbottompadding">
 	<div class="grid-container">
-		<div class="grid-x grid-padding-x">
-			<?php
-			if (have_posts()) {
-				?>
-				<div class="mp-solution-grid">
-					<?php
-					while (have_posts()) {
-						the_post();
-						Template::get_template_part('marketplace/card', 'solution');
-					}
-					?>
-				</div>
-				<?php
-			} else {
-				?>
-				<div class="cell">
-					<p><?php _e('No solutions found.', 'aras-marketplace'); ?></p>
-				</div>
-				<?php
-			}
+		<?php
+		if (have_posts()) {
 			?>
-		</div>
+			<div class="mp-solution-grid">
+				<?php
+				while (have_posts()) {
+					the_post();
+					Template::get_template_part('marketplace/card', 'solution');
+				}
+				?>
+			</div>
+			<?php
+		} else {
+			?>
+			<div class="cell">
+				<p><?php _e('No solutions found.', 'aras-marketplace'); ?></p>
+			</div>
+			<?php
+		}
+		?>
 	</div>
 </section>
 <?php

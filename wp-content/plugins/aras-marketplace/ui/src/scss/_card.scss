@@ -9,11 +9,12 @@
 	&__header {
 		gap: 1em;
 		display: flex;
-		justify-content: space-between;
+		
 		align-items: flex-start;
 		img {
 			width: auto;
 			height: 3.2em;
+			flex-shrink: 0;
 		}
 	}
 
@@ -32,7 +33,7 @@
 	&__excerpt {
 		font-size: 0.9em;
 		color: var(--mp-muted-text);
-		transition: 0.2s all;
+		// transition: 0.2s all;
 		&:hover {
 			text-decoration: none;
 			color: #000;

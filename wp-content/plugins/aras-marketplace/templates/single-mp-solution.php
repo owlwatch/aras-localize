@@ -15,9 +15,15 @@ $logo = get_post_thumbnail_id();
 if( !$logo ){
 	$contributor = get_first_term('mp-contributor');
 	if( $contributor ){
-		$logo = get_field('logo', $contributor);
+		$logo = get_field('square_logo', $contributor);
 		if( $logo ){
 			$logo = $logo['ID'];
+		}
+		else {
+			$logo = get_field('logo', $contributor);
+			if( $logo ){
+				$logo = $logo['ID'];
+			}
 		}
 	}
 }
@@ -74,7 +80,10 @@ if( !empty($images) ){
 	foreach( $images as $image ){
 		$media[] = [
 			'type' => 'image',
-			'image'  => $image
+			'full' => $image['url'],
+			'large' => $image['sizes']['large'],
+			'image'  => $image['url'],
+			'alt' => $image['alt']
 		];
 	}
 }
@@ -83,7 +92,8 @@ if( !empty($videos) ){
 	foreach( $videos as $video ){
 		$media[] = [
 			'type' => 'video',
-			'url'  => $video
+			'image' => Template::getYoutubeThumbnailUrlFromVideoUrl($video['youtube_link']),
+			'youtube_url'  => $video['youtube_link']
 		];
 	}
 }
@@ -152,11 +162,39 @@ if( !empty($videos) ){
 
 			<?php
 			if( !empty( $media ) ){
+
+				$small_swiper_config = [
+					'slides' => $media,
+					'swiperConfig' => [
+						'loop' => true,
+						'spaceBetween' => 10,
+						'navigation' => [
+							'nextEl' => '.swiper-button-next',
+							'prevEl' => '.swiper-button-prev',
+						],
+						'breakpoints' => [
+							640 => [
+								'slidesPerView' => 2,
+							],
+							768 => [
+								'slidesPerView' => 3,
+							],
+							1024 => [
+								'slidesPerView' => 4,
+							]
+						]
+					]
+				];
 				?>
 			<div class="mp-solution-page__media-column">
-				<div class="" style="aspect-ratio: 4/3; background: #ccc;">
+				<div class="mp-solution-page__gallery">
+					<div class="mp-solution-page__gallery-large-slider">
+					</div>
 
-				</div>	
+					<div data-mp-swiper="<?php echo esc_attr( json_encode( $small_swiper_config ) ) ?>">
+						
+					</div>
+				</div>
 			</div>
 				<?php
 			}
