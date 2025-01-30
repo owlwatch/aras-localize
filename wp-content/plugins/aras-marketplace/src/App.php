@@ -32,6 +32,7 @@ class App {
 	public $templateService;
 
 	/**
+	 * ui
 	 * @var Aras\Marketplace\Service\ViteService
 	 */
 	public $ui;
@@ -50,7 +51,9 @@ class App {
 		// lets set up our core services
 		$this->acfService = new Service\ACF();
 		$this->acpService = new Service\ACP();
-		$this->templateService = new Service\Template( $this->ui );
+		$this->templateService = new Service\Template(
+			$this->ui
+		);
 
 		
 	}
