@@ -19,7 +19,7 @@ class ACF {
 	 * Set the load json path
 	 */
 	public function setLoadJson( $paths = []) {
-		$paths[] = ARAS_MARKETPLACE_PATH . '/config/acf';
+		$paths[] = ARAS_MARKETPLACE_PATH . 'config/acf';
 		return $paths;
 	}
 
@@ -30,7 +30,7 @@ class ACF {
 		// we only want to save if this matches a certain field group
 		// check the post title for Swoogo: prefix
 		if ( preg_match( '/marketplace/i', $post['title'] ) ) {
-			$paths = [ARAS_MARKETPLACE_PATH . '/config/acf'];
+			$paths = [ARAS_MARKETPLACE_PATH . 'config/acf'];
 		}
 		return $paths;
 	}
