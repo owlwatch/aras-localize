@@ -20,7 +20,6 @@ class ACF {
 	 */
 	public function setLoadJsonPaths( $paths = []) {
 		$paths[] = ARAS_MARKETPLACE_PATH . 'config/acf';
-		error_log('load paths: ' . print_r($paths, true));
 		return $paths;
 	}
 
