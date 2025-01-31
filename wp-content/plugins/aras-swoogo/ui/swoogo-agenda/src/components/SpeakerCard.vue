@@ -67,7 +67,12 @@ a.swoogo-speaker-card(
     padding: 1rem;
   }
 	&__name {
-		font-size: 1.33rem;
+		font-size: 1em;
+	}
+	&__title {
+		font-size: 0.85em;
+		font-weight: 400;
+		color: #666;
 	}
 }
 </style>
