@@ -18,14 +18,22 @@ $types = get_terms( array(
 		<label for="mp-solution-category-filter"><?php _e('Filter by Category', 'aras-marketplace'); ?></label>
 		<select id="mp-solution-category-filter" onchange="window.location=this.value">
 			<option value="<?php echo get_post_type_archive_link( 'mp-solution'); ?>"><?php _e('All Categories', 'aras-marketplace'); ?></option>
-			<?php foreach( $categories as $category ){ ?>
+			<?php
+			$current_category = get_query_var('mp-solution-category');
+			foreach( $categories as $category ){
+				?>
 				<?php
 				$selected = '';
-				if( is_tax('mp-solution-category', $category->term_id) ){
+				// get the link
+				$link = get_term_link($category);
+				if( ($type = get_query_var('mp-solution-type')) ){
+					$link = add_query_arg( 'mp-solution-type', $type, $link );
+				}
+				if( $current_category == $category->slug ){
 					$selected = 'selected';
 				}
 				?>
-				<option <?php echo $selected ?> value="<?php echo get_term_link($category); ?>">
+				<option <?php echo $selected ?> value="<?php echo $link; ?>">
 					<?php echo $category->name; ?>
 				</option>
 			<?php } ?>
@@ -36,14 +44,20 @@ $types = get_terms( array(
 		<label for="mp-solution-type-filter"><?php _e('Filter by Type', 'aras-marketplace'); ?></label>
 		<select id="mp-solution-type-filter" onchange="window.location=this.value">
 			<option value="<?php echo get_post_type_archive_link( 'mp-solution'); ?>"><?php _e('All Types', 'aras-marketplace'); ?></option>
-			<?php foreach( $types as $type ){ ?>
-				<?php
+			<?php 
+			$current_type = get_query_var('mp-solution-type');
+			foreach( $types as $type ){ 
 				$selected = '';
-				if( is_tax('mp-solution-type', $type->term_id) ){
+				// get the link
+				$link = get_term_link($type);
+				if( ($category = get_query_var('mp-solution-category')) ){
+					$link = add_query_arg( 'mp-solution-category', $category, $link );
+				}
+				if( $current_type == $type->slug ){
 					$selected = 'selected';
 				}
 				?>
-				<option <?php echo $selected ?> value="<?php echo get_term_link($type); ?>">
+				<option <?php echo $selected ?> value="<?php echo $link; ?>">
 					<?php echo $type->name; ?>
 				</option>
 			<?php } ?>
