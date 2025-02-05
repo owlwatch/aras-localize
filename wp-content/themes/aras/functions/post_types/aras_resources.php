@@ -342,7 +342,7 @@ function resource_selections_metabox($post)
 	// for keys that match the regex /.*cards_\d+_content_item$/
 
 	global $wpdb;
-	$sql = $wpdb->prepare('SELECT * FROM wp_postmeta WHERE meta_key REGEXP %s AND meta_value = %d', '.+_cards_[\d]+_content_item$', $post->ID);
+	$sql = $wpdb->prepare('SELECT * FROM wp_postmeta WHERE meta_key LIKE %s AND meta_value = %d', '%_cards_%_content_item', $post->ID);
 	$results = $wpdb->get_results($sql);
 
 	if (empty($results)) {
