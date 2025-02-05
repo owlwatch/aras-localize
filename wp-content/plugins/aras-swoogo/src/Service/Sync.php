@@ -20,6 +20,10 @@ class Sync
 	{
 		$this->api = $api;
 
+		if( !$this->api->isConnected() ){
+			return;
+		}
+
 		// add a cron jobs to sync events
 		add_action( 'aras_swoogo_sync_events', array( $this, 'syncEvents' ) );
 
@@ -55,6 +59,10 @@ class Sync
 
 	public function syncEvent( $id )
 	{
+
+		if( !$this->api->isConnected() ){
+			return;
+		}
 		
 		// get the event from the API
 		$event = new \stdClass;
