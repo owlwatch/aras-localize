@@ -15,6 +15,59 @@
             margin-bottom: 1.5rem;
         }
 
+        &.tabs-stacked {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: end;
+            justify-content: center;
+            gap: 0 1rem;
+            margin-bottom: 1.5rem;
+
+            @include breakpoint(medium only) {
+                flex-direction: row;
+            }
+
+            @include breakpoint(small only) {
+                flex-direction: row;
+            }
+
+            .tabs-title {
+                width: auto;
+                align-items: end;
+                justify-content: center;
+                display: flex;
+
+                @include breakpoint(medium only) {
+                    width: auto;
+                }
+
+                @include breakpoint(small only) {
+                    width: auto;
+                }
+
+                &.is-active {
+                    a {
+                        &::after {
+                            content: '';
+                            min-width: 1px;
+
+                            @include breakpoint(medium only) {
+                                min-width: 1px;
+                            }
+                        }
+                    }
+                }
+
+                a {
+                    padding: 0 4px .6rem 4px;
+                    min-width: 50px;
+                    text-align: center;
+                }
+            }
+
+        }
+
         &.two-col {
             display: flex;
             flex-direction: row;
