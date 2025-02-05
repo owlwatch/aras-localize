@@ -8,6 +8,7 @@ class SwoogoApi
 	protected $consumerSecret;
 	protected $accessToken;
 	protected $apiBase = 'https://api.swoogo.com/api/v1/';
+	protected $connected = false;
 
 	public function __construct($consumerKey, $consumerSecret )
 	{
@@ -22,7 +23,12 @@ class SwoogoApi
 		$this->consumerKey = urlencode($consumerKey);
 		$this->consumerSecret = urlencode($consumerSecret);
 		if (!$this->accessToken) {
-			$this->authorize();
+			try {
+				$this->authorize();
+				$this->connected = true;
+			}catch( \Exception $e ){
+				error_log( print_r( $e ) );
+			}
 		}
 	}
 
@@ -108,5 +114,10 @@ class SwoogoApi
 	public function delete($endpoint, $parameters = array())
 	{
 		return $this->request($endpoint, $parameters, 'DELETE');
+	}
+
+	public function isConnected()
+	{
+		return $this->connected;
 	}
 }

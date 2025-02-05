@@ -88,6 +88,10 @@
 			<?php $tabscol = 'two-col'; ?>
 			<?php $tabscell = 'large-6 medium-4'; ?>
 			<?php $contcell = 'large-6 medium-8'; ?>
+		<?php elseif (get_sub_field('tab_layout') == 'stacked') : ?>
+			<?php $tabscol = 'tabs-stacked'; ?>
+			<?php $tabscell = 'medium-12'; ?>
+			<?php $contcell = 'medium-12'; ?>
 		<?php else : ?>
 			<?php $tabscol = ''; ?>
 			<?php $tabscell = 'medium-4'; ?>

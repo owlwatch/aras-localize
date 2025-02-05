@@ -318,3 +318,57 @@ function ensure_taxonomy_archive_takes_precedence_over_post_type_archive( $query
 }
 
 add_action('pre_get_posts', 'ensure_taxonomy_archive_takes_precedence_over_post_type_archive');
+
+// lets add a meta box on the edit page for resources
+// that shows the places the resource is selected in the
+// automatic cards ACF flexible content field
+function add_resource_selections_metabox()
+{
+	add_meta_box(
+		'resource_selections',
+		__('Automatic Cards', 'aras'),
+		'resource_selections_metabox',
+		'resource',
+		'side',
+		'default'
+	);
+}
+
+add_action('add_meta_boxes', 'add_resource_selections_metabox');
+
+function resource_selections_metabox($post)
+{
+	// search for the id of this post as the meta_value
+	// for keys that match the regex /.*cards_\d+_content_item$/
+
+	global $wpdb;
+	$sql = $wpdb->prepare('SELECT * FROM wp_postmeta WHERE meta_key LIKE %s AND meta_value = %d', '%_cards_%_content_item', $post->ID);
+	$results = $wpdb->get_results($sql);
+
+	if (empty($results)) {
+		echo '<p>Not found in any Automatic Cards</p>';
+		return;
+	}
+
+	$query = new WP_Query([
+		'post_type' => 'any',
+		'post__in' => array_map(function($result){
+			return $result->post_id;
+		}, $results),
+		'posts_per_page' => -1,
+	]);
+
+	if ($query->have_posts()) {
+		echo '<p>Found in the following posts:</p>';
+		echo '<ul>';
+		while ($query->have_posts()) {
+			$query->the_post();
+			echo '<li><a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
+		}
+		wp_reset_postdata();
+		echo '</ul>';
+	}
+	else {
+		echo '<p>Not found in any Automatic Cards</p>';
+	}
+}

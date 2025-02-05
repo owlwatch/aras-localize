@@ -143,10 +143,12 @@ watch( activeModalSpeaker, (val) => {
 });
 
 const formatDate = (date: string) => {
-  const d = new Date();
-  d.setFullYear(parseInt(date.split('-')[0]));
-  d.setMonth(parseInt(date.split('-')[1]) - 1);
-  d.setDate(parseInt(date.split('-')[2]));
+  
+  // const d = new Date();
+  // d.setFullYear(parseInt(date.split('-')[0]));
+  // d.setMonth(parseInt(date.split('-')[1]) - 1);
+  // d.setDate(parseInt(date.split('-')[2]));
+  const d = new Date(date+' 00:00:00');
   return d.toLocaleDateString('en', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' });
 };
 
