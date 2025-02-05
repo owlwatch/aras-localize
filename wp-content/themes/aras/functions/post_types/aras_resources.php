@@ -346,7 +346,7 @@ function resource_selections_metabox($post)
 	$results = $wpdb->get_results($sql);
 
 	if (empty($results)) {
-		echo '<p>Not found in any Automatic Cards found</p>';
+		echo '<p>Not found in any Automatic Cards</p>';
 		return;
 	}
 
@@ -369,6 +369,6 @@ function resource_selections_metabox($post)
 		echo '</ul>';
 	}
 	else {
-		echo '<p>Not found in any Automatic Cards found</p>';
+		echo '<p>Not found in any Automatic Cards</p>';
 	}
 }
