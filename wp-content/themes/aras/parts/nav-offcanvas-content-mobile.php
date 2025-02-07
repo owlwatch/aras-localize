@@ -215,9 +215,9 @@
 																<?php endif; ?>
 															<?php else : ?>
 																<?php if (get_sub_field('mega_menu_label', 'option')) : ?>
-																	<h6 class="<?php echo $indent; ?> mega-menu-label"><?php echo get_sub_field('mega_menu_label', 'option'); ?></h6>
+																	<div class="<?php echo $indent; ?> mega-menu-label h6"><?php echo get_sub_field('mega_menu_label', 'option'); ?></div>
 																<?php else : ?>
-																	<h6 class="<?php echo $indent; ?> mega-menu-label"></h6>
+																	<div class="<?php echo $indent; ?> mega-menu-label h6"></div>
 																<?php endif; ?>
 															<?php endif; ?>
 														<?php endif; ?>
@@ -244,10 +244,10 @@
 														<?php endif; ?>
 													<?php endif; ?>
 													<?php if (get_sub_field('mega_menu_cta_subhead', 'option')) : ?>
-														<h6 class="mega-menu-cta-subhead"><?php echo get_sub_field('mega_menu_cta_subhead', 'option'); ?></h6>
+														<div class="mega-menu-cta-subhead h6"><?php echo get_sub_field('mega_menu_cta_subhead', 'option'); ?></div>
 													<?php endif; ?>
 													<?php if (get_sub_field('mega_menu_cta_headline', 'option')) : ?>
-														<h4 class="mega-menu-cta-headline"><?php echo get_sub_field('mega_menu_cta_headline', 'option'); ?></h4>
+														<div class="mega-menu-cta-headline h4"><?php echo get_sub_field('mega_menu_cta_headline', 'option'); ?></div>
 													<?php endif; ?>
 													<?php if (get_sub_field('mega_menu_cta_description', 'option')) : ?>
 														<div class="mega-menu-cta-desc"><?php echo get_sub_field('mega_menu_cta_description', 'option'); ?></div>

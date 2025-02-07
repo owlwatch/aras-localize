@@ -583,12 +583,14 @@
         }
 
         .mega-menu-cta-subhead {
+          color: $gold;
           margin-bottom: 0.25rem;
         }
 
-        h4.mega-menu-cta-headline {
+        .mega-menu-cta-headline {
           font-size: 1.2rem;
           margin-bottom: 6px;
+          color: #fff;
 
           @include breakpoint(medium only) {
             font-size: 1.15rem;
@@ -990,6 +992,7 @@
         }
 
         .mega-menu-cta-subhead {
+          color: $gold;
           margin-bottom: 0.25rem;
         }
 

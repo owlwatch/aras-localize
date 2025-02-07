@@ -31,12 +31,13 @@ const location = computed( () => eventStore.getSessionLocation(session.value) );
 
 // format the date and time
 const formatDate = (date: string) => {
-	const d = new Date(date);
+	const d = new Date(date+' 00:00:00');
 	return d.toLocaleDateString('en', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 };
 
 // format start_time and end_time
 const formatTime = (time: string) => {
+
 	const t = new Date(session.value.date+' '+time);
 	return t.toLocaleTimeString('en', { hour: 'numeric', minute: '2-digit' });
 };
