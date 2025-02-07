@@ -600,7 +600,7 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 		'Region__c' => $sendRegion,
 		'Default_URL_Campaign__c' => 'true',
 		'Portfolio__c' => $sendPortfolio,
-		'Channel__c' => $sendChannel,
+		'Type' => $sendChannel,
 	);
 	if (!empty($resourceType)) {
 		$body_params['Asset_Type__c'] = $resourceType;
