@@ -95,6 +95,15 @@
       }
       return {};
     }
+
+    function getRaidParameters() {
+      // lets use the localStorage object we saved
+      var raidJson = localStorage.getItem('aras_raid');
+      if( raidJson ){
+        return JSON.parse(raidJson);
+      }
+      return {};
+    }
     // Function to autofill form fields with UTM parameters
     function autofillFormFields() {
       var utmParameters = getUTMParameters();
@@ -103,6 +112,14 @@
         var field = document.querySelector('input[placeholder="utm_' + key + '"]'); // Find field with placeholder matching UTM parameter
         if (field) {
           field.value = fieldValue; // Populate field with UTM parameter value
+        }
+      });
+      var raidParameters = getRaidParameters();
+      Object.keys(raidParameters).forEach(function(key) {
+        var fieldValue = raidParameters[key];
+        var field = document.querySelector('input[placeholder="' + key + '"]'); // Find field with placeholder matching UTM parameter
+        if (field) {
+          field.value = fieldValue; // Populate field with RAID parameter value
         }
       });
     }

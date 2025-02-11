@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = new URL(window.location.href);
     var params = new URLSearchParams(currentUrl.search);
     var utm = {};
+    var raid = {};
     var found = false;
+    var raidFound = false;
 
     // look for UTM parameters
     params.forEach((value, key) => {
@@ -12,10 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
             utm[shortKey] = value;
             found = true;
         }
+        if( key.match(/^(gb|wb)raid$/) && value ) {
+            raid[key] = value;
+            raidFound = true;
+        };
     });
     // save our updated UTM object to localStorage
     if (found) {
         window.localStorage.setItem('aras_utm', JSON.stringify(utm))
+    }
+    if( raidFound ){
+        window.localStorage.setItem('aras_raid', JSON.stringify(raid))
     }
 });
 
