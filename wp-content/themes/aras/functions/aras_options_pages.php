@@ -6,7 +6,7 @@ function custom_menu_order($menu_ord)
 		return true;
 	}
 
-	return array(
+	$items =  array(
 		'index.php', // Dashboard
 		'global-content-media', // Global Content ***********
 		'upload.php', // Media
@@ -20,7 +20,13 @@ function custom_menu_order($menu_ord)
 		'edit.php?post_type=resource', // resource
 		'edit.php?post_type=event', // event
 		'edit.php?post_type=glossary', // glossary
-		'edit.php?post_type=mp-solution', // marketplace solution
+	);
+	
+	if( is_plugin_active( 'aras-marketplace/aras-marketplace.php' ) ) {
+		$items[] = 'edit.php?post_type=mp-solution';
+	}
+
+	$items = array_merge($items, array(
 		'edit.php?post_type=news', // news
 		'edit.php?post_type=documentation', // documentation
 		'edit.php?post_type=partners', // salesforce
@@ -41,7 +47,8 @@ function custom_menu_order($menu_ord)
 
 		'plugins.php', // Plugins
 		'themes.php', // Appearance
-	);
+	));
+	return $items;
 }
 add_filter('custom_menu_order', 'custom_menu_order');
 add_filter('menu_order', 'custom_menu_order');
