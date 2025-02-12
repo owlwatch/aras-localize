@@ -109,20 +109,20 @@
       var utmParameters = getUTMParameters();
       Object.keys(utmParameters).forEach(function(key) {
         var fieldValue = utmParameters[key];
-        var field = document.querySelector('input[placeholder="utm_' + key + '"]'); // Find field with placeholder matching UTM parameter
-        if (field) {
-          field.value = fieldValue; // Populate field with UTM parameter value
-        }
+        var fields = document.querySelectorAll('input[placeholder="utm_' + key + '"],input[data-field-name="utm_'+key+'"]'); // Find field with placeholder matching UTM parameter
+        fields.forEach( field =>  field.value = fieldValue ); // Populate field with UTM parameter value
       });
       var raidParameters = getRaidParameters();
       Object.keys(raidParameters).forEach(function(key) {
         var fieldValue = raidParameters[key];
-        var field = document.querySelector('input[placeholder="' + key + '"]'); // Find field with placeholder matching UTM parameter
-        if (field) {
-          field.value = fieldValue; // Populate field with RAID parameter value
-        }
+        var fields = document.querySelectorAll('input[placeholder="' + key + '"],input[data-field-name="'+key+'"]'); // Find field with placeholder matching UTM parameter
+        fields.forEach( field =>  field.value = fieldValue );
       });
     }
     autofillFormFields();
+    // also autofill form fields whenever a gravity form is loaded
+    document.addEventListener('gform_post_render', function(event) {
+      autofillFormFields();
+    });
   });
 </script>
