@@ -113,6 +113,24 @@
 
 										<?php endif; ?>
 
+										<?php if (have_rows('dropdown_items')) : ?>
+											<ul class="menu vertical nested simplenav-dropdown">
+												<?php while (have_rows('dropdown_items')) : the_row(); ?>
+													<li>
+														<?php $sub_link = get_sub_field('navigation_link');
+														if ($sub_link) : $sub_link_url = $sub_link['url'];
+															$sub_link_title = $sub_link['title'];
+															$sub_link_target = $sub_link['target'] ? $sub_link['target'] : '_self';
+														?>
+															<a class="simplenav-sub <?php echo $lightnav; ?>" href="<?php echo esc_url($sub_link_url); ?>" target="<?php echo esc_attr($sub_link_target) ?: '_self'; ?>">
+																<?php echo esc_html($sub_link_title); ?>
+															</a>
+														<?php endif; ?>
+													</li>
+												<?php endwhile; ?>
+											</ul>
+										<?php endif; ?>
+
 									</li>
 								<?php endwhile; /* Endwhile meganav */ ?>
 								<?php if (get_sub_field('language_switcher') == 'show') : ?>

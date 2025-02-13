@@ -359,7 +359,7 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 3,
-                    "layout": "table",
+                    "layout": "block",
                     "pagination": 0,
                     "min": 0,
                     "max": 0,
@@ -377,12 +377,13 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "40",
                                 "class": "",
                                 "id": ""
                             },
                             "wpml_cf_preferences": 3,
                             "return_format": "array",
+                            "allow_in_bindings": 1,
                             "parent_repeater": "field_6675b7975bed4"
                         },
                         {
@@ -395,7 +396,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "40",
                                 "class": "",
                                 "id": ""
                             },
@@ -408,9 +409,114 @@
                             "return_format": "value",
                             "multiple": 0,
                             "allow_null": 0,
+                            "allow_in_bindings": 1,
                             "ui": 0,
                             "ajax": 0,
                             "placeholder": "",
+                            "parent_repeater": "field_6675b7975bed4"
+                        },
+                        {
+                            "key": "field_67ae0f9f4de0d",
+                            "label": "Has Dropdown",
+                            "name": "has_dropdown",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1,
+                            "parent_repeater": "field_6675b7975bed4"
+                        },
+                        {
+                            "key": "field_67ae09bf3cb38",
+                            "label": "Dropdown Items",
+                            "name": "dropdown_items",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_67ae0f9f4de0d",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "layout": "table",
+                            "min": 1,
+                            "max": 0,
+                            "collapsed": "",
+                            "button_label": "Add Row",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_67ae0e293cb3a",
+                                    "label": "Navigation Link",
+                                    "name": "navigation_link",
+                                    "aria-label": "",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 3,
+                                    "return_format": "array",
+                                    "allow_in_bindings": 1,
+                                    "parent_repeater": "field_67ae09bf3cb38"
+                                },
+                                {
+                                    "key": "field_67ae0e453cb3c",
+                                    "label": "Navigation Link Type",
+                                    "name": "navigation_link_type",
+                                    "aria-label": "",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "choices": {
+                                        "link": "Link",
+                                        "button": "Button"
+                                    },
+                                    "default_value": "link",
+                                    "return_format": "value",
+                                    "multiple": 0,
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 1,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "placeholder": "",
+                                    "parent_repeater": "field_67ae09bf3cb38"
+                                }
+                            ],
                             "parent_repeater": "field_6675b7975bed4"
                         }
                     ]
@@ -517,5 +623,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1737092927
+    "modified": 1739460608
 }

@@ -333,6 +333,16 @@
         }
       }
 
+      .simplenav-dropdown {
+        background: #ffffffaa !important;
+        a {
+          color: #000;
+          &:hover {
+            color: $red;
+          }
+        }
+      }
+
     }
 
     .meganav {
