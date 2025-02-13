@@ -808,7 +808,7 @@
     flex-direction: column;
     gap: 1rem;
     justify-content: end;
-    align-items: center;
+    align-items: start;
     position: static;
 
     @include breakpoint(medium only) {
@@ -842,6 +842,11 @@
       &::after {
         content: none;
       }
+    }
+
+    .simplenav-sub {
+      color: #fff;
+      font-size: 0.9em;
     }
 
     .simplenav-button {

@@ -113,7 +113,7 @@
 
 										<?php endif; ?>
 
-										<?php if (have_rows('dropdown_items')) : ?>
+										<?php if (get_sub_field('has_dropdown') && have_rows('dropdown_items')) : ?>
 											<ul class="menu vertical nested simplenav-dropdown">
 												<?php while (have_rows('dropdown_items')) : the_row(); ?>
 													<li>

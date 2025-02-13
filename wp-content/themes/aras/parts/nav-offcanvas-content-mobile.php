@@ -35,11 +35,14 @@
 			<?php while (have_rows('simplified_navigation', $nav_post_id)) : the_row(); ?>
 
 				<?php if (have_rows('navigation_items', $nav_post_id)) : ?>
-					<ul class="accordion-menu vertical menu simplenav" data-dropdown-menu>
+					<ul class="vertical menu simplenav" style="margin-top: 3rem">
 						<?php while (have_rows('navigation_items', $nav_post_id)) : the_row(); ?>
+							<?php
+							?>
 							<li>
 
-								<?php $link = get_sub_field('navigation_link');
+								<?php
+								$link = get_sub_field('navigation_link');
 								if ($link) : $link_url = $link['url'];
 									$link_title = $link['title'];
 									$link_target = $link['target'] ? $link['target'] : '_self';
@@ -55,6 +58,24 @@
 										</a>
 									<?php endif; ?>
 
+								<?php endif; ?>
+
+								<?php if ( get_sub_field('has_dropdown') ) : ?>
+									<ul class="menu vertical nested bg-dblue submenu is-accordion-submenu">
+										<?php while (have_rows('dropdown_items')) : the_row(); ?>
+											<li>
+												<?php $sub_link = get_sub_field('navigation_link');
+												if ($sub_link) : $sub_link_url = $sub_link['url'];
+													$sub_link_title = $sub_link['title'];
+													$sub_link_target = $sub_link['target'] ? $sub_link['target'] : '_self';
+												?>
+													<a class="simplenav-sub <?php echo $lightnav; ?>" href="<?php echo esc_url($sub_link_url); ?>" target="<?php echo esc_attr($sub_link_target) ?: '_self'; ?>">
+														<?php echo esc_html($sub_link_title); ?>
+													</a>
+												<?php endif; ?>
+											</li>
+										<?php endwhile; ?>
+									</ul>
 								<?php endif; ?>
 
 							</li>
