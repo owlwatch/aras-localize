@@ -71,7 +71,7 @@ require_once(get_template_directory() . '/functions/apis/api_salesforce.php');
 require_once(get_template_directory() . '/functions/apis/api_myi.php');
 
 //Gravity Forms Functions
-require_once(get_template_directory() . '/functions/apis/aras_gravity_forms.php');
+require_once(get_template_directory() . '/functions/apis/class.aras_gravity_forms.php');
 
 // Swoogo Functions
 require_once(get_template_directory() . '/functions/apis/api_swoogo.php');
@@ -121,3 +121,5 @@ require_once(get_template_directory() . '/functions/filters.php');
 require_once(get_template_directory() . '/functions/seo.php');
 
 require_once(get_template_directory() . '/functions/bitly.php');
+
+require_once(get_template_directory() . '/functions/qualified.php');
