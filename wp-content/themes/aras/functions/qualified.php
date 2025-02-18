@@ -23,8 +23,8 @@ class QualifiedIntegration
 
 	private function __construct()
 	{
-		add_filter('gform_confirmation', [$this, 'gform_confirmation'], 11, 4);
-		add_action('wp_footer', [$this, 'wp_footer'], 10, 4);
+		// add_filter('gform_confirmation', [$this, 'gform_confirmation'], 11, 4);
+		// add_action('wp_footer', [$this, 'wp_footer'], 10, 4);
 
 	}
 

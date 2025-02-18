@@ -35,7 +35,8 @@ class GravityForms
 
 	public function gform_form_args($args)
 	{
-		$args['submission_method'] = \GFFormDisplay::SUBMISSION_METHOD_AJAX;
+		// disable this for now...
+		// $args['submission_method'] = \GFFormDisplay::SUBMISSION_METHOD_AJAX;
 		return $args;
 	}
 
