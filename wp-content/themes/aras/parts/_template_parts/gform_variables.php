@@ -109,13 +109,14 @@
       var utmParameters = getUTMParameters();
       Object.keys(utmParameters).forEach(function(key) {
         var fieldValue = utmParameters[key];
-        var fields = document.querySelectorAll('input[placeholder="utm_' + key + '"],input[data-field-name="utm_'+key+'"]'); // Find field with placeholder matching UTM parameter
+        var fields = document.querySelectorAll('input[placeholder="utm_' + key + '"],[data-field-name="utm_'+key+'"]>input'); // Find field with placeholder matching UTM parameter
         fields.forEach( field =>  field.value = fieldValue ); // Populate field with UTM parameter value
       });
       var raidParameters = getRaidParameters();
       Object.keys(raidParameters).forEach(function(key) {
+        console.log( key, raidParameters[key] );
         var fieldValue = raidParameters[key];
-        var fields = document.querySelectorAll('input[placeholder="' + key + '"],input[data-field-name="'+key+'"]'); // Find field with placeholder matching UTM parameter
+        var fields = document.querySelectorAll('input[placeholder="' + key + '"],[data-field-name="'+key+'"]>input'); // Find field with placeholder matching UTM parameter
         fields.forEach( field =>  field.value = fieldValue );
       });
     }
