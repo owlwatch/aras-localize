@@ -121,8 +121,7 @@
     }
     autofillFormFields();
     // also autofill form fields whenever a gravity form is loaded
-    document.addEventListener('gform/post_render', function(event) {
-      autofillFormFields();
-    });
+    document.addEventListener('gform/post_render', autofillFormFields);
+    document.addEventListener('gform_post_render', autofillFormFields);
   });
 </script>
