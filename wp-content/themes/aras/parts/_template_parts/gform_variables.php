@@ -104,6 +104,15 @@
       }
       return {};
     }
+
+    function get_gclid() {
+      var gclid = localStorage.getItem('aras_gclid');
+      if( gclid ){
+        return gclid;
+      }
+      return '';
+    }
+
     // Function to autofill form fields with UTM parameters
     function autofillFormFields() {
       var utmParameters = getUTMParameters();
@@ -119,6 +128,12 @@
         var fields = document.querySelectorAll('input[placeholder="' + key + '"],[data-field-name="'+key+'"]>input'); // Find field with placeholder matching UTM parameter
         fields.forEach( field =>  field.value = fieldValue );
       });
+
+      let gclid = get_gclid();
+      if( gclid ){
+        var fields = document.querySelectorAll('input[placeholder="gclid"],[data-field-name="gclid"]>input'); // Find field with placeholder matching UTM parameter
+        fields.forEach( field =>  field.value = gclid );
+      }
     }
     autofillFormFields();
     // also autofill form fields whenever a gravity form is loaded
