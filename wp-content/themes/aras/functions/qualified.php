@@ -40,7 +40,8 @@ class QualifiedIntegration
 		
 			// add flag to trigger qualified experience
 			$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
-			$confirmation = '';
+			$redirectingText = __('Redirecting...', 'aras');
+			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
 		}
 
 		else {
@@ -107,7 +108,8 @@ class QualifiedIntegration
 
 		// we actually want to convert the confirmation to a string
 		// with a script that calls our "fireQualifiedEvent" function
-		$confirmation .= "<script>arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ");</script>";
+		
+		$confirmation .= "<script>arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).");</script>";
 
 		return $confirmation;
 	}
@@ -123,7 +125,6 @@ class QualifiedIntegration
 				// lets add our function to fire the qualified event
 				function arasFireQualifiedEvent( payload, redirect ){
 
-					console.log( payload );
 					if( window.qualified ){	
 						qualified("saveFormData", payload);
 						qualified("emitFormFill", "custom");

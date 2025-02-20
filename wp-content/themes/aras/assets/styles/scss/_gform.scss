@@ -191,3 +191,27 @@
     }
   }
 }
+
+.aras-redirecting {
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Add a loading spinner before the text */
+.aras-redirecting::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: redirecting-spin 1s linear infinite;
+  margin-right: 10px;
+}
+@keyframes redirecting-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
