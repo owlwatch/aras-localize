@@ -23,24 +23,92 @@ class QualifiedIntegration
 
 	private function __construct()
 	{
-		// add_filter('gform_confirmation', [$this, 'gform_confirmation'], 11, 4);
-		// add_action('wp_footer', [$this, 'wp_footer'], 10, 4);
+		add_filter('gform_confirmation', [$this, 'gform_confirmation'], 20, 4);
+		add_action('wp_footer', [$this, 'wp_footer'], 10, 4);
 
 	}
 
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
+		$redirect = false;
+		
 		// if the confirmation is not a redirect, return
-		if (! is_array($confirmation) || empty($confirmation['redirect'])) {
-			return $confirmation;
+		if (is_array($confirmation) && !empty($confirmation['redirect'])) {
+	
+			// get the redirect url
+			$redirect = $confirmation['redirect'];
+		
+			// add flag to trigger qualified experience
+			$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
+			$confirmation = '';
 		}
-	
-		// get the redirect url
-		$redirect = $confirmation['redirect'];
-	
-		// add flag to trigger qualified experience
-		$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
-		$confirmation['redirect'] = $redirect;
+
+		else {
+			// get the qualified script
+			$script = get_field('qualified_show_experience_script', 'option');
+			if ($script) {
+				$confirmation.=$script;
+			}
+		}
+
+		// we can't use the normal redirect because we need to trigger the qualified
+		// saveFormData event using the gform_confirmation_loaded filter
+
+		// go through our form / entry and create a payload
+		$payload = [
+			'email' => '',
+			'company' => '',
+			'phone' => '',
+			'firstName' => '',
+			'lastName' => ''
+		];
+
+		// get the form fields
+		$fields = $form['fields'];
+		
+		foreach ($fields as $field) {
+			$fieldId = $field->id;
+			$fieldLabel = strtolower($field->label);
+			$isRequired = $field->isRequired;
+
+			// check if the field is in the entry
+			if (empty($entry[$fieldId])) {
+				continue;
+			}
+
+			// get the field value
+			$fieldValue = $entry[$fieldId];
+
+			// check if the field is an email
+			if (strpos($fieldLabel, 'email') !== false && $isRequired) {
+				$payload['email'] = $fieldValue;
+			}
+
+			// check if the field is a company
+			if (strpos($fieldLabel, 'company') !== false) {
+				$payload['company'] = $fieldValue;
+			}
+
+			// check if the field is a phone
+			if (strpos($fieldLabel, 'phone') !== false && $isRequired) {
+				$payload['phone'] = $fieldValue;
+			}
+
+			// check if the field is a first name
+			if (strpos($fieldLabel, 'first name') !== false && $isRequired) {
+				$payload['firstName'] = $fieldValue;
+			}
+
+			// check if the field is a last name
+			if (strpos($fieldLabel, 'last name') !== false && $isRequired) {
+				$payload['lastName'] = $fieldValue;
+			}
+		}
+
+		// we actually want to convert the confirmation to a string
+		// with a script that calls our "fireQualifiedEvent" function
+		$confirmation .= "<script>arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ");</script>";
+
 		return $confirmation;
 	}
 
@@ -51,6 +119,26 @@ class QualifiedIntegration
 		?>
 		<script>
 			document.addEventListener( 'gform/post_init', function(){
+
+				// lets add our function to fire the qualified event
+				function arasFireQualifiedEvent( payload, redirect ){
+
+					console.log( payload );
+					if( window.qualified ){	
+						qualified("saveFormData", payload);
+						qualified("emitFormFill", "custom");
+					}
+
+					console.log( {redirect} );
+					if( redirect ){
+						window.location = redirect;
+					}
+				}
+
+				// export the "fireQualifiedEvent" function
+				window.arasFireQualifiedEvent = arasFireQualifiedEvent;
+
+				// this would be ideal if Google Analytics played nice...
 				gform.utils.addAsyncFilter('gform/ajax/post_ajax_submission', async (data) => {
 
 					// get the form data from data.form
@@ -88,14 +176,11 @@ class QualifiedIntegration
 						}
 					});
 
-					console.log( {payload} );
-
 					if( !window.qualified ){
 						return data;
 					}
 					
-					qualified("saveFormData", payload);
-					qualified("emitFormFill", "custom");
+					arasFireQualifiedEvent(payload);
 					return data;
 				});
 			});
