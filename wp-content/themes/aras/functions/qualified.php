@@ -86,7 +86,7 @@ class QualifiedIntegration
 			}
 
 			// check if the field is a company
-			if (strpos($fieldLabel, 'company') !== false) {
+			if (strpos($fieldLabel, 'company') !== false && $isRequired && strpos($fieldLabel, 'facebook') === false) {
 				$payload['company'] = $fieldValue;
 			}
 
@@ -163,7 +163,7 @@ class QualifiedIntegration
 						if( labelText.match(/email/i) && labelText.match(/required/i)){
 							payload.email = field.value;
 						}
-						else if( labelText.match(/company/i) ){
+						else if( labelText.match(/company/i) && !labelText.match(/facebook/i) ){
 							payload.company = field.value;
 						}
 						else if( labelText.match(/phone/i) ){
