@@ -262,8 +262,11 @@ class GravityForms
 			 * in place for backwards compatability
 			 */
 			$use_standard_gravity_form_confirmation = true;
+
 			if( $use_standard_gravity_form_confirmation ){
-				$confirmation = $post_submission['content'];
+				if( !empty($post_submission['content']) ){
+					$confirmation = $post_submission['content'];
+				}
 				return $confirmation;
 			}
 
@@ -278,6 +281,9 @@ class GravityForms
 			$confirmation = [
 				'redirect' => $post_submission['redirect_url']
 			];
+			return $confirmation;
+		}
+		else {
 			return $confirmation;
 		}
 	}
