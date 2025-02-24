@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var params = new URLSearchParams(currentUrl.search);
     var utm = {};
     var raid = {};
+    var gclid = '';
     var found = false;
     var raidFound = false;
 
@@ -18,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
             raid[key] = value;
             raidFound = true;
         };
+        if( key.match(/gclid/) && value ) {
+            gclid = value;
+        }
     });
     // save our updated UTM object to localStorage
     if (found) {
@@ -25,6 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if( raidFound ){
         window.localStorage.setItem('aras_raid', JSON.stringify(raid))
+    }
+
+    // look for gclid
+    if( gclid ){
+        window.localStorage.setItem('aras_gclid', gclid);
     }
 });
 

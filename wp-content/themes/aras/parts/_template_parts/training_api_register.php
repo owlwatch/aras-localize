@@ -150,7 +150,7 @@ if ($data != null) {
 														<h4 class="hero-form-headline"><?php echo get_field('form_headline')  ?></h4>
 													<?php endif; ?>
 													<?php $gravity_form_id = get_field('form_shortcode');
-													echo do_shortcode('[gravityform id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
+													echo do_shortcode('[gravityform ajax="true" id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
 												</div>
 												<?php get_template_part('parts/_template_parts/gform_variables'); ?>
 											<?php else : ?>

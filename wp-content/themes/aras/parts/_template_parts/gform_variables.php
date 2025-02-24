@@ -104,25 +104,40 @@
       }
       return {};
     }
+
+    function get_gclid() {
+      var gclid = localStorage.getItem('aras_gclid');
+      if( gclid ){
+        return gclid;
+      }
+      return '';
+    }
+
     // Function to autofill form fields with UTM parameters
     function autofillFormFields() {
       var utmParameters = getUTMParameters();
       Object.keys(utmParameters).forEach(function(key) {
         var fieldValue = utmParameters[key];
-        var fields = document.querySelectorAll('input[placeholder="utm_' + key + '"],input[data-field-name="utm_'+key+'"]'); // Find field with placeholder matching UTM parameter
+        var fields = document.querySelectorAll('input[placeholder="utm_' + key + '"],[data-field-name="utm_'+key+'"]>input'); // Find field with placeholder matching UTM parameter
         fields.forEach( field =>  field.value = fieldValue ); // Populate field with UTM parameter value
       });
       var raidParameters = getRaidParameters();
       Object.keys(raidParameters).forEach(function(key) {
+        console.log( key, raidParameters[key] );
         var fieldValue = raidParameters[key];
-        var fields = document.querySelectorAll('input[placeholder="' + key + '"],input[data-field-name="'+key+'"]'); // Find field with placeholder matching UTM parameter
+        var fields = document.querySelectorAll('input[placeholder="' + key + '"],[data-field-name="'+key+'"]>input'); // Find field with placeholder matching UTM parameter
         fields.forEach( field =>  field.value = fieldValue );
       });
+
+      let gclid = get_gclid();
+      if( gclid ){
+        var fields = document.querySelectorAll('input[placeholder="gclid"],[data-field-name="gclid"]>input'); // Find field with placeholder matching UTM parameter
+        fields.forEach( field =>  field.value = gclid );
+      }
     }
     autofillFormFields();
     // also autofill form fields whenever a gravity form is loaded
-    document.addEventListener('gform/post_render', function(event) {
-      autofillFormFields();
-    });
+    document.addEventListener('gform/post_render', autofillFormFields);
+    document.addEventListener('gform_post_render', autofillFormFields);
   });
 </script>

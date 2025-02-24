@@ -740,7 +740,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
               echo '<h3 class="text-center" style="margin-bottom: 1rem; font-weight: 400;">' . get_sub_field('subscribe_form_headline', 'option') . '<h3>';
             } ?>
             <?php $gravity_form_id = get_sub_field('subscribe_form_embed', 'option');
-            echo do_shortcode('[gravityform id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
+            echo do_shortcode('[gravityform ajax="true" id="' . $gravity_form_id . '" title="false" description="false"]'); ?>
           </div>
           <?php get_template_part('parts/_template_parts/gform_variables'); ?>
           <button class="close-button" data-close aria-label="Close modal" type="button">

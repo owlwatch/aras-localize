@@ -70,6 +70,10 @@ const speakers = computed( () => {
       return true;
     });
   }
+
+  all.sort( (a, b) => {
+    return a.last_name.localeCompare(b.last_name);
+  });
   return all;
 });
 

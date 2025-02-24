@@ -1,4 +1,5 @@
 <?php
+
 /* License Key form:
 Form ID #14, Field ID #9, set validation format for MAC Address*/
 
@@ -15,51 +16,54 @@ function custom_mac_address_validation($result, $value)
 }
 
 // Add the custom merge tag to the merge tag dropdown
-add_filter( 'gform_merge_tags', 'aras_gf_add_format_term_merge_tag', 10, 2 );
-function aras_gf_add_format_term_merge_tag( $merge_tags, $form_id ) {
-    $merge_tags[] = array(
-        'label' => 'Resource Format',  // Label for the merge tag
-        'tag'   => '{format_term}' // Merge tag to insert
-    );
-    return $merge_tags;
+add_filter('gform_merge_tags', 'aras_gf_add_format_term_merge_tag', 10, 2);
+function aras_gf_add_format_term_merge_tag($merge_tags, $form_id)
+{
+	$merge_tags[] = array(
+		'label' => 'Resource Format',  // Label for the merge tag
+		'tag'   => '{format_term}' // Merge tag to insert
+	);
+	return $merge_tags;
 }
 
 
-add_filter( 'gform_replace_merge_tags', 'aras_gf_populate_format_taxonomy', 10, 3 );
-function aras_gf_populate_format_taxonomy( $text, $form, $entry ) {
-    // Check for the custom merge tag {format_term}
-    if ( strpos( $text, '{format_term}' ) === false ) {
-        return $text;
-    }
+add_filter('gform_replace_merge_tags', 'aras_gf_populate_format_taxonomy', 10, 3);
+function aras_gf_populate_format_taxonomy($text, $form, $entry)
+{
+	// Check for the custom merge tag {format_term}
+	if (strpos($text, '{format_term}') === false) {
+		return $text;
+	}
 
-    // Get the current post ID of the embedding page
-    global $post;
-    $post_id = $post->ID;
+	// Get the current post ID of the embedding page
+	global $post;
+	$post_id = $post->ID;
 
-    // Get the terms of the 'format' taxonomy for the current post
-    $terms = get_the_terms( $post_id, 'format' );
+	// Get the terms of the 'format' taxonomy for the current post
+	$terms = get_the_terms($post_id, 'format');
 
-    if ( $terms && ! is_wp_error( $terms ) ) {
-        // Get the first term from the 'format' taxonomy
-        $first_term = $terms[0]->name;
+	if ($terms && ! is_wp_error($terms)) {
+		// Get the first term from the 'format' taxonomy
+		$first_term = $terms[0]->name;
 
-        // Replace the {format_term} merge tag with the first term's name
-        $text = str_replace( '{format_term}', $first_term, $text );
-    }
+		// Replace the {format_term} merge tag with the first term's name
+		$text = str_replace('{format_term}', $first_term, $text);
+	}
 
-    return $text;
+	return $text;
 }
 
 // Ensure values that start with db_ are set to '' before they are saved
 add_filter('gform_pre_submission', 'aras_gf_clear_db_fields');
-function aras_gf_clear_db_fields($form) {
-    foreach ($form['fields'] as $field) {
-        $field_id = $field->id;
-        $field_value = rgpost("input_{$field_id}");
-        if (preg_match('/^db_/i', $field_value)) {
-            $_POST["input_{$field_id}"] = '';
-        }
-    }
+function aras_gf_clear_db_fields($form)
+{
+	foreach ($form['fields'] as $field) {
+		$field_id = $field->id;
+		$field_value = rgpost("input_{$field_id}");
+		if (preg_match('/^db_/i', $field_value)) {
+			$_POST["input_{$field_id}"] = '';
+		}
+	}
 }
 
 add_filter('gform_field_value', 'populate_fields', 10, 3);
@@ -83,38 +87,38 @@ function populate_fields($value, $field, $name)
 	}
 
 	$resource_format = '';
-	if( is_singular('resource') ){
+	if (is_singular('resource')) {
 		// Get the terms of the 'format' taxonomy for the current post
-		$terms = get_the_terms( get_the_ID(), 'format' );
+		$terms = get_the_terms(get_the_ID(), 'format');
 
-		if ( $terms && ! is_wp_error( $terms ) ) {
+		if ($terms && ! is_wp_error($terms)) {
 			// Get the first term from the 'format' taxonomy
 			$resource_format = $terms[0]->name;
 		}
 	}
 
 	$values = array(
-		'visitor_id'     			=> isset($_COOKIE['visitor_id']) ? $_COOKIE['visitor_id'] : $value,
-		'site_language'  			=> isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : $value,
-		'DB_annual_revenue'  				=> isset($_COOKIE['DB_annual_revenue']) ? $_COOKIE['DB_annual_revenue'] : $value,
-		'DB_Company_Facebook_url'  				=> isset($_COOKIE['DB_Company_Facebook_url']) ? $_COOKIE['DB_Company_Facebook_url'] : $value,
-		'DB_Company_Twitter_url'  				=> isset($_COOKIE['DB_Company_Twitter_url']) ? $_COOKIE['DB_Company_Twitter_url'] : $value,
-		'DB_executive_linkedIn_profile'  				=> isset($_COOKIE['DB_executive_linkedIn_profile']) ? $_COOKIE['DB_executive_linkedIn_profile'] : $value,
-		'DB_executive_city'  				=> isset($_COOKIE['DB_executive_city']) ? $_COOKIE['DB_executive_city'] : $value,
-		'DB_executive_state'  				=> isset($_COOKIE['DB_executive_state']) ? $_COOKIE['DB_executive_state'] : $value,
-		'DB_executive_country'  				=> isset($_COOKIE['DB_executive_country']) ? $_COOKIE['DB_executive_country'] : $value,
-		'DB_phone'  				=> isset($_COOKIE['DB_phone']) ? $_COOKIE['DB_phone'] : $value,
-		'DB_email'  				=> isset($_COOKIE['DB_email']) ? $_COOKIE['DB_email'] : $value,
-		'DB_executive_description'  				=> isset($_COOKIE['DB_executive_description']) ? $_COOKIE['DB_executive_description'] : $value,
-		'DB_first_name'  				=> isset($_COOKIE['DB_first_name']) ? $_COOKIE['DB_first_name'] : $value,
-		'DB_last_name'  				=> isset($_COOKIE['DB_last_name']) ? $_COOKIE['DB_last_name'] : $value,
-		'DB_job_function'  				=> isset($_COOKIE['DB_job_function']) ? $_COOKIE['DB_job_function'] : $value,
-		'DB_job_level'  				=> isset($_COOKIE['DB_job_level']) ? $_COOKIE['DB_job_level'] : $value,
-		'DB_title'  				=> isset($_COOKIE['DB_title']) ? $_COOKIE['DB_title'] : $value,
-		'DB_employee_count'  				=> isset($_COOKIE['DB_employee_count']) ? $_COOKIE['DB_employee_count'] : $value,
-		'WebinarID' => $webinar_id,
-		'SecondaryCampaignID' => $SecondaryCampaignID,
-		'Asset_Type_Downloaded' => $resource_format,
+		'visitor_id'                           => isset($_COOKIE['visitor_id']) ? $_COOKIE['visitor_id'] : $value,
+		'site_language'                        => isset($_COOKIE['wp-wpml_current_language']) ? $_COOKIE['wp-wpml_current_language'] : $value,
+		'DB_annual_revenue'                    => isset($_COOKIE['DB_annual_revenue']) ? $_COOKIE['DB_annual_revenue'] : $value,
+		'DB_Company_Facebook_url'              => isset($_COOKIE['DB_Company_Facebook_url']) ? $_COOKIE['DB_Company_Facebook_url'] : $value,
+		'DB_Company_Twitter_url'               => isset($_COOKIE['DB_Company_Twitter_url']) ? $_COOKIE['DB_Company_Twitter_url'] : $value,
+		'DB_executive_linkedIn_profile'        => isset($_COOKIE['DB_executive_linkedIn_profile']) ? $_COOKIE['DB_executive_linkedIn_profile'] : $value,
+		'DB_executive_city'                    => isset($_COOKIE['DB_executive_city']) ? $_COOKIE['DB_executive_city'] : $value,
+		'DB_executive_state'                   => isset($_COOKIE['DB_executive_state']) ? $_COOKIE['DB_executive_state'] : $value,
+		'DB_executive_country'                 => isset($_COOKIE['DB_executive_country']) ? $_COOKIE['DB_executive_country'] : $value,
+		'DB_phone'                             => isset($_COOKIE['DB_phone']) ? $_COOKIE['DB_phone'] : $value,
+		'DB_email'                             => isset($_COOKIE['DB_email']) ? $_COOKIE['DB_email'] : $value,
+		'DB_executive_description'             => isset($_COOKIE['DB_executive_description']) ? $_COOKIE['DB_executive_description'] : $value,
+		'DB_first_name'                        => isset($_COOKIE['DB_first_name']) ? $_COOKIE['DB_first_name'] : $value,
+		'DB_last_name'                         => isset($_COOKIE['DB_last_name']) ? $_COOKIE['DB_last_name'] : $value,
+		'DB_job_function'                      => isset($_COOKIE['DB_job_function']) ? $_COOKIE['DB_job_function'] : $value,
+		'DB_job_level'                         => isset($_COOKIE['DB_job_level']) ? $_COOKIE['DB_job_level'] : $value,
+		'DB_title'                             => isset($_COOKIE['DB_title']) ? $_COOKIE['DB_title'] : $value,
+		'DB_employee_count'                    => isset($_COOKIE['DB_employee_count']) ? $_COOKIE['DB_employee_count'] : $value,
+		'WebinarID'                            => $webinar_id,
+		'SecondaryCampaignID'                  => $SecondaryCampaignID,
+		'Asset_Type_Downloaded'                => $resource_format,
 		'Marketo_Interactive_Webinar_Asset_ID' => $marketo_interactive_webinar_asset_id,
 	);
 	$value = isset($values[$name]) ? $values[$name] : $value;
@@ -532,39 +536,39 @@ function post_to_third_party_9($entry, $form)
 {
 	// Data validation
 	$validated_data = array(
-		'site_language' => sanitize_text_field(rgar($entry, '28')),
-		'pardot_visitor_id' => sanitize_text_field(rgar($entry, '35')),
-		'pardoturl' => sanitize_text_field(rgar($entry, '48')),
-		'firstname' => sanitize_text_field(rgar($entry, '3')),
-		'Last_Touch_Form_Name' => sanitize_text_field(rgar($entry, '38')),
-		'lastname' => sanitize_text_field(rgar($entry, '5')),
-		'assetname' => sanitize_text_field(rgar($entry, '18')),
-		'email' => sanitize_email(rgar($entry, '39')),
-		'company' => sanitize_text_field(rgar($entry, '13')),
-		'phone' => sanitize_text_field(rgar($entry, '12')),
-		'title' => sanitize_text_field(rgar($entry, '42')),
-		'country' => sanitize_text_field(rgar($entry, '48.6')),
-		'classid' => sanitize_text_field(rgar($entry, '47')),
-		'wantcommunity' => sanitize_text_field(rgar($entry, '45')),
-		'wantpsb' => sanitize_text_field(rgar($entry, '44')),
-		'wantnewsletter' => sanitize_text_field(rgar($entry, '46')),
-		'Aras_Cookie' => sanitize_text_field(rgar($entry, '29')),
-		'referrer' => sanitize_text_field(rgar($entry, '30')),
-		'DB_annual_revenue' => sanitize_text_field(rgar($entry, '17')),
-		'DB_Company_Facebook_url' => sanitize_text_field(rgar($entry, '20')),
+		'site_language'                 => sanitize_text_field(rgar($entry, '28')),
+		'pardot_visitor_id'             => sanitize_text_field(rgar($entry, '35')),
+		'pardoturl'                     => sanitize_text_field(rgar($entry, '48')),
+		'firstname'                     => sanitize_text_field(rgar($entry, '3')),
+		'Last_Touch_Form_Name'          => sanitize_text_field(rgar($entry, '38')),
+		'lastname'                      => sanitize_text_field(rgar($entry, '5')),
+		'assetname'                     => sanitize_text_field(rgar($entry, '18')),
+		'email'                         => sanitize_email(rgar($entry, '39')),
+		'company'                       => sanitize_text_field(rgar($entry, '13')),
+		'phone'                         => sanitize_text_field(rgar($entry, '12')),
+		'title'                         => sanitize_text_field(rgar($entry, '42')),
+		'country'                       => sanitize_text_field(rgar($entry, '48.6')),
+		'classid'                       => sanitize_text_field(rgar($entry, '47')),
+		'wantcommunity'                 => sanitize_text_field(rgar($entry, '45')),
+		'wantpsb'                       => sanitize_text_field(rgar($entry, '44')),
+		'wantnewsletter'                => sanitize_text_field(rgar($entry, '46')),
+		'Aras_Cookie'                   => sanitize_text_field(rgar($entry, '29')),
+		'referrer'                      => sanitize_text_field(rgar($entry, '30')),
+		'DB_annual_revenue'             => sanitize_text_field(rgar($entry, '17')),
+		'DB_Company_Facebook_url'       => sanitize_text_field(rgar($entry, '20')),
 		'DB_executive_linkedIn_profile' => sanitize_text_field(rgar($entry, '23')),
-		'DB_executive_country' => sanitize_text_field(rgar($entry, '24')),
-		'DB_executive_city' => sanitize_text_field(rgar($entry, '25')),
-		'DB_phone' => sanitize_text_field(rgar($entry, '27')),
-		'DB_executive_state' => sanitize_text_field(rgar($entry, '26')),
+		'DB_executive_country'          => sanitize_text_field(rgar($entry, '24')),
+		'DB_executive_city'             => sanitize_text_field(rgar($entry, '25')),
+		'DB_phone'                      => sanitize_text_field(rgar($entry, '27')),
+		'DB_executive_state'            => sanitize_text_field(rgar($entry, '26')),
 	);
 	$token_request_data = array(
 		'grant_type' => 'password',
-		'scope' => 'Innovator',
-		'client_id' => 'IOMApp',
-		'username' => 'web2lead',
-		'password' => '4d87a136d94d89910de45c3af3120c31',
-		'database' => 'MyInnovator'
+		'scope'      => 'Innovator',
+		'client_id'  => 'IOMApp',
+		'username'   => 'web2lead',
+		'password'   => '4d87a136d94d89910de45c3af3120c31',
+		'database'   => 'MyInnovator'
 	);
 	$token_response = wp_remote_post('https://myinnovator.com/OAuthServer/connect/token', array(
 		'body' => $token_request_data
@@ -699,73 +703,74 @@ function post_to_third_party_14($entry, $form)
 	}
 }
 
+/**
+ *  move code to find the redirects to a single function
+ * @param $entry
+ */
+function aras_find_redirect( $entry, $form)
+{
+	$redirect_url = false;
+	$current_page_id = get_queried_object_id();
+	
+	if( get_field('post_submission_action', $current_page_id) == 'redirect' ) {
+		if( get_field('post-submission_redirect_url', $current_page_id) ) {
+			$redirect_url = get_field('post-submission_redirect_url', $current_page_id);
+		}
+	}
 
+	if (have_rows('flexible_content', $current_page_id)) {
+		while (have_rows('flexible_content', $current_page_id)) {
+			the_row();
+			if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') {
+				
+				if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+					if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+						$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+					}
+				}
+				if (have_rows('right_content', $current_page_id)) {
+					while (have_rows('right_content', $current_page_id)) {
+						the_row();
+						if (have_rows('form_block', $current_page_id)) {
+							while (have_rows('form_block', $current_page_id) && !$redirect_url) {
+								the_row();
+								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+									}
+								}
+							}
+						}
+					}
+				}
+				if (have_rows('left_content', $current_page_id)) {
+					while (have_rows('left_content', $current_page_id)) {
+						the_row();
+						if (have_rows('form_block', $current_page_id)) {
+							while (have_rows('form_block', $current_page_id)) {
+								the_row();
+								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
+									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
+										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $redirect_url;
+}
 
 function gated_res_submission($entry, $form)
 {
 
 
 	$current_page_id = get_queried_object_id();
-	$redirect_url = $_SERVER['REQUEST_URI'];
-
-
-
-	if (get_field('post_submission_action', $current_page_id) == 'redirect') {
-		if (get_field('post-submission_redirect_url', $current_page_id)) {
-			$redirect_url = get_field('post-submission_redirect_url', $current_page_id);
-			wp_redirect($redirect_url);
-			exit();
-		}
-	}
-	if (have_rows('flexible_content', $current_page_id)) :
-		while (have_rows('flexible_content', $current_page_id)) : the_row();
-			if (get_row_layout() == 'split_content_section' || get_row_layout() == 'full_width_form_section') :
-				$post_submission_id_set = false;
-
-				if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
-					if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
-						$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
-						wp_redirect($redirect_url);
-						exit();
-						$post_submission_id_set = true;
-					}
-				}
-				if (have_rows('right_content', $current_page_id)) :
-					while (have_rows('right_content', $current_page_id)) : the_row();
-						if (have_rows('form_block', $current_page_id)) :
-							while (have_rows('form_block', $current_page_id)) : the_row();
-								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
-									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
-										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
-										wp_redirect($redirect_url);
-										exit();
-										$post_submission_id_set = true;
-									}
-								}
-							endwhile;
-						endif;
-					endwhile;
-				endif;
-				if (have_rows('left_content', $current_page_id)) :
-					while (have_rows('left_content', $current_page_id)) : the_row();
-						if (have_rows('form_block', $current_page_id)) :
-							while (have_rows('form_block', $current_page_id)) : the_row();
-
-								if (get_sub_field('post_submission_action', $current_page_id) == 'redirect') {
-									if (get_sub_field('post-submission_redirect_url', $current_page_id)) {
-										$redirect_url = get_sub_field('post-submission_redirect_url', $current_page_id);
-										wp_redirect($redirect_url);
-										exit();
-										$post_submission_id_set = true;
-									}
-								}
-							endwhile;
-						endif;
-					endwhile;
-				endif;
-			endif;
-		endwhile;
-	endif;
+	$redirect_url = aras_find_redirect( $entry, $form );
 
 
 
@@ -934,15 +939,15 @@ add_filter('gform_form_tag', function ($output, $form) {
 
 	$form_title = str_replace("'", "\\'", $form['title']);
 
-	$validation_endpoint = rest_url('gf/v2/forms/'.$form['id'].'/submissions/validation');
+	$validation_endpoint = rest_url('gf/v2/forms/' . $form['id'] . '/submissions/validation');
 
 	$attrs = [
-		'data-marketo-id="'.esc_attr($data->marketo_form).'"',
+		'data-marketo-id="' . esc_attr($data->marketo_form) . '"',
 		'data-form-title="' . esc_attr($form_title) . '"',
-		'data-validation-endpoint="'.esc_attr($validation_endpoint).'"'
+		'data-validation-endpoint="' . esc_attr($validation_endpoint) . '"'
 	];
 
-	$form_tag = '<form '.implode(' ', $attrs);
+	$form_tag = '<form ' . implode(' ', $attrs);
 
 	$output = str_replace('<form', $form_tag, $output);
 	return $output;
@@ -959,6 +964,5 @@ add_filter('gform_field_content', function ($field_content, $field, $value, $lea
 			$field_content = preg_replace('/(<[^>]*\bclass=["\'][^"\']*ginput_container[^"\']*["\'][^>]*)(>)/', '$1 data-field-name="' . esc_attr($parameter_name) . '"$2', $field_content);
 		}
 	}
-
 	return $field_content;
 }, 10, 5);
