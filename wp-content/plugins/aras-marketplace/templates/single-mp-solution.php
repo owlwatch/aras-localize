@@ -92,6 +92,16 @@ $media = [];
 $images = get_field('images');
 $videos = get_field('videos');
 
+if( !empty($videos) ){
+	foreach( $videos as $video ){
+		$media[] = [
+			'type' => 'video',
+			'image' => Template::getYoutubeThumbnailUrlFromVideoUrl($video['youtube_link']),
+			'youtube_url'  => $video['youtube_link']
+		];
+	}
+}
+
 if( !empty($images) ){
 	foreach( $images as $image ){
 		$media[] = [
@@ -104,15 +114,6 @@ if( !empty($images) ){
 	}
 }
 
-if( !empty($videos) ){
-	foreach( $videos as $video ){
-		$media[] = [
-			'type' => 'video',
-			'image' => Template::getYoutubeThumbnailUrlFromVideoUrl($video['youtube_link']),
-			'youtube_url'  => $video['youtube_link']
-		];
-	}
-}
 
 ?>
 <section class="mediumtoppadding mediumbottompadding">
