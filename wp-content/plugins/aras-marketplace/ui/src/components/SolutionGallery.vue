@@ -179,6 +179,11 @@ const thumbsSwiperConfig = {
 		--swiper-theme-color: var(--mp-color-brand);
 		.swiper-slide {
 			cursor: zoom-in;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: auto;
+			background: #f2f2f2;
 		}
 	}
 	// &:deep(.swiper-button-prev),
