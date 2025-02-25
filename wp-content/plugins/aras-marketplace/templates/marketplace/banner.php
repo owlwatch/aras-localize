@@ -12,16 +12,6 @@ $logo = get_field('marketplace_logo', 'option');
 						<?php echo get_field('marketplace_title', 'option'); ?>
 					</span>
 				</a>
-
-				<form class="mp-banner__search">
-					<input 
-						class="mp-banner__search-input"
-						type="search"
-						name="s"
-						placeholder="<?php _e('Find solution', 'aras-marketplace'); ?>"
-						value="<?php echo get_search_query(); ?>"
-					/>
-				</form>
 			</div>
 		</div>
 	</div>

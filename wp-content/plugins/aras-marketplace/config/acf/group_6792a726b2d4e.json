@@ -3,6 +3,28 @@
     "title": "Marketplace Solution Fields",
     "fields": [
         {
+            "key": "field_67bccdad92418",
+            "label": "Solution Title",
+            "name": "solution_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This is the title displayed in cards and on the individual solution page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6792fc34efd01",
             "label": "Contributor",
             "name": "contributor",
@@ -148,16 +170,51 @@
             "allow_in_bindings": 0
         },
         {
-            "key": "field_6792a7904d94e",
-            "label": "Release Notes",
-            "name": "release_notes",
+            "key": "field_67bcca4068dc9",
+            "label": "Release Notes Type",
+            "name": "release_notes_type",
             "aria-label": "",
-            "type": "file",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "download": "Download",
+                "link": "Link"
+            },
+            "default_value": "download",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6792a7904d94e",
+            "label": "Release Notes File",
+            "name": "release_notes_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_67bcca4068dc9",
+                        "operator": "==",
+                        "value": "download"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -168,6 +225,32 @@
             "max_size": "",
             "mime_types": "",
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_67bccd9068dca",
+            "label": "Release Notes Link",
+            "name": "release_notes_link",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_67bcca4068dc9",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": ""
         },
         {
             "key": "field_6792a85d4d94f",
@@ -465,6 +548,54 @@
             "default_value": "",
             "allow_in_bindings": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_67bcd0c1a9fc8",
+            "label": "Sales Email",
+            "name": "sales_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_67bcd1baa5b10",
+            "label": "Pricing",
+            "name": "pricing",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "taxonomy": "marketplace-pricing",
+            "add_term": 1,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "field_type": "radio",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -486,5 +617,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1738954609
+    "modified": 1740427841
 }

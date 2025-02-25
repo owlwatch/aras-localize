@@ -1,11 +1,37 @@
 .mp-solution-filters {
-	display: flex;
-	gap: 1rem;
-	margin-bottom: 1rem;
-	label {
-		font-size: 0.8rem;
-	}
-	fieldset {
-		min-width: 250px;
+	&__form {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		margin-bottom: 2rem;
+		label {
+			font-size: 0.8rem;
+		}
+		input, select {
+			margin-bottom: 0;
+		}
+
+
+		fieldset {
+			min-width: 200px;
+			width: 100%;
+			@media screen and (min-width: 600px) {
+				width: 40%;
+			}
+			@media screen and (min-width: 900px) {
+				width: auto;
+				&.mp-solution-type-search {
+					margin-left: auto;
+				}
+			}
+		}
+
+		button {
+			align-self: flex-end;
+			margin-left: auto;
+			@media screen and (min-width: 600px) {
+				margin-left: 0;
+			}
+		}
 	}
 }

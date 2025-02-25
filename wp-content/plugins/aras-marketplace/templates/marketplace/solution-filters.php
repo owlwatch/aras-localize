@@ -14,53 +14,63 @@ $types = get_terms( array(
 // and check for the current term to set the selected
 ?>
 <div class="mp-solution-filters">
-	<fieldset>
-		<label for="mp-solution-category-filter"><?php _e('Filter by Category', 'aras-marketplace'); ?></label>
-		<select id="mp-solution-category-filter" onchange="window.location=this.value">
-			<option value="<?php echo get_post_type_archive_link( 'mp-solution'); ?>"><?php _e('All Categories', 'aras-marketplace'); ?></option>
-			<?php
-			$current_category = get_query_var('mp-solution-category');
-			foreach( $categories as $category ){
-				?>
+	<form class="mp-solution-filters__form" action="<?php echo get_post_type_archive_link('mp-solution'); ?>" method="get">
+		<fieldset>
+			<label for="mp-solution-category-filter"><?php _e('Filter by Category', 'aras-marketplace'); ?></label>
+			<select id="mp-solution-category-filter" name="mp-solution-category" onchange="document.querySelector('.mp-solution-filters__form').submit()">
+				<option value=""><?php _e('All Categories', 'aras-marketplace'); ?></option>
 				<?php
-				$selected = '';
-				// get the link
-				$link = get_term_link($category);
-				if( ($type = get_query_var('mp-solution-type')) ){
-					$link = add_query_arg( 'mp-solution-type', $type, $link );
-				}
-				if( $current_category == $category->slug ){
-					$selected = 'selected';
-				}
-				?>
-				<option <?php echo $selected ?> value="<?php echo $link; ?>">
-					<?php echo $category->name; ?>
-				</option>
-			<?php } ?>
-		</select>
-	</fieldset>
+				$current_category = get_query_var('mp-solution-category');
+				foreach( $categories as $category ){
+					?>
+					<?php
+					$selected = '';
+					// get the link
+					$value = $category->slug;
+					if( $current_category == $category->slug ){
+						$selected = 'selected';
+					}
+					?>
+					<option <?php echo $selected ?> value="<?php echo esc_attr($value); ?>">
+						<?php echo $category->name; ?>
+					</option>
+				<?php } ?>
+			</select>
+		</fieldset>
 
-	<fieldset>
-		<label for="mp-solution-type-filter"><?php _e('Filter by Type', 'aras-marketplace'); ?></label>
-		<select id="mp-solution-type-filter" onchange="window.location=this.value">
-			<option value="<?php echo get_post_type_archive_link( 'mp-solution'); ?>"><?php _e('All Types', 'aras-marketplace'); ?></option>
-			<?php 
-			$current_type = get_query_var('mp-solution-type');
-			foreach( $types as $type ){ 
-				$selected = '';
-				// get the link
-				$link = get_term_link($type);
-				if( ($category = get_query_var('mp-solution-category')) ){
-					$link = add_query_arg( 'mp-solution-category', $category, $link );
-				}
-				if( $current_type == $type->slug ){
-					$selected = 'selected';
-				}
-				?>
-				<option <?php echo $selected ?> value="<?php echo $link; ?>">
-					<?php echo $type->name; ?>
-				</option>
-			<?php } ?>
-		</select>
-	</fieldset>
+		<fieldset>
+			<label for="mp-solution-type-filter"><?php _e('Filter by Type', 'aras-marketplace'); ?></label>
+			<select id="mp-solution-type-filter" name="mp-solution-type" onchange="document.querySelector('.mp-solution-filters__form').submit()">
+				<option value=""><?php _e('All Types', 'aras-marketplace'); ?></option>
+				<?php 
+				$current_type = get_query_var('mp-solution-type');
+				foreach( $types as $type ){ 
+					$selected = '';
+					// get the link
+					$value = $type->slug;
+					if( $current_type == $type->slug ){
+						$selected = 'selected';
+					}
+					?>
+					<option <?php echo $selected ?> value="<?php echo esc_attr($value); ?>">
+						<?php echo $type->name; ?>
+					</option>
+				<?php } ?>
+			</select>
+		</fieldset>
+
+		<fieldset class="mp-solution-type-search">
+			<label class="mp-solution-type-filter" for="mp-search"><?php _e('Search', 'aras-marketplace'); ?></label>
+			<input 
+				class="mp-banner__search-input"
+				type="search"
+				name="mp-search"
+				placeholder="<?php _e('Search Marketplace', 'aras-marketplace'); ?>"
+				value="<?php echo get_search_query(); ?>"
+			/>
+		</fieldset>
+		<button type="submit" class="mp-solution-filters__submit aras-button">
+			<?php _e('Search', 'aras-marketplace'); ?>
+		</button>
+	</form>
 </div>

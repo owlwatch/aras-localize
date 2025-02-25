@@ -32,6 +32,12 @@ class App {
 	public $templateService;
 
 	/**
+	 * queryService
+	 * @var Aras\Marketplace\Service\Query
+	 */
+	public $queryService;
+
+	/**
 	 * ui
 	 * @var Aras\Marketplace\Service\ViteService
 	 */
@@ -55,7 +61,7 @@ class App {
 			$this->ui
 		);
 
-		
+		$this->queryService = new Service\Query();
 	}
 
 	/**

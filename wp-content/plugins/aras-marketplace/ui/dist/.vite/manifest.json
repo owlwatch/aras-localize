@@ -1,26 +1,26 @@
 {
-  "src/components/Swiper.vue": {
-    "file": "assets/Swiper-B8x3uc0t.js",
-    "name": "Swiper",
-    "src": "src/components/Swiper.vue",
+  "src/components/SolutionGallery.vue": {
+    "file": "assets/SolutionGallery-BvQ6fwmI.js",
+    "name": "SolutionGallery",
+    "src": "src/components/SolutionGallery.vue",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ts"
     ],
     "css": [
-      "assets/Swiper-Bt7vuCX6.css"
+      "assets/SolutionGallery-Bq_BLYhW.css"
     ]
   },
   "src/main.ts": {
-    "file": "assets/main-kFPFKcoz.js",
+    "file": "assets/main-BxYsXTKR.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "dynamicImports": [
-      "src/components/Swiper.vue"
+      "src/components/SolutionGallery.vue"
     ],
     "css": [
-      "assets/main-Bc_KXTIH.css"
+      "assets/main-DwjTPppZ.css"
     ]
   }
 }

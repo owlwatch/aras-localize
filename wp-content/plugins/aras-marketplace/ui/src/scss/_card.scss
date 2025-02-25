@@ -3,8 +3,12 @@
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1.5rem;
-	border: 1px solid var(--mp-light-border);
-	border-radius: 0.5rem;
+	border: 2px solid var(--mp-light-border);
+	transition: 0.2s border-color;
+
+	&:hover {
+		border-color: var(--mp-color-brand);
+	}
 
 	&__header {
 		gap: 1em;
@@ -15,6 +19,13 @@
 			width: auto;
 			height: 3.2em;
 			flex-shrink: 0;
+		}
+
+		&:hover {
+			text-decoration: none;
+			.mp-card__title {
+				color: #333
+			}
 		}
 	}
 
@@ -27,7 +38,9 @@
 
 	&__title {
 		color: #000;
-		font-size: 1.2em;
+		font-size: 1.5em;
+		font-weight: 300;
+		
 	}
 
 	&__excerpt {

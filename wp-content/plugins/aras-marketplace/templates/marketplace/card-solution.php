@@ -8,8 +8,8 @@ $contributor = get_first_term('mp-contributor');
 		
 		<?php if( has_post_thumbnail() ){ ?>
 			<?php the_post_thumbnail('medium', ['class' => 'mp-card__header-image']); ?>
-		<?php }else if( ($square_logo = get_field('square_logo', $contributor )) ){ ?>
-			<?php echo wp_get_attachment_image( $square_logo['id'], 'medium', ['class' => 'mp-card__header-image']); ?>
+		<?php }else if( ($default_solution_icon = get_field('default_solution_icon', $contributor )) ){ ?>
+			<?php echo wp_get_attachment_image( $default_solution_icon['id'], 'medium', ['class' => 'mp-card__header-image']); ?>
 		<?php } ?>
 
 		<span class="mp-card__title">

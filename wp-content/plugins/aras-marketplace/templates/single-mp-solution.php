@@ -15,7 +15,7 @@ $logo = get_post_thumbnail_id();
 if( !$logo ){
 	$contributor = get_first_term('mp-contributor');
 	if( $contributor ){
-		$logo = get_field('square_logo', $contributor);
+		$logo = get_field('default_solution_icon', $contributor);
 		if( $logo ){
 			$logo = $logo['ID'];
 		}
@@ -38,7 +38,20 @@ $specs = [
 	__('Release Date', 'asa-marketplace')    => $release_date
 ];
 
-$release_notes = get_field('release_notes');
+$release_notes_type = get_field('release_notes_type');
+switch( $release_notes_type ){
+	case 'file':
+		$release_notes = get_field('release_notes_file');
+		if( $release_notes ){
+			$release_notes = $release_notes['url'];
+		}
+		break;
+	case 'url':
+		$release_notes = get_field('release_notes_url');
+		break;
+	default:
+		$release_notes = false;
+}
 if( $release_notes ){
 	$specs[__('Release Notes', 'asa-marketplace')] = 
 		'<a href="'.$release_notes['url'].'" target="_blank">'.__('View Release Notes', 'asa-marketplace').'</a>';
@@ -47,6 +60,9 @@ if( $release_notes ){
 $specs[__('Category', 'asa-marketplace')] = get_the_term_list( get_the_ID(), 'mp-solution-category' );
 
 $versions = get_the_terms( get_the_ID(), 'mp-aras-version' );
+usort( $versions, function($a, $b){
+	return version_compare($a->name, $b->name);
+});
 if( !empty($versions) ){
 	$specs[__('Supported Aras Versions', 'asa-marketplace')] = implode(', ', array_map(function($version){
 		return $version->name;
@@ -162,36 +178,10 @@ if( !empty($videos) ){
 
 			<?php
 			if( !empty( $media ) ){
-
-				$small_swiper_config = [
-					'slides' => $media,
-					'swiperConfig' => [
-						'loop' => true,
-						'spaceBetween' => 10,
-						'navigation' => [
-							'nextEl' => '.swiper-button-next',
-							'prevEl' => '.swiper-button-prev',
-						],
-						'breakpoints' => [
-							640 => [
-								'slidesPerView' => 2,
-							],
-							768 => [
-								'slidesPerView' => 3,
-							],
-							1024 => [
-								'slidesPerView' => 4,
-							]
-						]
-					]
-				];
 				?>
 			<div class="mp-solution-page__media-column">
 				<div class="mp-solution-page__gallery">
-					<div class="mp-solution-page__gallery-large-slider">
-					</div>
-
-					<div data-mp-swiper="<?php echo esc_attr( json_encode( $small_swiper_config ) ) ?>">
+					<div data-mp-solution-gallery="<?php echo esc_attr( json_encode( ['media'=>$media] ) ) ?>">
 						
 					</div>
 				</div>
