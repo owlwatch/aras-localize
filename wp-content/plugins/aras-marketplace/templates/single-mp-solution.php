@@ -135,6 +135,29 @@ if( !empty($images) ){
 					<?php
 				}
 				?>
+
+				<?php
+				// show the "type"
+				$type = get_first_term('mp-solution-type');
+				if( $type ){
+					?>
+					<div class="mp-type-label">
+						<?php
+						$icon = get_field('icon', $type);
+						if( $icon ){
+							echo wp_get_attachment_image( $icon['ID'], 'medium', false, [
+								'class' => 'mp-type-label__icon'
+							]);
+						}
+						?>
+						<span class="mp-type-label__name">
+							<?php echo $type->name; ?>
+						</span>
+					</div>
+					<?php
+				}
+				?>
+
 				<div class="mp-solution-page__specifications">
 					<?php
 					foreach( $specs as $label => $value ){
@@ -153,6 +176,8 @@ if( !empty($images) ){
 					}
 					?>
 				</div>
+
+				
 			</div>
 
 			<div class="mp-solution-page__content-column">
