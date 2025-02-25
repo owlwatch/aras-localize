@@ -28,6 +28,9 @@ Template::get_template_part('marketplace/banner');
 				?>
 			</div>
 			<?php
+			// output pagination
+			Template::get_template_part('marketplace/pagination');
+
 		} else {
 			?>
 			<div class="cell">
