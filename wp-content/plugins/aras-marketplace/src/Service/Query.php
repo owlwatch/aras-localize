@@ -29,6 +29,10 @@ class Query
 		}
 
 		if ( is_post_type_archive( 'mp-solution' ) ) {
+			// this should be sorted by release date?
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'meta_key', 'release_date' );
+			$query->set( 'order', 'DESC' );
 			// maybe filter by search
 			if ( $search = get_query_var( 'mp-search' ) ) {
 				$query->set( 's', $search );
