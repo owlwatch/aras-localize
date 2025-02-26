@@ -69,6 +69,16 @@ if( !empty($versions) ){
 	}, $versions));
 }
 
+$is_integration = get_field('is_integration');
+if( $is_integration ){
+	$specs[
+		sprintf( 
+			__('Supported Versions of %s', 'asa-marketplace'), 
+			get_field('integration_tool')
+		)
+	] = get_field('integration_tool_supported_versions');
+}
+
 $languages = get_the_terms( get_the_ID(), 'mp-language' );
 if( !empty($languages) ){
 	$specs[__('Supported Languages', 'asa-marketplace')] = implode(', ', array_map(function($language){
@@ -84,16 +94,6 @@ if( $support_link ){
 $license_agreement_link = get_field('license_agreement_link');
 if( $license_agreement_link ){
 	$specs[__('Legal', 'asa-marketplace')] = '<a href="'.$license_agreement_link.'" target="_blank">'.__('View License Agreement', 'asa-marketplace').'</a>';
-}
-
-$is_integration = get_field('is_integration');
-if( $is_integration ){
-	$specs[
-		sprintf( 
-			__('Supported Versions of %s', 'asa-marketplace'), 
-			get_field('integration_tool')
-		)
-	] = get_field('integration_tool_supported_versions');
 }
 
 // get media
@@ -121,7 +121,7 @@ if( !empty($videos) ){
 			'youtube_url'  => $video['youtube_link']
 		];
 	}
-}
+}	
 
 ?>
 <section class="mediumtoppadding mediumbottompadding">
