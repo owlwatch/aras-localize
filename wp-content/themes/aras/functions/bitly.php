@@ -18,6 +18,9 @@ if( !$bitly_link_map ){
 	$bitly_legacy_links = array_map('str_getcsv', file(get_template_directory() . '/data/bitly-legacy-links.csv'));
 	$keys = array_shift($bitly_legacy_links);
 
+	// reverse the order of $bitly_legacy_links
+	$bitly_legacy_links = array_reverse($bitly_legacy_links);
+
 	$link_index = array_search('Link', $keys);
 	$destination_index = array_search('Destination URL', $keys);
 
