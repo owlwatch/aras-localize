@@ -1,18 +1,5 @@
 <template lang="pug">
 .mp-solution-gallery
-	.mp-solution-gallery__large
-		Swiper.mp-solution-gallery__large-swiper(
-			v-bind="largeSwiperConfig"
-			:thumbs="{swiper: thumbsSwiper}"
-			@activeIndexChange="activeIndexChange"
-			@swiper="setLargeSwiper"
-		)
-			swiper-slide.swiper-slide(
-				v-for="(slide, index) in media"
-				:key="index"
-				@click="openModal(index)"
-			)
-				img(:src="slide.large || slide.image" :alt="slide.alt")
 	.mp-solution-thumbs
 		Swiper(
 			v-bind="thumbsSwiperConfig"
@@ -26,7 +13,19 @@
 					@click="setActiveIndex(index)"
 					:src="slide.large || slide.image" :alt="slide.alt"
 				)
-
+				.mp-solution-gallery__large
+	Swiper.mp-solution-gallery__large-swiper(
+		v-bind="largeSwiperConfig"
+		:thumbs="{swiper: thumbsSwiper}"
+		@activeIndexChange="activeIndexChange"
+		@swiper="setLargeSwiper"
+	)
+		swiper-slide.swiper-slide(
+			v-for="(slide, index) in media"
+			:key="index"
+			@click="openModal(index)"
+		)
+			img(:src="slide.large || slide.image" :alt="slide.alt")
 	// Modal
 teleport(to="body")
 	.modal(v-if="isModalOpen")
@@ -72,6 +71,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.css'
 import { Pagination, Navigation, Controller, Thumbs } from 'swiper/modules'
 
+import { onMounted, onBeforeUnmount } from 'vue';
+
 interface Slide {
 	type: string
 	image?: string,
@@ -79,6 +80,26 @@ interface Slide {
 	youtube_url?: string
 	large?: string
 }
+
+const handleKeydown = (event: KeyboardEvent) => {
+	if (isModalOpen.value) {
+		if (event.key === 'Escape') {
+			closeModal();
+		} else if (event.key === 'ArrowLeft') {
+			prevSlide();
+		} else if (event.key === 'ArrowRight') {
+			nextSlide();
+		}
+	}
+};
+
+onMounted(() => {
+	window.addEventListener('keydown', handleKeydown);
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('keydown', handleKeydown);
+});
 
 const props = defineProps<{
 	media?: Slide[]
@@ -150,16 +171,17 @@ const getYoutubeEmbedUrl = ( url: string ) => {
 }
 
 const largeSwiperConfig = {
-	modules: [Navigation, Thumbs],
+	modules: [Thumbs],
 	slidesPerView: 1,
 	spaceBetween: 30,
-	navigation: true
+	autoHeight: true
 }
 
 const thumbsSwiperConfig = {
-	modules: [Thumbs],
+	modules: [Thumbs, Navigation],
 	slidesPerView: 'auto',
 	spaceBetween: 20,
+	navigation: true,
   watchSlidesProgress: true
 }
 </script>
@@ -175,9 +197,11 @@ const thumbsSwiperConfig = {
 	flex-direction: column;
 	gap: 1rem;
 
+	--swiper-navigation-size: 20px;
+	--swiper-theme-color: var(--mp-color-brand);
+
 	&__large-swiper {
-		--swiper-navigation-size: 20px;
-		--swiper-theme-color: var(--mp-color-brand);
+		width: 100%;
 		.swiper-slide {
 			cursor: zoom-in;
 			display: flex;
@@ -260,6 +284,10 @@ const thumbsSwiperConfig = {
 		max-width: calc(100% - 2rem);
 		max-height: calc(100% - 4rem);
 		overflow: visible;
+		img {
+			max-width: 100%;
+			max-height: 100%;
+		}
 	}
 	&-close {
 		position: absolute;
