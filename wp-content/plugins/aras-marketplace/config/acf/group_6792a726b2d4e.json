@@ -324,7 +324,7 @@
             "return_format": "array",
             "library": "all",
             "min": "",
-            "max": 4,
+            "max": "",
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -617,5 +617,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1740427841
+    "modified": 1740537434
 }
