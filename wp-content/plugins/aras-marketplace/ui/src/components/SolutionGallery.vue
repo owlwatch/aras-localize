@@ -1,6 +1,7 @@
 <template lang="pug">
 .mp-solution-gallery
-	.mp-solution-thumbs
+	.mp-solution-gallery__thumbs
+		
 		Swiper(
 			v-bind="thumbsSwiperConfig"
 			@swiper="setThumbsSwiper"
@@ -13,20 +14,55 @@
 					@click="setActiveIndex(index)"
 					:src="slide.large || slide.image" :alt="slide.alt"
 				)
-				.mp-solution-gallery__large
-	Swiper.mp-solution-gallery__large-swiper(
-		v-bind="largeSwiperConfig"
-		:thumbs="{swiper: thumbsSwiper}"
-		@activeIndexChange="activeIndexChange"
-		@swiper="setLargeSwiper"
-	)
-		swiper-slide.swiper-slide(
-			v-for="(slide, index) in media"
-			:key="index"
-			@click="openModal(index)"
+	.mp-solution-gallery__nav
+		button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
+			@click="prevSlide()"
+			:disabled="!hasPrev()"
+			type="button"
 		)
-			img(:src="slide.large || slide.image" :alt="slide.alt")
-	// Modal
+			svg(
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				fill="currentColor"
+				class="bi bi-chevron-left"
+				viewBox="0 0 16 16"
+			)
+				path(
+					fill-rule="evenodd"
+					d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+				)
+		button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
+			@click="nextSlide()"
+			:disabled="!hasNext()"
+			type="button"
+		)
+			svg(
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				fill="currentColor"
+				class="bi bi-chevron-right"
+				viewBox="0 0 16 16"
+			)
+				path(
+					fill-rule="evenodd"
+					d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+				)
+	.mp-solution-gallery__large
+		Swiper.mp-solution-gallery__large-swiper(
+			v-bind="largeSwiperConfig"
+			:thumbs="{swiper: thumbsSwiper}"
+			@activeIndexChange="activeIndexChange"
+			@swiper="setLargeSwiper"
+		)
+			swiper-slide.swiper-slide(
+				v-for="(slide, index) in media"
+				:key="index"
+				@click="openModal(index)"
+			)
+				img(:src="slide.large || slide.image" :alt="slide.alt")
+// Modal
 teleport(to="body")
 	.modal(v-if="isModalOpen")
 		.modal-content
@@ -57,12 +93,37 @@ teleport(to="body")
 					@click="prevSlide"
 					type="button"
 					:disabled="!hasPrev()"
-				) ←
+				)
+					svg(
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-chevron-left"
+						viewBox="0 0 16 16"
+					)
+						path(
+							fill-rule="evenodd"
+							d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+						)
+					
 				button.modal-nav.modal-next(
 					@click="nextSlide"
 					type="button"
 					:disabled="!hasNext()"
-				) →
+				)
+					svg(
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-chevron-right"
+						viewBox="0 0 16 16"
+					)
+						path(
+							fill-rule="evenodd"
+							d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+						)
 </template>
 
 <script lang="ts" setup>
@@ -181,7 +242,10 @@ const thumbsSwiperConfig = {
 	modules: [Thumbs, Navigation],
 	slidesPerView: 'auto',
 	spaceBetween: 20,
-	navigation: true,
+	navigation: {
+		nextEl: '.mp-solution-gallery__thumbs-nav--next',
+		prevEl: '.mp-solution-gallery__thumbs-nav--prev'
+	},
   watchSlidesProgress: true
 }
 </script>
@@ -199,6 +263,49 @@ const thumbsSwiperConfig = {
 
 	--swiper-navigation-size: 20px;
 	--swiper-theme-color: var(--mp-color-brand);
+
+	&__thumbs {
+		display: flex;
+		gap: 10px;
+	}
+
+	&__nav {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		align-self: center;
+		width: 100%;
+		justify-content: space-between;
+		&-button {
+			font-size: 0.9em;
+			border-radius: 50%;
+			height: 1.5em;
+			width: 1.5em;
+			color: inherit;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #ccc;
+			cursor: pointer;
+			svg {
+				width: 60%;
+				height: 60%;
+			}
+			&:hover:not(:disabled) {
+				background-color: var(--mp-color-brand);
+				color: #fff;
+			}
+			&:disabled {
+				opacity: 0.2;
+			}
+			&--prev svg {
+				// transform: translateX(-10%);
+			}
+			&--next svg {
+				// transform: translateX(10%);
+			}
+		}
+	}
 
 	&__large-swiper {
 		width: 100%;
