@@ -78,16 +78,18 @@ teleport(to="body")
 						d="M18.3 5.71a1 1 0 00-1.42 0L12 10.59 7.12 5.71a1 1 0 00-1.42 1.42L10.59 12l-4.89 4.88a1 1 0 001.42 1.42L12 13.41l4.88 4.89a1 1 0 001.42-1.42L13.41 12l4.89-4.88a1 1 0 000-1.41z"
 					)
 			template( v-if="media[modalIndex].youtube_url" )
-				iframe.mp-solution-gallery__youtube(
-					:src="getYoutubeEmbedUrl(media[modalIndex].youtube_url)"
-					frameborder="0"
-					width="16"
-					height="9"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen
-				)
+				div.modal-media-wrap
+					iframe.mp-solution-gallery__youtube(
+						:src="getYoutubeEmbedUrl(media[modalIndex].youtube_url)"
+						frameborder="0"
+						width="16"
+						height="9"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					)
 			template(v-else)
-				img(:src="media[modalIndex].large || media[modalIndex].image" :alt="media[modalIndex].alt")
+				div.modal-media-wrap
+					img(:src="media[modalIndex].large || media[modalIndex].image" :alt="media[modalIndex].alt")
 			.modal-nav.mp-solution-gallery__nav(style="margin-top: 10px")
 				button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
 					@click="prevSlide"
@@ -127,7 +129,7 @@ teleport(to="body")
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.css'
 import { Pagination, Navigation, Controller, Thumbs } from 'swiper/modules'
@@ -141,26 +143,6 @@ interface Slide {
 	youtube_url?: string
 	large?: string
 }
-
-const handleKeydown = (event: KeyboardEvent) => {
-	if (isModalOpen.value) {
-		if (event.key === 'Escape') {
-			closeModal();
-		} else if (event.key === 'ArrowLeft') {
-			prevSlide();
-		} else if (event.key === 'ArrowRight') {
-			nextSlide();
-		}
-	}
-};
-
-onMounted(() => {
-	window.addEventListener('keydown', handleKeydown);
-});
-
-onBeforeUnmount(() => {
-	window.removeEventListener('keydown', handleKeydown);
-});
 
 const props = defineProps<{
 	media?: Slide[]
@@ -248,6 +230,42 @@ const thumbsSwiperConfig = {
 	},
   watchSlidesProgress: true
 }
+
+// modal stuff
+const handleOutsideClick = (event: MouseEvent) => {
+	if (isModalOpen.value && !(event.target as HTMLElement).closest('.modal-content')) {
+		closeModal();
+	}
+};
+watch(isModalOpen, (val) => {
+	if (val) {
+		setTimeout(() => window.addEventListener('click', handleOutsideClick), 1);	
+		document.body.style.overflow = 'hidden';
+	} else {
+		window.removeEventListener('click', handleOutsideClick);
+		document.body.style.overflow = '';
+	}
+});
+
+const handleKeydown = (event: KeyboardEvent) => {
+	if (isModalOpen.value) {
+		if (event.key === 'Escape') {
+			closeModal();
+		} else if (event.key === 'ArrowLeft') {
+			prevSlide();
+		} else if (event.key === 'ArrowRight') {
+			nextSlide();
+		}
+	}
+};
+
+onMounted(() => {
+	window.addEventListener('keydown', handleKeydown);
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('keydown', handleKeydown);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -292,7 +310,7 @@ const thumbsSwiperConfig = {
 				width: 60%;
 				height: 60%;
 			}
-			&:hover:not(:disabled) {
+			&:hover:not(:disabled) {	
 				background-color: var(--mp-color-brand);
 				color: #fff;
 			}
@@ -303,7 +321,7 @@ const thumbsSwiperConfig = {
 				transform: translateX(-5%);
 			}
 			&--next svg {
-				transform: translateX(15%);
+				transform: translateX(10%);
 			}
 		}
 	}
@@ -392,7 +410,17 @@ const thumbsSwiperConfig = {
 		max-width: calc(100% - 2rem);
 		max-height: calc(100% - 4rem);
 		overflow: visible;
-		img {
+		display: flex;
+		flex-direction: column;
+	}
+	&-media-wrap {
+		flex: 1 auto;
+		max-width: 100%;
+		max-height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		iframe, img {
 			max-width: 100%;
 			max-height: 100%;
 		}
@@ -405,23 +433,6 @@ const thumbsSwiperConfig = {
 		
 		color: #fff;
 	}
-	&-nav {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		font-size: 2rem;
-		line-height: 1;
-		color: var(--mp-color-brand);
-		cursor: pointer;
-		&:disabled {
-			opacity: 0.3;
-		}
-		&.modal-prev {
-			margin-right: auto;
-		}
-		&.modal-next {
-			margin-left: auto;
-		}
-	}
+	
 }
 </style>
