@@ -45,6 +45,7 @@ teleport(to="body")
 			template( v-if="media[modalIndex].youtube_url" )
 				iframe.mp-solution-gallery__youtube(
 					:src="getYoutubeEmbedUrl(media[modalIndex].youtube_url)"
+					frameborder="0"
 					width="16"
 					height="9"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -195,6 +196,7 @@ const thumbsSwiperConfig = {
 		width: 900px;
 		height: auto;
 		aspect-ratio: 16/9;
+		border-width: 0;
 	}
 }
 
