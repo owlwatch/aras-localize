@@ -29,15 +29,39 @@ class Query
 		}
 
 		if ( is_post_type_archive( 'mp-solution' ) ) {
-			// this should be sorted by release date?
-			$query->set( 'orderby', 'meta_value' );
-			$query->set( 'meta_key', 'release_date' );
-			$query->set( 'order', 'DESC' );
+			
+			$query->set( 'orderby', 'post_title' );
+			$query->set( 'order', 'ASC' );
 			// maybe filter by search
 			if ( $search = get_query_var( 'mp-search' ) ) {
 				$query->set( 's', $search );
+
+				// expand the search into the "brief_description"
+				$query->set( 'meta_query', array(
+					'relation' => 'OR',
+					array(
+						'key' => 'brief_description',
+						'value' => $search,
+						'compare' => 'LIKE'
+					)
+				));
+
+				// can we search by a the name of a taxonomy term
+				// // that this has?
+				// $taxonomies = array( 'mp-solution-category', 'mp-solution-type', 'mp-contributor' );
+				// $tax_query = array();
+				// foreach( $taxonomies as $taxonomy ) {
+				// 	$tax_query[] = array(
+				// 		'taxonomy' => $taxonomy,
+				// 		'field' => 'name',
+				// 		'terms' => $search,
+				// 		'operator' => 'IN'
+				// 	);
+				// }
+				// $query->set( 'tax_query', $tax_query );
 			}
 		}
 	}
+
 
 }

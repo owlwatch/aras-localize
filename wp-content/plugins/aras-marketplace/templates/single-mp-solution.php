@@ -86,21 +86,20 @@ if( $license_agreement_link ){
 	$specs[__('Legal', 'asa-marketplace')] = '<a href="'.$license_agreement_link.'" target="_blank">'.__('View License Agreement', 'asa-marketplace').'</a>';
 }
 
+$is_integration = get_field('is_integration');
+if( $is_integration ){
+	$specs[
+		sprintf( 
+			__('Supported Versions of %s', 'asa-marketplace'), 
+			get_field('integration_tool')
+		)
+	] = get_field('integration_tool_supported_versions');
+}
 
 // get media
 $media = [];
 $images = get_field('images');
 $videos = get_field('videos');
-
-if( !empty($videos) ){
-	foreach( $videos as $video ){
-		$media[] = [
-			'type' => 'video',
-			'image' => Template::getYoutubeThumbnailUrlFromVideoUrl($video['youtube_link']),
-			'youtube_url'  => $video['youtube_link']
-		];
-	}
-}
 
 if( !empty($images) ){
 	foreach( $images as $image ){
@@ -114,6 +113,15 @@ if( !empty($images) ){
 	}
 }
 
+if( !empty($videos) ){
+	foreach( $videos as $video ){
+		$media[] = [
+			'type' => 'video',
+			'image' => Template::getYoutubeThumbnailUrlFromVideoUrl($video['youtube_link']),
+			'youtube_url'  => $video['youtube_link']
+		];
+	}
+}
 
 ?>
 <section class="mediumtoppadding mediumbottompadding">
@@ -129,7 +137,7 @@ if( !empty($images) ){
 				// if this is downloadable, show a button
 				if( get_field('is_downloadable') ){
 					?>
-					<a href="<?php echo get_field('download_link'); ?>" class="aras-button mp-solution-page__download-button">
+					<a href="<?php echo get_field('download_link'); ?>" target="_blank" class="aras-button mp-solution-page__download-button">
 						<?php _e('Get it', 'aras-marketplace'); ?>
 					</a>
 					<?php
