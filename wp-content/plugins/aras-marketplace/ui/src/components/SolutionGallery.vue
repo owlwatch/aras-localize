@@ -88,8 +88,8 @@ teleport(to="body")
 				)
 			template(v-else)
 				img(:src="media[modalIndex].large || media[modalIndex].image" :alt="media[modalIndex].alt")
-			.modal-nav
-				button.modal-nav.modal-prev(
+			.modal-nav.mp-solution-gallery__nav(style="margin-top: 10px")
+				button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
 					@click="prevSlide"
 					type="button"
 					:disabled="!hasPrev()"
@@ -107,7 +107,7 @@ teleport(to="body")
 							d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
 						)
 					
-				button.modal-nav.modal-next(
+				button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
 					@click="nextSlide"
 					type="button"
 					:disabled="!hasNext()"
@@ -277,7 +277,7 @@ const thumbsSwiperConfig = {
 		width: 100%;
 		justify-content: space-between;
 		&-button {
-			font-size: 0.9em;
+			font-size: 1rem;
 			border-radius: 50%;
 			height: 1.5em;
 			width: 1.5em;
@@ -286,6 +286,7 @@ const thumbsSwiperConfig = {
 			align-items: center;
 			justify-content: center;
 			background: #ccc;
+			color: #000;
 			cursor: pointer;
 			svg {
 				width: 60%;
@@ -299,10 +300,10 @@ const thumbsSwiperConfig = {
 				opacity: 0.2;
 			}
 			&--prev svg {
-				// transform: translateX(-10%);
+				transform: translateX(-5%);
 			}
 			&--next svg {
-				// transform: translateX(10%);
+				transform: translateX(15%);
 			}
 		}
 	}
