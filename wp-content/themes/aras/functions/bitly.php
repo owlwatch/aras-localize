@@ -18,7 +18,11 @@ if( !$bitly_link_map ){
 	$bitly_legacy_links = array_map('str_getcsv', file(get_template_directory() . '/data/bitly-legacy-links.csv'));
 	$keys = array_shift($bitly_legacy_links);
 
+	// reverse the order of $bitly_legacy_links
+	$bitly_legacy_links = array_reverse($bitly_legacy_links);
+
 	$link_index = array_search('Link', $keys);
+	$custom_link_index = array_search('Custom Link', $keys);
 	$destination_index = array_search('Destination URL', $keys);
 
 	if( $link_index === false || $destination_index === false ) {
@@ -34,8 +38,9 @@ if( !$bitly_link_map ){
 			error_log("Row $i has a different number of columns than the header row");
 			continue;
 		}
-		// get the path from the link
-		$link_path = parse_url($row[$link_index], PHP_URL_PATH);
+		// get the path from the custom link
+		$link = !empty($row[$custom_link_index]) ? $row[$custom_link_index] : $row[$link_index];
+		$link_path = parse_url($link, PHP_URL_PATH);
 		$bitly_link_map[$link_path] = $row[$destination_index];
 	}
 
