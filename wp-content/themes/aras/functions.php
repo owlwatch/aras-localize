@@ -123,3 +123,5 @@ require_once(get_template_directory() . '/functions/seo.php');
 require_once(get_template_directory() . '/functions/bitly.php');
 
 require_once(get_template_directory() . '/functions/qualified.php');
+
+require_once(get_template_directory() . '/functions/sitemap.php');

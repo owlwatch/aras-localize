@@ -16,7 +16,8 @@ get_header(); ?>
                 <?php
                 $args = array(
                     'title_li' => '',
-                    'sort_column' => 'menu_order'
+                    'sort_column' => 'menu_order',
+                    'walker' => new Aras\Sitemap_Walker()
                 );
                 wp_list_pages($args);
                 ?>
@@ -25,91 +26,54 @@ get_header(); ?>
 
             <h2>Resources</h2>
             <ul>
-                <?php $resource_posts = new WP_Query(
-                    array(
-                        'post_type' => 'resource',
-                        'posts_per_page' => -1
-                    )
-                ); ?>
-                <?php while ($resource_posts->have_posts()) : $resource_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '"  href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
+                <?php
+                $args = array(
+                    'title_li' => '',
+                    'sort_column' => 'menu_order',
+                    'post_type' => 'resource',
+                    'walker' => new Aras\Sitemap_Walker()
+                );
+                wp_list_pages($args);
+                ?>
             </ul>
 
             <h2>Blog</h2>
             <ul>
-                <?php $blog_posts = new WP_Query(
-                    array(
-                        'posts_per_page' => -1
-                    )
-                ); ?>
-                <?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '" href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
+            <?php
+                $args = array(
+                    'title_li' => '',
+                    'sort_column' => 'menu_order',
+                    'post_type' => 'post',
+                    'walker' => new Aras\Sitemap_Walker()
+                );
+                wp_list_pages($args);
+                ?>
             </ul>
 
             <h2>News</h2>
             <ul>
-                <?php $news_posts = new WP_Query(
-                    array(
-                        'post_type' => 'news_type',
-                        'posts_per_page' => -1
-                    )
-                ); ?>
-                <?php while ($news_posts->have_posts()) : $news_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '" href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
+            <?php
+                $args = array(
+                    'title_li' => '',
+                    'sort_column' => 'menu_order',
+                    'post_type' => 'news',
+                    'walker' => new Aras\Sitemap_Walker()
+                );
+                wp_list_pages($args);
+                ?>
             </ul>
-
-            <h2>Events</h2>
-            <!--<ul>
-            <?php $news_posts = new WP_Query(
-                array(
-                    'post_type' => 'news_type',
-                    'posts_per_page' => -1
-                )
-            ); ?>
-                <?php while ($news_posts->have_posts()) : $news_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '" href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
-            </ul>-->
-
-            <h2>Partners</h2>
-            <!--<ul>
-            <?php $news_posts = new WP_Query(
-                array(
-                    'post_type' => 'news_type',
-                    'posts_per_page' => -1
-                )
-            ); ?>
-                <?php while ($news_posts->have_posts()) : $news_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '" href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
-            </ul>-->
 
             <h2>Documentation</h2>
             <ul>
-                <?php $documentation_posts = new WP_Query(
-                    array(
-                        'post_type' => 'documentation',
-                        'posts_per_page' => -1
-                    )
-                ); ?>
-                <?php while ($documentation_posts->have_posts()) : $documentation_posts->the_post(); ?>
-                    <li>
-                        <?php the_title('<a aria-label="' . the_title_attribute('echo=0') . '" href="' . get_permalink() . '" title="' . the_title_attribute('echo=0') . '" rel="bookmark">', '</a>'); ?>
-                    </li>
-                <?php endwhile; ?>
+            <?php
+                $args = array(
+                    'title_li' => '',
+                    'sort_column' => 'menu_order',
+                    'post_type' => 'documentation',
+                    'walker' => new Aras\Sitemap_Walker()
+                );
+                wp_list_pages($args);
+                ?>
             </ul>
 
         </div>
