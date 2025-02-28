@@ -40,21 +40,21 @@ $specs = [
 
 $release_notes_type = get_field('release_notes_type');
 switch( $release_notes_type ){
-	case 'file':
+	case 'download':
 		$release_notes = get_field('release_notes_file');
 		if( $release_notes ){
 			$release_notes = $release_notes['url'];
 		}
 		break;
-	case 'url':
-		$release_notes = get_field('release_notes_url');
+	case 'link':
+		$release_notes = get_field('release_notes_link');
 		break;
 	default:
 		$release_notes = false;
 }
 if( $release_notes ){
 	$specs[__('Release Notes', 'asa-marketplace')] = 
-		'<a href="'.$release_notes['url'].'" target="_blank">'.__('View Release Notes', 'asa-marketplace').'</a>';
+		'<a href="'.$release_notes.'" target="_blank">'.__('View Release Notes', 'asa-marketplace').'</a>';
 }
 
 $specs[__('Category', 'asa-marketplace')] = get_the_term_list( get_the_ID(), 'mp-solution-category' );
