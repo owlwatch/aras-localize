@@ -69,6 +69,14 @@ class Sitemap {
 			'exclude_from_html_sitemap',
 			1
 		));
+
+		// also exclude any posts that are set to "noindex" through Yoast
+		$excluded_post_ids = array_merge($excluded_post_ids, $wpdb->get_col($wpdb->prepare(
+			"SELECT post_id FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %s",
+			'_yoast_wpseo_meta-robots-noindex',
+			1
+		)));
+		
 		return array_merge($exclude, $excluded_post_ids);
 	}
 
