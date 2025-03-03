@@ -26,7 +26,7 @@ class PasswordProtect
 	{
 
 		if( is_user_logged_in() ){
-			//return;
+			return;
 		}
 
 		$this->isProtected = get_field('marketplace_private', 'option');
