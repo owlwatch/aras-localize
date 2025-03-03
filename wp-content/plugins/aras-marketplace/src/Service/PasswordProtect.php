@@ -35,13 +35,13 @@ class PasswordProtect
 			$this->password = get_field('marketplace_password', 'option');
 
 			// check for the cookie
-			if( !empty($_COOKIE[$this->password]) ) {
+			if( !empty($_COOKIE['wordpress_'.$this->password]) ) {
 				$this->isProtected = false;
 			}
 
 			// check for the password in the request
-			else if (isset($_GET[$this->password])) {
-				setcookie( $this->password, '1', time() + 3600, '/');
+			if (isset($_GET[$this->password])) {
+				setcookie( 'wordpress_'.$this->password, '1', time() + 3600, '/');
 				$this->isProtected = false;
 			}
 
