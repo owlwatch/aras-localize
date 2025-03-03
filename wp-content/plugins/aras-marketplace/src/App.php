@@ -44,6 +44,12 @@ class App {
 	public $ui;
 
 	/**
+	 * passwordProtectService
+	 * @var Aras\Marketplace\Service\PasswordProtect
+	 */
+	public $passwordProtectService;
+
+	/**
 	 * The constructor
 	 */
 	private function __construct() {
@@ -62,6 +68,7 @@ class App {
 		);
 
 		$this->queryService = new Service\Query();
+		$this->passwordProtectService = new Service\PasswordProtect();
 	}
 
 	/**
