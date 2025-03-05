@@ -21,7 +21,17 @@ class Template {
 	public function __construct( ViteService $ui)
 	{
 		$this->ui = $ui;
+		
 		add_filter( 'template_include', array( $this, 'template_include' ) );
+		add_filter( 'the_title', array( $this, 'the_title' ), 10, 2 );
+	}
+
+	public function the_title( $title, $id )
+	{
+		if( get_post_type($id) === 'mp-solution' && ($solution_title = get_field('solution_title', $id)) ){
+			$title = $solution_title;
+		}
+		return $title;
 	}
 
 	public function template_include( $template )

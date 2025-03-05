@@ -9,7 +9,7 @@
             "aria-label": "",
             "type": "text",
             "instructions": "This is the title displayed in cards and on the individual solution page",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -31,7 +31,7 @@
             "aria-label": "",
             "type": "taxonomy",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
@@ -596,6 +596,28 @@
             "bidirectional": 0,
             "multiple": 0,
             "bidirectional_target": []
+        },
+        {
+            "key": "field_67c85c17418c8",
+            "label": "Solution Code",
+            "name": "solution_code",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "For internal use",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -617,5 +639,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1740537434
+    "modified": 1741184058
 }
