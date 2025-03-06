@@ -16,11 +16,11 @@ class Permalinks
 	// <Contributor> - <Solution Title>
 	public function generate_default_permalink($post_id)
 	{
-		$contributor = get_first_term('mp-contributor', $post_id);
-		$contributor_name = $contributor ? $contributor->name : '';
-		$solution_title = get_the_title($post_id);
-		$permalink = sanitize_title($contributor_name . ' - ' . $solution_title);
-		return $permalink;
+		// $contributor = get_first_term('mp-contributor', $post_id);
+		// $contributor_name = $contributor ? $contributor->name : '';
+		// $solution_title = get_the_title($post_id);
+		// $permalink = sanitize_title($contributor_name . ' - ' . $solution_title);
+		// return $permalink;
 	}
 
 }
