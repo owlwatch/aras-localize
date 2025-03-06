@@ -63,27 +63,32 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</div>
-			
 			<?php
 			$nav_post_id = $current_post_id = get_queried_object_id();
 			// check if 'use_parent_page_navigation' is set to true
 			$use_parent_nav = get_field('use_parent_page_navigation');
 
-			if( $use_parent_nav ){
-				// get the parent page ID
-				$parent_id = wp_get_post_parent_id( $current_post_id );
-				
-				// if the parent ID is 0, then we are on the parent page
-				// so we can use the parent page ID
-				if( $parent_id == 0 ){
-					
-				}
-				else {
-					// lets use setup_postdata to set the parent page as the current
-					// page so we can get the navigation from the parent page
-					$nav_post_id = $parent_id;
+			if ($use_parent_nav) {
+				while( $use_parent_nav ){
+					// get the parent page ID
+					$parent_id = wp_get_post_parent_id($current_post_id);
+					// if the parent ID is 0, then we are on the parent page
+					// so we can use the parent page ID
+					if ($parent_id == 0) {
+						$use_parent_nav = false;
+					} else {
+						$use_parent_nav = get_field('use_parent_page_navigation', $parent_id);
+						if( !$use_parent_nav ){
+
+						// lets use setup_postdata to set the parent page as the current
+						// page so we can get the navigation from the parent page
+							$nav_post_id = $parent_id;
+							$current_post_id = $parent_id;
+						}
+					}
 				}
 			}
+			?>
 			?>
 
 			<?php if (have_rows('simplified_navigation', $nav_post_id)) : ?>
