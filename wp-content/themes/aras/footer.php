@@ -40,7 +40,7 @@
 						<?php while (have_rows('footer_nav_column', 'option')) : the_row(); ?>
 							<div class="footer-column">
 								<?php if (get_sub_field('footer_column_label', 'option')) : ?>
-									<h6><?php echo get_sub_field('footer_column_label', 'option'); ?></h6>
+									<div class="h6"><?php echo get_sub_field('footer_column_label', 'option'); ?></div>
 								<?php endif; ?>
 								<?php if (have_rows('footer_column_items', 'option')) : ?>
 									<?php while (have_rows('footer_column_items', 'option')) : the_row(); ?>
@@ -61,7 +61,7 @@
 				<?php endif; ?>
 				<div class="cell small-12 medium-auto large-shrink footer-social small-order-3 medium-order-2 large-order-3">
 					<?php if (get_field('social_label', 'option')) : ?>
-						<h6><?php echo get_field('social_label', 'option'); ?></h6>
+						<div class="h6"><?php echo get_field('social_label', 'option'); ?></div>
 					<?php endif; ?>
 					<?php if (have_rows('social_links', 'option')) : ?>
 						<div class="footer-socials">
