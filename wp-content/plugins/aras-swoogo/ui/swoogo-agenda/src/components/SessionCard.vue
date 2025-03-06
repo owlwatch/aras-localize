@@ -46,7 +46,9 @@ function formatTime(time: string) {
 		// show date
 		.swoogo-session-card__date(v-if="props.showDate")
 			| {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
-		span.swoogo-session-card__track.swoogo-pill {{ session.track.name}} 
+		span.swoogo-session-card__track.swoogo-pill(
+			v-if="session.track"
+		) {{ session.track.name}} 
 		a.swoogo-session-card__title(
 			href="#"
 			@click.prevent="activeModalSession = session"

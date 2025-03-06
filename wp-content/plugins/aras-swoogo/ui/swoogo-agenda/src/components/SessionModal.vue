@@ -50,7 +50,9 @@ const formatTime = (time: string) => {
 modal(@close="emit('close')" :show-close-button="false")
 	template(v-slot:header)
 		
-		.swoogo-pill {{ session.track.name }}
+		.swoogo-pill(
+			v-if="session.track"
+		) {{ session.track.name }}
 		// modal header
 		h2 {{ session.name }}
 
