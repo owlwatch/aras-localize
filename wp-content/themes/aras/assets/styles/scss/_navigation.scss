@@ -320,6 +320,17 @@
         padding: .5rem 1rem;
         min-width: 60px;
 
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        &:after {
+          position: static;
+          margin-top: 0;
+          margin-bottom: 0;
+          border-top-color: currentColor;
+        }
+
         @include breakpoint(medium only) {
           padding: 10px;
           margin-bottom: 0;
