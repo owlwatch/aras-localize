@@ -591,7 +591,7 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 	$body_params = array(
 		'Name' => $sendName,
 		'Campaign_Friendly_Name__c' => $campaignFriendlyName,
-		//'Asset_Name__c' => $title_of_page,
+		'Asset_Name__c' => $title_of_page,
 		'StartDate' => date('Y-m-d'),
 		'Asset_Link__c'	=> $url_of_page,
 		'Language__c' => $sendLanguage,
@@ -604,6 +604,13 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 	);
 	if (!empty($resourceType)) {
 		$body_params['Asset_Type__c'] = $resourceType;
+	}
+
+	// add utm parameters
+	if (strpos($url_of_page, '/events/') !== false) {
+		$body_params['UTM_Medium__c'] = 'event';
+		$body_params['UTM_Source__c'] = 'aras-events';
+		$body_params['UTM_Content__c'] = 'webinar';
 	}
 
 	$body = wp_json_encode($body_params);
