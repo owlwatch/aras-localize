@@ -60,7 +60,7 @@
 
 								<?php endif; ?>
 
-								<?php if ( get_sub_field('has_dropdown') ) : ?>
+								<?php if (get_sub_field('has_dropdown')) : ?>
 									<ul class="menu vertical nested bg-dblue submenu is-accordion-submenu">
 										<?php while (have_rows('dropdown_items')) : the_row(); ?>
 											<li>
@@ -82,31 +82,9 @@
 						<?php endwhile; /* Endwhile meganav */ ?>
 					</ul>
 				<?php endif; /* Endif meganav */ ?>
-<?php endwhile; ?>
-</nav>
-<?php endif; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			<?php endwhile; ?>
+		<?php endif; ?>
+	</nav>
 <?php else : ?>
 	<nav class="off-canvas position-right" id="off-canvas" data-off-canvas>
 		<div class="upper-nav">
