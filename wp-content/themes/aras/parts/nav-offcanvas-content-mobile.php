@@ -12,9 +12,10 @@
 	$use_parent_nav = get_field('use_parent_page_navigation');
 
 	if ($use_parent_nav) {
+		$parent_id = $current_post_id;
 		while( $use_parent_nav ){
 			// get the parent page ID
-			$parent_id = wp_get_post_parent_id($current_post_id);
+			$parent_id = wp_get_post_parent_id($parent_id);
 			// if the parent ID is 0, then we are on the parent page
 			// so we can use the parent page ID
 			if ($parent_id == 0) {
