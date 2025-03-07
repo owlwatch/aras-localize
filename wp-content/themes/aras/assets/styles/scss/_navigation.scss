@@ -324,6 +324,10 @@
         align-items: center;
         gap: 6px;
 
+        .is-active >& {
+          background-color: #fff;
+        }
+
         &:after {
           position: static;
           margin-top: 0;
