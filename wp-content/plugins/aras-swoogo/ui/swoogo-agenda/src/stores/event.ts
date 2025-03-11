@@ -4,7 +4,9 @@ import {useScrollLock} from '@vueuse/core';
 
 interface SwoogoField {
 	id: number
+	attribute: string
 	name: string
+	type: string
 }
 
 interface EventData {
@@ -59,12 +61,22 @@ interface Speaker {
 interface Sponsor {
 	id: number
 	name: string
+	description: string
 	logo_id: string
+	video_url: string
+	company_asset: string
+	primary_contact: string
+	primary_contact_email: string
+	primary_contact_phone: string
+	sponsor_order: string
+	presentation_title: string
+	exhibition_title: string
 	level?: {
 		id: number,
 		value: string
 	}
 	eventIds?: number[]
+	[key: string]: any
 }
 
 interface Track {
@@ -77,6 +89,28 @@ interface Location {
 	id: number
 	name: string
 	eventIds?: number[]
+}
+const mapFields = ( data:any, fields: SwoogoField[] ) => {
+	// map fields
+	fields.forEach( field => {
+		if( field.attribute in data ){
+			// only if the sponsor field starts with c_
+			if( field.attribute.match(/^c_/) ){
+				// the key should be the name all lowercase with _ instead of spaces
+				let key = field.name.toLowerCase().replace(/\s+/g,'_');
+				// if the key is already in the sponsor, add the type
+				if( key in data ){
+					key = key + '_' + field.type;
+				}
+				// if the key is not in the sponsor, add the field to the sponsor object
+				if( !(key in data) ){
+					// add the field to the sponsor object
+					data[key] = data[field.attribute];
+					delete data[field.attribute];
+				}
+			}
+		}
+	});
 }
 
 export const useEventStore = defineStore('event', () => {
@@ -106,11 +140,15 @@ export const useEventStore = defineStore('event', () => {
 		}
 
 		data.sponsors.forEach( sponsor => {
+			// use field map to update sponsor data
+			
 			let existing = sponsors.value.find( s => s.id == sponsor.id );
 			if( existing ) {
 				existing.eventIds?.push( eventId );
 			}
 			else {
+				// map fields
+				mapFields( sponsor, data.sponsorFields );
 				sponsor.eventIds = [eventId];
 				sponsors.value.push( sponsor );
 			}
@@ -122,6 +160,7 @@ export const useEventStore = defineStore('event', () => {
 				existing.eventIds?.push( eventId );
 			}
 			else {
+				mapFields( speaker, data.contactFields );
 				speaker.eventIds = [eventId];
 				speakers.value.push( speaker );
 			}
@@ -133,6 +172,7 @@ export const useEventStore = defineStore('event', () => {
 				existing.eventIds?.push( eventId );
 			}
 			else {
+				// mapFields( track, data.trackFields );
 				track.eventIds = [eventId];
 				tracks.value.push( track );
 			}
@@ -144,6 +184,7 @@ export const useEventStore = defineStore('event', () => {
 				existing.eventIds?.push( eventId );
 			}
 			else {
+				// mapFields( location, data.locationFields );
 				location.eventIds = [eventId];
 				locations.value.push( location );
 			}
@@ -155,6 +196,7 @@ export const useEventStore = defineStore('event', () => {
 				existing.eventIds?.push( eventId );
 			}
 			else {
+				mapFields( session, data.sessionFields );
 				session.eventIds = [eventId];
 				sessions.value.push( session );
 			}

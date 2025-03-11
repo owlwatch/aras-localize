@@ -6,6 +6,8 @@ import {onKeyStroke} from '@vueuse/core';
 import { onMounted, onUnmounted, ref, toRefs, computed } from 'vue';
 import Modal from './Modal.vue';
 
+import videoPlaceholderUrl from '@/assets/images/video-placeholder.jpg';
+
 const props = defineProps<{
 	sponsor: Sponsor
 	showLevel: boolean
@@ -20,6 +22,22 @@ function getSponsorLevelKey(level: string) {
   // split the level name, first word will be the css color name
   const [color] = level.split(' ');
   return color.toLowerCase();
+}
+
+/**
+ * If the passed url is any version of a youtube url,
+ * return the associated embed url
+ * 
+ * @param url 
+ * @return url
+ */
+function getYoutubeEmbedUrl( url: string ){
+	const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+	const match = url.match(youtubeRegex);
+	if( match ){
+		return `https://www.youtube.com/embed/${match[1]}`;
+	}
+	return false;
 }
 </script>
 
@@ -47,16 +65,28 @@ modal(
 		.swoogo-sponsor-modal__body
 			.swoogo-sponsor-modal__main
 				.swoogo-sponsor-modal__bio(v-html="sponsor.description")
-				a.swoogo-sponsor-modal__video(
+				div(
 					v-if="sponsor.video_url"
-					:href="sponsor.video_url"
-					target="_blank"
 				)
-					img(
-						src="@/assets/video-placeholder.jpg"
-						alt="Watch Video"
+					// embed the youtube video if possible
+					iframe.swoogo-sponsor-modal__video-embed(
+						v-if="getYoutubeEmbedUrl(sponsor.video_url)"
+						:src="getYoutubeEmbedUrl(sponsor.video_url)"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
 					)
-					
+
+					a.swoogo-sponsor-modal__video-link(
+						v-else
+						:href="sponsor.video_url"
+						target="_blank"
+					)
+						img(
+							src="/images/video-placeholder.jpg"
+							alt="Watch Video"
+						)
+						
 			.swoogo-sponsor-modal__sidebar
 				img.swoogo-sponsor-modal__logo(
 					:src="sponsor.logo_id"
@@ -68,12 +98,28 @@ modal(
 					target="_blank"
 				) Visit Website
 
+				.swoogo-sponsor-modal__contact-download(
+					v-if="sponsor.company_asset"
+				)
+					a.aras-button(
+						aria-label="Download PDF"
+						target="_blank"
+						:href="sponsor.company_asset || '#'"
+					) Download PDF
+
 				// contact information
 				.swoogo-sponsor-modal__contact-information
-					.swoogo-sponsor-modal__contact-name {{ sponsor.c_29712 }}
-					.swoogo-sponsor-modal__contact-email 
-						a(:href="`mailto:${sponsor.c_29713}`") {{ sponsor.c_29713 }}
-					.swoogo-sponsor-modal__contact-phone {{ sponsor.c_29714 }}
+					.swoogo-sponsor-modal__contact-name(
+						v-if="sponsor.primary_contact"
+					) {{ sponsor.primary_contact }}
+
+					.swoogo-sponsor-modal__contact-email(
+						v-if="sponsor.primary_contact_email"
+					)
+						a(:href="`mailto:${sponsor.primary_contact_email}`") {{ sponsor.primary_contact_email }}
+					.swoogo-sponsor-modal__contact-phone(
+						v-if="sponsor.primary_contact_phone"
+					) {{ sponsor.primary_contact_phone }}
 </template>
 
 
@@ -113,8 +159,12 @@ modal(
 	}
 
 	&__logo {
-		border-radius: 0.75rem;
-		border: 1px solid #ccc;
+		
+	}
+
+	&__video-embed {
+		width: 100%;
+		aspect-ratio: 16/9;;
 	}
 	&__main {
 		width: 100%;
@@ -130,7 +180,7 @@ modal(
 	}
 
 	&__contact-information {
-		margin-top: 2rem;
+		// margin-top: 2rem;
 		font-weight: 300;
 	}
 	&__contact-name {

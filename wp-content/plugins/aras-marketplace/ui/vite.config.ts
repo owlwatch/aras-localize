@@ -22,7 +22,7 @@ export default defineConfig({
 
   base: process.env.APP_ENV == 'development' 
     ? '/'
-    : relativeURL+'/dist/' ,
+    : './' ,
 
   build: {
     manifest: true,

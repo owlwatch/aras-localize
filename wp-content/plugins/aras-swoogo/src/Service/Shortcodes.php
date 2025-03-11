@@ -52,6 +52,7 @@ class Shortcodes
 	{
 		return $this->shortcode('sponsors', $atts, [
 			'use_sponsor_levels' => "true",
+			'layout' => 'grid',
 			'filter_by_level' => "",
 		]);
 	}

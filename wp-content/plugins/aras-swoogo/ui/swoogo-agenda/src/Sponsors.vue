@@ -4,15 +4,21 @@ import { useEventStore } from './stores/event';
 import type {Session, Speaker, Event, Sponsor} from './stores/event';
 import { storeToRefs } from 'pinia';
 import SponsorModal from './components/SponsorModal.vue';
+import SponsorCard from './components/SponsorCard.vue';
+import SponsorRow from './components/SponsorRow.vue';
 
 const eventStore = useEventStore();
-const props = defineProps<{
+interface Props {
   eventId: number
   config?: {
     useSponsorLevels: boolean,
-    filterByLevel: string
+    filterByLevel: string,
+    layout?: 'grid' | 'list'
   }
-}>();
+}
+const props = withDefaults(defineProps<Props>(),{
+
+});
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -87,31 +93,42 @@ const activeModalSponsor = ref<Sponsor|null>(null);
       h2.swoogo-sponsors__level-title(
       ) {{ sponsorLevelLabel(group.level) }}
       .swoogo-sponsors__sponsor
-      ul.swoogo-sponsors__sponsors
+      ul.swoogo-sponsors__sponsors(
+        :data-layout="config.layout"
+      )
         li.swoogo-sponsors__sponsor(
           v-for="sponsor in group.sponsors"
           :key="`sponsor-${sponsor.id}`"
         )
-          a.swoogo-sponsor-card(
-            href="#"
+          sponsor-card(
+            v-if="config.layout == 'grid'"
             @click.prevent="activeModalSponsor=sponsor"
+            :sponsor="sponsor"
           )
-            img.swoogo-sponsor-card__logo(:src="sponsor.logo_id" :alt="sponsor.name")
-            //- h3.swoogo-sponsor-card__name {{ sponsor.name }}
+
+          sponsor-row(
+            v-else-if="layout == 'list'"
+            :sponsor="sponsor"
+          )
 
 ul.swoogo-sponsors__sponsors(
+  :data-layout="config.layout"
   v-else
 )
   li.swoogo-sponsors__sponsor(
     v-for="sponsor in sponsors"
     :key="`sponsor-${sponsor.id}`"
   )
-    a.swoogo-sponsor-card(
-      href="#"
+    sponsor-card(
+      v-if="config.layout == 'grid'"
       @click.prevent="activeModalSponsor=sponsor"
+      :sponsor="sponsor"
     )
-      img.swoogo-sponsor-card__logo(:src="sponsor.logo_id" :alt="sponsor.name")
-      //- h3.swoogo-sponsor-card__name {{ sponsor.name }}
+
+    sponsor-row(
+      v-else
+      :sponsor="sponsor"
+    )
 
 sponsor-modal(
   v-if="activeModalSponsor"
@@ -159,13 +176,15 @@ sponsor-modal(
     }
   }
   &__sponsors {
-    display: grid;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-    grid-template-columns: repeat(auto-fill, minmax(var(--level-card-width, 200px), 1fr));
-    @media (max-width: 768px) {
-      gap: 1rem;
+    &[data-layout="grid"]{
+      display: grid;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      grid-template-columns: repeat(auto-fill, minmax(var(--level-card-width, 200px), 1fr));
+      @media (max-width: 768px) {
+        gap: 1rem;
+      }
     }
   }
   &__sponsor {
@@ -174,25 +193,6 @@ sponsor-modal(
     padding: 0;
     display: flex;
     height: auto;
-  }
-}
-
-.swoogo-sponsor-card {
-  // border-radius: 0.75rem;
-  overflow: hidden;
-  border: 1px solid var(--gray-border);
-  display: flex;
-  transition: 0.2s;
-  height: auto;
-  &__logo {
-    display: block;
-    margin: 0;
-    padding: 0;
-    object-fit: contain;
-  }
-  &:hover {
-    border-color: var(--red);
-    box-shadow: 0 0 3px var(--red);
   }
 }
 </style>

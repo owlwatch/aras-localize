@@ -167,6 +167,7 @@ function custom_confirmation($confirmation, $form, $entry)
 	$redirect_url = $_SERVER['REQUEST_URI'];
 
 
+
 	if (get_field('post_submission_action', $current_page_id) == 'update') {
 		GFCommon::log_debug('post_submission_action is update');
 		if (get_field('post_submission_content_behavior', $current_page_id) == 'newtab') {

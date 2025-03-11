@@ -3,8 +3,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-let relativeURL = __dirname.replace(/.*\/wp\-content/, '/wp-content');
-
 import path from 'path';
 
 // https://vitejs.dev/config/
@@ -21,7 +19,7 @@ export default defineConfig({
 
   base: process.env.APP_ENV == 'development' 
     ? '/'
-    : relativeURL+'/dist/' ,
+    : './' ,
 
   build: {
     manifest: true,
@@ -32,7 +30,9 @@ export default defineConfig({
   },
 
   server: {
-    port : 6237
+    port : 6237,
+    origin: 'http://aras.local:6237',
+    cors: true
   },
 
   css: {
