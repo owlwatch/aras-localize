@@ -130,7 +130,7 @@ if( !empty($videos) ){
 		<div class="mp-solution-page">
 
 		<div class="mp-solution-page__content-column">
-				<h1 class="mp-solution-page__title">
+				<h1 class="mp-solution-page__title h2">
 					<?php the_title(); ?>
 				</h1>
 				<div class="mp-solution-page__contributor">
