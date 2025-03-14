@@ -1,6 +1,6 @@
 {
   "src/components/SolutionGallery.vue": {
-    "file": "assets/SolutionGallery-C8ZjYo1P.js",
+    "file": "assets/SolutionGallery-UhgoyCzO.js",
     "name": "SolutionGallery",
     "src": "src/components/SolutionGallery.vue",
     "isDynamicEntry": true,
@@ -8,11 +8,11 @@
       "src/main.ts"
     ],
     "css": [
-      "assets/SolutionGallery-B1PY1FtI.css"
+      "assets/SolutionGallery-Car9H62U.css"
     ]
   },
   "src/main.ts": {
-    "file": "assets/main-Bm4Weqxa.js",
+    "file": "assets/main-Yb_TzYQf.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,

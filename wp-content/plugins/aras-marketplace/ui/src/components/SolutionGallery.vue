@@ -288,7 +288,7 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	margin: 2rem 0;
+	margin: 1rem 0;
 
 	--swiper-navigation-size: 20px;
 	--swiper-theme-color: var(--mp-color-brand);
