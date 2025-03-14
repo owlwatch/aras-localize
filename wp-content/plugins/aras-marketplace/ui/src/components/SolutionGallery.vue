@@ -425,26 +425,19 @@ onBeforeUnmount(() => {
 		&-content {
 			position: relative;
 			background: #fff;
-			padding: 1rem;
 			max-width: calc(100% - 2rem);
 			max-height: calc(100% - 4rem);
 			overflow: visible;
 			display: flex;
 			flex-direction: column;
-		}
-		&-media-wrap {
-			flex: 1 auto;
-			max-width: 100%;
-			max-height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			iframe, img {
-				max-width: 100%;
-				max-height: 100%;
+			width: auto;
+			height: auto;
+			&--youtube {
+				width: 900px;
+				height: auto;
+				aspect-ratio: 16/9;
 			}
 		}
-		
 	}
 }
 
