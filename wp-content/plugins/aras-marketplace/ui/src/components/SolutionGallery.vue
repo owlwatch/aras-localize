@@ -1,54 +1,6 @@
 <template lang="pug">
 .mp-solution-gallery
-	.mp-solution-gallery__thumbs
-		
-		Swiper(
-			v-bind="thumbsSwiperConfig"
-			@swiper="setThumbsSwiper"
-		)
-			swiper-slide.swiper-slide.swiper-slide--thumb(
-				v-for="(slide, index) in media"
-				:key="index"
-			)
-				img(
-					@click="setActiveIndex(index)"
-					:src="slide.large || slide.image" :alt="slide.alt"
-				)
-	.mp-solution-gallery__nav
-		button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
-			@click="prevSlide()"
-			:disabled="!hasPrev()"
-			type="button"
-		)
-			svg(
-				xmlns="http://www.w3.org/2000/svg"
-				width="16"
-				height="16"
-				fill="currentColor"
-				class="bi bi-chevron-left"
-				viewBox="0 0 16 16"
-			)
-				path(
-					fill-rule="evenodd"
-					d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-				)
-		button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
-			@click="nextSlide()"
-			:disabled="!hasNext()"
-			type="button"
-		)
-			svg(
-				xmlns="http://www.w3.org/2000/svg"
-				width="16"
-				height="16"
-				fill="currentColor"
-				class="bi bi-chevron-right"
-				viewBox="0 0 16 16"
-			)
-				path(
-					fill-rule="evenodd"
-					d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-				)
+	
 	.mp-solution-gallery__large
 		Swiper.mp-solution-gallery__large-swiper(
 			v-bind="largeSwiperConfig"
@@ -56,17 +8,102 @@
 			@activeIndexChange="activeIndexChange"
 			@swiper="setLargeSwiper"
 		)
-			swiper-slide.swiper-slide(
+			swiper-slide.swiper-slide.swiper-slide--large(
 				v-for="(slide, index) in media"
 				:key="index"
 				@click="openModal(index)"
 			)
 				img(:src="slide.large || slide.image" :alt="slide.alt")
+	
+	.mp-solution-gallery__thumbs
+		//- button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
+		//- 	@click="prevSlide()"
+		//- 	:disabled="!hasPrev()"
+		//- 	type="button"
+		//- )
+		//- 	svg(
+		//- 		xmlns="http://www.w3.org/2000/svg"
+		//- 		width="16"
+		//- 		height="16"
+		//- 		fill="currentColor"
+		//- 		class="bi bi-chevron-left"
+		//- 		viewBox="0 0 16 16"
+		//- 	)
+		//- 		path(
+		//- 			fill-rule="evenodd"
+		//- 			d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+		//- 		)
+
+		Swiper(
+			v-bind="thumbsSwiperConfig"
+			@swiper="setThumbsSwiper"
+		)
+			SwiperSlide.swiper-slide.swiper-slide--thumb(
+				v-for="(slide, index) in media"
+				:key="index"
+			)
+				img(
+					@click="setActiveIndex(index)"
+					:src="slide.large || slide.image" :alt="slide.alt"
+				)
+		//- button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
+		//- 	@click="nextSlide()"
+		//- 	:disabled="!hasNext()"
+		//- 	type="button"
+		//- )
+		//- 	svg(
+		//- 		xmlns="http://www.w3.org/2000/svg"
+		//- 		width="16"
+		//- 		height="16"
+		//- 		fill="currentColor"
+		//- 		class="bi bi-chevron-right"
+		//- 		viewBox="0 0 16 16"
+		//- 	)
+		//- 		path(
+		//- 			fill-rule="evenodd"
+		//- 			d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+		//- 		)
+
 // Modal
 teleport(to="body")
-	.modal(v-if="isModalOpen")
-		.modal-content
-			.modal-close(@click="closeModal") 
+	.mp-solution-gallery__modal(v-if="isModalOpen")
+		.mp-solution-gallery__modal-buttons
+			button.mp-solution-gallery__modal-prev(
+				@click="prevSlide"
+				type="button"
+				:disabled="!hasPrev()"
+			)
+				svg(
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					fill="currentColor"
+					class="bi bi-chevron-left"
+					viewBox="0 0 16 16"
+				)
+					path(
+						fill-rule="evenodd"
+						d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+					)
+				
+			button.mp-solution-gallery__modal-prev(
+				@click="nextSlide"
+				type="button"
+				:disabled="!hasNext()"
+			)
+				svg(
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					fill="currentColor"
+					class="bi bi-chevron-right"
+					viewBox="0 0 16 16"
+				)
+					path(
+						fill-rule="evenodd"
+						d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+					)
+			button.mp-solution-gallery__modal-close(@click="closeModal") 
 				svg(
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
@@ -77,62 +114,28 @@ teleport(to="body")
 					path(
 						d="M18.3 5.71a1 1 0 00-1.42 0L12 10.59 7.12 5.71a1 1 0 00-1.42 1.42L10.59 12l-4.89 4.88a1 1 0 001.42 1.42L12 13.41l4.88 4.89a1 1 0 001.42-1.42L13.41 12l4.89-4.88a1 1 0 000-1.41z"
 					)
-			template( v-if="media[modalIndex].youtube_url" )
-				div.modal-media-wrap
-					iframe.mp-solution-gallery__youtube(
-						:src="getYoutubeEmbedUrl(media[modalIndex].youtube_url)"
-						frameborder="0"
-						width="16"
-						height="9"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						allowfullscreen
-					)
-			template(v-else)
-				div.modal-media-wrap
-					img(:src="media[modalIndex].large || media[modalIndex].image" :alt="media[modalIndex].alt")
-			.modal-nav.mp-solution-gallery__nav(style="margin-top: 10px")
-				button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
-					@click="prevSlide"
-					type="button"
-					:disabled="!hasPrev()"
-				)
-					svg(
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						fill="currentColor"
-						class="bi bi-chevron-left"
-						viewBox="0 0 16 16"
-					)
-						path(
-							fill-rule="evenodd"
-							d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-						)
+		template( v-if="media[modalIndex].youtube_url" )
 					
-				button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
-					@click="nextSlide"
-					type="button"
-					:disabled="!hasNext()"
-				)
-					svg(
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						fill="currentColor"
-						class="bi bi-chevron-right"
-						viewBox="0 0 16 16"
-					)
-						path(
-							fill-rule="evenodd"
-							d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-						)
+			iframe.mp-solution-gallery__modal-content.mp-solution-gallery__modal-content--youtube(
+				:src="getYoutubeEmbedUrl(media[modalIndex].youtube_url)"
+				frameborder="0"
+				width="16"
+				height="9"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen
+			)
+		template(v-else)
+					
+			img.mp-solution-gallery__modal-content.mp-solution-gallery__modal-content--image(
+				:src="media[modalIndex].large || media[modalIndex].image" :alt="media[modalIndex].alt"
+			)
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.css'
-import { Pagination, Navigation, Controller, Thumbs } from 'swiper/modules'
+import { Navigation, Thumbs } from 'swiper/modules'
 
 import { onMounted, onBeforeUnmount } from 'vue';
 
@@ -215,25 +218,32 @@ const getYoutubeEmbedUrl = ( url: string ) => {
 
 const largeSwiperConfig = {
 	modules: [Thumbs],
-	slidesPerView: 1,
+	slidesPerView: 'auto',
 	spaceBetween: 30,
-	autoHeight: true
+	autoHeight: true,
+	mousewheel: {
+		enabled: true
+	}
 }
 
 const thumbsSwiperConfig = {
 	modules: [Thumbs, Navigation],
 	slidesPerView: 'auto',
 	spaceBetween: 20,
-	navigation: {
-		nextEl: '.mp-solution-gallery__thumbs-nav--next',
-		prevEl: '.mp-solution-gallery__thumbs-nav--prev'
-	},
+	centeredSlides: true,
+	centeredSlidesBounds: true,
+	slideToClickedSlide: true,
+	// navigation: {
+	// 	nextEl: '.mp-solution-gallery__thumbs-nav--next',
+	// 	prevEl: '.mp-solution-gallery__thumbs-nav--prev',
+
+	// },
   watchSlidesProgress: true
 }
 
 // modal stuff
 const handleOutsideClick = (event: MouseEvent) => {
-	if (isModalOpen.value && !(event.target as HTMLElement).closest('.modal-content')) {
+	if (isModalOpen.value && !(event.target as HTMLElement).closest('.mp-solution-gallery__modal-content, .mp-solution-gallery__modal-buttons')) {
 		closeModal();
 	}
 };
@@ -278,6 +288,7 @@ onBeforeUnmount(() => {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	margin: 2rem 0;
 
 	--swiper-navigation-size: 20px;
 	--swiper-theme-color: var(--mp-color-brand);
@@ -285,6 +296,7 @@ onBeforeUnmount(() => {
 	&__thumbs {
 		display: flex;
 		gap: 10px;
+		align-items: center;
 	}
 
 	&__nav {
@@ -326,15 +338,34 @@ onBeforeUnmount(() => {
 		}
 	}
 
+	&__large {
+		aspect-ratio: 16/9;
+		position: relative;
+		&-swiper {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			.swiper-wrapper {
+
+			}
+		}
+
+	}
+
 	&__large-swiper {
-		width: 100%;
 		.swiper-slide {
 			cursor: zoom-in;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			height: auto;
-			background: #f2f2f2;
+			height: 100%;
+			width: auto;
+			> img {
+				width: auto;
+				height: 100%;
+			}
 		}
 	}
 	// &:deep(.swiper-button-prev),
@@ -348,9 +379,77 @@ onBeforeUnmount(() => {
 		aspect-ratio: 16/9;
 		border-width: 0;
 	}
+
+	&__modal {
+		position: fixed;
+		z-index: 1000;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.9);
+		backdrop-filter: blur(4px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&-buttons {
+			position: absolute;
+			top: 3rem;
+			right: 1rem;
+			display: flex;
+			justify-content: space-between;
+			padding: 0.35rem;
+			gap: 0.5em;
+			background-color: rgba(0, 0, 0, .15);
+			box-shadow: rgba(255,255,255,0.3) 0px 4px 16px;
+			border-radius: 50px;
+			button {
+				color: #fff;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 1.75em;
+				height: 1.75em;
+				border-radius: 50%;
+				background: #333;
+				&:hover {
+					background: #282828;
+					box-shadow: rgba(255,255,255,0.3) 0px 2px 4px;
+				}
+				&:disabled {
+					opacity: 0.25;
+				}
+			}
+		}
+		
+		&-content {
+			position: relative;
+			background: #fff;
+			padding: 1rem;
+			max-width: calc(100% - 2rem);
+			max-height: calc(100% - 4rem);
+			overflow: visible;
+			display: flex;
+			flex-direction: column;
+		}
+		&-media-wrap {
+			flex: 1 auto;
+			max-width: 100%;
+			max-height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			iframe, img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+		
+	}
 }
 
 .swiper-slide {
+	max-width: 100%;
 	text-align: center;
 	font-size: 18px;
 	background: #fff;
@@ -381,6 +480,10 @@ onBeforeUnmount(() => {
 	&-thumb-active {
 		border-color: var(--mp-color-brand)
 	}
+
+	&--large {
+		
+	}
 }
 
 .swiper-pagination-bullet {
@@ -392,47 +495,5 @@ onBeforeUnmount(() => {
 	color: #000;
 }
 
-.modal {
-	position: fixed;
-	z-index: 1000;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	&-content {
-		position: relative;
-		background: #fff;
-		padding: 1rem;
-		max-width: calc(100% - 2rem);
-		max-height: calc(100% - 4rem);
-		overflow: visible;
-		display: flex;
-		flex-direction: column;
-	}
-	&-media-wrap {
-		flex: 1 auto;
-		max-width: 100%;
-		max-height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		iframe, img {
-			max-width: 100%;
-			max-height: 100%;
-		}
-	}
-	&-close {
-		position: absolute;
-		bottom: calc( 100% );
-		right: 0;
-		cursor: pointer;
-		
-		color: #fff;
-	}
-	
-}
+
 </style>

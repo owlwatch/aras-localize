@@ -60,10 +60,11 @@ if( $release_notes ){
 $specs[__('Category', 'asa-marketplace')] = get_the_term_list( get_the_ID(), 'mp-solution-category' );
 
 $versions = get_the_terms( get_the_ID(), 'mp-aras-version' );
-usort( $versions, function($a, $b){
-	return version_compare($a->name, $b->name);
-});
+
 if( !empty($versions) ){
+	usort( $versions, function($a, $b){
+		return version_compare($a->name, $b->name);
+	});
 	$specs[__('Supported Aras Versions', 'asa-marketplace')] = implode(', ', array_map(function($version){
 		return $version->name;
 	}, $versions));
@@ -127,6 +128,40 @@ if( !empty($videos) ){
 <section class="mediumtoppadding mediumbottompadding">
 	<div class="grid-container">
 		<div class="mp-solution-page">
+
+		<div class="mp-solution-page__content-column">
+				<h1 class="mp-solution-page__title">
+					<?php the_title(); ?>
+				</h1>
+				<div class="mp-solution-page__contributor">
+					<?php
+					$contributor = get_first_term('mp-contributor');
+					if( $contributor ){
+						?>
+						By 
+						<a href="<?php echo get_term_link( $contributor ); ?>">
+							<?php echo $contributor->name; ?>
+						</a>
+						<?php
+					}
+					?>	
+				</div>
+
+				<?php
+				if( !empty( $media ) ){
+					?>	
+				<div class="mp-solution-page__gallery" data-mp-solution-gallery="<?php echo esc_attr( json_encode( ['media'=>$media] ) ) ?>">
+					
+				</div>
+					<?php
+				}
+				?>
+
+				<div class="mp-solution-page__content">
+					<?php the_content(); ?>
+				</div>
+			</div>
+			
 			<div class="mp-solution-page__specification-column">
 				<?php
 				if( $logo ){
@@ -184,45 +219,7 @@ if( !empty($videos) ){
 					}
 					?>
 				</div>
-
-				
 			</div>
-
-			<div class="mp-solution-page__content-column">
-				<h1 class="mp-solution-page__title">
-					<?php the_title(); ?>
-				</h1>
-				<div class="mp-solution-page__contributor">
-					<?php
-					$contributor = get_first_term('mp-contributor');
-					if( $contributor ){
-						?>
-						By 
-						<a href="<?php echo get_term_link( $contributor ); ?>">
-							<?php echo $contributor->name; ?>
-						</a>
-						<?php
-					}
-					?>	
-				</div>
-				<div class="mp-solution-page__content">
-					<?php the_content(); ?>
-				</div>
-			</div>
-
-			<?php
-			if( !empty( $media ) ){
-				?>
-			<div class="mp-solution-page__media-column">
-				<div class="mp-solution-page__gallery">
-					<div data-mp-solution-gallery="<?php echo esc_attr( json_encode( ['media'=>$media] ) ) ?>">
-						
-					</div>
-				</div>
-			</div>
-				<?php
-			}
-			?>
 		</div>
 	</div>
 </section>

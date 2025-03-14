@@ -10,6 +10,14 @@ Template::get_template_part('marketplace/banner');
 <section class="smalltoppadding mediumbottompadding">
 	<div class="grid-container">
 
+		<?php
+		// output landing page content if we are on the initial page
+		// of the archive
+		if( is_post_type_archive() && !is_paged() ){
+			Template::get_template_part('marketplace/landing');
+		}	
+		?>
+
 		<div class="mp-solution-filters">
 			<?php
 			Template::get_template_part('marketplace/solution', 'filters');
