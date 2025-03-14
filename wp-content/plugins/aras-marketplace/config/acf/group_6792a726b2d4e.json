@@ -94,7 +94,7 @@
             "load_terms": 1,
             "return_format": "id",
             "field_type": "select",
-            "allow_null": 0,
+            "allow_null": 1,
             "allow_in_bindings": 0,
             "bidirectional": 0,
             "multiple": 0,
@@ -639,5 +639,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1741272310
+    "modified": 1741919415
 }
