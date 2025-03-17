@@ -192,6 +192,24 @@ if( !empty($videos) ){
 					</a>
 					<?php
 				}
+				else if( have_rows('marketplace_sales_modal_content', 'option') ){
+					// we want to show a modal
+					?>
+					<div class="reveal medium" id="aras-solution-modal" data-reveal>
+						<?php
+						Template::get_template_part('marketplace/page-content', null, [
+							'field_name' => 'marketplace_sales_modal_content'
+						]);
+						?>
+						<button class="close-button" data-close aria-label="Close modal" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<button type="button" class="aras-button mp-solution-page__download-button" data-open="aras-solution-modal">
+						<?php _e('Get it', 'aras-marketplace'); ?>
+					</button>
+					<?php
+				}
 				?>
 
 				<?php

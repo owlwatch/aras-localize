@@ -14,7 +14,9 @@ Template::get_template_part('marketplace/banner');
 		// output landing page content if we are on the initial page
 		// of the archive
 		if( is_post_type_archive() && !is_paged() ){
-			Template::get_template_part('marketplace/landing');
+			Template::get_template_part('marketplace/page-content', null, [
+				'field_name' => 'marketplace_landing_content'
+			]);
 		}	
 		?>
 

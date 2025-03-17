@@ -3,6 +3,25 @@
     "title": "Marketplace Settings",
     "fields": [
         {
+            "key": "field_67d8461dd7903",
+            "label": "Banner",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
             "key": "field_6799a4ad5da6c",
             "label": "Logo",
             "name": "marketplace_logo",
@@ -52,11 +71,11 @@
             "append": ""
         },
         {
-            "key": "field_67c9b162a0cdd",
-            "label": "Fallback Solution Icon",
-            "name": "marketplace_fallback_solution_icon",
+            "key": "field_67d84630d7904",
+            "label": "Privacy",
+            "name": "",
             "aria-label": "",
-            "type": "image",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -66,17 +85,9 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 1,
-            "preview_size": "medium"
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_67c5fa4940ac2",
@@ -131,6 +142,94 @@
             "append": ""
         },
         {
+            "key": "field_67d84652d7905",
+            "label": "General",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_67c9b162a0cdd",
+            "label": "Fallback Solution Icon",
+            "name": "marketplace_fallback_solution_icon",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_67d847999cbdf",
+            "label": "Sales Modal Content",
+            "name": "marketplace_sales_modal_content",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "When there is no download link, this content is displayed in a sales modal when someone clicks the \"Get it\" button",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "clone": [
+                "field_65e63f1700b9e"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_67d84667d7906",
+            "label": "Landing Page",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
             "key": "field_67d381b4faff7",
             "label": "Landing Page Content",
             "name": "marketplace_landing_content",
@@ -173,5 +272,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1741916424
+    "modified": 1742230555
 }

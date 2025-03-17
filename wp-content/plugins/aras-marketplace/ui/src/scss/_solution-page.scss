@@ -99,3 +99,10 @@
 		}
 	}
 }
+
+#aras-solution-modal {
+	*:last-child,
+	section:last-of-type {
+		margin-bottom: 0;
+	}
+}
