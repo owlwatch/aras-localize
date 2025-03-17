@@ -393,6 +393,7 @@ onBeforeUnmount(() => {
 		justify-content: center;
 		align-items: center;
 		&-buttons {
+			z-index: 100;
 			position: absolute;
 			top: 3rem;
 			right: 1rem;
