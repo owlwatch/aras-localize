@@ -28,9 +28,14 @@ class Query
 			return;
 		}
 
-		if ( is_post_type_archive( 'mp-solution' ) ) {
+		if ( is_post_type_archive( 'mp-solution' ) || 
+			 is_tax( 'mp-solution-category' ) || 
+			 is_tax( 'mp-solution-type' ) ||
+			 is_tax( 'mp-contributor' )
+		) {
 			
-			$query->set( 'orderby', 'post_title' );
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'meta_key', 'solution_title' );
 			$query->set( 'order', 'ASC' );
 			// maybe filter by search
 			if ( $search = get_query_var( 'mp-search' ) ) {
