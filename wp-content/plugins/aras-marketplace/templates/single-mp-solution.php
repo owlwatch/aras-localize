@@ -129,22 +129,42 @@ if( !empty($videos) ){
 	<div class="grid-container">
 		<div class="mp-solution-page">
 
-		<div class="mp-solution-page__content-column">
-				<h1 class="mp-solution-page__title h2">
-					<?php the_title(); ?>
-				</h1>
-				<div class="mp-solution-page__contributor">
-					<?php
-					$contributor = get_first_term('mp-contributor');
-					if( $contributor ){
-						?>
-						By 
-						<a href="<?php echo get_term_link( $contributor ); ?>">
-							<?php echo $contributor->name; ?>
-						</a>
+			<div class="mp-solution-page__content-column">
+
+				<div class="mp-solution-page__title-row">
+					<div class="mp-solution-page__title-icon-col">
 						<?php
-					}
-					?>	
+						if( $logo ){
+							?>
+							<a href="<?php echo get_term_link( $contributor ); ?>">
+								<?php
+								echo wp_get_attachment_image($logo, 'medium', false, [
+									'class' => 'mp-solution-page__logo'
+								]);
+								?>
+							</a>
+							<?php
+						}
+						?>
+					</div>
+					<div class="mp-solution-page__title-text-col">
+						<h1 class="mp-solution-page__title h2">
+							<?php the_title(); ?>
+						</h1>
+						<div class="mp-solution-page__contributor">
+							<?php
+							$contributor = get_first_term('mp-contributor');
+							if( $contributor ){
+								?>
+								By 
+								<a href="<?php echo get_term_link( $contributor ); ?>">
+									<?php echo $contributor->name; ?>
+								</a>
+								<?php
+							}
+							?>
+						</div>
+					</div>
 				</div>
 
 				<?php
@@ -164,17 +184,6 @@ if( !empty($videos) ){
 			
 			<div class="mp-solution-page__specification-column">
 				<?php
-				if( $logo ){
-					?>
-					<a href="<?php echo get_term_link( $contributor ); ?>">
-						<?php
-						echo wp_get_attachment_image($logo, 'medium', false, [
-							'class' => 'mp-solution-page__logo'
-						]);
-						?>
-					</a>
-					<?php
-				}
 				// if this is downloadable, show a button
 				if( get_field('is_downloadable') ){
 					?>
