@@ -1,7 +1,8 @@
 <?php
-$field_name = $args['field_name'];
-if( have_rows($field_name, 'option') ):
-	while( have_rows($field_name, 'option') ):
+$field_name = isset( $args['field_name'] ) ? $args['field_name'] : '_|_';
+$post_id = isset($args['post_id']) ? $args['post_id'] : 'option';
+if( have_rows($field_name, $post_id) ):
+	while( have_rows($field_name, $post_id) ):
 		the_row();
 		if (have_rows('flexible_post_content')) :
 			while (have_rows('flexible_post_content')) : the_row();

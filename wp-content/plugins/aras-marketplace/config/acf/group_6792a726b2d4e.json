@@ -550,6 +550,37 @@
             "placeholder": ""
         },
         {
+            "key": "field_67d980e951e38",
+            "label": "Sales Modal Content",
+            "name": "marketplace_sales_modal_content",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6792ab1f4d959",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "clone": [
+                "field_65e63f1700b9e"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
             "key": "field_67bcd0c1a9fc8",
             "label": "Sales Email",
             "name": "sales_email",
@@ -639,5 +670,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1741919415
+    "modified": 1742307623
 }
