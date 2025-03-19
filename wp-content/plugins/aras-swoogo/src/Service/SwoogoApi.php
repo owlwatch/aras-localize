@@ -27,7 +27,7 @@ class SwoogoApi
 				$this->authorize();
 				$this->connected = true;
 			}catch( \Exception $e ){
-				error_log( print_r( $e ) );
+				error_log( print_r( $e, 1 ) );
 			}
 		}
 	}
