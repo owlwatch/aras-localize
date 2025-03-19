@@ -16,7 +16,9 @@
 		
 		align-items: flex-start;
 		img {
-			width: auto;
+			width: 4em;
+			object-fit: contain;
+			object-position: 50% 50%;
 			height: 4em;
 			flex-shrink: 0;
 		}

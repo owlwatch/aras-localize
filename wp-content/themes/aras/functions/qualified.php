@@ -130,7 +130,6 @@ class QualifiedIntegration
 						qualified("emitFormFill", "custom");
 					}
 
-					console.log( {redirect} );
 					if( redirect ){
 						window.location = redirect;
 					}
