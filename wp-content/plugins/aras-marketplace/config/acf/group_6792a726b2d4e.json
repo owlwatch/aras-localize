@@ -353,9 +353,9 @@
             "layout": "table",
             "pagination": 0,
             "min": 0,
-            "max": 2,
+            "max": 0,
             "collapsed": "",
-            "button_label": "Add Row",
+            "button_label": "Add Video",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -365,7 +365,7 @@
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -571,7 +571,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "clone": [
                 "field_65e63f1700b9e"
             ],
@@ -670,5 +670,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1742307623
+    "modified": 1742428525
 }
