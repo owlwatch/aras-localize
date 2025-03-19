@@ -135,15 +135,9 @@ if( !empty($videos) ){
 					<div class="mp-solution-page__title-icon-col">
 						<?php
 						if( $logo ){
-							?>
-							<a href="<?php echo get_term_link( $contributor ); ?>">
-								<?php
-								echo wp_get_attachment_image($logo, 'medium', false, [
-									'class' => 'mp-solution-page__logo'
-								]);
-								?>
-							</a>
-							<?php
+							echo wp_get_attachment_image($logo, 'medium', false, [
+								'class' => 'mp-solution-page__logo'
+							]);
 						}
 						?>
 					</div>
