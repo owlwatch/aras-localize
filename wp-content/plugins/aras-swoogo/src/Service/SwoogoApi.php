@@ -43,7 +43,7 @@ class SwoogoApi
 		curl_setopt($ch, CURLOPT_POSTFIELDS, 'grant_type=client_credentials');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$result = json_decode(curl_exec($ch));
 		if (empty($result->access_token)) {
@@ -80,7 +80,7 @@ class SwoogoApi
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->accessToken));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 		$response = curl_exec($ch);
