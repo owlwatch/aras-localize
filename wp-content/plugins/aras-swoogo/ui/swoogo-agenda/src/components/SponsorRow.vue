@@ -17,9 +17,33 @@ const props = defineProps<{
 
 	.swoogo-sponsor-row__content
 		h3.swoogo-sponsor-row__name {{ sponsor.name }}
-		div(v-html="sponsor.description")
+		.swoogo-sponsor-row__description(v-html="sponsor.description")
 </template>
 
 
 <!-- SCSS Style -->
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.swoogo-sponsor-row {
+
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: 3rem;
+
+	@container sponsor-list ( max-width: 500px ){
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+	&__image {
+		text-align: center;
+	}
+	&__logo {
+		margin: 0;
+		max-width: 200px;
+	}
+	&__description {
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+</style>

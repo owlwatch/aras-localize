@@ -186,6 +186,18 @@ sponsor-modal(
         gap: 1rem;
       }
     }
+    &[data-layout="list"]{
+      container: sponsor-list / inline-size;
+      display: grid;
+      
+      .swoogo-sponsors__sponsor {
+        padding-bottom: 2em;
+        &:not(:last-child){
+          border-bottom: 1px solid #d8d8d8;
+          margin-bottom: 2em;
+        }
+      }
+    }
   }
   &__sponsor {
     list-style: none;
