@@ -116,7 +116,7 @@ class Template {
 	public static function getYoutubeThumbnailUrlFromVideoUrl($video_url)
 	{
 		$video_id = self::getYoutubeVideoIdFromUrl($video_url);
-		return "https://img.youtube.com/vi/{$video_id}/maxresdefault.jpg";
+		return "https://img.youtube.com/vi/{$video_id}/hqdefault.jpg";
 	}
 
 	public static function getYoutubeVideoIdFromUrl($url)
