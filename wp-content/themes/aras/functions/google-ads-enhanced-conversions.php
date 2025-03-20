@@ -30,7 +30,7 @@ class GoogleAdsEnhancedConversions
 		// find the email from the form
 		$email = '';
 		foreach( $form['fields'] as $field ){
-			if( $field->type === 'email' && $field->required ){
+			if( $field->type === 'email' && $field->isRequired ){
 				$email = rgar($entry, $field->id);
 				break;
 			}
