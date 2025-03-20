@@ -50,3 +50,5 @@ EOC;
 
 	}
 }
+
+GoogleAdsEnhancedConversions::getInstance();

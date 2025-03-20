@@ -124,4 +124,6 @@ require_once(get_template_directory() . '/functions/bitly.php');
 
 require_once(get_template_directory() . '/functions/qualified.php');
 
+require_once(get_template_directory() . '/functions/google-ads-enhanced-conversions.php');
+
 require_once(get_template_directory() . '/functions/sitemap.php');
