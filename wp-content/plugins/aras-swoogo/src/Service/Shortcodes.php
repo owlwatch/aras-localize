@@ -25,6 +25,7 @@ class Shortcodes
 		add_shortcode( 'swoogo-speaker-carousel', array( $this, 'speakerCarousel' ) );
 		add_shortcode( 'swoogo-sponsors', array( $this, 'sponsors' ) );
 		add_shortcode( 'swoogo-sponsor-carousel', array( $this, 'sponsorCarousel' ) );
+		add_shortcode( 'acf_the_content', array( $this, 'removeParagraphsAroundShortcodes' ) );
 	}
 
 	public function agenda( $atts )
@@ -140,5 +141,16 @@ class Shortcodes
 		$this->agendaUI->render('src/main.ts');
 		return ob_get_clean();
 
+	}
+
+	public function removeParagraphsAroundShortcodes( $content )
+	{
+		$array = array (
+			'<p>[' => '[', 
+			']</p>' => ']', 
+			']<br />' => ']'
+		);
+		$content = strtr($content, $array);
+		return $content;
 	}
 }
