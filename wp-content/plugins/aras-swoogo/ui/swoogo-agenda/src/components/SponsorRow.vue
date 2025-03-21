@@ -9,9 +9,7 @@ const props = defineProps<{
 
 <!-- Pug Template -->
 <template lang="pug">
-.swoogo-sponsor-row(
-	href="#"
-)
+.swoogo-sponsor-row
 	.swoogo-sponsor-row__image
 		img.swoogo-sponsor-row__logo(:src="sponsor.logo_id" :alt="sponsor.name")
 
