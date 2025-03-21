@@ -145,12 +145,9 @@ class Shortcodes
 
 	public function removeParagraphsAroundShortcodes( $content )
 	{
-		$array = array (
-			'<p>[' => '[', 
-			']</p>' => ']', 
-			']<br />' => ']'
-		);
-		$content = strtr($content, $array);
+		// remove paragraphs around shortcodes
+		$pattern = '/<p[^>]*?>\s*(\[swoogo.*?\])\s*<\/p>/';
+		$content = preg_replace($pattern, '$1', $content);
 		return $content;
 	}
 }
