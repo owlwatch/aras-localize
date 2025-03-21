@@ -14,7 +14,11 @@ const props = defineProps<{
 		img.swoogo-sponsor-row__logo(:src="sponsor.logo_id" :alt="sponsor.name")
 
 	.swoogo-sponsor-row__content
-		h3.swoogo-sponsor-row__name {{ sponsor.name }}
+		h3.swoogo-sponsor-row__name
+			a(
+				:href="sponsor.website"
+				target="_blank"
+			) {{ sponsor.name }}
 		.swoogo-sponsor-row__description(v-html="sponsor.description")
 </template>
 
