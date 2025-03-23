@@ -26,6 +26,7 @@ class Shortcodes
 		add_shortcode( 'swoogo-sponsors', array( $this, 'sponsors' ) );
 		add_shortcode( 'swoogo-sponsor-carousel', array( $this, 'sponsorCarousel' ) );
 		add_shortcode( 'acf_the_content', array( $this, 'removeParagraphsAroundShortcodes' ) );
+		add_shortcode( 'the_content', array( $this, 'removeParagraphsAroundShortcodes' ) );
 	}
 
 	public function agenda( $atts )
@@ -146,7 +147,7 @@ class Shortcodes
 	public function removeParagraphsAroundShortcodes( $content )
 	{
 		// remove paragraphs around shortcodes
-		$pattern = '/<p[^>]*?>\s*(\[swoogo.*?\])\s*<\/p>/';
+		$pattern = '/<p[^>]*>\s*(\[swoogo\-.+?\])\s*<\/p>/';
 		$content = preg_replace($pattern, '$1', $content);
 		return $content;
 	}

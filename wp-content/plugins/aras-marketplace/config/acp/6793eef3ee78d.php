@@ -7,9 +7,25 @@ return array (
     'title' => '',
     'type' => 'mp-solution',
     'id' => '6793eef3ee78d',
-    'updated' => 1737748372,
+    'updated' => 1742737749,
     'columns' => 
     array (
+      '1b9c1c63ebc6a8' => 
+      array (
+        'type' => 'field_67c85c17418c8',
+        'label' => 'Solution Code',
+        'width' => '150',
+        'width_unit' => 'px',
+        'character_limit' => '',
+        'export' => 'on',
+        'sort' => 'on',
+        'edit' => 'on',
+        'bulk_edit' => 'on',
+        'search' => 'on',
+        'filter' => 'off',
+        'filter_label' => '',
+        'name' => '1b9c1c63ebc6a8',
+      ),
       '2b9716dccdd2f2' => 
       array (
         'type' => 'column-featured_image',
@@ -159,7 +175,7 @@ return array (
       'wpseo-links' => 
       array (
         'type' => 'wpseo-links',
-        'label' => '<span class="yoast-linked-to yoast-column-header-has-tooltip" data-tooltip-text="Number of outgoing internal links in this post. See "Yoast Columns" text in the help tab for more info."><span class="screen-reader-text">Outgoing internal links</span></span>',
+        'label' => '<span class="yoast-linked-to yoast-column-header-has-tooltip"><span class="screen-reader-text">Outgoing internal links</span></span>',
         'width' => '',
         'width_unit' => '%',
         'sort' => 'on',

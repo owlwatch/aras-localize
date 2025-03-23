@@ -127,3 +127,18 @@ add_filter( 'gform_field_validation', function ( $result, $value, $form, $field 
     }
     return $result;
 }, 10, 4 );
+
+// allow for mailto links in the URL field
+add_filter('acf/validate_value', function( $valid, $value, $field, $input ){
+	if( $field['type'] === 'url' ){
+		// we also want to allow mailto:email values
+		if( strpos($value, 'mailto:') === 0 ){
+			// split the to get the email and test with filter_var
+			$email = str_replace('mailto:', '', $value);
+			if( filter_var($email, FILTER_VALIDATE_EMAIL) ){
+				$valid = true;
+			}
+		}
+	}
+	return $valid;
+}, 11, 4);
