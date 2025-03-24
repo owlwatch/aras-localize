@@ -10,29 +10,26 @@
 		)
 			swiper-slide.swiper-slide.swiper-slide--large(
 				v-for="(slide, index) in media"
+				:class="`swiper-slide--${slide.type}`"
 				:key="index"
 				@click="openModal(index)"
 			)
 				img(:src="slide.large || slide.image" :alt="slide.alt")
+				// display a play button over the image if the type is a video
+				.swiper-slide__video-overlay(
+					v-if="slide.type === 'video'"
+				)
+					svg.swiper-slide__play-button(
+						v-if="slide.type === 'video'"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 384 512"
+					)
+						path(
+							fill="currentColor"
+							d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
+						)
 	
 	.mp-solution-gallery__thumbs
-		//- button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--prev(
-		//- 	@click="prevSlide()"
-		//- 	:disabled="!hasPrev()"
-		//- 	type="button"
-		//- )
-		//- 	svg(
-		//- 		xmlns="http://www.w3.org/2000/svg"
-		//- 		width="16"
-		//- 		height="16"
-		//- 		fill="currentColor"
-		//- 		class="bi bi-chevron-left"
-		//- 		viewBox="0 0 16 16"
-		//- 	)
-		//- 		path(
-		//- 			fill-rule="evenodd"
-		//- 			d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-		//- 		)
 
 		Swiper(
 			v-bind="thumbsSwiperConfig"
@@ -46,23 +43,19 @@
 					@click="setActiveIndex(index)"
 					:src="slide.large || slide.image" :alt="slide.alt"
 				)
-		//- button.mp-solution-gallery__nav-button.mp-solution-gallery__nav-button--next(
-		//- 	@click="nextSlide()"
-		//- 	:disabled="!hasNext()"
-		//- 	type="button"
-		//- )
-		//- 	svg(
-		//- 		xmlns="http://www.w3.org/2000/svg"
-		//- 		width="16"
-		//- 		height="16"
-		//- 		fill="currentColor"
-		//- 		class="bi bi-chevron-right"
-		//- 		viewBox="0 0 16 16"
-		//- 	)
-		//- 		path(
-		//- 			fill-rule="evenodd"
-		//- 			d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-		//- 		)
+				// display a play button over the image if the type is a video
+				.swiper-slide__video-overlay(
+					v-if="slide.type === 'video'"
+				)
+					svg.swiper-slide__play-button(
+						v-if="slide.type === 'video'"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 384 512"
+					)
+						path(
+							fill="currentColor"
+							d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
+						)
 
 // Modal
 teleport(to="body")
@@ -475,10 +468,39 @@ onBeforeUnmount(() => {
 		border-color: var(--mp-color-brand)
 	}
 
-	&--large {
-		
+	
+	&__video-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		// radial gradient background
+		background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%);
+	}
+	&__video-overlay:hover &__play-button {
+		transform: translate(-50%, -50%) scale(1.1);
+	}
+	&__play-button {
+		transition: 0.2s all;
+		width: 20%;
+		aspect-ratio: 1/1;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: var(--mp-color-brand);
+		filter: drop-shadow(0 0 20px rgba(255,255,255,1));
+		z-index: 2;
+		path {
+			stroke: #fff;
+		}
+	}
+	&--thumb &__play-button {
+		width: 40%;
 	}
 }
+
 
 .swiper-pagination-bullet {
 	background: #000;

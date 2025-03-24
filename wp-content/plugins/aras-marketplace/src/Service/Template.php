@@ -115,8 +115,18 @@ class Template {
 
 	public static function getYoutubeThumbnailUrlFromVideoUrl($video_url)
 	{
+		// lets cache this...
+		$thumbnail = wp_cache_get( $video_url, 'aras_marketplace_youtube_thumbnail' );
+		if( $thumbnail ){
+			return $thumbnail;
+		}
 		$video_id = self::getYoutubeVideoIdFromUrl($video_url);
-		return "https://img.youtube.com/vi/{$video_id}/hqdefault.jpg";
+		// use oembed to get the thumbnail
+		$oembed = _wp_oembed_get_object();
+		$data = $oembed->get_data( $video_url );
+		$thumbnail = $data->thumbnail_url;
+		wp_cache_set( $video_url, $thumbnail, 'aras_marketplace_youtube_thumbnail', 3600 );
+		return $thumbnail;
 	}
 
 	public static function getYoutubeVideoIdFromUrl($url)
