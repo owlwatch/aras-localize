@@ -15,6 +15,8 @@ $types = get_terms( array(
 ?>
 <div class="mp-solution-filters">
 	<form class="mp-solution-filters__form" action="<?php echo get_post_type_archive_link('mp-solution'); ?>" method="get">
+
+		<?php if( !is_wp_error( $categories ) && !empty($categories ) ){ ?>
 		<fieldset>
 			<label for="mp-solution-category-filter"><?php _e('Filter by Category', 'aras-marketplace'); ?></label>
 			<select id="mp-solution-category-filter" name="mp-solution-category" onchange="document.querySelector('.mp-solution-filters__form').submit()">
@@ -38,6 +40,10 @@ $types = get_terms( array(
 			</select>
 		</fieldset>
 
+		<?php } ?>
+
+		<?php if( !is_wp_error( $types ) && !empty($types) ){ ?>
+
 		<fieldset>
 			<label for="mp-solution-type-filter"><?php _e('Filter by Type', 'aras-marketplace'); ?></label>
 			<select id="mp-solution-type-filter" name="mp-solution-type" onchange="document.querySelector('.mp-solution-filters__form').submit()">
@@ -58,6 +64,8 @@ $types = get_terms( array(
 				<?php } ?>
 			</select>
 		</fieldset>
+
+		<?php } ?>
 
 		<fieldset class="mp-solution-type-search">
 			<label class="mp-solution-type-filter" for="mp-search"><?php _e('Search', 'aras-marketplace'); ?></label>

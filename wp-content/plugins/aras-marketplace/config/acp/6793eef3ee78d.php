@@ -7,7 +7,7 @@ return array (
     'title' => '',
     'type' => 'mp-solution',
     'id' => '6793eef3ee78d',
-    'updated' => 1742737749,
+    'updated' => 1742845648,
     'columns' => 
     array (
       '1b9c1c63ebc6a8' => 
@@ -76,37 +76,45 @@ return array (
         'filter_label' => '',
         'name' => '2c93cd1fcf1aa0',
       ),
-      '436c1dd8ad9168' => 
+      '3461b11930e560' => 
       array (
-        'type' => 'field_6792ade8dc767',
-        'label' => 'Category',
+        'type' => 'column-taxonomy',
+        'label' => 'Categories',
         'width' => '',
         'width_unit' => '%',
-        'term_property' => '',
+        'taxonomy' => 'mp-solution-category',
         'term_link_to' => 'filter',
-        'export' => 'on',
+        'number_of_items' => '10',
+        'separator' => 'comma',
         'edit' => 'on',
+        'enable_term_creation' => 'off',
+        'export' => 'on',
+        'sort' => 'on',
         'bulk_edit' => 'on',
         'search' => 'on',
         'filter' => 'off',
         'filter_label' => '',
-        'name' => '436c1dd8ad9168',
+        'name' => '3461b11930e560',
       ),
-      '40080236126e98' => 
+      '5f1bc75c0d0e58' => 
       array (
-        'type' => 'field_6792adbfdc766',
-        'label' => 'Solution Type',
+        'type' => 'column-taxonomy',
+        'label' => 'Solution Types',
         'width' => '',
         'width_unit' => '%',
-        'term_property' => '',
+        'taxonomy' => 'mp-solution-type',
         'term_link_to' => 'filter',
-        'export' => 'on',
+        'number_of_items' => '10',
+        'separator' => 'comma',
         'edit' => 'on',
+        'enable_term_creation' => 'off',
+        'export' => 'on',
+        'sort' => 'on',
         'bulk_edit' => 'on',
         'search' => 'on',
-        'filter' => 'off',
+        'filter' => 'on',
         'filter_label' => '',
-        'name' => '40080236126e98',
+        'name' => '5f1bc75c0d0e58',
       ),
       'wpseo-score' => 
       array (
