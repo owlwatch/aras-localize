@@ -34,7 +34,7 @@ if( $release_date ){
 }
 
 $specs = [
-	__('Release Version', 'asa-marketplace') => get_field('release_version'),
+	__('Latest Release', 'asa-marketplace') => get_field('release_version'),
 	__('Release Date', 'asa-marketplace')    => $release_date
 ];
 
