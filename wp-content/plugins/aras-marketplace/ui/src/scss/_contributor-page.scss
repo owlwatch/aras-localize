@@ -2,9 +2,11 @@
 	padding: 1.5rem 0;
 	width: 100%;
 	background-color: #f6f6f6;
-	&__logo {
+	&__logo-wrapper img {
 		max-height: 80px;
 		width: auto;
+		height: auto;
+		max-width: 100%;
 	}
 	&__title {
 		margin-bottom: 0;

@@ -30,9 +30,15 @@ if( $social_links ){
 		<?php
 		$logo = get_field('logo', get_queried_object());
 		if( $logo ){
+			?>
+			<div class="mp-contributor-banner__logo-wrapper">
+			<?php
 			echo wp_get_attachment_image( $logo['id'], 'large', false, [
 				'class' => 'mp-contributor-banner__logo'
 			]);
+			?>
+			</div>
+			<?php
 		}
 		else {
 			?>
