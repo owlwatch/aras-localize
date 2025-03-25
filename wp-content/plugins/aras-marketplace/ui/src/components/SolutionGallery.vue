@@ -204,7 +204,8 @@ const hasPrev = () => {
 
 const getYoutubeEmbedUrl = ( url: string ) => {
 	// allow for all types of youtube urls
-	const youtubeId = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)[2];
+	const end = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)[2];
+	const youtubeId = end !== undefined ? end.split(/[^0-9a-z_\-]/i)[0] : end;
 	const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
 	return youtubeEmbedUrl;
 }
