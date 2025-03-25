@@ -38,6 +38,7 @@ class GravityForms
 		// need a fix for the google analytics handling of ajax redirects:
 		add_filter('gform_gravityformsgoogleanalytics_pre_process_feeds', [$this, 'before_ga_process_feeds'], 10, 3);
 		add_filter('gform_post_process_feed', [$this, 'after_ga_process_feeds'], 10, 4);
+		add_filter('gform_ajax_iframe_content', [$this, 'gform_ajax_iframe_content'], 10, 1);
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
@@ -60,6 +61,18 @@ class GravityForms
 			$confirmation .= $this->confirmation_output_buffer;
 		}
 		return $confirmation;
+	}
+
+	public function gform_ajax_iframe_content( $content )
+	{
+		// move all the <scripts> to the <head>
+		$head = '';
+		$content = preg_replace_callback('/<script.*?>.*?<\/script>/s', function($matches) use (&$head){
+			$head .= $matches[0];
+			return '';
+		}, $content);
+		$content = str_replace('</head>', $head . '</head>', $content);
+		return $content;
 	}
 
 	public function gform_form_args($args)

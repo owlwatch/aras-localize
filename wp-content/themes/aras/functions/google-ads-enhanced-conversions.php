@@ -42,7 +42,7 @@ class GoogleAdsEnhancedConversions
 
 		$script = <<<EOC
 <script type="text/javascript">
-if( window.dataLayer ) dataLayer.push({ 'upd_email' : '{$email}'});
+if( window.parent.dataLayer ) window.parent.dataLayer.push({ 'upd_email' : '{$email}'});
 </script>
 EOC;
 		$confirmation = $script . $confirmation;

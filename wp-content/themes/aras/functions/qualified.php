@@ -109,7 +109,10 @@ class QualifiedIntegration
 		// we actually want to convert the confirmation to a string
 		// with a script that calls our "fireQualifiedEvent" function
 		
-		$confirmation .= "<script>arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).");</script>";
+		$confirmation .= "<script>window.parent.arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).");</script>";
+		// also add the gf_{form_id} div to the confirmation
+		$form_id = $form['id'];
+		$confirmation .= "<div id='gf_$form_id'></div>";
 
 		return $confirmation;
 	}
