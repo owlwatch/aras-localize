@@ -131,7 +131,9 @@ class QualifiedIntegration
 					}
 
 					if( redirect ){
-						window.location = redirect;
+						setTimeout(() => {
+							window.location = redirect;
+						}, 20);
 					}
 				}
 
