@@ -209,6 +209,11 @@ if( $social_links ){
 						}
 						?>
 					</div>
+
+					<?php
+					// output pagination
+					Template::get_template_part('marketplace/pagination');
+					?>
 				</div>
 			</div>
 		</div>
