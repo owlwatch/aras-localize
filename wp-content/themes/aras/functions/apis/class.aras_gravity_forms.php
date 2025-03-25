@@ -8,6 +8,8 @@ class GravityForms
 {
 	private static $instance;
 
+	private $confirmation_output_buffer = '';
+
 	public static function getInstance()
 	{
 		if (! isset(self::$instance)) {
@@ -27,10 +29,37 @@ class GravityForms
 		add_filter('gform_field_value_autocountry', [$this, 'autocomplete_country_by_lang']);
 		add_filter('gform_field_value_visitor_id', [$this, 'populate_visitor_id'], 10, 1);
 		add_filter('gform_confirmation', [$this, 'gform_confirmation'], 10, 4);
+		add_filter('gform_confirmation', [$this, 'gform_confirmation_append_output'], 22, 4);
 		add_action('gform_after_submission', [$this, 'gform_after_submission'], 10, 2);
 		add_filter('gform_form_tag', [$this, 'gform_form_tag'], 10, 2);
 		add_filter('gform_field_content', [$this, 'gform_field_content'], 10, 5);
 		add_filter( 'gform_form_args', [$this, 'gform_form_args'] );
+
+		// need a fix for the google analytics handling of ajax redirects:
+		add_filter('gform_gravityformsgoogleanalytics_pre_process_feeds', [$this, 'before_ga_process_feeds'], 10, 3);
+		add_filter('gform_post_process_feed', [$this, 'after_ga_process_feeds'], 10, 4);
+	}
+
+	public function before_ga_process_feeds($feeds, $entry, $form)
+	{
+		ob_start();
+		return $feeds;
+	}
+
+	public function after_ga_process_feeds($feed, $entry, $form, $addon)
+	{
+		if( $addon->get_slug() !== 'gravityformsgoogleanalytics' ){
+			return;
+		}
+		$this->confirmation_output_buffer = ob_get_clean();
+	}
+
+	public function gform_confirmation_append_output($confirmation, $form, $entry, $ajax)
+	{
+		if( !is_array( $confirmation) ){
+			$confirmation .= $this->confirmation_output_buffer;
+		}
+		return $confirmation;
 	}
 
 	public function gform_form_args($args)
