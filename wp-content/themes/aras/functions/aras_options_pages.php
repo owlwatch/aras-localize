@@ -39,6 +39,7 @@ function custom_menu_order($menu_ord)
 		'gf_edit_forms', // Gravity Forms
 		'wpseo_dashboard', // Yoast
 		'users.php', // Users
+		'edit.php?post_type=user-profile', // resource
 		'options-general.php', // Settings
 		'tools.php', // Tools
 		'types_access', // Toolset

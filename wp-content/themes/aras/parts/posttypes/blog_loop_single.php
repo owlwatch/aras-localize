@@ -117,29 +117,7 @@ $tags = get_the_tags($current_post_id);
 			</div>
 		</div>
 	</section>
-	<?php if (have_rows('author_information', 'user_' . $author_id)) : ?>
-		<?php while (have_rows('author_information', 'user_' . $author_id)) : the_row(); ?>
-			<?php if (get_sub_field('author_bio', 'user_' . $author_id)) : ?>
-				<section class="author-section">
-					<div class="grid-container">
-						<div class="grid-x grid-margin-x">
-							<div class="cell small-12 mediumtoppadding mediumbottompadding">
-								<?php $image = get_sub_field('author_headshot');
-								if (!empty($image)) : ?>
-									<img class="author-headshot" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-								<?php endif; ?>
-								<div class="author-bio">
-									<h3>About <?php the_author(); ?></h3>
-									<?php echo get_sub_field('author_bio'); ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			<?php endif; ?>
-		<?php endwhile; ?>
-	<?php endif; ?>
-
+	<?php get_template_part('parts/_template_parts/author_information'); ?>
 	<?php comments_template();
 	?>
 

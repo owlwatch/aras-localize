@@ -1,0 +1,45 @@
+{
+    "key": "group_67e56f68836e1",
+    "title": "Author Information (Legacy)",
+    "fields": [
+        {
+            "key": "field_67e56f6a067e8",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "<p>These fields has been moved to <a href=\"edit.php?post_type=user-profile\"><strong>Author Profiles<\/strong><\/a> so that they can be translated. An author profile will automatically be created when a user is added.<\/p>",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_form",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1743089771
+}

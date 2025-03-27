@@ -33,7 +33,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 3,
+                    "wpml_cf_preferences": 1,
                     "return_format": "array",
                     "library": "all",
                     "min_width": "",
@@ -43,6 +43,7 @@
                     "max_height": "",
                     "max_size": "",
                     "mime_types": "",
+                    "allow_in_bindings": 1,
                     "preview_size": "medium"
                 },
                 {
@@ -67,14 +68,37 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_67e5665d82470",
+            "label": "User",
+            "name": "user",
+            "aria-label": "",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "role": "",
+            "return_format": "array",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "bidirectional_target": []
         }
     ],
     "location": [
         [
             {
-                "param": "user_role",
+                "param": "post_type",
                 "operator": "==",
-                "value": "all"
+                "value": "user-profile"
             }
         ]
     ],
@@ -88,5 +112,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714489777
+    "modified": 1743090641
 }

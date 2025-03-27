@@ -109,6 +109,9 @@ require_once(get_template_directory() . '/functions/post_types/aras_demo.php');
 //Speakers CPT
 require_once(get_template_directory() . '/functions/post_types/aras_speakers.php');
 
+// User Profiles
+require_once(get_template_directory() . '/functions/post_types/aras_user-profiles.php');
+
 //WPML DB Insert - complete, keeping this here and commented out for history. Associated folder - "./functions/wpml-resources"
 //require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
 
