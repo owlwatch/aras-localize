@@ -82,7 +82,7 @@ if( $is_integration ){
 
 $languages = get_the_terms( get_the_ID(), 'mp-language' );
 if( !empty($languages) ){
-	$specs[__('Supported Languages', 'asa-marketplace')] = implode(', ', array_map(function($language){
+	$specs[__('Available Languages', 'asa-marketplace')] = implode(', ', array_map(function($language){
 		return $language->name;
 	}, $languages));
 }
@@ -94,7 +94,7 @@ if( $support_link ){
 
 $license_agreement_link = get_field('license_agreement_link');
 if( $license_agreement_link ){
-	$specs[__('Legal', 'asa-marketplace')] = '<a href="'.$license_agreement_link.'" target="_blank">'.__('View License Agreement', 'asa-marketplace').'</a>';
+	// $specs[__('Legal', 'asa-marketplace')] = '<a href="'.$license_agreement_link.'" target="_blank">'.__('View License Agreement', 'asa-marketplace').'</a>';
 }
 
 // get media
