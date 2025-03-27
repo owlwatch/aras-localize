@@ -135,9 +135,14 @@ class QualifiedIntegration
 
 					if( redirect ){
 						// allow for gtm processing
-						setTimeout(() => {
+						let fallback = setTimeout(() => {
 							window.location = redirect;
-						}, 1000);
+						}, 2500);
+						// wait for google analytics events
+						window.addEventListener('googleanalytics/event_sent', () => {
+							clearTimeout( fallback );
+							window.location = redirect;
+						});
 					}
 				}
 
