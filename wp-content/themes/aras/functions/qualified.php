@@ -137,7 +137,7 @@ class QualifiedIntegration
 						// allow for gtm processing
 						setTimeout(() => {
 							window.location = redirect;
-						}, 20);
+						}, 1000);
 					}
 				}
 
