@@ -367,7 +367,7 @@ onBeforeUnmount(() => {
 			width: auto;
 			> img {
 				width: auto;
-				height: 100%;
+				max-height: 100%;
 			}
 		}
 	}
