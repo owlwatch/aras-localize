@@ -126,7 +126,8 @@ function custom_language_dropdown_filter()
 	//	$currentURL .= "?" . $_SERVER['QUERY_STRING'];
 	//}
 	// Get the list of available languages
-	$languages = apply_filters('wpml_active_languages', NULL);
+	global $wp_query;
+	$languages = apply_filters('wpml_active_languages', null);
 	?>
 	<?php if (!empty($languages)) : ?>
 		<button aria-label="language options" class="language-dropdown language-dropdown-button" type="button">
