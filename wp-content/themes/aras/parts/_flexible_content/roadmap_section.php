@@ -31,6 +31,7 @@ if ($data != null) {
       }
     }
   }
+  ksort($unique_product_area);
   ?>
   <section class="roadmap-filter-section bg-white mediumtoppadding nobottompadding">
     <div class="grid-container">
