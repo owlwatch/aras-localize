@@ -126,19 +126,7 @@ class Shortcodes
 		$event_data = get_post_meta( $event->ID, 'swoogo_event', true );
 		?><script type="application/json" data-aras-widget="swoogo-<?php echo $widget ?>" data-post-id="<?php echo $event->ID ?>" data-config="<?php echo esc_attr( json_encode($config) ) ?>"><?php
 		echo json_encode($event_data);
-		?></script><div class="swoogo-loading">
-			<div>Loading...</div>
-			<style>
-				.swoogo-loading {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					height: 400px;
-					animation: fading 1.5s infinite;
-					font-weight: 400;
-				}
-			</style>
-		</div><?php
+		?></script><?php
 		$this->agendaUI->render('src/main.ts');
 		return ob_get_clean();
 
