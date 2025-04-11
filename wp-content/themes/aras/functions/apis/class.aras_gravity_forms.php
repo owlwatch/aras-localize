@@ -33,12 +33,15 @@ class GravityForms
 		add_action('gform_after_submission', [$this, 'gform_after_submission'], 10, 2);
 		add_filter('gform_form_tag', [$this, 'gform_form_tag'], 10, 2);
 		add_filter('gform_field_content', [$this, 'gform_field_content'], 10, 5);
-		add_filter( 'gform_form_args', [$this, 'gform_form_args'] );
+		add_filter('gform_form_args', [$this, 'gform_form_args'] );
 
 		// need a fix for the google analytics handling of ajax redirects:
 		add_filter('gform_gravityformsgoogleanalytics_pre_process_feeds', [$this, 'before_ga_process_feeds'], 10, 3);
 		add_filter('gform_post_process_feed', [$this, 'after_ga_process_feeds'], 10, 4);
 		add_filter('gform_ajax_iframe_content', [$this, 'gform_ajax_iframe_content'], 10, 1);
+
+		// japanese fix for last name before first name
+		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
@@ -704,6 +707,36 @@ class GravityForms
 			// Log error if access token is not found
 			GFCommon::log_debug('Error obtaining access token: Access token not found in response');
 		}
+	}
+
+	public function gform_form_post_get_meta($form, $form_id)
+	{
+		// only if the current language is japaenese and
+		// we are in the frontend
+		if (is_admin()) {
+			return $form;
+		}
+		// check if the form is in the correct language
+		if( !defined('ICL_LANGUAGE_CODE') ){
+			return $form;
+		}
+
+		if (isset($form['fields'])) {
+			usort( $form['fields'], function($a, $b) {
+				$aOrder = $this->get_order_from_css_class( $a->cssClass );
+				$bOrder = $this->get_order_from_css_class( $b->cssClass );
+				return $aOrder <=> $bOrder;
+			});
+		}
+		return $form;
+	}
+
+	private function get_order_from_css_class( $cssClass )
+	{
+		$matches = [];
+		$lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : 'en';
+		preg_match("/$lang-order-(\-?\d+)/", $cssClass, $matches);
+		return isset($matches[1]) ? (int)$matches[1] : 0;
 	}
 }
 
