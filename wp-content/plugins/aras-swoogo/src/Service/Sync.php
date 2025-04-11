@@ -32,6 +32,11 @@ class Sync
 		}
 	}
 
+	/**
+	 * Sync all the events
+	 *
+	 * @return void
+	 */
 	public function syncEvents()
 	{
 
@@ -42,6 +47,12 @@ class Sync
 		}
 	}
 
+	/**
+	 * Get all the swoogo fields for a given type
+	 *
+	 * @param string $type
+	 * @return array
+	 */
 	public function getSwoogoFields( $type='')
 	{
 		$fields = [];
@@ -57,11 +68,17 @@ class Sync
 		return $fields;
 	}
 
+	/**
+	 * Sync the event with the API
+	 *
+	 * @param int $id
+	 * @return int|null
+	 */
 	public function syncEvent( $id )
 	{
 
 		if( !$this->api->isConnected() ){
-			return;
+			return null;
 		}
 		
 		// get the event from the API
