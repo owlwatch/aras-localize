@@ -28,9 +28,24 @@ class QualifiedIntegration
 
 	}
 
+	private function is_qualified_enabled_for_form( $form )
+	{
+		// stored in the cssClass as 'use-qualified'
+		$useQualified = false;
+		if (isset($form['cssClass'])) {
+			$cssClasses = explode(' ', $form['cssClass']);
+			if (in_array('use-qualified', $cssClasses)) {
+				$useQualified = true;
+			}
+		}
+		return $useQualified;
+	}
+
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
 		$redirect = false;
+
+		$enabled = $this->is_qualified_enabled_for_form( $form );
 		
 		// if the confirmation is not a redirect, return
 		if (is_array($confirmation) && !empty($confirmation['redirect'])) {
@@ -39,7 +54,9 @@ class QualifiedIntegration
 			$redirect = $confirmation['redirect'];
 		
 			// add flag to trigger qualified experience
-			$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
+			if( $enabled ){
+				$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
+			}
 			$redirectingText = __('Redirecting...', 'aras');
 			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
 		}
@@ -109,7 +126,7 @@ class QualifiedIntegration
 		// we actually want to convert the confirmation to a string
 		// with a script that calls our "fireQualifiedEvent" function
 		
-		$confirmation .= "<script>window.parent.arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).");</script>";
+		$confirmation .= "<script>window.parent.arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).", ". json_encode( $enabled ) .");</script>";
 		// also add the gf_{form_id} div to the confirmation
 		$form_id = $form['id'];
 		$confirmation .= "<div id='gf_$form_id'></div>";
@@ -126,9 +143,9 @@ class QualifiedIntegration
 			document.addEventListener( 'gform/post_init', function(){
 
 				// lets add our function to fire the qualified event
-				function arasFireQualifiedEvent( payload, redirect ){
+				function arasFireQualifiedEvent( payload, redirect, redirectText, enabled ){
 
-					if( window.qualified ){	
+					if( window.qualified && enabled ){	
 						qualified("saveFormData", payload);
 						qualified("emitFormFill", "custom");
 					}
