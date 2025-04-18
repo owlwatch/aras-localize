@@ -76,6 +76,9 @@ require_once(get_template_directory() . '/functions/apis/class.aras_gravity_form
 // Swoogo Functions
 require_once(get_template_directory() . '/functions/apis/api_swoogo.php');
 
+// Verint API Functions
+require_once(get_template_directory() . '/functions/apis/api_verint.php');
+
 
 /*     POST TYPE CUSTOM FUNCTIONS     */
 

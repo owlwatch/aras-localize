@@ -1,0 +1,16 @@
+{
+    "name": "owlwatch/aras-verint",
+    "description": "Verint app for Aras",
+    "autoload": {
+        "psr-4": {
+            "Aras\\Verint\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Owl Watch Consulting",
+            "email": "fabrizim@owlwatch.com"
+        }
+    ],
+    "require": {}
+}

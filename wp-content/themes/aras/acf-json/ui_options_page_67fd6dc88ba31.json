@@ -1,0 +1,23 @@
+{
+    "key": "ui_options_page_67fd6dc88ba31",
+    "title": "Verint Settings",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Verint Settings",
+    "menu_slug": "verint-settings",
+    "parent_slug": "options-general.php",
+    "advanced_configuration": false,
+    "icon_url": "",
+    "menu_title": "",
+    "position": null,
+    "redirect": false,
+    "description": "",
+    "menu_icon": [],
+    "update_button": "Update",
+    "updated_message": "Options Updated",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": false,
+    "modified": 1744661960
+}

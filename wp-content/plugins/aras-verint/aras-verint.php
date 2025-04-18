@@ -1,0 +1,25 @@
+<?php
+/**
+ * Plugin Name: Aras - Verint Integration
+ * Description: Adds integration with the Swoogo platform
+ * Version: 1.0
+ * Author: Owl Watch Consulting
+ */
+namespace Aras\Verint;
+
+if (!defined('ABSPATH')) {
+	exit; // Exit if accessed directly.
+}
+
+// define some constants
+define( 'ARAS_VERINT_PATH', plugin_dir_path( __FILE__ ) );
+define( 'ARAS_VERINT_URL', plugin_dir_url( __FILE__ ) );
+
+require_once( __DIR__ . '/vendor/autoload.php' );
+
+// load the plugin
+function app(){
+	return App::getInstance();
+}
+
+app(); // initialize the app
