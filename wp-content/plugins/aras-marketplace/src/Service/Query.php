@@ -39,31 +39,9 @@ class Query
 			$query->set( 'order', 'ASC' );
 			// maybe filter by search
 			if ( $search = get_query_var( 'mp-search' ) ) {
+				// add query_var to enable acf search
+				$query->query_vars['s'] = $search;
 				$query->set( 's', $search );
-
-				// expand the search into the "brief_description"
-				$query->set( 'meta_query', array(
-					'relation' => 'OR',
-					array(
-						'key' => 'brief_description',
-						'value' => $search,
-						'compare' => 'LIKE'
-					)
-				));
-
-				// can we search by a the name of a taxonomy term
-				// // that this has?
-				// $taxonomies = array( 'mp-solution-category', 'mp-solution-type', 'mp-contributor' );
-				// $tax_query = array();
-				// foreach( $taxonomies as $taxonomy ) {
-				// 	$tax_query[] = array(
-				// 		'taxonomy' => $taxonomy,
-				// 		'field' => 'name',
-				// 		'terms' => $search,
-				// 		'operator' => 'IN'
-				// 	);
-				// }
-				// $query->set( 'tax_query', $tax_query );
 			}
 		}
 	}
