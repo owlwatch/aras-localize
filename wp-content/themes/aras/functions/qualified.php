@@ -33,9 +33,10 @@ class QualifiedIntegration
 		// stored in the cssClass as 'use-qualified'
 		$useQualified = false;
 		if (isset($form['cssClass'])) {
-			$cssClasses = explode(' ', $form['cssClass']);
-			if (in_array('use-qualified', $cssClasses)) {
-				$useQualified = true;
+			$cssClasses = $form['cssClass'];
+			// we are going to match by class
+			if( preg_match('/(^|\s)use-qualified-([^\s]+?)(\s|$)/', $cssClasses, $matches) ){
+				$useQualified = $matches[2];
 			}
 		}
 		return $useQualified;
@@ -55,7 +56,7 @@ class QualifiedIntegration
 		
 			// add flag to trigger qualified experience
 			if( $enabled ){
-				$redirect = add_query_arg('show_qualified_experience', 'true', $redirect);
+				$redirect = add_query_arg('show_qualified_experience', $enabled, $redirect);
 			}
 			$redirectingText = __('Redirecting...', 'aras');
 			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
@@ -64,6 +65,11 @@ class QualifiedIntegration
 		else {
 			// get the qualified script
 			$script = get_field('qualified_show_experience_script', 'option');
+
+			// replace the experience id with the form specific one
+			if ($script) {
+				$script = preg_replace('/experience-([\d]+)/', 'experience-'.$enabled, $script);
+			}
 			if ($script) {
 				$confirmation.=$script;
 			}
@@ -226,6 +232,10 @@ class QualifiedIntegration
 			return;
 		}
 
+		$id = $_GET['show_qualified_experience'];
+		// replace the experience id with the form specific one
+		$script = preg_replace('/experience-([\d]+)/', 'experience-'.$id, $script);
+		
 		// output the script
 		echo $script;
 	}
