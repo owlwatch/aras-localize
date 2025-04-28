@@ -80,6 +80,8 @@ class QualifiedIntegration
 			$script = $this->get_qualified_script($enabled);
 			if ($script) {
 				$confirmation.=$script;
+				// debug
+				$confirmation .= "<script>console.log('triggering qualified experience');</script>";
 			}
 		}
 
@@ -239,7 +241,7 @@ class QualifiedIntegration
 		}
 
 		// get the qualified script
-		$script = get_field('qualified_show_experience_script', 'option');
+		$script = $this->get_qualified_script( $_GET['show_qualified_experience'] );
 		if (! $script) {
 			return;
 		}
