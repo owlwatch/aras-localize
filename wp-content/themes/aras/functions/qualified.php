@@ -34,7 +34,9 @@ class QualifiedIntegration
 		$useQualified = false;
 		if (isset($form['cssClass'])) {
 			// check if the cssClass contains 'use-qualified-<numbers>'
-			$useQualified = preg_match('/use-qualified-([0-9]+)/', $form['cssClass']);
+			if( preg_match('/use-qualified-([0-9]+)/', $form['cssClass']) ){
+				$useQualified = true;
+			}
 		}
 		return $useQualified;
 	}
