@@ -21,9 +21,9 @@ class Rest
 		register_rest_route( 'aras-verint/v1', '/api/(?P<path>.+)', array(
 			'methods' => array( 'POST', 'GET', 'PUT', 'DELETE' ),
 			'callback' => array( $this, 'api' ),
-			// 'permission_callback' => function () {
-			// 	return is_super_admin();
-			// },
+			'permission_callback' => function () {
+				return is_super_admin();
+			},
 			'args' => array(
 				'path' => array(
 					'required' => true,
@@ -31,13 +31,13 @@ class Rest
 				),
 			),
 		));
-
+		
 		register_rest_route( 'aras-verint/v1', '/forum-urls', array(
 			'methods' => array('GET'),
 			'callback' => array( $this, 'forumUrls' ),
-			// 'permission_callback' => function () {
-			// 	return is_super_admin();
-			// }
+			'permission_callback' => function () {
+				return is_super_admin();
+			}
 		));
 	}
 
