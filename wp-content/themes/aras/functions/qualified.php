@@ -33,10 +33,8 @@ class QualifiedIntegration
 		// stored in the cssClass as 'use-qualified'
 		$useQualified = false;
 		if (isset($form['cssClass'])) {
-			$cssClasses = explode(' ', $form['cssClass']);
-			if (in_array('use-qualified', $cssClasses)) {
-				$useQualified = true;
-			}
+			// check if the cssClass contains 'use-qualified-<numbers>'
+			$useQualified = preg_match('/use-qualified-([0-9]+)/', $form['cssClass']);
 		}
 		return $useQualified;
 	}
