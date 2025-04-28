@@ -34,11 +34,25 @@ class QualifiedIntegration
 		$useQualified = false;
 		if (isset($form['cssClass'])) {
 			// check if the cssClass contains 'use-qualified-<numbers>'
-			if( preg_match('/use-qualified-([0-9]+)/', $form['cssClass']) ){
-				$useQualified = true;
+			if( preg_match('/use-qualified-([0-9]+)/', $form['cssClass'], $matches) ){
+				$useQualified = $matches[1];
 			}
 		}
 		return $useQualified;
+	}
+
+	private function get_qualified_script($id)
+	{
+		// get the qualified script
+		$script = get_field('qualified_show_experience_script', 'option');
+		if ($script) {
+			// we need to replace the {id} with the id from the form
+			$script = preg_replace('/experience-\d+/', 'experience-'.$id, $script);
+			$script = preg_replace('/experience-\{id\}/', 'experience-'.$id, $script);
+			return $script;
+		}
+
+		return false;
 	}
 
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
@@ -61,9 +75,9 @@ class QualifiedIntegration
 			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
 		}
 
-		else {
+		else if( $enabled ){
 			// get the qualified script
-			$script = get_field('qualified_show_experience_script', 'option');
+			$script = $this->get_qualified_script($enabled);
 			if ($script) {
 				$confirmation.=$script;
 			}
