@@ -161,6 +161,7 @@ class QualifiedIntegration
 				console.log( 'arasFireQualifiedEvent', payload, redirect, redirectText, enabled );
 
 				if( window.qualified && enabled ){	
+					console.log('firing qualified event');
 					qualified("saveFormData", payload);
 					qualified("emitFormFill", "custom");
 				}
