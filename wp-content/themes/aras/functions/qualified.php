@@ -81,7 +81,7 @@ class QualifiedIntegration
 			if ($script) {
 				$confirmation.=$script;
 				// debug
-				$confirmation .= "<script>console.log('triggering qualified experience');</script>";
+				$confirmation .= "<script>console.log('triggering qualified experience', '$enabled');</script>";
 			}
 		}
 
@@ -160,10 +160,8 @@ class QualifiedIntegration
 			// lets add our function to fire the qualified event
 			function arasFireQualifiedEvent( payload, redirect, redirectText, enabled ){
 
-				console.log( 'arasFireQualifiedEvent', payload, redirect, redirectText, enabled );
-
 				if( window.qualified && enabled ){	
-					console.log('firing qualified event');
+					console.log('firing qualified saveFormData', payload);
 					qualified("saveFormData", payload);
 					qualified("emitFormFill", "custom");
 				}
