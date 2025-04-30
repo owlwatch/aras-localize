@@ -33,12 +33,26 @@ class QualifiedIntegration
 		// stored in the cssClass as 'use-qualified'
 		$useQualified = false;
 		if (isset($form['cssClass'])) {
-			$cssClasses = explode(' ', $form['cssClass']);
-			if (in_array('use-qualified', $cssClasses)) {
-				$useQualified = true;
+			// check if the cssClass contains 'use-qualified-<numbers>'
+			if( preg_match('/use-qualified-([0-9]+)/', $form['cssClass'], $matches) ){
+				$useQualified = $matches[1];
 			}
 		}
 		return $useQualified;
+	}
+
+	private function get_qualified_script($id)
+	{
+		// get the qualified script
+		$script = get_field('qualified_show_experience_script', 'option');
+		if ($script) {
+			// we need to replace the {id} with the id from the form
+			$script = preg_replace('/experience-\d+/', 'experience-'.$id, $script);
+			$script = preg_replace('/experience-\{id\}/', 'experience-'.$id, $script);
+			return $script;
+		}
+
+		return false;
 	}
 
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
@@ -61,11 +75,13 @@ class QualifiedIntegration
 			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
 		}
 
-		else {
+		else if( $enabled ){
 			// get the qualified script
-			$script = get_field('qualified_show_experience_script', 'option');
+			$script = $this->get_qualified_script($enabled);
 			if ($script) {
 				$confirmation.=$script;
+				// debug
+				$confirmation .= "<script>console.log('triggering qualified experience', '$enabled');</script>";
 			}
 		}
 
@@ -126,7 +142,7 @@ class QualifiedIntegration
 		// we actually want to convert the confirmation to a string
 		// with a script that calls our "fireQualifiedEvent" function
 		
-		$confirmation .= "<script>window.parent.arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).", ". json_encode( $enabled ) .");</script>";
+		$confirmation = "<script>window.parent.arasFireQualifiedEvent(" . json_encode($payload) . ", " . json_encode($redirect) . ", ". json_encode($redirectingText).", ". json_encode( $enabled ) .");</script>".$confirmation;
 		// also add the gf_{form_id} div to the confirmation
 		$form_id = $form['id'];
 		$confirmation .= "<div id='gf_$form_id'></div>";
@@ -144,9 +160,8 @@ class QualifiedIntegration
 			// lets add our function to fire the qualified event
 			function arasFireQualifiedEvent( payload, redirect, redirectText, enabled ){
 
-				console.log( 'arasFireQualifiedEvent', payload, redirect, redirectText, enabled );
-
 				if( window.qualified && enabled ){	
+					console.log('firing qualified saveFormData', payload);
 					qualified("saveFormData", payload);
 					qualified("emitFormFill", "custom");
 				}
@@ -224,7 +239,7 @@ class QualifiedIntegration
 		}
 
 		// get the qualified script
-		$script = get_field('qualified_show_experience_script', 'option');
+		$script = $this->get_qualified_script( $_GET['show_qualified_experience'] );
 		if (! $script) {
 			return;
 		}
