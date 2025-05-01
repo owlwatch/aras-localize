@@ -43,6 +43,7 @@ class MediaCleanup
 				'relation' => 'AND',
 				[
 					'key' => 'next3_get_attached_file_cache',
+
 					'value' => '',
 					'compare' => '!=',
 				],
