@@ -3,7 +3,7 @@
     "description": "Verint app for Aras",
     "autoload": {
         "psr-4": {
-            "Aras\\Verint\\": "src/"
+            "Aras\\Verint\\": "app/"
         }
     },
     "authors": [

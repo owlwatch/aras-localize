@@ -16,7 +16,7 @@ class ComposerStaticInit60aea86fcfe50034e29271553ff14a69
     public static $prefixDirsPsr4 = array (
         'Aras\\Verint\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

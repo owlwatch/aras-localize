@@ -29,7 +29,13 @@ class App {
 	 * The Reset API Service
 	 * @var Aras\Verint\Service\Rest
 	 */
-	public $restService;	
+	public $restService;
+
+	/**
+	 * The Media Cleanup Service
+	 * @var Aras\Verint\Service\MediaCleanup
+	 */
+	public $mediaCleanupService;
 
 	/**
 	 * Agenda UI
@@ -52,6 +58,7 @@ class App {
 		$this->restService = new Service\Rest();
 
 		$this->apiService = new Service\VerintApi();
+		$this->mediaCleanupService = new Service\MediaCleanup();
 		
 		$this->ui = new Service\ViteService(
 			ARAS_SWOOGO_PATH.'/ui/dist',

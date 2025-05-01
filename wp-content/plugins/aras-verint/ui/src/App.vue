@@ -9,10 +9,16 @@ const pages = {
 		component: defineAsyncComponent( () => import('@/components/Explorer.vue') ),
 		name: 'Explorer',
 	},
+	
+	'media': {
+		component: defineAsyncComponent( () => import('@/components/Media.vue') ),
+		name: 'Media',
+	},
+
 	'about': {
 		component: defineAsyncComponent( () => import('@/components/About.vue') ),
 		name: 'About',
-	}
+	},
 }
 const info = ref<any>();
 const activePage = ref<string>('explorer');
