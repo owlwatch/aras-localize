@@ -17,21 +17,21 @@ const useForumsStore = defineStore("forums", () => {
 
 	const {root, nonce} = window.wpApiSettings;
 
+	
 	const api = async ( path: string, body: {} = {}, method: string = 'GET') => {
-		let url = `${root}aras-verint/v1/api/${path}`;
+		return rest('api/'+path, body, method);
+	};
 
-		console.log( {method, body} );
-
+	const rest = async ( path: string, body: {} = {}, method: string = 'GET') => {
+		let url = `${root}aras-verint/v1/${path}`;
+		
 		if( method == 'GET') {
 			// if method is GET, append the body as query parameters
 			const queryParams = new URLSearchParams(body as any).toString();
-			console.log( {queryParams, body} );
 			if (queryParams) {
 				url += `?${queryParams}`;
 			}
 		}
-
-		console.log(url);
 
 		return fetch(url, {
 			method,
@@ -50,10 +50,11 @@ const useForumsStore = defineStore("forums", () => {
 			.catch((error) => {
 				console.error('Error:', error);
 			});
-	}
+	};
 
 	return {
-		api
+		api,
+		rest
 	};
 
 });

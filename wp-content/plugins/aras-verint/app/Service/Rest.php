@@ -39,6 +39,16 @@ class Rest
 				return is_super_admin();
 			}
 		));
+
+		register_rest_route( 'aras-verint/v1', '/media-objects', array(
+			'methods' => array('GET'),
+			'callback' => function(){
+				return app()->mediaCleanupService->getObjects();
+			},
+			'permission_callback' => function () {
+				return is_super_admin();
+			}
+		));
 	}
 
 	public function api( $request ) {
