@@ -1,5 +1,5 @@
 {
-    "key": "group_667c408e328a9",
+    "key": "group_681820a94605d",
     "title": "Landing Page Hero Banner",
     "fields": [
         {
@@ -382,7 +382,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "layout": "block",
             "sub_fields": [
                 {
@@ -399,7 +399,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 0,
                     "choices": {
                         "solid": "Solid Background",
                         "image": "Background Image",
@@ -436,7 +436,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 0,
                     "choices": {
                         "transparent": "Transparent",
                         "white": "White",
@@ -462,21 +462,13 @@
                     "type": "select",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_667c67fddc909",
-                                "operator": "!=",
-                                "value": "solid"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": false,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 0,
                     "choices": {
                         "nooverlay": "No overlay",
                         "nooverlaywhite": "No overlay, invert text colors",
@@ -541,7 +533,6 @@
                             "max_height": "",
                             "max_size": "",
                             "mime_types": "",
-                            "allow_in_bindings": 1,
                             "preview_size": "medium"
                         },
                         {
@@ -558,7 +549,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": 0,
+                            "wpml_cf_preferences": 1,
                             "choices": {
                                 "topleft": "Top Left",
                                 "topcenter": "Top Center",
@@ -574,7 +565,6 @@
                             "return_format": "value",
                             "multiple": 0,
                             "allow_null": 0,
-                            "allow_in_bindings": 1,
                             "ui": 0,
                             "ajax": 0,
                             "placeholder": ""
@@ -606,7 +596,6 @@
                     "wpml_cf_preferences": 1,
                     "default_value": "",
                     "maxlength": "",
-                    "allow_in_bindings": 1,
                     "placeholder": "",
                     "prepend": "",
                     "append": ""
@@ -614,34 +603,16 @@
             ]
         }
     ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "lp"
-            },
-            {
-                "param": "post_template",
-                "operator": "==",
-                "value": "default"
-            }
-        ]
-    ],
-    "menu_order": -1,
-    "position": "acf_after_title",
+    "location": [],
+    "menu_order": 0,
+    "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": [
-        "the_content",
-        "comments",
-        "slug",
-        "send-trackbacks"
-    ],
+    "hide_on_screen": [],
     "active": true,
     "description": "",
-    "show_in_rest": 0,
+    "show_in_rest": false,
     "acfml_field_group_mode": "advanced",
-    "modified": 1746413422
+    "modified": 1746411689
 }

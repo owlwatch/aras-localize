@@ -689,6 +689,39 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6818b4482faca": {
+                    "key": "layout_6818b4482faca",
+                    "name": "map_section",
+                    "label": "Map Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6818b4532facd",
+                            "label": "Map Section",
+                            "name": "map_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "clone": [
+                                "group_6818b2ec96142"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -816,5 +849,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1744143293
+    "modified": 1746449530
 }

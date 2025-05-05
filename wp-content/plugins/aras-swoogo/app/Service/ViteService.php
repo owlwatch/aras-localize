@@ -89,6 +89,8 @@ class ViteService {
 		
 		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($handle, CURLOPT_NOBODY, true);
+		curl_setopt($handle, CURLOPT_TIMEOUT, 1);
+		curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
 
 		curl_exec($handle);
 		$error = curl_errno($handle);

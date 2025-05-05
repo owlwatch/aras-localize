@@ -142,3 +142,22 @@ add_filter('acf/validate_value', function( $valid, $value, $field, $input ){
 	}
 	return $valid;
 }, 11, 4);
+
+// Method 1: Filter.
+function aras_acf_google_map_api( $api ){
+	// get the field from our options
+	$api['key'] = get_field('google_maps_api_key', 'options');
+	return $api;
+}
+add_filter('acf/fields/google_map/api', 'aras_acf_google_map_api');
+
+function aras_acf_input_disable_autocomplete() {
+	?>
+	<script type="text/javascript">
+		  (function($) {
+			$('.acf-input-wrap input, .acf-input textarea').attr('autocomplete', 'new-password'); // use a random string other than off to disable it completely
+		  })(jQuery);
+	</script>
+	<?php
+  }
+  add_action('acf/input/admin_footer', 'aras_acf_input_disable_autocomplete');
