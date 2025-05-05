@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Aras\\Swoogo\\' => array($baseDir . '/src'),
+    'Aras\\Swoogo\\' => array($baseDir . '/app'),
 );

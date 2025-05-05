@@ -17,10 +17,10 @@ class MediaCleanup
 	 */
 	public function __construct()
 	{
-		add_action('init', [$this, 'init']);
+		// add_action('init', [$this, 'init']);
 		// add_action('init', [$this, 'testR2']);
 		// add_action('aras_next3_media_audit', [$this, 'audit']);
-		add_action('aras_next3_media_cleanup', [$this, 'cleanup']);
+		// add_action('aras_next3_media_cleanup', [$this, 'cleanup']);
 	}
 
 	public function testR2()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, watch, computed } from 'vue'
+import { defineProps, ref, watch, computed, provide } from 'vue'
 import { useEventStore } from './stores/event';
 import type {Session, Speaker, Event} from './stores/event';
 import { storeToRefs } from 'pinia';
@@ -11,12 +11,16 @@ const eventStore = useEventStore();
 const props = defineProps<{ 
   eventId: number
   config: {
-    filterByTrack: string
+    filterByTrack: string,
+    hideTrack?: boolean,
   }
 }>();
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
+
+const hideTrack = props.config.hideTrack || false;
+provide('hideTrack', hideTrack);
 
 // utility function to test a string against another string that can contain
   // * as a wildcard

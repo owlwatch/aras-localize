@@ -3,7 +3,7 @@
 import type {Session, Speaker} from '@/stores/event';
 import {useEventStore} from '@/stores/event';
 import {storeToRefs} from 'pinia';
-import {watch} from 'vue';
+import {inject} from 'vue';
 
 const props = withDefaults(defineProps<{
 	session: Session
@@ -11,8 +11,10 @@ const props = withDefaults(defineProps<{
 	showSpeakers?: boolean
 }>(),{
 	showDate: true,
-	showSpeakers: true
+	showSpeakers: true,
 });
+
+const hideTrack = inject('hideTrack', false);
 
 const {session, showSpeakers} = props;
 
@@ -47,7 +49,7 @@ function formatTime(time: string) {
 		.swoogo-session-card__date(v-if="props.showDate")
 			| {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
 		span.swoogo-session-card__track.swoogo-pill(
-			v-if="session.track"
+			v-if="session.track && !hideTrack"
 		) {{ session.track.name}} 
 		a.swoogo-session-card__title(
 			href="#"

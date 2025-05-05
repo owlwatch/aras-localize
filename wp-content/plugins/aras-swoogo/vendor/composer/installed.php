@@ -3,7 +3,7 @@
         'name' => 'owlwatch/aras-swoogo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7b2c410d51cb967cafe2c39b92b4c874460e4ee7',
+        'reference' => '9b7c3ab6ca30b3b7a2b2dea0e40848499ddac3c6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'owlwatch/aras-swoogo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7b2c410d51cb967cafe2c39b92b4c874460e4ee7',
+            'reference' => '9b7c3ab6ca30b3b7a2b2dea0e40848499ddac3c6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

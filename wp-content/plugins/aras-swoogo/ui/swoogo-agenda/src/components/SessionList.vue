@@ -13,7 +13,7 @@ import type { Swiper as SwiperInst } from 'swiper/types';
 import 'swiper/css';
 
 const props = defineProps<{
-	sessions: Session[]
+	sessions: Session[],
 }>();
 
 const swiperInst = ref<SwiperInst | null>(null);
@@ -98,6 +98,7 @@ template(v-else)
 	session-card(
 		:showDate="false"
 		:session="sessions[0]"
+		:hideTrack="props.hideTrack"
 	)
 </template>
 

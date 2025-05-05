@@ -16,7 +16,7 @@ class ComposerStaticInit3b303e4343e4ff6de1f6115b915d20f4
     public static $prefixDirsPsr4 = array (
         'Aras\\Swoogo\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

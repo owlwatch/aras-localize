@@ -3,11 +3,15 @@
 import type { Session } from '@/stores/event';
 import {useEventStore} from '@/stores/event';
 import {onKeyStroke} from '@vueuse/core';
-import { onMounted, onUnmounted, ref, toRefs, computed } from 'vue';
+import { onMounted, onUnmounted, ref, toRefs, computed, inject } from 'vue';
 import Modal from './Modal.vue';
 
-const props = defineProps<{ session: Session }>();
+const props = defineProps<{ 
+	session: Session
+}>();
 const emit = defineEmits(['close']);
+
+const hideTrack = inject('hideTrack', false);
 
 // get next and previous sessions if they exist
 const eventStore = useEventStore();
@@ -51,12 +55,14 @@ modal(@close="emit('close')" :show-close-button="false")
 	template(v-slot:header)
 		
 		.swoogo-pill(
-			v-if="session.track"
+			v-if="session.track && !hideTrack"
 		) {{ session.track.name }}
 		// modal header
 		h2 {{ session.name }}
 
-		.swoogo-session-modal__location 
+		.swoogo-session-modal__location(
+			v-if="location"
+		)
 			// font awesome svg for map
 			svg(
 				xmlns="http://www.w3.org/2000/svg"

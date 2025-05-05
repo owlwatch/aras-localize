@@ -3,7 +3,7 @@
     "description": "Swoogo integration for Aras",
     "autoload": {
         "psr-4": {
-            "Aras\\Swoogo\\": "src/"
+            "Aras\\Swoogo\\": "app/"
         }
     },
     "authors": [
