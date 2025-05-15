@@ -49,10 +49,10 @@ interface Session {
 	eventIds?: number[]
 	translations?: {
 		[lang: string]: {
-			name: string
-			description: string
+			[name: string]: string
 		}
 	}
+	[key: string]: any
 }
 
 interface Speaker {
