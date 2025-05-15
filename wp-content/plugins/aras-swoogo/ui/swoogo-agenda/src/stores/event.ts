@@ -215,7 +215,7 @@ export const useEventStore = defineStore('event', () => {
 				if( lang && session.translations && session.translations[lang] ){
 					Object.keys(session.translations[lang]).forEach( key => {
 						if( session.translations && session.translations[lang] ){
-							if( key in session ){
+							if( key in session && session.translations[lang][key] ){
 								session[key] = session.translations[lang][key];
 							}
 						}
