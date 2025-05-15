@@ -77,7 +77,9 @@ class SwoogoApi
 		} else if ($method == 'delete') {
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 		}
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->accessToken));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Authorization: Bearer ' . $this->accessToken
+		));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 5);

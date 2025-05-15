@@ -99,12 +99,25 @@ class App {
 	{
 		if( !empty( $_REQUEST['test-swoogo-sync-event'] ) ){
 			$event_id = $_REQUEST['test-swoogo-sync-event'];
-			$post_id = $this->syncService->syncEvent( $event_id );
+			$lang = $_REQUEST['lang'] ?? 'en';
+			$post_id = $this->syncService->syncEvent( $event_id, $lang );
 			$data = get_post_meta( $post_id, 'swoogo_event', true );
 			header('Content-Type: application/json; charset=utf-8');
 			echo json_encode( $data );
 			exit;
-		}	
+		}
+
+		if( !empty( $_REQUEST['test-swoogo-session-data'])){
+			$session_id = $_REQUEST['test-swoogo-session-data'];
+			$lang = $_REQUEST['lang'] ?? 'en';
+			$data = $this->apiService->get('sessions/'.$session_id, [
+				'lang' => $lang,
+				'expand' => 'translations'
+			], $lang);
+			header('Content-Type: application/json; charset=utf-8');
+			echo json_encode( $data );
+			exit;
+		}
 	}
 
 }

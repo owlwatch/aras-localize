@@ -114,9 +114,9 @@ function fetch_and_save_pdf($pdf_id)
 		if (isset($token_response_data['access_token'])) {
 			$access_token = $token_response_data['access_token'];
 
-			error_log( $access_token );
 
-			$pdf_url = 'https://www.myinnovator.com/server/odata/Document(\'' . $pdf_id . '\')/viewable_file/$value';
+			$pdf_url = "https://www.myinnovator.com/server/odata/Document('$pdf_id')/viewable_file/\$value";
+			// $pdf_url = 'https://myinnovator.com/?StartItem=Document%3A'.$pdf_id;
 			error_log( $pdf_url );
 			$pdf_directory = wp_upload_dir()['basedir'] . '/training/';
 			$pdf_file_name = $pdf_id . '.pdf';

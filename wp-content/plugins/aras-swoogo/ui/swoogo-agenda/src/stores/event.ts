@@ -47,6 +47,12 @@ interface Session {
 	track_id: number
 	speaker_ids: number[]
 	eventIds?: number[]
+	translations?: {
+		[lang: string]: {
+			name: string
+			description: string
+		}
+	}
 }
 
 interface Speaker {
@@ -139,6 +145,12 @@ export const useEventStore = defineStore('event', () => {
 			details.value.push( data.details );
 		}
 
+		// what language are we using
+		let lang = document.querySelector('html')?.getAttribute('lang');
+		if( !lang ) lang = 'en';
+		// we are only using base language, not region
+		lang = lang.split('-')[0];
+
 		data.sponsors.forEach( sponsor => {
 			// use field map to update sponsor data
 			
@@ -198,6 +210,17 @@ export const useEventStore = defineStore('event', () => {
 			else {
 				mapFields( session, data.sessionFields );
 				session.eventIds = [eventId];
+				// if there are translations, lets update their corresponding
+				// fields
+				if( lang && session.translations && session.translations[lang] ){
+					Object.keys(session.translations[lang]).forEach( key => {
+						if( session.translations && session.translations[lang] ){
+							if( key in session ){
+								session[key] = session.translations[lang][key];
+							}
+						}
+					});
+				}
 				sessions.value.push( session );
 			}
 		});

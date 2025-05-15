@@ -87,7 +87,7 @@ class Sync
 		$event->contactFields = $this->getSwoogoFields('contacts');
 		$event->sponsorFields = $this->getSwoogoFields('sponsors');
 
-		$event->details = $this->api->get('events/'.$id);
+		$event->details = $this->api->get('events/'.$id, []);
 		
 		// lets get all the fields for the sessions
 		$fields = array_map( function($field){
@@ -104,7 +104,7 @@ class Sync
 				'event_id' => $id,
 				'page' => $page++,
 				'fields' => implode(',',$fields),
-				'expand' => 'speakers,track,location',
+				'expand' => 'speakers,track,location,translations',
 			]);
 			$sessions = array_merge( $sessions,  $sessionResponse->items );
 		}while( $sessionResponse->_meta->currentPage < $sessionResponse->_meta->pageCount );
