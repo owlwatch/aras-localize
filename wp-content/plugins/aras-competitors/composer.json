@@ -1,0 +1,16 @@
+{
+    "name": "owlwatch/aras-competitors",
+    "description": "App for adding competitor tables",
+    "autoload": {
+        "psr-4": {
+            "Aras\\Competitors\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Owl Watch Consulting",
+            "email": "fabrizim@owlwatch.com"
+        }
+    ],
+    "require": {}
+}

@@ -37,6 +37,72 @@
             },
             "wpml_cf_preferences": 3,
             "layouts": {
+                "layout_67f58380ace5a": {
+                    "key": "layout_67f58380ace5a",
+                    "name": "accordion_section",
+                    "label": "Accordion Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_67f5838cace5f",
+                            "label": "Accordion Section",
+                            "name": "accordion_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_67f580dbc625f"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_65c3dc13372ba": {
+                    "key": "layout_65c3dc13372ba",
+                    "name": "automatic_cards_section",
+                    "label": "Automatic Cards Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65c3dc25372bd",
+                            "label": "Automatic Cards Section",
+                            "name": "automatic_cards_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_65c2a1b77908a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65b28ff0c53f9": {
                     "key": "layout_65b28ff0c53f9",
                     "name": "cards_section",
@@ -70,6 +136,72 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_662c351d1af60": {
+                    "key": "layout_662c351d1af60",
+                    "name": "comparison_table",
+                    "label": "Comparison Table",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_662c35231af63",
+                            "label": "Comparison Table",
+                            "name": "comparison_table",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_662baf5217217"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_682641e64fb61": {
+                    "key": "layout_682641e64fb61",
+                    "name": "competitor_table",
+                    "label": "Competitor Table",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_682641f84fb64",
+                            "label": "Capabilities Comparison Section",
+                            "name": "Capabilities_Comparison_Section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "clone": [
+                                "group_6826405b8ec38"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65c3db69372ab": {
                     "key": "layout_65c3db69372ab",
                     "name": "customer_story_section",
@@ -93,6 +225,85 @@
                             "wpml_cf_preferences": 3,
                             "clone": [
                                 "group_65c2a9b0c8c95"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6679cfab5d709": {
+                    "key": "layout_6679cfab5d709",
+                    "name": "featured_speakers_section",
+                    "label": "Featured Speakers Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6679cfb45d70c",
+                            "label": "Featured Speakers Section",
+                            "name": "featured_speakers_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_6679cf0df1e86"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_6679cfb45d70c",
+                            "label": "Featured Speakers Section",
+                            "name": "featured_speakers_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_6679cf0df1e86"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_6679cfb45d70c",
+                            "label": "Featured Speakers Section",
+                            "name": "featured_speakers_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_6679cf0df1e86"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -169,6 +380,85 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_667d7e59d5139": {
+                    "key": "layout_667d7e59d5139",
+                    "name": "full_width_form_section",
+                    "label": "Full Width Form Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667d7e8cd513c",
+                            "label": "Full Width Form Section",
+                            "name": "full_width_form_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d76a98c422"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_667d7e8cd513c",
+                            "label": "Full Width Form Section",
+                            "name": "full_width_form_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d76a98c422"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_667d7e8cd513c",
+                            "label": "Full Width Form Section",
+                            "name": "full_width_form_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d76a98c422"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65c3db9f372af": {
                     "key": "layout_65c3db9f372af",
                     "name": "leadership_tabs_section",
@@ -235,6 +525,39 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_6818b4482faca": {
+                    "key": "layout_6818b4482faca",
+                    "name": "map_section",
+                    "label": "Map Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6818b4532facd",
+                            "label": "Map Section",
+                            "name": "map_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "clone": [
+                                "group_6818b2ec96142"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65bd31db5e7e1": {
                     "key": "layout_65bd31db5e7e1",
                     "name": "quote_section",
@@ -258,39 +581,6 @@
                             "wpml_cf_preferences": 3,
                             "clone": [
                                 "group_65bd2fb50aa91"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_65c3dc13372ba": {
-                    "key": "layout_65c3dc13372ba",
-                    "name": "automatic_cards_section",
-                    "label": "Automatic Cards Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_65c3dc25372bd",
-                            "label": "Automatic Cards Section",
-                            "name": "automatic_cards_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_65c2a1b77908a"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -465,263 +755,6 @@
                     ],
                     "min": "",
                     "max": ""
-                },
-                "layout_662c351d1af60": {
-                    "key": "layout_662c351d1af60",
-                    "name": "comparison_table",
-                    "label": "Comparison Table",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_662c35231af63",
-                            "label": "Comparison Table",
-                            "name": "comparison_table",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_662baf5217217"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_6679cfab5d709": {
-                    "key": "layout_6679cfab5d709",
-                    "name": "featured_speakers_section",
-                    "label": "Featured Speakers Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_6679cfb45d70c",
-                            "label": "Featured Speakers Section",
-                            "name": "featured_speakers_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_6679cf0df1e86"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        },
-                        {
-                            "key": "field_6679cfb45d70c",
-                            "label": "Featured Speakers Section",
-                            "name": "featured_speakers_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_6679cf0df1e86"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        },
-                        {
-                            "key": "field_6679cfb45d70c",
-                            "label": "Featured Speakers Section",
-                            "name": "featured_speakers_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_6679cf0df1e86"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_667d7e59d5139": {
-                    "key": "layout_667d7e59d5139",
-                    "name": "full_width_form_section",
-                    "label": "Full Width Form Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_667d7e8cd513c",
-                            "label": "Full Width Form Section",
-                            "name": "full_width_form_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_667d76a98c422"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        },
-                        {
-                            "key": "field_667d7e8cd513c",
-                            "label": "Full Width Form Section",
-                            "name": "full_width_form_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_667d76a98c422"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        },
-                        {
-                            "key": "field_667d7e8cd513c",
-                            "label": "Full Width Form Section",
-                            "name": "full_width_form_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_667d76a98c422"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_67f58380ace5a": {
-                    "key": "layout_67f58380ace5a",
-                    "name": "accordion_section",
-                    "label": "Accordion Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_67f5838cace5f",
-                            "label": "Accordion Section",
-                            "name": "accordion_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_67f580dbc625f"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_6818b4482faca": {
-                    "key": "layout_6818b4482faca",
-                    "name": "map_section",
-                    "label": "Map Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_6818b4532facd",
-                            "label": "Map Section",
-                            "name": "map_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 0,
-                            "clone": [
-                                "group_6818b2ec96142"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
                 }
             },
             "min": "",
@@ -849,5 +882,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1746449530
+    "modified": 1747337867
 }

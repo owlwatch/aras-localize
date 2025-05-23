@@ -49,6 +49,15 @@ class Rest
 			}
 		));
 
+		register_rest_route( 'aras-verint/v1', '/articles', array(
+			'methods' => array('GET'),
+			'callback' => array( $this, 'articles' ),
+			'permission_callback' => function () {
+				// return is_super_admin();
+				return true;
+			}
+		));
+
 		register_rest_route( 'aras-verint/v1', '/media-objects', array(
 			'methods' => array('GET'),
 			'callback' => function(){
@@ -56,6 +65,17 @@ class Rest
 			},
 			'permission_callback' => function () {
 				return is_super_admin();
+			}
+		));
+
+		register_rest_route( 'aras-verint/v1', '/blog-export', array(
+			'methods' => array('GET'),
+			'callback' => function(){
+				return $this->blogExport();
+			},
+			'permission_callback' => function () {
+				// return is_super_admin();
+				return true;
 			}
 		));
 
@@ -139,6 +159,106 @@ class Rest
 			error_log( 'forumsPage: ' . $forumsPage );
 			$forumsResponse = app()->apiService->get('forums', ['PageIndex'=> $forumsPage++, 'PageSize' =>100]);
 			foreach( $forumsResponse->Forums as $forum ){
+				$data = $this->_sanitize_forum($forum);
+				// output headers if we haven't yet
+				if( $count == 0 ){
+					$headers = array_keys($data);
+					fputcsv($output, $headers, ",", '"', '\\');
+				}
+				fputcsv($output, $data, ",", '"', '\\');
+				$threads = [];
+				// we also want all the threads
+				$threadsPage = 0;
+				$count++;
+				do {
+					error_log( 'Forum '.$forum->Name .' threadsPage: ' . $threadsPage );
+					$threadsResponse = app()->apiService->get('forums/'.$forum->Id.'/threads', ['PageIndex'=> $threadsPage++, 'PageSize' =>100]);
+					foreach( $threadsResponse->Threads as $thread ){
+						fputcsv($output, $this->_sanitize_thread($thread), ",", '"', '\\');
+						$count++;
+					}
+					
+				}while( ($threadsResponse->PageIndex+1) * $threadsResponse->PageSize < $threadsResponse->TotalCount );
+			}
+			
+		}while( ($forumsResponse->PageIndex+1) * $forumsResponse->PageSize < $forumsResponse->TotalCount );
+
+
+		fclose($output);
+		exit;
+
+	}
+
+	public function blogExport()
+	{
+		header('Content-Type: application/csv; charset=utf-8');
+		header('Content-Disposition: attachment; filename=blog-export.csv');
+
+		$output = fopen('php://output', 'w');
+		$headers = ['Id', 'Title', 'Url', 'Body', 'Excerpt', 'Date', 'Tags', 'Categories', 'Author Username', 'Author First Name', 'Author Last Name', 'Author Email'];
+		fputcsv($output, $headers, ",", '"', '\\');
+
+		// we are going to get these from wordpress posts
+		// that are tagged with "Aras Labs" or in the category "Aras Labs"
+
+		$args = [
+			'post_type' => 'post',
+			'posts_per_page' => -1,
+			'tax_query' => [
+				'relation' => 'OR',
+				[
+					'taxonomy' => 'post_tag',
+					'field' => 'slug',
+					'terms' => ['aras-labs']
+				],
+				[
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => ['aras-labs']
+				]
+			]
+		];
+		$posts = get_posts( $args );
+		foreach( $posts as $post ){
+			$tags = get_the_tags( $post->ID );
+			if( $tags ) $tags = array_map( function($t) { return $t->name; }, $tags );
+			else $tags = [];
+			$categories = get_the_category( $post->ID );
+			if( $categories ) $categories = array_map( function($c) { return $c->name; }, $categories );
+			else $categories = [];
+			$author = get_userdata( $post->post_author );
+			$data = [
+				$post->ID,
+				$post->post_title,
+				get_permalink( $post->ID ),
+				$post->post_content,
+				$post->post_excerpt,
+				$post->post_date,
+				implode(' | ', $tags),
+				implode(' | ', $categories),
+				$author->user_login,
+				$author->first_name,
+				$author->last_name,
+				$author->user_email
+			];
+			fputcsv($output, $data, ",", '"', '\\');
+		}
+		exit;
+	}
+
+	public function articles()
+	{
+		header('Content-Type: application/csv; charset=utf-8');
+		header('Content-Disposition: attachment; filename=articles.csv');
+
+		$forumsPage = 0;
+		$output = fopen('php://output', 'w');
+		$count = 0;
+		
+		do {
+			error_log( 'forumsPage: ' . $forumsPage );
+			$forumsResponse = app()->apiService->get('forums', ['PageIndex'=> $forumsPage++, 'PageSize' =>100]);
+			foreach( $forumsResponse->Forums as $forum ){
 				fputcsv($output, $this->_sanitize_forum($forum), ",", '"', '\\');
 				$threads = [];
 				// we also want all the threads
@@ -154,11 +274,6 @@ class Rest
 			}
 			
 		}while( ($forumsResponse->PageIndex+1) * $forumsResponse->PageSize < $forumsResponse->TotalCount );
-
-
-		fclose($output);
-		exit;
-
 	}
 
 	public function bannedUserList()
@@ -185,6 +300,7 @@ class Rest
 				// fputcsv($output, $this->_sanitize_forum($forum), ",", '"', '\\');
 				$clean = [];
 				$clean['Id'] = $user->Id;
+				$clean['ContentId'] = $user->ContentId;
 				$clean['Username'] = $user->Username;
 				$clean['DisplayName'] = $user->DisplayName;
 				$clean['Email'] = $user->PrivateEmail;
@@ -206,6 +322,7 @@ class Rest
 	{
 		$clean = [];
 		$clean['Id'] = $forum->Id;
+		$clean['ContentId'] = $forum->ContentId;
 		$clean['Title'] = $forum->Title;
 		$clean['Url'] = $forum->Url;
 		$clean['Body'] = $forum->description;
@@ -220,9 +337,9 @@ class Rest
 	{
 		$clean = [];
 		$clean['Id'] = $thread->Id;
+		$clean['ContentId'] = $thread->ContentId;
 		$clean['Title'] = $thread->Subject;
 		$clean['Url'] = $thread->Url;
-		
 		$clean['Body'] = $thread->Body;
 		$clean['ContentType'] = 'forum-thread';
 		$clean['Date'] = $thread->Date;
