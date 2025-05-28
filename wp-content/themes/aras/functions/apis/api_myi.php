@@ -115,7 +115,7 @@ function fetch_and_save_pdf($pdf_id)
 			$access_token = $token_response_data['access_token'];
 
 
-			$pdf_url = "https://www.myinnovator.com/server/odata/Document('$pdf_id')/viewable_file/\$value";
+			$pdf_url = "https://myinnovator.com/server/odata/Document('$pdf_id')/viewable_file/\$value";
 			// $pdf_url = 'https://myinnovator.com/?StartItem=Document%3A'.$pdf_id;
 			error_log( $pdf_url );
 			$pdf_directory = wp_upload_dir()['basedir'] . '/training/';
@@ -126,7 +126,11 @@ function fetch_and_save_pdf($pdf_id)
 			$args = array(
 				'headers' => $headers
 			);
+
+			error_log( $pdf_url );
 			$pdf_response = wp_remote_get($pdf_url, $args);
+
+			error_log( $pdf_response['body'] );
 			// Check for errors
 			if (!is_wp_error($pdf_response)) {
 				$pdf_file_path = $pdf_directory . $pdf_file_name;

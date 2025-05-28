@@ -265,7 +265,12 @@ if ($data != null) {
 										<p class="training-data">Student Role: <strong><?php echo isset($item['_student_role']) ? $item['_student_role'] : ''; ?></strong></p>
 									</div>
 									<?php $upload_dir = wp_upload_dir(); ?>
-									<a aria-label="Download the Course PDF" class="aras-button" target="_blank" href="<?php echo $upload_dir['baseurl']; ?>/training/<?php echo $item['pdf_id']; ?>.pdf">Download the Course PDF</a>
+									<a
+										aria-label="Download the Course PDF"
+										class="aras-button"
+										target="_blank"
+										href="<?php echo $upload_dir['baseurl']; ?>/training/<?php echo $item['pdf_id']; ?>.pdf"
+									>Download the Course PDF</a>
 									<div class="training-single-description wysiwyg-content">
 										<h6><strong>Description</strong></h6>
 										<?php echo isset($item['_class_description']) ? $item['_class_description'] : ''; ?>
