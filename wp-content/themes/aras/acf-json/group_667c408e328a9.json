@@ -369,11 +369,11 @@
             "placeholder": ""
         },
         {
-            "key": "field_667c67e6dc908",
-            "label": "Hero Background",
-            "name": "hero_background",
+            "key": "field_68388fcb233b3",
+            "label": "Background Style",
+            "name": "hero_background_background_style",
             "aria-label": "",
-            "type": "group",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -383,235 +383,197 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_667c67fddc909",
-                    "label": "Background Style",
-                    "name": "background_style",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "choices": {
-                        "solid": "Solid Background",
-                        "image": "Background Image",
-                        "video": "Background Video"
-                    },
-                    "default_value": "solid",
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "allow_in_bindings": 1,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": ""
-                },
-                {
-                    "key": "field_667c6850dc90b",
-                    "label": "Background Color",
-                    "name": "background_color",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_667c67fddc909",
-                                "operator": "==",
-                                "value": "solid"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "choices": {
-                        "transparent": "Transparent",
-                        "white": "White",
-                        "grey": "Grey",
-                        "whitetogrey": "White to Grey Gradient",
-                        "greytowarm": "Grey to Warm Gradient",
-                        "dblue": "Dark Blue"
-                    },
-                    "default_value": "white",
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "allow_in_bindings": 1,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": ""
-                },
-                {
-                    "key": "field_667c682bdc90a",
-                    "label": "Background Options",
-                    "name": "background_options",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_667c67fddc909",
-                                "operator": "!=",
-                                "value": "solid"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "choices": {
-                        "nooverlay": "No overlay",
-                        "nooverlaywhite": "No overlay, invert text colors",
-                        "lightoverlay": "Light overlay over background image",
-                        "darkoverlay": "Dark overlay over background image"
-                    },
-                    "default_value": false,
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "allow_in_bindings": 1,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": ""
-                },
-                {
-                    "key": "field_667c687fdc90c",
-                    "label": "Background Image",
-                    "name": "background_image",
-                    "aria-label": "",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_667c67fddc909",
-                                "operator": "==",
-                                "value": "image"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_667c6cc74661a",
-                            "label": "Image",
-                            "name": "image",
-                            "aria-label": "",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 0,
-                            "return_format": "array",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": "",
-                            "allow_in_bindings": 1,
-                            "preview_size": "medium"
-                        },
-                        {
-                            "key": "field_667c688adc90d",
-                            "label": "Background Image Position",
-                            "name": "background_image_position",
-                            "aria-label": "",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 0,
-                            "choices": {
-                                "topleft": "Top Left",
-                                "topcenter": "Top Center",
-                                "topright": "Top Right",
-                                "middleleft": "Middle Left",
-                                "middlecenter": "Middle Center",
-                                "middleright": "Middle Right",
-                                "bottomleft": "Bottom Left",
-                                "bottomcenter": "Bottom Center",
-                                "bottomright": "Bottom Right"
-                            },
-                            "default_value": "middlecenter",
-                            "return_format": "value",
-                            "multiple": 0,
-                            "allow_null": 0,
-                            "allow_in_bindings": 1,
-                            "ui": 0,
-                            "ajax": 0,
-                            "placeholder": ""
-                        }
-                    ]
-                },
-                {
-                    "key": "field_667c68aedc90e",
-                    "label": "Background Vidyard Video ID",
-                    "name": "background_vidyard_video_id",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_667c67fddc909",
-                                "operator": "==",
-                                "value": "video"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 1,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                }
-            ]
+            "choices": {
+                "solid": "Solid Background",
+                "image": "Background Image",
+                "video": "Background Video"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_68389020233b4",
+            "label": "Background Color",
+            "name": "hero_background_background_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_68388fcb233b3",
+                        "operator": "==",
+                        "value": "solid"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "transparent": "Transparent",
+                "white": "White",
+                "grey": "Grey",
+                "whitetogrey": "White to Grey Gradient",
+                "greytowarm": "Grey to Warm Gradient",
+                "dblue": "Dark Blue"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_68389047233b5",
+            "label": "Background Options",
+            "name": "hero_background_background_options",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_68388fcb233b3",
+                        "operator": "!=",
+                        "value": "solid"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "nooverlay": "No overlay",
+                "nooverlaywhite": "No overlay, invert text colors",
+                "lightoverlay": "Light overlay over background image",
+                "darkoverlay": "Dark overlay over background image"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6838913a71ef5",
+            "label": "Background Image",
+            "name": "hero_background_background_image_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_68388fcb233b3",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6838916c71ef6",
+            "label": "Background Image Position",
+            "name": "hero_background_background_image_background_image_position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_68388fcb233b3",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "topleft": "Top Left",
+                "topcenter": "Top Center",
+                "topright": "Top Right",
+                "middleleft": "Middle Left",
+                "middlecenter": "Middle Center",
+                "middleright": "Middle Right",
+                "bottomleft": "Bottom Left",
+                "bottomcenter": "Bottom Center",
+                "bottomright": "Bottom Right"
+            },
+            "default_value": "middlecenter",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_683890f4233b9",
+            "label": "Background Vidyard Video ID",
+            "name": "hero_background_background_vidyard_video_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -643,5 +605,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1746413422
+    "modified": 1748538328
 }

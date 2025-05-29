@@ -23,20 +23,17 @@
 <?php endif; ?>
 
 
-<?php if (have_rows('hero_background')) : ?>
-  <?php while (have_rows('hero_background')) : the_row(); ?>
-
-    <?php if (get_sub_field('background_style') != 'solid') : ?>
-      <?php if (get_sub_field('background_options') == 'darkoverlay') : ?>
+    <?php if (get_field('hero_background_background_style') != 'solid') : ?>
+      <?php if (get_field('hero_background_background_options') == 'darkoverlay') : ?>
         <?php $bg_color = 'bg-dblue'; ?>
-      <?php elseif (get_sub_field('background_options') == 'nooverlaywhite') : ?>
+      <?php elseif (get_field('hero_background_background_options') == 'nooverlaywhite') : ?>
         <?php $bg_color = 'bg-dblue'; ?>
       <?php else : ?>
         <?php $bg_color = 'bg-norm'; ?>
       <?php endif; ?>
     <?php else : ?>
       <?php
-      $background_color = get_sub_field('background_color');
+      $background_color = get_field('hero_background_background_color');
       $bg_color = '';
       switch ($background_color) {
         case 'transparent':
@@ -62,20 +59,13 @@
       }
       ?>
     <?php endif; ?>
-  <?php endwhile; ?>
-<?php endif; ?>
-
-
 <section class="hero-banner lp-hero <? echo $minheight; ?> <? echo $positionbuffer; ?> <? echo $bg_color; ?> <? echo $navformat; ?> " id="page-intro">
 
-  <?php if (have_rows('hero_background')) : ?>
-    <?php while (have_rows('hero_background')) : the_row(); ?>
-      <?php if (get_sub_field('background_style') == 'image') : ?>
+      <?php if (get_field('hero_background_background_style') == 'image') : ?>
 
-        <?php if (have_rows('background_image')) : ?>
-          <?php while (have_rows('background_image')) : the_row(); ?>
 
-            <?php $bg_placement = get_sub_field('background_image_position');
+          
+            <?php $bg_placement = get_field('hero_background_background_image_background_image_position');
             switch ($bg_placement) {
               case 'topleft':
                 $bgp = 'background-position: top left';
@@ -108,25 +98,21 @@
                 $bgp = 'background-position: top left';
             }
             ?>
-            <?php $image = get_sub_field('image'); ?>
+            <?php $image = get_field('hero_background_background_image_image'); ?>
             <div class="background-pattern-full" title="<?php echo esc_attr($image['alt']); ?>" style="background-image: url(<?php echo esc_url($image['url']); ?>); <?php echo $bgp; ?>">
             </div>
-          <?php endwhile; ?>
-        <?php endif; ?>
-      <?php elseif (get_sub_field('background_style') == 'video') : ?>
-        <?php if (get_sub_field('background_vidyard_video_id')) : ?>
+      <?php elseif (get_field('hero_background_background_style') == 'video') : ?>
+        <?php if (get_field('hero_background_background_vidyard_video_id')) : ?>
           <iframe class="vidyard-player-background" src="//play.vidyard.com/<?php echo get_sub_field('background_vidyard_video_id'); ?>/type/background" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
         <?php endif; ?>
       <?php endif; ?>
-      <?php if (get_sub_field('background_style') != 'solid') : ?>
-        <?php if (get_sub_field('background_options') == 'darkoverlay') : ?>
+      <?php if (get_field('hero_background_background_style') != 'solid') : ?>
+        <?php if (get_field('hero_background_background_options') == 'darkoverlay') : ?>
           <div class="background-overlay-dark"></div>
-        <?php elseif (get_sub_field('background_options') == 'lightoverlay') : ?>
+        <?php elseif (get_field('hero_background_background_options') == 'lightoverlay') : ?>
           <div class="background-overlay-light"></div>
         <?php endif; ?>
       <?php endif; ?>
-    <?php endwhile; ?>
-  <?php endif; ?>
 
 
 
