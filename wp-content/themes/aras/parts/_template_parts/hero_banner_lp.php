@@ -103,7 +103,7 @@
             </div>
       <?php elseif (get_field('hero_background_background_style') == 'video') : ?>
         <?php if (get_field('hero_background_background_vidyard_video_id')) : ?>
-          <iframe class="vidyard-player-background" src="//play.vidyard.com/<?php echo get_sub_field('background_vidyard_video_id'); ?>/type/background" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
+          <iframe class="vidyard-player-background" src="//play.vidyard.com/<?php echo get_field('hero_background_background_vidyard_video_id'); ?>/type/background" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
         <?php endif; ?>
       <?php endif; ?>
       <?php if (get_field('hero_background_background_style') != 'solid') : ?>
