@@ -195,7 +195,7 @@ class Rest
 		header('Content-Disposition: attachment; filename=blog-export.csv');
 
 		$output = fopen('php://output', 'w');
-		$headers = ['Id', 'Title', 'Url', 'Body', 'Excerpt', 'Date', 'Featured Image', 'Tags', 'Categories', 'Author Username', 'Author First Name', 'Author Last Name', 'Author Email'];
+		$headers = ['Id', 'Title', 'Url', 'Body', 'Excerpt', 'Date', 'Featured Image', 'All Images', 'Tags', 'Categories', 'Author Username', 'Author First Name', 'Author Last Name', 'Author Email'];
 		fputcsv($output, $headers, ",", '"', '\\');
 
 		// we are going to get these from wordpress posts
@@ -234,10 +234,13 @@ class Rest
 			// the temporary directory will be wp-content/uploads/aras-labs-images/
 
 			$regex = '/<img[^>]+src="([^">]+\/(wp-content\/uploads\/[^">]+))"/i';
-			preg_match_all($regex, $post->post_content, $matches);
-			$images = $matches[2];
+			$all_matches = preg_match_all($regex, $post->post_content, $matches);
+			$images = $all_matches ? $matches[2] : [];
 			if( has_post_thumbnail( $post->ID ) ){
-				$images[] = str_replace( home_url().'/', '', get_the_post_thumbnail_url( $post->ID ) );
+				$url = get_the_post_thumbnail_url( $post->ID );
+				if( preg_match( '/wp-content\/uploads\/.+$/', $url, $matches ) ){
+					$images[] = $matches[0];
+				}
 			}
 			// copy the images to a temporary directory
 			$tempDir = wp_upload_dir()['basedir'] . '/aras-labs-images/';
@@ -268,6 +271,7 @@ class Rest
 				$post->post_excerpt,
 				$post->post_date,
 				get_the_post_thumbnail_url( $post->ID ),
+				implode(' | ', $images),
 				implode(' | ', $tags),
 				implode(' | ', $categories),
 				$author->user_login,
