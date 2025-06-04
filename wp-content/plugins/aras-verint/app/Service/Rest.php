@@ -237,7 +237,7 @@ class Rest
 			preg_match_all($regex, $post->post_content, $matches);
 			$images = $matches[2];
 			if( has_post_thumbnail( $post->ID ) ){
-				$images[] = str_replace( home_url(), '', get_the_post_thumbnail_url( $post->ID ) );
+				$images[] = str_replace( home_url().'/', '', get_the_post_thumbnail_url( $post->ID ) );
 			}
 			// copy the images to a temporary directory
 			$tempDir = wp_upload_dir()['basedir'] . '/aras-labs-images/';
