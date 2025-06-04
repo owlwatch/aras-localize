@@ -73,7 +73,7 @@
             "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
-            "return_format": "id",
+            "return_format": "object",
             "field_type": "multi_select",
             "allow_null": 0,
             "allow_in_bindings": 0,
@@ -120,7 +120,7 @@
             },
             "wpml_cf_preferences": 1,
             "clone": [
-                "group_6616ae7eab59d"
+                "group_654a99c975efb"
             ],
             "display": "seamless",
             "layout": "block",
@@ -204,5 +204,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1747337954
+    "modified": 1748542019
 }

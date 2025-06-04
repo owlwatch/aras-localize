@@ -20,7 +20,7 @@ $location = get_sub_field('address');
 	<?php $anchor = ('id="contentsection-' . $modnum . '"'); ?>
 <?php endif; ?>
 <?php
-$background_color = get_sub_field('background_color')||'white';
+$background_color = get_sub_field('background_color')?:'white';
 $top_padding = get_sub_field('top_padding_amount');
 $bottom_padding = get_sub_field('bottom_padding_amount');
 $bg_color = '';
@@ -148,9 +148,62 @@ switch ($horizontal_alignment) {
 		
 		<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">
 			<div class="cell small-12 content-before">
-				<div class="wysiwyg-content">
-					<p>Comparison table</p>
-				</div>
+				<?php
+
+				// we need to get the competitors
+				$competitors = get_sub_field('competitors');
+
+				// and the capabilities
+				$capabilities = get_sub_field('capabilities');
+				?>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<?php
+							foreach( $competitors as $competitor ){
+								?>
+								<th><?php echo $competitor->post_title ?></th>
+								<?php
+							}
+							?>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $capabilities as $capability ){
+							?>
+						<tr>
+							<th><?php echo esc_html( $capability->name ); ?></th>
+							<?php
+							foreach( $competitors as $competitor ){
+								// get the rating for this capability and competitor
+								$rating = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-rating', true );
+								$description = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-description', true );
+								?>
+								<td>
+									<div class="aras-compare-rating">
+										<?php
+										for ( $i = 0; $i <= 4; $i++ ){
+											if( $rating == $i ){
+												echo '<span class="aras-compare-rating-star filled">★</span>';
+											}
+											else {
+												echo '<span class="aras-compare-rating-star">☆</span>';
+											}
+										}
+										?>
+									</div>
+									<div class="aras-compare-description"><?php echo esc_html( $description ); ?></div>
+								</td>
+								<?php
+							}
+							?>
+						</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

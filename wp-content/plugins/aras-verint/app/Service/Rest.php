@@ -195,7 +195,7 @@ class Rest
 		header('Content-Disposition: attachment; filename=blog-export.csv');
 
 		$output = fopen('php://output', 'w');
-		$headers = ['Id', 'Title', 'Url', 'Body', 'Excerpt', 'Date', 'Tags', 'Categories', 'Author Username', 'Author First Name', 'Author Last Name', 'Author Email'];
+		$headers = ['Id', 'Title', 'Url', 'Body', 'Excerpt', 'Date', 'Featured Image', 'Tags', 'Categories', 'Author Username', 'Author First Name', 'Author Last Name', 'Author Email'];
 		fputcsv($output, $headers, ",", '"', '\\');
 
 		// we are going to get these from wordpress posts
@@ -227,6 +227,39 @@ class Rest
 			if( $categories ) $categories = array_map( function($c) { return $c->name; }, $categories );
 			else $categories = [];
 			$author = get_userdata( $post->post_author );
+
+			// find all the images in the post content
+			// and copy them to a temporary directory that
+			// we will zip up later
+			// the temporary directory will be wp-content/uploads/aras-labs-images/
+
+			$regex = '/<img[^>]+src="([^">]+\/(wp-content\/uploads\/[^">]+))"/i';
+			preg_match_all($regex, $post->post_content, $matches);
+			$images = $matches[2];
+			if( has_post_thumbnail( $post->ID ) ){
+				$images[] = str_replace( home_url(), '', get_the_post_thumbnail_url( $post->ID ) );
+			}
+			// copy the images to a temporary directory
+			$tempDir = wp_upload_dir()['basedir'] . '/aras-labs-images/';
+			if( !file_exists($tempDir) ){
+				mkdir($tempDir, 0755, true);
+			}
+			foreach( $images as $image ){
+				// copy the image to the temporary directory
+				$imagePath = ABSPATH . $image;
+				if( file_exists($imagePath) ){
+					// we should retain the directory structure (which can be neste)
+					// so we will create the directory structure in the temp dir
+					$dir = dirname($image);
+					$tempImageDir = $tempDir . str_replace(ABSPATH . 'wp-content/uploads/', '', $dir);
+					if( !file_exists($tempImageDir) ){
+						wp_mkdir_p($tempImageDir);
+					}
+					$tempImagePath = $tempImageDir .'/'. basename($image);
+					copy($imagePath, $tempImagePath);
+				}
+			}
+
 			$data = [
 				$post->ID,
 				$post->post_title,
@@ -234,6 +267,7 @@ class Rest
 				$post->post_content,
 				$post->post_excerpt,
 				$post->post_date,
+				get_the_post_thumbnail_url( $post->ID ),
 				implode(' | ', $tags),
 				implode(' | ', $categories),
 				$author->user_login,
