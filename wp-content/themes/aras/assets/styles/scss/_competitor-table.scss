@@ -7,7 +7,7 @@
 
 	thead th {
 		position: sticky;
-		z-index: 2;;
+		z-index: 2;
 		top: calc( var(--aras-header-height, 50px) + var(--wp-admin--admin-bar--height,0) - 1px);
 	}
 
@@ -22,7 +22,18 @@
 		}
 
 		&:not(:first-child) {
-			width: 100px;
+			width: 110px;
+			img {
+				max-height:30px;
+				width: auto;
+				height: auto;
+			}
+		}
+		&:not(:nth-child(2)) {
+			img {
+				// black and white
+				filter: grayscale(100%);
+			}
 		}
 	}
 
