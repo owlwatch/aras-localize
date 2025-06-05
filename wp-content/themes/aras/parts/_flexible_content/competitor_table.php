@@ -179,7 +179,16 @@ switch ($horizontal_alignment) {
 						<?php foreach( $capabilities as $capability ){
 							?>
 						<tr>
-							<th><?php echo esc_html( $capability->name ); ?></th>
+							<th>
+								<div class="competitor-table__capability-name">
+									<?php echo esc_html( $capability->name ); ?>
+								</div>
+								<?php if( $capability->description ){ ?>
+									<div class="competitor-table__capability-description">
+										<?php echo esc_html( $capability->description ); ?>
+									</div>
+								<?php } ?>
+							</th>
 							<?php
 							foreach( $competitors as $competitor ){
 								// get the rating for this capability and competitor
@@ -239,7 +248,19 @@ switch ($horizontal_alignment) {
 		</div>
 	</div>
 </section>
-
+<?php
+if( !function_exists('_aras_should_print_competitor_script') ){
+	function _aras_should_print_competitor_script(){
+		static $printed = false;
+		if( $printed ){
+			return false;
+		}
+		$printed = true;
+		return true;
+	}
+}
+if( _aras_should_print_competitor_script() ){
+	?>
 <script>
 	// when the 'competitor-table' width is less than 700px', we want to
 	// copy the logo (or text) in the thead th into its corresponding tbody td
@@ -283,3 +304,6 @@ switch ($horizontal_alignment) {
 		});
 	});
 </script>
+	<?php
+}
+?>

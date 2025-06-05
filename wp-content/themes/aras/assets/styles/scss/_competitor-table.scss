@@ -77,6 +77,14 @@
 		}
 	}
 
+	&__capability-name {
+		font-weight: 600;
+	}
+	&__capability-description {
+		font-size: 0.9em;
+		color: #666; // Example description color
+	}
+
 	// mobile version
 	&--mobile {
 		display: grid;
@@ -144,7 +152,7 @@
 		}
 		tbody {
 			display: grid;
-			gap: 1em;
+			gap: 1.25em;
 			tr {
 				>td,>th {
 					flex-direction: column;
