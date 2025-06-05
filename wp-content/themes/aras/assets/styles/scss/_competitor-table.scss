@@ -109,6 +109,7 @@
 				flex-wrap: wrap;
 				align-items: center;
 				justify-content: center;
+				gap: 1em;
 				>td,>th {
 					display: flex;
 					text-align: left;
@@ -122,6 +123,12 @@
 
 					&:not(:first-child) {
 						flex-basis: 100%; // Make other cells take half width
+					}
+					&:not(:nth-child(2)) {
+						img {
+							// black and white
+							filter: grayscale(100%);
+						}
 					}
 				}
 			}
