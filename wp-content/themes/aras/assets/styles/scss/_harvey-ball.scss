@@ -1,12 +1,12 @@
 html {
   --color-harvey-ball-background: #e0e0e0;
-  --color-harvey-ball-fill: #76c7c0;
+  --color-harvey-ball-fill: #999;
   --harvey-ball-rotation: 0deg; // Default rotation
 }
 
 .harvey-ball {
     --size: 30px;              /* Size of the circle */
-    --color: black;             /* Color of the progress fill */
+    --color: var(--color-harvey-ball-fill);             /* Color of the progress fill */
     --value: 0%;                /* Percentage of the progress */
     --border-width: 2px;        /* Border thickness */
     
@@ -16,8 +16,9 @@ html {
     border-radius: 50%;
     border: var(--border-width) var(--color) solid;
     background: conic-gradient(
-            var(--color) 0% var(--value),   /* Fill progress */
-            transparent var(--value)        /* Transparent for the rest */
+			transparent 0% calc( 100% - var(--value)),        /* Transparent for the rest */
+            var(--color) calc( 100% - var(--value))   /* Fill progress */
+            
     );
 	&--25 {
 		--value: 25%;

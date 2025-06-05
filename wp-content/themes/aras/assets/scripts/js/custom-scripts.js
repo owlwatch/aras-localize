@@ -242,3 +242,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// add a window resize observer to the header.header and update a root css variable '--aras-header-height'
+// on domcontentloaded
+
+document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector('.header');
+    if (header) {
+        const updateHeaderHeight = () => {
+            const headerHeight = header.offsetHeight;
+            document.documentElement.style.setProperty('--aras-header-height', `${headerHeight}px`);
+        };
+        // Initial call to set the variable
+        updateHeaderHeight();
+        // Add resize observer
+        window.addEventListener('resize', updateHeaderHeight);
+    }
+});

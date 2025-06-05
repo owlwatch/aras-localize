@@ -1,25 +1,36 @@
-table.competitor-table {
-
+.competitor-table {
+	border-width: 0;
 	border-collapse: collapse;
-	td,th {
+	td,th,tbody,thead {
 		border-width: 0;
+	}
+
+	thead th {
+		position: sticky;
+		z-index: 2;;
+		top: calc( var(--aras-header-height, 50px) + var(--wp-admin--admin-bar--height,0) - 1px);
 	}
 
 	thead th {
 		font-weight: bold;
 		text-align: center;
 		border-bottom: 1px solid #ddd;
+		padding: 1em 0.5em;
 
 		&:first-child {
 			text-align: left;
 		}
 
 		&:not(:first-child) {
-			width: 120px;
+			width: 100px;
 		}
 	}
 
 	tbody tr {
+		td:nth-child(2){
+			--color-harvey-ball-fill: #{$red};
+		}
+		
 		&:nth-child(2n) {
 			background-color: transparent; // Light background for odd rows
 		}
@@ -31,10 +42,13 @@ table.competitor-table {
 			background: transparent;
 			text-align: center;
 		}
-		&:not(:last-child) {
-			td,th {
-				border-bottom: 1px solid #ddd; // Light border for rows
-			}
+		
+		td,th {
+			border-bottom: 1px solid #ddd; // Light border for rows
+		}
+		
+		th {
+			background-color: transparent;
 		}
 	}
 
@@ -45,5 +59,113 @@ table.competitor-table {
 			font-weight: bold;
 			color: #333; // Example feature color
 		}
+	}
+
+	// mobile version
+	&--mobile {
+		display: grid;
+		border-width: 0;
+		box-shadow: 0;
+		gap: 1em;
+		thead {
+			border-width: 0;
+			display: block;
+			position: static;
+			tr {
+				display: block;
+			}
+			th {
+				background-color: transparent;
+				display: block;
+				border-bottom-width: 0;
+			}
+			th:not(:first-child) {
+				display: none; // Hide all but the first column in mobile view
+			}
+		}
+		tbody {
+			border-width: 0;
+			display: grid;
+			gap: 1em;
+			tr {
+				border: 1px solid #ddd;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				>td,>th {
+					display: flex;
+					text-align: left;
+					border-bottom-width: 0 !important;
+					gap: 1em;
+					&:first-child {
+						flex-basis: 100%; // Make the first cell take full width
+						font-weight: bold;
+						text-align: center;
+					}
+
+					&:not(:first-child) {
+						flex-basis: 100%; // Make other cells take half width
+					}
+				}
+			}
+		}
+	}
+	&--harvey-balls.competitor-table--mobile {
+		thead th:not(:first-child) {
+			display: none; // Hide the header in mobile view
+			border-bottom: 0;
+		}
+		tbody {
+			display: grid;
+			gap: 1em;
+			tr {
+				>td,>th {
+					flex-direction: column;
+					&:not(:first-child) {
+						flex-basis: auto; // Make the first cell take full width
+					}
+				}
+				> td {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+				.competitor-table__difference-logo {
+					height: 30px;
+					display: flex;
+					align-items: center;
+					img {
+						max-height: 100%;
+						width: auto;
+						max-width: 90px;
+					}
+				}
+			}
+		}
+	}
+
+	&__legend {
+		margin-top: 2rem;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+
+		&-item {
+			font-size: 0.8rem;
+			display: flex;
+			align-items: center;
+			gap: 1em;
+			line-height: 1.4;
+			
+		}
+	}
+
+	&--mobile + &__legend {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }

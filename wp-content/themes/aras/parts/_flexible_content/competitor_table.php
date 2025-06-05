@@ -123,7 +123,7 @@ switch ($horizontal_alignment) {
 	?>
 <?php endif; ?>
 
-<section class="content-section map-section <?= "$toppadding $bottompadding $bg_color" ?> <?php if (get_sub_field('background_image') != '') : ?>has-bg-img<?php endif; ?>" <?= "$anchor" ?> <?php if (get_sub_field('background_image')) : ?>title="<?php echo esc_attr($background_image['alt']); ?>" style="background-image: url(<?php echo esc_url($background_image['url']); ?>);min-height: calc((<?php echo ($background_image['height']); ?> / <?php echo ($background_image['width']); ?>) * 100vw);<?php echo $bgp; ?>" <?php endif; ?>>
+<section class="<?= "$toppadding $bottompadding $bg_color" ?> <?php if (get_sub_field('background_image') != '') : ?>has-bg-img<?php endif; ?>" <?= "$anchor" ?> <?php if (get_sub_field('background_image')) : ?>title="<?php echo esc_attr($background_image['alt']); ?>" style="background-image: url(<?php echo esc_url($background_image['url']); ?>);min-height: calc((<?php echo ($background_image['height']); ?> / <?php echo ($background_image['width']); ?>) * 100vw);<?php echo $bgp; ?>" <?php endif; ?>>
 	<?php get_template_part('parts/_template_parts/background_visual'); ?>
 	<div class="grid-container">
 		<?php if (get_sub_field('content_before')) : ?>
@@ -150,7 +150,7 @@ switch ($horizontal_alignment) {
 				// use tooltip
 				$use_tooltip = get_sub_field('use_tooltip');
 				?>
-				<table class="competitor-table">
+				<table class="competitor-table <?php if( $show_harvey_ball ){ ?>competitor-table--harvey-balls<?php } ?> <?php if( $use_tooltip ){ ?>competitor-table--tooltip<?php } ?>">
 					<thead>
 						<tr>
 							<th>
@@ -187,16 +187,18 @@ switch ($horizontal_alignment) {
 								$description = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-description', true );
 								?>
 								<td>
-									<?php if( $show_harvey_ball ){ ?>
-										<div class="right harvey-ball harvey-ball--<?php echo esc_attr( $rating * 25 ); ?>" <?php if( $use_tooltip && $description ){ ?>data-tooltip title="<?php echo esc_attr( $description ); ?>"<?php } ?>></div>
-									</td>
-									<?php } ?>
-									<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball) { ?>
-										<div class="description">
-											<?php echo esc_html( $description ); ?>
-										</div>
+									<div class="competitor-table__difference">
+										<?php if( $show_harvey_ball ){ ?>
+											<div class="right harvey-ball harvey-ball--<?php echo esc_attr( $rating * 25 ); ?>" <?php if( $use_tooltip && $description ){ ?>data-tooltip title="<?php echo esc_attr( $description ); ?>"<?php } ?>></div>
+										</td>
+										<?php } ?>
+										<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball) { ?>
+											<div class="description">
+												<?php echo esc_html( $description ); ?>
+											</div>
 
-									<?php } ?>
+										<?php } ?>
+									</div>
 								<?php
 							}
 							?>
@@ -206,7 +208,78 @@ switch ($horizontal_alignment) {
 						?>
 					</tbody>
 				</table>
+				<?php if( $show_harvey_ball ){ ?>
+				<div class="competitor-table__legend">
+					<div class="competitor-table__legend-item">
+						<div class="harvey-ball harvey-ball--0"></div>
+						<span><?php 
+						esc_html_e( 'Legacy only', 'aras' );
+						?></span>
+					</div>
+					<div class="competitor-table__legend-item">
+						<div class="harvey-ball harvey-ball--25"></div>
+						<span><?php 
+						_e( 'Acquired-unintegrated Capability<br />Still Mainly Old Legacy', 'aras' );
+						?></span>
+					</div>
+					<div class="competitor-table__legend-item">
+						<div class="harvey-ball harvey-ball--50"></div>
+						<span><?php 
+						_e( 'Acquired Partially -integrated Capability<br />Still Requires Substantial Legacy', 'aras' );
+						?></span>
+					</div>
+					<div class="competitor-table__legend-item">
+						<div class="harvey-ball harvey-ball--100"></div>
+						<span><?php 
+						_e( 'Fully Modern', 'aras' );
+						?></span>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+	// when the 'competitor-table' width is less than 700px', we want to
+	// copy the logo (or text) in the thead th into its corresponding tbody td
+	// and then remove it when the width is greater than 700px. the logo should
+	// be wrapped in a div with the class 'competitor-table__difference-logo'
+	jQuery(document).ready(function($) {
+		function adjustCompetitorTable() {
+			
+			$('.competitor-table').each(function() {
+				const table = this;
+				if ($(table).width() < 700) {
+					if( $(table).hasClass('competitor-table--mobile') ){
+						return;
+					}
+					$(table).addClass('competitor-table--mobile');
+
+					$(table).find('thead th').each(function(index) {
+						if( index == 0 ){
+							return;
+						}
+						const html = $(this).html();
+						const company = $('<div class="competitor-table__difference-logo"></div>').html(html);
+						$(table).find('tbody tr td:nth-child(' + (index + 1) + ')').prepend(company);
+					});
+				} else {
+					if( !$(table).hasClass('competitor-table--mobile') ){
+						return;
+					}
+					$(table).removeClass('competitor-table--mobile');
+					$(table).find('tbody tr td .competitor-table__difference-logo').remove();
+				}
+			});
+		}
+
+		// Initial adjustment
+		adjustCompetitorTable();
+
+		// Adjust on window resize
+		$(window).resize(function() {
+			adjustCompetitorTable();
+		});
+	});
+</script>
