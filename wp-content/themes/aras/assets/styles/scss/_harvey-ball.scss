@@ -1,0 +1,34 @@
+html {
+  --color-harvey-ball-background: #e0e0e0;
+  --color-harvey-ball-fill: #76c7c0;
+  --harvey-ball-rotation: 0deg; // Default rotation
+}
+
+.harvey-ball {
+    --size: 30px;              /* Size of the circle */
+    --color: black;             /* Color of the progress fill */
+    --value: 0%;                /* Percentage of the progress */
+    --border-width: 2px;        /* Border thickness */
+    
+    display: inline-block;
+    width: var(--size);         /* Set the width based on the variable */
+    aspect-ratio: 1 / 1;        /* Ensures the element is a perfect circle */
+    border-radius: 50%;
+    border: var(--border-width) var(--color) solid;
+    background: conic-gradient(
+            var(--color) 0% var(--value),   /* Fill progress */
+            transparent var(--value)        /* Transparent for the rest */
+    );
+	&--25 {
+		--value: 25%;
+	}
+	&--50 {
+		--value: 50%;
+	}
+	&--75 {
+		--value: 75%;
+	}
+	&--100 {
+		--value: 100%;
+	}
+}

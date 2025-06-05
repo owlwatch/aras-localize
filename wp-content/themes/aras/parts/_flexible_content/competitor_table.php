@@ -1,15 +1,3 @@
-<?php
-if( !function_exists('aras_map_section_id') ){
-	function aras_map_section_count() {
-		static $count = 0;
-		return $count++;
-	}
-}
-$index = aras_map_section_count();
-$map_section_id = 'aras-map-section-' . $index;
-
-$location = get_sub_field('address');
-?>
 <?php if (get_sub_field('show_for_this_language') == 'hide') : ?>
 	<?php return; ?>
 <?php endif; ?>
@@ -155,15 +143,33 @@ switch ($horizontal_alignment) {
 
 				// and the capabilities
 				$capabilities = get_sub_field('capabilities');
+
+				// show harvey ball
+				$show_harvey_ball = get_sub_field('show_harvey_ball');
+
+				// use tooltip
+				$use_tooltip = get_sub_field('use_tooltip');
 				?>
-				<table>
+				<table class="competitor-table">
 					<thead>
 						<tr>
-							<th></th>
+							<th>
+								<?php
+								esc_html_e( 'Differentiating Capabilities', 'aras' );
+								?>
+							</th>
 							<?php
 							foreach( $competitors as $competitor ){
 								?>
-								<th><?php echo $competitor->post_title ?></th>
+								<th><?php 
+								// if the competitor has a logo (featured image), show it
+								if( has_post_thumbnail( $competitor->ID ) ){
+									$logo = get_the_post_thumbnail( $competitor->ID, 'medium' );
+									echo $logo;
+								} else {
+									echo esc_html( $competitor->post_title );
+								}
+								?></th>
 								<?php
 							}
 							?>
@@ -181,20 +187,16 @@ switch ($horizontal_alignment) {
 								$description = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-description', true );
 								?>
 								<td>
-									<div class="aras-compare-rating">
-										<?php
-										for ( $i = 0; $i <= 4; $i++ ){
-											if( $rating == $i ){
-												echo '<span class="aras-compare-rating-star filled">★</span>';
-											}
-											else {
-												echo '<span class="aras-compare-rating-star">☆</span>';
-											}
-										}
-										?>
-									</div>
-									<div class="aras-compare-description"><?php echo esc_html( $description ); ?></div>
-								</td>
+									<?php if( $show_harvey_ball ){ ?>
+										<div class="right harvey-ball harvey-ball--<?php echo esc_attr( $rating * 25 ); ?>" <?php if( $use_tooltip && $description ){ ?>data-tooltip title="<?php echo esc_attr( $description ); ?>"<?php } ?>></div>
+									</td>
+									<?php } ?>
+									<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball) { ?>
+										<div class="description">
+											<?php echo esc_html( $description ); ?>
+										</div>
+
+									<?php } ?>
 								<?php
 							}
 							?>

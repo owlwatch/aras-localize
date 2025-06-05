@@ -1,0 +1,49 @@
+table.competitor-table {
+
+	border-collapse: collapse;
+	td,th {
+		border-width: 0;
+	}
+
+	thead th {
+		font-weight: bold;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+
+		&:first-child {
+			text-align: left;
+		}
+
+		&:not(:first-child) {
+			width: 120px;
+		}
+	}
+
+	tbody tr {
+		&:nth-child(2n) {
+			background-color: transparent; // Light background for odd rows
+		}
+		img {
+			max-width: 90%;
+			max-height: 40px;
+		}
+		td {
+			background: transparent;
+			text-align: center;
+		}
+		&:not(:last-child) {
+			td,th {
+				border-bottom: 1px solid #ddd; // Light border for rows
+			}
+		}
+	}
+
+	.competitor-table__cell {
+		padding: 10px;
+
+		&.feature {
+			font-weight: bold;
+			color: #333; // Example feature color
+		}
+	}
+}
