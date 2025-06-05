@@ -91,8 +91,6 @@
 				display: block;
 			}
 			th {
-				background-color: #f2f2f2;
-				font-size: 1.2em;
 				display: block;
 				border-bottom-width: 0;
 			}
@@ -111,6 +109,10 @@
 				align-items: center;
 				justify-content: center;
 				gap: 1em;
+				th {
+					background-color: #f2f2f2;
+					font-size: 1.2em;
+				}
 				>td,>th {
 					display: flex;
 					text-align: left;
