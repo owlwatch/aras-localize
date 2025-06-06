@@ -1,0 +1,23 @@
+{
+    "key": "ui_options_page_6841ddc96ca73",
+    "title": "Aras Competitors Settings",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Aras Competitors Settings",
+    "menu_slug": "aras-competitors-settings",
+    "parent_slug": "edit.php?post_type=aras-competitor",
+    "advanced_configuration": 1,
+    "icon_url": "",
+    "menu_title": "Settings",
+    "position": "",
+    "redirect": false,
+    "description": "",
+    "menu_icon": [],
+    "update_button": "Update",
+    "updated_message": "Options Updated",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": 0,
+    "modified": 1749147117
+}

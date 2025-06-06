@@ -155,7 +155,7 @@ switch ($horizontal_alignment) {
 						<tr>
 							<th>
 								<?php
-								esc_html_e( 'Differentiating Capabilities', 'aras' );
+								echo get_sub_field('table_title');
 								?>
 							</th>
 							<?php
@@ -219,30 +219,21 @@ switch ($horizontal_alignment) {
 				</table>
 				<?php if( $show_harvey_ball ){ ?>
 				<div class="competitor-table__legend">
-					<div class="competitor-table__legend-item">
-						<div class="harvey-ball harvey-ball--0"></div>
-						<span><?php 
-						esc_html_e( 'Legacy only', 'aras' );
-						?></span>
-					</div>
-					<div class="competitor-table__legend-item">
-						<div class="harvey-ball harvey-ball--25"></div>
-						<span><?php 
-						_e( 'Acquired-unintegrated Capability<br />Still Mainly Old Legacy', 'aras' );
-						?></span>
-					</div>
-					<div class="competitor-table__legend-item">
-						<div class="harvey-ball harvey-ball--50"></div>
-						<span><?php 
-						_e( 'Acquired Partially -integrated Capability<br />Still Requires Substantial Legacy', 'aras' );
-						?></span>
-					</div>
-					<div class="competitor-table__legend-item">
-						<div class="harvey-ball harvey-ball--100"></div>
-						<span><?php 
-						_e( 'Fully Modern', 'aras' );
-						?></span>
-					</div>
+					<?php
+					for( $i=0; $i<6; $i++ ){
+						$harvey_ball_class = 'harvey-ball--' . ( $i * 25 );
+						$harvey_ball_key = get_field( 'harvey_ball_legend_key_' . ( $i * 25 ), 'option' );
+						if( !$harvey_ball_key ){
+							continue;
+						}
+						?>
+						<div class="competitor-table__legend-item">
+							<div class="harvey-ball <?php echo esc_attr( $harvey_ball_class ); ?>"></div>
+							<span><?php echo $harvey_ball_key; ?></span>
+						</div>
+						<?php
+					}
+					?>
 				<?php } ?>
 			</div>
 		</div>

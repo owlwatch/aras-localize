@@ -22,6 +22,28 @@
             "selected": 0
         },
         {
+            "key": "field_6842165f9bea3",
+            "label": "Table Title",
+            "name": "table_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68264098ae97d",
             "label": "Competitors",
             "name": "competitors",
@@ -256,5 +278,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1749068499
+    "modified": 1749169070
 }

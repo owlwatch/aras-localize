@@ -18,6 +18,39 @@
             },
             "wpml_cf_preferences": 3,
             "layouts": {
+                "layout_684234e0c41ca": {
+                    "key": "layout_684234e0c41ca",
+                    "name": "competitor_table",
+                    "label": "Competitor Table",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_684234ecc41cd",
+                            "label": "Competitor Table",
+                            "name": "competitor_table",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "clone": [
+                                "field_68264098ae97d"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65e642f445b7e": {
                     "key": "layout_65e642f445b7e",
                     "name": "post_content_section",
@@ -161,5 +194,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1725934317
+    "modified": 1749169436
 }

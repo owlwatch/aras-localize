@@ -117,7 +117,7 @@ class Admin {
 						<?php for ( $i = 0; $i <= 4; $i++ ): ?>
 						<div style="display:flex; flex-direction:column; align-items: center;">
 							<input style="margin: 0 !important" type="radio" id="aras-compare-<?php echo esc_attr( $term->slug ); ?>-rating-<?php echo $i ?>" name="aras-compare-<?php echo esc_attr( $term->slug ); ?>-rating" value="<?php echo $i; ?>" <?php checked( $rating, $i ); ?> style="margin-right: 0.5rem;" />
-							<label style="margin: 0.5rem 0;" for="aras-compare-<?php echo esc_attr( $term->slug ); ?>-rating-<?php echo $i ?>"><?php echo $i; ?></label>
+							<label style="margin: 0.5rem 0;" for="aras-compare-<?php echo esc_attr( $term->slug ); ?>-rating-<?php echo $i ?>"><?php echo $i * 25; ?>%</label>
 						</div>
 						<?php endfor; ?>
 						</div>
