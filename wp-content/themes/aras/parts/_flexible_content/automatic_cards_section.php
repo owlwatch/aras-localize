@@ -371,7 +371,7 @@
 						'tax_query'      => $tax_query,
 						'orderby'        => 'date',
 						'order'          => 'DESC',
-						'suppress_filters' => true,
+						'suppress_filters' => false,
 					);
 				}
 				$query = new WP_Query($args); ?>
