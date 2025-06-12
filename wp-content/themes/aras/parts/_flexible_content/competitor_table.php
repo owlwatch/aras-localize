@@ -149,15 +149,23 @@ switch ($horizontal_alignment) {
 
 				// use tooltip
 				$use_tooltip = get_sub_field('use_tooltip');
+
+				// small columns
+				$small_columns = $show_harvey_ball && $use_tooltip;
+
+				$table_classes = [
+					'competitor-table',
+					$show_harvey_ball ? 'competitor-table--harvey-balls' : '',
+					$use_tooltip ? 'competitor-table--tooltip' : '',
+					$small_columns ? 'competitor-table--small-columns' : '',
+					'competitor-table--competitor-count-' . count( $competitors ),
+				];
+
 				?>
-				<table class="competitor-table <?php if( $show_harvey_ball ){ ?>competitor-table--harvey-balls<?php } ?> <?php if( $use_tooltip ){ ?>competitor-table--tooltip<?php } ?>">
+				<table class="<?php echo implode( ' ',$table_classes ); ?>">
 					<thead>
 						<tr>
-							<th>
-								<?php
-								echo get_sub_field('table_title');
-								?>
-							</th>
+							<th><?php echo get_sub_field('table_title'); ?></th>
 							<?php
 							foreach( $competitors as $competitor ){
 								?>
@@ -199,15 +207,15 @@ switch ($horizontal_alignment) {
 									<div class="competitor-table__difference">
 										<?php if( $show_harvey_ball ){ ?>
 											<div class="right harvey-ball harvey-ball--<?php echo esc_attr( $rating * 25 ); ?>" <?php if( $use_tooltip && $description ){ ?>data-tooltip title="<?php echo esc_attr( $description ); ?>"<?php } ?>></div>
-										</td>
 										<?php } ?>
 										<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball) { ?>
-											<div class="description">
-												<?php echo esc_html( $description ); ?>
+											<div class="competitor-table__difference-description">
+												<?php echo $description; ?>
 											</div>
 
 										<?php } ?>
 									</div>
+								</td>
 								<?php
 							}
 							?>

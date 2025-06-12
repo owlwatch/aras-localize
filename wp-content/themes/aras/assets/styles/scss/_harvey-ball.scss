@@ -11,6 +11,7 @@ html {
     --border-width: 2px;        /* Border thickness */
     
     display: inline-block;
+	flex-shrink: 0;
     width: var(--size);         /* Set the width based on the variable */
     aspect-ratio: 1 / 1;        /* Ensures the element is a perfect circle */
     border-radius: 50%;

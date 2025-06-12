@@ -13,7 +13,7 @@
 
 	thead th {
 		font-weight: bold;
-		text-align: center;
+		text-align: left;
 		border-bottom: 1px solid #ddd;
 		padding: 1em 0.5em;
 
@@ -22,8 +22,8 @@
 		}
 
 		&:not(:first-child) {
-			width: 110px;
 			img {
+				max-width: 110px;
 				max-height:30px;
 				width: auto;
 				height: auto;
@@ -60,6 +60,7 @@
 		}
 		
 		td,th {
+			vertical-align: top;
 			border-bottom: 1px solid #ddd; // Light border for rows
 		}
 		
@@ -77,12 +78,80 @@
 		}
 	}
 
+	&__difference {
+		width: 100%;
+		display: flex;
+		align-self: start;
+		align-items: start;
+		justify-content: start;
+		gap: 1em;
+		.harvey-ball {
+			margin-top: 0.25em;
+		}
+		&-description {
+			text-align: left;
+		}
+	}
+
 	&__capability-name {
 		font-weight: 600;
 	}
 	&__capability-description {
 		font-size: 0.9em;
 		color: #666; // Example description color
+	}
+
+	&--competitor-count {
+		&-1 {
+			thead th:not(:first-child) {
+				width: 50%;
+			}
+		}
+		&-2 {
+			thead th:not(:first-child) {
+				width: 30%;
+			}
+		}
+		&-3 {
+			thead th:not(:first-child) {
+				width: 20%;
+			}
+		}
+		&-4 {
+			thead th:not(:first-child) {
+				width: 10%;
+			}
+		}
+	}
+
+	&--harvey-balls.competitor-table--tooltip {
+		thead th {
+			font-weight: bold;
+			text-align: center;
+			border-bottom: 1px solid #ddd;
+			padding: 1em 0.5em;
+
+			&:first-child {
+				text-align: left;
+			}
+
+			&:not(:first-child) {
+				text-align: center;
+				width: 110px;
+				img {
+					max-height:30px;
+					width: auto;
+					height: auto;
+				}
+			}
+		}
+		tbody td {
+			flex-basis: auto;
+		}
+		.competitor-table__difference {
+			align-items: center;
+			justify-content: center;
+		}
 	}
 
 	// mobile version
@@ -101,6 +170,9 @@
 			th {
 				display: block;
 				border-bottom-width: 0;
+				&:empty {
+					display: none; // Hide empty header cells
+				}
 			}
 			th:not(:first-child) {
 				display: none; // Hide all but the first column in mobile view
@@ -113,19 +185,28 @@
 			tr {
 				border: 1px solid #ddd;
 				display: flex;
+				flex-grow: 1;
 				flex-wrap: wrap;
 				align-items: center;
-				justify-content: center;
+				justify-content: start;
 				gap: 1em;
 				th {
+					flex-grow: 1;
 					background-color: #f2f2f2;
 					font-size: 1.2em;
+					.competitor-table__capability-description {
+						font-weight: 400;
+						text-align: left;
+					}
 				}
 				>td,>th {
+					flex-direction: column;
+					flex-grow: 1;
+					justify-content: start;
 					display: flex;
 					text-align: left;
 					border-bottom-width: 0 !important;
-					gap: 1em;
+					gap: 0.66em;
 					&:first-child {
 						flex-basis: 100%; // Make the first cell take full width
 						font-weight: bold;
@@ -141,11 +222,31 @@
 							filter: grayscale(100%);
 						}
 					}
+
+					.competitor-table__difference-logo {
+						height: 30px;
+						display: flex;
+						align-items: center;
+						font-weight: 600;
+						font-size: 1.2em;
+						img {
+							max-height: 100%;
+							width: auto;
+							max-width: 90px;
+						}
+					}
 				}
+			}
+			
+		}
+		.competitor-table__difference {
+			align-items: start;
+			.harvey-ball {
+				margin-top: 0em;
 			}
 		}
 	}
-	&--harvey-balls.competitor-table--mobile {
+	&--harvey-balls.competitor-table--tooltip.competitor-table--mobile {
 		thead th:not(:first-child) {
 			display: none; // Hide the header in mobile view
 			border-bottom: 0;
@@ -165,16 +266,6 @@
 					align-items: center;
 					justify-content: center;
 				}
-				.competitor-table__difference-logo {
-					height: 30px;
-					display: flex;
-					align-items: center;
-					img {
-						max-height: 100%;
-						width: auto;
-						max-width: 90px;
-					}
-				}
 			}
 		}
 	}
@@ -184,7 +275,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		align-items: start;
 		justify-content: space-between;
 		gap: 1em;
 
