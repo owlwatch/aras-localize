@@ -627,6 +627,7 @@ class GravityForms
 	
 	function _post_to_third_party_14($entry, $form)
 	{
+		GFCommon::log_debug('gform_after_submission: form_id => ' . $form['id']);
 		// Data validation
 		$validated_data = array(
 			'site_language'                 => sanitize_text_field(rgar($entry, '28')),
@@ -667,7 +668,7 @@ class GravityForms
 		// Check for errors in obtaining token
 		if (is_wp_error($token_response)) {
 			// Log error
-			// GFCommon::log_debug('Error obtaining access token: ' . $token_response->get_error_message());
+			GFCommon::log_debug('Error obtaining access token: ' . $token_response->get_error_message());
 			return;
 		}
 		// Decode the JSON response to obtain access token
