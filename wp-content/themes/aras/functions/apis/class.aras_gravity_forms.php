@@ -663,7 +663,8 @@ class GravityForms
 			'database'   => 'MyInnovator'
 		);
 		$token_response = wp_remote_post('https://myinnovator.com/OAuthServer/connect/token', array(
-			'body' => $token_request_data
+			'body' => $token_request_data,
+			'sslverify'   => false,
 		));
 		// Check for errors in obtaining token
 		if (is_wp_error($token_response)) {
@@ -692,6 +693,7 @@ class GravityForms
 			$args = array(
 				'headers' => $headers,
 				'body' => $body,
+				'sslverify'   => false,
 			);
 			// Send the POST request
 			$response = wp_remote_post($endpoint_url, $args);
