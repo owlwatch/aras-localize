@@ -146,7 +146,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 					<?php if (!$logo_slider_shown) : ?>
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
-								jQuery('.logo-slider-slick').each( () => {
+								jQuery('.logo-slider-slick').each( function(){
 									const logos_to_show = jQuery(this).data('logos-to-show');
 									let count, countmed, countsmall, countxsmall;
 									switch( logos_to_show ) {
