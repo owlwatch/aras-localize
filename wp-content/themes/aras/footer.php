@@ -144,7 +144,12 @@ if (have_posts()) : while (have_posts()) : the_post();
 				<?php endif; ?>
 				<?php if (get_row_layout() == 'logo_section') : ?>
 					<?php if (!$logo_slider_shown) : ?>
-						<?php if (get_sub_field('logos_to_show') == 'four') : ?>
+						<?php if (get_sub_field('logos_to_show') == 'three') : ?>
+							<?php $count = '3'; ?>
+							<?php $countmed = '3'; ?>
+							<?php $countsmall = '2'; ?>
+							<?php $countxsmall = '1'; ?>
+						<?php elseif (get_sub_field('logos_to_show') == 'four') : ?>
 							<?php $count = '4'; ?>
 							<?php $countmed = '3'; ?>
 							<?php $countsmall = '2'; ?>
