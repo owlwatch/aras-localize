@@ -1,4 +1,11 @@
 <?php
+
+// if this is password protected, just show the_content
+if (post_password_required()) {
+  the_content();
+  return;
+}
+
 $current_post_id = get_the_ID(); ?>
 
 <?php if ((isset($_GET['id']) && intval($_GET['id']) === $current_post_id)) : ?>
