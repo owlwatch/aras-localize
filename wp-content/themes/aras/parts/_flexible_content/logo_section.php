@@ -88,7 +88,7 @@
 			<?php endif; ?>
 
 			<?php if (have_rows('logos')) : ?>
-				<div class="grid-x grid-padding-x logo-slider-slick <?php echo $logostyle; ?>" data-logos-to-show="<?php get_sub_field('logos_to_show'); ?>" >
+				<div class="grid-x grid-padding-x logo-slider-slick <?php echo $logostyle; ?>" data-logos-to-show="<?php echo get_sub_field('logos_to_show'); ?>" >
 					<?php while (have_rows('logos')) : the_row(); ?>
 
 						<?php $image = get_sub_field('logo_image');
