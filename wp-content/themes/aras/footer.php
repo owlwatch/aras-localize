@@ -144,67 +144,72 @@ if (have_posts()) : while (have_posts()) : the_post();
 				<?php endif; ?>
 				<?php if (get_row_layout() == 'logo_section') : ?>
 					<?php if (!$logo_slider_shown) : ?>
-						<?php if (get_sub_field('logos_to_show') == 'three') : ?>
-							<?php $count = '3'; ?>
-							<?php $countmed = '3'; ?>
-							<?php $countsmall = '2'; ?>
-							<?php $countxsmall = '1'; ?>
-						<?php elseif (get_sub_field('logos_to_show') == 'four') : ?>
-							<?php $count = '4'; ?>
-							<?php $countmed = '3'; ?>
-							<?php $countsmall = '2'; ?>
-							<?php $countxsmall = '1'; ?>
-						<?php elseif (get_sub_field('link_alignment') == 'five') : ?>
-							<?php $count = '5'; ?>
-							<?php $countmed = '4'; ?>
-							<?php $countsmall = '3'; ?>
-							<?php $countxsmall = '2'; ?>
-						<?php elseif (get_sub_field('link_alignment') == 'six') : ?>
-							<?php $count = '6'; ?>
-							<?php $countmed = '4'; ?>
-							<?php $countsmall = '3'; ?>
-							<?php $countxsmall = '2'; ?>
-						<?php else : ?>
-							<?php $count = '6'; ?>
-							<?php $countmed = '4'; ?>
-							<?php $countsmall = '3'; ?>
-							<?php $countxsmall = '2'; ?>
-						<?php endif; ?>
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
-								jQuery('.logo-slider-slick').slick({
-									infinite: true,
-									slidesToShow: <?php echo $count; ?>,
-									slidesToScroll: 1,
-									dots: false,
-									arrows: false,
-									autoplay: true,
-									autoplaySpeed: 3000,
-									pauseOnHover: false,
-									speed: 500,
-									cssEase: 'ease-in-out',
-									draggable: true,
-									pauseOnHover: false,
-									swipeToSlide: true,
-									responsive: [{
-											breakpoint: 1023,
-											settings: {
-												slidesToShow: <?php echo $countmed; ?>
+								jQuery('.logo-slider-slick').each( () => {
+									const logos_to_show = $(this).data('logos-to-show');
+									let count, countmed, countsmall, countxsmall;
+									switch( logos_to_show ) {
+										case 'three':
+											count = 3;
+											countmed = 3;
+											countsmall = 2;
+											countxsmall = 1;
+											break;
+										case 'four':
+											count = 4;
+											countmed = 3;
+											countsmall = 2;
+											countxsmall = 1;
+											break;
+										case 'five':
+											count = 5;
+											countmed = 4;
+											countsmall = 3;
+											countxsmall = 2;
+											break;
+										
+										default:
+											count = 6;
+											countmed = 4;
+											countsmall = 3;
+											countxsmall = 2;
+									}
+
+									$(this).slick({
+										infinite: true,
+										slidesToShow: count,
+										slidesToScroll: 1,
+										dots: false,
+										arrows: false,
+										autoplay: true,
+										autoplaySpeed: 3000,
+										pauseOnHover: false,
+										speed: 500,
+										cssEase: 'ease-in-out',
+										draggable: true,
+										pauseOnHover: false,
+										swipeToSlide: true,
+										responsive: [{
+												breakpoint: 1023,
+												settings: {
+													slidesToShow: countmed
+												},
 											},
-										},
-										{
-											breakpoint: 639,
-											settings: {
-												slidesToShow: <?php echo $countsmall; ?>
+											{
+												breakpoint: 639,
+												settings: {
+													slidesToShow: countsmall
+												},
 											},
-										},
-										{
-											breakpoint: 450,
-											settings: {
-												slidesToShow: <?php echo $countxsmall; ?>
+											{
+												breakpoint: 450,
+												settings: {
+													slidesToShow: countxsmall
+												}
 											}
-										}
-									]
+										]
+									});
 								});
 						</script>
 						<?php $logo_slider_shown = true;  ?>
