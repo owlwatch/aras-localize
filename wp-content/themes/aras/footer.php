@@ -147,7 +147,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 						<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
 						<script>
 								jQuery('.logo-slider-slick').each( () => {
-									const logos_to_show = $(this).data('logos-to-show');
+									const logos_to_show = jQuery(this).data('logos-to-show');
 									let count, countmed, countsmall, countxsmall;
 									switch( logos_to_show ) {
 										case 'three':
@@ -176,7 +176,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 											countxsmall = 2;
 									}
 
-									$(this).slick({
+									jQuery(this).slick({
 										infinite: true,
 										slidesToShow: count,
 										slidesToScroll: 1,
