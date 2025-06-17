@@ -87,8 +87,12 @@
 				</div>
 			<?php endif; ?>
 
+			<?php
+			$logos_to_show = get_sub_field('logos_to_show');
+			?>
+
 			<?php if (have_rows('logos')) : ?>
-				<div class="grid-x grid-padding-x logo-slider-slick <?php echo $logostyle; ?>" data-logos-to-show="<?php echo get_sub_field('logos_to_show'); ?>" >
+				<div class="grid-x grid-padding-x logo-slider-slick <?php echo $logostyle; ?>" data-logos-to-show="<?php echo $logos_to_show ?>" >
 					<?php while (have_rows('logos')) : the_row(); ?>
 
 						<?php $image = get_sub_field('logo_image');
