@@ -20,8 +20,15 @@
 add_filter('acf/settings/save_json', 'my_acf_json_save_point');
 function my_acf_json_save_point($path)
 {
-	$path = get_stylesheet_directory() . '/acf-json';
+	$path = get_template_directory() . '/acf-json';
 	return $path;
+}
+
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
+function my_acf_json_load_point($paths)
+{
+	$paths[] = get_template_directory() . '/acf-json';
+	return $paths;
 }
 
 // Adjust ACF post object fields to only filter by post title instead of by content.

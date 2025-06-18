@@ -1,0 +1,121 @@
+.glossary {
+    .glossary-row {
+        display: block;
+        margin-bottom: 1.25rem;
+
+        a h4 {
+            font-weight: 500;
+            font-size: 1.15rem;
+        }
+
+        p {
+            margin-top: .5rem;
+            margin-bottom: 0;
+            font-size: .9rem;
+        }
+    }
+}
+
+.glossary-archive {
+    .glossary-filter-bar {
+        width: 100%;
+
+        .glossary-filters {
+            display: flex;
+            flex-direction: row;
+            gap: calc(1% + .75rem);
+
+            @include breakpoint(medium only) {
+                gap: 1rem;
+            }
+
+            @include breakpoint(small only) {
+                gap: .5rem;
+                flex-direction: column;
+            }
+
+            .filters-letters {
+                flex: 1;
+
+                .glossary-letters {
+                    width: calc(100% + 5px);
+                    justify-content: space-between;
+                    margin-left: -5px;
+
+                    @include breakpoint(medium only) {
+                        justify-content: left;
+                    }
+
+                    @include breakpoint(small only) {
+                        justify-content: left;
+                    }
+
+                    .glossary-letter {
+                        border: none;
+                        background-color: transparent;
+                        color: $black;
+                        text-transform: uppercase;
+                        font-weight: 500;
+                        margin: 0;
+                        width: 30px;
+                        height: 34px;
+                        padding: 5px;
+
+                        @include breakpoint(small only) {
+                            width: fit-content;
+                            height: 34px;
+                            padding: 2px 5px;
+                            height: 30px;
+                        }
+
+                        &.active {
+                            color: $red;
+                            background-color: transparent;
+                        }
+
+                        &:disabled {
+                            color: $lightgrey;
+                        }
+
+                        &:nth-child(1) {
+                            padding-right: 1rem;
+                            width: fit-content;
+                            letter-spacing: 3px;
+
+                            @include breakpoint(medium only) {
+                                padding-right: 5px;
+                            }
+
+                            @include breakpoint(small only) {
+                                padding-right: 5px;
+                                letter-spacing: 1px;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .filters-search {
+                input {
+                    padding: 0;
+                    background-color: transparent;
+                    border: transparent;
+                    box-shadow: none;
+                    margin-bottom: 0;
+                    height: 34px;
+                    width: 100px;
+                    color: $black;
+                    font-weight: 500;
+                    //border-bottom: solid 2px $lightgrey;
+
+                    &::placeholder {
+                        color: $lightgrey;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                    }
+                }
+            }
+        }
+    }
+}

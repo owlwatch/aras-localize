@@ -6,7 +6,6 @@
  * For more info: https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  */
 get_header(); ?>
-
 <?php $search_refer = $_GET['post_type']; ?>
 
 <main class="search" role="main">

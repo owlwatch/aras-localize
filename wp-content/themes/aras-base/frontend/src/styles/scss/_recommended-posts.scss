@@ -1,0 +1,322 @@
+.recommended-posts,
+.blog-archive,
+.automatic-cards-section {
+    position: relative;
+
+    .recommended-title {
+        @include breakpoint(small only) {
+            text-align: center;
+        }
+    }
+
+
+    &.hide-images {
+        .blog-item-cell {
+            img.wp-post-image {
+                display: none;
+            }
+        }
+    }
+
+    &.card-connector .blog-item-cell {
+        &::before {
+            content: '';
+            height: 2px;
+            width: 30px;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            right: calc(100% + 2px);
+            left: auto;
+            background-color: $lightgrey;
+            position: absolute;
+        }
+    }
+
+    &.card-connector .grid-x .blog-item-cell {
+        &::before {
+            @include breakpoint(small only) {
+                content: '';
+                height: 20px;
+                width: 1px;
+                margin-left: auto;
+                margin-right: auto;
+                bottom: calc(100% + 2px);
+                top: auto;
+                left: 0;
+                right: 0;
+                background-color: $lightgrey;
+                position: absolute;
+            }
+        }
+
+        &.large-6 {
+            &:nth-child(2n - 1) {
+                &::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(2n - 1) {
+                    &::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &.large-4 {
+            &:nth-child(3n - 2) {
+                &::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(3n - 2) {
+                    &::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+
+        &.large-3 {
+            &:nth-child(4n - 3) {
+                &::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(medium only) {
+                &:nth-child(4n - 3) {
+                    &::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(2n - 1) {
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(4n - 3) {
+                    &::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(2n - 1) {
+                    &::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &.highlight-gradient .blog-item-cell.bordercard {
+        &:after {
+            background: linear-gradient(0deg, rgba($color: $lightgrey, $alpha: 1.0) 0%, rgba($color: $lightgrey, $alpha: 1.0) 100%);
+        }
+
+        &:hover {
+            &:after {
+                background: linear-gradient(0deg, rgba(206, 35, 39, 1) 0%, rgba(212, 150, 35, 1) 100%);
+            }
+        }
+    }
+
+    .card-slider-slick {
+        overflow: hidden;
+    }
+
+    .blog-item-cell {
+        position: relative;
+
+        @include breakpoint(small only) {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-width: 400px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .card-container {
+            position: relative;
+            height: 100%;
+            background-color: white;
+            z-index: 1;
+        }
+
+        img.wp-post-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: center center;
+            //filter: grayscale(1);
+        }
+
+        .card-content-container {
+            padding: 1.6rem 1.6rem 2.3rem;
+
+            @include breakpoint(medium only) {
+                padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+            }
+
+            @media screen and (max-width: 800px) {
+                padding: 1.1rem 1.1rem 1.35rem 1.1rem;
+            }
+
+            @include breakpoint(small only) {
+                padding: 1.1rem 1.1rem 1.35rem 1.1rem;
+            }
+
+            a {
+                text-decoration: none;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            h6 {
+                margin-bottom: 1rem;
+                color: $black !important;
+
+                @include breakpoint(medium only) {
+                    margin-bottom: .75rem;
+                }
+
+                @include breakpoint(small only) {
+                    margin-bottom: .5rem;
+                }
+
+                &.author {
+                    text-transform: none;
+                }
+            }
+
+            .card-headline-a {
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .card-headline {
+                color: $black !important;
+                margin-bottom: 1rem;
+                font-size: 25px;
+
+                @include breakpoint(medium only) {
+                    margin-bottom: .75rem;
+                    font-size: 23px;
+                }
+
+                @media screen and (max-width: 800px) {
+                    font-size: 20px;
+                }
+
+                @include breakpoint(small only) {
+                    margin-bottom: .5rem;
+                    font-size: 18px;
+                }
+            }
+
+            .card-bottom {
+                position: absolute;
+                bottom: 2rem;
+                left: 1.6rem;
+                right: 1.6rem;
+
+                @include breakpoint(medium only) {
+                    bottom: 1.25rem;
+                    left: 1.25rem;
+                    right: 1.25rem;
+                }
+
+                @media screen and (max-width: 800px) {
+                    bottom: 1.1rem;
+                    left: 1.1rem;
+                    right: 1.1rem;
+                }
+
+                @include breakpoint(small only) {
+                    bottom: 1.1rem;
+                    left: 1.1rem;
+                    right: 1.1rem;
+                }
+            }
+        }
+
+        &.bordercard {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: solid 2px transparent;
+
+            @include breakpoint(small only) {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            &:after {
+                background: lightgrey;
+                //background: $filterblue;
+                content: '';
+                position: absolute;
+                top: -2px;
+                bottom: -2px;
+                left: -2px;
+                right: -2px;
+                position: absolute;
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                z-index: 0;
+                transition: .2s ease-in-out;
+            }
+
+            &:hover {
+                &:after {
+                    background: $red;
+                }
+            }
+        }
+    }
+}
+
+.recommended-posts.bg-dblue,
+.blog-archive.bg-dblue,
+.automatic-cards-section.bg-dblue {
+    .blog-item-cell {
+        &.bordercard {
+            &:after {
+                background: $filterblue;
+            }
+        }
+    }
+}

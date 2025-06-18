@@ -1,0 +1,574 @@
+/** CARDS SECTION **/
+.cards-section {
+    overflow: hidden;
+    position: relative;
+
+    .card-buttons-section {
+        margin-top: .5rem;
+
+        a {
+            margin-top: .5rem;
+            margin-left: 0;
+            margin-right: .5rem;
+        }
+
+        &.align-center {
+            a {
+                margin-left: .33rem;
+                margin-right: .33rem;
+            }
+        }
+    }
+}
+
+.cell-card {
+    position: relative;
+
+    @include breakpoint(small only) {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        max-width: 400px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .card-image-container {
+        width: 100%;
+        height: auto;
+
+        img {
+            width: 100%;
+        }
+
+        a,
+        button {
+            cursor: pointer;
+        }
+    }
+
+    .card-subhead {
+        margin-bottom: 1rem;
+
+        @include breakpoint(medium only) {
+            margin-bottom: .75rem;
+        }
+
+        @include breakpoint(small only) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .card-headline {
+        margin-bottom: 1rem;
+        font-size: 25px;
+
+        @include breakpoint(medium only) {
+            margin-bottom: .75rem;
+            font-size: 23px;
+        }
+
+        @media screen and (max-width: 800px) {
+            font-size: 20px;
+        }
+
+        @include breakpoint(small only) {
+            margin-bottom: .5rem;
+            font-size: 18px;
+        }
+    }
+
+    a .card-headline {
+        text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: .5rem;
+
+        @include breakpoint(medium only) {
+            margin-bottom: .375rem;
+        }
+
+        @include breakpoint(small only) {
+            margin-bottom: .25rem;
+        }
+    }
+
+    p {
+        margin-bottom: .5rem;
+        line-height: 1.5;
+        font-size: 16px;
+
+        @include breakpoint(medium only) {
+            font-size: 15px;
+        }
+
+        @include breakpoint(small only) {
+            font-size: 15px;
+        }
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .card-a {
+        text-decoration: none;
+    }
+
+    &.bordercard {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border: solid 2px transparent;
+
+        @include breakpoint(small only) {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        &:after {
+            background-color: lightgrey;
+            content: '';
+            position: absolute;
+            top: -2px;
+            bottom: -2px;
+            left: -2px;
+            right: -2px;
+            position: absolute;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            z-index: 0;
+            transition: .2s;
+        }
+
+        &.card-highlight-gradient-cont:hover {
+            &:after {
+                background: linear-gradient(0deg, rgba(206, 35, 39, 1) 0%, rgba(212, 150, 35, 1) 100%);
+            }
+        }
+
+        &.card-highlight-cont:hover {
+            &:after {
+                background: $red;
+            }
+        }
+
+        .card-container {
+            position: relative;
+            height: 100%;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .card-icon-container {
+            padding: 2.3rem 2.1rem 0 2.1rem;
+
+            @include breakpoint(medium only) {
+                padding: 1.5rem 1.25rem 0 1.25rem;
+            }
+
+            @include breakpoint(small only) {
+                padding: 1.8rem 1.8rem 0 1.8rem;
+            }
+
+            .card-icon {
+                height: 60px;
+                width: auto;
+
+                @include breakpoint(small only) {
+                    height: 50px;
+                }
+            }
+        }
+
+        .card-content-container {
+            padding: 1.6rem 2.1rem 2.3rem 2.1rem;
+
+            @include breakpoint(medium only) {
+                padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+            }
+
+            @media screen and (max-width: 800px) {
+                padding: 1.1rem 1.1rem 1.35rem 1.1rem;
+            }
+
+            @include breakpoint(small only) {
+                padding: 1.1rem 1.1rem 1.35rem 1.1rem;
+            }
+
+            &>*:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .card-bottom {
+            position: absolute;
+            bottom: 2.1rem;
+            left: 2.1rem;
+            right: 2.1rem;
+
+            @include breakpoint(medium only) {
+                bottom: 1.25rem;
+                left: 1.25rem;
+                right: 1.25rem;
+            }
+
+            @media screen and (max-width: 800px) {
+                bottom: 1.1rem;
+                left: 1.1rem;
+                right: 1.1rem;
+            }
+
+            @include breakpoint(small only) {
+                bottom: 1.1rem;
+                left: 1.1rem;
+                right: 1.1rem;
+            }
+        }
+
+        .card-flex {
+            display: flex;
+            flex-direction: row;
+
+            .card-icon-container {
+                width: calc(2rem + 65px);
+                padding: 2rem 0rem 2rem 2rem;
+
+                @include breakpoint(medium only) {
+                    width: calc(2rem + 60px);
+                    padding: 1.75rem 0rem 1.75rem 1.75rem;
+                }
+
+                @media screen and (max-width: 800px) {
+                    width: calc(2rem + 50px);
+                    padding: 1.1rem 0rem 1.1rem 1.1rem;
+                }
+
+                @include breakpoint(small only) {
+                    padding: 1.1rem 0rem 1.1rem 1.1rem;
+                    width: calc(2rem + 50px);
+                }
+
+                .card-icon {
+                    width: 65px;
+                    height: auto;
+
+                    @include breakpoint(medium only) {
+                        width: 60px;
+                    }
+
+                    @media screen and (max-width: 800px) {
+                        width: 50px;
+                    }
+
+                    @include breakpoint(small only) {
+                        width: 50px;
+                    }
+                }
+            }
+
+            .card-content-container {
+                flex: 1;
+                padding: 2rem 2rem 2rem 1.25rem;
+
+                @include breakpoint(medium only) {
+                    padding: 1.75rem 1.75rem 1.75rem 1rem;
+                }
+
+                @media screen and (max-width: 800px) {
+                    padding: 1.1rem 1.1rem 1.1rem .8rem;
+                }
+
+                @include breakpoint(small only) {
+                    padding: 1.1rem 1.1rem 1.1rem .8rem;
+                }
+            }
+        }
+
+        .card-connector::before {
+            content: '';
+            height: 2px;
+            width: 30px;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            right: calc(100% + 2px);
+            left: auto;
+            background-color: $lightgrey;
+            position: absolute;
+
+            @include breakpoint(small only) {
+                content: '';
+                height: 20px;
+                width: 1px;
+                margin-left: auto;
+                margin-right: auto;
+                bottom: calc(100% + 2px);
+                top: auto;
+                left: 0;
+                right: 0;
+                background-color: $lightgrey;
+                position: absolute;
+            }
+        }
+
+        &.large-6 {
+            &:nth-child(2n - 1) {
+                .card-connector::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(2n - 1) {
+                    .card-connector::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    .card-connector::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &.large-4 {
+            &:nth-child(3n - 2) {
+                .card-connector::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(3n - 2) {
+                    .card-connector::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    .card-connector::before {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+
+        &.large-3 {
+            &:nth-child(4n - 3) {
+                .card-connector::before {
+                    display: none;
+                }
+            }
+
+            @include breakpoint(medium only) {
+                &:nth-child(4n - 3) {
+                    .card-connector::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(2n - 1) {
+                    .card-connector::before {
+                        display: none !important;
+                    }
+                }
+            }
+
+            @include breakpoint(small only) {
+                &:nth-child(4n - 3) {
+                    .card-connector::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(2n - 1) {
+                    .card-connector::before {
+                        display: block;
+                    }
+                }
+
+                &:nth-child(1) {
+                    .card-connector::before {
+                        display: none !important;
+                    }
+                }
+
+            }
+        }
+    }
+
+    &.freecard {
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        .card-container {
+            position: relative;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .card-icon-container {
+            padding: 0;
+
+            .card-icon {
+                height: 60px;
+                width: auto;
+
+                @include breakpoint(small only) {
+                    height: 50px;
+                }
+            }
+        }
+
+        .card-content-container {
+            padding: 1.6rem 0 0 0;
+        }
+
+        .card-bottom {
+            position: absolute;
+            bottom: 0;
+        }
+
+
+        .card-flex {
+            display: flex;
+            flex-direction: row;
+
+            .card-icon-container {
+                width: calc(2.1rem + 60px);
+                padding: 2.1rem 0 2.1rem 2.1rem;
+
+                .card-icon {
+                    width: 60px;
+                    height: auto;
+
+                    @include breakpoint(small only) {
+                        width: 50px;
+                    }
+                }
+            }
+
+            .card-content-container {
+                flex: 1;
+            }
+        }
+    }
+}
+
+.card-slider-slick {
+    //&::after {
+    //  position: absolute;
+    //  content: '';
+    //  right: 100%;
+    //  width: 100vw;
+    //  height: 100%;
+    //  top: 0;
+    //  bottom: 0;
+    //  background-color: white;
+    //  z-index: 3;
+    //}
+
+    .slick-list {
+        //overflow: visible;
+        margin: 0 -15px;
+
+        @include breakpoint(small only) {
+            margin: 0 -8px;
+        }
+
+        .slick-track {
+            display: flex;
+
+            .slick-slide {
+                height: inherit;
+                margin-left: 15px;
+                margin-right: 15px;
+                position: relative;
+
+                @include breakpoint(small only) {
+                    margin-left: 8px !important;
+                    margin-right: 8px !important;
+                }
+
+                .card-connector::before {
+                    @include breakpoint(small only) {
+                        content: '';
+                        height: 2px;
+                        width: 16px;
+                        top: 0;
+                        bottom: 0;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        right: calc(100% + 2px);
+                        left: auto;
+                        background-color: $lightgrey;
+                        position: absolute;
+                    }
+                }
+
+
+                &.bordercard {
+                    &.slick-current {
+                        &.card-highlight-gradient-cont {
+                            &:after {
+                                background: linear-gradient(0deg, rgba(206, 35, 39, 1) 0%, rgba(212, 150, 35, 1) 100%);
+                            }
+                        }
+
+                        &.card-highlight-cont {
+                            &:after {
+                                background: $red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.card-arrows {
+    position: relative;
+    width: 80px;
+    height: 44px;
+    display: block;
+    margin-top: 5px;
+
+    .slick-prev,
+    .slick-next {
+        font-size: 1.5rem;
+        position: relative;
+        display: inline-block;
+        width: 26px;
+        height: 35px;
+        background-color: transparent;
+        top: auto;
+        transform: none;
+        left: auto;
+        right: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    .slick-prev {
+        background-image: url(../../images/icons/prevarrow.svg);
+        margin-right: 8px;
+    }
+
+    .slick-next {
+        background-image: url(../../images/icons/nextarrow.svg);
+    }
+}

@@ -1,0 +1,754 @@
+.home-hero-banner {
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  overflow: visible;
+
+  @include breakpoint(medium only) {
+    overflow: hidden;
+  }
+
+  @include breakpoint(small only) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .scroll-dots-homenav {
+    margin-bottom: 1rem;
+
+    .slick-dots {
+      height: 1.125rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      position: relative;
+      bottom: 0;
+      list-style: none;
+      text-align: left;
+      padding: 0;
+      margin: 0;
+      gap: .75rem;
+
+      @include breakpoint(small only) {
+        justify-content: center;
+      }
+
+      li {
+        position: relative;
+        display: inline-block;
+        height: auto;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+
+        &.slick-active {
+          button {
+            background: $red;
+          }
+        }
+
+        button {
+          background: $midgrey;
+          display: block;
+          height: 1.125rem;
+          width: 1.125rem;
+          outline: none;
+          line-height: 0;
+          font-size: 0;
+          padding: 0;
+          margin: 0;
+
+          &:before {
+            display: none;
+            content: none;
+          }
+        }
+      }
+    }
+  }
+
+  .grid-container {
+
+    .grid-x {
+      min-height: 50vh;
+
+      @include breakpoint(medium only) {
+        min-height: 40vh;
+      }
+
+      .hero-content-inner {
+        max-width: 400px;
+        margin-right: auto;
+
+        @include breakpoint(small only) {
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+        }
+
+        p {
+          font-size: 1.6rem;
+          line-height: 1.2;
+          font-weight: 300;
+          color: $grey;
+
+          @include breakpoint(medium only) {
+            font-size: 1.3rem;
+          }
+
+          @include breakpoint(small only) {
+            font-size: 1.15rem;
+          }
+        }
+      }
+
+      .hero-visual {
+        @include breakpoint(small only) {
+          text-align: center;
+          margin: auto;
+        }
+      }
+
+      .hero-visual-image {
+        max-width: 500px;
+        float: right;
+
+        @include breakpoint(small only) {
+          float: none;
+        }
+
+      }
+
+      video {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 50%;
+        padding-bottom: 0;
+        z-index: -1;
+
+        @include breakpoint(medium only) {
+          left: 50%;
+          width: 60%;
+        }
+
+        @include breakpoint(small only) {
+          position: relative;
+          left: 0;
+          width: 75%;
+        }
+      }
+    }
+  }
+}
+
+
+
+.hero-banner {
+  position: relative;
+  background-color: $lightestgrey;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  @include breakpoint(small only) {
+    &.img-hero-banner {
+      padding-top: 11rem;
+    }
+
+    .hero-background-image {}
+
+    .hero-background-overlay {
+      display: none;
+    }
+  }
+
+  .hero-background-overlay {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(60% + 1px);
+    height: 100%;
+    z-index: 2;
+    background: $lightestgrey;
+    background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 5%, rgba($color: $lightestgrey, $alpha: 0.0) 70%);
+
+    @include breakpoint(medium only) {
+      width: calc(50% + 1px);
+      background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 5%, rgba($color: $lightestgrey, $alpha: 0.8) 30%, rgba($color: $lightestgrey, $alpha: 0.2) 70%);
+    }
+
+    @include breakpoint(small only) {
+      width: 100%;
+      background: linear-gradient(180deg, rgba($color: $lightestgrey, $alpha: 0.7) 0%, rgba($color: $lightestgrey, $alpha: 0.8) 50%);
+    }
+  }
+
+  .hero-background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 1;
+
+    @include breakpoint(medium only) {
+      width: 50%;
+    }
+
+    @include breakpoint(small only) {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      width: 100%;
+      height: 9rem;
+    }
+  }
+
+  .grid-container {
+    z-index: 3;
+
+    .hero-height-standard {
+      min-height: 18rem;
+
+      @include breakpoint(medium only) {
+        min-height: 14rem;
+      }
+
+      @include breakpoint(small only) {
+        min-height: 1rem;
+      }
+    }
+
+    .hero-height-shortened {
+      min-height: 0rem;
+
+      @include breakpoint(medium only) {
+        min-height: 7rem;
+      }
+
+      @include breakpoint(small only) {
+        min-height: 1rem;
+      }
+    }
+
+    .grid-x {
+      .hero-content-inner {
+        margin-right: auto;
+
+        > *, [role="heading"] > *{
+          &:first-child {
+            margin-top: 0;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        [role="heading"] + .aras-button {
+          margin-top: 1.5rem;
+        }
+
+        .hero-headline {
+          &.color-red {
+            color: $red;
+          }
+        }
+
+        p {
+          font-size: 1.4rem;
+          line-height: 1.2;
+          font-weight: 300;
+        }
+
+        &>*:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &.bg-norm {
+      .hero-content-inner {
+        p {
+          color: $grey;
+        }
+      }
+    }
+  }
+
+
+  &.lp-hero {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+
+    @include breakpoint(medium only) {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    @media print,
+    screen and (max-width: 923px) {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    @include breakpoint(small only) {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    &.toppadded {
+      padding-top: calc(6rem + 97px);
+
+      @include breakpoint(medium only) {
+        padding-top: calc(4.5rem + 97px);
+      }
+
+      @media print,
+      screen and (max-width: 923px) {
+        padding-top: calc(3.5rem + 89.625px);
+      }
+
+      @include breakpoint(small only) {
+        padding-top: calc(2rem + 84.375px);
+      }
+    }
+
+    &.hb-partial-fullscreen,
+    &.hb-fullscreen {
+      .grid-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        .grid-x {
+          height: 100%;
+        }
+      }
+    }
+
+    &.hb-partial-fullscreen {
+      min-height: 75vh;
+
+      &.globalbuffer {
+        min-height: calc(75vh - 136px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(75vh - 115px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(75vh - 106px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(75vh - 92.5px);
+        }
+      }
+
+      &.shortbuffer {
+        min-height: calc(75vh - 97px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(75vh - 97px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(75vh - 89.625px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(75vh - 84.375px);
+        }
+      }
+    }
+
+    &.hb-fullscreen {
+      min-height: 100vh;
+
+      &.globalbuffer {
+        min-height: calc(100vh - 136px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(100vh - 115px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(100vh - 106px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(100vh - 92.5px);
+        }
+      }
+
+      &.shortbuffer {
+        min-height: calc(100vh - 97px);
+
+        @include breakpoint(medium only) {
+          min-height: calc(100vh - 97px);
+        }
+
+        @media print,
+        screen and (max-width: 923px) {
+          min-height: calc(100vh - 89.625px);
+        }
+
+        @include breakpoint(small only) {
+          min-height: calc(100vh - 84.375px);
+        }
+      }
+    }
+
+    &.bg-white {
+      background-color: white;
+    }
+
+    &.bg-grey {
+      background-color: $lightestgrey;
+    }
+
+    &.bg-dblue {
+      background-color: $dblue;
+    }
+
+    &.bg-whitetogrey {
+      background: linear-gradient(0deg,
+          rgba($color: $lightestgrey, $alpha: 1) 0%,
+          rgba($color: $lightestgrey, $alpha: 0) 100%);
+    }
+
+    &.bg-greytowarm {
+      position: relative;
+      background: linear-gradient(0deg,
+          rgba($color: $lightestgrey, $alpha: 0.35) 0%,
+          rgba($color: $lightestgrey, $alpha: 0.9) 66%,
+          rgba($color: $lightestgrey, $alpha: 1) 100%);
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(206, 33, 39, 1) 0%, rgba(212, 150, 35, 1) 100%);
+        z-index: -1;
+      }
+    }
+
+    .image-block,
+    .video-block {
+      @include breakpoint(small only) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  &.cs-hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-color: transparent;
+    position: relative;
+
+    @include breakpoint(medium only) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    @include breakpoint(small only) {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .grid-container {
+      .grid-x {
+        min-height: 0px;
+      }
+    }
+
+    .hero-side {
+      @include breakpoint(small only) {
+        height: auto;
+        margin-top: 2rem;
+      }
+    }
+
+    @include breakpoint(small only) {
+      .hero-content {
+        max-width: 425px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .hero-side-container {
+      min-height: 50px;
+      max-width: 350px;
+      margin-left: auto;
+      display: block;
+      padding: 2rem 2.5rem;
+      background-color: $lightestgrey;
+      margin-bottom: -6rem;
+
+      @include breakpoint(medium only) {
+        margin-bottom: -4.5rem;
+        padding: 1.5rem 2rem;
+      }
+
+      @include breakpoint(small only) {
+        margin-bottom: -3rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem 2rem;
+        max-width: 425px;
+      }
+
+      .hero-side-img {
+        background-color: $white;
+        padding: 1rem;
+
+        img {
+          padding: 0 15%;
+          width: 100%;
+        }
+      }
+
+      .side-cat {
+        display: block;
+        border-bottom: solid 1px $lightgrey;
+        padding: 1.5rem 0;
+
+        h6 {
+          font-weight: 500;
+          color: $black;
+        }
+
+        p {
+          margin: 0;
+          color: $grey;
+        }
+
+        &:nth-last-child(1) {
+          margin-bottom: .5rem;
+        }
+      }
+    }
+  }
+
+  &.gated-hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+
+    @include breakpoint(medium only) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    @include breakpoint(small only) {
+      padding-top: 2rem;
+      padding-bottom: 0;
+    }
+
+
+    &.toppadded {
+      padding-top: calc(4rem + 60px);
+
+      @include breakpoint(medium only) {
+        padding-top: calc(3rem + 60px);
+      }
+
+      @include breakpoint(small only) {
+        padding-top: calc(2rem + 80px);
+      }
+    }
+
+    .grid-container {
+      .grid-x {
+        min-height: 0px;
+      }
+    }
+
+    .intro-content {
+      margin-top: 1rem;
+    }
+
+    @include breakpoint(small only) {
+      .hero-content-inner {
+        max-width: 425px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 4rem;
+      }
+    }
+  }
+
+  &.blog-hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+
+    @include breakpoint(medium only) {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    @include breakpoint(small only) {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .grid-container {
+      .grid-x {
+        min-height: 140px;
+      }
+    }
+
+    .hero-content {
+      @include breakpoint(small only) {
+        max-width: 425px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .hero-content-inner {
+      max-width: 600px;
+      > *, [role="heading"] > *{
+        &:first-child {
+          margin-top: 0;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .hero-headline {
+      font-size: 34px;
+      margin-bottom: 20px;
+      line-height: 1.15;
+
+      @include breakpoint(medium only) {
+        font-size: 28px;
+      }
+
+      @include breakpoint(small only) {
+        font-size: 26px;
+      }
+    }
+
+    .hero-image-side {
+      height: 10px;
+      text-align: right;
+
+      @include breakpoint(small only) {
+        height: auto;
+        margin-top: 2rem;
+        max-width: 425px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      img {
+        max-height: 250px;
+        width: auto;
+
+        @include breakpoint(small only) {
+          max-height: auto;
+          width: 100%;
+        }
+
+      }
+    }
+
+    &:after {
+      content: '';
+      width: 48%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 52%;
+      right: 0;
+      background-image: url(../../images/backgrounds/hero-cta-background.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: left center;
+      opacity: .33;
+    }
+  }
+
+  &.short-hero {
+    background-color: $dblue;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+
+    .grid-container {
+      z-index: 1;
+
+      .grid-x {
+        min-height: 10px;
+      }
+    }
+
+    &:after {
+      content: '';
+      width: 48%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 60%;
+      right: 0;
+      background-image: url(../../images/backgrounds/glossary-hero-background.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: left center;
+      z-index: 0;
+    }
+
+    .hero-byline {
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.backlink a,
+.backlink-link {
+  color: $red;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  h6 {
+    color: $red;
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+      color: $black;
+    }
+  }
+}

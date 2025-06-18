@@ -58,7 +58,7 @@ wp-content/*
 
 !wp-content/themes
 wp-content/themes/*
-!wp-content/themes/aras
+!wp-content/themes/aras*
 
 
 !wp-content/plugins

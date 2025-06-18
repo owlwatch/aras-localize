@@ -1,0 +1,325 @@
+.scrolling-content-section {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  flex-direction: column;
+
+  .bg-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .slick-list {
+      height: 100%;
+
+      .slick-track {
+        height: 100%;
+
+
+        .bg-slider-item {
+          position: relative;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .scrolling-bg-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: auto;
+    right: auto;
+    width: 60%;
+    z-index: 2;
+
+    @include breakpoint(medium only) {
+      width: 60%;
+    }
+
+    @include breakpoint(small only) {
+      width: 90%;
+    }
+
+    &.background-left-img {
+      left: 0;
+    }
+
+    &.background-right-img {
+      right: 0;
+    }
+  }
+
+  &.bg-white {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(medium only) {}
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $white, $alpha: 1.0) 2%, rgba($color: $white, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  &.bg-dblue {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $dblue, $alpha: 1.0) 2%, rgba($color: $dblue, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  &.bg-grey,
+  &.bg-whitetogrey {
+    .scrolling-bg-overlay {
+      &.background-right-img {
+        background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.0) 100%);
+
+        @media print,
+        screen and (min-width: 1600px) {
+          background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.0) 70%);
+        }
+
+        @include breakpoint(small only) {
+          background: linear-gradient(90deg, rgba($color: $lightestgrey, $alpha: 1.0) 2%, rgba($color: $lightestgrey, $alpha: 0.5) 100%);
+        }
+      }
+    }
+  }
+
+  .scrolling-bg-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: auto;
+    right: auto;
+    width: 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 1;
+
+    @include breakpoint(medium only) {
+      width: 60%;
+    }
+
+    @include breakpoint(small only) {
+      width: 90%;
+    }
+
+    &.background-left-img {
+      left: 0;
+    }
+
+    &.background-right-img {
+      right: 0;
+    }
+  }
+
+
+  .scroll-nav-dots {
+    margin-bottom: 2rem;
+    width: 100%;
+
+    .scroll-labeled {
+      .slick-dots {
+        display: block;
+        position: relative;
+        bottom: 0;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+
+        li {
+          position: relative;
+          display: inline-block;
+          height: auto;
+          width: auto;
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+
+          &.slick-active {
+            button {
+              color: $red;
+            }
+          }
+
+          &:nth-last-child(1) {
+            button {
+              &:after {
+                display: none;
+              }
+            }
+          }
+
+          button {
+            background: transparent;
+            display: block;
+            height: auto;
+            width: auto;
+            outline: none;
+            line-height: 1.2;
+            font-size: .85rem;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: $midgrey;
+            padding: 0 6px 0 0;
+            margin: 0;
+
+            &:before {
+              display: none;
+              content: none;
+            }
+
+            &:after {
+              content: '→';
+              padding-left: 6px;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll-dots {
+      .slick-dots {
+        height: 1.125rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        position: relative;
+        bottom: 0;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+        gap: .75rem;
+
+        li {
+          position: relative;
+          display: inline-block;
+          height: auto;
+          width: auto;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+
+          &.slick-active {
+            button {
+              background: $red;
+            }
+          }
+
+          button {
+            background: $midgrey;
+            display: block;
+            height: 1.125rem;
+            width: 1.125rem;
+            outline: none;
+            line-height: 0;
+            font-size: 0;
+            padding: 0;
+            margin: 0;
+
+            &:before {
+              display: none;
+              content: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .scroll-content-section-slick {
+    display: block;
+    margin: 0;
+
+    .slick-track {
+      display: flex !important;
+    }
+
+    .scroll-content-section-item {
+      height: inherit !important;
+      width: 100%;
+
+      .grid-container {
+        height: 100% !important;
+
+        .grid-x {
+          height: 100% !important;
+
+          .wysiwyg-content {
+            max-width: 480px;
+            font-weight: 500;
+
+            h6 {
+              color: $red;
+              margin-bottom: .25rem;
+              font-weight: 500;
+            }
+
+            h2 {
+              font-size: 2.25rem;
+              margin-bottom: .75rem;
+              line-height: 1.25;
+            }
+
+            li {
+              margin-bottom: .35rem;
+            }
+
+            .aras-button {
+              margin-top: .75rem;
+            }
+          }
+
+          .scrolling-image-block {
+            @include breakpoint(small only) {
+
+              .image-container {
+                text-align: center;
+              }
+            }
+
+            img {
+              width: 100%;
+              max-width: auto;
+              height: auto;
+              max-height: 500px;
+
+              @include breakpoint(small only) {
+                max-height: 300px;
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
