@@ -2,7 +2,10 @@
 $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $current_url = esc_url(home_url(add_query_arg(array(), $wp->request)));
 $labelterms = get_the_terms(get_the_ID(), 'event_type');
-if ($labelterms && !is_wp_error($labelterms)) {
+
+// first check for 
+$cta_label = get_field('cta_label');
+if (!$cta_label && $labelterms && !is_wp_error($labelterms)) {
 	$term = array_shift($labelterms);
 	$cta_label = get_field('format_cta_label', $term);
 	if (str_contains($site_url, '/ja-jp/')) {
@@ -48,6 +51,9 @@ endif;
 		<?php $href = get_the_permalink() ?>
 		<?php $target = '_self' ?>
 	<?php endif; ?>
+<?php elseif (get_field('event_content_type') == 'internal_link') : ?>
+	<?php $href = get_field('internal_link'); ?>
+	<?php $target = '_self' ?>
 <?php else : ?>
 	<?php $href = get_the_permalink() ?>
 	<?php $target = '_self' ?>
@@ -56,72 +62,39 @@ endif;
 
 <article class="cell cell-card blog-item-cell bordercard <?php echo $perrow; ?>" id="post-<?php the_ID(); ?>" role="article">
 	<div class="card-container">
-		<?php if (get_field('external_url')) : ?>
-			<a class="card-image-container" aria-label="<?php the_title_attribute() ?>" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
-				<?php if (has_post_thumbnail('')) : ?>
-					<?php //the_post_thumbnail('full');
-					$image_id = get_post_thumbnail_id();
-					$image_url = wp_get_attachment_image_src($image_id, 'full'); // 'full' size image
-					if (get_post_meta($image_id, '_wp_attachment_image_alt', true) != '') {
-						$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-					} else {
-						$image_alt = get_the_title('');
-					}
-					$image_data = wp_get_attachment_metadata($image_id);
-					$image_width = $image_data['width'];
-					$image_height = $image_data['height'];
-					$image_loading = 'lazy';
-					$image_decoding = 'async';
-					$image_srcset = wp_get_attachment_image_srcset($image_id, 'full'); // 'full' size image srcset
-					?>
-					<img class="card-image" src="<?php echo $image_url[0]; ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo $image_alt; ?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>" loading="<?php echo $image_loading; ?>" decoding="<?php echo $image_decoding; ?>" />
-				<?php else : ?>
-					<img class="card-image" src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholders/resource-placeholder.svg" alt="<?php the_title(''); ?>">
-				<?php endif; ?>
-			</a>
-		<?php else : ?>
-			<a class="card-image-container" aria-label="<?php the_title_attribute() ?>" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
-				<?php if (has_post_thumbnail('')) : ?>
-					<?php //the_post_thumbnail('full');
-					$image_id = get_post_thumbnail_id();
-					$image_url = wp_get_attachment_image_src($image_id, 'full'); // 'full' size image
-					if (get_post_meta($image_id, '_wp_attachment_image_alt', true) != '') {
-						$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-					} else {
-						$image_alt = get_the_title('');
-					}
-					$image_data = wp_get_attachment_metadata($image_id);
-					$image_width = $image_data['width'];
-					$image_height = $image_data['height'];
-					$image_loading = 'lazy';
-					$image_decoding = 'async';
-					$image_srcset = wp_get_attachment_image_srcset($image_id, 'full'); // 'full' size image srcset
-					?>
-					<img class="card-image" src="<?php echo $image_url[0]; ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo $image_alt; ?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>" loading="<?php echo $image_loading; ?>" decoding="<?php echo $image_decoding; ?>" />
-				<?php else : ?>
-					<img class="card-image" src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholders/resource-placeholder.svg" alt="<?php the_title(''); ?>">
-				<?php endif; ?>
-			</a>
-		<?php endif; ?>
+		<a class="card-image-container" aria-label="<?php the_title_attribute() ?>" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
+			<?php if (has_post_thumbnail('')) : ?>
+				<?php //the_post_thumbnail('full');
+				$image_id = get_post_thumbnail_id();
+				$image_url = wp_get_attachment_image_src($image_id, 'full'); // 'full' size image
+				if (get_post_meta($image_id, '_wp_attachment_image_alt', true) != '') {
+					$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+				} else {
+					$image_alt = get_the_title('');
+				}
+				$image_data = wp_get_attachment_metadata($image_id);
+				$image_width = $image_data['width'];
+				$image_height = $image_data['height'];
+				$image_loading = 'lazy';
+				$image_decoding = 'async';
+				$image_srcset = wp_get_attachment_image_srcset($image_id, 'full'); // 'full' size image srcset
+				?>
+				<img class="card-image" src="<?php echo $image_url[0]; ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo $image_alt; ?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>" loading="<?php echo $image_loading; ?>" decoding="<?php echo $image_decoding; ?>" />
+			<?php else : ?>
+				<img class="card-image" src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholders/resource-placeholder.svg" alt="<?php the_title(''); ?>">
+			<?php endif; ?>
+		</a>
 		<div class="card-content-container">
 			<h6 class="card-subhead">
 				<?php if ($formatlist) : ?><?php echo $formatlist; ?> <?php if (!get_field('hide_date_on_listing') || get_field('event_time')) : ?> | <?php endif; ?> <?php endif; ?><?php if (get_field('event_date')) : ?><?php if (!get_field('hide_date_on_listing')) : ?><?php echo get_field('event_date'); ?><?php endif; ?><?php if (get_field('event_time')) : ?><?php if (!get_field('hide_date_on_listing')) : ?>,<?php endif; ?> <?php echo get_field('event_time'); ?><?php endif; ?><?php endif; ?>
 			</h6>
-			<?php if (get_field('external_url')) : ?>
-				<a aria-label="<?php the_title_attribute() ?>" class="card-headline-a" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
+			<a aria-label="<?php the_title_attribute() ?>" class="card-headline-a" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
+				<?php if (get_field('hero_headline')) : ?>
+					<h3 class="card-headline"><?php echo get_field('hero_headline'); ?></h3>
 				<?php else : ?>
-					<a aria-label="<?php the_title_attribute() ?>" class="card-headline-a" title="<?php the_title_attribute() ?>" href="<?php echo $href; ?>" target="<?php echo $target; ?>">
-					<?php endif; ?>
-					<?php if (get_field('hero_headline')) : ?>
-						<h3 class="card-headline"><?php echo get_field('hero_headline'); ?></h3>
-					<?php else : ?>
-						<h3 class="card-headline"><?php the_title(''); ?></h3>
-					<?php endif; ?>
-					<?php if (get_field('external_url')) : ?>
-					</a>
-				<?php else : ?>
-				</a>
-			<?php endif; ?>
+					<h3 class="card-headline"><?php the_title(''); ?></h3>
+				<?php endif; ?>
+			</a>
 			<span class="card-link card-link--buffer">
 				<?php if ($cta_label) {
 					echo esc_html($cta_label) . '&nbsp;→';

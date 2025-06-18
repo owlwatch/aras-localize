@@ -81,12 +81,14 @@
             "wpml_cf_preferences": 3,
             "choices": {
                 "internal": "Internal",
+                "internal_link": "Internal Link",
                 "external": "External"
             },
             "default_value": "internal",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
             "placeholder": ""
@@ -116,6 +118,63 @@
             "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_6852038e2365b",
+            "label": "Internal Link",
+            "name": "internal_link",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "If the event links to an external page instead of an internal page, add the URL here.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66201c8289684",
+                        "operator": "==",
+                        "value": "internal_link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "post_type": [
+                "lp",
+                "page",
+                "post"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "allow_archives": 1,
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_6851fe1e13962",
+            "label": "CTA Label",
+            "name": "cta_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "Register",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -147,5 +206,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1729798571
+    "modified": 1750206729
 }
