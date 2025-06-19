@@ -57,10 +57,7 @@
           else {
             $url = $video['url'];
           }
-          error_log('Hero video URL: ' . $url);
-          
           ?>
-          <!-- hero_video: <?php print_r( $video ); ?> -->
           <video playsinline muted autoplay loop src="<?php echo $url; ?>"></video>
         <?php else : ?>
           <?php $image = get_field('hero_image');
