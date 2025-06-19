@@ -29,7 +29,7 @@ function update_myi_data_hourly( $debug = false )
 	}
 	// Roadmap data
 	$roadmap_url = 'https://myinnovator.com/server/odata/method.MyI_Public_Roadmap_Query';
-	$roadmap_data = fetch_data_from_myi_api($roadmap_url);
+	$roadmap_data = fetch_data_from_myi_api($roadmap_url, true);
 	if( $debug ) {
 		echo "Fetching roadmap data from: $roadmap_url\n";
 		print_r($roadmap_data);
@@ -164,7 +164,7 @@ function fetch_and_save_pdf($pdf_id)
 
 
 // API CALL
-function fetch_data_from_myi_api($url)
+function fetch_data_from_myi_api($url, $debug = false )
 {
 	$token_request_data = array(
 		'grant_type' => 'password',
@@ -201,6 +201,10 @@ function fetch_data_from_myi_api($url)
 		);
 		$api_response = wp_remote_post($url, $args);
 
+		if( $debug ) {
+			print_r($api_response);
+		}
+
 		// Check for errors
 		if (!is_wp_error($api_response)) {
 			$api_body = wp_remote_retrieve_body($api_response);
@@ -208,6 +212,9 @@ function fetch_data_from_myi_api($url)
 			return $api_data;
 		}
 		else {
+			if( $debug ){
+				print_r( 'Error fetching data from MyI API: ' . $api_response->get_error_message() );
+			}
 			error_log('Error fetching data from MyI API: ' . $api_response->get_error_message());
 		}
 	}
@@ -215,14 +222,15 @@ function fetch_data_from_myi_api($url)
 }
 
 // Save API calls to files
-function save_data_to_file($data, $filename)
+function save_data_to_file($data, $filename )
 {
 	if( !is_dir( get_template_directory() . '/api_json/' ) ) {
 		mkdir( get_template_directory() . '/api_json/', 0755, true );
 	}
 	$full_filename = get_template_directory() . '/api_json/' . $filename;
 	$data['last_update_time'] = time();
-	file_put_contents($full_filename, json_encode($data));
+	$ret = file_put_contents($full_filename, json_encode($data));
+	return $ret;
 }
 // Function to load data from file
 function load_data_from_file($filename)
