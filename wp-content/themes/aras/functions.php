@@ -18,12 +18,12 @@ add_action('init', function () {
 	if( is_admin() ) {
 		return;
 	}
-	require_once(get_template_directory() . '/functions/vite-service.php');
-	$vite =  new \Aras\ViteService(
-		get_stylesheet_directory() . '/dist',
-		get_stylesheet_directory_uri() . '/dist/',
-		'http://localhost:5176'
-	);
-	// enqueue the main entry point
-	$vite->enqueue('src/index.js');
+	// require_once(get_template_directory() . '/functions/vite-service.php');
+	// $vite =  new \Aras\ViteService(
+	// 	get_stylesheet_directory() . '/dist',
+	// 	get_stylesheet_directory_uri() . '/dist/',
+	// 	'http://localhost:5176'
+	// );
+	// // enqueue the main entry point
+	// $vite->enqueue('src/index.js');
 });
