@@ -142,7 +142,8 @@ function fetch_and_save_pdf($pdf_id)
 				'Authorization' => 'Bearer ' . $access_token
 			);
 			$args = array(
-				'headers' => $headers
+				'headers' => $headers,
+				'sslverify' => false, // Disable SSL verification
 			);
 
 			$pdf_response = wp_remote_get($pdf_url, $args);
@@ -184,7 +185,7 @@ function fetch_data_from_myi_api($url, $debug = false )
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	// disable ssl verification
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	
+
 
 	// Execute the request to obtain access token
 	$token_response = curl_exec($ch);
@@ -201,7 +202,8 @@ function fetch_data_from_myi_api($url, $debug = false )
 			'Authorization' => 'Bearer ' . $access_token
 		);
 		$args = array(
-			'headers' => $headers
+			'headers' => $headers,
+			'sslverify' => false, // Disable SSL verification
 		);
 		$api_response = wp_remote_post($url, $args);
 
