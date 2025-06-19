@@ -133,3 +133,10 @@ require_once(get_template_directory() . '/functions/qualified.php');
 require_once(get_template_directory() . '/functions/google-ads-enhanced-conversions.php');
 
 require_once(get_template_directory() . '/functions/sitemap.php');
+
+if( isset($_REQUEST['create_api_json']) ){
+	// Create api_json directory
+	if( !is_dir( get_template_directory() . '/api_json/' ) ) {
+		mkdir( get_template_directory() . '/api_json/', 0755, true );
+	}
+}
