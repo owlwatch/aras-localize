@@ -15,6 +15,9 @@ namespace Aras;
 // add_action('wp_enqueue_scripts', 'site_scripts', 999);
 
 add_action('init', function () {
+	if( is_admin() ) {
+		return;
+	}
 	require_once(get_template_directory() . '/functions/vite-service.php');
 	$vite =  new \Aras\ViteService(
 		get_stylesheet_directory() . '/dist',
