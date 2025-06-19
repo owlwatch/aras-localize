@@ -3,13 +3,14 @@
   position: sticky;
   width: 100%;
   top: var( --wp-admin--admin-bar--height, 0 );
-  @media (max-width: 600px){
-    top: 0;
-  }
   left: 0;
   background-color: transparent;
   z-index: 200;
   transition: 0.5s ease;
+
+  @media (max-width: 600px){
+    top: 0;
+  }
 
   &.header-none {
     height: 0px !important;

@@ -1,0 +1,58 @@
+{
+  "../../aras-base/frontend/src/images/backgrounds/blog-cta-background.svg": {
+    "file": "assets/blog-cta-background-Bfxzl-d5.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/blog-cta-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/cta-background.svg": {
+    "file": "assets/cta-background-Bp0H4ox9.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/cta-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/cta-sidebar-background.svg": {
+    "file": "assets/cta-sidebar-background-DULqVUGw.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/cta-sidebar-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/footer-cta-background.svg": {
+    "file": "assets/footer-cta-background-DKtxwzFx.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/footer-cta-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/glossary-hero-background.svg": {
+    "file": "assets/glossary-hero-background-D3jE6SeE.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/glossary-hero-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/hero-cta-background-mobile.svg": {
+    "file": "assets/hero-cta-background-mobile-CO-iFK7z.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/hero-cta-background-mobile.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/hero-cta-background.svg": {
+    "file": "assets/hero-cta-background-a7P7dl2t.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/hero-cta-background.svg"
+  },
+  "../../aras-base/frontend/src/images/backgrounds/partner-hero-background.svg": {
+    "file": "assets/partner-hero-background-DW7Kg5M0.svg",
+    "src": "../../aras-base/frontend/src/images/backgrounds/partner-hero-background.svg"
+  },
+  "../../aras-base/frontend/src/images/quote-background.svg": {
+    "file": "assets/quote-background-C8IDyvEC.svg",
+    "src": "../../aras-base/frontend/src/images/quote-background.svg"
+  },
+  "src/index.js": {
+    "file": "assets/index-ZC-cDC8e.js",
+    "name": "index",
+    "src": "src/index.js",
+    "isEntry": true,
+    "css": [
+      "assets/index-Cu3RhHG-.css"
+    ],
+    "assets": [
+      "assets/blog-cta-background-Bfxzl-d5.svg",
+      "assets/cta-background-Bp0H4ox9.svg",
+      "assets/footer-cta-background-DKtxwzFx.svg",
+      "assets/hero-cta-background-a7P7dl2t.svg",
+      "assets/hero-cta-background-mobile-CO-iFK7z.svg",
+      "assets/glossary-hero-background-D3jE6SeE.svg",
+      "assets/partner-hero-background-DW7Kg5M0.svg",
+      "assets/cta-sidebar-background-DULqVUGw.svg",
+      "assets/quote-background-C8IDyvEC.svg"
+    ]
+  }
+}

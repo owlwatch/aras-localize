@@ -1,4 +1,4 @@
-import { jQuery } from 'jquery';
+
 ////Maintain Query Parameters
 document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = new URL(window.location.href);
