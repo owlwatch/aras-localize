@@ -200,10 +200,10 @@
         },
         {
             "key": "field_660f31c938731",
-            "label": "",
-            "name": "",
+            "label": "Hero Video",
+            "name": "hero_video",
             "aria-label": "",
-            "type": "message",
+            "type": "file",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -221,9 +221,12 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "message": "The Hero Video is coded into the template. For assistance on editing this element, please contact a developer.",
-            "new_lines": "wpautop",
-            "esc_html": 0
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "mp4",
+            "allow_in_bindings": 1
         },
         {
             "key": "field_65b0001c79714",
@@ -305,5 +308,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714490542
+    "modified": 1750297515
 }

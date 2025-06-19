@@ -37,6 +37,7 @@ node_modules
 *.ra
 *.3gpp
 *.3gp
+*.mp4
 *.mpeg
 *.mpg
 *.mov

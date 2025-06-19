@@ -26,9 +26,6 @@ export default defineConfig({
 		emptyOutDir: true,
 		outDir: '../dist',
 		rollupOptions: {
-			external: [
-				'jquery'
-			],
 			input: [
 				'./src/index.js',
 			]

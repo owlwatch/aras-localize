@@ -48,7 +48,16 @@
 
       <div class="cell small-12 medium-4 large-6 hero-visual">
         <?php if (get_field('visual_type') == 'video') : ?>
-          <video playsinline muted autoplay loop src="<?php echo get_template_directory_uri(); ?>/assets/video/aras-home-animation.mp4"></video>
+          <?php
+          $url = get_field('hero_video');
+          if (empty($url)) {
+            $url = get_template_directory_uri() . '/assets/video/aras-home-animation.mp4';
+          }
+          else {
+            $url = $url['url'];
+          }
+          ?>
+          <video playsinline muted autoplay loop src="<?php echo $url; ?>"></video>
         <?php else : ?>
           <?php $image = get_field('hero_image');
           if (!empty($image)) : ?>
