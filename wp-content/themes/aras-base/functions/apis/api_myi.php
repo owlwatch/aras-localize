@@ -120,6 +120,7 @@ function fetch_and_save_pdf($pdf_id)
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($token_request_data));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 		// Execute the request to obtain access token
 		$token_response = curl_exec($ch);
@@ -181,6 +182,7 @@ function fetch_data_from_myi_api($url, $debug = false )
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($token_request_data));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 	// Execute the request to obtain access token
 	$token_response = curl_exec($ch);
