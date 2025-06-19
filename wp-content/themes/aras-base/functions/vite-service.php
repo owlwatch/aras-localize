@@ -74,6 +74,14 @@ class ViteService {
 		if ($exists !== null) {
 			return $exists;
 		}
+
+		// only allow dev on .local domains,
+		// we need to check home_url
+		$homeUrl = home_url();
+		if (strpos($homeUrl, '.local') === false && strpos($homeUrl, '.dev') === false) {
+			$exists = false;
+			return false;
+
 		$handle = curl_init($this->devHost . '/' . $entry);
 		
 		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
