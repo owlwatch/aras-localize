@@ -7,6 +7,12 @@ function hourly_api_call_event()
 		wp_schedule_event(time(), 'hourly', 'update_myi_data_hourly_event');
 	}
 }
+
+add_action('init', function(){
+	if( isset($_REQUEST['run_myi']) ) {
+		update_myi_data_hourly( true );
+	}
+});
 ////We ball (send it now)
 //update_myi_data_hourly();
 
@@ -14,12 +20,20 @@ function hourly_api_call_event()
 add_action('update_myi_data_hourly_event', 'update_myi_data_hourly');
 
 // Function to update roadmap data hourly
-function update_myi_data_hourly()
+function update_myi_data_hourly( $debug = false )
 {
 	error_log('update_myi_data_hourly called at ' . date('Y-m-d H:i:s'));
+	if( $debug ) {
+		header('Content-Type: text/plain; charset=UTF-8');
+		echo "update_myi_data_hourly called at " . date('Y-m-d H:i:s') . "\n";
+	}
 	// Roadmap data
 	$roadmap_url = 'https://myinnovator.com/server/odata/method.MyI_Public_Roadmap_Query';
 	$roadmap_data = fetch_data_from_myi_api($roadmap_url);
+	if( $debug ) {
+		echo "Fetching roadmap data from: $roadmap_url\n";
+		print_r($roadmap_data);
+	}
 	if ($roadmap_data) {
 		save_data_to_file($roadmap_data, 'MyI_Public_Roadmap_Query.json');
 		//	echo "Roadmap data updated at " . date('Y-m-d H:i:s') . "\n";
@@ -83,6 +97,9 @@ function update_myi_data_hourly()
 				}
 			}
 		}
+	}
+	if( $debug ){
+		exit;
 	}
 }
 
