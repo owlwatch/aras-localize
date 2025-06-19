@@ -196,6 +196,9 @@ function fetch_data_from_myi_api($url)
 // Save API calls to files
 function save_data_to_file($data, $filename)
 {
+	if( !is_dir( get_template_directory() . '/api_json/' ) ) {
+		mkdir( get_template_directory() . '/api_json/', 0755, true );
+	}
 	$full_filename = get_template_directory() . '/api_json/' . $filename;
 	$data['last_update_time'] = time();
 	file_put_contents($full_filename, json_encode($data));
