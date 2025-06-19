@@ -81,6 +81,7 @@ class ViteService {
 		if (strpos($homeUrl, '.local') === false && strpos($homeUrl, '.dev') === false) {
 			$exists = false;
 			return false;
+		}
 
 		$handle = curl_init($this->devHost . '/' . $entry);
 		
