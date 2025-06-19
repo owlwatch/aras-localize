@@ -50,13 +50,15 @@
         <?php if (get_field('visual_type') == 'video') : ?>
           <?php
           $video = get_field('hero_video');
-          
+
           if (empty($video) || !$video) {
             $url = get_template_directory_uri() . '/assets/video/aras-home-animation.mp4';
           }
           else {
             $url = $video['url'];
           }
+          error_log('Hero video URL: ' . $url);
+          
           ?>
           <!-- hero_video: <?php print_r( $video ); ?> -->
           <video playsinline muted autoplay loop src="<?php echo $url; ?>"></video>
