@@ -36,19 +36,19 @@
     "src": "../../aras-base/frontend/src/images/quote-background.svg"
   },
   "src/index.js": {
-    "file": "assets/index-B0es33SW.js",
+    "file": "assets/index--n9UGhFb.js",
     "name": "index",
     "src": "src/index.js",
     "isEntry": true,
     "css": [
-      "assets/index-Cu3RhHG-.css"
+      "assets/index-DdaztMmL.css"
     ],
     "assets": [
+      "assets/hero-cta-background-a7P7dl2t.svg",
+      "assets/hero-cta-background-mobile-CO-iFK7z.svg",
       "assets/blog-cta-background-Bfxzl-d5.svg",
       "assets/cta-background-Bp0H4ox9.svg",
       "assets/footer-cta-background-DKtxwzFx.svg",
-      "assets/hero-cta-background-a7P7dl2t.svg",
-      "assets/hero-cta-background-mobile-CO-iFK7z.svg",
       "assets/glossary-hero-background-D3jE6SeE.svg",
       "assets/partner-hero-background-DW7Kg5M0.svg",
       "assets/cta-sidebar-background-DULqVUGw.svg",

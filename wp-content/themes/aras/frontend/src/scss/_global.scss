@@ -297,7 +297,7 @@ table {
     font-size: 0.85rem;
     font-weight: 400;
     padding: 5px 8px 5px 18px;
-    background-image: url(../images/icons/clipboard-icon.svg);
+    background-image: url(aras-base/src/images/icons/clipboard-icon.svg);
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: left 5px;
@@ -907,7 +907,7 @@ blockquote,
   bottom: 0;
   left: 52%;
   right: 0;
-  background-image: url(../../images/backgrounds/hero-cta-background.svg);
+  background-image: url(aras-base/src/images/backgrounds/hero-cta-background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left center;
@@ -934,7 +934,7 @@ blockquote,
   bottom: 0;
   right: 52%;
   left: 0;
-  background-image: url(../../images/backgrounds/hero-cta-background.svg);
+  background-image: url(aras-base/src/images/backgrounds/hero-cta-background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right center;
@@ -947,7 +947,7 @@ blockquote,
     right: 0;
     width: 100%;
     height: 50%;
-    background-image: url(../../images/backgrounds/hero-cta-background-mobile.svg);
+    background-image: url(aras-base/src/images/backgrounds/hero-cta-background-mobile.svg);
     background-position: top center;
   }
 }
