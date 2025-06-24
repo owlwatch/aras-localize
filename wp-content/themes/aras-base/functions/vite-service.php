@@ -35,9 +35,18 @@ class ViteService {
 		$this->devHost = $devHost;
 	}
 
-	public function enqueue( $entry, $footer = false )
+	public function enqueue( $entry, $action = false )
 	{
-		$action = $footer ? 'wp_footer' : 'wp_head';
+		switch( $action ) {
+			case true:
+				$action = 'wp_footer';
+				break;
+			case false:
+				$action = 'wp_head';
+				break;
+			default:
+				break;
+		}
 		add_action( $action, function() use($entry){
 			echo $this->vite( $entry );
 		});

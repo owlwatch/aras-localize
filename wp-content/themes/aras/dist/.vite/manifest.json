@@ -1,4 +1,8 @@
 {
+  "../../aras-base/frontend/src/images/Aras-Logo.svg": {
+    "file": "assets/Aras-Logo-CAhhH2sp.svg",
+    "src": "../../aras-base/frontend/src/images/Aras-Logo.svg"
+  },
   "../../aras-base/frontend/src/images/backgrounds/blog-cta-background.svg": {
     "file": "assets/blog-cta-background-Bfxzl-d5.svg",
     "src": "../../aras-base/frontend/src/images/backgrounds/blog-cta-background.svg"
@@ -35,6 +39,11 @@
     "file": "assets/quote-background-C8IDyvEC.svg",
     "src": "../../aras-base/frontend/src/images/quote-background.svg"
   },
+  "src/admin.scss": {
+    "file": "assets/admin-5RCwnJpp.css",
+    "src": "src/admin.scss",
+    "isEntry": true
+  },
   "src/index.js": {
     "file": "assets/index--n9UGhFb.js",
     "name": "index",
@@ -54,5 +63,10 @@
       "assets/cta-sidebar-background-DULqVUGw.svg",
       "assets/quote-background-C8IDyvEC.svg"
     ]
+  },
+  "src/login.scss": {
+    "file": "assets/login-DMpmaCb9.css",
+    "src": "src/login.scss",
+    "isEntry": true
   }
 }

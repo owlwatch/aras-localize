@@ -28,6 +28,8 @@ export default defineConfig({
 		rollupOptions: {
 			input: [
 				'./src/index.js',
+				'./src/admin.scss',
+				'./src/login.scss'
 			]
 		}
 	},
