@@ -86,6 +86,9 @@ if ($post->post_parent == 20987) { ?>
                                 $title = get_sub_field('title');
                                 $build = get_sub_field('build');
                                 $created = get_sub_field('created');
+                                if ($created) {
+                                    $created = wp_date('F j, Y', strtotime($created));
+                                }
                                 $download = get_sub_field('download');
                                 $download_short = basename($download);
                                 $file_size = get_sub_field('file_size');

@@ -18,7 +18,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_661ef2f3ee2b8",
@@ -119,9 +120,10 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "display_format": "m\/d\/Y",
-            "return_format": "d\/m\/Y",
-            "first_day": 1
+            "display_format": "F j, Y",
+            "return_format": "F j, Y",
+            "first_day": 1,
+            "allow_in_bindings": 1
         },
         {
             "key": "field_661ef1349c906",
@@ -138,9 +140,10 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "display_format": "m\/d\/Y",
-            "return_format": "d\/m\/Y",
-            "first_day": 1
+            "display_format": "F j, Y",
+            "return_format": "F j, Y",
+            "first_day": 1,
+            "allow_in_bindings": 1
         },
         {
             "key": "field_661ef1589c907",
@@ -176,7 +179,8 @@
             },
             "wpml_cf_preferences": 3,
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_661ed07afa189",
@@ -328,5 +332,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1714490568
+    "modified": 1750950893
 }
