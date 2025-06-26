@@ -265,8 +265,9 @@
                     },
                     "wpml_cf_preferences": 1,
                     "display_format": "m\/d\/Y",
-                    "return_format": "d\/m\/Y",
+                    "return_format": "F j, Y",
                     "first_day": 1,
+                    "allow_in_bindings": 1,
                     "parent_repeater": "field_661ed07afa189"
                 },
                 {
@@ -332,5 +333,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1750950893
+    "modified": 1750952188
 }

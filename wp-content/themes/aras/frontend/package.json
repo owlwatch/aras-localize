@@ -17,6 +17,7 @@
     "mixitup-multifilter": "^3.3.7",
     "mixitup-pagination": "^3.3.2",
     "motion-ui": "^2.0.8",
+    "photoswipe": "^5.4.4",
     "what-input": "^5.2.12"
   },
   "devDependencies": {
