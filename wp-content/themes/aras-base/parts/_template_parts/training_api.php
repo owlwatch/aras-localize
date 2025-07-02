@@ -609,13 +609,15 @@ if ($data != null) {
 
 			// Add an event listener to the reset button
 			document.getElementById('clear-button').addEventListener('click', function() {
-				document.getElementById('class_name').value = '';
-				document.getElementById('class_language').value = '';
-				document.getElementById('delivery_method').value = '';
-				document.getElementById('student_role').value = '';
-				document.getElementById('location').value = '';
+				document.querySelectorAll('select').forEach(function(select) {
+					select.selectedIndex = 0; // Reset each select element to the first option
+					// and trigger the change event
+					var event = new Event('change');
+					select.dispatchEvent(event);
+				});
 				mixer.filter('all');
 			});
+
 
 			/*Custom Select Script
 			  var x, i, j, l, ll, selElmnt, a, b, c;
@@ -671,6 +673,20 @@ if ($data != null) {
 						}
 					});
 					b.appendChild(c);
+  
+					selElmnt.addEventListener("change", function() {
+						// get the value
+						var selectedValue = this.options[this.selectedIndex].value;
+						// find the corresponding div in the select-items
+						var items = this.parentNode.getElementsByClassName("select-items")[0].getElementsByTagName("div");
+						for (var k = 0; k < items.length; k++) {
+							if (items[k].dataset.targetclass === selectedValue) {
+								// if found, trigger click
+								items[k].click();
+								break;
+							}
+						}
+					});
 				}
 				x[i].appendChild(b);
 				a.addEventListener("click", function(e) {
