@@ -45,12 +45,12 @@
     "isEntry": true
   },
   "src/index.js": {
-    "file": "assets/index--n9UGhFb.js",
+    "file": "assets/index-FZxkSzRl.js",
     "name": "index",
     "src": "src/index.js",
     "isEntry": true,
     "css": [
-      "assets/index-DdaztMmL.css"
+      "assets/index-CoSVK1Fe.css"
     ],
     "assets": [
       "assets/hero-cta-background-a7P7dl2t.svg",
