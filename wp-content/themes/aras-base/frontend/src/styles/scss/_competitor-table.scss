@@ -43,6 +43,7 @@
 	}
 
 	tbody tr {
+		vertical-align: middle;
 		td:nth-child(2){
 			--color-harvey-ball-fill: #{var(--primary)};
 		}
@@ -57,10 +58,10 @@
 		td {
 			background: transparent;
 			text-align: center;
+			vertical-align: middle;
 		}
 		
 		td,th {
-			vertical-align: top;
 			border-bottom: 1px solid #ddd; // Light border for rows
 		}
 		
@@ -89,7 +90,9 @@
 			margin-top: 0.25em;
 		}
 		&-description {
-			text-align: left;
+			text-align: center;
+			font-size: 0.9em;
+			color: #666; // Example description color
 		}
 	}
 
@@ -151,6 +154,12 @@
 		.competitor-table__difference {
 			align-items: center;
 			justify-content: center;
+		}
+	}
+
+	&--harvey-balls.competitor-table--hide-harvey-ball-in-first-row {
+		thead th:nth-child(2) {
+			width: auto;
 		}
 	}
 

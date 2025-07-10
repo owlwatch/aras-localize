@@ -147,6 +147,9 @@ switch ($horizontal_alignment) {
 				// show harvey ball
 				$show_harvey_ball = get_sub_field('show_harvey_ball');
 
+				// hide_harvey_ball_in_first_row
+				$hide_harvey_ball_in_first_row = get_sub_field('hide_harvey_ball_in_first_row');
+
 				// use tooltip
 				$use_tooltip = get_sub_field('use_tooltip');
 
@@ -157,6 +160,7 @@ switch ($horizontal_alignment) {
 					'competitor-table',
 					$show_harvey_ball ? 'competitor-table--harvey-balls' : '',
 					$use_tooltip ? 'competitor-table--tooltip' : '',
+					$hide_harvey_ball_in_first_row ? 'competitor-table--hide-harvey-ball-in-first-row' : '',
 					$small_columns ? 'competitor-table--small-columns' : '',
 					'competitor-table--competitor-count-' . count( $competitors ),
 				];
@@ -198,17 +202,17 @@ switch ($horizontal_alignment) {
 								<?php } ?>
 							</th>
 							<?php
-							foreach( $competitors as $competitor ){
+							foreach( $competitors as $i => $competitor ){
 								// get the rating for this capability and competitor
 								$rating = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-rating', true );
 								$description = get_post_meta( $competitor->ID, 'aras-compare-' . $capability->slug . '-description', true );
 								?>
 								<td>
 									<div class="competitor-table__difference">
-										<?php if( $show_harvey_ball ){ ?>
+										<?php if( $show_harvey_ball && !($i === 0 && $hide_harvey_ball_in_first_row) ){ ?>
 											<div class="right harvey-ball harvey-ball--<?php echo esc_attr( $rating * 25 ); ?>" <?php if( $use_tooltip && $description ){ ?>data-tooltip title="<?php echo esc_attr( $description ); ?>"<?php } ?>></div>
 										<?php } ?>
-										<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball) { ?>
+										<?php if( $show_harvey_ball && !$use_tooltip || !$show_harvey_ball || $show_harvey_ball && $i === 0 && $hide_harvey_ball_in_first_row ) { ?>
 											<div class="competitor-table__difference-description">
 												<?php echo $description; ?>
 											</div>

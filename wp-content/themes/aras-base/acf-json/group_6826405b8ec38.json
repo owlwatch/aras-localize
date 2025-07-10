@@ -126,6 +126,36 @@
             "ui": 1
         },
         {
+            "key": "field_686fd960695a4",
+            "label": "Hide Harvey Ball in First Row",
+            "name": "hide_harvey_ball_in_first_row",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6840a8daafe3b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_6840a8ffafe3c",
             "label": "Use Tooltip",
             "name": "use_tooltip",
@@ -278,5 +308,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1749169070
+    "modified": 1752160820
 }
