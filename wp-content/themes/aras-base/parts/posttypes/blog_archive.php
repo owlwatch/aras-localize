@@ -143,6 +143,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         else {
           $featposts = new WP_Query($fargs);
         }
+
         if ($featposts->have_posts()) : ?>
           <?php while ($featposts->have_posts()) : $featposts->the_post();
             $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>
@@ -559,7 +560,9 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       // }
       // Taxonomy Query for Author Filter
       if( is_author() ){
-        $args['author_name'] = get_query_var( 'author_name' );
+        // $args['_author_query'] = is_author();
+        // $args['author_name'] = get_query_var( 'author_name' );
+        $args['author'] = get_queried_object_id();
       }
       if (!empty($author_switcher)) {
         $user = get_user_by('slug', $author_switcher);
@@ -659,9 +662,19 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
         $posts_query = Aras\WPML\get_wp_query( $args, $lang_codes );
       }
       else {
+        global $sitepress, $wpml_query_filter;
+        $args['suppress_filters'] = false; // Allow WPML to filter the query
+        remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
+        remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+        remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
+		    remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
         $posts_query = new WP_Query($args);
+        add_filter('parse_query', array($sitepress, 'parse_query'), 10);
+        add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+        add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+		    add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
       }
-      
+
       if ($posts_query->have_posts()) : $postCount = 0;
         while ($posts_query->have_posts()) :  $posts_query->the_post();
           $postCount++;
@@ -683,11 +696,16 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       <?php endif; ?>
       -->
       <?php
+      global $wp_query;
+      $_wp_query = $wp_query;
+      $wp_query = $posts_query;
       the_posts_pagination( array(
         'mid_size' => 2,
         'prev_text' => __( '←', 'aras' ),
         'next_text' => __( '→', 'aras' ),
         ) );
+      $wp_query = $_wp_query; // Restore the original query
+      wp_reset_query();
       ?>
     </section>
   </div>

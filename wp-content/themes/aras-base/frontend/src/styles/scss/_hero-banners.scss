@@ -44,7 +44,7 @@
 
         &.slick-active {
           button {
-            background: $red;
+            background: var(--primary);
           }
         }
 
@@ -260,7 +260,7 @@
 
         .hero-headline {
           &.color-red {
-            color: $red;
+            color: var(--primary);
           }
         }
 
@@ -736,14 +736,14 @@
 
 .backlink a,
 .backlink-link {
-  color: $red;
+  color: var(--primary);
   font-weight: 600;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
 
   h6 {
-    color: $red;
+    color: var(--primary);
     font-weight: 600;
 
     &:hover,

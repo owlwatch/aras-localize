@@ -58,7 +58,7 @@
   }
 
   [type=checkbox] {
-    accent-color: $red !important;
+    accent-color: var(--primary) !important;
     border-radius: 0px !important;
     border: solid 1px $bordergrey !important;
     box-shadow: none !important;
@@ -68,12 +68,12 @@
     margin-bottom: 1px !important;
 
     &:focus {
-      border-color: $red !important;
+      border-color: var(--primary) !important;
       box-shadow: none !important;
     }
 
     &::before {
-      color: $red !important;
+      color: var(--primary) !important;
     }
   }
 

@@ -71,7 +71,7 @@
         text-decoration: underline;
         font-size: 14px;
         z-index: 2;
-        color: $red;
+        color: var(--primary);
 
         &:hover,
         &:focus {
@@ -160,7 +160,7 @@
     width: 100%;
     padding: 3px;
     cursor: pointer;
-    color: $red;
+    color: var(--primary);
 
     &:hover,
     &:focus {

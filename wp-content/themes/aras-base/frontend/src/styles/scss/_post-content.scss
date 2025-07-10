@@ -206,7 +206,7 @@
         position: sticky;
         padding: 1rem 1.5rem;
         height: fit-content;
-        border: solid 1px $red;
+        border: solid 1px var(--primary);
         background-color: $white;
         width: 280px;
 
@@ -264,18 +264,18 @@
 
                     &:hover,
                     &:focus {
-                        color: $red;
+                        color: var(--primary);
                     }
                 }
 
                 &.toc-active {
                     a {
                         font-weight: 500;
-                        color: $red;
+                        color: var(--primary);
 
                         &:hover,
                         &:focus {
-                            color: $red;
+                            color: var(--primary);
                         }
                     }
                 }

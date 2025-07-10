@@ -99,7 +99,7 @@
     h6, .h6 {
         font-weight: 500;
         margin-bottom: 1rem;
-        color: $red;
+        color: var(--primary);
     }
 
 
@@ -253,11 +253,11 @@
             }
 
             a {
-                color: $red;
+                color: var(--primary);
 
                 &:hover,
                 &:focus {
-                    color: $red;
+                    color: var(--primary);
                 }
             }
         }
@@ -297,7 +297,7 @@
 
                 &:hover,
                 &:focus {
-                    color: $red;
+                    color: var(--primary);
                 }
             }
         }

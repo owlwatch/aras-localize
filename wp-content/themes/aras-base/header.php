@@ -57,20 +57,16 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta class="foundation-mq">
 
-	<!-- FaceBook verification -->
-	<meta name="facebook-domain-verification" content="ss0wvow4gmxzcl5li304yx6grdm2xi" />
-	<!-- Google verification -->
-	<meta name="verify-v1" content="G4QZwekdXSJ2uABMgaEZb5wu5AMUQq95WtvVazi2XwU=" />
-	<meta name="google-site-verification" content="52u8_4HI4AIiJPqrRoBTTZW9bPdTOXRMntJPMwAwEtQ" />
-	<!-- Microsoft validation -->
-	<meta name="msvalidate.01" content="690FB99AB92221C408434BEF074BFB29" />
+	<?php get_template_part('parts/head'); ?>
 
 	<?php if (!function_exists('has_site_icon') || !has_site_icon()) { ?>
 		<!-- If Site Icon isn't set in customizer -->
 		<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
 	<?php } ?>
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-	<link rel="stylesheet" href="https://use.typekit.net/pun6fdh.css">
+	<?php
+	
+	?>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/slick/slick-theme.css" />
 	<!-- The script tag should live in the head of your page if at all possible -->

@@ -62,7 +62,17 @@ class WPML_Helper
 
 function get_wp_query( array $args, array $languages )
 {
-	return WPML_Helper::get_instance()->get_wp_query( $args, $languages );
+	global $sitepress, $wpml_query_filter;
+	remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
+	remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+	remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
+	remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
+	$query = WPML_Helper::get_instance()->get_wp_query( $args, $languages );
+	add_filter('parse_query', array($sitepress, 'parse_query'), 10);
+	add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+	add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+	add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+	return $query;
 }
 
 add_filter('wpseo_canonical', 'Aras\\WPML\\wpml_custom_canonical_url');

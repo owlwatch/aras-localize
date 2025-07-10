@@ -302,7 +302,7 @@
 
             &:hover {
                 &:after {
-                    background: $red;
+                    background: var(--primary);
                 }
             }
         }

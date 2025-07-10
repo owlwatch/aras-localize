@@ -15,7 +15,22 @@
             <h1 class="hero-headline <?php echo $h1color; ?>"><?php the_title(''); ?></h1>
           <?php endif; ?>
           <h6 class="byline">
-            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>"><?php the_author(); ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<?php echo get_the_time('F j, Y'); ?>
+            <?php
+            // account for co_authors
+            $authors = [get_the_author_meta('ID')];
+            $co_authors = get_field('co_authors');
+            if( !empty($co_authors) && is_array($co_authors) ) {
+              // merge co-authors with the main author
+              $authors = array_merge( $authors, $co_authors );
+            }
+            $links = array_map( function($id){
+              $user = get_user_by( 'id', $id);
+              $url = get_author_posts_url($id);
+              $link = "<a href=\"$url\">$user->display_name</a>";
+              return $link;
+            }, $authors );
+            ?>
+            <?php echo implode(', ', $links) ?>&nbsp;&nbsp;|&nbsp;&nbsp;<?php echo get_the_time('F j, Y'); ?>
           </h6>
         </div>
       </div>

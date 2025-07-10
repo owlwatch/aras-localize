@@ -165,7 +165,7 @@
 
           &.slick-active {
             button {
-              color: $red;
+              color: var(--primary);
             }
           }
 
@@ -230,7 +230,7 @@
 
           &.slick-active {
             button {
-              background: $red;
+              background: var(--primary);
             }
           }
 
@@ -278,7 +278,7 @@
             font-weight: 500;
 
             h6 {
-              color: $red;
+              color: var(--primary);
               margin-bottom: .25rem;
               font-weight: 500;
             }

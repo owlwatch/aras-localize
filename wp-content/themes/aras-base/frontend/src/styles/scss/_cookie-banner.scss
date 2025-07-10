@@ -35,7 +35,7 @@
     #CybotCookiebotDialogBodyContentTitle {
       font-size: 15px;
       font-weight: 500;
-      font-family: "azo-sans-web", sans-serif;
+      font-family: var(--heading-font);;
       color: $black;
     }
 
@@ -44,10 +44,10 @@
       font-weight: 300;
       color: $black;
       line-height: 1.2;
-      font-family: "azo-sans-web", sans-serif;
+      font-family: var(--body-font);;
 
       a {
-        color: $red;
+        color: var(--primary);
         font-weight: 400;
         text-decoration: none !important;
 
@@ -82,7 +82,7 @@
     border-radius: 0px;
     font-size: 14px;
     font-weight: 400;
-    font-family: "azo-sans-web", sans-serif;
+    font-family: var(--body-font);;
     padding: 10px 20px 8px 20px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -118,7 +118,7 @@
   }
 
   input:checked+.CybotCookiebotDialogBodyLevelButtonSlider {
-    background-color: $red !important;
+    background-color: var(--primary) !important;
   }
 
   input:disabled+.CybotCookiebotDialogBodyLevelButtonSlider {
@@ -132,22 +132,22 @@
 
 #CybotCookiebotDialogNav {
   .CybotCookiebotDialogNavItemLink.CybotCookiebotDialogActive {
-    border-bottom-color: $red !important;
+    border-bottom-color: var(--primary) !important;
   }
 
 }
 
 #CookiebotWidget {
   .CookiebotWidget-body .CookiebotWidget-consents-list li.CookiebotWidget-approved svg {
-    fill: $red !important;
+    fill: var(--primary) !important;
   }
 
   .CookiebotWidget-consent-details button svg {
-    fill: $red !important;
+    fill: var(--primary) !important;
   }
 
   .CookiebotWidget-consent-details button {
-    color: $red !important;
+    color: var(--primary) !important;
 
     &:hover,
     &:focus {
@@ -167,7 +167,7 @@
     border-radius: 0px;
     font-size: 13px;
     font-weight: 400;
-    font-family: "azo-sans-web", sans-serif;
+    font-family: var(--body-font);;
     padding: 8px 10px 7px 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -210,7 +210,7 @@
   border-radius: 0px !important;
   font-size: 13px !important;
   font-weight: 400 !important;
-  font-family: "azo-sans-web", sans-serif !important;
+  font-family: var(--body-font); !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
   transition: .1s ease-in-out !important;

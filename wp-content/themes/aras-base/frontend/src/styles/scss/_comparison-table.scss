@@ -71,7 +71,7 @@
                     padding: 10px 0 5px 0;
                     font-size: 1.2rem;
                     font-weight: 600;
-                    color: $red;
+                    color: var(--primary);
                 }
             }
 
@@ -96,12 +96,12 @@
                         color: $black !important;
 
                         span {
-                            color: $red;
+                            color: var(--primary);
                         }
 
                         &:focus,
                         &:hover {
-                            color: $red;
+                            color: var(--primary);
                         }
 
                     }
@@ -156,7 +156,7 @@
                         }
 
                         .check {
-                            fill: $red;
+                            fill: var(--primary);
                         }
 
                         .x {

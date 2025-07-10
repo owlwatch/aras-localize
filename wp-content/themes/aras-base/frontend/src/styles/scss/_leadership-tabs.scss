@@ -164,7 +164,7 @@
     }
 
     .bio-readmore {
-        color: $red;
+        color: var(--primary);
         cursor: pointer;
     }
 }

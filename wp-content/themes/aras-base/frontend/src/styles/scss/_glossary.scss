@@ -69,7 +69,7 @@
                         }
 
                         &.active {
-                            color: $red;
+                            color: var(--primary);
                             background-color: transparent;
                         }
 

@@ -41,3 +41,53 @@ function featured_blog_taxonomy()
 	register_taxonomy('featured-blog', array('post'), $args);
 }
 add_action('init', 'featured_blog_taxonomy', 1);
+
+
+add_filter('posts_where', 'aras_author_where', 10, 2);
+function aras_author_where($where, $query)
+{
+	if (!$query->get('author') ) {
+		return $where;
+	}
+
+	$re = '/(wp_posts\.post_author\sIN\s\(([0-9]+)\))/i';
+	$re2 = '/(wp_posts\.post_author\s=\s([0-9]+))/i';
+
+	foreach( [$re, $re2] as $regex ){
+		$where = preg_replace_callback($regex, function( $matches ){
+			return '((' . $matches[0] . " AND co_authors_null.post_id IS NULL) OR co_authors.meta_value LIKE '%\"{$matches[2]}\"%' )";
+		}, $where);
+	}
+
+	
+	return $where;
+}
+
+function aras_author_join( $join, $query )
+{
+	if( !$query->get('author') ){
+		return $join;
+	}
+
+	// we need to add our co_author join
+	global $wpdb;
+	$join .= " LEFT JOIN {$wpdb->postmeta} AS co_authors ON (
+		{$wpdb->posts}.ID = co_authors.post_id
+	) LEFT JOIN {$wpdb->postmeta} AS co_authors_null ON (
+		{$wpdb->posts}.ID = co_authors_null.post_id AND co_authors_null.meta_key = 'co_authors'
+	)";
+	return $join;
+}
+add_filter('posts_join', 'aras_author_join', 10, 2);
+
+function aras_author_groupby( $groupby, $query )
+{
+	if( !$query->get('author') ){
+		return $groupby;
+	}
+
+	global $wpdb;
+	$groupby = "{$wpdb->posts}.ID";
+	return $groupby;
+}
+add_filter('posts_groupby', 'aras_author_groupby', 10, 2);

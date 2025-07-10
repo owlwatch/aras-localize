@@ -38,6 +38,11 @@ add_action('init', function () {
 	$vite->enqueue('src/index.js');
 });
 
+add_action('wp_enqueue_scripts', function () {
+	// enqueue jquery
+	wp_enqueue_script('jquery');
+});
+
 // add admin styles
 add_action('admin_init', function () {
 	$vite = getViteService();

@@ -17,7 +17,7 @@
 
     &:hover,
     &:focus {
-      color: $red;
+      color: var(--primary);
     }
   }
 }
@@ -123,7 +123,7 @@
         font-size: 1rem;
         z-index: 3;
 
-        background: $red;
+        background: var(--primary);
         background: linear-gradient(90deg, rgba(206, 33, 39, 1) 0%, rgba(208, 66, 38, 1) 50%, rgba(212, 150, 35, 1) 100%);
 
       }
@@ -170,11 +170,11 @@
         margin-bottom: .6rem;
 
         a {
-          color: $red;
+          color: var(--primary);
 
           &:focus,
           &:hover {
-            color: $red;
+            color: var(--primary);
           }
         }
       }
@@ -266,7 +266,7 @@
         }
 
         .card-headline {
-          color: $red;
+          color: var(--primary);
           font-weight: 400;
           margin-bottom: 1rem;
 
@@ -517,8 +517,8 @@
     }
 
     input[type=submit].button {
-      background-color: $gold !important;
-      border: solid 2px $gold !important;
+      background-color: var(--secondary) !important;
+      border: solid 2px var(--secondary) !important;
       color: $black !important;
       font-size: .9rem !important;
       min-width: 100px !important;
@@ -565,7 +565,7 @@
 }
 
 .gform_confirmation_message {
-  font-family: "azo-sans-web", sans-serif;
+  font-family: var(--body-font);;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;

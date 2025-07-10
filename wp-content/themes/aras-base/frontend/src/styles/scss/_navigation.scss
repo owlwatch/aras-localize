@@ -48,7 +48,7 @@
     margin: 0;
 
     &:after {
-      color: $gold;
+      color: var(--secondary);
       content: "»";
     }
   }
@@ -211,7 +211,7 @@
         &:hover,
         &:focus {
           text-decoration: none;
-          color: $red;
+          color: var(--primary);
         }
       }
 
@@ -279,7 +279,7 @@
 
       &.lightnav {
         .language-dropdown-button {
-          background-color: $red;
+          background-color: var(--primary);
           color: $white;
         }
       }
@@ -308,7 +308,7 @@
 
         &:hover,
         &:focus {
-          color: $red;
+          color: var(--primary);
         }
 
         &::after {
@@ -343,8 +343,8 @@
         }
 
         &.lightnav {
-          background-color: $gold;
-          border: solid 2px $gold;
+          background-color: var(--secondary);
+          border: solid 2px var(--secondary);
           color: $dblue;
         }
       }
@@ -354,7 +354,7 @@
         a {
           color: #000;
           &:hover {
-            color: $red;
+            color: var(--primary);
           }
         }
       }
@@ -427,8 +427,8 @@
 
       .is-dropdown-submenu-parent.is-active {
         .nav-toplevel {
-          color: $red;
-          border-bottom: solid 3px rgba($color: $red, $alpha: 1);
+          color: var(--primary);
+          border-bottom: solid 3px color-mix(in srgb, var(--primary), transparent 0%);
         }
       }
 
@@ -437,7 +437,7 @@
         text-decoration: none;
         color: $grey;
         cursor: pointer;
-        border-bottom: solid 3px rgba($color: $red, $alpha: 0);
+        border-bottom: solid 3px color-mix(in srgb, var(--primary), transparent 100%);
         padding: 0.7rem 0 2rem 0;
         margin: 0 0 -2rem 0;
         line-height: 1;
@@ -451,8 +451,8 @@
 
         &:hover,
         &:focus {
-          color: $red;
-          border-bottom: solid 3px rgba($color: $red, $alpha: 1);
+          color: var(--primary);
+          border-bottom: solid 3px color-mix(in srgb, var(--primary), transparent 0%);
         }
 
         &::after {
@@ -463,14 +463,14 @@
       a.nav-toplevel:hover,
       a.nav-toplevel:focus {
         text-decoration: none;
-        color: $red;
-        border-bottom: solid 3px rgba($color: $red, $alpha: 1);
+        color: var(--primary);
+        border-bottom: solid 3px color-mix(in srgb, var(--primary), transparent 0%) !important;
       }
 
       .active>a.nav-toplevel:hover,
       .active>a.nav-toplevel:focus,
       .is-active>a.nav-toplevelhover {
-        border-bottom: solid 3px rgba($color: $gold, $alpha: 0) !important;
+        border-bottom: solid 3px color-mix(in srgb, var(--secondary), transparent 100%) !important;
         background-color: transparent;
       }
     }
@@ -504,7 +504,7 @@
 
         &:hover,
         &:focus {
-          color: $red;
+          color: var(--primary);
         }
       }
 
@@ -550,7 +550,7 @@
 
         &:hover,
         &:focus {
-          color: $red !important;
+          color: var(--primary) !important;
         }
       }
 
@@ -582,7 +582,7 @@
 
         &:hover,
         &:focus {
-          color: $red;
+          color: var(--primary);
         }
 
         &.indent-item {
@@ -609,7 +609,7 @@
         }
 
         .mega-menu-cta-subhead {
-          color: $gold;
+          color: var(--secondary);
           margin-bottom: 0.25rem;
         }
 
@@ -683,10 +683,10 @@
     }
 
     .menu-icon[aria-expanded="true"]:after {
-      background: $red;
+      background: var(--primary);
       box-shadow:
-        0 8px 0 $red,
-        0 16px 0 $red;
+        0 8px 0 var(--primary),
+        0 16px 0 var(--primary);
     }
   }
 }
@@ -695,15 +695,15 @@
   width: 35px;
   height: 35px;
   padding: 2px;
-  border: solid 2px $red;
-  color: $red;
+  border: solid 2px var(--primary);
+  color: var(--primary);
   text-align: center;
   cursor: pointer;
 }
 
 .lightnav .language-dropdown {
-  background-color: $red;
-  border: solid 2px $red;
+  background-color: var(--primary);
+  border: solid 2px var(--primary);
   color: $white;
 }
 
@@ -740,7 +740,7 @@
 
     &:hover,
     &:focus {
-      color: $red;
+      color: var(--primary);
     }
 
     img {
@@ -776,7 +776,7 @@
       &:hover,
       &:focus {
         text-decoration: none;
-        color: $red;
+        color: var(--primary);
       }
     }
 
@@ -909,7 +909,7 @@
       &:hover,
       &:focus {
         text-decoration: none;
-        //color: $red;
+        //color: var(--primary);
         color: $white;
       }
     }
@@ -935,11 +935,11 @@
     }
 
     .is-accordion-submenu-parent[aria-expanded="true"]>a {
-      color: $red;
+      color: var(--primary);
     }
 
     .is-accordion-submenu-parent[aria-expanded="true"]>a:after {
-      border-color: $red transparent transparent;
+      border-color: var(--primary) transparent transparent;
       transform: rotate(180deg);
       transform-origin: 50% 50%;
     }
@@ -980,7 +980,7 @@
 
         &:hover,
         &:focus {
-          color: $red;
+          color: var(--primary);
           text-decoration: none;
         }
       }
@@ -988,7 +988,7 @@
       .mega-menu-label {
         margin: 0;
         padding: 0.33rem 0 0.33rem 0;
-        color: $gold;
+        color: var(--secondary);
         text-transform: uppercase;
         font-size: 0.825rem;
         font-weight: 400;
@@ -1023,7 +1023,7 @@
         }
 
         .mega-menu-cta-subhead {
-          color: $gold;
+          color: var(--secondary);
           margin-bottom: 0.25rem;
         }
 

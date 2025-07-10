@@ -74,15 +74,15 @@
             background-color: $white;
 
             &:hover {
-                border: solid $red 1px;
+                border: solid var(--primary) 1px;
             }
 
             &.highlighted {
-                border: solid $red 3px;
+                border: solid var(--primary) 3px;
                 padding: 7px;
 
                 &:hover {
-                    border: solid $red 3px;
+                    border: solid var(--primary) 3px;
                 }
             }
 
@@ -109,7 +109,7 @@
 
                 strong {
                     font-weight: 400;
-                    color: $red;
+                    color: var(--primary);
                 }
             }
 

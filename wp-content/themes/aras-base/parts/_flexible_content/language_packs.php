@@ -11,7 +11,7 @@ if ($post->post_parent == 20987) { ?>
         }
 
         .language-packs .accordion-title {
-            font-family: "azo-sans-web", sans-serif;
+            font-family: var(--heading-font);;
             font-size: 1.25rem;
             font-weight: 300;
             line-height: 1;

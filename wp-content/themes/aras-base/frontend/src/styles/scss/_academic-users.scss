@@ -63,14 +63,14 @@
             }
 
             a {
-                color: $red;
+                color: var(--primary);
 
                 &:hover {
                     text-decoration: underline;
                 }
 
                 &:focus {
-                    color: $red;
+                    color: var(--primary);
                     text-decoration: underline;
                 }
 
