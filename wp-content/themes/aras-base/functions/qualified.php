@@ -37,6 +37,13 @@ class QualifiedIntegration
 			if( preg_match('/use-qualified-([0-9]+)/', $form['cssClass'], $matches) ){
 				$useQualified = $matches[1];
 			}
+
+			// check for a language override 'use-qualified-<language>-<numbers>'
+			// get the language code from wpml
+			$language = apply_filters('wpml_current_language', null);
+			if( $language && preg_match('/use-qualified-'.$language.'-([0-9]+)/', $form['cssClass'], $matches) ){
+				$useQualified = $matches[1];
+			}
 		}
 		return $useQualified;
 	}
