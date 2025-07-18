@@ -69,8 +69,8 @@
 	?>
 
 
-
-	<section class="side-tabs-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+	<section class="side-tabs-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (get_sub_field('content_before')) : ?>
 			<div class="grid-container">

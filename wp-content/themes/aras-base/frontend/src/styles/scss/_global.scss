@@ -1014,6 +1014,9 @@ blockquote,
   background-color: rgba($color: $dblue, $alpha: 0.75);
 }
 
+.text-light, .text-light * {
+  color: #fff;
+}
 
 
 .flex-video,

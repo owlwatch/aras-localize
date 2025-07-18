@@ -75,6 +75,8 @@
 			}
 		</style>
 	<?php endif; ?>
+
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 	<section class="quote-section <?= "$bg_color" ?>" <?= "$anchor" ?>>
 		<div class="grid-container <?= "$toppadding $bottompadding" ?>">
 			<div class="grid-x grid-margin-x">

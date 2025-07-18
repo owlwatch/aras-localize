@@ -79,7 +79,9 @@
 		<?php $celltwo = 'small-up-1 medium-up-3 large-up-6'; ?>
 	<?php endif; ?>
 
-	<section class="featured-speakers-section <?= "$bg_color $toppadding $bottompadding" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+
+	<section class="featured-speakers-section <?= "$bg_color $toppadding $bottompadding $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (get_sub_field('content_before')) : ?>
 			<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">

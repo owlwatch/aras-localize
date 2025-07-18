@@ -113,8 +113,8 @@
 	<?php else : ?>
 		<?php $highlight_type = '' ?>
 	<?php endif; ?>
-
-	<section class="cards-section automatic-cards-section <?= "$toppadding $bottompadding $bg_color $connector $include_images $highlight_type" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+	<section class="cards-section automatic-cards-section <?= "$toppadding $bottompadding $bg_color $text_color $connector $include_images $highlight_type" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 			<?php if (get_sub_field('content_before')) : ?>

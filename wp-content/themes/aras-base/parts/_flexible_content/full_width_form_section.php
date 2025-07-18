@@ -68,7 +68,9 @@
 	}
 	?>
 
-	<section class="full-width-form-section <?= "$bg_color $toppadding $bottompadding" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+
+	<section class="full-width-form-section <?= "$bg_color $toppadding $bottompadding $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 			<?php if (get_sub_field('content_before')) : ?>

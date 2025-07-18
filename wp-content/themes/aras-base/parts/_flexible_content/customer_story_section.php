@@ -75,8 +75,8 @@
 		<?php $imageside = 'background-right-img'; ?>
 		<?php $contentside = 'align-left'; ?>
 	<?php endif; ?>
-
-	<section class="customer-story-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+	<section class="customer-story-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (get_sub_field('background_image')) : ?>
 			<?php $image = get_sub_field('background_image'); ?>

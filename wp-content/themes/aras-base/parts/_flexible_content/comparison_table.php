@@ -84,7 +84,8 @@ switch ($bottom_padding) {
 }
 
 ?>
-<section class="comparison__table <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+<section class="comparison__table <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
     <?php get_template_part('parts/_template_parts/background_visual'); ?>
     <div class="grid-container">
         <div class="grid-x grid-margin-x">

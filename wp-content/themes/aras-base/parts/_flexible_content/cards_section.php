@@ -127,7 +127,9 @@
 		<?php endif; ?>
 	<?php endif; ?>
 
-	<section class="cards-section <?= "$toppadding $bottompadding $bg_color" ?>" <?= "$anchor" ?>>
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+
+	<section class="cards-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 

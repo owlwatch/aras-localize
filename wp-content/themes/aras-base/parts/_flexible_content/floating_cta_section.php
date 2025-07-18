@@ -100,7 +100,9 @@
 	<?php else : ?>
 		<?php $imgorient = ''; ?>
 	<?php endif; ?>
-	<section class="floating-cta-section <?= "$bg_color $toppadding $bottompadding" ?>" <?= "$anchor" ?>>
+
+	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+	<section class="floating-cta-section <?= "$bg_color $toppadding $bottompadding $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<div class="grid-container">
 			<div class="grid-x grid-margin-x">
