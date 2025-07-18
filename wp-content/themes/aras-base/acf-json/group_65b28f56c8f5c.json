@@ -865,6 +865,18 @@
                 "operator": "==",
                 "value": "demo"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "resource"
+            },
+            {
+                "param": "post_template",
+                "operator": "==",
+                "value": "single-resource-with-toc.php"
+            }
         ]
     ],
     "menu_order": 2,
@@ -882,5 +894,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1747337867
+    "modified": 1752794227
 }
