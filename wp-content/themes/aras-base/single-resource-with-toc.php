@@ -36,7 +36,7 @@ endif; ?>
 <?php get_template_part('parts/_template_parts/footer_cta'); ?>
 
 <style>
-
+@media( min-width: 924px ) {
   /* 
   We want the Table of Contents to be fixed in the right column,
   but we want to allow the post-content to have full screen sections,
@@ -75,6 +75,7 @@ endif; ?>
   .resource-toc__content section > .grid-container > .grid-x {
     margin-right: 300px; /* Adjust this value to match the width of the TOC */
   }
+}
 </style>
 
 <script>
