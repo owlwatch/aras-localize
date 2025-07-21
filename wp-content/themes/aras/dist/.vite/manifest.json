@@ -39,18 +39,28 @@
     "file": "assets/quote-background-C8IDyvEC.svg",
     "src": "../../aras-base/frontend/src/images/quote-background.svg"
   },
+  "node_modules/photoswipe/dist/photoswipe.esm.js": {
+    "file": "assets/photoswipe.esm-D2Nf-uDI.js",
+    "name": "photoswipe.esm",
+    "src": "node_modules/photoswipe/dist/photoswipe.esm.js",
+    "isDynamicEntry": true
+  },
   "src/admin.scss": {
     "file": "assets/admin-5RCwnJpp.css",
     "src": "src/admin.scss",
     "isEntry": true
   },
   "src/index.js": {
-    "file": "assets/index-IzepFg6s.js",
+    "file": "assets/index-DmRy6018.js",
     "name": "index",
     "src": "src/index.js",
     "isEntry": true,
+    "dynamicImports": [
+      "node_modules/photoswipe/dist/photoswipe.esm.js",
+      "node_modules/photoswipe/dist/photoswipe.esm.js"
+    ],
     "css": [
-      "assets/index-WmppykYp.css"
+      "assets/index-Clva9Qyx.css"
     ],
     "assets": [
       "assets/hero-cta-background-a7P7dl2t.svg",

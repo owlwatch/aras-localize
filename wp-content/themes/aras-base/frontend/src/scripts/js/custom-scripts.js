@@ -260,3 +260,28 @@ document.addEventListener("DOMContentLoaded", function () {
         window.addEventListener('resize', updateHeaderHeight);
     }
 });
+
+// lets add an option to zoom images
+document.addEventListener("DOMContentLoaded", async () => {
+    const images = document.querySelectorAll('.zoomable-image');
+    if (images) {
+        // first lets load the photoswipe library and css
+        const photoswipe = await import('photoswipe/lightbox');
+        await import('photoswipe/style.css');
+        console.log(images);
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                const modal = document.createElement('div');
+                modal.classList.add('image-zoom-modal');
+                const img = document.createElement('img');
+                img.src = image.src;
+                modal.appendChild(img);
+                document.body.appendChild(modal);
+                
+                modal.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+            });
+        });
+    }
+});

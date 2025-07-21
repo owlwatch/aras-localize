@@ -65,7 +65,9 @@
                     "allow_null": 0,
                     "ui": 0,
                     "ajax": 0,
-                    "placeholder": ""
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_65b160c351bd2",
@@ -138,7 +140,9 @@
                             "allow_null": 0,
                             "ui": 0,
                             "ajax": 0,
-                            "placeholder": ""
+                            "placeholder": "",
+                            "create_options": 0,
+                            "save_options": 0
                         },
                         {
                             "key": "field_65b160c35cdf8",
@@ -165,7 +169,9 @@
                             "allow_null": 0,
                             "ui": 0,
                             "ajax": 0,
-                            "placeholder": ""
+                            "placeholder": "",
+                            "create_options": 0,
+                            "save_options": 0
                         },
                         {
                             "key": "field_65b160c35cdfe",
@@ -329,11 +335,13 @@
                             "choices": {
                                 "greyscale": "Greyscale",
                                 "overlay": "Orange Overlay",
-                                "shadow": "Outline Shadow"
+                                "shadow": "Outline Shadow",
+                                "zoomable": "Zoomable"
                             },
                             "default_value": [],
                             "return_format": "value",
                             "allow_custom": 0,
+                            "allow_in_bindings": 1,
                             "layout": "vertical",
                             "toggle": 0,
                             "save_custom": 0,
@@ -383,6 +391,56 @@
                             "wpml_cf_preferences": 3,
                             "clone": [
                                 "group_65f08b633082c"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "field_667db4a83a67e",
+                    "label": "Form Block",
+                    "name": "form_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65b160c351bc2",
+                                "operator": "==",
+                                "value": "form"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667db4c23a67f",
+                            "label": "Form Details",
+                            "name": "form_details",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d7788d7519"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -506,7 +564,9 @@
                     "allow_null": 0,
                     "ui": 0,
                     "ajax": 0,
-                    "placeholder": ""
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_65b2e4d9825e6",
@@ -579,7 +639,9 @@
                             "allow_null": 0,
                             "ui": 0,
                             "ajax": 0,
-                            "placeholder": ""
+                            "placeholder": "",
+                            "create_options": 0,
+                            "save_options": 0
                         },
                         {
                             "key": "field_65b2e4d9825e9",
@@ -606,7 +668,9 @@
                             "allow_null": 0,
                             "ui": 0,
                             "ajax": 0,
-                            "placeholder": ""
+                            "placeholder": "",
+                            "create_options": 0,
+                            "save_options": 0
                         },
                         {
                             "key": "field_65b2e4d9825ea",
@@ -770,11 +834,13 @@
                             "choices": {
                                 "greyscale": "Greyscale",
                                 "overlay": "Orange Overlay",
-                                "shadow": "Outline Shadow"
+                                "shadow": "Outline Shadow",
+                                "zoomable": "Zoomable"
                             },
                             "default_value": [],
                             "return_format": "value",
                             "allow_custom": 0,
+                            "allow_in_bindings": 1,
                             "layout": "vertical",
                             "toggle": 0,
                             "save_custom": 0,
@@ -881,6 +947,56 @@
                             "prefix_name": 0
                         }
                     ]
+                },
+                {
+                    "key": "field_667db5053a680",
+                    "label": "Form Block",
+                    "name": "form_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_65b2e4d9825e5",
+                                "operator": "==",
+                                "value": "form"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_667db50e3a681",
+                            "label": "Form Details",
+                            "name": "form_details",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_667d7788d7519"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
                 }
             ]
         },
@@ -928,7 +1044,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65b160c34fbf2",
@@ -956,7 +1074,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65ce2f86cf2b7",
@@ -984,7 +1104,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65c2abafabcce",
@@ -1067,5 +1189,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1719610881
+    "modified": 1752812858
 }

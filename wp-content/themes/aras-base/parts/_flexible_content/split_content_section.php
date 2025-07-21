@@ -184,7 +184,14 @@
 												<?php if ($overlay == 'overlay') : ?>
 													<img class="image-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
 												<?php endif; ?>
+												<?php $zoomable = in_array('zoomable', $image_options) ?: false; ?>
+												<?php if( $zoomable ){ ?>
+												<a href="<?php echo esc_url($image['url']); ?>" data-pswp-width="<?php echo $image['width']; ?>" data-pswp-height="<?php echo $image['height']; ?>" class="zoomable-image">
+												<?php } ?>
 												<img class="split-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>">
+												<?php if( $zoomable ){ ?>
+												</a>
+												<?php } ?>
 											</div>
 										</div>
 									<?php endif; ?>
@@ -416,7 +423,14 @@
 												<?php if ($overlay == 'overlay') : ?>
 													<img class="image-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
 												<?php endif; ?>
+												<?php $zoomable = in_array('zoomable', $image_options) ?: false; ?>
+												<?php if( $zoomable ){ ?>
+												<a href="<?php echo esc_url($image['url']); ?>" data-pswp-width="<?php echo $image['width']; ?>" data-pswp-height="<?php echo $image['height']; ?>" class="zoomable-image">
+												<?php } ?>
 												<img class="split-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>">
+												<?php if( $zoomable ){ ?>
+												</a>
+												<?php } ?>
 											</div>
 										</div>
 									<?php endif; ?>

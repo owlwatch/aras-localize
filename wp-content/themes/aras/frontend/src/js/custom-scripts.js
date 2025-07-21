@@ -1,3 +1,12 @@
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#my-gallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe')
+});
+lightbox.init();
 
 ////Maintain Query Parameters
 document.addEventListener("DOMContentLoaded", function () {
@@ -258,5 +267,37 @@ document.addEventListener("DOMContentLoaded", function () {
         updateHeaderHeight();
         // Add resize observer
         window.addEventListener('resize', updateHeaderHeight);
+    }
+});
+
+// lets add an option to zoom images
+document.addEventListener("DOMContentLoaded", async () => {
+    const images = document.querySelectorAll('.zoomable-image>img, a[href$=".jpg"]>img[class*="wp-image-"], a[href$=".jpeg"]>img[class*="wp-image-"], a[href$=".png"] img[class*="wp-image-"], a[href$=".gif"] img[class*="wp-image-"], a[href$=".webm"] img[class*="wp-image-"]');
+    if (images && images.length > 0) {
+        // filter the images to the links
+        const filteredImages = Array.from(images).map(image => {
+            const anchor = image.closest('a');
+            if( !anchor.getAttribute('data-pswp-width') ){
+                // we actually want to set the width and height based on the real size
+                // so we will pre-load the image to get its natural dimensions
+                const img = new Image();
+                img.src = anchor.href;
+                img.onload = () => {
+                    anchor.setAttribute('data-pswp-height', img.naturalHeight);
+                    anchor.setAttribute('data-pswp-width', img.naturalWidth);
+                };
+            }
+            return anchor;
+        });
+        // first lets load the photoswipe library and css
+        const photoswipe = await import('photoswipe/lightbox');
+        await import('photoswipe/style.css');
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: 'body',
+            children: filteredImages,
+            pswpModule: () => import('photoswipe')
+        });
+        
+        lightbox.init();
     }
 });
