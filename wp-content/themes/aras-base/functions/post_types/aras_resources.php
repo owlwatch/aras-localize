@@ -334,7 +334,7 @@ function add_resource_selections_metabox()
 	);
 }
 
-add_action('add_meta_boxes', 'add_resource_selections_metabox');
+// add_action('add_meta_boxes', 'add_resource_selections_metabox');
 
 function resource_selections_metabox($post)
 {
@@ -366,6 +366,7 @@ function resource_selections_metabox($post)
 			echo '<li><a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
 		}
 		wp_reset_postdata();
+		wp_reset_query();
 		echo '</ul>';
 	}
 	else {
