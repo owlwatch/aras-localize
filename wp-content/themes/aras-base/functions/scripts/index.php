@@ -44,6 +44,18 @@ function aras_export_resources()
 		$all_topics = is_array($topics) ? implode(', ', array_map(function($term){
 			return $term->name;
 		}, $topics)) : '';
+
+		fputcsv( $out, [
+			'ID',
+			'Title',
+			'Permalink',
+			'Edit Link',
+			'Date',
+			'Last Modified',
+			'File',
+			'Formats',
+			'Topics'
+		]);
 		
 		fputcsv( $out, [
 			get_the_ID(),
@@ -51,6 +63,7 @@ function aras_export_resources()
 			get_permalink(),
 			get_edit_post_link(),
 			get_the_date('Y-m-d H:i:s'),
+			get_the_modified_date('Y-m-d H:i:s'),
 			$button ? $button['url'] : 'no file',
 			$all_formats,
 			$all_topics
