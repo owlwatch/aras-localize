@@ -334,15 +334,15 @@ function add_resource_selections_metabox()
 	);
 }
 
-// add_action('add_meta_boxes', 'add_resource_selections_metabox');
+add_action('add_meta_boxes', 'add_resource_selections_metabox');
 
-function resource_selections_metabox($post)
+function resource_selections_metabox($_post)
 {
 	// search for the id of this post as the meta_value
 	// for keys that match the regex /.*cards_\d+_content_item$/
 
 	global $wpdb;
-	$sql = $wpdb->prepare('SELECT * FROM wp_postmeta WHERE meta_key LIKE %s AND meta_value = %d', '%_cards_%_content_item', $post->ID);
+	$sql = $wpdb->prepare('SELECT post_id FROM wp_postmeta WHERE meta_key LIKE %s AND meta_value = %d', '%_cards_%_content_item', $_post->ID);
 	$results = $wpdb->get_results($sql);
 
 	if (empty($results)) {
@@ -358,15 +358,12 @@ function resource_selections_metabox($post)
 		'posts_per_page' => -1,
 	]);
 
-	if ($query->have_posts()) {
+	if (!empty($query->posts)) {
 		echo '<p>Found in the following posts:</p>';
 		echo '<ul>';
-		while ($query->have_posts()) {
-			$query->the_post();
-			echo '<li><a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
+		foreach( $query->posts as $p){
+			echo '<li><a href="' . get_edit_post_link($p->ID) . '">' . get_the_title($p->ID) . '</a></li>';
 		}
-		wp_reset_postdata();
-		wp_reset_query();
 		echo '</ul>';
 	}
 	else {

@@ -134,6 +134,8 @@ require_once(get_template_directory() . '/functions/google-ads-enhanced-conversi
 
 require_once(get_template_directory() . '/functions/sitemap.php');
 
+require_once(get_template_directory() . '/functions/debug.php');
+
 if( isset($_REQUEST['create_api_json']) ){
 	// Create api_json directory
 	if( !is_dir( get_template_directory() . '/api_json/' ) ) {
