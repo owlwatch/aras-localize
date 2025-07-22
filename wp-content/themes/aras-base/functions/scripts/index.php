@@ -30,6 +30,18 @@ function aras_export_resources()
 		'post_type' => 'resource',
 		'suppress_filters' => true
 	]);
+
+	fputcsv( $out, [
+		'ID',
+		'Title',
+		'Permalink',
+		'Edit Link',
+		'Date',
+		'Last Modified',
+		'File',
+		'Formats',
+		'Topics'
+	]);
 	
 	while( $resource_query->have_posts() ){
 		$resource_query->the_post();
@@ -45,17 +57,7 @@ function aras_export_resources()
 			return $term->name;
 		}, $topics)) : '';
 
-		fputcsv( $out, [
-			'ID',
-			'Title',
-			'Permalink',
-			'Edit Link',
-			'Date',
-			'Last Modified',
-			'File',
-			'Formats',
-			'Topics'
-		]);
+		
 		
 		fputcsv( $out, [
 			get_the_ID(),
