@@ -69,17 +69,17 @@
             background-repeat: no-repeat;
 
             @include breakpoint(medium only) {
-                left: -5px;
+                left: 0px;
                 top: -20px;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
 
             @include breakpoint(small only) {
-                left: -8px;
+                left: 0px;
                 top: -20px;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -116,5 +116,57 @@
             max-width: 100%;
             max-height: 60px;
         }
+    }
+}
+.quote-carousel{
+    overflow: hidden;
+    > .swiper-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        > .swiper-slide {
+            flex: 0 0 100%;
+        }
+    }
+}
+
+.quote-container p {
+    font-size: 1.15rem;
+}
+
+.quote-carousel {
+    --swiper-navigation-size: 30px;
+
+    &.swiper {
+        padding-bottom: 40px !important;
+        margin-bottom: -40px;
+        margin-top: -30px !important;
+    }
+    .swiper-wrapper {
+        padding-top: 30px;
+        .quote-container {
+            
+        }
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #fff;
+        @media (max-width: 767px) {
+            top: auto;
+            bottom: 0rem;
+            font-size: 1.5rem;
+        }
+        &:after {
+            @media (max-width: 767px) {
+                font-size: inherit;
+            }
+        }
+        
+    }
+    .swiper-pagination-bullet {
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .swiper-pagination-bullet-active {
+        background-color: #fff;
     }
 }

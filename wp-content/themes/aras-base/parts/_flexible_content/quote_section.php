@@ -66,6 +66,34 @@
 		default:
 			$bottompadding = 'mediumbottompadding';
 	}
+
+	// lets get our quotes
+	$quotes = [];
+	$source = get_sub_field('quote_source') ?: 'manual'; // default to manual if not set
+	if( 'manual' === $source ){
+		// manual quotes
+		$quote = [
+			'content' => get_sub_field('quote_content'),
+			'attribution' => get_sub_field('quote_attribution'),
+			'attribution_url' => get_sub_field('quote_attribution_url'),
+			'attribution_logo' => get_sub_field('quote_attribution_logo')
+		];
+		$quotes[] = $quote;
+	}
+
+	else {
+		// we are going to pull them from the library
+		$quote_posts = get_sub_field('quotes');
+		foreach( $quote_posts as $quote_post ){
+			$quote = [
+				'content' => get_field('quote_content', $quote_post->ID),
+				'attribution' => get_field('quote_attribution', $quote_post->ID),
+				'attribution_url' => get_field('quote_attribution_url', $quote_post->ID),
+				'attribution_logo' => get_field('quote_attribution_logo', $quote_post->ID)
+			];
+			$quotes[] = $quote;
+		}
+	}
 	?>
 	<?php if (get_sub_field('background_visual') == 'custom') : ?>
 		<?php $image = get_sub_field('custom_background_visual'); ?>
@@ -79,36 +107,60 @@
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 	<section class="quote-section <?= "$bg_color" ?>" <?= "$anchor" ?>>
 		<div class="grid-container <?= "$toppadding $bottompadding" ?>">
-			<div class="grid-x grid-margin-x">
+					<?php if( count( $quotes ) > 1 ){ ?>
+					<div class="quote-carousel swiper"><div class="swiper-wrapper">
+					<?php } ?>
+					<?php
+					foreach( $quotes as $quote ){
+						?>
+					<?php if( count( $quotes ) > 1 ){ ?>
+					<div class="swiper-slide">
+					<?php } ?>
+					<div class="grid-x grid-margin-x">
 
-				<div class="cell small-12 medium-11 large-10 quote-container">
-					<?php if (get_sub_field('quote_content')) : ?>
-						<h3><?php echo get_sub_field('quote_content', false, false); ?></h3>
-					<?php endif; ?>
-					<?php if (get_sub_field('quote_attribution_url')) : ?>
-						<?php if (get_sub_field('quote_attribution')) : ?>
-							<a aria-label="<?php echo get_sub_field('quote_attribution'); ?>" class="attr-link" href="<?php echo get_sub_field('quote_attribution_url'); ?>" target="_blank">
-								<h6><?php echo get_sub_field('quote_attribution'); ?></h6>
-							</a>
+						<div class="cell small-12 medium-11 large-10">
+					<div class="quote-container">
+						<?php if ($quote['content']) : ?>
+							<h3><?php echo $quote['content']; ?></h3>
 						<?php endif; ?>
-						<?php $image = get_sub_field('quote_attribution_logo');
-						if (!empty($image)) : ?>
-							<a aria-label="<?php echo get_sub_field('quote_attribution'); ?>" class="attr-img-link" href="<?php echo get_sub_field('quote_attribution_url'); ?>" target="_blank">
+						<?php if ($quote['attribution_url']) : ?>
+							<?php if ($quote['attribution']) : ?>
+								<a aria-label="<?php echo $quote['attribution']; ?>" class="attr-link" href="<?php echo $quote['attribution_url']; ?>" target="_blank">
+									<h6><?php echo $quote['attribution']; ?></h6>
+								</a>
+							<?php endif; ?>
+							<?php $image = $quote['attribution_logo'];
+							if (!empty($image)) : ?>
+								<a aria-label="<?php echo $quote['attribution']; ?>" class="attr-img-link" href="<?php echo $quote['attribution_url']; ?>" target="_blank">
+									<img class="quote-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
+								</a>
+							<?php endif; ?>
+						<?php else : ?>
+							<?php if ($quote['attribution']) : ?>
+								<h6><?php echo $quote['attribution']; ?></h6>
+							<?php endif; ?>
+							<?php $image = $quote['attribution_logo'];
+							if (!empty($image)) : ?>
 								<img class="quote-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-							</a>
+							<?php endif; ?>
 						<?php endif; ?>
-					<?php else : ?>
-						<?php if (get_sub_field('quote_attribution')) : ?>
-							<h6><?php echo get_sub_field('quote_attribution'); ?></h6>
-						<?php endif; ?>
-						<?php $image = get_sub_field('quote_attribution_logo');
-						if (!empty($image)) : ?>
-							<img class="quote-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-						<?php endif; ?>
-					<?php endif; ?>
-				</div>
+					</div>
+								</div>
+								</div>
+						<?php if( count( $quotes ) > 1 ){ ?>
+						</div>
+						<?php } ?>
+						<?php
+					}
+					?>
+					<?php if( count( $quotes ) > 1 ){ ?>
+						</div>
+						<div class="swiper-pagination"></div>
 
-			</div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+					<?php } ?>
 		</div>
 	</section>
 <?php endif; ?>

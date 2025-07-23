@@ -22,11 +22,11 @@
             "selected": 0
         },
         {
-            "key": "field_65bd2fd590ffc",
-            "label": "Quote Content",
-            "name": "quote_content",
+            "key": "field_6880e1eed89b5",
+            "label": "Quote Source",
+            "name": "quote_source",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -35,8 +35,44 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "manual": "Manual",
+                "library": "Library"
+            },
+            "default_value": "manual",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_65bd2fd590ffc",
+            "label": "Quote Content",
+            "name": "quote_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "wpml_cf_preferences": 2,
             "default_value": "",
+            "allow_in_bindings": 1,
             "tabs": "all",
             "toolbar": "basic",
             "media_upload": 0,
@@ -50,7 +86,15 @@
             "type": "textarea",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -59,6 +103,7 @@
             "wpml_cf_preferences": 2,
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "rows": 3,
             "placeholder": "",
             "new_lines": "br"
@@ -71,7 +116,15 @@
             "type": "url",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -79,6 +132,7 @@
             },
             "wpml_cf_preferences": 2,
             "default_value": "",
+            "allow_in_bindings": 1,
             "placeholder": ""
         },
         {
@@ -89,7 +143,15 @@
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -105,7 +167,49 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
+            "allow_in_bindings": 1,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_6880e242d89b6",
+            "label": "Quotes",
+            "name": "quotes",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "library"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "post_type": [
+                "aras_quote"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "return_format": "object",
+            "min": 1,
+            "max": "",
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
         },
         {
             "key": "field_65bd2fb50de02",
@@ -178,7 +282,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_667ee21541c4b",
@@ -205,7 +311,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_667ee23341c4c",
@@ -276,5 +384,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1719592804
+    "modified": 1753277285
 }

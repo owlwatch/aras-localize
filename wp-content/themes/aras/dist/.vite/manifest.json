@@ -39,11 +39,55 @@
     "file": "assets/quote-background-C8IDyvEC.svg",
     "src": "../../aras-base/frontend/src/images/quote-background.svg"
   },
+  "_utils-CUBDBEVm.js": {
+    "file": "assets/utils-CUBDBEVm.js",
+    "name": "utils"
+  },
+  "node_modules/photoswipe/dist/photoswipe-lightbox.esm.js": {
+    "file": "assets/photoswipe-lightbox.esm-4VpeJUsy.js",
+    "name": "photoswipe-lightbox.esm",
+    "src": "node_modules/photoswipe/dist/photoswipe-lightbox.esm.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/photoswipe/dist/photoswipe.css": {
+    "file": "assets/photoswipe-cPPnkASS.css",
+    "src": "node_modules/photoswipe/dist/photoswipe.css"
+  },
   "node_modules/photoswipe/dist/photoswipe.esm.js": {
     "file": "assets/photoswipe.esm-D2Nf-uDI.js",
     "name": "photoswipe.esm",
     "src": "node_modules/photoswipe/dist/photoswipe.esm.js",
     "isDynamicEntry": true
+  },
+  "node_modules/swiper/modules/index.mjs": {
+    "file": "assets/index-B3m-Q-OJ.js",
+    "name": "index",
+    "src": "node_modules/swiper/modules/index.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils-CUBDBEVm.js"
+    ]
+  },
+  "node_modules/swiper/modules/navigation.css": {
+    "file": "assets/navigation-DQzmXbEx.css",
+    "src": "node_modules/swiper/modules/navigation.css"
+  },
+  "node_modules/swiper/modules/pagination.css": {
+    "file": "assets/pagination-DE0q59Ew.css",
+    "src": "node_modules/swiper/modules/pagination.css"
+  },
+  "node_modules/swiper/swiper.css": {
+    "file": "assets/swiper-DHBATib1.css",
+    "src": "node_modules/swiper/swiper.css"
+  },
+  "node_modules/swiper/swiper.mjs": {
+    "file": "assets/swiper-DpV62hU0.js",
+    "name": "swiper",
+    "src": "node_modules/swiper/swiper.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils-CUBDBEVm.js"
+    ]
   },
   "src/admin.scss": {
     "file": "assets/admin-5RCwnJpp.css",
@@ -51,16 +95,18 @@
     "isEntry": true
   },
   "src/index.js": {
-    "file": "assets/index-C-yBr9t1.js",
+    "file": "assets/index-B4uTNhov.js",
     "name": "index",
     "src": "src/index.js",
     "isEntry": true,
     "dynamicImports": [
+      "node_modules/photoswipe/dist/photoswipe-lightbox.esm.js",
       "node_modules/photoswipe/dist/photoswipe.esm.js",
-      "node_modules/photoswipe/dist/photoswipe.esm.js"
+      "node_modules/swiper/swiper.mjs",
+      "node_modules/swiper/modules/index.mjs"
     ],
     "css": [
-      "assets/index-Dyq_Pce2.css"
+      "assets/index-aykIldtL.css"
     ],
     "assets": [
       "assets/hero-cta-background-a7P7dl2t.svg",

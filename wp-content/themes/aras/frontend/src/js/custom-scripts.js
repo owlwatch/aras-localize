@@ -1,13 +1,3 @@
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-
-const lightbox = new PhotoSwipeLightbox({
-  gallery: '#my-gallery',
-  children: 'a',
-  pswpModule: () => import('photoswipe')
-});
-lightbox.init();
-
 ////Maintain Query Parameters
 document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = new URL(window.location.href);
@@ -299,5 +289,45 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         
         lightbox.init();
+    }
+});
+
+// look for .quote-carousel and initialize swiper if it exists
+document.addEventListener("DOMContentLoaded", async () => {
+    const quoteCarousel = document.querySelector('.quote-carousel');
+    if (quoteCarousel) {
+        // load swiper
+        const { Swiper } = await import('swiper');
+        const { Navigation, Pagination, Autoplay } = await import('swiper/modules');
+        
+        // also need to import the swiper css
+        await import('swiper/css');
+        await import('swiper/css/pagination');
+        await import('swiper/css/navigation');
+        
+        // initialize swiper
+        new Swiper(quoteCarousel, {
+            modules:[Navigation, Pagination, Autoplay],
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
     }
 });
