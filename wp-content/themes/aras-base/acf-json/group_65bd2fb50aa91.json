@@ -79,6 +79,45 @@
             "delay": 0
         },
         {
+            "key": "field_6880fe67e5e00",
+            "label": "Quote Font Size",
+            "name": "quote_font_size",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "default": "Default",
+                "medium": "Medium",
+                "large": "Large"
+            },
+            "default_value": "default",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_65bd2fea90ffd",
             "label": "Quote Attribution",
             "name": "quote_attribution",
@@ -384,5 +423,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1753277285
+    "modified": 1753284247
 }

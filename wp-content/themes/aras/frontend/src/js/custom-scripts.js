@@ -314,7 +314,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             autoplay: {
                 delay: 5000,
-                disableOnInteraction: false,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true
             },
 
             // If we need pagination

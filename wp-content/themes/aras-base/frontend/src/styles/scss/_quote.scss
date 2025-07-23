@@ -129,8 +129,19 @@
     }
 }
 
-.quote-container p {
+.quote-content--default p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.quote-content--medium p {
     font-size: 1.15rem;
+    line-height: 1.5;
+}
+
+.quote-content--large p {
+    font-size: 1.65rem;
+    line-height: 1.5;
 }
 
 .quote-carousel {
