@@ -1,0 +1,121 @@
+<?php
+
+namespace Aras\Script;
+
+class TermUpdates
+{
+
+	public function __construct() {}
+
+	function get_translated_term($term_id, $taxonomy, $language_code)
+	{
+		// get the translated term ID
+		$translated_term_id = apply_filters('wpml_object_id', $term_id, $taxonomy, false, $language_code);
+		if (!$translated_term_id) {
+			return null; // no translation found
+		}
+
+		// get the translated term
+		$translated_term = get_term_by( 'term_id', $translated_term_id, $taxonomy);
+		if (is_wp_error($translated_term)) {
+			return null; // error getting term
+		}
+
+		return $translated_term;
+	}
+
+	function get_languages()
+	{
+		static $lagnagues;
+		if( isset($languages) ) {
+			return $languages;
+		}
+
+		// we need to get all languages
+		$languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
+		return $languages;
+	}
+
+	function get_term_translations($term_id, $taxonomy)
+	{
+		
+		$languages = $this->get_languages();
+
+		foreach( $languages as $language ) {
+			$translated_term = $this->get_translated_term($term_id, $taxonomy, $language['code']);
+			if ($translated_term) {
+				$translations[$language['code']] = $translated_term;
+			}
+		}
+
+		return $translations;
+	}
+
+	public function run()
+	{
+		
+		header('Content-Type: application/json; charset=utf-8');
+		// we want to find all categories and tags
+		// and make sure that all their translations use the same slug
+
+		$categories = get_categories(['hide_empty' => false]);
+		$tags = get_tags(['hide_empty' => false]);
+
+		$terms = array_merge($categories, $tags);
+
+		$terms_to_update = [];
+		$all_translations = [];
+
+		foreach ($terms as $term) {
+			// get the term ID
+			$term_id = $term->term_id;
+
+			// get the translations of the term
+			$translations = $this->get_term_translations($term_id, $term->taxonomy);
+			
+			if (empty($translations)) {
+				continue; // no translations found, skip to next term
+			}
+
+			// we need to convert the translations to an array
+			$all_translations[$term->slug] = $translations;
+
+			// get the slug of the original term
+			$original_slug = $term->slug;
+
+			// loop through each translation
+			foreach ($translations as $lang => $translation) {
+
+				// get the translated term ID
+				$translated_term_id = $translation->term_id;
+
+				// get the slug of the translated term
+				$translated_slug = $translation->slug;
+
+				// if the slugs don't match, update the translation
+				if ($original_slug !== $translated_slug) {
+					// wp_update_term($translated_term_id, 'category', ['slug' => $original_slug]);
+					// $updated = true;
+					if( !$terms_to_update[$term_id] ){
+						$terms_to_update[$term_id] = [];
+					}
+					$terms_to_update[$term_id][] = [
+						'original_slug' => $original_slug,
+						'original_term_id' => $term_id,
+						'lang' => $lang,
+						'term_id' => $translated_term_id,
+						'slug' => $translated_slug,
+						'name' => $translation->name,
+						'taxonomy' => $translation->taxonomy
+					];
+				}
+			}
+		}
+
+		echo json_encode([
+			'terms_to_update' => $terms_to_update,
+			'terms' => $terms
+		], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+		exit;
+	}
+}
