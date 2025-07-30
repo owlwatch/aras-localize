@@ -237,7 +237,7 @@ class Rest
 			$all_matches = preg_match_all($regex, $post->post_content, $matches);
 			$images = $all_matches ? $matches[2] : [];
 			if( has_post_thumbnail( $post->ID ) ){
-				$url = get_the_post_thumbnail_url( $post->ID );
+				$url = get_the_post_thumbnail_url( $post->ID, 'full' );
 				if( preg_match( '/wp-content\/uploads\/.+$/', $url, $matches ) ){
 					$images[] = $matches[0];
 				}
@@ -270,7 +270,7 @@ class Rest
 				$post->post_content,
 				$post->post_excerpt,
 				$post->post_date,
-				get_the_post_thumbnail_url( $post->ID ),
+				get_the_post_thumbnail_url( $post->ID, 'full' ),
 				implode(' | ', $images),
 				implode(' | ', $tags),
 				implode(' | ', $categories),
