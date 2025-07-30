@@ -19,6 +19,11 @@ function custom_menu_order($menu_ord)
 		'edit.php?post_type=demo', // lp
 		'edit.php?post_type=resource', // resource
 		'edit.php?post_type=event', // event
+
+		// competitors
+		'edit.php?post_type=aras-competitor', // competitors
+		'edit.php?post_type=aras_quote', // quotes
+
 		'edit.php?post_type=glossary', // glossary
 	);
 	

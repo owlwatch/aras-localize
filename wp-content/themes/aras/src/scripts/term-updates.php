@@ -11,7 +11,14 @@ class TermUpdates
 	{
 		// get the translated term ID
 		$translated_term_id = apply_filters('wpml_object_id', $term_id, $taxonomy, false, $language_code);
-		if (!$translated_term_id) {
+		if (!$translated_term_id || $translated_term_id == $term_id) {
+			print_r([
+				'message' => 'No translation found',
+				'term_id' => $term_id,
+				'taxonomy' => $taxonomy,
+				'language_code' => $language_code,
+				'translated_term_id' => $translated_term_id
+			]);
 			return null; // no translation found
 		}
 
@@ -59,9 +66,9 @@ class TermUpdates
 		// and make sure that all their translations use the same slug
 
 		$categories = get_categories(['hide_empty' => false]);
-		$tags = get_tags(['hide_empty' => false]);
+		// $tags = get_tags(['hide_empty' => false]);
 
-		$terms = array_merge($categories, $tags);
+		$terms = $categories;
 
 		$terms_to_update = [];
 		$all_translations = [];
@@ -92,6 +99,15 @@ class TermUpdates
 				// get the slug of the translated term
 				$translated_slug = $translation->slug;
 
+				print_r([
+					'original_slug' => $original_slug,
+					'translated_slug' => $translated_slug,
+					'lang' => $lang,
+					'term_id' => $term_id,
+					'translated_term_id' => $translated_term_id,
+					'name' => $translation->name,
+					'taxonomy' => $translation->taxonomy
+				]);
 				// if the slugs don't match, update the translation
 				if ($original_slug !== $translated_slug) {
 					// wp_update_term($translated_term_id, 'category', ['slug' => $original_slug]);
