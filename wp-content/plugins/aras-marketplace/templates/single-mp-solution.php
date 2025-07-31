@@ -87,6 +87,10 @@ if( !empty($languages) ){
 	}, $languages));
 }
 
+if( get_field('product_code') ){
+	$specs[__('Product Code', 'asa-marketplace')] = get_field('product_code');
+}
+
 $support_link = get_field('support_link');
 if( $support_link ){
 	$specs[__('Support', 'asa-marketplace')] = '<a href="'.$support_link.'" target="_blank">'.__('Get Support', 'asa-marketplace').'</a>';

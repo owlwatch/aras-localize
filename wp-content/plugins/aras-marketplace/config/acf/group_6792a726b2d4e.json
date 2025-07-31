@@ -629,6 +629,28 @@
             "bidirectional_target": []
         },
         {
+            "key": "field_688a0f2434f89",
+            "label": "Product Code",
+            "name": "product_code",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_67c85c17418c8",
             "label": "Solution Code",
             "name": "solution_code",
@@ -638,7 +660,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -670,5 +692,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1742428525
+    "modified": 1753878650
 }
