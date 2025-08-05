@@ -3,6 +3,18 @@
  * For more info: https://developer.wordpress.org/themes/basics/theme-functions/
  */
 
+$config = apply_filters('aras_config', [
+	'version' => '1.0.0',
+	'textdomain' => 'aras',
+	'api_url' => 'https://api.aras.com',
+	'site_url' => 'https://www.aras.com',
+	'features' => []
+]);
+
+global $aras_base_config;
+$aras_base_config = $config;
+
+
 // Theme support options
 require_once(get_template_directory() . '/functions/theme-support.php');
 
@@ -63,21 +75,33 @@ require_once(get_template_directory() . '/functions/aras_footer.php');
 
 
 /*     API CUSTOM FUNCTIONS     */
-
-//Salesforce-related API connections (Partners, Academic Users)
-require_once(get_template_directory() . '/functions/apis/api_salesforce.php');
+if( in_array( 'salesforce', $config['features'] ) ) {
+	//Salesforce-related API connections (Partners, Academic Users)
+	require_once(get_template_directory() . '/functions/apis/api_salesforce.php');
+}
 
 //MyI API Functions
-require_once(get_template_directory() . '/functions/apis/api_myi.php');
+if( in_array( 'myi', $config['features'] ) ) {
+	// MyI API Functions
+	require_once(get_template_directory() . '/functions/apis/api_myi.php');
+}
 
-//Gravity Forms Functions
-require_once(get_template_directory() . '/functions/apis/class.aras_gravity_forms.php');
+if( in_array('gravity_forms', $config['features']) ) {
+	//Gravity Forms Functions
+	require_once(get_template_directory() . '/functions/apis/class.aras_gravity_forms.php');
+}
 
 // Swoogo Functions
-require_once(get_template_directory() . '/functions/apis/api_swoogo.php');
+if( in_array('swoogo', $config['features']) ) {
+	// Swoogo API Functions
+	require_once(get_template_directory() . '/functions/apis/api_swoogo.php');
+}
 
 // Verint API Functions
-require_once(get_template_directory() . '/functions/apis/api_verint.php');
+if( in_array('verint', $config['features']) ) {
+	// Verint API Functions
+	require_once(get_template_directory() . '/functions/apis/api_verint.php');
+}
 
 
 /*     POST TYPE CUSTOM FUNCTIONS     */
@@ -86,37 +110,59 @@ require_once(get_template_directory() . '/functions/apis/api_verint.php');
 require_once(get_template_directory() . '/functions/post_types/aras_ajax.php');
 
 // Salseforce Post Types (Partners, Academic Users)
-require_once(get_template_directory() . '/functions/post_types/aras_sf_post_types.php');
+if( in_array( 'salesforce', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_sf_post_types.php');
+}
 
 //Resources CPT and Tax
-require_once(get_template_directory() . '/functions/post_types/aras_resources.php');
+if( in_array( 'resources', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_resources.php');
+}
 
 //Events
-require_once(get_template_directory() . '/functions/post_types/aras_events.php');
+if( in_array( 'events', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_events.php');
+}
 
 //Documentation CPT
-require_once(get_template_directory() . '/functions/post_types/aras_documentation.php');
+if( in_array( 'documentation', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_documentation.php');
+}
 
 //News CPT and Tax
-require_once(get_template_directory() . '/functions/post_types/aras_news.php');
+if( in_array( 'news', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_news.php');
+}
 
 //Blog Tax
-require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
+if( in_array( 'blog', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_blog.php');
+}
 
 //LP CPT
-require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
+if( in_array( 'lp', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_lp.php');
+}
 
 //Demo CPT
-require_once(get_template_directory() . '/functions/post_types/aras_demo.php');
+if( in_array( 'demo', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_demo.php');
+}
 
 //Speakers CPT
-require_once(get_template_directory() . '/functions/post_types/aras_speakers.php');
+if( in_array( 'speakers', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_speakers.php');
+}
 
 // User Profiles
-require_once(get_template_directory() . '/functions/post_types/aras_user-profiles.php');
+if( in_array( 'user_profiles', $config['features'] ) ) {
+	require_once(get_template_directory() . '/functions/post_types/aras_user-profiles.php');
+}
 
-// Quotes
-require_once(get_template_directory() . '/functions/post_types/aras_quote.php');
+if( in_array('quotes', $config['features']) ) {
+	// Quotes
+	require_once(get_template_directory() . '/functions/post_types/aras_quote.php');
+}
 
 //WPML DB Insert - complete, keeping this here and commented out for history. Associated folder - "./functions/wpml-resources"
 //require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
@@ -131,9 +177,15 @@ require_once(get_template_directory() . '/functions/seo.php');
 
 require_once(get_template_directory() . '/functions/bitly.php');
 
-require_once(get_template_directory() . '/functions/qualified.php');
+if( in_array('qualified', $config['features']) ) {
+	// Qualified API Functions
+	require_once(get_template_directory() . '/functions/qualified.php');
+}
 
-require_once(get_template_directory() . '/functions/google-ads-enhanced-conversions.php');
+if( in_array('google_ads_enhanced_conversions', $config['features']) ) {
+	// Google Ads Enhanced Conversions
+	require_once(get_template_directory() . '/functions/google-ads-enhanced-conversions.php');
+}
 
 require_once(get_template_directory() . '/functions/sitemap.php');
 

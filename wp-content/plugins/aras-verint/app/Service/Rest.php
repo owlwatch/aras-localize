@@ -2,6 +2,7 @@
 namespace Aras\Verint\Service;
 
 use function Aras\Verint\app;
+use WP_REST_Request;
 
 class Rest
 {
@@ -82,6 +83,30 @@ class Rest
 		register_rest_route( 'aras-verint/v1', '/banned-user-list', array(
 			'methods' => array('GET'),
 			'callback' => array( $this, 'bannedUserList' ),
+			'permission_callback' => function () {
+				// return is_super_admin();
+				return true;
+			}
+		));
+
+		register_rest_route( 'aras-verint/v1', '/delete-users', array(
+			'methods' => array('GET'),
+			'callback' => array( $this, 'deleteUsers' ),
+			'args' => array(
+				'dataset' => array(
+					'required' => false,
+					'type' => 'string',
+				),
+				'test' => array(
+					'required' => false,
+					'default' => true,
+					'type' => 'boolean',
+				),
+				'all' => array(
+					'required' => false,
+					'type' => 'boolean',
+				),
+			),
 			'permission_callback' => function () {
 				// return is_super_admin();
 				return true;
@@ -353,6 +378,83 @@ class Rest
 
 		fclose($output);
 		exit;
+
+	}
+
+	public function deleteUsers( WP_REST_Request $request )
+	{
+		$dataset = $request->get_param('dataset');
+		$test = $request->get_param('test');
+		$all = $request->get_param('all');
+
+		$log = [];
+
+		if( !$dataset ){
+			wp_send_json_error( 'No dataset provided' );
+			exit;
+		}
+
+		// action is based on the dataset name
+		$action = $dataset == 'delete-user-and-content' ? 'delete' : 'merge';
+
+		// lets get the users from the dataset
+		// the dataset is a csv in the 'data' directory of the plugin
+		$csvFile = ARAS_VERINT_PATH . '/data/' . $dataset . '.csv';
+		if( !file_exists($csvFile) ){
+			wp_send_json_error( 'Dataset not found: ' . $dataset );
+			exit;
+		}
+		$users = [];
+		if( ($handle = fopen($csvFile, 'r')) !== false ) {
+			$header = fgetcsv($handle, 1000, ',');
+			while( ($data = fgetcsv($handle, 1000, ',')) !== false ) {
+				$user = array_combine($header, $data);
+				$users[] = $user;
+			}
+			fclose($handle);
+		}
+
+		foreach( $users as $user ){
+			$id = $user['ID'];
+			$content_id = $user['Content ID'];
+			$username = $user['Username'];
+			$args = [
+				'Username' => $username
+			];
+			if( $action == 'merge' ){
+				$args['MergeToReassignedUser'] = true;
+			}
+			else {
+				$args['DeleteAllContent'] = true;
+			}
+			$response = null;
+			if( !$test ){
+				try {
+					$response = app()->apiService->delete('users/'.$id, $args);
+				}catch( \Exception $e ){
+					$response = $e->getMessage();
+				}
+			}
+
+			$log[] = [
+				'method' => "DELETE",
+				'endpoint' => "https://www.aras.com/community/api.ashx/v2/users/{$id}.json",
+				'args' => $args,
+				'response' => $response
+			];
+
+			if( !$all ){
+				break;
+			}
+		}
+
+		return [
+			'success' => true,
+			'log' => $log,
+			'test' => $test,
+			'all' => $all,
+			'dataset' => $dataset
+		];
 
 	}
 
