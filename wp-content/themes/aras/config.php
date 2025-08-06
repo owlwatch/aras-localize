@@ -16,7 +16,8 @@ add_filter('aras_config', function ($config) {
 		'user_profiles',
 		'quotes',
 		'qualified',
-		'google_ads_enhanced_conversions'
+		'google_ads_enhanced_conversions',
+		'gravity_forms'
 	];
 	return $config;
 });
