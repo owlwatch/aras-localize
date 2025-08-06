@@ -260,15 +260,12 @@ class GravityForms
 
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
-		error_log(__CLASS__.'::'.__FUNCTION__);
 		$post_id = url_to_postid( $entry['source_url'] );
 		$post_submission = $this->_get_post_submission_config( $post_id );
 		if( !$post_submission ){
 			error_log( 'no post submission' );
 			return $confirmation;
 		}
-
-		error_log( print_r( ['post_submission' => $post_submission], 1 ) );
 
 		if( 'update' === $post_submission['action'] ){
 			$redirect_url = $entry['source_url'];
