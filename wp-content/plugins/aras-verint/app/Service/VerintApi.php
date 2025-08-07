@@ -57,7 +57,8 @@ class VerintApi
 			$headers[] ='Content-Length: ' . strlen($paramString);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $paramString);
 		} else if ($method == 'delete') {
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			$headers[] = 'Rest-Method: DELETE';
 		}
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Aras Verint API');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
