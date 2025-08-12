@@ -341,6 +341,38 @@
             "append": ""
         },
         {
+            "key": "field_689b39dd68b69",
+            "label": "Form Button Color Override",
+            "name": "form_button_color_override",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Leave blank for default submit button text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "default": "Default (Black)",
+                "red": "Red",
+                "blue": "Blue",
+                "orange": "Orange"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_66292c672a141",
             "label": "Includes Salesforce Campaign",
             "name": "create_salesforce_campaign",
@@ -1439,5 +1471,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1752794276
+    "modified": 1755003439
 }

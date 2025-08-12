@@ -3,53 +3,22 @@
 // This is the template that displays all of the <head> section
 $blog_gtm_id = get_field('blog_tag_manager_id', 'option');
 $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
+
+$gtm_id = (is_singular('post') || is_home() || is_category() || is_author() || is_tag())  ? $blog_gtm_id : $main_site_gtm_id;
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
 
 <head>
-	<?php if (is_singular('post') || is_home() || is_category() || is_author() || is_tag()) : ?>
-		<!-- Google Tag Manager: Blog -->
-		
-		<script>
-			(function(w, d, s, l, i) {
-				w[l] = w[l] || [];
-				w[l].push({
-					'gtm.start': new Date().getTime(),
-					event: 'gtm.js'
-				});
-				var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s),
-					dl = l != 'dataLayer' ? '&l=' + l : '';
-				j.async = true;
-				j.src =
-					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-				f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', '<?php echo $blog_gtm_id ?>');
-		</script>
-		<!-- End Google Tag Manager -->
-	<?php else : ?>
-		<!-- Google Tag Manager: Main Site -->
-		<script>
-			(function(w, d, s, l, i) {
-				w[l] = w[l] || [];
-				w[l].push({
-					'gtm.start': new Date().getTime(),
-					event: 'gtm.js'
-				});
-				var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s),
-					dl = l != 'dataLayer' ? '&l=' + l : '';
-				j.async = true;
-				j.src =
-					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-				f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', '<?php echo $main_site_gtm_id ?>');
-		</script>
-		<!-- End Google Tag Manager -->
-
+	<?php if ($gtm_id ): ?>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','<?php echo $gtm_id ?>');</script>
+<!-- End Google Tag Manager -->
 	<?php endif; ?>
-
 	<meta charset="utf-8">
 	<!-- Force IE to use the latest rendering engine available -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -77,12 +46,11 @@ $main_site_gtm_id = get_field('main_site_tag_manager_id', 'option');
 </head>
 
 <body <?php body_class(); ?>>
-	<?php if (is_singular('post') || is_home() || is_category() || is_author() || is_tag()) : ?>
-		<!-- GTM - Blog -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $blog_gtm_id ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<?php else : ?>
-		<!-- GTM - Main Site -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $main_site_gtm_id ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<?php if ($gtm_id) : ?>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtm_id; ?>"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 	<?php endif; ?>
 	<script>
 		async function trackView(theHref, message) {

@@ -127,6 +127,58 @@
       text-decoration: none !important;
       transition: .2s ease-in-out;
     }
+
+    .form-button-color-red & {
+      background-color: var(--primary) !important;
+      border: solid 2px var(--primary) !important;
+      color: var(--white) !important;
+
+      &:hover,
+      &:focus {
+        background-color: transparent !important;
+        border: solid 2px $red;
+        color: var(--primary) !important;
+      }
+    }
+
+    .form-button-color-red & {
+      background-color: var(--primary) !important;
+      border: solid 2px var(--primary) !important;
+      color: var(--white) !important;
+
+      &:hover,
+      &:focus {
+        background-color: transparent !important;
+        border: solid 2px var(--primary);
+        color: var(--primary) !important;
+      }
+    }
+
+    .form-button-color-blue & {
+      background-color: var(--blue) !important;
+      border: solid 2px var(--blue) !important;
+      color: var(--white) !important;
+
+      &:hover,
+      &:focus {
+        background-color: transparent !important;
+        border: solid 2px var(--blue);
+        color: var(--blue) !important;
+      }
+    }
+
+    .form-button-color-orange & {
+      background-color: var(--orange) !important;
+      border: solid 2px var(--orange) !important;
+      color: var(--white) !important;
+
+      &:hover,
+      &:focus {
+        background-color: transparent !important;
+        border: solid 2px var(--orange);
+        color: var(--orange) !important;
+      }
+    }
   }
 
   .gfield--type-address {

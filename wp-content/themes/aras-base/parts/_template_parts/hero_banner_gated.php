@@ -71,7 +71,10 @@
           <div class="cell small-12 medium-6 large-5 ">
             <div id="hero-form-container" class="hero-form-container">
               <?php if (get_field('form_shortcode')) : ?>
-                <div class="hero-form bg-white">
+                <?php
+                $button_color = get_field('form_button_color_override') ?: 'default';
+                ?>
+                <div class="hero-form bg-white form-button-color-<?php echo esc_attr($button_color); ?>">
                   <?php if (get_field('form_headline')) : ?>
                     <h4 class="hero-form-headline"><?php echo get_field('form_headline')  ?></h4>
                   <?php endif; ?>
