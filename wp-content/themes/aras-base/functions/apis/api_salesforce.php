@@ -333,6 +333,7 @@ function update_academic_users_from_file()
 				update_field('Academic_Logo__c', $Academic_Logo__c, $existing_post->ID);
 				update_field('Academic_Website_Link__c', $Academic_Website_Link__c, $existing_post->ID);
 				update_field('Academic_Description_for_Website__c', $Academic_Description_for_Website__c, $existing_post->ID);
+				update_post_meta( $existing_post->ID, 'aras_academic_user_name', $Name);
 			} else {
 				//New partner means new post
 				$post_args = array(
@@ -345,13 +346,14 @@ function update_academic_users_from_file()
 				update_field('Academic_Logo__c', $Academic_Logo__c, $new_post_id);
 				update_field('Academic_Website_Link__c', $Academic_Website_Link__c, $new_post_id);
 				update_field('Academic_Description_for_Website__c', $Academic_Description_for_Website__c, $new_post_id);
+				update_post_meta( $new_post_id, 'aras_academic_user_name', $Name);
 			}
 		}
 	}
 	// After processing array, delete 'sf-academic-users' posts that don't have a matching item in the api array
 	$all_academic_users = get_posts(array('post_type' => 'sf-academic-users', 'posts_per_page' => -1));
 	foreach ($all_academic_users as $academic_user) {
-		$academic_user_name = $academic_user->post_title;
+		$academic_user_name = get_post_meta($academic_user->ID, 'aras_academic_user_name', true);
 		$found = false;
 
 		// Loop through each item in the array to check for a matching academic_user name
