@@ -200,7 +200,9 @@
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
+											<div class="wysiwyg-content">
 											<?php echo get_sub_field('card_content'); ?>
+											</div>
 										<?php endif; ?>
 
 										<?php if (get_sub_field('card_link_type') == 'popup') : ?>
@@ -295,7 +297,9 @@
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
-											<?php echo get_sub_field('card_content'); ?>
+											<div class="wysiwyg-content">
+												<?php echo get_sub_field('card_content'); ?>
+											</div>
 										<?php endif; ?>
 
 										<?php if (get_sub_field('card_link_type') == 'popup') : ?>
