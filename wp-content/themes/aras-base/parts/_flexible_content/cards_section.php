@@ -200,7 +200,7 @@
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
-											<div class="wysiwyg-content">
+											<div class="wysiwyg-content smallbottompadding">
 											<?php echo get_sub_field('card_content'); ?>
 											</div>
 										<?php endif; ?>
@@ -297,7 +297,7 @@
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
-											<div class="wysiwyg-content">
+											<div class="wysiwyg-content smallbottompadding">
 												<?php echo get_sub_field('card_content'); ?>
 											</div>
 										<?php endif; ?>
