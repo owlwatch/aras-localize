@@ -5,7 +5,8 @@ use Aras\Marketplace\Service\Template;
 app()->templateService->enqueue_style();
 get_header();
 
-Template::get_template_part('marketplace/banner');
+// Template::get_template_part('marketplace/banner');
+get_template_part('parts/_template_parts/hero_banner');
 ?>
 <section class="smalltoppadding mediumbottompadding">
 	<div class="grid-container">
