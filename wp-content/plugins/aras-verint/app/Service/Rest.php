@@ -117,8 +117,8 @@ class Rest
 				),
 			),
 			'permission_callback' => function () {
-				// return is_super_admin();
-				return true;
+				return is_super_admin();
+				// return true;
 			}
 		));
 
