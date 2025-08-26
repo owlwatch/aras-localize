@@ -97,7 +97,7 @@
 						<h3><?php echo get_sub_field('customer_headline'); ?></h3>
 					<?php endif; ?>
 					<?php if (get_sub_field('customer_content')) : ?>
-						<div class="wysiwyg-content">
+						<div class="wysiwyg-content smallbottompadding">
 							<?php echo get_sub_field('customer_content'); ?>
 						</div>
 					<?php endif; ?>
