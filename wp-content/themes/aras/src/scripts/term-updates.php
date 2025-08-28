@@ -62,6 +62,9 @@ class TermUpdates
 	{
 
 		global $sitepress;
+
+		// we need to set the primary language to english
+		$sitepress->switch_lang('en');
 		
 		header('Content-Type: application/json; charset=utf-8');
 		// we want to find all categories and tags
@@ -144,30 +147,36 @@ class TermUpdates
 				// we also want to pull the acf field from the english term
 				// for the title translation
 				switch( $update['lang'] ){
-					case 'fr':
+					case 'fr-fr':
 						$lang = 'french';
 						break;
-					case 'de':
+					case 'de-de':
 						$lang = 'german';
 						break;
-					case 'ja':
+					case 'ja-jp':
 						$lang = 'japanese';
 						break;
 					default:
 						$lang = 'en-us';
 				}
 				$key = 'cat_label_' . $lang;
-				$value = get_field($key, 'category_' . $english_term->term_id);
+				$label = get_field($key, 'category_' . $english_term->term_id);
 
 				$updated_values = ['slug' => $english_term->slug];
-				if( $value ) {
+				if( $label ) {
 					// this should be the title for the translated category
-					$updated_values['name'] = $value;
+					$updated_values['name'] = $label;
 				}
 
 				// we want to switch to the language of the term we are updating
 				$switch_lang = new \WPML_Temporary_Switch_Language( $sitepress, $update['lang'] );
 				$update['updated'] = wp_update_term($update['term_id'], $update['taxonomy'], $updated_values);
+				// $update['updated'] = $updated_values;
+				// $update['label'] = [
+				// 	$key,
+				// 	'category_' . $english_term->term_id,
+				// 	$label
+				// ];
 				unset($switch_lang);
 			}
 		}
