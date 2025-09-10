@@ -114,3 +114,21 @@ function add_lang_to_user_profile( $user )
         echo '<input type="hidden" name="lang" value="' . esc_attr($current_language) . '">';
     }
 }
+
+// we need to redirect to english for the admin page=wpseo_page
+add_action('admin_init', 'Aras\\WPML\\redirect_wpseo_page');
+
+function redirect_wpseo_page()
+{
+	if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'wpseo_page_settings') {
+		// check current language
+		$current_language = apply_filters('wpml_current_language', null);
+		if ($current_language !== 'en') {
+			// redirect to english version of the page
+			$url = add_query_arg('lang', 'en', $_SERVER['REQUEST_URI']);
+			$url = add_query_arg('warn_about_wpseo_settings_languages', '1', $url);
+			wp_redirect($url);
+			exit;
+		}
+	}
+}

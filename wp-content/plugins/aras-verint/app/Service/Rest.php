@@ -106,10 +106,19 @@ class Rest
 					'required' => false,
 					'type' => 'boolean',
 				),
+				'index' => array(
+					'required' => false,
+					'type' => 'integer',
+				),
+				'limit' => array(
+					'required' => false,
+					'default' => 100,
+					'type' => 'integer',
+				),
 			),
 			'permission_callback' => function () {
-				// return is_super_admin();
-				return true;
+				return is_super_admin();
+				// return true;
 			}
 		));
 
@@ -386,9 +395,10 @@ class Rest
 		$dataset = $request->get_param('dataset');
 		$test = $request->get_param('test');
 		$all = $request->get_param('all');
+		$index = $request->get_param('index');
+		$limit = $request->get_param('limit');
 
 		$log = [];
-
 		if( !$dataset ){
 			wp_send_json_error( 'No dataset provided' );
 			exit;
@@ -414,15 +424,35 @@ class Rest
 			fclose($handle);
 		}
 
-		foreach( $users as $user ){
+		if( is_int($index) ){
+			$all = false;
+		}
+
+		$deleted = [];
+
+		foreach( $users as $i => $user ){
+			if( is_int($index) && $index !== $i ){
+				continue;
+			}
 			$id = $user['ID'];
 			$content_id = $user['Content ID'];
 			$username = $user['Username'];
+
+			if( $this->_getDeletedUserLog( $id ) ){
+				$log[] =  'skipped '.$id;
+				// if this we are on a specific index, we should break out of the foreach loop
+				if( is_int($index) ){
+					break;
+				}
+				continue;
+			}
 			$args = [
-				'Username' => $username
+				// 'Id' => intval($id)
 			];
 			if( $action == 'merge' ){
-				$args['MergeToReassignedUser'] = true;
+				$args['id'] = intval($id);
+				// $args['MergeToReassignedUser'] = true;
+				$args['ReassignedUserId'] = 2103;
 			}
 			else {
 				$args['DeleteAllContent'] = true;
@@ -431,6 +461,37 @@ class Rest
 			if( !$test ){
 				try {
 					$response = app()->apiService->delete('users/'.$id, $args);
+
+					// if this is successful, we should log it so we don't have to do it again...
+					// how do we know its successful?
+					// the response contains an object with Info, Warnings, and Errors
+					// if the "Errors" array contains a string with 'The user with identifier '$id' could not be found.' then we can assume it was deleted
+					// or if the "Info" array contains a string "User was deleted."
+					if( isset($response->Errors) && is_array($response->Errors) && count($response->Errors) > 0 ){
+						foreach( $response->Errors as $error ){
+							if( strpos($error, "The user with identifier '$id' could not be found.") !== false ){
+								// this means the user was deleted
+								$deleted[] = $id;
+								$this->_setDeletedUserLog( $id, true );
+								break;
+							}
+						}
+					}
+					else if( isset($response->Info) && is_array($response->Info) && count($response->Info) > 0 ){
+						foreach( $response->Info as $info ){
+							if( strpos($info, 'User was deleted.') !== false ){
+								$deleted[] = $id;
+								$this->_setDeletedUserLog( $id, true );
+								break;
+							}
+						}
+					}
+					else {
+						// we don't know if it was deleted or not, so we will log it as false
+						$this->_setDeletedUserLog( $id, false );
+					}
+
+					// save our logs
 				}catch( \Exception $e ){
 					$response = $e->getMessage();
 				}
@@ -446,6 +507,11 @@ class Rest
 			if( !$all ){
 				break;
 			}
+
+			if( $limit && count($deleted) >= $limit ){
+				// we have reached the limit, so we should break out of the foreach loop
+				break;
+			}
 		}
 
 		return [
@@ -458,6 +524,28 @@ class Rest
 
 	}
 
+	public function _getDeletedUserLog( $user_id )
+	{
+		$log = get_option('aras_verint_delete_users_log', []);
+		if( !is_array($log) ){
+			$log = [];
+		}
+		if( isset($log[$user_id]) ){
+			return $log[$user_id];
+		}
+		return false;
+	}
+
+	public function _setDeletedUserLog( $user_id, $status )
+	{
+		$log = get_option('aras_verint_delete_users_log', []);
+		if( !is_array($log) ){
+			$log = [];
+		}
+		$log[$user_id] = $status;
+		update_option('aras_verint_delete_users_log', $log);
+	}
+	
 	public function _sanitize_forum( $forum )
 	{
 		$clean = [];

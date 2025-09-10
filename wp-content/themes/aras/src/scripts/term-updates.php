@@ -12,13 +12,13 @@ class TermUpdates
 		// get the translated term ID
 		$translated_term_id = apply_filters('wpml_object_id', $term_id, $taxonomy, false, $language_code);
 		if (!$translated_term_id || $translated_term_id == $term_id) {
-			print_r([
-				'message' => 'No translation found',
-				'term_id' => $term_id,
-				'taxonomy' => $taxonomy,
-				'language_code' => $language_code,
-				'translated_term_id' => $translated_term_id
-			]);
+			// print_r([
+			// 	'message' => 'No translation found',
+			// 	'term_id' => $term_id,
+			// 	'taxonomy' => $taxonomy,
+			// 	'language_code' => $language_code,
+			// 	'translated_term_id' => $translated_term_id
+			// ]);
 			return null; // no translation found
 		}
 
@@ -60,6 +60,11 @@ class TermUpdates
 
 	public function run()
 	{
+
+		global $sitepress;
+
+		// we need to set the primary language to english
+		$sitepress->switch_lang('en');
 		
 		header('Content-Type: application/json; charset=utf-8');
 		// we want to find all categories and tags
@@ -71,6 +76,8 @@ class TermUpdates
 		$terms = $categories;
 
 		$terms_to_update = [];
+		$updated_terms = [];
+		$english_terms = [];
 		$all_translations = [];
 
 		foreach ($terms as $term) {
@@ -99,20 +106,21 @@ class TermUpdates
 				// get the slug of the translated term
 				$translated_slug = $translation->slug;
 
-				print_r([
-					'original_slug' => $original_slug,
-					'translated_slug' => $translated_slug,
-					'lang' => $lang,
-					'term_id' => $term_id,
-					'translated_term_id' => $translated_term_id,
-					'name' => $translation->name,
-					'taxonomy' => $translation->taxonomy
-				]);
+				// print_r([
+				// 	'original_slug' => $original_slug,
+				// 	'translated_slug' => $translated_slug,
+				// 	'lang' => $lang,
+				// 	'term_id' => $term_id,
+				// 	'translated_term_id' => $translated_term_id,
+				// 	'name' => $translation->name,
+				// 	'taxonomy' => $translation->taxonomy
+				// ]);
 				// if the slugs don't match, update the translation
 				if ($original_slug !== $translated_slug) {
 					// wp_update_term($translated_term_id, 'category', ['slug' => $original_slug]);
 					// $updated = true;
 					if( !$terms_to_update[$term_id] ){
+						$english_terms[$term_id] = $term;
 						$terms_to_update[$term_id] = [];
 					}
 					$terms_to_update[$term_id][] = [
@@ -125,6 +133,51 @@ class TermUpdates
 						'taxonomy' => $translation->taxonomy
 					];
 				}
+
+				else {
+
+				}
+			}
+		}
+
+		foreach( $terms_to_update as $term_id => &$updates ) {
+			$english_term = $english_terms[$term_id];
+			foreach( $updates as &$update ) {
+				
+				// we also want to pull the acf field from the english term
+				// for the title translation
+				switch( $update['lang'] ){
+					case 'fr-fr':
+						$lang = 'french';
+						break;
+					case 'de-de':
+						$lang = 'german';
+						break;
+					case 'ja-jp':
+						$lang = 'japanese';
+						break;
+					default:
+						$lang = 'en-us';
+				}
+				$key = 'cat_label_' . $lang;
+				$label = get_field($key, 'category_' . $english_term->term_id);
+
+				$updated_values = ['slug' => $english_term->slug];
+				if( $label ) {
+					// this should be the title for the translated category
+					$updated_values['name'] = $label;
+				}
+
+				// we want to switch to the language of the term we are updating
+				$switch_lang = new \WPML_Temporary_Switch_Language( $sitepress, $update['lang'] );
+				$update['updated'] = wp_update_term($update['term_id'], $update['taxonomy'], $updated_values);
+				// $update['updated'] = $updated_values;
+				// $update['label'] = [
+				// 	$key,
+				// 	'category_' . $english_term->term_id,
+				// 	$label
+				// ];
+				unset($switch_lang);
 			}
 		}
 

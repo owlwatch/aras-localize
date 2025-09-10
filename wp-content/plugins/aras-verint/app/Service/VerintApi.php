@@ -43,6 +43,7 @@ class VerintApi
 
 		$ch = curl_init();
 		$paramString = http_build_query($parameters);
+		$jsonString = json_encode($parameters);
 		$headers = [
 			'Rest-User-Token: ' . $this->token,
 			'Content-Type: application/json',
@@ -51,13 +52,14 @@ class VerintApi
 		curl_setopt($ch, CURLOPT_URL, $url . ($method == 'get' && !empty($paramString) ? '?' . $paramString : ''));
 		if ($method == 'post') {
 			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $paramString);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonString);
 		} else if ($method == 'put') {
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-			$headers[] ='Content-Length: ' . strlen($paramString);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $paramString);
+			$headers[] ='Content-Length: ' . strlen($jsonString);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonString);
 		} else if ($method == 'delete') {
 			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($parameters));
 			$headers[] = 'Rest-Method: DELETE';
 		}
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Aras Verint API');
@@ -67,9 +69,17 @@ class VerintApi
 		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
+		// debug the curl request
+		// curl_setopt($ch, CURLOPT_VERBOSE, true);
+		// output debug to normal log
+		// $verbose = fopen('php://output', 'w+');
+		// curl_setopt($ch, CURLOPT_STDERR, $verbose);
+
 		$response = curl_exec($ch);
 
-		list($contentType, $charset) = explode(';', curl_getinfo($ch, CURLINFO_CONTENT_TYPE), 2);
+
+		list($contentType) = explode(';', curl_getinfo($ch, CURLINFO_CONTENT_TYPE), 2);
+		
 
 		// get the headers too
 		// $info = curl_getinfo( $ch );print_r( $info );
