@@ -148,7 +148,7 @@ if( !empty($videos) ){
 					<div class="mp-solution-page__title-text-col">
 						<div>
 							<a href="<?php echo get_post_type_archive_link('mp-solution'); ?>" class="card-link">
-								<?php $title = get_field('marketplace_title', 'option'); ?>
+								<?php $title = get_field('marketplace_breadcrumb_text', 'option'); ?>
 								<?php if( $title ): ?>
 									<?php echo $title; ?>
 								<?php else: ?>

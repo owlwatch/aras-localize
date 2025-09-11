@@ -28,7 +28,7 @@ if( $social_links ){
 
 		<div style="margin-bottom: 1em;">
 			<a href="<?php echo get_post_type_archive_link('mp-solution'); ?>" class="card-link">
-				<?php $title = get_field('marketplace_title', 'option'); ?>
+				<?php $title = get_field('marketplace_breadcrumb_text', 'option'); ?>
 				<?php if( $title ): ?>
 					<?php echo $title; ?>
 				<?php else: ?>
