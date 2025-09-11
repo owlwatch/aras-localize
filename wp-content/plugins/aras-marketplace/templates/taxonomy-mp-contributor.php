@@ -5,8 +5,6 @@ use function Aras\Marketplace\app;
 app()->templateService->enqueue_style();
 get_header();
 
-Template::get_template_part('marketplace/banner');
-
 $address = get_field('address', get_queried_object());
 $email = get_field('email', get_queried_object());
 $phone = get_field('phone_number', get_queried_object());
@@ -27,6 +25,18 @@ if( $social_links ){
 ?>
 <section class="mp-contributor-banner bg-dgrey">
 	<div class="grid-container">
+
+		<div style="margin-bottom: 1em;">
+			<a href="<?php echo get_post_type_archive_link('mp-solution'); ?>" class="card-link">
+				<?php $title = get_field('marketplace_title', 'option'); ?>
+				<?php if( $title ): ?>
+					<?php echo $title; ?>
+				<?php else: ?>
+					<?php _e('Marketplace', 'aras-marketplace'); ?>
+				<?php endif; ?>
+			</a>
+		</div>
+
 		<?php
 		$logo = get_field('logo', get_queried_object());
 		if( $logo ){

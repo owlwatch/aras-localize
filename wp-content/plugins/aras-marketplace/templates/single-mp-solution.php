@@ -5,7 +5,7 @@ use function Aras\Marketplace\app;
 app()->templateService->enqueue_style();
 get_header();
 
-Template::get_template_part('marketplace/banner');
+// Template::get_template_part('marketplace/banner');
 
 
 while( have_posts() ): the_post();
@@ -146,6 +146,16 @@ if( !empty($videos) ){
 						?>
 					</div>
 					<div class="mp-solution-page__title-text-col">
+						<div>
+							<a href="<?php echo get_post_type_archive_link('mp-solution'); ?>" class="card-link">
+								<?php $title = get_field('marketplace_title', 'option'); ?>
+								<?php if( $title ): ?>
+									<?php echo $title; ?>
+								<?php else: ?>
+									<?php _e('Marketplace', 'aras-marketplace'); ?>
+								<?php endif; ?>
+							</a>
+						</div>
 						<h1 class="mp-solution-page__title h2">
 							<?php the_title(); ?>
 						</h1>
