@@ -17,6 +17,8 @@ $timezone = get_sub_field('timezone');
 $content_after = get_sub_field('content_after');
 $hide_when_expired = get_sub_field('hide_when_expired');
 
+$call_to_action_button = get_sub_field('call_to_action_button');
+
 // create the actual DateTime
 $datetime_string = $date_time . ' ' . $timezone;
 $datetime = new DateTime($date_time, new DateTimeZone($timezone));
@@ -205,6 +207,20 @@ switch ($horizontal_alignment) {
 							<?php echo $content_after; ?>
 						</div>
 					<?php endif; ?>
+
+					<?php if( $call_to_action_button ){ ?>
+						<div class="countdown-section__cta-button" style="margin-top: 1.5rem;">
+							<a
+								href="<?php echo esc_url($call_to_action_button['url']); ?>"
+								class="aras-button" 
+								<?php if( $call_to_action_button['target'] ){ ?>
+									target="<?php echo esc_attr($call_to_action_button['target']); ?>"
+								<?php } ?>
+							>
+								<?php echo esc_html($call_to_action_button['title'] ?: 'Learn More'); ?>
+							</a>
+						</div>
+					<?php } ?>
 				</div>
 				<?php if ($side_content_position == 'right' && $side_content) : ?>
 					<div class="cell small-12 medium-5 large-4 countdown-section__side-content <?php if ($size_content) : ?>sized-content<?php endif; ?>">

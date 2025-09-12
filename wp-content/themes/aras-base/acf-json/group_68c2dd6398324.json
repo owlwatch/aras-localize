@@ -267,6 +267,24 @@
             "delay": 0
         },
         {
+            "key": "field_68c430be67de3",
+            "label": "Call to Action Button",
+            "name": "call_to_action_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_68c2de272e912",
             "label": "Hide When Expired",
             "name": "hide_when_expired",
@@ -434,5 +452,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1757685003
+    "modified": 1757688178
 }
