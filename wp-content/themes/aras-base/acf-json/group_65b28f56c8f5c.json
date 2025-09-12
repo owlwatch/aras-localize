@@ -202,6 +202,39 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_68c2deb24c7c9": {
+                    "key": "layout_68c2deb24c7c9",
+                    "name": "countdown_section",
+                    "label": "Countdown Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_68c2dec14c7cc",
+                            "label": "Countdown Section",
+                            "name": "countdown_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "clone": [
+                                "group_68c2dd6398324"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_65c3db69372ab": {
                     "key": "layout_65c3db69372ab",
                     "name": "customer_story_section",
@@ -894,5 +927,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1752794227
+    "modified": 1757601505
 }
