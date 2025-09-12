@@ -1,15 +1,16 @@
 <?php
 // add a function to know if we've been in this file before
-function aras_has_displayed_countdown_section()
-{
-	static $been_here = false;
-	if (! $been_here) {
-		$been_here = true;
-		return false;
+if( !function_exists('aras_has_displayed_countdown_section') ){
+	function aras_has_displayed_countdown_section()
+	{
+		static $been_here = false;
+		if (! $been_here) {
+			$been_here = true;
+			return false;
+		}
+		return true;
 	}
-	return true;
 }
-
 // Set up our variables
 $content_before = get_sub_field('content_before');
 $date_time = get_sub_field('date_time');
@@ -209,7 +210,7 @@ switch ($horizontal_alignment) {
 					<?php endif; ?>
 
 					<?php if( $call_to_action_button ){ ?>
-						<div class="countdown-section__cta-button" style="margin-top: 1.5rem;">
+						<div class="countdown-section__cta-button">
 							<a
 								href="<?php echo esc_url($call_to_action_button['url']); ?>"
 								class="aras-button" 
@@ -259,6 +260,11 @@ if (aras_has_displayed_countdown_section()) {
 		text-align: center;
 		display: grid;
 		gap: 2rem;
+	}
+
+	.countdown-section__cta-button .aras-button {
+		margin-top: 0rem;
+
 	}
 
 
