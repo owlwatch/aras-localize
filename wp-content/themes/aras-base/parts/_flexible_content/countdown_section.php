@@ -260,6 +260,7 @@ if (aras_has_displayed_countdown_section()) {
 
 	.countdown-segment {
 		flex: 1 1 3em;
+		max-width: 3.5em;
 	}
 
 	.countdown-number {
