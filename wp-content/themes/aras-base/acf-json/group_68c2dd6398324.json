@@ -249,7 +249,7 @@
             "label": "Content After",
             "name": "content_after",
             "aria-label": "",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -260,11 +260,11 @@
             },
             "wpml_cf_preferences": 0,
             "default_value": "",
-            "maxlength": "",
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_68c2de272e912",
@@ -290,8 +290,8 @@
         },
         {
             "key": "field_68c2dddf2e910",
-            "label": "Side Content",
-            "name": "side_content",
+            "label": "Side Content Position",
+            "name": "side_content_position",
             "aria-label": "",
             "type": "select",
             "instructions": "",
@@ -330,7 +330,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_68c2dd63eae53",
+                        "field": "field_68c2dddf2e910",
                         "operator": "!=",
                         "value": "none"
                     }
@@ -434,5 +434,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1757617174
+    "modified": 1757685003
 }

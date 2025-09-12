@@ -1,4 +1,15 @@
 <?php
+// add a function to know if we've been in this file before
+function aras_has_displayed_countdown_section()
+{
+	static $been_here = false;
+	if (! $been_here) {
+		$been_here = true;
+		return false;
+	}
+	return true;
+}
+
 // Set up our variables
 $content_before = get_sub_field('content_before');
 $date_time = get_sub_field('date_time');
@@ -13,14 +24,13 @@ $now = new DateTime('now', new DateTimeZone($timezone));
 $expired = $now > $datetime;
 // If we are to hide when expired and it is expired, then return
 if ($hide_when_expired && $expired) {
-  return;
+	return;
 }
 
 $side_content_position = get_sub_field('side_content_position');
 $size_content = false;
-if ($side_content_position != 'none' ) {
-  $side_content_position = 'right';
-  $side_content = get_sub_field('side_content');
+if ($side_content_position != 'none') {
+	$side_content = get_sub_field('side_content_html');
 }
 
 
@@ -109,7 +119,7 @@ switch ($horizontal_alignment) {
 		$horiz = 'align-bottom';
 		break;
 	default:
-		$horiz = 'align-top';
+		$horiz = 'align-middle';
 }
 ?>
 <?php if (get_sub_field('background_image')) : ?>
@@ -164,27 +174,39 @@ switch ($horizontal_alignment) {
 						</div>
 					</div>
 				<?php endif; ?>
-				<div class="cell small-12 <?php if ($side_content_position != 'none') : ?>medium-6 large-4<?php else : ?>medium-8 large-6<?php endif; ?> countdown-section__countdown <?php if ($size_content) : ?>sized-content<?php endif; ?>">
+				<div class="cell small-12 <?php if ($side_content) : ?>medium-6 large-8<?php endif; ?> countdown-section__countdown">
+
+					<?php if( $content_before ): ?>
+						<div class="countdown-section__content-before wysiwyg-content">
+							<?php echo $content_before; ?>
+						</div>
+					<?php endif; ?>
 					<div class="countdown-timer" data-datetime="<?php echo esc_attr($datetime->format('Y-m-d H:i:s')); ?>" data-timezone="<?php echo esc_attr($timezone); ?>" data-expired-message="<?php echo esc_attr(get_sub_field('expired_message') ?: 'This event has passed.'); ?>">
 						<div class="countdown-segment">
-							<span class="countdown-number" id="days">00</span>
+							<span class="countdown-number" data-countdown="days">00</span>
 							<span class="countdown-label">Days</span>
 						</div>
 						<div class="countdown-segment">
-							<span class="countdown-number" id="hours">00</span>
+							<span class="countdown-number" data-countdown="hours">00</span>
 							<span class="countdown-label">Hours</span>
 						</div>
 						<div class="countdown-segment">
-							<span class="countdown-number" id="minutes">00</span>
+							<span class="countdown-number" data-countdown="minutes">00</span>
 							<span class="countdown-label">Minutes</span>
 						</div>
 						<div class="countdown-segment">
-							<span class="countdown-number" id="seconds">00</span>
+							<span class="countdown-number" data-countdown="seconds">00</span>
 							<span class="countdown-label">Seconds</span>
 						</div>
 					</div>
+
+					<?php if( $content_after ): ?>
+						<div class="countdown-section__content-after wysiwyg-content">
+							<?php echo $content_after; ?>
+						</div>
+					<?php endif; ?>
 				</div>
-				<?php if( $side_content_position == 'right' && $side_content) : ?>
+				<?php if ($side_content_position == 'right' && $side_content) : ?>
 					<div class="cell small-12 medium-5 large-4 countdown-section__side-content <?php if ($size_content) : ?>sized-content<?php endif; ?>">
 						<div class="wysiwyg-content">
 							<?php echo $side_content; ?>
@@ -197,60 +219,77 @@ switch ($horizontal_alignment) {
 	</div>
 </section>
 
+<?php
+if (aras_has_displayed_countdown_section()) {
+	// only load script/style once
+	return;
+}
+?>
+
 <style>
 	.countdown-section__container {
 		max-width: 1200px;
 		margin: 0 auto;
 	}
+
+	.countdown-section__container > .grid-x {
+		row-gap: 3rem;
+	}
 	.countdown-section__side-content {
 		margin-bottom: 1.5rem;
 	}
+
 	.countdown-section__countdown {
 		text-align: center;
+		display: grid;
+		gap: 2rem;
+	}
+
+
+	:root {
+		--aras-countdown-size: 1.5rem;
 	}
 	.countdown-timer {
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
-		flex-wrap: wrap;
+		flex-wrap: no-wrap;
+		font-size: var(--aras-countdown-size);
+		color: var(--aras-countdown-color, inherit);
 	}
+
 	.countdown-segment {
-		flex: 1 1 80px;
-		min-width: 80px;
+		flex: 1 1 3em;
 	}
+
 	.countdown-number {
 		display: block;
-		font-size: 3rem;
+		font-size: 2em;
 		font-weight: bold;
+		line-height: 1;
 	}
+
 	.countdown-label {
 		display: block;
-		font-size: 1rem;
+		font-size: 0.5em;
 		text-transform: uppercase;
-		color: var(--mp-dark-bg);
 	}
+
 	@media (min-width: 640px) {
-		.countdown-number {
-			font-size: 4rem;
-		}
-		.countdown-label {
-			font-size: 1.25rem;
+		:root{
+			--aras-countdown-size: 2rem;
 		}
 	}
+
 	@media (min-width: 1024px) {
-		.countdown-number {
-			font-size: 5rem;
-		}
-		.countdown-label {
-			font-size: 1.5rem;
+		:root{
+			--aras-countdown-size: 2.5rem;
 		}
 	}
+
 	@media (min-width: 1200px) {
-		.countdown-number {
-			font-size: 6rem;
-		}
-		.countdown-label {
-			font-size: 1.75rem;
+		:root{
+			--aras-countdown-size: 3rem;
 		}
 	}
 </style>
@@ -262,10 +301,14 @@ switch ($horizontal_alignment) {
 			const targetDateStr = countdown.getAttribute('data-datetime');
 			const timezone = countdown.getAttribute('data-timezone');
 			const expiredMessage = countdown.getAttribute('data-expired-message') || 'This event has passed.';
-			const targetDate = new Date(new Date(targetDateStr + ' UTC').toLocaleString("en-US", { timeZone: timezone }));
-			
+			const targetDate = new Date(new Date(targetDateStr + ' UTC').toLocaleString("en-US", {
+				timeZone: timezone
+			}));
+
 			function updateCountdown() {
-				const now = new Date(new Date().toLocaleString("en-US", { timeZone: timezone }));
+				const now = new Date(new Date().toLocaleString("en-US", {
+					timeZone: timezone
+				}));
 				const diff = targetDate - now;
 
 				if (diff <= 0) {
@@ -278,10 +321,10 @@ switch ($horizontal_alignment) {
 				const minutes = Math.floor((diff / (1000 * 60)) % 60);
 				const seconds = Math.floor((diff / 1000) % 60);
 
-				countdown.querySelector('#days').textContent = String(days).padStart(2, '0');
-				countdown.querySelector('#hours').textContent = String(hours).padStart(2, '0');
-				countdown.querySelector('#minutes').textContent = String(minutes).padStart(2, '0');
-				countdown.querySelector('#seconds').textContent = String(seconds).padStart(2, '0');
+				countdown.querySelector('[data-countdown="days"]').textContent = String(days).padStart(2, '0');
+				countdown.querySelector('[data-countdown="hours"]').textContent = String(hours).padStart(2, '0');
+				countdown.querySelector('[data-countdown="minutes"]').textContent = String(minutes).padStart(2, '0');
+				countdown.querySelector('[data-countdown="seconds"]').textContent = String(seconds).padStart(2, '0');
 			}
 
 			updateCountdown();
