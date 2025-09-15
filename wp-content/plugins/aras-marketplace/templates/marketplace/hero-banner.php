@@ -63,6 +63,6 @@ if (!get_field('marketplace_hero_headline', 'option') && !get_field('marketplace
   <?php $image = get_field('marketplace_hero_image', 'option');  ?>
   <?php if (!empty($image)) : ?>
     <div class="hero-background-overlay"></div>
-    <div class="hero-background-image" style="background-image:url(<?php echo wp_get_attachment_image_url($image, 'full'); ?>);" title="<?php echo wp_get_attachment_image($image, 'alt'); ?>"></div>
+    <div class="hero-background-image" style="background-image:url(<?php echo wp_get_attachment_image_url($image['id'], 'large'); ?>);" title="<?php echo wp_get_attachment_image($image['id'], 'alt'); ?>"></div>
   <?php endif; ?>
 </section>
