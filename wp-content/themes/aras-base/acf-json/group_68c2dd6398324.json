@@ -57,7 +57,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "display_format": "Y-m-d H:i:s",
             "return_format": "Y-m-d H:i:s",
             "first_day": 1,
@@ -78,7 +78,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 1,
             "choices": {
                 "Africa\/Abidjan": "Africa\/Abidjan",
                 "Africa\/Accra": "Africa\/Accra",
@@ -453,5 +453,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1758309188
+    "modified": 1758309366
 }
