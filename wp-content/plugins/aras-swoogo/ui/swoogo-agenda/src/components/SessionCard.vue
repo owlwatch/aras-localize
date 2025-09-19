@@ -74,6 +74,10 @@ function formatTime(time: string) {
 						p 
 							strong {{ speaker.first_name }} {{ speaker.last_name }}
 						p {{ speaker.job_title }}
+						p(
+							v-if="speaker.company"
+							style="font-weight: 400"
+						) {{ speaker.company }}
 </template>
 
 

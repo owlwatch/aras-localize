@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useEventStore } from './stores/event';
 import type {Sponsor, Event} from './stores/event';
 import { storeToRefs } from 'pinia';
