@@ -57,10 +57,11 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 3,
+            "wpml_cf_preferences": 0,
             "display_format": "Y-m-d H:i:s",
             "return_format": "Y-m-d H:i:s",
             "first_day": 1,
+            "default_to_current_date": 0,
             "allow_in_bindings": 0
         },
         {
@@ -452,5 +453,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1757688178
+    "modified": 1758309188
 }
