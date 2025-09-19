@@ -187,19 +187,19 @@ switch ($horizontal_alignment) {
 					<div class="countdown-timer" data-datetime="<?php echo esc_attr($datetime->format('Y-m-d H:i:s')); ?>" data-timezone="<?php echo esc_attr($timezone); ?>" data-expired-message="<?php echo esc_attr(get_sub_field('expired_message') ?: 'This event has passed.'); ?>">
 						<div class="countdown-segment">
 							<span class="countdown-number" data-countdown="days">00</span>
-							<span class="countdown-label">Days</span>
+							<span class="countdown-label"><?php echo _e('Days', 'aras'); ?></span>
 						</div>
 						<div class="countdown-segment">
 							<span class="countdown-number" data-countdown="hours">00</span>
-							<span class="countdown-label">Hours</span>
+							<span class="countdown-label"><?php echo _e('Hours', 'aras'); ?></span>
 						</div>
 						<div class="countdown-segment">
 							<span class="countdown-number" data-countdown="minutes">00</span>
-							<span class="countdown-label">Minutes</span>
+							<span class="countdown-label"><?php echo _e('Minutes', 'aras'); ?></span>
 						</div>
 						<div class="countdown-segment">
 							<span class="countdown-number" data-countdown="seconds">00</span>
-							<span class="countdown-label">Seconds</span>
+							<span class="countdown-label"><?php echo _e('Seconds', 'aras'); ?></span>
 						</div>
 					</div>
 
