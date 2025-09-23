@@ -67,3 +67,15 @@ function joints_custom_admin_footer() {
 
 // adding it to the admin area
 add_filter('admin_footer_text', 'joints_custom_admin_footer');
+
+// update media author when enable media replace upload is done
+add_action('enable-media-replace-upload-done', function($target_url, $source_url, $post_id){
+	$updated_author_id = get_post_meta($this->post_id, '_emr_replace_author', true);
+	$author_id = get_post_field('post_author', $post_id);
+	if( $updated_author_id && $author_id != $updated_author_id ){
+		wp_update_post([
+			'ID' => $post_id,
+			'post_author' => $author_id
+		]);
+	}
+}, 10, 3);

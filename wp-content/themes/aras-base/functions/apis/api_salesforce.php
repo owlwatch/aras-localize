@@ -28,7 +28,7 @@ function update_salesforce_data()
 	$partners_url = 'https://aras1.my.salesforce.com/services/data/v60.0/ui-api/list-records/00BUM000000arH72AI';
 	$p_query_params = array(
 		'optionalFields' => '
-			Partner_Integrations__c,Partner_Icon_For_Website__c,Aras_Website__c,Partners_URL_Link__c,Partner_Info__c,Partner_Name_For_Website__c,Industries_Partner__c,Partner_Solutions__c,Type_Partner__c,Regions_Partner__c,Name,Partner_Name_For_Website_Japan__c,Partner_Info_Japan__c',
+			Partner_Integrations__c,Partner_Icon_For_Website__c,Aras_Website__c,Partners_URL_Link__c,Partner_Info__c,Partner_Name_For_Website__c,Industries_Partner__c,Partner_Solutions__c,Type_Partner__c,Regions_Partner__c,Name,Partner_Name_For_Website_Japan__c,Partner_Info_Japan__c,Certifications__c',
 		'sortBy' => 'Name',
 		'pageSize' => '2000'
 	);
@@ -165,6 +165,7 @@ function update_partners_from_file()
 	$unique_Type_Partner__c = [];
 	$unique_Regions_Partner__c = [];
 	$unique_Partner_Integrations__c = [];
+	$unique_Certifications__c = [];
 
 	foreach ($partners_data['records'] as $record) {
 		$Partner_Name_For_Website__c = $record['fields']['Partner_Name_For_Website__c']['value'];
@@ -175,6 +176,7 @@ function update_partners_from_file()
 		$Partner_Solutions__c = $record['fields']['Partner_Solutions__c']['displayValue'];
 		$Type_Partner__c = $record['fields']['Type_Partner__c']['displayValue'];
 		$Regions_Partner__c = $record['fields']['Regions_Partner__c']['displayValue'];
+		$Certifications__c = $record['fields']['Certifications__c']['displayValue'];
 		$Partner_Integrations__c = $record['fields']['Partner_Integrations__c']['displayValue'];
 		//$formatted_Industries_Partner__c = formatCatString($Industries_Partner__c);
 		//$formatted_Partner_Solutions__c = formatCatString($Partner_Solutions__c);
@@ -192,6 +194,8 @@ function update_partners_from_file()
 		$terms_Solutions = explode(';', $Partner_Solutions__c);
 		$unique_Partner_Solutions__c = array_merge($unique_Partner_Solutions__c, array_unique($terms_Solutions));
 		$terms_Type = explode(';', $Type_Partner__c);
+		$terms_Certifications = explode(';', $Certifications__c);
+		$unique_Certifications__c = array_merge($unique_Certifications__c, array_unique($terms_Certifications));
 		$unique_Type_Partner__c = array_merge($unique_Type_Partner__c, array_unique($terms_Type));
 		$terms_Regions = explode(';', $Regions_Partner__c);
 		$unique_Regions_Partner__c = array_merge($unique_Regions_Partner__c, array_unique($terms_Regions));
@@ -214,6 +218,7 @@ function update_partners_from_file()
 
 				update_field('partner_name_for_website_japan__c', $Partner_Name_For_Website_Japan__c, $existing_post->ID);
 				update_field('partner_info_japan__c', $Partner_Info_Japan__c, $existing_post->ID);
+				update_field('certifications__c', $Certifications__c, $existing_post->ID);
 			} else {
 				//New partner means new post
 				$post_args = array(
@@ -234,6 +239,8 @@ function update_partners_from_file()
 
 				update_field('partner_name_for_website_japan__c', $Partner_Name_For_Website_Japan__c, $new_post_id);
 				update_field('partner_info_japan__c', $Partner_Info_Japan__c, $new_post_id);
+
+				update_field('certifications__c', $Certifications__c, $new_post_id);
 			}
 		}
 	}
@@ -243,13 +250,15 @@ function update_partners_from_file()
 	$unique_Type_Partner__c = array_unique($unique_Type_Partner__c);
 	$unique_Regions_Partner__c = array_unique($unique_Regions_Partner__c);
 	$unique_Partner_Integrations__c = array_unique($unique_Partner_Integrations__c);
+	$unique_Certifications__c = array_unique($unique_Certifications__c);
 	// Now combine all the arrays into one mega-array
 	$merged_partner_cat_array = array(
 		'Industries_Partner__c' => $unique_Industries_Partner__c,
 		'Partner_Solutions__c' => $unique_Partner_Solutions__c,
 		'Type_Partner__c' => $unique_Type_Partner__c,
 		'Regions_Partner__c' => $unique_Regions_Partner__c,
-		'Partner_Integrations__c' => $unique_Partner_Integrations__c
+		'Partner_Integrations__c' => $unique_Partner_Integrations__c,
+		'Certifications__c' => $unique_Certifications__c
 	);
 	// And now save the mega-array as a file to be accessed for the filters
 	$api_folder = get_template_directory() . '/api_json/';

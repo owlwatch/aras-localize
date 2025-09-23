@@ -40,6 +40,19 @@ if ($partner_integrations) {
 } else {
 	$integrations_slugs_list = '';
 }
+
+$certifications = get_field('certifications__c');
+if ($certifications) {
+	$certifications_array = explode(';', $certifications);
+	// add cert_ prefix to each slug
+	$certifications_array = array_map(function($item) {
+		return 'cert_' . $item;
+	}, $certifications_array);
+	$certifications_slugs = array_map('sanitize_and_convert_to_slug', $certifications_array);
+	$certifications_slugs_list = implode(' ', $certifications_slugs);
+} else {
+	$certifications_slugs_list = '';
+}
 ?>
 
 <?php if (get_field('partner_icon_for_website__c')) {
@@ -55,7 +68,7 @@ if ($partner_integrations) {
 	} else {
 		$partner_title = get_the_title('');
 	} ?>
-	<div class="partner-item mix <?= "$industries_slugs_list $solutions_slugs_list $type_slugs_list $regions_slugs_list $integrations_slugs_list" ?>">
+	<div class="partner-item mix <?= "$industries_slugs_list $solutions_slugs_list $type_slugs_list $regions_slugs_list $integrations_slugs_list $certifications_slugs_list" ?>">
 		<a aria-label="<?php echo $partner_title; ?>" title="<?php echo $partner_title; ?>" href="<?php the_permalink() ?>">
 			<img src="<?php echo $thumbnail_url; ?>" alt="<?php echo $partner_title; ?>" title="<?php echo $partner_title; ?>" />
 		</a>

@@ -65,6 +65,24 @@ function generate_slug($termname)
           </div>
         </div>
         <div  class="partner-filters">
+
+          <fieldset class="partner-filters__item" data-filter-group="certification" data-logic="and">
+            <label for="partner-certification">
+                <?php echo get_field('partner_certification_label', 'option') ?: 'Certification' ?>
+            </label>
+              <select id="certification">
+                <option value="">
+                  <?php echo get_field('certification_label_all', 'option') ?: 'All Certifications' ?>
+                </option>
+                <?php foreach ($filter_data['Certifications__c'] as $termname) : ?>
+                  <?php if (!empty($termname)) : ?>
+                    <?php $termslug = generate_slug('cert_'.$termname); ?>
+                    <option value=".<?php echo $termslug; ?>"><?php echo $termname; ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </select>
+          </fieldset>
+          
           <fieldset class="partner-filters__item" data-filter-group="partner-type" data-logic="and">
             <label for="partner-type">
                 <?php echo get_field('partner_type_label', 'option') ?: 'Type' ?>
