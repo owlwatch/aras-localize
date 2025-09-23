@@ -68,11 +68,11 @@ function generate_slug($termname)
 
           <fieldset class="partner-filters__item" data-filter-group="certification" data-logic="and">
             <label for="partner-certification">
-                <?php echo get_field('partner_certification_label', 'option') ?: 'Certification' ?>
+                <?php echo get_field('partner_certification_filter_label', 'option') ?: 'Certification' ?>
             </label>
               <select id="certification">
                 <option value="">
-                  <?php echo get_field('certification_label_all', 'option') ?: 'All Certifications' ?>
+                  <?php echo get_field('partner_certification_filter_label_all', 'option') ?: 'All Certifications' ?>
                 </option>
                 <?php foreach ($filter_data['Certifications__c'] as $termname) : ?>
                   <?php if (!empty($termname)) : ?>

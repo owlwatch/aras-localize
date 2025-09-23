@@ -77,6 +77,20 @@ if (str_contains($site_url, '/ja-jp/')) {
 					$types = array_map('trim', explode( ';', get_field('type_partner__c')));
 					$is_solution = in_array('Solutions', $types);
 					?>
+
+					<?php if (get_field('certifications__c')) : ?>
+						<?php $partner_certifications = get_field('certifications__c');
+						$partner_certifications_formatted = str_replace(';', ', ', $partner_certifications); ?>
+						<div class="filters-item">
+							<?php if (get_field('partner_single_certifications_label', 'option')) : ?>
+								<h6><?php echo get_field('partner_single_certifications_label', 'option'); ?></h6>
+							<?php else : ?>
+								<h6>Certifications</h6>
+							<?php endif; ?>
+							<p><?= "$partner_certifications_formatted" ?></p>
+						</div>
+					<?php endif; ?>
+
 					<?php if (get_field('type_partner__c')) : ?>
 						<?php $partner_type = get_field('type_partner__c');
 						$partner_type_formatted = str_replace(';', ', ', $partner_type); ?>
