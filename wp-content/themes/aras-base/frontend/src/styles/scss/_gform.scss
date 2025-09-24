@@ -22,6 +22,11 @@
     display: none !important;
   }
 
+  .gfield--type-multi_choice > .gfield_label {
+    display: block !important;
+    margin-bottom: 0.5em !important;
+  }
+
   input[type=text],
   input[type=email],
   input[type=tel],
