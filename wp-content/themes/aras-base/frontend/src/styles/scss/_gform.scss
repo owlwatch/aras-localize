@@ -1,4 +1,5 @@
 .gform_wrapper {
+  --gf-color-primary: var(--primary);
   .gform_heading {
     height: min-content;
     width: fit-content;
@@ -106,7 +107,8 @@
     justify-content: center;
   }
 
-  input[type=submit].button {
+  input[type=submit].button,
+  .gform_next_button{
     background-color: $black !important;
     border: solid 2px $black !important;
     border-radius: 0px !important;
