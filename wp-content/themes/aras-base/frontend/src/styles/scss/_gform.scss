@@ -24,7 +24,15 @@
 
   .gfield--type-multi_choice > .gfield_label {
     display: block !important;
-    margin-bottom: 0.5em !important;
+    margin-bottom: 1em !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  .gfield_required {
+    margin-left: 0.2em;
   }
 
   input[type=text],
