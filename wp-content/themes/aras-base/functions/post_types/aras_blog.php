@@ -55,7 +55,7 @@ function aras_author_where($where, $query)
 
 	foreach( [$re, $re2] as $regex ){
 		$where = preg_replace_callback($regex, function( $matches ){
-			return '((' . $matches[0] . " AND co_authors_null.post_id IS NULL) OR co_authors.meta_value LIKE '%\"{$matches[2]}\"%' )";
+			return '(' . $matches[0] . " OR (co_authors.post_id IS NOT NULL AND co_authors.meta_value LIKE '%\"{$matches[2]}\"%' ))";
 		}, $where);
 	}
 
@@ -72,9 +72,7 @@ function aras_author_join( $join, $query )
 	// we need to add our co_author join
 	global $wpdb;
 	$join .= " LEFT JOIN {$wpdb->postmeta} AS co_authors ON (
-		{$wpdb->posts}.ID = co_authors.post_id
-	) LEFT JOIN {$wpdb->postmeta} AS co_authors_null ON (
-		{$wpdb->posts}.ID = co_authors_null.post_id AND co_authors_null.meta_key = 'co_authors'
+		{$wpdb->posts}.ID = co_authors.post_id AND co_authors.meta_key = 'co_authors'
 	)";
 	return $join;
 }
@@ -91,3 +89,11 @@ function aras_author_groupby( $groupby, $query )
 	return $groupby;
 }
 add_filter('posts_groupby', 'aras_author_groupby', 10, 2);
+
+// debug the SQL query to error_log if the query has author
+add_action('posts_request', function($sql, $query){
+	if( $query->get('author') ){
+		error_log($sql);
+	}
+	return $sql;
+}, 10, 2);
