@@ -1,5 +1,7 @@
 .gform_wrapper {
+  
   --gf-color-primary: var(--primary);
+
   .gform_heading {
     height: min-content;
     width: fit-content;
@@ -195,6 +197,10 @@
         color: var(--orange) !important;
       }
     }
+  }
+
+  .gf_step_completed .gf_step_number {
+    --gf-local-bg-color: var(--primary);
   }
 
   .gfield--type-address {
