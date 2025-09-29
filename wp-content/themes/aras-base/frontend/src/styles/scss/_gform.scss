@@ -22,7 +22,23 @@
   }
 
   .gfield_label {
-    display: none !important;
+    // :not(.gform_page.show-labels &) {
+      display: none !important;
+    // }
+  }
+
+  .gform_page.show-labels {
+    .gform_page_fields > .gform_fields {
+      row-gap: 2.5em !important;
+    }
+    .gfield_label {
+      display: block !important;
+      margin-bottom: 0.5em !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      font-size: 1rem;
+    }
   }
 
   .gfield--type-multi_choice > .gfield_label {
