@@ -154,14 +154,6 @@ class QualifiedIntegration
 		$form_id = $form['id'];
 		$confirmation .= "<div id='gf_$form_id'></div>";
 
-		// debug confirmation at this point
-		error_log(print_r(
-			[
-				'fn' => 'qualified\gform_confiramtion',
-				'confirmation' => $confirmation,
-			],
-			true
-		));
 		return $confirmation;
 	}
 
