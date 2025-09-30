@@ -10,6 +10,8 @@ class GravityForms
 
 	private $confirmation_output_buffer = '';
 
+	public static $pageHasForm = false;
+
 	public static function getInstance()
 	{
 		if (! isset(self::$instance)) {
@@ -47,6 +49,36 @@ class GravityForms
 		add_filter('gform_confirmation_anchor', function($offset, $form) {
 			return false;
 		}, 10, 2);
+		add_action('wp_footer', function() {
+			if( !self::$pageHasForm ){
+				return;
+			}
+			?>
+			<script>
+				(function(){
+					function scrollToForm( form_id ){
+						console.log( 'scrollToForm', form_id )
+						let div = document.getElementById('gform_wrapper_'+form_id);
+						// make sure the form has the right offset
+						if( !div ){
+							div = document.getElementById('gform_confirmation_wrapper_'+form_id);
+							if( !div ){
+								return;
+							}
+						}
+						div.style.scrollMarginTop = 'var(--aras-header-height)';
+						if( div ){
+							div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+						}
+					}
+					jQuery(document).on('gform_confirmation_loaded gform_page_loaded', function(event, formId){
+						// code to be triggered when the confirmation page is loaded
+						scrollToForm( formId );
+					});
+				})();
+			</script>
+			<?php
+		});
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
@@ -375,6 +407,7 @@ class GravityForms
 
 	public function gform_form_tag ($output, $form) {
 
+		self::$pageHasForm = true;
 
 		global $vxg_marketo;
 		if (!isset($vxg_marketo)) {
