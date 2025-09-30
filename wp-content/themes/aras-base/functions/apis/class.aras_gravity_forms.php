@@ -45,7 +45,7 @@ class GravityForms
 
 		// add a scroll offset for the gform anchor
 		add_filter('gform_confirmation_anchor', function($offset, $form) {
-			return 120;
+			return 20;
 		}, 10, 2);
 	}
 
@@ -270,7 +270,7 @@ class GravityForms
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
 		$post_id = url_to_postid( $entry['source_url'] );
-		$post_submission = $this->_get_post_submission_config( $post_id );
+		$post_submission = $this->_get_post_submission_config( $post_id, $form['id'] );
 
 		// debug confirmation at this point
 		error_log(print_r(
@@ -436,6 +436,7 @@ class GravityForms
 		$fn = $sub_field ? 'get_sub_field' : 'get_field';
 		$config = [
 			'action' => $fn('post_submission_action', $page_id),
+			'form_shortcode' => $fn('form_shortcode', $page_id),
 			'content_behavior' => $fn('post-post_submission_content_behavior', $page_id),
 			'redirect_url' => $fn('post-submission_redirect_url', $page_id),
 			'custom_confirmation_message' => $fn('custom_confirmation_message', $page_id),
@@ -447,13 +448,16 @@ class GravityForms
 		return $config;
 	}
 
-	private function _get_post_submission_config( $page_id=null )
+	private function _get_post_submission_config( $page_id=null, $form_id=null )
 	{
 		$post_submission = false;
 		$current_page_id = $page_id ?: get_queried_object_id();
 
 		if( get_field('post_submission_action', $current_page_id) ) {
 			$post_submission = $this->_retrieve_post_submission_config( $current_page_id, false, 'post' );
+			if( $post_submission['form_shortcode'] == $form_id ){
+				return $post_submission;
+			}
 		}
 
 		if (have_rows('flexible_content', $current_page_id)) {
@@ -463,6 +467,9 @@ class GravityForms
 					
 					if( get_sub_field('post_submission_action' ) ){
 						$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'full_width_form_section' );
+						if( $post_submission['form_shortcode'] == $form_id ){
+							return $post_submission;
+						}
 					}
 					if (have_rows('right_content', $current_page_id)) {
 						while (have_rows('right_content', $current_page_id)) {
@@ -472,6 +479,9 @@ class GravityForms
 									the_row();
 									if (get_sub_field('post_submission_action', $current_page_id)) {
 										$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'split_content_section:right' );
+										if( $post_submission['form_shortcode'] == $form_id ){
+											return $post_submission;
+										}
 									}
 								}
 							}
@@ -485,6 +495,9 @@ class GravityForms
 									the_row();
 									if (get_sub_field('post_submission_action', $current_page_id)) {
 										$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'split_content_section:left' );
+										if( $post_submission['form_shortcode'] == $form_id ){
+											return $post_submission;
+										}
 									}
 								}
 							}
