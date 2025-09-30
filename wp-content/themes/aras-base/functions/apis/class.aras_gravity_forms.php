@@ -42,6 +42,11 @@ class GravityForms
 
 		// japanese fix for last name before first name
 		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
+
+		// add a scroll offset for the gform anchor
+		add_filter('gform_confirmation_anchor', function($offset, $form) {
+			return 120;
+		}, 10, 2);
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
