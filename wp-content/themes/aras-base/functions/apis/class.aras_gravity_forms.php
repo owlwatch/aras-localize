@@ -45,7 +45,7 @@ class GravityForms
 
 		// add a scroll offset for the gform anchor
 		add_filter('gform_confirmation_anchor', function($offset, $form) {
-			return 20;
+			return false;
 		}, 10, 2);
 	}
 
