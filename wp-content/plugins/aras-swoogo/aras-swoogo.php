@@ -22,4 +22,7 @@ function app(){
 	return App::getInstance();
 }
 
-app(); // initialize the app
+add_action('init', function(){
+	// load text domain
+	app();
+});

@@ -260,6 +260,11 @@ class GravityForms
 
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
+		error_log(print_r([
+			'fn' => 'gform_confirmation',
+			'confirmation' => $confirmation
+		], true));
+		
 		$post_id = url_to_postid( $entry['source_url'] );
 		$post_submission = $this->_get_post_submission_config( $post_id );
 		if( !$post_submission ){
