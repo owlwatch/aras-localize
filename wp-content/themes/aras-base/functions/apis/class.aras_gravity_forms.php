@@ -98,6 +98,13 @@ class GravityForms
 			return $result;
 		}
 
+		// check for non http/https protocols and fail validation
+		if ( preg_match( '#^[a-zA-Z]+://#i', $value ) && ! preg_match( '#^https?://#i', $value ) ) {
+			$result['is_valid'] = false;
+			$result['message']  = 'Please enter a valid URL.';
+			return $result;
+		}
+
 		// Accept values without protocol (example.com)
 		// We'll prepend later during save
 		if ( ! preg_match( '#^https?://#i', $value ) ) {
@@ -106,6 +113,10 @@ class GravityForms
 			if ( filter_var( 'https://' . $value, FILTER_VALIDATE_URL ) !== false ) {
 				$result['is_valid'] = true;
 				$result['message']  = '';
+			}
+			else {
+				$result['is_valid'] = false;
+				$result['message']  = 'Please enter a valid URL.';
 			}
 		}
 
