@@ -102,12 +102,10 @@ class GravityForms
 		// We'll prepend later during save
 		if ( ! preg_match( '#^https?://#i', $value ) ) {
 			// Treat as valid for now
-			$value = 'https://' . $value; // Prepend for validation
 			// check if it's a valid url now
-			if ( ! filter_var( $value, FILTER_VALIDATE_URL ) ) {
+			if ( filter_var( 'https://' . $value, FILTER_VALIDATE_URL ) === false ) {
 				$result['is_valid'] = false;
 				$result['message']  = 'Please enter a valid URL.';
-				return $result;
 			}
 		}
 
