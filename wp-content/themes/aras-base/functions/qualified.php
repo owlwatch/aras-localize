@@ -82,7 +82,7 @@ class QualifiedIntegration
 			$confirmation = '<div class="aras-redirecting">'.$redirectingText.'</div>';
 		}
 
-		else if( $enabled ){
+		else if( $enabled && is_string($confirmation) ){
 			// get the qualified script
 			$script = $this->get_qualified_script($enabled);
 			if ($script) {
@@ -154,6 +154,14 @@ class QualifiedIntegration
 		$form_id = $form['id'];
 		$confirmation .= "<div id='gf_$form_id'></div>";
 
+		// debug confirmation at this point
+		error_log(print_r(
+			[
+				'fn' => 'qualified\gform_confiramtion',
+				'confirmation' => $confirmation,
+			],
+			true
+		));
 		return $confirmation;
 	}
 
