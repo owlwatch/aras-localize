@@ -1,6 +1,7 @@
 .gform_wrapper {
   
   --gf-color-primary: var(--primary);
+  
 
   .gform_heading {
     height: min-content;
@@ -215,8 +216,13 @@
     }
   }
 
-  .gf_step_completed .gf_step_number {
-    --gf-local-bg-color: var(--primary);
+  .gf_page_steps .gf_step_completed .gf_step_number{
+    --gf-local-bg-color: var(--dblue);
+    --gf-local-border-color: var(--dblue);
+    &::after {
+      --gf-field-pg-steps-number-bg-color-complete: var(--gf-local-bg-color);
+      --gf-field-pg-steps-number-border-color-complete: var(--gf-local-border-color);
+    }
   }
 
   .gfield--type-address {
