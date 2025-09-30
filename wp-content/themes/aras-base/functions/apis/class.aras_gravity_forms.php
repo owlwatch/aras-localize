@@ -45,6 +45,9 @@ class GravityForms
 		// japanese fix for last name before first name
 		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
 
+		// add a filter that will modify the submitted value to add https:// to any url field that doesn't have it
+		add_filter('gform_pre_submission_filter', [$this, 'gform_pre_submission_filter'], 10, 1);
+
 		// add a scroll offset for the gform anchor
 		add_filter('gform_confirmation_anchor', function($offset, $form) {
 			return false;
@@ -79,6 +82,19 @@ class GravityForms
 			</script>
 			<?php
 		});
+	}
+
+	public function gform_pre_submission_filter( $form ) {
+		foreach( $form['fields'] as $field ){
+			if( in_array( $field->type, ['website', 'url'] ) ){
+				$field_id = $field->id;
+				$value = rgpost( "input_{$field_id}" );
+				if( $value && !preg_match('/^https?:\/\//i', $value) ){
+					$_POST["input_{$field_id}"] = 'https://' . $value;
+				}
+			}
+		}
+		return $form;
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
