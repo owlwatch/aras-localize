@@ -46,7 +46,10 @@ class GravityForms
 		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
 
 		// add a filter that will modify the submitted value to add https:// to any url field that doesn't have it
-		add_filter('gform_pre_submission_filter', [$this, 'gform_pre_submission_filter'], 10, 1);
+		add_filter('gform_field_validation', [$this, 'allow_missing_protocol_in_website_fields'], 10, 4);
+
+		// save any website field values with the https:// if missing
+		add_filter('gform_save_field_value', [$this, 'prepend_protocol_to_website_fields'], 10, 4);
 
 		// add a scroll offset for the gform anchor
 		add_filter('gform_confirmation_anchor', function($offset, $form) {
@@ -84,17 +87,50 @@ class GravityForms
 		});
 	}
 
-	public function gform_pre_submission_filter( $form ) {
-		foreach( $form['fields'] as $field ){
-			if( in_array( $field->type, ['website', 'url'] ) ){
-				$field_id = $field->id;
-				$value = rgpost( "input_{$field_id}" );
-				if( $value && !preg_match('/^https?:\/\//i', $value) ){
-					$_POST["input_{$field_id}"] = 'https://' . $value;
-				}
+	public function allow_missing_protocol_in_website_fields( $result, $value, $form, $field  ) {
+		// Only target Website field type
+		if ( $field->type !== 'website' ) {
+			return $result;
+		}
+
+		// If empty, skip (required field check still applies)
+		if ( rgblank( $value ) ) {
+			return $result;
+		}
+
+		// Accept values without protocol (example.com)
+		// We'll prepend later during save
+		if ( ! preg_match( '#^https?://#i', $value ) ) {
+			// Treat as valid for now
+			$value = 'https://' . $value; // Prepend for validation
+			// check if it's a valid url now
+			if ( ! filter_var( $value, FILTER_VALIDATE_URL ) ) {
+				$result['is_valid'] = false;
+				$result['message']  = 'Please enter a valid URL.';
+				return $result;
 			}
 		}
-		return $form;
+
+		return $result;
+	}
+
+	public function prepend_protocol_to_website_fields( $value, $field, $lead, $form ) {
+		// Only target Website field type
+		if ( $field->type !== 'website' ) {
+			return $value;
+		}
+
+		// If empty, skip (required field check still applies)
+		if ( rgblank( $value ) ) {
+			return $value;
+		}
+
+		// Prepend https:// if missing and no other protocol present
+		if (  ! preg_match( '#^[a-zA-Z]+://#i', $value ) ) {
+			$value = 'https://' . $value;
+		}
+
+		return $value;
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
