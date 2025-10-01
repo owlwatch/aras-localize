@@ -3,11 +3,33 @@
     "title": "Swoogo: Options",
     "fields": [
         {
-            "key": "field_676edf88fc491",
-            "label": "Sync",
-            "name": "",
+            "key": "field_68dd1646ca5b4",
+            "label": "Swoogo API Key",
+            "name": "swoogo_api_key",
             "aria-label": "",
-            "type": "tab",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68dd1659ca5b5",
+            "label": "Swoogo API Secret",
+            "name": "swoogo_api_secret",
+            "aria-label": "",
+            "type": "password",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -17,9 +39,10 @@
                 "id": ""
             },
             "wpml_cf_preferences": 1,
-            "placement": "left",
-            "endpoint": 0,
-            "selected": 0
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_676ed239d45a1",
@@ -58,7 +81,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
                     "maxlength": "",
                     "allow_in_bindings": 0,
@@ -68,69 +91,6 @@
                     "parent_repeater": "field_676ed239d45a1"
                 }
             ]
-        },
-        {
-            "key": "field_6730a8d066061",
-            "label": "Swoogo API",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "placement": "left",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_6730a8e666062",
-            "label": "Swoogo API Key",
-            "name": "swoogo_api_key",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6730a8f466063",
-            "label": "Swoogo API Secret",
-            "name": "swoogo_api_secret",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         }
     ],
     "location": [
@@ -151,6 +111,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "advanced",
-    "modified": 1747164558
+    "acfml_field_group_mode": "translation",
+    "modified": 1759319682
 }

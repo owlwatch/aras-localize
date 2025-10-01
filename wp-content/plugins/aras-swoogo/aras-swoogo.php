@@ -22,7 +22,5 @@ function app(){
 	return App::getInstance();
 }
 
-add_action('init', function(){
-	// load text domain
-	app();
-});
+// debug if the 'init' action has already fired
+app();

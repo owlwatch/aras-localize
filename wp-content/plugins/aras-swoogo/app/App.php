@@ -55,6 +55,33 @@ class App {
 		$this->acfService = new Service\ACF();
 		$this->adminService = new Service\Admin();
 
+		
+		// allow for tests
+		if( did_action( 'init' ) ){
+			$this->init();
+		}
+		else {
+			add_action('init', [$this, 'init']);
+		}
+	}
+
+	/**
+	 * Get the instance of the class
+	 *
+	 * @return App
+	 */
+	public static function getInstance() {
+
+		if ( self::$instance == null ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	public function init()
+	{
+		
 		// get our token and secret
 		$key = get_field('swoogo_api_key', 'option');
 		$secret = get_field('swoogo_api_secret', 'option');
@@ -76,27 +103,6 @@ class App {
 			$this->agendaUI
 		);
 
-		// allow for tests
-		// add_action('init', [$this, 'init']);
-		$this->init();
-	}
-
-	/**
-	 * Get the instance of the class
-	 *
-	 * @return App
-	 */
-	public static function getInstance() {
-
-		if ( self::$instance == null ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
-
-	public function init()
-	{
 		if( !empty( $_REQUEST['test-swoogo-sync-event'] ) ){
 			$event_id = $_REQUEST['test-swoogo-sync-event'];
 			$lang = $_REQUEST['lang'] ?? 'en';
