@@ -78,11 +78,6 @@ class App {
 		$key = get_field('swoogo_api_key', 'option');
 		$secret = get_field('swoogo_api_secret', 'option');
 
-		error_log( print_r([
-			'key' => $key,
-			'secret' => $secret
-		], true) );
-
 		if( !$key || !$secret ){
 			return;
 		}
