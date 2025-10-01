@@ -54,15 +54,7 @@ class App {
 		// lets set up our services
 		$this->acfService = new Service\ACF();
 		$this->adminService = new Service\Admin();
-
-		
-		// allow for tests
-		if( did_action( 'init' ) ){
-			$this->init();
-		}
-		else {
-			add_action('init', [$this, 'init']);
-		}
+		add_action('init', [$this, 'init']);
 	}
 
 	/**
@@ -85,6 +77,11 @@ class App {
 		// get our token and secret
 		$key = get_field('swoogo_api_key', 'option');
 		$secret = get_field('swoogo_api_secret', 'option');
+
+		error_log( print_r([
+			'key' => $key,
+			'secret' => $secret
+		], true) );
 
 		if( !$key || !$secret ){
 			return;
