@@ -73,10 +73,28 @@ class App {
 
 	public function init()
 	{
+
+		// log the current path and the file/line
+		error_log( print_r([
+			'message' => 'Aras\Swoogo\App::init',
+			'file' => __FILE__,
+			'line' => __LINE__,
+			'request_uri' => $_SERVER['REQUEST_URI'] ?? ''
+		], true) );
 		
 		// get our token and secret
 		$key = get_field('swoogo_api_key', 'option');
 		$secret = get_field('swoogo_api_secret', 'option');
+
+		// log the current path and the file/line
+		error_log( print_r([
+			'message' => 'Aras\Swoogo\App::init',
+			'key' => $key ? 'set' : 'not set',
+			'secret' => $secret ? 'set' : 'not set',
+			'file' => __FILE__,
+			'line' => __LINE__,
+			'request_uri' => $_SERVER['REQUEST_URI'] ?? ''
+		], true) );
 
 		if( !$key || !$secret ){
 			return;
