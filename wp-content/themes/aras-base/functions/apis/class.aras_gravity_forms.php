@@ -158,10 +158,6 @@ class GravityForms
 
 	public function gform_confirmation_append_output($confirmation, $form, $entry, $ajax)
 	{
-		error_log(print_r([
-			'fn' => 'gform_confirmation_append_output',
-			'confirmation' => $confirmation
-		], true));
 		if( !is_array( $confirmation) ){
 			$confirmation .= $this->confirmation_output_buffer;
 		}
@@ -365,15 +361,7 @@ class GravityForms
 		$post_id = url_to_postid( $entry['source_url'] );
 		$post_submission = $this->_get_post_submission_config( $post_id, $form['id'] );
 
-		// debug confirmation at this point
-		error_log(print_r(
-			[
-				'fn' => 'GravityForms::gform_confirmation',
-				'post_submission' => $post_submission,
-			],
-			true
-		));
-
+		
 		if( !$post_submission ){
 			error_log( 'no post submission' );
 			return $confirmation;
@@ -425,14 +413,6 @@ class GravityForms
 			$use_standard_gravity_form_confirmation = true;
 
 			if( $use_standard_gravity_form_confirmation ){
-				// debug confirmation at this point
-				error_log(print_r(
-					[
-						'fn' => 'GravityForms::gform_confirmation/use_standard_gravity_form_confirmation',
-						'confirmation' => $confirmation,
-					],
-					true
-				));
 				if( !empty($post_submission['content']) ){
 					$confirmation = $post_submission['content'];
 				}
@@ -442,15 +422,6 @@ class GravityForms
 			$confirmation = [
 				'redirect' => add_query_arg('id', $post_id, $redirect_url)
 			];
-
-			// debug confirmation at this point
-			error_log(print_r(
-				[
-					'fn' => 'GravityForms::gform_confirmation/end_of_function',
-					'confirmation' => $confirmation,
-				],
-				true
-			));
 
 			return $confirmation;
 

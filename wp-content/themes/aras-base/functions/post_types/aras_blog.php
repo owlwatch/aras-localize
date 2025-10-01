@@ -89,11 +89,3 @@ function aras_author_groupby( $groupby, $query )
 	return $groupby;
 }
 add_filter('posts_groupby', 'aras_author_groupby', 10, 2);
-
-// debug the SQL query to error_log if the query has author
-add_action('posts_request', function($sql, $query){
-	if( $query->get('author') ){
-		error_log($sql);
-	}
-	return $sql;
-}, 10, 2);
