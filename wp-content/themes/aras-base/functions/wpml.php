@@ -63,15 +63,20 @@ class WPML_Helper
 function get_wp_query( array $args, array $languages )
 {
 	global $sitepress, $wpml_query_filter;
-	remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
-	remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
-	remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
-	remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
-	$query = WPML_Helper::get_instance()->get_wp_query( $args, $languages );
-	add_filter('parse_query', array($sitepress, 'parse_query'), 10);
-	add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
-	add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
-	add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+	if( isset( $sitepress) ){
+		remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
+		remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+		remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
+		remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
+		$query = WPML_Helper::get_instance()->get_wp_query( $args, $languages );
+		add_filter('parse_query', array($sitepress, 'parse_query'), 10);
+		add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+		add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+		add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+	}
+	else {
+		$query = new WP_Query( $args );
+	}
 	return $query;
 }
 
@@ -116,19 +121,19 @@ function add_lang_to_user_profile( $user )
 }
 
 // we need to redirect to english for the admin page=wpseo_page
-add_action('admin_init', 'Aras\\WPML\\redirect_wpseo_page');
+// add_action('admin_init', 'Aras\\WPML\\redirect_wpseo_page');
 
-function redirect_wpseo_page()
-{
-	if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'wpseo_page_settings') {
-		// check current language
-		$current_language = apply_filters('wpml_current_language', null);
-		if ($current_language !== 'en') {
-			// redirect to english version of the page
-			$url = add_query_arg('lang', 'en', $_SERVER['REQUEST_URI']);
-			$url = add_query_arg('warn_about_wpseo_settings_languages', '1', $url);
-			wp_redirect($url);
-			exit;
-		}
-	}
-}
+// function redirect_wpseo_page()
+// {
+// 	if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'wpseo_page_settings') {
+// 		// check current language
+// 		$current_language = apply_filters('wpml_current_language', null);
+// 		if ($current_language !== 'en') {
+// 			// redirect to english version of the page
+// 			$url = add_query_arg('lang', 'en', $_SERVER['REQUEST_URI']);
+// 			$url = add_query_arg('warn_about_wpseo_settings_languages', '1', $url);
+// 			wp_redirect($url);
+// 			exit;
+// 		}
+// 	}
+// }

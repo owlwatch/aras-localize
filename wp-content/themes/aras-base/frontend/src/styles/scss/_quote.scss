@@ -13,7 +13,7 @@
             right: -833px;
             width: 1000px;
             height: calc(100% - 4rem);
-            background-image: url(../../images/quote-background.svg);
+            background-image: var( --aras-quote-bg, url(../../images/quote-background.svg) );
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom left;
@@ -40,7 +40,7 @@
     &.bg-white {
         .quote-container {
             &::before {
-                background-image: url(../../images/icons/quotemark-on-white.svg);
+                background-image: var( --aras-quotemark, url(../../images/icons/quotemark-on-white.svg) );
             }
         }
     }
@@ -59,7 +59,7 @@
 
         &::before {
             content: '';
-            background-image: url(../../images/icons/quotemark.svg);
+            background-image: var( --aras-quotemark, url(../../images/icons/quotemark-on-white.svg) );
             width: 65px;
             height: 65px;
             position: absolute;
@@ -174,10 +174,33 @@
         
     }
     .swiper-pagination-bullet {
-        background-color: #fff;
+        background-color: var(--aras-quote-swiper-pagination-bullet-bg, #fff);
         cursor: pointer;
     }
     .swiper-pagination-bullet-active {
-        background-color: #fff;
+        background-color: var(--aras-quote-swiper-pagination-bullet-active-bg, #fff);
+    }
+}
+
+.quote-attribution {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .quote-headshot {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        object-position: center;
+        flex-shrink: 0;
+    }
+
+    span {
+        font-weight: 500;
+        font-size: 1.2rem;
+        text-transform: none;
+        color: #000;
     }
 }

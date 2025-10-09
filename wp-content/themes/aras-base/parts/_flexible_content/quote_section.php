@@ -77,7 +77,8 @@
 			'font_size' => get_sub_field('quote_font_size') ?: 'default',
 			'attribution' => get_sub_field('quote_attribution'),
 			'attribution_url' => get_sub_field('quote_attribution_url'),
-			'attribution_logo' => get_sub_field('quote_attribution_logo')
+			'attribution_logo' => get_sub_field('quote_attribution_logo'),
+			'headshot' => get_sub_field('quote_headshot')
 		];
 		$quotes[] = $quote;
 	} else {
@@ -89,7 +90,8 @@
 				'font_size' => get_field('quote_font_size', $quote_post->ID) ?: 'default',
 				'attribution' => get_field('quote_attribution', $quote_post->ID),
 				'attribution_url' => get_field('quote_attribution_url', $quote_post->ID),
-				'attribution_logo' => get_field('quote_attribution_logo', $quote_post->ID)
+				'attribution_logo' => get_field('quote_attribution_logo', $quote_post->ID),
+				'headshot' => get_field('quote_headshot', $quote_post->ID)
 			];
 			$quotes[] = $quote;
 		}
@@ -107,8 +109,14 @@
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 	<section class="quote-section <?= "$bg_color" ?>" <?= "$anchor" ?>>
 		<div class="grid-container <?= "$toppadding $bottompadding" ?>">
-			<?php if (count($quotes) > 1) { ?>
-				<div class="quote-carousel swiper">
+			<?php if (count($quotes) > 1) {
+				$autoplay = get_sub_field('carousel_autoplay');
+				?>
+				<div
+					class="quote-carousel swiper"
+					data-autoplay="<?php echo esc_attr(json_encode($autoplay)); ?>"
+					data-duration="<?php echo esc_attr(get_sub_field('autoplay_duration') ?: 5000); ?>"
+				>
 					<div class="swiper-wrapper">
 					<?php } ?>
 					<?php
@@ -128,8 +136,15 @@
 										<?php endif; ?>
 										<?php if ($quote['attribution_url']) : ?>
 											<?php if ($quote['attribution']) : ?>
-												<a aria-label="<?php echo $quote['attribution']; ?>" class="attr-link" href="<?php echo $quote['attribution_url']; ?>" target="_blank">
-													<h6><?php echo $quote['attribution']; ?></h6>
+												<a class="quote-attribution h6" aria-label="<?php echo $quote['attribution']; ?>" class="attr-link" href="<?php echo $quote['attribution_url']; ?>" target="_blank">
+													<?php
+													if( $quote['headshot']){
+														?>
+														<img class="quote-headshot" src="<?php echo esc_url($quote['headshot']['medium']); ?>" alt="<?php if (esc_attr($quote['headshot']['alt'])) : ?> <?php echo esc_attr($quote['headshot']['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
+														<?php
+													}
+													?>
+													<span><?php echo $quote['attribution']; ?></span>
 												</a>
 											<?php endif; ?>
 											<?php $image = $quote['attribution_logo'];
@@ -140,7 +155,16 @@
 											<?php endif; ?>
 										<?php else : ?>
 											<?php if ($quote['attribution']) : ?>
-												<h6><?php echo $quote['attribution']; ?></h6>
+												<div class="quote-attribution h6">
+													<?php
+													if( $quote['headshot']){
+														?>
+														<img class="quote-headshot" src="<?php echo esc_url($quote['headshot']['sizes']['medium']); ?>" alt="<?php if (esc_attr($quote['headshot']['alt'])) : ?> <?php echo esc_attr($quote['headshot']['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
+														<?php
+													}
+													?>
+													<span><?php echo $quote['attribution']; ?></span>
+												</div>
 											<?php endif; ?>
 											<?php $image = $quote['attribution_logo'];
 											if (!empty($image)) : ?>

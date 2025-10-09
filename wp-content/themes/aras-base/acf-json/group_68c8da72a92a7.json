@@ -1,9 +1,9 @@
 {
-    "key": "group_65c2916595d3c",
-    "title": "Side Tabs Section",
+    "key": "group_68c8da72a92a7",
+    "title": "Top Tabs Section",
     "fields": [
         {
-            "key": "field_65c2916597f71",
+            "key": "field_68c8da72aa8ef",
             "label": "Content",
             "name": "",
             "aria-label": "",
@@ -22,7 +22,7 @@
             "selected": 0
         },
         {
-            "key": "field_65cfc240847cf",
+            "key": "field_68c8da72aa8f9",
             "label": "Content Before",
             "name": "content_before",
             "aria-label": "",
@@ -45,7 +45,7 @@
             "prefix_name": 0
         },
         {
-            "key": "field_65c2916597f8d",
+            "key": "field_68c8da72aa900",
             "label": "Tab Items",
             "name": "tab_items",
             "aria-label": "",
@@ -68,7 +68,7 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_65c2919c86b17",
+                    "key": "field_68c8da72ac359",
                     "label": "Tab Label",
                     "name": "tab_label",
                     "aria-label": "",
@@ -86,11 +86,11 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_65c2916597f8d",
+                    "parent_repeater": "field_68c8da72aa900",
                     "wpml_cf_preferences": 2
                 },
                 {
-                    "key": "field_65cf9c574b8aa",
+                    "key": "field_68c8da72ac35c",
                     "label": "Tab Subhead",
                     "name": "tab_subhead",
                     "aria-label": "",
@@ -108,11 +108,11 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_65c2916597f8d",
+                    "parent_repeater": "field_68c8da72aa900",
                     "wpml_cf_preferences": 2
                 },
                 {
-                    "key": "field_65cf9c6b4b8ab",
+                    "key": "field_68c8da72ac35f",
                     "label": "Tab Headline",
                     "name": "tab_headline",
                     "aria-label": "",
@@ -130,11 +130,42 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_65c2916597f8d",
+                    "parent_repeater": "field_68c8da72aa900",
                     "wpml_cf_preferences": 2
                 },
                 {
-                    "key": "field_65c291a686b18",
+                    "key": "field_68c8db51e9bb9",
+                    "label": "Tab Layout",
+                    "name": "tab_layout",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "full": "Full Width",
+                        "image-left": "Image Left",
+                        "image-right": "Image Right"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
+                    "parent_repeater": "field_68c8da72aa900"
+                },
+                {
+                    "key": "field_68c8da72ac362",
                     "label": "Tab Content",
                     "name": "tab_content",
                     "aria-label": "",
@@ -152,24 +183,31 @@
                     "toolbar": "full",
                     "media_upload": 1,
                     "delay": 0,
-                    "parent_repeater": "field_65c2916597f8d",
+                    "parent_repeater": "field_68c8da72aa900",
                     "wpml_cf_preferences": 2
                 },
                 {
-                    "key": "field_65cf9c774b8ac",
+                    "key": "field_68c8da72ac365",
                     "label": "Tab Visual",
                     "name": "tab_visual",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_68c8db51e9bb9",
+                                "operator": "!=",
+                                "value": "full"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "50",
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 2,
                     "return_format": "array",
                     "library": "all",
                     "min_width": "",
@@ -179,49 +217,12 @@
                     "max_height": "",
                     "max_size": "",
                     "mime_types": "",
+                    "allow_in_bindings": 1,
                     "preview_size": "medium",
-                    "parent_repeater": "field_65c2916597f8d"
+                    "parent_repeater": "field_68c8da72aa900"
                 },
                 {
-                    "key": "field_68d21d16df718",
-                    "label": "Tab Visual Placement",
-                    "name": "tab_visual_placement",
-                    "aria-label": "",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_65cf9c774b8ac",
-                                "operator": "!=empty"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "inline": "Inline",
-                        "left": "Left",
-                        "right": "Right"
-                    },
-                    "default_value": "inline",
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "allow_in_bindings": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "create_options": 0,
-                    "save_options": 0,
-                    "parent_repeater": "field_65c2916597f8d"
-                },
-                {
-                    "key": "field_65cf9c994b8ad",
+                    "key": "field_68c8da72ac368",
                     "label": "Tab Visual Link",
                     "name": "tab_visual_link",
                     "aria-label": "",
@@ -231,7 +232,7 @@
                     "conditional_logic": [
                         [
                             {
-                                "field": "field_65cf9c774b8ac",
+                                "field": "field_68c8da72ac365",
                                 "operator": "!=empty"
                             }
                         ]
@@ -243,10 +244,10 @@
                     },
                     "wpml_cf_preferences": 2,
                     "return_format": "array",
-                    "parent_repeater": "field_65c2916597f8d"
+                    "parent_repeater": "field_68c8da72aa900"
                 },
                 {
-                    "key": "field_65c293b927e45",
+                    "key": "field_68c8da72ac36b",
                     "label": "Tab Button",
                     "name": "tab_button",
                     "aria-label": "",
@@ -261,12 +262,12 @@
                     },
                     "wpml_cf_preferences": 2,
                     "return_format": "array",
-                    "parent_repeater": "field_65c2916597f8d"
+                    "parent_repeater": "field_68c8da72aa900"
                 }
             ]
         },
         {
-            "key": "field_65c2916597f9b",
+            "key": "field_68c8da72aa906",
             "label": "Options",
             "name": "",
             "aria-label": "",
@@ -285,37 +286,7 @@
             "selected": 0
         },
         {
-            "key": "field_65c293fefc604",
-            "label": "Tab Layout",
-            "name": "tab_layout",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 3,
-            "choices": {
-                "onecol": "One side column",
-                "twocol": "Two side columns",
-                "stacked": "Stacked above content"
-            },
-            "default_value": "onecol",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_65c2ab9a30917",
+            "key": "field_68c8da72aa90c",
             "label": "Background Color",
             "name": "background_color",
             "aria-label": "",
@@ -338,7 +309,7 @@
             "prefix_name": 0
         },
         {
-            "key": "field_65c2916597fb3",
+            "key": "field_68c8da72aa90f",
             "label": "Module Options",
             "name": "module_options",
             "aria-label": "",
@@ -359,35 +330,6 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
-        },
-        {
-            "key": "field_65cfc603e94d0",
-            "label": "Tab Label Style",
-            "name": "tab_label_style",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 3,
-            "choices": {
-                "standard": "Standard",
-                "upper": "All Uppercase"
-            },
-            "default_value": "standard",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
         }
     ],
     "location": [
@@ -423,5 +365,5 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758600867
+    "modified": 1757993908
 }

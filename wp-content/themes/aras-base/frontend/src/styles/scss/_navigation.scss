@@ -28,6 +28,55 @@
   &.header-simplenav {
     
   }
+  &.header-transparent {
+    position: fixed;
+    + section {
+      padding-top: calc( var(--aras-header-height, 120px) + 4em );
+    }
+    .nav-bar {
+      transition: 0.3s all;
+    }
+    &:not(.is-scrolled) .nav-bar,
+    .nav-bar .navigation,
+    .nav-bar .navigation .upper-nav .nav-search-form .search-arrow-icon{
+      background-color: transparent !important;
+    }
+    &:not(.is-scrolled) .nav-bar .navigation .upper-nav .nav-search-form {
+      border-bottom: transparent !important;
+    }
+
+    .nav-bar .navigation .upper-nav .nav-search-form .search-arrow-icon{
+      background-color: transparent !important;
+    }
+    .nav-bar .navigation .upper-nav .nav-search-form {
+      
+    }
+
+    &.header-light-text:not(.is-scrolled) {
+      
+      img.nav-logo {
+        filter: brightness(0) invert(1);
+      }
+
+      .nav-bar,
+      .nav-bar .navigation a:not(.aras-button),
+      .nav-bar .navigation button.toplevel,
+      .nav-bar .navigation .upper-nav .upper-nav-item,
+      .nav-bar .navigation .simplenav .simplenav-toplevel,
+      .nav-bar .navigation .simplenav .simplenav-button,
+      .nav-bar .navigation .meganav .meganav-top-level-button,
+      .nav-bar .navigation .meganav .nav-toplevel {
+        color: $white !important;
+      }
+      .nav-bar .navigation .upper-nav .nav-search-form:focus-within .search-field {
+        color: #fff;
+      }
+      .nav-bar .navigation .upper-nav .nav-search-form .search-arrow-icon {
+        filter: brightness(2);
+      }
+
+    }
+  }
 }
 
 /** ANNOUNCEMENT BAR **/
@@ -180,7 +229,7 @@
       text-align: left;
     }
 
-    a,
+    .dropdown a,
     .nav-toplevel {
       font-size: 15px;
       font-weight: 400;
@@ -525,7 +574,7 @@
 
     .mega-dropdown {
       top: 100%;
-      background-color: $dblue;
+      background-color: var( --aras-nav-mega-menu-dropdown-bg-color, $dblue );
       width: 100%;
       left: 0;
       right: 0;
@@ -550,7 +599,7 @@
 
         &:hover,
         &:focus {
-          color: var(--primary) !important;
+          color: var(--aras-nav-mega-menu-link-hover-color) !important;
         }
       }
 
@@ -582,7 +631,7 @@
 
         &:hover,
         &:focus {
-          color: var(--primary);
+          color: var(--aras-nav-mega-menu-link-hover-color, var(--white));
         }
 
         &.indent-item {
@@ -778,6 +827,10 @@
         text-decoration: none;
         color: var(--primary);
       }
+    }
+
+    .aras-button {
+      font-weight: 600;
     }
 
     .nav-search-form {
@@ -980,7 +1033,7 @@
 
         &:hover,
         &:focus {
-          color: var(--primary);
+          color: var(--aras-nav-mega-menu-link-hover-color);
           text-decoration: none;
         }
       }

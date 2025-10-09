@@ -96,7 +96,18 @@ $gtm_id = (is_singular('post') || is_home() || is_category() || is_author() || i
 				<header class="header header-none" role="banner">
 				</header>
 			<?php else : ?>
-				<header class="header header-base" role="banner">
+				<?php
+				$header_classes = [
+					'header-base'
+				];
+				if( get_field('header_transparent') ) {
+					$header_classes[] = 'header-transparent';
+					$header_classes[] = 'header-text-' . (get_field('header_text_color')?:'light');
+				}
+				$header_classes = apply_filters( 'aras_header_classes', $header_classes );
+				$header_classes = implode( ' ', $header_classes );
+				?>
+				<header class="header <?php echo $header_classes; ?>" role="banner">
 					<?php get_template_part('parts/nav', 'offcanvas-global'); ?>
 				</header>
 			<?php endif; ?>

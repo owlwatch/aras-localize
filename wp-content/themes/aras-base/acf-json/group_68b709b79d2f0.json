@@ -1,9 +1,9 @@
 {
-    "key": "group_65afffdabf7c4",
-    "title": "Home Hero Banner",
+    "key": "group_68b709b79d2f0",
+    "title": "Home Hero Banner (copy)",
     "fields": [
         {
-            "key": "field_65afffdad095b",
+            "key": "field_68b709b7a30b2",
             "label": "Home Hero Content",
             "name": "",
             "aria-label": "",
@@ -22,7 +22,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_660f457ea04a1",
+            "key": "field_68b709b7a30bd",
             "label": "Home Hero Content Groups",
             "name": "home_hero_content_groups",
             "aria-label": "",
@@ -45,7 +45,7 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_65afffdad0962",
+                    "key": "field_68b709b7a5c86",
                     "label": "Hero Headline",
                     "name": "hero_headline",
                     "aria-label": "",
@@ -64,10 +64,10 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_660f457ea04a1"
+                    "parent_repeater": "field_68b709b7a30bd"
                 },
                 {
-                    "key": "field_65afffdad0968",
+                    "key": "field_68b709b7a5c8f",
                     "label": "Hero Content",
                     "name": "hero_content",
                     "aria-label": "",
@@ -86,10 +86,10 @@
                     "toolbar": "basic",
                     "media_upload": 0,
                     "delay": 0,
-                    "parent_repeater": "field_660f457ea04a1"
+                    "parent_repeater": "field_68b709b7a30bd"
                 },
                 {
-                    "key": "field_65afffdad096d",
+                    "key": "field_68b709b7a5c94",
                     "label": "Hero Button",
                     "name": "hero_button",
                     "aria-label": "",
@@ -104,12 +104,12 @@
                     },
                     "wpml_cf_preferences": 2,
                     "return_format": "array",
-                    "parent_repeater": "field_660f457ea04a1"
+                    "parent_repeater": "field_68b709b7a30bd"
                 }
             ]
         },
         {
-            "key": "field_660f4c162627c",
+            "key": "field_68b709b7a30c3",
             "label": "Include Navigation Squares?",
             "name": "include_navigation_squares",
             "aria-label": "",
@@ -130,7 +130,7 @@
             "ui": 1
         },
         {
-            "key": "field_6622dd670095a",
+            "key": "field_68b709b7a30d2",
             "label": "Autoplay Speed",
             "name": "autoplay_speed",
             "aria-label": "",
@@ -153,7 +153,7 @@
             "append": "seconds"
         },
         {
-            "key": "field_65afffdad0973",
+            "key": "field_68b709b7a30e2",
             "label": "Home Hero Visual",
             "name": "",
             "aria-label": "",
@@ -172,7 +172,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_65affffe79713",
+            "key": "field_68b709b7a30ea",
             "label": "Visual Type",
             "name": "visual_type",
             "aria-label": "",
@@ -201,7 +201,7 @@
             "save_options": 0
         },
         {
-            "key": "field_660f31c938731",
+            "key": "field_68b709b7a30ef",
             "label": "Hero Video",
             "name": "hero_video",
             "aria-label": "",
@@ -211,7 +211,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_65affffe79713",
+                        "field": "field_68b709b7a30ea",
                         "operator": "==",
                         "value": "video"
                     }
@@ -231,7 +231,7 @@
             "allow_in_bindings": 1
         },
         {
-            "key": "field_65b0001c79714",
+            "key": "field_68b709b7a30f3",
             "label": "Hero Image",
             "name": "hero_image",
             "aria-label": "",
@@ -241,7 +241,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_65affffe79713",
+                        "field": "field_68b709b7a30ea",
                         "operator": "==",
                         "value": "image"
                     }
@@ -265,7 +265,7 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_65b0033ccfa21",
+            "key": "field_68b709b7a30f7",
             "label": "End",
             "name": "",
             "aria-label": "",
@@ -290,11 +290,6 @@
                 "param": "page_template",
                 "operator": "==",
                 "value": "templates\/homepage.php"
-            },
-            {
-                "param": "theme",
-                "operator": "==",
-                "value": "aras"
             }
         ]
     ],
@@ -314,5 +309,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756826219
+    "modified": 1756826039
 }

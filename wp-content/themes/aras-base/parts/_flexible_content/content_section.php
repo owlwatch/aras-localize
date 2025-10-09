@@ -82,46 +82,13 @@
 		default:
 			$horiz = 'align-top';
 	}
+	$background_image = false;
+	if( in_array(get_sub_field('background_visual_style'), ['left','right','full']) ){
+		$background_image = get_sub_field('background_image');
+	}
 	?>
-	<?php if (get_sub_field('background_image')) : ?>
-		<?php $background_image = get_sub_field('background_image'); ?>
-
-		<?php $bg_placement = get_sub_field('background_image_position');
-		switch ($bg_placement) {
-			case 'topleft':
-				$bgp = 'background-position: top left';
-				break;
-			case 'topcenter':
-				$bgp = 'background-position: top center';
-				break;
-			case 'topright':
-				$bgp = 'background-position: top right';
-				break;
-			case 'middleleft':
-				$bgp = 'background-position: center left';
-				break;
-			case 'middlecenter':
-				$bgp = 'background-position: center center';
-				break;
-			case 'middleright':
-				$bgp = 'background-position: center right';
-				break;
-			case 'bottomleft':
-				$bgp = 'background-position: bottom left';
-				break;
-			case 'bottomcenter':
-				$bgp = 'background-position: bottom center';
-				break;
-			case 'bottomright':
-				$bgp = 'background-position: bottom right';
-				break;
-			default:
-				$bgp = 'background-position: top left';
-		}
-		?>
-	<?php endif; ?>
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
-	<section class="content-section <?= "$toppadding $bottompadding $bg_color $text_color" ?> <?php if (get_sub_field('background_image') != '') : ?>has-bg-img<?php endif; ?>" <?= "$anchor" ?> <?php if (get_sub_field('background_image')) : ?>title="<?php echo esc_attr($background_image['alt']); ?>" style="background-image: url(<?php echo esc_url($background_image['url']); ?>);min-height: calc((<?php echo ($background_image['height']); ?> / <?php echo ($background_image['width']); ?>) * 100vw);<?php echo $bgp; ?>" <?php endif; ?>>
+	<section class="content-section <?= "$toppadding $bottompadding $bg_color $text_color" ?> <?php if ($background_image) : ?>has-bg-img<?php endif; ?>" <?= "$anchor" ?> <?php if ($background_image) : ?>title="<?php echo esc_attr($background_image['alt']); ?>" style="background-image: url(<?php echo esc_url($background_image['url']); ?>);min-height: calc((<?php echo ($background_image['height']); ?> / <?php echo ($background_image['width']); ?>) * 100vw);<?php echo $bgp; ?>" <?php endif; ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 		<?php if (have_rows('content')) : ?>
 
@@ -157,10 +124,24 @@
 
 										<?php if (get_sub_field('link_type_type') == 'popup') : ?>
 											<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
-												<div class="<?php echo $lalign; ?>">
+												<div class="<?php echo $lalign; ?> text-block__buttons">
 													<button aria-label="<?php echo get_sub_field('popup_label'); ?>" class="aras-button" data-open="popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
 														<?php echo get_sub_field('popup_label'); ?>
 													</button>
+
+													<?php
+													$button2 = get_sub_field('text_block_link_2');
+													if( $button2 ){
+														$button2_url = $button2['url'];
+														$button2_title = $button2['title'];
+														$button2_target = $button2['target'] ? $button2['target'] : '_self';
+														?>
+														<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+															<?php echo esc_html($button2_title); ?>
+														</a>
+													<?php
+													}
+													?>
 												</div>
 											<?php endif; ?>
 										<?php else : ?>
@@ -169,10 +150,24 @@
 												$link_title = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 											?>
-												<div class="<?php echo $lalign; ?>">
+												<div class="<?php echo $lalign; ?> text-block__buttons">
 													<a aria-label="<?php echo esc_html($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
 														<?php echo esc_html($link_title); ?>
 													</a>
+
+													<?php
+													$button2 = get_sub_field('text_block_link_2');
+													if( $button2 ){
+														$button2_url = $button2['url'];
+														$button2_title = $button2['title'];
+														$button2_target = $button2['target'] ? $button2['target'] : '_self';
+														?>
+														<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+															<?php echo esc_html($button2_title); ?>
+														</a>
+													<?php
+													}
+													?>
 												</div>
 											<?php endif; ?>
 										<?php endif; ?>
@@ -180,6 +175,145 @@
 									</div>
 								<?php endwhile; ?>
 							<?php endif; ?>
+
+						<?php elseif (get_sub_field('content_type') == 'columns') : ?>
+							<div class="text-block-columns cell">
+							<?php if (have_rows('text_block')) : ?>
+								<?php while (have_rows('text_block')) : the_row(); ?>
+									<?php if (get_sub_field('link_alignment') == 'left') : ?>
+										<?php $lalign = 'text-left'; ?>
+									<?php elseif (get_sub_field('link_alignment') == 'center') : ?>
+										<?php $lalign = 'text-center'; ?>
+									<?php else : ?>
+										<?php $lalign = 'text-left'; ?>
+									<?php endif; ?>
+										<div class="text-block wysiwyg-content <?= "$blockwidth" ?>">
+											<?php if (get_sub_field('text_content')) : ?>
+												<?php echo get_sub_field('text_content'); ?>
+											<?php endif; ?>
+
+											<?php if (get_sub_field('link_type_type') == 'popup') : ?>
+												<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
+													<div class="<?php echo $lalign; ?> text-block__buttons">
+														<button aria-label="<?php echo get_sub_field('popup_label'); ?>" class="aras-button" data-open="popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
+															<?php echo get_sub_field('popup_label'); ?>
+														</button>
+
+														<?php
+														$button2 = get_sub_field('text_block_link_2');
+														if( $button2 ){
+															$button2_url = $button2['url'];
+															$button2_title = $button2['title'];
+															$button2_target = $button2['target'] ? $button2['target'] : '_self';
+															?>
+															<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+																<?php echo esc_html($button2_title); ?>
+															</a>
+														<?php
+														}
+														?>
+													</div>
+												<?php endif; ?>
+											<?php else : ?>
+												<?php $link = get_sub_field('text_block_link');
+												if ($link) : $link_url = $link['url'];
+													$link_title = $link['title'];
+													$link_target = $link['target'] ? $link['target'] : '_self';
+												?>
+													<div class="<?php echo $lalign; ?> text-block__buttons">
+														<a aria-label="<?php echo esc_html($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+															<?php echo esc_html($link_title); ?>
+														</a>
+
+														<?php
+														$button2 = get_sub_field('text_block_link_2');
+														if( $button2 ){
+															$button2_url = $button2['url'];
+															$button2_title = $button2['title'];
+															$button2_target = $button2['target'] ? $button2['target'] : '_self';
+															?>
+															<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+																<?php echo esc_html($button2_title); ?>
+															</a>
+														<?php
+														}
+														?>
+													</div>
+												<?php endif; ?>
+											<?php endif; ?>
+
+									</div>
+								<?php endwhile; ?>
+							<?php endif; ?>
+
+							<?php if (have_rows('text_block_2')) : ?>
+								<?php while (have_rows('text_block_2')) : the_row(); ?>
+									<?php if (get_sub_field('link_alignment') == 'left') : ?>
+										<?php $lalign = 'text-left'; ?>
+									<?php elseif (get_sub_field('link_alignment') == 'center') : ?>
+										<?php $lalign = 'text-center'; ?>
+									<?php else : ?>
+										<?php $lalign = 'text-left'; ?>
+									<?php endif; ?>
+										<div class="text-block wysiwyg-content <?= "$blockwidth" ?>">
+											<?php if (get_sub_field('text_content')) : ?>
+												<?php echo get_sub_field('text_content'); ?>
+											<?php endif; ?>
+
+											<?php if (get_sub_field('link_type_type') == 'popup') : ?>
+												<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
+													<div class="<?php echo $lalign; ?> text-block__buttons">
+														<button aria-label="<?php echo get_sub_field('popup_label'); ?>" class="aras-button" data-open="popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
+															<?php echo get_sub_field('popup_label'); ?>
+														</button>
+
+														<?php
+														$button2 = get_sub_field('text_block_link_2');
+														if( $button2 ){
+															$button2_url = $button2['url'];
+															$button2_title = $button2['title'];
+															$button2_target = $button2['target'] ? $button2['target'] : '_self';
+															?>
+															<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+																<?php echo esc_html($button2_title); ?>
+															</a>
+														<?php
+														}
+														?>
+													</div>
+												<?php endif; ?>
+											<?php else : ?>
+												<?php $link = get_sub_field('text_block_link');
+												if ($link) : $link_url = $link['url'];
+													$link_title = $link['title'];
+													$link_target = $link['target'] ? $link['target'] : '_self';
+												?>
+													<div class="<?php echo $lalign; ?> text-block__buttons">
+														<a aria-label="<?php echo esc_html($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+															<?php echo esc_html($link_title); ?>
+														</a>
+
+														<?php
+														$button2 = get_sub_field('text_block_link_2');
+														if( $button2 ){
+															$button2_url = $button2['url'];
+															$button2_title = $button2['title'];
+															$button2_target = $button2['target'] ? $button2['target'] : '_self';
+															?>
+															<a aria-label="<?php echo esc_html($button2_title); ?>" class="aras-button aras-button--white" href="<?php echo esc_url($button2_url); ?>" target="<?php echo esc_attr($button2_target); ?>">
+																<?php echo esc_html($button2_title); ?>
+															</a>
+														<?php
+														}
+														?>
+													</div>
+												<?php endif; ?>
+											<?php endif; ?>
+
+									</div>
+								<?php endwhile; ?>
+							<?php endif; ?>
+											</div>
 
 						<?php elseif (get_sub_field('content_type') == 'image') : ?>
 							<?php if (have_rows('image_block')) : ?>
@@ -369,3 +503,34 @@
 		<?php endwhile; ?>
 	<?php endif; ?>
 <?php endif; ?>
+
+<?php
+if( empty( $_REQUEST['content_section_script_shown']) ) {
+	$_REQUEST['content_section_script_shown'] = true;
+}
+else {
+	return;
+}
+add_action('wp_footer', function() {
+	?>
+<script>
+// Get all elements with class 'content-section'
+// If section contains one '.text-block' element and it has no content other than text nodes
+// Find the closest '.content-section' and hide it
+document.addEventListener("DOMContentLoaded", function() {
+	var textBlocks = document.querySelectorAll('.text-block');
+	textBlocks.forEach(function(textBlock) {
+		var hasOnlyTextNodes = Array.from(textBlock.childNodes).every(function(node) {
+			return node.nodeType === Node.TEXT_NODE;
+		});
+		if (hasOnlyTextNodes && textBlock.textContent.trim() === '') {
+			var contentSection = textBlock.closest('.content-section');
+			if (contentSection) {
+				contentSection.style.display = 'none';
+			}
+		}
+	});
+});
+</script>
+	<?php
+});

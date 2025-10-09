@@ -37,16 +37,17 @@ class ViteService {
 
 	public function enqueue( $entry, $action = false )
 	{
-		switch( $action ) {
-			case true:
+		switch( true ) {
+			case $action === true:
 				$action = 'wp_footer';
 				break;
-			case false:
+			case $action === false:
 				$action = 'wp_head';
 				break;
 			default:
 				break;
 		}
+		
 		add_action( $action, function() use($entry){
 			echo $this->vite( $entry );
 		});

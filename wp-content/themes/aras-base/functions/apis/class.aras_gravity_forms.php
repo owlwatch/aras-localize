@@ -10,8 +10,6 @@ class GravityForms
 
 	private $confirmation_output_buffer = '';
 
-	public static $pageHasForm = false;
-
 	public static function getInstance()
 	{
 		if (! isset(self::$instance)) {
@@ -44,102 +42,6 @@ class GravityForms
 
 		// japanese fix for last name before first name
 		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
-
-		// add a filter that will modify the submitted value to add https:// to any url field that doesn't have it
-		add_filter('gform_field_validation', [$this, 'allow_missing_protocol_in_website_fields'], 10, 4);
-
-		// save any website field values with the https:// if missing
-		add_filter('gform_save_field_value', [$this, 'prepend_protocol_to_website_fields'], 10, 4);
-
-		// add a scroll offset for the gform anchor
-		add_filter('gform_confirmation_anchor', function($offset, $form) {
-			return false;
-		}, 10, 2);
-		add_action('wp_footer', function() {
-			if( !self::$pageHasForm ){
-				return;
-			}
-			?>
-			<script>
-				(function(){
-					function scrollToForm( form_id ){
-						console.log( 'scrollToForm', form_id )
-						let div = document.getElementById('gform_wrapper_'+form_id);
-						// make sure the form has the right offset
-						if( !div ){
-							div = document.getElementById('gform_confirmation_wrapper_'+form_id);
-							if( !div ){
-								return;
-							}
-						}
-						div.style.scrollMarginTop = 'var(--aras-header-height)';
-						if( div ){
-							div.scrollIntoView({ behavior: 'smooth', block: 'start' });
-						}
-					}
-					jQuery(document).on('gform_confirmation_loaded gform_page_loaded', function(event, formId){
-						// code to be triggered when the confirmation page is loaded
-						scrollToForm( formId );
-					});
-				})();
-			</script>
-			<?php
-		});
-	}
-
-	public function allow_missing_protocol_in_website_fields( $result, $value, $form, $field  ) {
-		// Only target Website field type
-		if ( $field->type !== 'website' ) {
-			return $result;
-		}
-
-		// If empty, skip (required field check still applies)
-		if ( rgblank( $value ) ) {
-			return $result;
-		}
-
-		// check for non http/https protocols and fail validation
-		if ( preg_match( '#^[a-zA-Z]+://#i', $value ) && ! preg_match( '#^https?://#i', $value ) ) {
-			$result['is_valid'] = false;
-			$result['message']  = 'Please enter a valid URL.';
-			return $result;
-		}
-
-		// Accept values without protocol (example.com)
-		// We'll prepend later during save
-		if ( ! preg_match( '#^https?://#i', $value ) ) {
-			// Treat as valid for now
-			// check if it's a valid url now
-			if ( filter_var( 'https://' . $value, FILTER_VALIDATE_URL ) !== false ) {
-				$result['is_valid'] = true;
-				$result['message']  = '';
-			}
-			else {
-				$result['is_valid'] = false;
-				$result['message']  = 'Please enter a valid URL.';
-			}
-		}
-
-		return $result;
-	}
-
-	public function prepend_protocol_to_website_fields( $value, $field, $lead, $form ) {
-		// Only target Website field type
-		if ( $field->type !== 'website' ) {
-			return $value;
-		}
-
-		// If empty, skip (required field check still applies)
-		if ( rgblank( $value ) ) {
-			return $value;
-		}
-
-		// Prepend https:// if missing and no other protocol present
-		if (  ! preg_match( '#^[a-zA-Z]+://#i', $value ) ) {
-			$value = 'https://' . $value;
-		}
-
-		return $value;
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
@@ -359,9 +261,7 @@ class GravityForms
 	public function gform_confirmation($confirmation, $form, $entry, $ajax)
 	{
 		$post_id = url_to_postid( $entry['source_url'] );
-		$post_submission = $this->_get_post_submission_config( $post_id, $form['id'] );
-
-		
+		$post_submission = $this->_get_post_submission_config( $post_id );
 		if( !$post_submission ){
 			error_log( 'no post submission' );
 			return $confirmation;
@@ -439,7 +339,6 @@ class GravityForms
 
 	public function gform_form_tag ($output, $form) {
 
-		self::$pageHasForm = true;
 
 		global $vxg_marketo;
 		if (!isset($vxg_marketo)) {
@@ -501,7 +400,6 @@ class GravityForms
 		$fn = $sub_field ? 'get_sub_field' : 'get_field';
 		$config = [
 			'action' => $fn('post_submission_action', $page_id),
-			'form_shortcode' => $fn('form_shortcode', $page_id),
 			'content_behavior' => $fn('post-post_submission_content_behavior', $page_id),
 			'redirect_url' => $fn('post-submission_redirect_url', $page_id),
 			'custom_confirmation_message' => $fn('custom_confirmation_message', $page_id),
@@ -513,16 +411,13 @@ class GravityForms
 		return $config;
 	}
 
-	private function _get_post_submission_config( $page_id=null, $form_id=null )
+	private function _get_post_submission_config( $page_id=null )
 	{
 		$post_submission = false;
 		$current_page_id = $page_id ?: get_queried_object_id();
 
 		if( get_field('post_submission_action', $current_page_id) ) {
 			$post_submission = $this->_retrieve_post_submission_config( $current_page_id, false, 'post' );
-			if( $post_submission['form_shortcode'] == $form_id ){
-				return $post_submission;
-			}
 		}
 
 		if (have_rows('flexible_content', $current_page_id)) {
@@ -532,9 +427,6 @@ class GravityForms
 					
 					if( get_sub_field('post_submission_action' ) ){
 						$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'full_width_form_section' );
-						if( $post_submission['form_shortcode'] == $form_id ){
-							return $post_submission;
-						}
 					}
 					if (have_rows('right_content', $current_page_id)) {
 						while (have_rows('right_content', $current_page_id)) {
@@ -544,9 +436,6 @@ class GravityForms
 									the_row();
 									if (get_sub_field('post_submission_action', $current_page_id)) {
 										$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'split_content_section:right' );
-										if( $post_submission['form_shortcode'] == $form_id ){
-											return $post_submission;
-										}
 									}
 								}
 							}
@@ -560,9 +449,6 @@ class GravityForms
 									the_row();
 									if (get_sub_field('post_submission_action', $current_page_id)) {
 										$post_submission = $this->_retrieve_post_submission_config( $current_page_id, true, 'split_content_section:left' );
-										if( $post_submission['form_shortcode'] == $form_id ){
-											return $post_submission;
-										}
 									}
 								}
 							}

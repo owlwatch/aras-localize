@@ -118,10 +118,11 @@ switch ($bottom_padding) {
                     while (have_rows('sections')) : the_row();
                         $heading = get_sub_field('heading'); ?>
 
-
+                        <?php if( $heading ): ?>
                         <div class="comparison__table--body--section__header">
                             <h4><?= $heading ?></h4>
                         </div>
+                        <?php endif; ?>
                         <?php if (have_rows('rows')) :
                             while (have_rows('rows')) : the_row();
                                 $columns = get_sub_field('columns');

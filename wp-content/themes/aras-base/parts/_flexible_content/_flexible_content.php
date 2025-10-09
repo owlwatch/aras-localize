@@ -1,5 +1,5 @@
 <?php
-
+$flexible_content_field_name = isset($args['flexible_content_field_name']) ? $args['flexible_content_field_name'] : 'flexible_content';
 // if the post is password protected and they have not entered the password, return early
 if (post_password_required()) {
 ?>
@@ -38,11 +38,12 @@ if (post_password_required()) {
   return;
 }
 
-$current_post_id = get_the_ID(); ?>
+$current_post_id = isset( $args['current_post_id'] ) ? $args['current_post_id'] : get_the_ID();
+?>
 
 <?php if ((isset($_GET['id']) && intval($_GET['id']) === $current_post_id)) : ?>
-  <?php if (have_rows('flexible_content')) :
-    while (have_rows('flexible_content')) : the_row(); ?>
+  <?php if (have_rows($flexible_content_field_name, $current_post_id)) :
+    while (have_rows($flexible_content_field_name, $current_post_id)) : the_row(); ?>
       <?php $ungated_content = false; ?>
       <?php
       // split_content_section
@@ -86,8 +87,8 @@ $current_post_id = get_the_ID(); ?>
   <?php endif; ?>
 <?php else : ?>
 
-  <?php if (have_rows('flexible_content')) :
-    while (have_rows('flexible_content')) : the_row(); ?>
+  <?php if (have_rows($flexible_content_field_name, $current_post_id)) : ?>
+    <?php while (have_rows($flexible_content_field_name, $current_post_id)) : the_row(); ?>
       <?php
 
       // try to get the associated template part

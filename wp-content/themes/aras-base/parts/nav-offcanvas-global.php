@@ -34,7 +34,7 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 								$link_title = $link['title'];
 								$link_target = $link['target'] ? $link['target'] : '_self';
 							?>
-								<a aria-label="<?php echo esc_attr($link_title); ?>" class="upper-nav-item" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+								<a aria-label="<?php echo esc_attr($link_title); ?>" class="<?php if( get_sub_field('is_button') ) { ?>aras-button<?php }else { ?>upper-nav-item<?php } ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
 									<?php echo esc_html($link_title); ?>
 								</a>
 							<?php endif; ?>

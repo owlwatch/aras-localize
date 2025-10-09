@@ -175,6 +175,40 @@
             "placeholder": ""
         },
         {
+            "key": "field_68c8f70528be5",
+            "label": "Quote Headshot",
+            "name": "quote_headshot",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_65bd303190ffe",
             "label": "Quote Attribution Logo",
             "name": "quote_attribution_logo",
@@ -387,6 +421,66 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "medium"
+        },
+        {
+            "key": "field_68d1a0bd86488",
+            "label": "Autoplay Carousel",
+            "name": "carousel_autoplay",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Only enabled if there are more than one quote",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6880e1eed89b5",
+                        "operator": "==",
+                        "value": "library"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_68d1a15e8648a",
+            "label": "Autoplay Duration",
+            "name": "autoplay_duration",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Number of seconds each quote should display for",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_68d1a0bd86488",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 6,
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -422,6 +516,5 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "advanced",
-    "modified": 1753284247
+    "modified": 1758568905
 }

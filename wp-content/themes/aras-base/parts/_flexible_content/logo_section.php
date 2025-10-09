@@ -120,3 +120,86 @@
 		</div>
 	</section>
 <?php endif; ?>
+
+<?php
+if( empty( $_REQUEST['logo_slider_shown']) ) {
+	$_REQUEST['logo_slider_shown'] = true;
+}
+else {
+	return;
+}
+add_action('wp_footer', function() {
+
+	?>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/slick/slick.min.js"></script>
+	<script>
+			jQuery('.logo-slider-slick').each( function(){
+				const logos_to_show = jQuery(this).data('logos-to-show');
+				let count, countmed, countsmall, countxsmall;
+				switch( logos_to_show ) {
+					case 'three':
+						count = 3;
+						countmed = 3;
+						countsmall = 2;
+						countxsmall = 1;
+						break;
+					case 'four':
+						count = 4;
+						countmed = 3;
+						countsmall = 2;
+						countxsmall = 1;
+						break;
+					case 'five':
+						count = 5;
+						countmed = 4;
+						countsmall = 3;
+						countxsmall = 2;
+						break;
+					
+					default:
+						count = 6;
+						countmed = 4;
+						countsmall = 3;
+						countxsmall = 2;
+				}
+
+				jQuery(this).slick({
+					infinite: true,
+					slidesToShow: count,
+					slidesToScroll: 1,
+					dots: false,
+					arrows: false,
+					autoplay: true,
+					autoplaySpeed: 3000,
+					pauseOnHover: false,
+					speed: 500,
+					cssEase: 'ease-in-out',
+					draggable: true,
+					pauseOnHover: false,
+					swipeToSlide: true,
+					responsive: [{
+							breakpoint: 1023,
+							settings: {
+								slidesToShow: countmed
+							},
+						},
+						{
+							breakpoint: 639,
+							settings: {
+								slidesToShow: countsmall
+							},
+						},
+						{
+							breakpoint: 450,
+							settings: {
+								slidesToShow: countxsmall
+							}
+						}
+					]
+				});
+			});
+	</script>
+	<?php $logo_slider_shown = true;  ?>
+	<?php
+});
+?>

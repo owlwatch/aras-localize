@@ -180,6 +180,10 @@ require_once(get_template_directory() . '/functions/seo.php');
 
 require_once(get_template_directory() . '/functions/bitly.php');
 
+require_once(get_template_directory() . '/functions/acf.php');
+
+require_once(get_template_directory() . '/functions/editor.php');
+
 if( is_aras_feature_enabled('qualified') ) {
 	// Qualified API Functions
 	require_once(get_template_directory() . '/functions/qualified.php');

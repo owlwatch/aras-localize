@@ -3,7 +3,7 @@
 	<?php if (get_sub_field('anchor_link')) : ?>
 		<?php $anchor = ('id="' . get_sub_field('anchor_link') . '"'); ?>
 	<?php else : ?>
-		<?php $anchor = ('id="side-tabs-section-' . $modnum . '"'); ?>
+		<?php $anchor = ('id="top-tabs-section-' . $modnum . '"'); ?>
 	<?php endif; ?>
 	<?php
 	$background_color = get_sub_field('background_color');
@@ -70,7 +70,7 @@
 
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 
-	<section class="side-tabs-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
+	<section class="top-tabs-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
 
 		<?php if (get_sub_field('content_before')) : ?>
@@ -94,8 +94,8 @@
 			<?php $contcell = 'medium-12'; ?>
 		<?php else : ?>
 			<?php $tabscol = ''; ?>
-			<?php $tabscell = 'medium-3'; ?>
-			<?php $contcell = 'medium-9'; ?>
+			<?php $tabscell = 'medium-4'; ?>
+			<?php $contcell = 'medium-8'; ?>
 		<?php endif; ?>
 
 		<?php if (get_sub_field('tab_label_style') == 'upper') : ?>
@@ -108,8 +108,8 @@
 			<div class="grid-container">
 				<div class="grid-x grid-padding-x">
 
-					<div class="cell small-12 <?php echo $tabscell; ?>">
-						<ul class="tabs side-tabs <?php echo $tabscol; ?>" data-tabs id="side-tabs-<?php echo $modnum; ?>">
+					<div class="cell small-12">
+						<ul class="tabs top-tabs <?php echo $tabscol; ?>" data-tabs id="top-tabs-<?php echo $modnum; ?>">
 							<?php while (have_rows('tab_items')) : the_row(); ?>
 								<?php $titlenum = get_row_index(); ?>
 								<?php if (get_sub_field('tab_label')) : ?>
@@ -119,88 +119,70 @@
 								<?php endif; ?>
 								<?php if ($titlenum == '1') : ?>
 									<li id="sidelabel-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" class="tabs-title is-active <?php echo $labelstyle; ?>">
-										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#sidetab<?php echo $titlenum; ?>" aria-selected="true"><?php echo $tab_label; ?></a>
+										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="toptab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#toptab<?php echo $titlenum; ?>" aria-selected="true"><?php echo $tab_label; ?></a>
 									</li>
 								<?php else : ?>
 									<li id="sidelabel-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" class="tabs-title <?php echo $labelstyle; ?>">
-										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#sidetab<?php echo $titlenum; ?>"><?php echo $tab_label; ?></a>
+										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="toptab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#toptab<?php echo $titlenum; ?>"><?php echo $tab_label; ?></a>
 									</li>
 								<?php endif; ?>
 							<?php endwhile; ?>
 						</ul>
 					</div>
 
-					<div class="cell small-12  <?php echo $contcell; ?>">
-						<div class="tabs-content side-tabs-content" data-tabs-content="side-tabs-<?php echo $modnum; ?>" data-reset-on-close="true">
+					<div class="cell small-12">
+						<div class="tabs-content top-tabs-content" data-tabs-content="top-tabs-<?php echo $modnum; ?>" data-reset-on-close="true">
 							<?php while (have_rows('tab_items')) : the_row(); ?>
 								<?php $contentnum = get_row_index(); ?>
-								<?php $image = get_sub_field('tab_visual'); ?>
-								<?php $image_layout = get_sub_field('tab_visual_placement'); ?>
 
 								<?php if ($contentnum == '1') : ?>
-									<div class="tabs-panel is-active" id="sidetab-<?php echo $contentnum; ?>-<?php echo $modnum; ?>">
+									<div class="tabs-panel is-active" id="toptab-<?php echo $contentnum; ?>-<?php echo $modnum; ?>">
 									<?php else : ?>
-										<div class="tabs-panel" id="sidetab-<?php echo $contentnum; ?>-<?php echo $modnum; ?>">
+										<div class="tabs-panel" id="toptab-<?php echo $contentnum; ?>-<?php echo $modnum; ?>">
 										<?php endif; ?>
 
-										<?php if( $image && $image_layout !== 'inline' ): ?>
-											<div class="tab-panel-layout tab-panel-layout--<?php echo $image_layout; ?>">
-												<div class="tab-visual-wrapper">
-											<?php $link = get_sub_field('tab_visual_link');
-											if ($link) : $link_url = $link['url'];
-												$link_title = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-											?>
-												<a aria-label="<?php echo esc_attr($link_title); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-													<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-												</a>
-											<?php else : ?>
-												<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-											<?php endif; ?>
-												</div>
-												<div class="tab-content-wrapper">
-										<?php endif; ?>
+										<div class="tab-layout tab-layout--<?php echo get_sub_field('tab_layout'); ?>">
+											<div class="tab-content">
 
+												<?php if (get_sub_field('tab_subhead')) : ?>
+													<div class="overline"><?php echo get_sub_field('tab_subhead'); ?></div>
+												<?php endif; ?>
+												<?php if (get_sub_field('tab_headline')) : ?>
+													<h2><?php echo get_sub_field('tab_headline'); ?></h2>
+												<?php endif; ?>
+												<?php if (get_sub_field('tab_content')) : ?>
+													<div class="tab-content-content wysiwyg-content"><?php echo get_sub_field('tab_content'); ?></div>
+												<?php endif; ?>
 
-										<?php if (get_sub_field('tab_subhead')) : ?>
-											<h6><?php echo get_sub_field('tab_subhead'); ?></h6>
-										<?php endif; ?>
-										<?php if (get_sub_field('tab_headline')) : ?>
-											<h3><?php echo get_sub_field('tab_headline'); ?></h3>
-										<?php endif; ?>
-										<?php if (get_sub_field('tab_content')) : ?>
-											<div class="tab-content-content wysiwyg-content"><?php echo get_sub_field('tab_content'); ?></div>
-										<?php endif; ?>
-
-										<?php $image = get_sub_field('tab_visual');
-										if (!empty($image) && $image_layout === 'inline') : ?>
-											<?php $link = get_sub_field('tab_visual_link');
-											if ($link) : $link_url = $link['url'];
-												$link_title = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-											?>
-												<a aria-label="<?php echo esc_attr($link_title); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-													<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-												</a>
-											<?php else : ?>
-												<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
-											<?php endif; ?>
-										<?php endif; ?>
-
-										<?php $link = get_sub_field('tab_button');
-										if ($link) : $link_url = $link['url'];
-											$link_title = $link['title'];
-											$link_target = $link['target'] ? $link['target'] : '_self';
-										?>
-											<a aria-label="<?php echo esc_attr($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-												<?php echo esc_html($link_title); ?>
-											</a>
-										<?php endif; ?>
-
-										<?php if( $image && $image_layout !== 'inline' ): ?>
-												</div>
+												<?php $link = get_sub_field('tab_button');
+												if ($link) : $link_url = $link['url'];
+													$link_title = $link['title'];
+													$link_target = $link['target'] ? $link['target'] : '_self';
+												?>
+													<a aria-label="<?php echo esc_attr($link_title); ?>" class="aras-button" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+														<?php echo esc_html($link_title); ?>
+													</a>
+												<?php endif; ?>
 											</div>
-										<?php endif; ?>
+												<?php $image = get_sub_field('tab_visual');
+												if (!empty($image)) : ?>
+												<div class="tab-visual-container">
+													<?php $link = get_sub_field('tab_visual_link');
+													if ($link) : $link_url = $link['url'];
+														$link_title = $link['title'];
+														$link_target = $link['target'] ? $link['target'] : '_self';
+													?>
+														<a aria-label="<?php echo esc_attr($link_title); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+															<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
+														</a>
+													<?php else : ?>
+														<img class="tab-visual" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
+													<?php endif; ?>
+												</div>
+												<?php endif; ?>
+
+											</div>
+
 
 										<?php if ($contentnum == '1') : ?>
 										</div>

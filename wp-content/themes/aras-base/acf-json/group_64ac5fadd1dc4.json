@@ -18,7 +18,8 @@
             },
             "placement": "top",
             "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "selected": 0
         },
         {
             "key": "field_65bbb75ef2ef2",
@@ -185,7 +186,9 @@
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
-                    "parent_repeater": "field_64ac5fadd425f"
+                    "parent_repeater": "field_64ac5fadd425f",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_64ac62f2b82e6",
@@ -277,7 +280,9 @@
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
-                    "parent_repeater": "field_64ac5fadd425f"
+                    "parent_repeater": "field_64ac5fadd425f",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_660f38324c54d",
@@ -418,7 +423,9 @@
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
-                    "parent_repeater": "field_65cfa5f6db242"
+                    "parent_repeater": "field_65cfa5f6db242",
+                    "create_options": 0,
+                    "save_options": 0
                 }
             ]
         },
@@ -438,7 +445,8 @@
             },
             "placement": "top",
             "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "selected": 0
         },
         {
             "key": "field_65674fb9865f1",
@@ -465,7 +473,9 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65c2a6f61b5b5",
@@ -492,7 +502,51 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_68c8b51fa5876",
+            "label": "Use Buttons on Cards",
+            "name": "use_buttons_on_cards",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_68c881463d3c0",
+            "label": "Card CSS Classes",
+            "name": "card_css_classes",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_65b40e0dcdc7c",
@@ -563,7 +617,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_64ac6452b82e9",
@@ -583,16 +639,86 @@
                 "two": "Two",
                 "three": "Three",
                 "four": "Four",
+                "five": "Five",
                 "slider": "Slider"
             },
             "default_value": "three",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "wpml_cf_preferences": 1
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_68c8b293471b2",
+            "label": "Full Width Slide",
+            "name": "full_width_slide",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64ac6452b82e9",
+                        "operator": "==",
+                        "value": "slider"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_68c8cf28ac4f4",
+            "label": "Autoplay Slider",
+            "name": "autoplay_slider",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64ac6452b82e9",
+                        "operator": "==",
+                        "value": "slider"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "disabled": "Disabled",
+                "slow": "8000",
+                "fase": "5000"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65cfa28593e03",
@@ -612,7 +738,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -624,10 +750,49 @@
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "wpml_cf_preferences": 1
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_68c881c7b6922",
+            "label": "Slider Dots",
+            "name": "slider_dots",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64ac6452b82e9",
+                        "operator": "==",
+                        "value": "slider"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "show": "Show Dots",
+                "hide": "Hide Dots"
+            },
+            "default_value": "show",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_657750933f8fb",
@@ -654,7 +819,9 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65c2aaccb91b5",
@@ -736,6 +903,5 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "advanced",
-    "modified": 1714489875
+    "modified": 1758027190
 }

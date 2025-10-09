@@ -67,7 +67,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_667c408e59c35",
@@ -106,6 +108,23 @@
             },
             "wpml_cf_preferences": 2,
             "return_format": "array"
+        },
+        {
+            "key": "field_68b6f5cce4260",
+            "label": "Hero Button - Secondary",
+            "name": "hero_button_secondary",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 1
         },
         {
             "key": "field_667c408e59c3d",
@@ -153,6 +172,35 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_68e5dd6093658",
+            "label": "Text Color",
+            "name": "hero_text_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "dark": "Dark",
+                "light": "Light"
+            },
+            "default_value": "dark",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_667c408e59c46",
             "label": "End",
             "name": "",
@@ -191,12 +239,12 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "resource"
+                "value": "post"
             },
             {
                 "param": "post_template",
                 "operator": "==",
-                "value": "single-resource-ungated.php"
+                "value": "default"
             }
         ],
         [
@@ -217,7 +265,21 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "demo"
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "xplm-vendor"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "xplm-category"
             }
         ]
     ],
@@ -235,6 +297,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "advanced",
-    "modified": 1732648533
+    "modified": 1759894913
 }

@@ -2,7 +2,27 @@
   position: relative;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  overflow: visible;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+  &__svg {
+    max-width: 100%;
+    max-height: 100%;
+    svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      max-width: 50%;
+      max-height: 80vh;;
+      aspect-ratio: 1;
+    }
+  }
 
   @include breakpoint(medium only) {
     overflow: hidden;
@@ -750,5 +770,11 @@
     &:focus {
       color: $black;
     }
+  }
+}
+
+.hero-text-color-light {
+  h1,h2,h3,h4,h5,h6,p,a {
+    color: var(--white, #fff);
   }
 }

@@ -663,16 +663,21 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       }
       else {
         global $sitepress, $wpml_query_filter;
-        $args['suppress_filters'] = false; // Allow WPML to filter the query
-        remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
-        remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
-        remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
-		    remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
-        $posts_query = new WP_Query($args);
-        add_filter('parse_query', array($sitepress, 'parse_query'), 10);
-        add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
-        add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
-		    add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+        if( isset( $sitepress ) ){
+          $args['suppress_filters'] = false; // Allow WPML to filter the query
+          remove_filter('parse_query', array($sitepress, 'parse_query'), 10);
+          remove_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+          remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
+          remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
+          $posts_query = new WP_Query($args);
+          add_filter('parse_query', array($sitepress, 'parse_query'), 10);
+          add_filter('pre_get_posts', array($sitepress, 'pre_get_posts'), 10);
+          add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+          add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+        }
+        else {
+          $posts_query = new WP_Query($args);
+        }
       }
 
       if ($posts_query->have_posts()) : $postCount = 0;

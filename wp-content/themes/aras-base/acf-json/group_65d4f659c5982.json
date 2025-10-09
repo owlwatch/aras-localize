@@ -46,7 +46,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_65d4f72769de9",
@@ -87,6 +89,28 @@
                     },
                     "wpml_cf_preferences": 2,
                     "return_format": "array",
+                    "parent_repeater": "field_65d4f72769de9"
+                },
+                {
+                    "key": "field_68c900a8c9a1d",
+                    "label": "Is Button",
+                    "name": "is_button",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1,
                     "parent_repeater": "field_65d4f72769de9"
                 }
             ]
@@ -162,7 +186,9 @@
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
-                    "parent_repeater": "field_65d50e1677a06"
+                    "parent_repeater": "field_65d50e1677a06",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_65d50e2f77a08",
@@ -191,7 +217,9 @@
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
-                    "parent_repeater": "field_65d50e1677a06"
+                    "parent_repeater": "field_65d50e1677a06",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_65d50e1e77a07",
@@ -285,6 +313,7 @@
                     "collapsed": "field_65d5164b3532f",
                     "button_label": "+ Second Level Link",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_65d50e1677a06",
                     "sub_fields": [
                         {
                             "key": "field_65d5164b3532f",
@@ -355,6 +384,7 @@
                             "collapsed": "field_65d5168f35332",
                             "button_label": "+ Third Level Link",
                             "rows_per_page": 20,
+                            "parent_repeater": "field_65d5162e3532e",
                             "sub_fields": [
                                 {
                                     "key": "field_65d5168f35332",
@@ -374,11 +404,9 @@
                                     "return_format": "array",
                                     "parent_repeater": "field_65d5167135331"
                                 }
-                            ],
-                            "parent_repeater": "field_65d5162e3532e"
+                            ]
                         }
-                    ],
-                    "parent_repeater": "field_65d50e1677a06"
+                    ]
                 },
                 {
                     "key": "field_65d63165ceb6b",
@@ -409,6 +437,7 @@
                     "collapsed": "field_65d631d174b26",
                     "button_label": "Add Column",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_65d50e1677a06",
                     "sub_fields": [
                         {
                             "key": "field_65d631d174b26",
@@ -436,7 +465,9 @@
                             "ui": 0,
                             "ajax": 0,
                             "placeholder": "",
-                            "parent_repeater": "field_65d63165ceb6b"
+                            "parent_repeater": "field_65d63165ceb6b",
+                            "create_options": 0,
+                            "save_options": 0
                         },
                         {
                             "key": "field_65d6320374b27",
@@ -467,6 +498,7 @@
                             "collapsed": "",
                             "button_label": "Add Item",
                             "rows_per_page": 20,
+                            "parent_repeater": "field_65d63165ceb6b",
                             "sub_fields": [
                                 {
                                     "key": "field_65d6321b74b28",
@@ -494,7 +526,9 @@
                                     "ui": 0,
                                     "ajax": 0,
                                     "placeholder": "",
-                                    "parent_repeater": "field_65d6320374b27"
+                                    "parent_repeater": "field_65d6320374b27",
+                                    "create_options": 0,
+                                    "save_options": 0
                                 },
                                 {
                                     "key": "field_660f3f38c4077",
@@ -578,7 +612,9 @@
                                     "ui": 0,
                                     "ajax": 0,
                                     "placeholder": "",
-                                    "parent_repeater": "field_65d6320374b27"
+                                    "parent_repeater": "field_65d6320374b27",
+                                    "create_options": 0,
+                                    "save_options": 0
                                 },
                                 {
                                     "key": "field_65d6326474b2a",
@@ -646,8 +682,7 @@
                                     "return_format": "array",
                                     "parent_repeater": "field_65d6320374b27"
                                 }
-                            ],
-                            "parent_repeater": "field_65d63165ceb6b"
+                            ]
                         },
                         {
                             "key": "field_65d64b0a33261",
@@ -673,6 +708,7 @@
                             },
                             "wpml_cf_preferences": 2,
                             "layout": "block",
+                            "parent_repeater": "field_65d63165ceb6b",
                             "sub_fields": [
                                 {
                                     "key": "field_65d64b6533262",
@@ -780,13 +816,10 @@
                                     "wpml_cf_preferences": 2,
                                     "return_format": "array"
                                 }
-                            ],
-                            "parent_repeater": "field_65d63165ceb6b"
+                            ]
                         }
-                    ],
-                    "parent_repeater": "field_65d50e1677a06"
+                    ]
                 },
-                
                 {
                     "key": "field_67210e07b68ef",
                     "label": "Custom HTML",
@@ -962,6 +995,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "advanced",
-    "modified": 1730219575
+    "modified": 1758003398
 }

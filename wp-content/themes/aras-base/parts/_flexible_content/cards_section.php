@@ -79,6 +79,8 @@
 		<?php $perrow = ('small-12 medium-4 large-4'); ?>
 	<?php elseif (get_sub_field('cards_per_row') == 'four') : ?>
 		<?php $perrow = ('small-12 medium-6 large-3'); ?>
+	<?php elseif (get_sub_field('cards_per_row') == 'five') : ?>
+		<?php $perrow = ('cards-5'); ?>
 	<?php elseif (get_sub_field('cards_per_row') == 'slider') : ?>
 		<?php $perrow = ('card-slick'); ?>
 	<?php else : ?>
@@ -127,7 +129,14 @@
 		<?php endif; ?>
 	<?php endif; ?>
 
+	<?php if( get_sub_field('card_css_classes') ): ?>
+		<?php $cardstyle .= ' ' . get_sub_field('card_css_classes'); ?>
+	<?php endif; ?>
+
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
+	<?php
+	$card_link_class = get_sub_field('use_buttons_on_cards') ? 'aras-button' : 'card-link';
+	?>
 
 	<section class="cards-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
 		<?php get_template_part('parts/_template_parts/background_visual'); ?>
@@ -143,8 +152,16 @@
 
 			<?php if ($perrow == 'card-slick') :
 				/* SLICK SLIDER */ ?>
+				<?php
+				$slidesPerRow = get_sub_field('full_width_slide') ?: 3;
+				$dots = get_sub_field('slider_dots') == 'show' ? true : false;
+				$autoplay = get_sub_field('autoplay_slider');
+				if( !$autoplay ) {
+					$autoplay = '5000';
+				}
+				?>
 				<?php if (have_rows('cards')) : ?>
-					<div class="card-slider-slick">
+					<div class="card-slider-slick" data-per-row="<?php echo $slidesPerRow ?>" data-dots="<?php echo json_encode($dots) ?>" data-autoplay="<?php echo $autoplay ?>"> 
 						<?php while (have_rows('cards')) : the_row(); ?>
 							<?php $cardnum = get_row_index(); ?>
 
@@ -200,18 +217,15 @@
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
-											<div class="wysiwyg-content smallbottompadding">
+											<div class="wysiwyg-content">
 											<?php echo get_sub_field('card_content'); ?>
 											</div>
 										<?php endif; ?>
 
 										<?php if (get_sub_field('card_link_type') == 'popup') : ?>
 											<?php if (get_sub_field('card_popup_label')) : ?>
-												<span class="card-link card-link--buffer">
-													<?php echo get_sub_field('card_popup_label'); ?>&nbsp;→
-												</span>
 												<div class="card-bottom">
-													<button aria-label="<?php echo get_sub_field('card_popup_label'); ?>" class="card-link" data-open="popup_<?php echo $modnum; ?>_<?php echo $cardnum; ?>">
+													<button aria-label="<?php echo get_sub_field('card_popup_label'); ?>" class="<?php echo $card_link_class ?>" data-open="popup_<?php echo $modnum; ?>_<?php echo $cardnum; ?>">
 														<?php echo get_sub_field('card_popup_label'); ?>&nbsp;→
 													</button>
 												</div>
@@ -222,11 +236,8 @@
 												$link_title = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 											?>
-												<span class="card-link card-link--buffer">
-													<?php echo esc_html($link_title); ?>&nbsp;→
-												</span>
 												<div class="card-bottom">
-													<a aria-label="<?php echo esc_html($link_title); ?>" class="card-link" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+													<a aria-label="<?php echo esc_html($link_title); ?>" class="<?php echo $card_link_class ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
 														<?php echo esc_html($link_title); ?>&nbsp;→
 													</a>
 												</div>
@@ -243,7 +254,7 @@
 				<?php endif; ?>
 			<?php else : ?>
 				<?php if (have_rows('cards')) : ?>
-					<div class="grid-x grid-margin-x <?php echo $horiz; ?>">
+					<div class="grid-x grid-margin-x <?php echo $horiz; ?>" data-columns="<?php echo $perrow ?>">
 						<?php while (have_rows('cards')) : the_row(); ?>
 							<?php $cardnum = get_row_index(); ?>
 							<?php if (get_sub_field('card_link')) : ?>
@@ -296,19 +307,20 @@
 										<?php if (get_sub_field('card_headline')) : ?>
 											<h3 class="card-headline"><?php echo get_sub_field('card_headline'); ?></h3>
 										<?php endif; ?>
+
+										<?php if(get_sub_field('card_content') || get_sub_field('card_link_type') == 'popup' || get_sub_field('card_link')): ?>
+											<div class="card-content-wrapper"><div class="card-content-inner">
+										<?php endif; ?>
 										<?php if (get_sub_field('card_content')) : ?>
-											<div class="wysiwyg-content smallbottompadding">
+											<div class="wysiwyg-content">
 												<?php echo get_sub_field('card_content'); ?>
 											</div>
 										<?php endif; ?>
 
 										<?php if (get_sub_field('card_link_type') == 'popup') : ?>
 											<?php if (get_sub_field('card_popup_label')) : ?>
-												<span class="card-link card-link--buffer">
-													<?php echo get_sub_field('card_popup_label'); ?>&nbsp;→
-												</span>
 												<div class="card-bottom">
-													<button aria-label="<?php echo get_sub_field('card_popup_label'); ?>" class="card-link" data-open="popup_<?php echo $modnum; ?>_<?php echo $cardnum; ?>">
+													<button aria-label="<?php echo get_sub_field('card_popup_label'); ?>" class="<?php echo $card_link_class ?>" data-open="popup_<?php echo $modnum; ?>_<?php echo $cardnum; ?>">
 														<?php echo get_sub_field('card_popup_label'); ?>&nbsp;→
 													</button>
 												</div>
@@ -319,15 +331,16 @@
 												$link_title = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 											?>
-												<span class="card-link card-link--buffer">
-													<?php echo esc_html($link_title); ?>&nbsp;→
-												</span>
 												<div class="card-bottom">
-													<a aria-label="<?php echo esc_html($link_title); ?>" class="card-link" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+													<a aria-label="<?php echo esc_html($link_title); ?>" class="<?php echo $card_link_class ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
 														<?php echo esc_html($link_title); ?>&nbsp;→
 													</a>
 												</div>
 											<?php endif; ?>
+										<?php endif; ?>
+
+										<?php if(get_sub_field('card_content') || get_sub_field('card_link_type') == 'popup' || get_sub_field('card_link')): ?>
+											</div></div>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -386,3 +399,6 @@
 		<?php endwhile; ?>
 	<?php endif; ?>
 <?php endif; ?>
+
+<?php
+include __DIR__ .'/cards-section-script.php';

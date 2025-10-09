@@ -244,3 +244,15 @@
         }
     }
 }
+
+.tab-panel-layout {
+    display: grid;
+    @include breakpoint(medium up) {
+        &--left {
+            grid-template-columns: 1fr 3fr;
+        }
+        &--right {
+            grid-template-columns: 3fr 1fr;
+        }
+    }
+}

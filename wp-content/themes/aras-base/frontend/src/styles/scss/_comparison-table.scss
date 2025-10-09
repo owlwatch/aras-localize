@@ -8,7 +8,7 @@
 
     &--header {
         position: sticky;
-        top: 140px;
+        top: var(--aras-header-height, 140px );
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -16,7 +16,6 @@
         z-index: 100;
 
         @include breakpoint(small only) {
-            top: 97px;
             flex-direction: column;
             padding-bottom: 20px;
         }
@@ -166,13 +165,5 @@
                 }
             }
         }
-    }
-}
-
-body.admin-bar .comparison__table--header {
-    top: calc(140px + 32px);
-
-    @include breakpoint(small only) {
-        top: calc(97px + 46px);
     }
 }

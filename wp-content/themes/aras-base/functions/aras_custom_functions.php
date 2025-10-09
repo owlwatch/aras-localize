@@ -149,3 +149,27 @@ function aras_gravity_forms_submit_button_override( $input, $form )
 
 }
 add_filter('gform_submit_button', 'aras_gravity_forms_submit_button_override', 10, 2);
+
+function aras_has_row_layout( $layout, $post_id = null ) {
+	if( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+	if( have_rows('flexible_content', $post_id) ) {
+		while( have_rows('flexible_content', $post_id) ) {
+			the_row();
+			if( get_row_layout() == $layout ) {
+				return true;
+			}
+		}
+	}
+	// we also need to check if there is a hero banner and if it has its own flexible content
+	if( have_rows('home_hero_flexible_content', $post_id) ) {
+		while( have_rows('home_hero_flexible_content', $post_id) ) {
+			the_row();
+			if( get_row_layout() == $layout ) {
+				return true;
+			}
+		}
+	}
+	return false;
+}

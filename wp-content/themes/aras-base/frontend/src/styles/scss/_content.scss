@@ -9,9 +9,7 @@
     screen and (min-width: 1600px) {
 
         &.has-bg-img {
-            // min-height: 850px !important;
-            display: flex;
-            align-items: center;
+            min-height: 850px !important;
         }
     }
 
@@ -193,7 +191,7 @@
 
     .image-container {
         position: relative;
-        max-width: 460px;
+        // max-width: 460px;
 
         &.image-container-fullwidth {
             max-width: 100%;
@@ -533,5 +531,31 @@
         &>*:last-child {
             margin-bottom: 0;
         }
+    }
+}
+
+.text-block-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5rem;
+    align-items: center;
+    @include breakpoint(large up) {
+        grid-template-columns: 1fr 1fr;
+    }
+    > * {
+        justify-content: center;
+    }
+}
+
+.centered-logo-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    img {
+        max-width: 25%;
+        height: auto;
     }
 }

@@ -432,3 +432,6 @@
 		</div>
 	</section>
 <?php endif; ?>
+
+<?php
+include __DIR__ .'/cards-section-script.php';
