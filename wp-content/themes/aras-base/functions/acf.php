@@ -53,3 +53,24 @@ add_filter('acf/load_field/type=flexible_content', function($field) {
 	$field['layouts'] = $layouts;
 	return $field;
 }, 10, 2);
+
+// allow for field group locations to have aribtrary values
+add_filter('acf/location/rule_values/taxonomy', function($choices) {
+	$choices['xplm-vendor'] = 'XPLM Vendor';
+	$choices['xplm-benefit'] = 'XPLM Benefit';
+	// feature
+	$choices['xplm-feature'] = 'XPLM Feature';
+	// category
+	$choices['xplm-category'] = 'XPLM Category';
+	return $choices;
+});
+
+
+// allow for field group locations to have aribtrary values
+add_filter('acf/location/rule_values/post_type', function($choices) {
+	$choices['xplm-solution'] = 'XPLM Solution';
+	$choices['xplm-combination'] = 'XPLM Combination';
+	$choices['xplm-customer-story'] = 'XPLM Customer Story';
+	$choices['xplm-sales-contact'] = 'XPLM Sales Contact';
+	return $choices;
+});
