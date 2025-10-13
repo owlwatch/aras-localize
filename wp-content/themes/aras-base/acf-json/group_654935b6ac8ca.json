@@ -289,6 +289,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
+        "the_content",
         "comments",
         "slug",
         "send-trackbacks"
@@ -298,5 +299,5 @@
     "show_in_rest": 0,
     "display_title": "",
     "acfml_field_group_mode": "advanced",
-    "modified": 1760119571
+    "modified": 1760384917
 }

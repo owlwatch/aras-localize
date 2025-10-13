@@ -73,6 +73,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        gap: 1.5rem;
     }
 
     .card-subhead {
@@ -167,13 +168,13 @@
             background-color: var(--aras-card-border-color, var(--primary, #e0e0e0));
             content: '';
             position: absolute;
-            top: -1px;
-            bottom: -1px;
-            left: -1px;
-            right: -1px;
+            top: calc(var(--aras-card-border-width, 2px) * -1);
+            bottom: calc(var(--aras-card-border-width, 2px) * -1);
+            left: calc(var(--aras-card-border-width, 2px) * -1);
+            right: calc(var(--aras-card-border-width, 2px) * -1);
             position: absolute;
-            width: calc(100% + 2px);
-            height: calc(100% + 2px);
+            width: calc(100% + var(--aras-card-border-width, 2px) * 2);
+            height: calc(100% + var(--aras-card-border-width, 2px) * 2);
             z-index: 0;
             transition: .2s;
         }
@@ -221,7 +222,7 @@
 
         .card-content-container {
             padding: 1.6rem 2.1rem 2.3rem 2.1rem;
-            padding: var(--gap) var(--v) var(--h) var(--v);
+            padding: var(--gap) var(--h) var(--v) var(--h);
 
             @include breakpoint(medium only) {
                 padding: 1.25rem 1.25rem 1.5rem 1.25rem;
