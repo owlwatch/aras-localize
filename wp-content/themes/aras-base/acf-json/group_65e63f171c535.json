@@ -17,8 +17,8 @@
                 "id": ""
             },
             "wpml_cf_preferences": 3,
-            "layouts": {
-                "layout_684234e0c41ca": {
+            "layouts": [
+                {
                     "key": "layout_684234e0c41ca",
                     "name": "competitor_table",
                     "label": "Competitor Table",
@@ -51,7 +51,7 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_65e642f445b7e": {
+                {
                     "key": "layout_65e642f445b7e",
                     "name": "post_content_section",
                     "label": "Post Content Section",
@@ -84,40 +84,7 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_65e6445ad5c03": {
-                    "key": "layout_65e6445ad5c03",
-                    "name": "post_split_content_section",
-                    "label": "Post Split Content Section",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_65e64466d5c06",
-                            "label": "Post Split Content Section",
-                            "name": "post_split_content_section",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": 3,
-                            "clone": [
-                                "group_65e64075ea4a8"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_65e64ae3cef1e": {
+                {
                     "key": "layout_65e64ae3cef1e",
                     "name": "post_floating_cta_section",
                     "label": "Post Floating CTA Section",
@@ -149,8 +116,41 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                {
+                    "key": "layout_65e6445ad5c03",
+                    "name": "post_split_content_section",
+                    "label": "Post Split Content Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65e64466d5c06",
+                            "label": "Post Split Content Section",
+                            "name": "post_split_content_section",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "clone": [
+                                "group_65e64075ea4a8"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
-            },
+            ],
             "min": "",
             "max": "",
             "button_label": "Add Row"
@@ -189,10 +189,13 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "the_content"
+    ],
     "active": true,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
     "acfml_field_group_mode": "advanced",
-    "modified": 1749169436
+    "modified": 1760386749
 }

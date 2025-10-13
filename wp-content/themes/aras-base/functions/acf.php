@@ -74,3 +74,38 @@ add_filter('acf/location/rule_values/post_type', function($choices) {
 	$choices['xplm-sales-contact'] = 'XPLM Sales Contact';
 	return $choices;
 });
+
+// lets fix the hide on screen so that it merges all the hidden items
+// from all the field groups
+function aras_acf_hide_on_screen_fix( $style, $field_group )
+{
+	// first we want to remove this filter so we don't get into an infinite loop
+	remove_filter('acf/get_field_group_style', 'aras_acf_hide_on_screen_fix', 10, 2);
+
+	// doing ajax?
+	$args = defined('DOING_AJAX') && DOING_AJAX ? wp_parse_args( wp_unslash( $_REQUEST ), [
+		'screen'  => '',
+		'post_id' => 0,
+		'ajax'    => true,
+		'exists'  => array(),
+	]) : [
+		'post_id'   => get_the_ID(),
+		'post_type' => get_post_type( get_the_ID() ),
+	];
+
+
+	// we need the field groups for the current screen (or ajax request)
+	$field_groups = acf_get_field_groups( $args );
+	
+	$style = '';
+	if ( $field_groups ) {
+		foreach ( $field_groups as $i => $field_group ) {
+			$field_group_style = acf_get_field_group_style( $field_group );
+			$style .= $field_group_style;
+		}
+	}
+	// first we want to remove this filter so we don't get into an infinite loop
+	add_filter('acf/get_field_group_style', 'aras_acf_hide_on_screen_fix', 10, 2);
+	return $style;
+}
+add_filter('acf/get_field_group_style', 'aras_acf_hide_on_screen_fix', 10, 2);
