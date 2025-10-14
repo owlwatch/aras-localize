@@ -164,6 +164,7 @@
             margin-bottom: 10px;
         }
 
+
         &:after {
             background-color: var(--aras-card-border-color, var(--primary, #e0e0e0));
             content: '';
@@ -668,7 +669,7 @@
 
                 &.bordercard {
                     .card-container {
-                        padding-bottom: 40px;
+                        
                     }
                     &.slick-current {
                         &.card-highlight-gradient-cont {

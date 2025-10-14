@@ -95,7 +95,7 @@
 		<?php else : ?>
 			<?php $tabscol = ''; ?>
 			<?php $tabscell = 'medium-3'; ?>
-			<?php $contcell = 'medium-9'; ?>
+			<?php $contcell = 'medium-8 large-offset-1'; ?>
 		<?php endif; ?>
 
 		<?php if (get_sub_field('tab_label_style') == 'upper') : ?>

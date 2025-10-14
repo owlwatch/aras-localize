@@ -229,7 +229,7 @@
             }
 
             .card-headline {
-                color: var(--primary);
+                color: var(--aras-card-headline-color, var(--primary));
                 margin-bottom: 1rem;
                 font-size: 25px;
 
