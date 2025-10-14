@@ -18,6 +18,10 @@ add_action('init', function(){
 		case 'find_posts_with_quote':
 			aras_export_posts_with_quote();
 			break;	
+
+		case 'find_automatic_cards_with_bad_posts':
+			aras_find_automatic_cards_with_bad_posts();
+			break;
 	}
 
 	exit;
@@ -130,5 +134,81 @@ function aras_export_posts_with_quote()
 		]);
 		
 	}
+	fclose($out);
+}
+
+function aras_find_automatic_cards_with_bad_posts()
+{
+	global $wpdb;
+
+	header('content-type: text/plain; charset=utf-8');
+	header('Content-Disposition: attachment; filename="automatic_cards_with_bad_posts.csv"');
+	$out = fopen('php://output', 'w');
+	
+	fputcsv( $out, [
+		'Page ID',
+		'Page Title',
+		'Page Permalink',
+		'Page Edit Link',
+	]);
+	
+	// Step 1: Find post IDs with a matching meta_key
+	$like = $wpdb->esc_like('content_item');
+
+	$sql = "SELECT m.meta_id, m.meta_key, m.post_id, m.meta_value FROM {$wpdb->postmeta} m JOIN {$wpdb->posts} p ON m.post_id = p.ID AND p.post_status = 'publish' WHERE meta_key LIKE 'flexible_content%content_item' GROUP BY m.post_id, m.meta_key HAVING meta_value != ''";
+
+	$results = $wpdb->get_results($sql);
+
+	// we need to find the post_ids of the bad posts (meta_value is either a deleted post_id or a post_id that is not published)
+	$bad_post_ids = [];
+	foreach( $results as $row ){
+		$page_id = $row->post_id;
+		$post_id = $row->meta_value;
+
+		// we need to get the flexible_content field to make sure that the content_item is actually an automatic card
+		// otherwise it could be a quote or other content item
+		$flexible_content = get_post_meta( $page_id, 'flexible_content', true );
+		if( !is_array( $flexible_content ) ){
+			continue;
+		}
+
+		// check the meta_key to get the flexible_content_{index}
+		preg_match( '/^flexible_content_(\d+)/', $row->meta_key, $matches );
+		if( !isset( $matches[1] ) ){
+			continue;
+		}
+		$index = intval( $matches[1] ); // meta_key is 1-based, array is 0-based
+		if( !isset( $flexible_content[$index] ) ){
+			continue;
+		}
+		$layout = $flexible_content[$index];
+		if( $layout !== 'automatic_cards_section' ){
+			continue;
+		}
+		if( $post_id ){
+			$post = get_post( $post_id );
+			if( !$post || $post->post_status !== 'publish' ){
+				$bad_post_ids[] = [
+					'meta_id' => $row->meta_id,
+					'meta_key' => $row->meta_key,
+					'page_id' => $page_id,
+					'permalink' => get_permalink( $page_id ),
+					'post_id' => $post_id,
+					'post_exists' => $post ? true : false,
+					'post_status' => $post ? $post->post_status : 'n/a',
+				];
+				fputcsv( $out, [
+					$page_id,
+					get_the_title( $page_id ),
+					get_permalink( $page_id ),
+					get_edit_post_link( $page_id ),
+				]);
+			}
+		}
+	}
+
+	
+
+
 	fclose($out);
 }
