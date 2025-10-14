@@ -1,4 +1,8 @@
 .gform_wrapper {
+  
+  --gf-color-primary: var(--primary);
+  
+
   .gform_heading {
     height: min-content;
     width: fit-content;
@@ -19,12 +23,42 @@
   }
 
   .gfield_label {
-    display: none !important;
+    // :not(.gform_page.show-labels &) {
+      display: none !important;
+    // }
+  }
+
+  .gform_page.show-labels {
+    .gform_page_fields > .gform_fields {
+      row-gap: 2.5em !important;
+    }
+    .gfield_label {
+      display: block !important;
+      margin-bottom: 0.5em !important;
+      text-transform: none;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+  }
+
+  .gfield--type-multi_choice > .gfield_label {
+    display: block !important;
+    margin-bottom: 0.5em !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .gfield_required {
+    margin-left: 0.2em;
   }
 
   input[type=text],
   input[type=email],
   input[type=tel],
+  input[type=url],
   textarea,
   select {
     border: solid 1px $bordergrey !important;
@@ -92,7 +126,8 @@
     justify-content: center;
   }
 
-  input[type=submit].button {
+  input[type=submit].button,
+  .gform_next_button{
     background-color: $black !important;
     border: solid 2px $black !important;
     border-radius: 0px !important;
@@ -178,6 +213,15 @@
         border: solid 2px var(--orange);
         color: var(--orange) !important;
       }
+    }
+  }
+
+  .gf_page_steps .gf_step_completed .gf_step_number{
+    --gf-local-bg-color: var(--dblue);
+    --gf-local-border-color: var(--dblue);
+    &::after {
+      --gf-field-pg-steps-number-bg-color-complete: var(--gf-local-bg-color);
+      --gf-field-pg-steps-number-border-color-complete: var(--gf-local-border-color);
     }
   }
 
