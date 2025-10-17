@@ -239,12 +239,12 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
+                "value": "resource"
             },
             {
                 "param": "post_template",
                 "operator": "==",
-                "value": "default"
+                "value": "single-resource-ungated.php"
             }
         ],
         [
@@ -299,5 +299,5 @@
     "show_in_rest": 0,
     "display_title": "",
     "acfml_field_group_mode": "advanced",
-    "modified": 1760384917
+    "modified": 1760728097
 }
