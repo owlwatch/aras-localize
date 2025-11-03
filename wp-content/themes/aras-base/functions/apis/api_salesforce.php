@@ -167,7 +167,15 @@ function update_partners_from_file()
 	$unique_Partner_Integrations__c = [];
 	$unique_Certifications__c = [];
 
-	foreach ($partners_data['records'] as $record) {
+	// lets clean the partners_data['records'] array by removing any
+	// partners that have a "Technology" certification
+	$filtered_records = array_filter($partners_data['records'], function ($record) {
+		$certifications = isset($record['fields']['Certifications__c']['displayValue']) ? $record['fields']['Certifications__c']['displayValue'] : '';
+		$certification_array = array_map('trim', explode(';', $certifications));
+		return !in_array('Technology', $certification_array);
+	});
+
+	foreach ($filtered_records as $record) {
 		$Partner_Name_For_Website__c = $record['fields']['Partner_Name_For_Website__c']['value'];
 		$Partner_Icon_For_Website__c = $record['fields']['Partner_Icon_For_Website__c']['value'];
 		$Partners_URL_Link__c = $record['fields']['Partners_URL_Link__c']['value'];
@@ -272,7 +280,7 @@ function update_partners_from_file()
 		$found = false;
 
 		// Loop through each item in the array to check for a matching partner name
-		foreach ($partners_data['records'] as $record) {
+		foreach ($filtered_records as $record) {
 			if ($record['fields']['Partner_Name_For_Website__c']['value'] == $partner_name) {
 				$found = true;
 				break; // No need to continue looping once a match is found
