@@ -52,12 +52,47 @@ class GravityForms
 		if ( is_page_template( array( 'templates/gated.php' ) ) || is_singular( 'lp' ) ) {
 			header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1.
 			header("X-Nitro-Disabled: 1");
+			header("X-Nitro-Disabled-Reason: Gated or LP template");
 			return;
 		}
 
 		// otherwise, we need to look through the flexible content for gated forms
-		
+		$flexible_content = get_field('flexible_content');
 
+		if ( $flexible_content && is_array( $flexible_content ) ) {
+			foreach ( $flexible_content as $layout ) {
+				if ( 'split_content_section' == $layout['acf_fc_layout'] ) {
+					// check right content
+					if ( isset( $layout['right_content'] ) && is_array( $layout['right_content'] ) ) {
+						foreach ( $layout['right_content'] as $right_layout ) {
+							if ( isset( $right_layout['form_block'] ) && is_array( $right_layout['form_block'] ) ) {
+								header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1.
+								header("X-Nitro-Disabled: 1");
+								header("X-Nitro-Disabled-Reason: Page has Gravity Form in Flexible Content");
+								return;
+							}
+						}
+					}
+					// check left content
+					if ( isset( $layout['left_content'] ) && is_array( $layout['left_content'] ) ) {
+						foreach ( $layout['left_content'] as $left_layout ) {
+							if ( isset( $left_layout['form_block'] ) && is_array( $left_layout['form_block'] ) ) {
+								header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1.
+								header("X-Nitro-Disabled: 1");
+								header("X-Nitro-Disabled-Reason: Page has Gravity Form in Flexible Content");
+								return;
+							}
+						}
+					}
+					// if its a full width form section, always disable caching
+				} elseif ( 'full_width_form_section' === $layout['acf_fc_layout'] ) {
+					header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1.
+					header("X-Nitro-Disabled: 1");
+					header("X-Nitro-Disabled-Reason: Page has Full Width Form Section in Flexible Content");
+					return;
+				}
+			}
+		}
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
