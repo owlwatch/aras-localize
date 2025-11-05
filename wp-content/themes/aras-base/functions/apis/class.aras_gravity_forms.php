@@ -42,6 +42,22 @@ class GravityForms
 
 		// japanese fix for last name before first name
 		add_filter('gform_form_post_get_meta', [$this, 'gform_form_post_get_meta'], 10, 2);
+	// we want to hook in before any output is sent to the browser
+		// right when wordpress figures out the theme template to use
+		add_action('template_redirect', [$this, 'maybe_prevent_caching'], 1);
+	}
+
+	public function maybe_prevent_caching()
+	{
+		if ( is_page_template( array( 'templates/gated.php' ) ) || is_singular( 'lp' ) ) {
+			header("Cache-Control: no-cache, must-revalidate"); // HTTP 1.1.
+			header("X-Nitro-Disabled: 1");
+			return;
+		}
+
+		// otherwise, we need to look through the flexible content for gated forms
+		
+
 	}
 
 	public function before_ga_process_feeds($feeds, $entry, $form)
