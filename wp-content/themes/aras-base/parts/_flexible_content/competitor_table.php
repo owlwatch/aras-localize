@@ -156,6 +156,10 @@ switch ($horizontal_alignment) {
 				// small columns
 				$small_columns = $show_harvey_ball && $use_tooltip;
 
+				$dividing_borders = get_sub_field('dividing_borders') ? 'competitor-table--dividing-borders' : '';
+				$centered_logos = get_sub_field('center_logos') ? 'competitor-table--centered-logos' : '';
+				$body_cell_text_alignment = get_sub_field('body_cell_text_alignment') ? 'competitor-table--body-text-' . get_sub_field('body_cell_text_alignment') : 'competitor-table--body-text-center';
+
 				$table_classes = [
 					'competitor-table',
 					$show_harvey_ball ? 'competitor-table--harvey-balls' : '',
@@ -163,6 +167,9 @@ switch ($horizontal_alignment) {
 					$hide_harvey_ball_in_first_row ? 'competitor-table--hide-harvey-ball-in-first-row' : '',
 					$small_columns ? 'competitor-table--small-columns' : '',
 					'competitor-table--competitor-count-' . count( $competitors ),
+					$dividing_borders,
+					$centered_logos,
+					$body_cell_text_alignment,
 				];
 
 				?>

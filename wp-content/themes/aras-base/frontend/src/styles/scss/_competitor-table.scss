@@ -15,7 +15,7 @@
 		font-weight: bold;
 		text-align: left;
 		border-bottom: 1px solid #ddd;
-		padding: 1em 0.5em;
+		padding: 1em 1em;
 
 		&:first-child {
 			text-align: left;
@@ -59,6 +59,7 @@
 			background: transparent;
 			text-align: center;
 			vertical-align: middle;
+			padding: 0.625rem 1rem;
 		}
 		
 		td,th {
@@ -70,12 +71,32 @@
 		}
 	}
 
+	&--centered-logos thead tr th:not(:first-child) {
+		text-align: center;
+	}
+
 	.competitor-table__cell {
 		padding: 10px;
 
 		&.feature {
 			font-weight: bold;
 			color: #333; // Example feature color
+		}
+	}
+	&--dividing-borders tbody td {
+		position: relative;
+	}
+	&--dividing-borders &__difference {
+		&::after {
+			// add a thin dividing line on the left
+			// that is 80% height of the parent
+			content: '';
+			position: absolute;
+			left: -0.5px;
+			top: 0.75rem;
+			height: calc(100% - 1.5rem);
+			width: 1px;
+			background-color: #e8e8e8;
 		}
 	}
 
@@ -94,6 +115,10 @@
 			font-size: 0.9em;
 			color: #666; // Example description color
 		}
+	}
+
+	&--body-text-left &__difference-description {
+		text-align: left;
 	}
 
 	&__capability-name {

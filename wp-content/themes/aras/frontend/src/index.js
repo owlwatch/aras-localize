@@ -1,3 +1,5 @@
+import './index.scss';
+
 import 'what-input';
 
 import 'mixitup';
@@ -9,6 +11,3 @@ import 'foundation-sites'
 import './js/init-foundation.js';
 import './js/wp-foundation.js'
 import './js/custom-scripts.js';
-
-
-import './index.scss'
