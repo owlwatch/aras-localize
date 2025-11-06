@@ -9,6 +9,7 @@ $types = get_terms( array(
 	'hide_empty' => true,
 ));
 
+$essid = get_field('marketplace_essid', 'option');
 
 // show a select box for both taxonomies,
 // and check for the current term to set the selected
@@ -77,6 +78,9 @@ $types = get_terms( array(
 				value="<?php echo get_search_query(); ?>"
 			/>
 		</fieldset>
+		<?php if( $essid ): ?>
+			<input type='hidden' value='<?php echo esc_attr($essid); ?>' name='wpessid' />
+		<?php endif; ?>
 		<button type="submit" class="mp-solution-filters__submit aras-button">
 			<?php _e('Search', 'aras-marketplace'); ?>
 		</button>

@@ -10,6 +10,10 @@ class Query
 		// register mp-search as a query var
 		add_filter( 'query_vars', array( $this, 'addQueryVars' ) );
 		add_action( 'pre_get_posts', array( $this, 'filterMarketplacePosts' ) );
+		// we need to add hooks to search over the related terms
+		// for this via join and where filters
+		// add_filter( 'posts_join', array( $this, 'postsJoin' ) );
+		// add_filter( 'posts_where', array( $this, 'postsWhere' ) );
 	}
 
 	/**
@@ -46,5 +50,34 @@ class Query
 		}
 	}
 
+	/**
+	 * Join to include term relationships
+	 */
+	public function postsJoin( $join ) {
+		global $wpdb;
+		if( !get_query_var('mp-search') ) {
+			return $join;
+		}
+		$join .= " LEFT JOIN {$wpdb->term_relationships} AS tr ON {$wpdb->posts}.ID = tr.object_id
+				   LEFT JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+				   LEFT JOIN {$wpdb->terms} AS t ON tt.term_id = t.term_id ";
+		return $join;
+	}
+
+	/**
+	 * Where clause to filter by search terms
+	 */
+	public function postsWhere( $where ) {
+		global $wpdb;
+
+		if( !get_query_var('mp-search') ) {
+			return $where;
+		}
+		if ( $search = get_query_var( 'mp-search' ) ) {
+			$where .= $wpdb->prepare( " OR ( t.name LIKE %s ) ", '%' . $wpdb->esc_like( $search ) . '%' );
+		}
+
+		return $where;
+	}
 
 }
