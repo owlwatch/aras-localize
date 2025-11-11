@@ -55,7 +55,7 @@ function aras_author_where($where, $query)
 
 	foreach( [$re, $re2] as $regex ){
 		$where = preg_replace_callback($regex, function( $matches ){
-			return '((' . $matches[0] . " AND co_authors_null.post_id IS NULL) OR co_authors.meta_value LIKE '%\"{$matches[2]}\"%' )";
+			return '(' . $matches[0] . " OR co_authors.meta_value LIKE '%\"{$matches[2]}\"%' )";
 		}, $where);
 	}
 
