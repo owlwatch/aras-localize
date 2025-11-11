@@ -10,10 +10,6 @@ class Query
 		// register mp-search as a query var
 		add_filter( 'query_vars', array( $this, 'addQueryVars' ) );
 		add_action( 'pre_get_posts', array( $this, 'filterMarketplacePosts' ) );
-		// we need to add hooks to search over the related terms
-		// for this via join and where filters
-		// add_filter( 'posts_join', array( $this, 'postsJoin' ) );
-		// add_filter( 'posts_where', array( $this, 'postsWhere' ) );
 	}
 
 	/**
@@ -46,6 +42,8 @@ class Query
 				// add query_var to enable acf search
 				$query->query_vars['s'] = $search;
 				$query->set( 's', $search );
+				// also need to make sure the conditional is_search is true
+				$query->is_search = true;
 			}
 		}
 	}
