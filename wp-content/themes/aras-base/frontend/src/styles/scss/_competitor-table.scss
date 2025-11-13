@@ -58,8 +58,8 @@
 		td {
 			background: transparent;
 			text-align: center;
-			vertical-align: middle;
-			padding: 0.625rem 1rem;
+			vertical-align: top;
+			padding: 1rem 1.5rem;
 		}
 		
 		td,th {
@@ -68,6 +68,8 @@
 		
 		th {
 			background-color: transparent;
+			vertical-align: top;
+			padding: 1rem 1.5rem;
 		}
 	}
 
@@ -100,6 +102,10 @@
 		}
 	}
 
+	&--equal-width-columns {
+		table-layout: fixed;
+	}
+
 	&__difference {
 		width: 100%;
 		display: flex;
@@ -129,7 +135,7 @@
 		color: #666; // Example description color
 	}
 
-	&--competitor-count {
+	:not(.competitor-table--equal-width-columns).competitor-table--competitor-count {
 		&-1 {
 			thead th:not(:first-child) {
 				width: 50%;

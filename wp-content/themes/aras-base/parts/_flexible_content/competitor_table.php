@@ -159,6 +159,7 @@ switch ($horizontal_alignment) {
 				$dividing_borders = get_sub_field('dividing_borders') ? 'competitor-table--dividing-borders' : '';
 				$centered_logos = get_sub_field('center_logos') ? 'competitor-table--centered-logos' : '';
 				$body_cell_text_alignment = get_sub_field('body_cell_text_alignment') ? 'competitor-table--body-text-' . get_sub_field('body_cell_text_alignment') : 'competitor-table--body-text-center';
+				$equal_width_columns = get_sub_field('equal_width_columns') ? 'competitor-table--equal-width-columns' : '';
 
 				$table_classes = [
 					'competitor-table',
@@ -170,6 +171,7 @@ switch ($horizontal_alignment) {
 					$dividing_borders,
 					$centered_logos,
 					$body_cell_text_alignment,
+					$equal_width_columns
 				];
 
 				?>
