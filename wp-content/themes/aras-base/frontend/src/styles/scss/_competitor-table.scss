@@ -135,23 +135,23 @@
 		color: #666; // Example description color
 	}
 
-	:not(.competitor-table--equal-width-columns).competitor-table--competitor-count {
-		&-1 {
+	:not(.competitor-table--equal-width-columns) {
+		.competitor-table--competitor-count-1 {
 			thead th:not(:first-child) {
 				width: 50%;
 			}
 		}
-		&-2 {
+		.competitor-table--competitor-count-2 {
 			thead th:not(:first-child) {
 				width: 30%;
 			}
 		}
-		&-3 {
+		.competitor-table--competitor-count-3 {
 			thead th:not(:first-child) {
 				width: 20%;
 			}
 		}
-		&-4 {
+		.competitor-table--competitor-count-4 {
 			thead th:not(:first-child) {
 				width: 10%;
 			}
