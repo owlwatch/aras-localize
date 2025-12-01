@@ -104,7 +104,8 @@
             "allow_in_bindings": 0,
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_6818b91090695",
@@ -146,6 +147,45 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_6923bb1116394",
+            "label": "Bamboo",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6923bb1e16395",
+            "label": "Bamboo API Key",
+            "name": "bamboo_api_key",
+            "aria-label": "",
+            "type": "password",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -166,6 +206,14 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
     "acfml_field_group_mode": "advanced",
-    "modified": 1746452787
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1763949368
 }
