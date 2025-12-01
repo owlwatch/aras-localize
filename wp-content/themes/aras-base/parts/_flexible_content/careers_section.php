@@ -254,8 +254,17 @@ switch ($horizontal_alignment) {
 					<h2 class="job-listings__department department-name"><?php echo esc_html( $department_name ); ?></h2>
 					<ul class="job-listings__list">
 						<?php foreach ( $department_jobs as $job ) : ?>
+							<?php
+							$url = $job['postingUrl'];
+							// this is in the format https://aras.bamboohr.com/jobs/view.php?id=197
+							// but we want to convert it to https://aras.bamboohr.com/careers/197
+							$parsed_url = parse_url( $url );
+							parse_str( $parsed_url['query'], $query_params );
+							$job_id = $query_params['id'];
+							$new_url = 'https://aras.bamboohr.com/careers/' . $job_id;
+							?>
 							<li class="job-listing">
-								<a class="job-listing__link" href="<?php echo esc_url( $job['postingUrl'] ); ?>" target="_blank" rel="noopener noreferrer">
+								<a class="job-listing__link" href="<?php echo esc_url( $new_url ); ?>" target="_blank" rel="noopener noreferrer">
 									<h3 class="job-listing__title"><?php echo esc_html( $job['title']['label'] ); ?></h3>
 									<span class="job-listing__location">
 										<?php
