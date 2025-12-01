@@ -255,7 +255,7 @@ switch ($horizontal_alignment) {
 					<ul class="job-listings__list">
 						<?php foreach ( $department_jobs as $job ) : ?>
 							<li class="job-listing">
-								<a class="job-listing__link href="<?php echo esc_url( $job['postingUrl'] ); ?>" target="_blank" rel="noopener noreferrer">
+								<a class="job-listing__link" href="<?php echo esc_url( $job['postingUrl'] ); ?>" target="_blank" rel="noopener noreferrer">
 									<h3 class="job-listing__title"><?php echo esc_html( $job['title']['label'] ); ?></h3>
 									<span class="job-listing__location">
 										<?php
