@@ -139,7 +139,7 @@ switch ($horizontal_alignment) {
 				<?php
 
 				$cache = wp_cache_get( 'bamboo_listings', 'bamboo');
-				if( !$cache ) {
+				if( !$cache || !isset($cache['jobs']) || empty( $cache['jobs']) ) {
 					$cache = [];
 				
 					// get our bamboo api key from acf options
@@ -239,7 +239,9 @@ switch ($horizontal_alignment) {
 					ksort( $departments );
 					$cache = ['jobs' => $jobs, 'departments' => $departments];
 					// cache for 1 hour
-					wp_cache_set( 'bamboo_listings', $cache, 'bamboo', 3600 ); 
+					if( !empty($jobs) ){
+						wp_cache_set( 'bamboo_listings', $cache, 'bamboo', 3600 ); 
+					}
 				}
 				else {
 					$jobs = $cache['jobs'];
