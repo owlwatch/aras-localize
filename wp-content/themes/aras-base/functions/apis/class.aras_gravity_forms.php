@@ -229,6 +229,7 @@ class GravityForms
 		}
 
 		$resource_format = '';
+		$asset_action = 'Downloaded';
 		if (is_singular('resource')) {
 			// Get the terms of the 'format' taxonomy for the current post
 			$terms = get_the_terms(get_the_ID(), 'format');
@@ -236,6 +237,17 @@ class GravityForms
 			if ($terms && ! is_wp_error($terms)) {
 				// Get the first term from the 'format' taxonomy
 				$resource_format = $terms[0]->name;
+				if( $resource_format == 'Webinar' ){
+					// if webinar and the date has past, we will mark it as on demand
+					if( get_field('post_submission_action') == 'update'){
+						// check for vidyard image in post_submission_content
+						$content = get_field('post_submission_content');
+						if( strpos( $content, 'vidyard-player-embed' ) !== false ){
+							$asset_action = 'Attended On-Demand';
+						}
+					}
+				}
+
 			}
 		}
 
@@ -262,6 +274,7 @@ class GravityForms
 			'SecondaryCampaignID'                  => $SecondaryCampaignID,
 			'Asset_Type_Downloaded'                => $resource_format,
 			'Marketo_Interactive_Webinar_Asset_ID' => $marketo_interactive_webinar_asset_id,
+			'Asset Action'                         => $asset_action
 		);
 		$value = isset($values[$name]) ? $values[$name] : $value;
 		return $value != $name ? trim($value) : '';
