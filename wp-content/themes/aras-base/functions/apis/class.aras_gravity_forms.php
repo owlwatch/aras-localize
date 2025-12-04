@@ -274,7 +274,7 @@ class GravityForms
 			'SecondaryCampaignID'                  => $SecondaryCampaignID,
 			'Asset_Type_Downloaded'                => $resource_format,
 			'Marketo_Interactive_Webinar_Asset_ID' => $marketo_interactive_webinar_asset_id,
-			'Asset Action'                         => $asset_action
+			'Asset_Action'                         => $asset_action
 		);
 		$value = isset($values[$name]) ? $values[$name] : $value;
 		return $value != $name ? trim($value) : '';
