@@ -12,7 +12,8 @@ const props = defineProps<{
   eventId: number
   config: {
     filterByTrack: string,
-    hideTrack: boolean
+    hideTrack: boolean,
+    hideDateAndTime?: boolean,
   }
 }>();
 
@@ -20,8 +21,10 @@ const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
 
 const hideTrack = props.config.hideTrack || false;
-
 provide('hideTrack', hideTrack);
+
+const hideDateAndTime = props.config.hideDateAndTime || false;
+provide('hideDateAndTime', hideDateAndTime);
 
 const speakers = computed( () => {
 

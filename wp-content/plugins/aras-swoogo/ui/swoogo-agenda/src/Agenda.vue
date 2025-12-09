@@ -13,8 +13,12 @@ const props = defineProps<{
   config: {
     filterByTrack: string,
     hideTrack?: boolean,
+    hideDateAndTime?: boolean,
   }
 }>();
+
+const hideDateAndTime = props.config.hideDateAndTime || false;
+provide('hideDateAndTime', hideDateAndTime);
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -160,7 +164,9 @@ const formatDate = (date: string) => {
 
 <template lang="pug">
 .swoogo-agenda
-  ul.swoogo-agenda__tabs
+  ul.swoogo-agenda__tabs(
+    v-if="!hideDateAndTime"
+  )
     li.swoogo-agenda__tab(
       v-for="day in Object.keys(sessionsByDay)"
       :key="`tab-${day}`"
@@ -174,7 +180,9 @@ const formatDate = (date: string) => {
         @click="activeTab = day"
       ) {{ formatDate(day) }}
   
-  ul.swoogo-agenda__days
+  ul.swoogo-agenda__days(
+    v-if="!hideDateAndTime"
+  )
     li.swoogo-agenda__day(
       role="tabpanel"
       :id="`tabccontent-${date}`"
@@ -194,6 +202,20 @@ const formatDate = (date: string) => {
             ref="sessionList"
             :sessions="sessions"
           )
+  // If hideDateAndTime is true, show all sessions in a single list
+  ul.swoogo-agenda__days(
+    v-else
+  )
+    li.swoogo-agenda__day
+      ul.swoogo-agenda__sessions-by-time(
+        v-for="(session, time) in filteredSessions"
+      )
+        li.swoogo-agenda__column.swoogo-agenda__column--sessions
+          session-list(
+            ref="sessionList"
+            :sessions="[session]"
+          )
+        
 
 speaker-modal(
   v-if="activeModalSpeaker"

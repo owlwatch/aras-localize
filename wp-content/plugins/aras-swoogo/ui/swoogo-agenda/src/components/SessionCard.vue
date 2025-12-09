@@ -18,6 +18,8 @@ const hideTrack = inject('hideTrack', false);
 
 const {session, showSpeakers} = props;
 
+const hideDateAndTime = inject('hideDateAndTime', false);
+
 const eventStore = useEventStore();
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
 
@@ -46,7 +48,7 @@ function formatTime(time: string) {
 .swoogo-session-card
 	.swoogo-session-card__header
 		// show date
-		.swoogo-session-card__date(v-if="props.showDate")
+		.swoogo-session-card__date(v-if="!hideDateAndTime && props.showDate")
 			| {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
 		span.swoogo-session-card__track.swoogo-pill(
 			v-if="session.track && !hideTrack"

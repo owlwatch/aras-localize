@@ -12,6 +12,7 @@ const props = defineProps<{
 const emit = defineEmits(['close']);
 
 const hideTrack = inject('hideTrack', false);
+const hideDateAndTime = inject('hideDateAndTime', false);
 
 // get next and previous sessions if they exist
 const eventStore = useEventStore();
@@ -76,7 +77,10 @@ modal(@close="emit('close')" :show-close-button="false")
 		// date and time
 		div.swoogo-session-modal__date-bar
 			div.swoogo-session-modal__date
-				strong {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
+				template(v-if="!hideDateAndTime")
+					strong {{ formatDate(session.date) }} {{ formatTime(session.start_time) }} - {{ formatTime(session.end_time) }}
+				template(v-else)
+					strong &nbsp;
 			div.swoogo-session-modal__nav
 				// previous session
 				button.swoogo-session-modal__nav-button(

@@ -33,7 +33,8 @@ class Shortcodes
 	{
 		return $this->shortcode('agenda', $atts, [
 			'filter_by_track' => "",
-			'hide_track' => "false"
+			'hide_track' => "false",
+			'hide_date_and_time' => "false",
 		]);
 	}
 
@@ -41,7 +42,8 @@ class Shortcodes
 	{
 		return $this->shortcode('speakers', $atts, [
 			'filter_by_track' => "",
-			'hide_track' => "false"
+			'hide_track' => "false",
+			'hide_date_and_time' => "false",
 		]);
 	}
 
