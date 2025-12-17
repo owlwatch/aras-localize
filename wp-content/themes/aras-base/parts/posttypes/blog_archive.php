@@ -535,10 +535,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       // Extract tag slug
       $parts = explode('/tag/', $current_url);
       if (count($parts) === 2) {
-        $tag_slug_with_query = $parts[1];
-        $tag_slug_parts = explode('?', $tag_slug_with_query);
-        $tag_slug = rtrim($tag_slug_parts[0], '/');
-        $tag_switcher = $tag_slug;
+        $tag_switcher = get_query_var('tag');
       }
       // Taxonomy Query for Tag Filter
       if (!empty($tag_switcher)) {
@@ -648,10 +645,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
       }
 
       if (strpos($site_url, '/page/') !== false) {
-        $pos = strpos($site_url, '/page/');
-        $page_substr = substr($site_url, $pos + 6); // 6 is the length of '/page/'
-        $page_number = intval($page_substr);
-        $args['paged'] = $page_number;
+        $args['paged'] = get_query_var('paged');
       }
 
       // Fix duplicate posts (only one should be returned per language)
