@@ -101,6 +101,17 @@ function update_myi_data_hourly( $debug = false )
 	if( $debug ){
 		exit;
 	}
+
+	// clear the cache for any pages with the template
+	// templates/training.php
+	// find the pages using this template
+	$pages = get_pages(array(
+		'meta_key' => '_wp_page_template',
+		'meta_value' => 'templates/training.php'
+	));
+	foreach( $pages as $page ){
+		aras_purge_post_url_caches( $page->ID );
+	}
 }
 
 function fetch_and_save_pdf($pdf_id)

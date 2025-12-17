@@ -661,6 +661,11 @@ function create_new_salesforce_campaign($title_of_page, $url_of_page, $language,
 	if (isset($response_data['success']) && $response_data['success'] === true) {
 		return $response_data['id'];
 	} else {
+		/**
+		 * @todo add email notification when something fails
+		 * and use the marketo gravity forms add on settings for the
+		 * list of recipients
+		 */
 		error_log('Error creating salesforce campaign: ' . $response_string."\nJSON: ".$body);
 		return false;
 	}

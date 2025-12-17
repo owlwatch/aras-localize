@@ -17,6 +17,89 @@ function is_aras_feature_enabled( $feature ) {
 	return in_array( $feature, $aras_base_config['features'] );
 }
 
+/**
+ * Purge WP Engine and NitroPack caches for a post's public URL.
+ */
+function aras_purge_post_url_caches( $post_id ) {
+	$post_id = absint( $post_id );
+	if ( ! $post_id ) {
+		return false;
+	}
+
+	$post_type = get_post_type( $post_id );
+	if ( ! $post_type ) {
+		return false;
+	}
+
+	$urls = array();
+	$primary_url = get_permalink( $post_id );
+	if ( $primary_url ) {
+		$urls[] = $primary_url;
+	}
+
+	if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+		$element_type = 'post_' . $post_type;
+		$trid = apply_filters( 'wpml_element_trid', null, $post_id, $element_type );
+		$translations = apply_filters( 'wpml_get_element_translations', null, $trid, $element_type );
+		if ( is_array( $translations ) ) {
+			foreach ( $translations as $translation ) {
+				if ( empty( $translation->element_id ) ) {
+					continue;
+				}
+				$translated_url = get_permalink( $translation->element_id );
+				if ( $translated_url ) {
+					$urls[] = $translated_url;
+				}
+			}
+		}
+	}
+
+	$urls = array_values( array_unique( $urls ) );
+	if ( ! $urls ) {
+		return false;
+	}
+
+	$did_purge = false;
+
+	foreach ( $urls as $url ) {
+		if ( class_exists( '\WpeCommon' ) ) {
+			$handler = function( $paths ) use ( $url ) {
+				$parts = function_exists( 'wp_parse_url' ) ? wp_parse_url( $url ) : parse_url( $url );
+				$path = ! empty( $parts['path'] ) ? $parts['path'] : '/';
+				$query = isset( $parts['query'] ) ? $parts['query'] : '';
+				$varnish_path = $path;
+
+				if ( $query !== '' ) {
+					$varnish_path .= '?' . $query;
+				}
+
+				if ( $url && count( $paths ) === 1 && $paths[0] === '.*' ) {
+					return array( $varnish_path );
+				}
+
+				return $paths;
+			};
+
+			add_filter( 'wpe_purge_varnish_cache_paths', $handler );
+			try {
+				\WpeCommon::purge_varnish_cache();
+				$did_purge = true;
+			} catch ( \Exception $e ) {
+			}
+			remove_filter( 'wpe_purge_varnish_cache_paths', $handler );
+		}
+
+		if ( function_exists( 'nitropack_sdk_purge' ) ) {
+			$reason = sprintf( 'Manual purge of %s via Aras helper', $url );
+			if ( nitropack_sdk_purge( $url, null, $reason ) ) {
+				$did_purge = true;
+			}
+		}
+	}
+
+	return $did_purge;
+}
+
 
 // Theme support options
 require_once(get_template_directory() . '/functions/theme-support.php');
