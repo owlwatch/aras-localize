@@ -111,11 +111,11 @@
 								<?php endif; ?>
 								<?php if ($titlenum == '1') : ?>
 									<li class="tabs-title is-active <?php echo $labelstyle; ?>">
-										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" aria-selected="true"><?php echo $tab_label; ?></a>
+										<a aria-label="<?php echo $tab_label; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" aria-selected="true"><?php echo $tab_label; ?></a>
 									</li>
 								<?php else : ?>
 									<li class="tabs-title <?php echo $labelstyle; ?>">
-										<a aria-label="<?php echo $tablabel; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#sidetab<?php echo $titlenum; ?>"><?php echo $tab_label; ?></a>
+										<a aria-label="<?php echo $tab_label; ?>" data-tabs-target="sidetab-<?php echo $titlenum; ?>-<?php echo $modnum; ?>" href="#sidetab<?php echo $titlenum; ?>"><?php echo $tab_label; ?></a>
 									</li>
 								<?php endif; ?>
 							<?php endwhile; ?>

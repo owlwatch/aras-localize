@@ -160,7 +160,7 @@ if( !is_array($labels) ){
             <div class="custom-select">
               <select id="format-filter" name="format">
                 <option value="">
-                  <?php echo $labels['all_formats'] ?: 'All Formats'; ?>
+                  <?php echo !empty( $labels['all_formats'] ) ? $labels['all_formats'] : 'All Formats'; ?>
                 </option>
                 <?php while (have_rows('resource_format_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
@@ -186,7 +186,7 @@ if( !is_array($labels) ){
             <div class="custom-select">
               <select id="application-filter" name="application">
                 <option value="">
-                  <?php echo $labels['all_applications'] ?: 'All Applications'; ?>
+                  <?php echo !empty( $labels['all_applications'] ) ? $labels['all_applications'] : 'All Applications'; ?>
                 </option>
                 <?php while (have_rows('resource_application_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
@@ -211,7 +211,7 @@ if( !is_array($labels) ){
             <div class="custom-select">
               <select id="industry-filter" name="industry">
                 <option value="">
-                  <?php echo $labels['all_industries'] ?: 'All Industries'; ?>
+                  <?php echo !empty( $labels['all_industries'] ) ? $labels['all_industries'] : 'All Industries'; ?>
                 </option>
                 <?php while (have_rows('resource_industry_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');
@@ -236,7 +236,7 @@ if( !is_array($labels) ){
             <div class="custom-select">
               <select id="topic-filter" name="topic">
                 <option value="">
-                  <?php echo $labels['all_topics'] ?: 'All Topics'; ?>
+                  <?php echo !empty( $labels['all_topics'] ) ? $labels['all_topics'] : 'All Topics'; ?>
                 </option>
                 <?php while (have_rows('resource_topic_filter', 'option')) : the_row(); ?>
                   <?php $term = get_sub_field('category_item', 'option');

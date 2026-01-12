@@ -115,11 +115,6 @@ if (function_exists('acf_add_options_page')) {
 		'menu_title'    => 'Partner Settings',
 		'parent_slug'    => 'edit.php?post_type=partners',
 	));
-	acf_add_options_sub_page(array(
-		'page_title'     => 'Academic Users Settings',
-		'menu_title'    => 'Academic Users Settings',
-		'parent_slug'    => 'edit.php?post_type=partners',
-	));
 }
 
 

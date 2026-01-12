@@ -9,12 +9,12 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
       <div class="cell small-12 medium-10 hero-content">
         <div class="hero-content-inner">
           <?php if (get_field('news_archive_headline', 'option')) : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>"><?php echo get_field('news_archive_headline', 'option'); ?></h1>
+            <h1 class="hero-headline"><?php echo get_field('news_archive_headline', 'option'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>">News</h1>
+            <h1 class="hero-headline">News</h1>
           <?php endif; ?>
           <?php if (get_field('news_archive_subheadline', 'option')) : ?>
-            <h2 class="hero-subhead <?php echo $h1color; ?>"><?php echo get_field('news_archive_subheadline', 'option'); ?></h2>
+            <h2 class="hero-subhead"><?php echo get_field('news_archive_subheadline', 'option'); ?></h2>
           <?php else : ?>
           <?php endif; ?>
         </div>

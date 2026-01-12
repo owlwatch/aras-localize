@@ -128,7 +128,9 @@ class Sync
 					'page' => $page++,
 					'fields' => implode(',',$fields),
 				]);
-				$sponsors = array_merge( $sponsors,  $sponsorResponse->items );
+				if( isset( $sponsorResponse->items) && !empty( $sponsorResponse->items ) ) {
+					$sponsors = array_merge( $sponsors,  $sponsorResponse->items );
+				}
 			}while( $sponsorResponse->_meta->currentPage < $sponsorResponse->_meta->pageCount );
 
 			$event->sponsors = $sponsors;
