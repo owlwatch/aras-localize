@@ -548,7 +548,7 @@
 
 
 							<?php if (have_rows('form_block')) : ?>
-								<div class="cell form-block small-12 medium-order-1 <?= "$leftsize $leftmobile" ?>">
+								<div class="cell form-block small-12 medium-order-1 <?= "$rightsize $rightmobile" ?>">
 									<?php while (have_rows('form_block')) : the_row(); ?>
 										<div id="" class="hero-form-container">
 											<?php if (get_sub_field('form_shortcode')) : ?>
