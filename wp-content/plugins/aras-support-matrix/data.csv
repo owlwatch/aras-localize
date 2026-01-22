@@ -1,0 +1,949 @@
+release_build,eol_date,component,cell_value,status,source_row,source_component_col,source_cell
+Release 14 | (Build 14.0.0.33343),May-2024,Product Engineering,Release 14 | (14.0.1),End of Life,5,D,D5
+Release 14 | (Build 14.0.0.33343),May-2024,Program Management,Release 14 | (14.0.1),End of Life,5,E,E5
+Release 14 | (Build 14.0.0.33343),May-2024,Requirements Engineering,Release 14 | (14.0.1),End of Life,5,F,F5
+Release 14 | (Build 14.0.0.33343),May-2024,Systems Architecture,Release 14 | (14.0.1),End of Life,5,G,G5
+Release 14 | (Build 14.0.0.33343),May-2024,Simulation Management,Release 14 | (14.0.1),End of Life,5,H,H5
+Release 14 | (Build 14.0.0.33343),May-2024,Component Engineering,Release 14 | (14.0.1),End of Life,5,I,I5
+Release 14 | (Build 14.0.0.33343),May-2024,Technical Documentation,Release 14 | (14.0.1),End of Life,5,J,J5
+Release 14 | (Build 14.0.0.33343),May-2024,Quality Management System,Release 14 | (14.0.1),End of Life,5,K,K5
+Release 14 | (Build 14.0.0.33343),May-2024,Process Quality Binding,Release 14 | (14.0.1),End of Life,5,L,L5
+Release 14 | (Build 14.0.0.33343),May-2024,Manufacturing Process Planning,Release 14 | (14.0.1),End of Life,5,M,M5
+Release 14 | (Build 14.0.0.33343),May-2024,Digital Twin Core,,End of Life,5,N,N5
+Release 14 | (Build 14.0.0.33343),May-2024,Unified Change Management,,End of Life,5,O,O5
+Release 14 | (Build 14.0.0.33343),May-2024,Variant Management,,End of Life,5,P,P5
+Release 14 | (Build 14.0.0.33343),May-2024,High Tech Electronics,,End of Life,5,Q,Q5
+Release 14 | (Build 14.0.0.33343),May-2024,Supplier Management,,End of Life,5,R,R5
+Release 14 | (Build 14.0.0.33343),May-2024,Aras ProAppDesigner,,End of Life,5,S,S5
+Release 14 | (Build 14.0.0.33343),May-2024,Aras Portal,,End of Life,5,T,T5
+Release 14 | (Build 14.0.0.33343),May-2024,Office Connector,Release 14 | (14.0.1),End of Life,5,U,U5
+Release 14 | (Build 14.0.0.33343),May-2024,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,5,V,V5
+Release 14 | (Build 14.0.0.33343),May-2024,Workspace Productivity Connector,,End of Life,5,W,W5
+Release 14 | (Build 14.0.0.33343),May-2024,Enterprise Search,Release 14 (14.0.1),End of Life,5,X,X5
+Release 14 | (Build 14.0.0.33343),May-2024,3D Visualization,Release 14 (14.0.1),End of Life,5,Y,Y5
+Release 14 | (Build 14.0.0.33343),May-2024,Process Engine,Release 18 | (14.0.1),End of Life,5,Z,Z5
+Release 14 | (Build 14.0.0.33343),May-2024,Event Handling Framework,,End of Life,5,AA,AA5
+Release 14 | (Build 14.0.0.33343),May-2024,Reporting,,End of Life,5,AB,AB5
+Release 14 | (Build 14.0.0.33343),May-2024,OAuth Registry,,End of Life,5,AC,AC5
+Release 14 | (Build 14.0.0.33343),May-2024,AI Assistant,,End of Life,5,AD,AD5
+Release 14 | (Build 14.0.0.33343),May-2024,Import Manager,,End of Life,5,AE,AE5
+Release 14 | (Build 14.0.0.33343),May-2024,Workflow UI,,End of Life,5,AF,AF5
+Release 14 | (Build 14.0.0.33343),May-2024,IOM SDK,,End of Life,5,AG,AG5
+Release 14 | (Build 14.0.0.33343),May-2024,Package Import/Export Utility,,End of Life,5,AH,AH5
+Release 14 | (Build 14.0.0.33343),May-2024,3D Visualization,Release 19 (14.0.2)[1],End of Life,8,Y,Y8
+Release 14 | (Build 14.0.0.33343),May-2024,3D Visualization,Release 21 (14.0.3),End of Life,11,Y,Y11
+Release 14 | (Build 14.0.0.33343),May-2024,Enterprise Search,Release 20 (14.0.2),End of Life,13,X,X13
+Release 14 | (Build 14.0.0.33343),May-2024,3D Visualization,Release 26 (14.0.4),End of Life,14,Y,Y14
+Release 14 | (Build 14.0.0.33343),May-2024,3D Visualization,Release 29 (14.0.5),End of Life,17,Y,Y17
+Release 15 | (Build 14.0.1.33397),Jun-2024,Product Engineering,Release 14 | (14.0.1),End of Life,21,D,D21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Program Management,Release 14 | (14.0.1),End of Life,21,E,E21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Requirements Engineering,Release 14 | (14.0.1),End of Life,21,F,F21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Systems Architecture,Release 14 | (14.0.1),End of Life,21,G,G21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Simulation Management,Release 14 | (14.0.1),End of Life,21,H,H21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Component Engineering,Release 14 | (14.0.1),End of Life,21,I,I21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Technical Documentation,Release 14 | (14.0.1),End of Life,21,J,J21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Quality Management System,Release 14 | (14.0.1),End of Life,21,K,K21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Process Quality Binding,Release 14 | (14.0.1),End of Life,21,L,L21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Manufacturing Process Planning,Release 14 | (14.0.1),End of Life,21,M,M21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Digital Twin Core,,End of Life,21,N,N21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Unified Change Management,,End of Life,21,O,O21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Variant Management,,End of Life,21,P,P21
+Release 15 | (Build 14.0.1.33397),Jun-2024,High Tech Electronics,,End of Life,21,Q,Q21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Supplier Management,,End of Life,21,R,R21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Aras ProAppDesigner,,End of Life,21,S,S21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Aras Portal,,End of Life,21,T,T21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Office Connector,Release 14 | (14.0.1),End of Life,21,U,U21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,21,V,V21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Workspace Productivity Connector,,End of Life,21,W,W21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Enterprise Search,Release 14 (14.0.1),End of Life,21,X,X21
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 14 (14.0.1),End of Life,21,Y,Y21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Process Engine,Release 18 | (14.0.1),End of Life,21,Z,Z21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Event Handling Framework,,End of Life,21,AA,AA21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Reporting,,End of Life,21,AB,AB21
+Release 15 | (Build 14.0.1.33397),Jun-2024,OAuth Registry,,End of Life,21,AC,AC21
+Release 15 | (Build 14.0.1.33397),Jun-2024,AI Assistant,,End of Life,21,AD,AD21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Import Manager,,End of Life,21,AE,AE21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Workflow UI,,End of Life,21,AF,AF21
+Release 15 | (Build 14.0.1.33397),Jun-2024,IOM SDK,,End of Life,21,AG,AG21
+Release 15 | (Build 14.0.1.33397),Jun-2024,Package Import/Export Utility,,End of Life,21,AH,AH21
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 19 (14.0.2)[1],End of Life,24,Y,Y24
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 21 (14.0.3),End of Life,27,Y,Y27
+Release 15 | (Build 14.0.1.33397),Jun-2024,Enterprise Search,Release 20 (14.0.2),End of Life,30,X,X30
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 26 (14.0.4),End of Life,30,Y,Y30
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 29 (14.0.5),End of Life,33,Y,Y33
+Release 15 | (Build 14.0.1.33397),Jun-2024,3D Visualization,Release 31 (14.0.6),End of Life,36,Y,Y36
+Release 16 | (Build 14.0.2.33605),Jul-2024,Product Engineering,Release 14 | (14.0.1),End of Life,39,D,D39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Program Management,Release 14 | (14.0.1),End of Life,39,E,E39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Requirements Engineering,Release 14 | (14.0.1),End of Life,39,F,F39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Systems Architecture,Release 14 | (14.0.1),End of Life,39,G,G39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Simulation Management,Release 14 | (14.0.1),End of Life,39,H,H39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Component Engineering,Release 14 | (14.0.1),End of Life,39,I,I39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Technical Documentation,Release 14 | (14.0.1),End of Life,39,J,J39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Quality Management System,Release 14 | (14.0.1),End of Life,39,K,K39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Process Quality Binding,Release 14 | (14.0.1),End of Life,39,L,L39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Manufacturing Process Planning,Release 14 | (14.0.1),End of Life,39,M,M39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Digital Twin Core,,End of Life,39,N,N39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Unified Change Management,,End of Life,39,O,O39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Variant Management,,End of Life,39,P,P39
+Release 16 | (Build 14.0.2.33605),Jul-2024,High Tech Electronics,,End of Life,39,Q,Q39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Supplier Management,,End of Life,39,R,R39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Aras ProAppDesigner,,End of Life,39,S,S39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Aras Portal,,End of Life,39,T,T39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Office Connector,Release 14 | (14.0.1),End of Life,39,U,U39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,39,V,V39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Workspace Productivity Connector,,End of Life,39,W,W39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Enterprise Search,Release 14 (14.0.1),End of Life,39,X,X39
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 14 (14.0.1),End of Life,39,Y,Y39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Process Engine,Release 18 | (14.0.1),End of Life,39,Z,Z39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Event Handling Framework,,End of Life,39,AA,AA39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Reporting,,End of Life,39,AB,AB39
+Release 16 | (Build 14.0.2.33605),Jul-2024,OAuth Registry,,End of Life,39,AC,AC39
+Release 16 | (Build 14.0.2.33605),Jul-2024,AI Assistant,,End of Life,39,AD,AD39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Import Manager,,End of Life,39,AE,AE39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Workflow UI,,End of Life,39,AF,AF39
+Release 16 | (Build 14.0.2.33605),Jul-2024,IOM SDK,,End of Life,39,AG,AG39
+Release 16 | (Build 14.0.2.33605),Jul-2024,Package Import/Export Utility,,End of Life,39,AH,AH39
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 19 (14.0.2)[1],End of Life,42,Y,Y42
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 21 (14.0.3),End of Life,45,Y,Y45
+Release 16 | (Build 14.0.2.33605),Jul-2024,Enterprise Search,Release 20 (14.0.2),End of Life,48,X,X48
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 26 (14.0.4),End of Life,48,Y,Y48
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 29 (14.0.5),End of Life,51,Y,Y51
+Release 16 | (Build 14.0.2.33605),Jul-2024,3D Visualization,Release 31 (14.0.6),End of Life,54,Y,Y54
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Product Engineering,Release 14 | (14.0.1),End of Life,57,D,D57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Program Management,Release 14 | (14.0.1),End of Life,57,E,E57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Requirements Engineering,Release 14 | (14.0.1),End of Life,57,F,F57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Systems Architecture,Release 14 | (14.0.1),End of Life,57,G,G57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Simulation Management,Release 14 | (14.0.1),End of Life,57,H,H57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Component Engineering,Release 14 | (14.0.1),End of Life,57,I,I57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Technical Documentation,Release 14 | (14.0.1),End of Life,57,J,J57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Quality Management System,Release 14 | (14.0.1),End of Life,57,K,K57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Process Quality Binding,Release 14 | (14.0.1),End of Life,57,L,L57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Manufacturing Process Planning,Release 14 | (14.0.1),End of Life,57,M,M57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Digital Twin Core,,End of Life,57,N,N57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Unified Change Management,,End of Life,57,O,O57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Variant Management,,End of Life,57,P,P57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,High Tech Electronics,,End of Life,57,Q,Q57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Supplier Management,,End of Life,57,R,R57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Aras ProAppDesigner,,End of Life,57,S,S57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Aras Portal,,End of Life,57,T,T57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Office Connector,Release 14 | (14.0.1),End of Life,57,U,U57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,57,V,V57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Workspace Productivity Connector,,End of Life,57,W,W57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Enterprise Search,Release 14 (14.0.1),End of Life,57,X,X57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 14 (14.0.1),End of Life,57,Y,Y57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Process Engine,Release 18 | (14.0.1),End of Life,57,Z,Z57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Event Handling Framework,,End of Life,57,AA,AA57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Reporting,,End of Life,57,AB,AB57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,OAuth Registry,,End of Life,57,AC,AC57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,AI Assistant,,End of Life,57,AD,AD57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Import Manager,,End of Life,57,AE,AE57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Workflow UI,,End of Life,57,AF,AF57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,IOM SDK,15.0.1,End of Life,57,AG,AG57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Package Import/Export Utility,,End of Life,57,AH,AH57
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 19 (14.0.2)[1],End of Life,60,Y,Y60
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Enterprise Search,Release 20 (14.0.2),End of Life,63,X,X63
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 21 (14.0.3),End of Life,63,Y,Y63
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 26 (14.0.4),End of Life,66,Y,Y66
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,Enterprise Search,Release 32 (14.0.3),End of Life,69,X,X69
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 29 (14.0.5),End of Life,69,Y,Y69
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 31 (14.0.6),End of Life,72,Y,Y72
+Release 17 | (Build 14.0.3.34066),Jun-2025 2,3D Visualization,Release 33 (14.0.7),End of Life,75,Y,Y75
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Product Engineering,Release 14 | (14.0.1),End of Life,78,D,D78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Program Management,Release 14 | (14.0.1),End of Life,78,E,E78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Requirements Engineering,Release 14 | (14.0.1),End of Life,78,F,F78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Systems Architecture,Release 14 | (14.0.1),End of Life,78,G,G78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Simulation Management,Release 14 | (14.0.1),End of Life,78,H,H78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Component Engineering,Release 14 | (14.0.1),End of Life,78,I,I78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Technical Documentation,Release 14 | (14.0.1),End of Life,78,J,J78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Quality Management System,Release 14 | (14.0.1),End of Life,78,K,K78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Process Quality Binding,Release 14 | (14.0.1),End of Life,78,L,L78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Manufacturing Process Planning,Release 14 | (14.0.1),End of Life,78,M,M78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Digital Twin Core,,End of Life,78,N,N78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Unified Change Management,,End of Life,78,O,O78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Variant Management,,End of Life,78,P,P78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,High Tech Electronics,,End of Life,78,Q,Q78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Supplier Management,,End of Life,78,R,R78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Aras ProAppDesigner,,End of Life,78,S,S78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Aras Portal,,End of Life,78,T,T78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Office Connector,Release 14 | (14.0.1),End of Life,78,U,U78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,78,V,V78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Workspace Productivity Connector,,End of Life,78,W,W78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Enterprise Search,Release 14 (14.0.1),End of Life,78,X,X78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 14 (14.0.1),End of Life,78,Y,Y78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Process Engine,Release 18 | (14.0.1),End of Life,78,Z,Z78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Event Handling Framework,,End of Life,78,AA,AA78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Reporting,,End of Life,78,AB,AB78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,OAuth Registry,,End of Life,78,AC,AC78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,AI Assistant,,End of Life,78,AD,AD78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Import Manager,,End of Life,78,AE,AE78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Workflow UI,,End of Life,78,AF,AF78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,IOM SDK,15.0.1,End of Life,78,AG,AG78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Package Import/Export Utility,,End of Life,78,AH,AH78
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 19 (14.0.2)[1],End of Life,81,Y,Y81
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Enterprise Search,Release 20 (14.0.2),End of Life,84,X,X84
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 21 (14.0.3),End of Life,84,Y,Y84
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 26 (14.0.4),End of Life,87,Y,Y87
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,Enterprise Search,Release 32 (14.0.3),End of Life,90,X,X90
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 29 (14.0.5),End of Life,90,Y,Y90
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 31 (14.0.6),End of Life,93,Y,Y93
+Release 18 | (Build 14.0.4.34465),Jun-2025 2,3D Visualization,Release 33 (14.0.7),End of Life,96,Y,Y96
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Product Engineering,Release 14 | (14.0.1),End of Life,99,D,D99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Program Management,Release 14 | (14.0.1),End of Life,99,E,E99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Requirements Engineering,Release 14 | (14.0.1),End of Life,99,F,F99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Systems Architecture,Release 14 | (14.0.1),End of Life,99,G,G99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Simulation Management,Release 14 | (14.0.1),End of Life,99,H,H99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Component Engineering,Release 14 | (14.0.1),End of Life,99,I,I99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Technical Documentation,Release 14 | (14.0.1),End of Life,99,J,J99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Quality Management System,Release 14 | (14.0.1),End of Life,99,K,K99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Process Quality Binding,Release 14 | (14.0.1),End of Life,99,L,L99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Manufacturing Process Planning,Release 19 | (14.0.2),End of Life,99,M,M99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Digital Twin Core,,End of Life,99,N,N99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Unified Change Management,,End of Life,99,O,O99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Variant Management,,End of Life,99,P,P99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,High Tech Electronics,,End of Life,99,Q,Q99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Supplier Management,,End of Life,99,R,R99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Aras ProAppDesigner,,End of Life,99,S,S99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Aras Portal,,End of Life,99,T,T99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Office Connector,Release 14 | (14.0.1),End of Life,99,U,U99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,99,V,V99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Workspace Productivity Connector,,End of Life,99,W,W99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Enterprise Search,Release 14 (14.0.1),End of Life,99,X,X99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 14 (14.0.1),End of Life,99,Y,Y99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Process Engine,Release 18 | (14.0.1),End of Life,99,Z,Z99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Event Handling Framework,,End of Life,99,AA,AA99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Reporting,,End of Life,99,AB,AB99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,OAuth Registry,,End of Life,99,AC,AC99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,AI Assistant,,End of Life,99,AD,AD99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Import Manager,,End of Life,99,AE,AE99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Workflow UI,,End of Life,99,AF,AF99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,IOM SDK,15.0.1,End of Life,99,AG,AG99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Package Import/Export Utility,,End of Life,99,AH,AH99
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 19 (14.0.2)[1],End of Life,102,Y,Y102
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Enterprise Search,Release 20 (14.0.2),End of Life,105,X,X105
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 21 (14.0.3),End of Life,105,Y,Y105
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 26 (14.0.4),End of Life,108,Y,Y108
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,Enterprise Search,Release 32 (14.0.3),End of Life,111,X,X111
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 29 (14.0.5),End of Life,111,Y,Y111
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 31 (14.0.6),End of Life,114,Y,Y114
+Release 19 | (Build 14.0.5.34717),Jun-2025 2,3D Visualization,Release 33 (14.0.7),End of Life,117,Y,Y117
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Product Engineering,Release 14 | (14.0.1),End of Life,120,D,D120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Program Management,Release 14 | (14.0.1),End of Life,120,E,E120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Requirements Engineering,Release 14 | (14.0.1),End of Life,120,F,F120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Systems Architecture,Release 14 | (14.0.1),End of Life,120,G,G120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Simulation Management,Release 14 | (14.0.1),End of Life,120,H,H120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Component Engineering,Release 14 | (14.0.1),End of Life,120,I,I120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Technical Documentation,Release 14 | (14.0.1),End of Life,120,J,J120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Quality Management System,Release 14 | (14.0.1),End of Life,120,K,K120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Process Quality Binding,Release 14 | (14.0.1),End of Life,120,L,L120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Manufacturing Process Planning,Release 19 | (14.0.2),End of Life,120,M,M120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Digital Twin Core,Release 20 | (14.0.1),End of Life,120,N,N120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Unified Change Management,,End of Life,120,O,O120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Variant Management,,End of Life,120,P,P120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,High Tech Electronics,,End of Life,120,Q,Q120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Supplier Management,,End of Life,120,R,R120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Aras ProAppDesigner,,End of Life,120,S,S120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Aras Portal,,End of Life,120,T,T120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Office Connector,Release 14 (14.0.1),End of Life,120,U,U120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Office Productivity Connector,Release 14 | (14.0.0.14),End of Life,120,V,V120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Workspace Productivity Connector,,End of Life,120,W,W120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Enterprise Search,Release 14 (14.0.1),End of Life,120,X,X120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 14 (14.0.1),End of Life,120,Y,Y120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Process Engine,Release 18 | (14.0.1),End of Life,120,Z,Z120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Event Handling Framework,,End of Life,120,AA,AA120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Reporting,,End of Life,120,AB,AB120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,OAuth Registry,,End of Life,120,AC,AC120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,AI Assistant,,End of Life,120,AD,AD120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Import Manager,,End of Life,120,AE,AE120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Workflow UI,,End of Life,120,AF,AF120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,IOM SDK,15.0.1,End of Life,120,AG,AG120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Package Import/Export Utility,15.0.0,End of Life,120,AH,AH120
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 19 (14.0.2)[1],End of Life,123,Y,Y123
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Enterprise Search,Release 20 (14.0.2),End of Life,126,X,X126
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 21 (14.0.3),End of Life,126,Y,Y126
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Office Connector,Release 20 (14.0.2),End of Life,128,U,U128
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 26 (14.0.4),End of Life,129,Y,Y129
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,Enterprise Search,Release 32 (14.0.3),End of Life,132,X,X132
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 29 (14.0.5),End of Life,132,Y,Y132
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 31 (14.0.6),End of Life,135,Y,Y135
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 33 (14.0.7),End of Life,138,Y,Y138
+Release 20 | (Build 14.0.6.34944),Dec-2025 4,3D Visualization,Release 35 (14.0.8),End of Life,141,Y,Y141
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,144,D,D144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Program Management,Release 14 | (14.0.1),Supported,144,E,E144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,144,F,F144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,144,G,G144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Simulation Management,Release 14 | (14.0.1),Supported,144,H,H144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,144,I,I144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,144,J,J144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,144,K,K144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,144,L,L144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,144,M,M144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,144,N,N144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Office Connector,Release 14 (14.0.1),Supported,144,U,U144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Office Productivity Connector,Release 14 | (14.0.0.14),Certified,144,V,V144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,144,X,X144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 14 (14.0.1),Supported,144,Y,Y144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Process Engine,Release 18 | (14.0.1),Supported,144,Z,Z144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,IOM SDK,15.0.1,Certified,144,AG,AG144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Package Import/Export Utility,15.0.0,Certified,144,AH,AH144
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 21 (14.0.3),Certified,147,Y,Y147
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,149,X,X149
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Office Connector,Release 20 (14.0.2),Supported,150,U,U150
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 26 (14.0.4),Certified,150,Y,Y150
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 29 (14.0.5),Certified,153,Y,Y153
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,154,X,X154
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 31 (14.0.6),Certified,156,Y,Y156
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 33 (14.0.7),Certified,159,Y,Y159
+Release 21 | (Build 14.0.7.35492),Mar-2026 4,3D Visualization,Release 35 (14.0.8),Certified,162,Y,Y162
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,165,D,D165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,165,E,E165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,165,F,F165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,165,G,G165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Simulation Management,Release 14 | (14.0.1),Supported,165,H,H165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,165,I,I165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,165,J,J165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,165,K,K165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,165,L,L165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,165,M,M165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,165,N,N165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Certified,165,P,P165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Supplier Management,Release 22 | (14.0.8.1.1),End of Life,165,R,R165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.22),Certified,165,S,S165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Aras Portal,Release 22 | (14.0.8.1),End of Life,165,T,T165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,165,U,U165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Office Productivity Connector,Release 22 | (14.0.0.22),Certified,165,V,V165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,165,X,X165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,165,Y,Y165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,165,Z,Z165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,IOM SDK,15.0.1,Certified,165,AG,AG165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,165,AH,AH165
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Certified,168,Y,Y168
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,170,X,X170
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,171,U,U171
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Certified,171,Y,Y171
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,174,I,I174
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Aras Portal,Release 14 | (14.14.22),Certified,174,T,T174
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,174,Y,Y174
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,175,X,X175
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,177,Y,Y177
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,180,Y,Y180
+Release 22 | (Build 14.0.8.35675),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,183,Y,Y183
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,186,D,D186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,186,E,E186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,186,F,F186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,186,G,G186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,186,H,H186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,186,I,I186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,186,J,J186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,186,K,K186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,186,L,L186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,186,M,M186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,186,N,N186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,186,P,P186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Supplier Management,Release 22 | (14.0.8.1.1),End of Life,186,R,R186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.22),Certified,186,S,S186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Aras Portal,Release 22 | (14.0.8.1.1),End of Life,186,T,T186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,186,U,U186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Office Productivity Connector,Release 22 | (14.0.0.22),Certified,186,V,V186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,186,X,X186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,186,Y,Y186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,186,Z,Z186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,IOM SDK,15.0.1,Certified,186,AG,AG186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,186,AH,AH186
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,189,Y,Y189
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,191,X,X191
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,192,U,U192
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Certified,192,Y,Y192
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Certified,195,H,H195
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,195,I,I195
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Aras Portal,Release 14 | (14.14.22),Certified,195,T,T195
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,195,Y,Y195
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,196,X,X196
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,198,Y,Y198
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,201,Y,Y201
+Release 23 | (Build 14.0.9.36073),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,204,Y,Y204
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,207,D,D207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,207,E,E207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,207,F,F207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,207,G,G207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,207,H,H207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,207,I,I207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,207,J,J207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,207,K,K207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,207,L,L207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,207,M,M207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,207,N,N207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,207,P,P207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Supplier Management,Release 22 | (14.0.8.1.1),End of Life,207,R,R207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.22),Certified,207,S,S207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Aras Portal,Release 22 | (14.0.8.1.1),End of Life,207,T,T207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,207,U,U207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Office Productivity Connector,Release 22 | (14.0.0.22),Certified,207,V,V207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,207,X,X207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,207,Y,Y207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,207,Z,Z207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,IOM SDK,15.0.1,Certified,207,AG,AG207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,207,AH,AH207
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,210,Y,Y210
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,211,U,U211
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,212,X,X212
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Certified,213,Y,Y213
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Office Connector,Release 24 (14.0.3),Certified,215,U,U215
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,216,H,H216
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,216,I,I216
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Aras Portal,Release 14 | (14.14.22),Certified,216,T,T216
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,216,Y,Y216
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,217,X,X217
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,219,Y,Y219
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,222,Y,Y222
+Release 24 | (Build 14.0.10.36415),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,225,Y,Y225
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,228,D,D228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,228,E,E228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,228,F,F228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,228,G,G228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,228,H,H228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,228,I,I228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,228,J,J228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,228,K,K228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,228,L,L228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,228,M,M228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,228,N,N228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,228,P,P228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Supplier Management,Release 22 | (14.0.8.1.1),End of Life,228,R,R228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.22),Certified,228,S,S228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Aras Portal,Release 22 | (14.0.8.1.1),End of Life,228,T,T228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,228,U,U228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Office Productivity Connector,Release 22 | (14.0.0.22),Certified,228,V,V228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,228,X,X228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,228,Y,Y228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,228,Z,Z228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,IOM SDK,15.0.1,Certified,228,AG,AG228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,228,AH,AH228
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,231,Y,Y231
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,232,U,U232
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,233,X,X233
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Certified,234,Y,Y234
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Office Connector,Release 24 (14.0.3),Supported,236,U,U236
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,237,H,H237
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,237,I,I237
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Aras Portal,Release 14 | (14.14.22),Certified,237,T,T237
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,237,Y,Y237
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,238,X,X238
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,240,Y,Y240
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,243,Y,Y243
+Release 25 | (Build 14.0.11.36751),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,246,Y,Y246
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,249,D,D249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,249,E,E249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,249,F,F249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,249,G,G249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,249,H,H249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,249,I,I249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,249,J,J249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,249,K,K249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,249,L,L249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,249,M,M249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,249,N,N249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,249,P,P249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Supplier Management,Release 22 | (14.0.8.1.1),End of Life,249,R,R249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.22),Certified,249,S,S249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Aras Portal,Release 22 | (14.0.8.1.1),End of Life,249,T,T249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,249,U,U249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Office Productivity Connector,Release 22 | (14.0.0.22),Certified,249,V,V249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,249,X,X249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,249,Y,Y249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,249,Z,Z249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,IOM SDK,15.0.1,Certified,249,AG,AG249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,249,AH,AH249
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,252,Y,Y252
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,253,U,U253
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,254,X,X254
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Certified,255,Y,Y255
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Office Connector,Release 24 (14.0.3),Supported,257,U,U257
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,258,H,H258
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,258,I,I258
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Aras Portal,Release 14 | (14.14.22),Certified,258,T,T258
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,258,Y,Y258
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,259,X,X259
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,261,Y,Y261
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,264,Y,Y264
+Release 26 | (Build 14.0.12.36913),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,267,Y,Y267
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,270,D,D270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,270,E,E270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,270,F,F270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,270,G,G270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,270,H,H270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,270,I,I270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,270,J,J270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,270,K,K270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,270,L,L270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,270,M,M270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,270,N,N270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,270,P,P270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Supplier Management,Release 27 | (14.0.8.1.1),End of Life,270,R,R270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.27),Certified,270,S,S270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Aras Portal,Release 27 | (14.0.8.1.1),End of Life,270,T,T270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,270,U,U270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Office Productivity Connector,Release 27 | (14.0.1),Certified,270,V,V270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,270,X,X270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,270,Y,Y270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,270,Z,Z270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Event Handling Framework,Release 27 | (14.0.1),Certified,270,AA,AA270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,AI Assistant,Release 35 [3] | (14.0.1),Certified,270,AD,AD270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,IOM SDK,15.0.1,Certified,270,AG,AG270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,270,AH,AH270
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,273,Y,Y273
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,274,U,U274
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,275,X,X275
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Supported,276,Y,Y276
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Variant Management,Release 27 | (14.0.2),Certified,278,P,P278
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Office Connector,Release 24 (14.0.3),Supported,278,U,U278
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Event Handling Framework,Release 32 | (14.0.2),Certified,278,AA,AA278
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,279,H,H279
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,279,I,I279
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Aras Portal,Release 14 | (14.14.27),Certified,279,T,T279
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,279,Y,Y279
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,280,X,X280
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,Office Connector,Release 27 (14.0.4),Certified,282,U,U282
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,282,Y,Y282
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,285,Y,Y285
+Release 27 | (Build 14.0.15.38102),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,288,Y,Y288
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,291,D,D291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,291,E,E291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,291,F,F291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,291,G,G291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,291,H,H291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,291,I,I291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,291,J,J291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,291,K,K291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,291,L,L291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,291,M,M291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,291,N,N291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,291,P,P291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Supplier Management,Release 27 | (14.0.8.1.1),End of Life,291,R,R291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.27),Certified,291,S,S291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Aras Portal,Release 27 | (14.0.8.1.1),End of Life,291,T,T291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,291,U,U291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Office Productivity Connector,Release 27 | (14.0.1),Certified,291,V,V291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,291,X,X291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,291,Y,Y291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,291,Z,Z291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Event Handling Framework,Release 27 | (14.0.1),Supported,291,AA,AA291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Reporting,Release 28 (14.0.1),Certified,291,AB,AB291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,AI Assistant,Release 35 [3] | (14.0.1),Certified,291,AD,AD291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,IOM SDK,15.0.1,Certified,291,AG,AG291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,291,AH,AH291
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,294,Y,Y294
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,295,U,U295
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,296,X,X296
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Reporting,Release 29 (14.0.2),Certified,296,AB,AB296
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Supported,297,Y,Y297
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Variant Management,Release 27 | (14.0.2),Supported,299,P,P299
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Office Connector,Release 24 (14.0.3),Supported,299,U,U299
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Event Handling Framework,Release 32 | (14.0.2),Certified,299,AA,AA299
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,300,H,H300
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,300,I,I300
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Aras Portal,Release 14 | (14.14.27),Certified,300,T,T300
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,300,Y,Y300
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,301,X,X301
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Reporting,Release 36 (14.0.3),Certified,301,AB,AB301
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Office Connector,Release 27 (14.0.4),Supported,303,U,U303
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,303,Y,Y303
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,306,Y,Y306
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,Reporting,Release 37 (14.0.4),Certified,306,AB,AB306
+Release 28 | (Build 14.0.18.39055),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,309,Y,Y309
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Product Engineering,Release 14 | (14.0.1),Certified,312,D,D312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Program Management,Release 14 | (14.0.1),Supported,312,E,E312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Requirements Engineering,Release 14 | (14.0.1),Supported,312,F,F312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Systems Architecture,Release 14 | (14.0.1),Supported,312,G,G312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Simulation Management,Release 14 (14.0.1),Supported,312,H,H312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Component Engineering,Release 14 | (14.0.1),Supported,312,I,I312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Technical Documentation,Release 14 | (14.0.1),Supported,312,J,J312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Quality Management System,Release 14 | (14.0.1),Supported,312,K,K312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Process Quality Binding,Release 14 | (14.0.1),Supported,312,L,L312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,312,M,M312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Digital Twin Core,Release 20 | (14.0.1),Supported,312,N,N312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Variant Management,Release 22 | (14.0.1),Supported,312,P,P312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Supplier Management,Release 27 | (14.0.8.1.1),End of Life,312,R,R312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Aras ProAppDesigner,Release 14 | (14.14.27),Certified,312,S,S312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Aras Portal,Release 27 | (14.0.8.1.1),End of Life,312,T,T312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Office Connector,Release 14 (14.0.1),Supported,312,U,U312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Office Productivity Connector,Release 27 | (14.0.1),Certified,312,V,V312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Enterprise Search,Release 14 (14.0.1),Supported,312,X,X312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 14 (14.0.1),Supported,312,Y,Y312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Process Engine,Release 18 | (14.0.1),Supported,312,Z,Z312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Event Handling Framework,Release 27 | (14.0.1),Supported,312,AA,AA312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Reporting,Release 28 (14.0.1),Supported,312,AB,AB312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,AI Assistant,Release 35 [3] | (14.0.1),Certified,312,AD,AD312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,IOM SDK,15.0.1,Certified,312,AG,AG312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Package Import/Export Utility,15.0.0,Certified,312,AH,AH312
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 21 (14.0.3),Supported,315,Y,Y315
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Office Connector,Release 20 (14.0.2),Supported,316,U,U316
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Enterprise Search,Release 20 (14.0.2),Supported,317,X,X317
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Reporting,Release 29 (14.0.2),Certified,317,AB,AB317
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 26 (14.0.4),Supported,318,Y,Y318
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Variant Management,Release 27 | (14.0.2),Supported,320,P,P320
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Office Connector,Release 24 (14.0.3),Supported,320,U,U320
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Event Handling Framework,Release 32 | (14.0.2),Certified,320,AA,AA320
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Simulation Management,Release 23 (14.0.2),Supported,321,H,H321
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Component Engineering,Release 22 | (14.0.2),Certified,321,I,I321
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Aras Portal,Release 14 | (14.14.27),Certified,321,T,T321
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 29 (14.0.5),Certified,321,Y,Y321
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Enterprise Search,Release 32 (14.0.3),Certified,322,X,X322
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Reporting,Release 36 (14.0.3),Certified,322,AB,AB322
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Office Connector,Release 27 (14.0.4),Supported,324,U,U324
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 31 (14.0.6),Certified,324,Y,Y324
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 33 (14.0.7),Certified,327,Y,Y327
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,Reporting,Release 37 (14.0.4),Certified,327,AB,AB327
+Release 29 | (Build 14.0.20.39432),Jun-2026 4,3D Visualization,Release 35 (14.0.8),Certified,330,Y,Y330
+Release 30 | (Build 14.0.22.40048),Aug-2026,Product Engineering,Release 14 | (14.0.1),Certified,333,D,D333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Program Management,Release 14 | (14.0.1),Supported,333,E,E333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Requirements Engineering,Release 14 | (14.0.1),Supported,333,F,F333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Systems Architecture,Release 14 | (14.0.1),Supported,333,G,G333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Simulation Management,Release 14 (14.0.1),Supported,333,H,H333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Component Engineering,Release 14 | (14.0.1),Supported,333,I,I333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Technical Documentation,Release 14 | (14.0.1),Supported,333,J,J333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Quality Management System,Release 14 | (14.0.1),Supported,333,K,K333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Process Quality Binding,Release 14 | (14.0.1),Supported,333,L,L333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,333,M,M333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Digital Twin Core,Release 20 | (14.0.1),Supported,333,N,N333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Unified Change Management,Release 30 5 (14.1.0),Certified,333,O,O333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Variant Management,Release 22 | (14.0.1),Supported,333,P,P333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Supplier Management,Release 27 | (14.0.8.1.1),End of Life,333,R,R333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Aras ProAppDesigner,Release 14 | (14.14.27),Certified,333,S,S333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Aras Portal,Release 27 | (14.0.8.1.1),End of Life,333,T,T333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Office Connector,Release 14 (14.0.1),Supported,333,U,U333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Office Productivity Connector,Release 27 | (14.0.1),Certified,333,V,V333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Enterprise Search,Release 14 (14.0.1),Supported,333,X,X333
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 14 (14.0.1),Supported,333,Y,Y333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Process Engine,Release 18 | (14.0.1),Supported,333,Z,Z333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Event Handling Framework,Release 27 | (14.0.1),Supported,333,AA,AA333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Reporting,Release 28 (14.0.1),Supported,333,AB,AB333
+Release 30 | (Build 14.0.22.40048),Aug-2026,AI Assistant,Release 35 [3] | (14.0.1),Certified,333,AD,AD333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Workflow UI,Release 37 (14.1.0),Certified,333,AF,AF333
+Release 30 | (Build 14.0.22.40048),Aug-2026,IOM SDK,15.0.1,Certified,333,AG,AG333
+Release 30 | (Build 14.0.22.40048),Aug-2026,Package Import/Export Utility,15.0.0,Certified,333,AH,AH333
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 21 (14.0.3),Supported,336,Y,Y336
+Release 30 | (Build 14.0.22.40048),Aug-2026,Office Connector,Release 20 (14.0.2),Supported,337,U,U337
+Release 30 | (Build 14.0.22.40048),Aug-2026,Enterprise Search,Release 20 (14.0.2),Supported,338,X,X338
+Release 30 | (Build 14.0.22.40048),Aug-2026,Reporting,Release 29 (14.0.2),Supported,338,AB,AB338
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 26 (14.0.4),Supported,339,Y,Y339
+Release 30 | (Build 14.0.22.40048),Aug-2026,Variant Management,Release 27 | (14.0.2),Supported,341,P,P341
+Release 30 | (Build 14.0.22.40048),Aug-2026,Office Connector,Release 24 (14.0.3),Supported,341,U,U341
+Release 30 | (Build 14.0.22.40048),Aug-2026,Event Handling Framework,Release 32 | (14.0.2),Certified,341,AA,AA341
+Release 30 | (Build 14.0.22.40048),Aug-2026,Simulation Management,Release 23 (14.0.2),Supported,342,H,H342
+Release 30 | (Build 14.0.22.40048),Aug-2026,Component Engineering,Release 22 | (14.0.2),Certified,342,I,I342
+Release 30 | (Build 14.0.22.40048),Aug-2026,Aras Portal,Release 14 | (14.14.27),Certified,342,T,T342
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 29 (14.0.5),Supported,342,Y,Y342
+Release 30 | (Build 14.0.22.40048),Aug-2026,Enterprise Search,Release 32 (14.0.3),Certified,343,X,X343
+Release 30 | (Build 14.0.22.40048),Aug-2026,Reporting,Release 36 (14.0.3),Certified,343,AB,AB343
+Release 30 | (Build 14.0.22.40048),Aug-2026,Office Connector,Release 27 (14.0.4),Supported,345,U,U345
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 31 (14.0.6),Certified,345,Y,Y345
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 33 (14.0.7),Certified,348,Y,Y348
+Release 30 | (Build 14.0.22.40048),Aug-2026,Reporting,Release 37 (14.0.4),Certified,348,AB,AB348
+Release 30 | (Build 14.0.22.40048),Aug-2026,3D Visualization,Release 35 (14.0.8),Certified,351,Y,Y351
+Release 31 | (Build 14.0.25.40942),Nov-2026,Product Engineering,Release 14 | (14.0.1),Certified,354,D,D354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Program Management,Release 14 | (14.0.1),Supported,354,E,E354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Requirements Engineering,Release 14 | (14.0.1),Supported,354,F,F354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Systems Architecture,Release 14 | (14.0.1),Supported,354,G,G354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Simulation Management,Release 14 (14.0.1),Supported,354,H,H354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Component Engineering,Release 14 | (14.0.1),Supported,354,I,I354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Technical Documentation,Release 14 | (14.0.1),Supported,354,J,J354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Quality Management System,Release 14 | (14.0.1),Supported,354,K,K354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Process Quality Binding,Release 14 | (14.0.1),Supported,354,L,L354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,354,M,M354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Digital Twin Core,Release 31 | (14.0.2),Certified,354,N,N354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Unified Change Management,Release 30 5 (14.1.0),Certified,354,O,O354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Variant Management,Release 22 | (14.0.1),Supported,354,P,P354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Supplier Management,Release 27 | (14.0.8.1.1),End of Life,354,R,R354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Aras ProAppDesigner,Release 14 | (14.14.27),Certified,354,S,S354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Aras Portal,Release 27 | (14.0.8.1.1),End of Life,354,T,T354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Connector,Release 14 (14.0.1),Supported,354,U,U354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Productivity Connector,Release 27 | (14.0.1),Certified,354,V,V354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Enterprise Search,Release 14 (14.0.1),Supported,354,X,X354
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 14 (14.0.1),Supported,354,Y,Y354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Process Engine,Release 18 | (14.0.1),Supported,354,Z,Z354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Event Handling Framework,Release 27 | (14.0.1),Supported,354,AA,AA354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Reporting,Release 28 (14.0.1),Supported,354,AB,AB354
+Release 31 | (Build 14.0.25.40942),Nov-2026,AI Assistant,Release 35 [3] | (14.0.1),Certified,354,AD,AD354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Workflow UI,Release 37 (14.1.0),Certified,354,AF,AF354
+Release 31 | (Build 14.0.25.40942),Nov-2026,IOM SDK,15.0.1,Certified,354,AG,AG354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Package Import/Export Utility,15.0.0,Certified,354,AH,AH354
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Connector,Release 20 (14.0.2),Supported,357,U,U357
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 21 (14.0.3),Supported,357,Y,Y357
+Release 31 | (Build 14.0.25.40942),Nov-2026,Enterprise Search,Release 20 (14.0.2),Supported,359,X,X359
+Release 31 | (Build 14.0.25.40942),Nov-2026,Reporting,Release 29 (14.0.2),Supported,359,AB,AB359
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Connector,Release 24 (14.0.3),Supported,360,U,U360
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 26 (14.0.4),Supported,360,Y,Y360
+Release 31 | (Build 14.0.25.40942),Nov-2026,Variant Management,Release 27 | (14.0.2),Supported,362,P,P362
+Release 31 | (Build 14.0.25.40942),Nov-2026,Event Handling Framework,Release 32 | (14.0.2),Certified,362,AA,AA362
+Release 31 | (Build 14.0.25.40942),Nov-2026,Simulation Management,Release 23 (14.0.2),Supported,363,H,H363
+Release 31 | (Build 14.0.25.40942),Nov-2026,Component Engineering,Release 22 | (14.0.2),Certified,363,I,I363
+Release 31 | (Build 14.0.25.40942),Nov-2026,Aras Portal,Release 14 | (14.14.27),Certified,363,T,T363
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Connector,Release 27 (14.0.4),Supported,363,U,U363
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 29 (14.0.5),Supported,363,Y,Y363
+Release 31 | (Build 14.0.25.40942),Nov-2026,Enterprise Search,Release 32 (14.0.3),Certified,364,X,X364
+Release 31 | (Build 14.0.25.40942),Nov-2026,Reporting,Release 36 (14.0.3),Certified,364,AB,AB364
+Release 31 | (Build 14.0.25.40942),Nov-2026,Office Connector,Release 31 (14.0.5),Certified,366,U,U366
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 31 (14.0.6),Certified,366,Y,Y366
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 33 (14.0.7),Certified,369,Y,Y369
+Release 31 | (Build 14.0.25.40942),Nov-2026,Reporting,Release 37 (14.0.4),Certified,369,AB,AB369
+Release 31 | (Build 14.0.25.40942),Nov-2026,3D Visualization,Release 35 (14.0.8),Certified,372,Y,Y372
+Release 32 | (Build 14.0.28.41847),Feb-2027,Product Engineering,Release 14 | (14.0.1),Certified,375,D,D375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Program Management,Release 14 | (14.0.1),Supported,375,E,E375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Requirements Engineering,Release 14 | (14.0.1),Supported,375,F,F375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Systems Architecture,Release 14 | (14.0.1),Supported,375,G,G375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Simulation Management,Release 14 (14.0.1),Supported,375,H,H375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Component Engineering,Release 14 | (14.0.1),Supported,375,I,I375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Technical Documentation,Release 14 | (14.0.1),Supported,375,J,J375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Quality Management System,Release 14 | (14.0.1),Supported,375,K,K375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Process Quality Binding,Release 14 | (14.0.1),Supported,375,L,L375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Manufacturing Process Planning,Release 19 | (14.0.2),Supported,375,M,M375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Digital Twin Core,Release 31 | (14.0.2),Supported,375,N,N375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Unified Change Management,Release 30 (14.1.0),Certified,375,O,O375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Variant Management,Release 22 | (14.0.1),Supported,375,P,P375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Supplier Management,Release 32 | (14.0.28.1.1),End of Life,375,R,R375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Aras ProAppDesigner,Release 14 | (14.14.32),Certified,375,S,S375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Aras Portal,Release 32 | (14.0.28.1.1),End of Life,375,T,T375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Office Connector,Release 24 (14.0.3),Supported,375,U,U375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Office Productivity Connector,Release 32 | (14.0.2),Certified,375,V,V375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Enterprise Search,Release 14 (14.0.1),Supported,375,X,X375
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 21 (14.0.3),Supported,375,Y,Y375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Process Engine,Release 18 | (14.0.1),Supported,375,Z,Z375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Event Handling Framework,Release 32 | (14.0.2),Certified,375,AA,AA375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Reporting,Release 28 (14.0.1),Supported,375,AB,AB375
+Release 32 | (Build 14.0.28.41847),Feb-2027,OAuth Registry,Release 32 | (14.0.1),Certified,375,AC,AC375
+Release 32 | (Build 14.0.28.41847),Feb-2027,AI Assistant,Release 35 [3] | (14.0.1),Certified,375,AD,AD375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Workflow UI,Release 37 (14.1.0),Certified,375,AF,AF375
+Release 32 | (Build 14.0.28.41847),Feb-2027,IOM SDK,15.0.1,Certified,375,AG,AG375
+Release 32 | (Build 14.0.28.41847),Feb-2027,Package Import/Export Utility,15.0.0,Certified,375,AH,AH375
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 26 (14.0.4),Supported,378,Y,Y378
+Release 32 | (Build 14.0.28.41847),Feb-2027,Reporting,Release 29 (14.0.2),Supported,379,AB,AB379
+Release 32 | (Build 14.0.28.41847),Feb-2027,Office Connector,Release 27 (14.0.4),Supported,380,U,U380
+Release 32 | (Build 14.0.28.41847),Feb-2027,Enterprise Search,Release 20 (14.0.2),Supported,380,X,X380
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 29 (14.0.5),Supported,381,Y,Y381
+Release 32 | (Build 14.0.28.41847),Feb-2027,Simulation Management,Release 23 (14.0.2),Supported,383,H,H383
+Release 32 | (Build 14.0.28.41847),Feb-2027,Component Engineering,Release 22 | (14.0.2),Certified,383,I,I383
+Release 32 | (Build 14.0.28.41847),Feb-2027,Variant Management,Release 27 | (14.0.2),Supported,383,P,P383
+Release 32 | (Build 14.0.28.41847),Feb-2027,Aras Portal,Release 14 | (14.14.32),Certified,383,T,T383
+Release 32 | (Build 14.0.28.41847),Feb-2027,Reporting,Release 36 (14.0.3),Certified,383,AB,AB383
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 31 (14.0.6),Supported,384,Y,Y384
+Release 32 | (Build 14.0.28.41847),Feb-2027,Office Connector,Release 31 (14.0.5),Supported,385,U,U385
+Release 32 | (Build 14.0.28.41847),Feb-2027,Enterprise Search,Release 32 (14.0.3),Certified,385,X,X385
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 33 (14.0.7),Certified,387,Y,Y387
+Release 32 | (Build 14.0.28.41847),Feb-2027,Reporting,Release 37 (14.0.4),Certified,388,AB,AB388
+Release 32 | (Build 14.0.28.41847),Feb-2027,3D Visualization,Release 35 (14.0.8),Certified,390,Y,Y390
+Release 33 | (Build 14.30.0.42172),May-2027,Product Engineering,Release 14 | (14.0.1),Certified,394,D,D394
+Release 33 | (Build 14.30.0.42172),May-2027,Program Management,Release 14 | (14.0.1),Supported,394,E,E394
+Release 33 | (Build 14.30.0.42172),May-2027,Requirements Engineering,Release 33 | (14.0.2),Certified,394,F,F394
+Release 33 | (Build 14.30.0.42172),May-2027,Systems Architecture,Release 14 | (14.0.1),Supported,394,G,G394
+Release 33 | (Build 14.30.0.42172),May-2027,Simulation Management,Release 14 (14.0.1),Supported,394,H,H394
+Release 33 | (Build 14.30.0.42172),May-2027,Component Engineering,Release 14 | (14.0.1),Supported,394,I,I394
+Release 33 | (Build 14.30.0.42172),May-2027,Technical Documentation,Release 14 | (14.0.1),Supported,394,J,J394
+Release 33 | (Build 14.30.0.42172),May-2027,Quality Management System,Release 14 | (14.0.1),Supported,394,K,K394
+Release 33 | (Build 14.30.0.42172),May-2027,Process Quality Binding,Release 14 | (14.0.1),Supported,394,L,L394
+Release 33 | (Build 14.30.0.42172),May-2027,Manufacturing Process Planning,Release 33 | (14.0.3),Certified,394,M,M394
+Release 33 | (Build 14.30.0.42172),May-2027,Digital Twin Core,Release 31 | (14.0.2),Supported,394,N,N394
+Release 33 | (Build 14.30.0.42172),May-2027,Unified Change Management,Release 30 (14.1.0),Certified,394,O,O394
+Release 33 | (Build 14.30.0.42172),May-2027,Variant Management,Release 22 (14.0.1),Supported,394,P,P394
+Release 33 | (Build 14.30.0.42172),May-2027,High Tech Electronics,Release 33 | (14.0.2),Certified,394,Q,Q394
+Release 33 | (Build 14.30.0.42172),May-2027,Supplier Management,Release 32 | (14.0.28.1.1),End of Life,394,R,R394
+Release 33 | (Build 14.30.0.42172),May-2027,Aras ProAppDesigner,Release 14 | (14.14.32),Certified,394,S,S394
+Release 33 | (Build 14.30.0.42172),May-2027,Aras Portal,Release 32 | (14.0.28.1.1),End of Life,394,T,T394
+Release 33 | (Build 14.30.0.42172),May-2027,Office Connector,Release 24 (14.0.3),Supported,394,U,U394
+Release 33 | (Build 14.30.0.42172),May-2027,Office Productivity Connector,Release 33 | (14.0.3),Certified,394,V,V394
+Release 33 | (Build 14.30.0.42172),May-2027,Workspace Productivity Connector,Release 33 | (14.0.1),Certified,394,W,W394
+Release 33 | (Build 14.30.0.42172),May-2027,Enterprise Search,Release 14 (14.0.1),Supported,394,X,X394
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 21 (14.0.3),Supported,394,Y,Y394
+Release 33 | (Build 14.30.0.42172),May-2027,Process Engine,Release 18 | (14.0.1),Supported,394,Z,Z394
+Release 33 | (Build 14.30.0.42172),May-2027,Event Handling Framework,Release 32 | (14.0.2),Supported,394,AA,AA394
+Release 33 | (Build 14.30.0.42172),May-2027,Reporting,Release 28 (14.0.1),Supported,394,AB,AB394
+Release 33 | (Build 14.30.0.42172),May-2027,OAuth Registry,Release 32 | (14.0.1),Supported,394,AC,AC394
+Release 33 | (Build 14.30.0.42172),May-2027,AI Assistant,Release 35 [3] | (14.0.1),Certified,394,AD,AD394
+Release 33 | (Build 14.30.0.42172),May-2027,Import Manager,Release 33 | (14.0.1),Certified,394,AE,AE394
+Release 33 | (Build 14.30.0.42172),May-2027,Workflow UI,Release 37 (14.1.0),Certified,394,AF,AF394
+Release 33 | (Build 14.30.0.42172),May-2027,IOM SDK,15.0.1,Certified,394,AG,AG394
+Release 33 | (Build 14.30.0.42172),May-2027,Package Import/Export Utility,15.0.0,Certified,394,AH,AH394
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 26 (14.0.4),Supported,397,Y,Y397
+Release 33 | (Build 14.30.0.42172),May-2027,Reporting,Release 29 (14.0.2),Supported,398,AB,AB398
+Release 33 | (Build 14.30.0.42172),May-2027,Variant Management,Release 27 (14.0.2),Supported,399,P,P399
+Release 33 | (Build 14.30.0.42172),May-2027,Office Connector,Release 27 (14.0.4),Supported,399,U,U399
+Release 33 | (Build 14.30.0.42172),May-2027,Enterprise Search,Release 20 (14.0.2),Supported,399,X,X399
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 29 (14.0.5),Supported,400,Y,Y400
+Release 33 | (Build 14.30.0.42172),May-2027,Simulation Management,Release 23 (14.0.2),Supported,402,H,H402
+Release 33 | (Build 14.30.0.42172),May-2027,Component Engineering,Release 22 | (14.0.2),Certified,402,I,I402
+Release 33 | (Build 14.30.0.42172),May-2027,Aras Portal,Release 14 | (14.14.32),Certified,402,T,T402
+Release 33 | (Build 14.30.0.42172),May-2027,Reporting,Release 36 (14.0.3),Certified,402,AB,AB402
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 31 (14.0.6),Supported,403,Y,Y403
+Release 33 | (Build 14.30.0.42172),May-2027,Variant Management,Release 33 (14.0.3),Certified,404,P,P404
+Release 33 | (Build 14.30.0.42172),May-2027,Office Connector,Release 31 (14.0.5),Supported,404,U,U404
+Release 33 | (Build 14.30.0.42172),May-2027,Enterprise Search,Release 32 (14.0.3),Supported,404,X,X404
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 33 (14.0.7),Certified,406,Y,Y406
+Release 33 | (Build 14.30.0.42172),May-2027,Reporting,Release 37 (14.0.4),Certified,407,AB,AB407
+Release 33 | (Build 14.30.0.42172),May-2027,3D Visualization,Release 35 (14.0.8),Certified,409,Y,Y409
+Release 34 | (Build 14.34.0.43336),Aug-2027,Product Engineering,Release 14 | (14.0.1),Certified,413,D,D413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Program Management,Release 14 | (14.0.1),Supported,413,E,E413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Requirements Engineering,Release 33 | (14.0.2),Supported,413,F,F413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Systems Architecture,Release 14 | (14.0.1),Supported,413,G,G413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Simulation Management,Release 14 (14.0.1),Supported,413,H,H413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Component Engineering,Release 14 | (14.0.1),Supported,413,I,I413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Technical Documentation,Release 14 | (14.0.1),Supported,413,J,J413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Quality Management System,Release 14 | (14.0.1),Supported,413,K,K413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Process Quality Binding,Release 14 | (14.0.1),Supported,413,L,L413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Manufacturing Process Planning,Release 33 | (14.0.3),Supported,413,M,M413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Digital Twin Core,Release 31 | (14.0.2),Supported,413,N,N413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Unified Change Management,Release 30 (14.1.0),Certified,413,O,O413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Variant Management,Release 27 (14.0.2),Supported,413,P,P413
+Release 34 | (Build 14.34.0.43336),Aug-2027,High Tech Electronics,Release 33 | (14.0.2),Certified,413,Q,Q413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Supplier Management,Release 32 | (14.0.28.1.1),End of Life,413,R,R413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Aras ProAppDesigner,Release 14 | (14.14.32),Certified,413,S,S413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Aras Portal,Release 32 | (14.0.28.1.1),End of Life,413,T,T413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Office Connector,Release 27 (14.0.4),Supported,413,U,U413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Office Productivity Connector,Release 33 | (14.0.3),Certified,413,V,V413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Workspace Productivity Connector,Release 33 | (14.0.1),Certified,413,W,W413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Enterprise Search,Release 20 (14.0.2),Supported,413,X,X413
+Release 34 | (Build 14.34.0.43336),Aug-2027,3D Visualization,Release 29 (14.0.5),Supported,413,Y,Y413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Process Engine,Release 18 | (14.0.1),Supported,413,Z,Z413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Event Handling Framework,Release 32 | (14.0.2),Supported,413,AA,AA413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Reporting,Release 28 (14.0.1),Supported,413,AB,AB413
+Release 34 | (Build 14.34.0.43336),Aug-2027,OAuth Registry,Release 32 | (14.0.1),Supported,413,AC,AC413
+Release 34 | (Build 14.34.0.43336),Aug-2027,AI Assistant,Release 35 [3] | (14.0.1),Certified,413,AD,AD413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Import Manager,Release 33 | (14.0.1),Certified,413,AE,AE413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Workflow UI,Release 37 (14.1.0),Certified,413,AF,AF413
+Release 34 | (Build 14.34.0.43336),Aug-2027,IOM SDK,15.0.1,Certified,413,AG,AG413
+Release 34 | (Build 14.34.0.43336),Aug-2027,Package Import/Export Utility,15.0.0,Certified,413,AH,AH413
+Release 34 | (Build 14.34.0.43336),Aug-2027,3D Visualization,Release 31 (14.0.6),Supported,417,Y,Y417
+Release 34 | (Build 14.34.0.43336),Aug-2027,Reporting,Release 29 (14.0.2),Supported,417,AB,AB417
+Release 34 | (Build 14.34.0.43336),Aug-2027,Simulation Management,Release 23 (14.0.2),Supported,421,H,H421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Component Engineering,Release 22 | (14.0.2),Certified,421,I,I421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Variant Management,Release 33 (14.0.3),Supported,421,P,P421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Aras Portal,Release 14 | (14.14.32),Certified,421,T,T421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Office Connector,Release 31 (14.0.5),Supported,421,U,U421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Enterprise Search,Release 32 (14.0.3),Supported,421,X,X421
+Release 34 | (Build 14.34.0.43336),Aug-2027,3D Visualization,Release 33 (14.0.7),Supported,421,Y,Y421
+Release 34 | (Build 14.34.0.43336),Aug-2027,Reporting,Release 36 (14.0.3),Certified,421,AB,AB421
+Release 34 | (Build 14.34.0.43336),Aug-2027,3D Visualization,Release 35 (14.0.8),Certified,425,Y,Y425
+Release 34 | (Build 14.34.0.43336),Aug-2027,Reporting,Release 37 (14.0.4),Certified,425,AB,AB425
+Release 35 | (Build 14.35.0.43890),Nov-2027,Product Engineering,Release 14 | (14.0.1),Certified,429,D,D429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Program Management,Release 14 | (14.0.1),Supported,429,E,E429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Requirements Engineering,Release 33 | (14.0.2),Supported,429,F,F429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Systems Architecture,Release 14 | (14.0.1),Supported,429,G,G429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Simulation Management,Release 14 (14.0.1),Supported,429,H,H429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Component Engineering,Release 14 | (14.0.1),Supported,429,I,I429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Technical Documentation,Release 14 | (14.0.1),Supported,429,J,J429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Quality Management System,Release 14 | (14.0.1),Supported,429,K,K429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Process Quality Binding,Release 14 | (14.0.1),Supported,429,L,L429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Manufacturing Process Planning,Release 33 | (14.0.3),Supported,429,M,M429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Digital Twin Core,Release 31 | (14.0.2),Supported,429,N,N429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Unified Change Management,Release 30 (14.1.0),Certified,429,O,O429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Variant Management,Release 27 (14.0.2),Supported,429,P,P429
+Release 35 | (Build 14.35.0.43890),Nov-2027,High Tech Electronics,Release 33 | (14.0.2),Certified,429,Q,Q429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Supplier Management,Release 32 | (14.0.28.1.1),End of Life,429,R,R429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Aras ProAppDesigner,Release 14 | (14.14.32),Certified,429,S,S429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Aras Portal,Release 32 | (14.0.28.1.1),End of Life,429,T,T429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Office Connector,Release 27 (14.0.4),Supported,429,U,U429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Office Productivity Connector,Release 33 | (14.0.3),Certified,429,V,V429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Workspace Productivity Connector,Release 33 | (14.0.1),Certified,429,W,W429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Enterprise Search,Release 20 (14.0.2),Supported,429,X,X429
+Release 35 | (Build 14.35.0.43890),Nov-2027,3D Visualization,Release 29 (14.0.5),Supported,429,Y,Y429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Process Engine,Release 18 | (14.0.1),Supported,429,Z,Z429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Event Handling Framework,Release 32 | (14.0.2),Supported,429,AA,AA429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Reporting,Release 28 (14.0.1),Supported,429,AB,AB429
+Release 35 | (Build 14.35.0.43890),Nov-2027,OAuth Registry,Release 32 | (14.0.1),Supported,429,AC,AC429
+Release 35 | (Build 14.35.0.43890),Nov-2027,AI Assistant,Release 35 [3] | (14.0.1),Certified,429,AD,AD429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Import Manager,Release 33 | (14.0.1),Certified,429,AE,AE429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Workflow UI,Release 37 (14.1.0),Certified,429,AF,AF429
+Release 35 | (Build 14.35.0.43890),Nov-2027,IOM SDK,15.0.1,Certified,429,AG,AG429
+Release 35 | (Build 14.35.0.43890),Nov-2027,Package Import/Export Utility,15.0.0,Certified,429,AH,AH429
+Release 35 | (Build 14.35.0.43890),Nov-2027,3D Visualization,Release 31 (14.0.6),Supported,433,Y,Y433
+Release 35 | (Build 14.35.0.43890),Nov-2027,Reporting,Release 29 (14.0.2),Supported,433,AB,AB433
+Release 35 | (Build 14.35.0.43890),Nov-2027,Simulation Management,Release 23 (14.0.2),Supported,437,H,H437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Component Engineering,Release 22 | (14.0.2),Certified,437,I,I437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Variant Management,Release 33 (14.0.3),Supported,437,P,P437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Aras Portal,Release 14 | (14.14.32),Certified,437,T,T437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Office Connector,Release 31 (14.0.5),Supported,437,U,U437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Enterprise Search,Release 32 (14.0.3),Supported,437,X,X437
+Release 35 | (Build 14.35.0.43890),Nov-2027,3D Visualization,Release 33 (14.0.7),Supported,437,Y,Y437
+Release 35 | (Build 14.35.0.43890),Nov-2027,Reporting,Release 36 (14.0.3),Certified,437,AB,AB437
+Release 35 | (Build 14.35.0.43890),Nov-2027,3D Visualization,Release 35 (14.0.8),Certified,441,Y,Y441
+Release 35 | (Build 14.35.0.43890),Nov-2027,Reporting,Release 37 (14.0.4),Certified,441,AB,AB441
+Release 36 | (Build 14.36.0.44303),Feb-2028,Product Engineering,Release 14 | (14.0.1),Certified,445,D,D445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Program Management,Release 14 | (14.0.1),Supported,445,E,E445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Requirements Engineering,Release 33 | (14.0.2),Supported,445,F,F445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Systems Architecture,Release 14 | (14.0.1),Supported,445,G,G445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Simulation Management,Release 14 (14.0.1),Supported,445,H,H445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Component Engineering,Release 14 | (14.0.1),Supported,445,I,I445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Technical Documentation,Release 14 | (14.0.1),Supported,445,J,J445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Quality Management System,Release 14 | (14.0.1),Supported,445,K,K445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Process Quality Binding,Release 14 | (14.0.1),Supported,445,L,L445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Manufacturing Process Planning,Release 33 | (14.0.3),Supported,445,M,M445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Digital Twin Core,Release 31 | (14.0.2),Supported,445,N,N445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Unified Change Management,Release 30 (14.1.0),Certified,445,O,O445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Variant Management,Release 27 (14.0.2),Supported,445,P,P445
+Release 36 | (Build 14.36.0.44303),Feb-2028,High Tech Electronics,Release 33 | (14.0.2),Certified,445,Q,Q445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Aras ProAppDesigner,Release 14 | (14.14.32),Certified,445,S,S445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Aras Portal,Release 14 | (14.14.32),Certified,445,T,T445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Office Connector,Release 27 (14.0.4),Supported,445,U,U445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Office Productivity Connector,Release 33 | (14.0.3),Certified,445,V,V445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Workspace Productivity Connector,Release 33 | (14.0.1),Certified,445,W,W445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Enterprise Search,Release 20 (14.0.2),Supported,445,X,X445
+Release 36 | (Build 14.36.0.44303),Feb-2028,3D Visualization,Release 29 (14.0.5),Supported,445,Y,Y445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Process Engine,Release 18 | (14.0.1),Supported,445,Z,Z445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Event Handling Framework,Release 32 | (14.0.2),Supported,445,AA,AA445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Reporting,Release 28 (14.0.1),Supported,445,AB,AB445
+Release 36 | (Build 14.36.0.44303),Feb-2028,OAuth Registry,Release 32 | (14.0.1),Supported,445,AC,AC445
+Release 36 | (Build 14.36.0.44303),Feb-2028,AI Assistant,Release 35 [3] | (14.0.1),Supported,445,AD,AD445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Import Manager,Release 33 | (14.0.1),Certified,445,AE,AE445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Workflow UI,Release 37 (14.1.0),Certified,445,AF,AF445
+Release 36 | (Build 14.36.0.44303),Feb-2028,IOM SDK,15.0.1,Supported,445,AG,AG445
+Release 36 | (Build 14.36.0.44303),Feb-2028,Package Import/Export Utility,15.0.0,Certified,445,AH,AH445
+Release 36 | (Build 14.36.0.44303),Feb-2028,3D Visualization,Release 31 (14.0.6),Supported,449,Y,Y449
+Release 36 | (Build 14.36.0.44303),Feb-2028,Reporting,Release 29 (14.0.2),Supported,449,AB,AB449
+Release 36 | (Build 14.36.0.44303),Feb-2028,Simulation Management,Release 23 (14.0.2),Supported,453,H,H453
+Release 36 | (Build 14.36.0.44303),Feb-2028,Component Engineering,Release 22 | (14.0.2),Certified,453,I,I453
+Release 36 | (Build 14.36.0.44303),Feb-2028,Variant Management,Release 33 (14.0.3),Supported,453,P,P453
+Release 36 | (Build 14.36.0.44303),Feb-2028,Office Connector,Release 31 (14.0.5),Supported,453,U,U453
+Release 36 | (Build 14.36.0.44303),Feb-2028,Enterprise Search,Release 32 (14.0.3),Supported,453,X,X453
+Release 36 | (Build 14.36.0.44303),Feb-2028,3D Visualization,Release 33 (14.0.7),Supported,453,Y,Y453
+Release 36 | (Build 14.36.0.44303),Feb-2028,Reporting,Release 36 (14.0.3),Certified,453,AB,AB453
+Release 36 | (Build 14.36.0.44303),Feb-2028,3D Visualization,Release 35 (14.0.8),Certified,457,Y,Y457
+Release 36 | (Build 14.36.0.44303),Feb-2028,Reporting,Release 37 (14.0.4),Certified,457,AB,AB457
+Release 37 | (Build 14.37.0.44844),May-2028,Product Engineering,Release 14 | (14.0.1),Certified,461,D,D461
+Release 37 | (Build 14.37.0.44844),May-2028,Program Management,Release 14 | (14.0.1),Supported,461,E,E461
+Release 37 | (Build 14.37.0.44844),May-2028,Requirements Engineering,Release 33 | (14.0.2),Supported,461,F,F461
+Release 37 | (Build 14.37.0.44844),May-2028,Systems Architecture,Release 14 | (14.0.1),Supported,461,G,G461
+Release 37 | (Build 14.37.0.44844),May-2028,Simulation Management,Release 14 (14.0.1),Supported,461,H,H461
+Release 37 | (Build 14.37.0.44844),May-2028,Component Engineering,Release 14 | (14.0.1),Supported,461,I,I461
+Release 37 | (Build 14.37.0.44844),May-2028,Technical Documentation,Release 14 | (14.0.1),Supported,461,J,J461
+Release 37 | (Build 14.37.0.44844),May-2028,Quality Management System,Release 14 | (14.0.1),Supported,461,K,K461
+Release 37 | (Build 14.37.0.44844),May-2028,Process Quality Binding,Release 14 | (14.0.1),Supported,461,L,L461
+Release 37 | (Build 14.37.0.44844),May-2028,Manufacturing Process Planning,Release 33 | (14.0.3),Supported,461,M,M461
+Release 37 | (Build 14.37.0.44844),May-2028,Digital Twin Core,Release 31 | (14.0.2),Supported,461,N,N461
+Release 37 | (Build 14.37.0.44844),May-2028,Unified Change Management,Release 30 (14.1.0),Certified,461,O,O461
+Release 37 | (Build 14.37.0.44844),May-2028,Variant Management,Release 27 (14.0.2),Supported,461,P,P461
+Release 37 | (Build 14.37.0.44844),May-2028,High Tech Electronics,Release 33 | (14.0.2),Supported,461,Q,Q461
+Release 37 | (Build 14.37.0.44844),May-2028,Aras ProAppDesigner,Release 14 | (14.14.32),Supported,461,S,S461
+Release 37 | (Build 14.37.0.44844),May-2028,Aras Portal,Release 14 | (14.14.32),Supported,461,T,T461
+Release 37 | (Build 14.37.0.44844),May-2028,Office Connector,Release 27 (14.0.4),Supported,461,U,U461
+Release 37 | (Build 14.37.0.44844),May-2028,Office Productivity Connector,Release 33 | (14.0.3),Supported,461,V,V461
+Release 37 | (Build 14.37.0.44844),May-2028,Workspace Productivity Connector,Release 33 | (14.0.1),Supported,461,W,W461
+Release 37 | (Build 14.37.0.44844),May-2028,Enterprise Search,Release 20 (14.0.2),Supported,461,X,X461
+Release 37 | (Build 14.37.0.44844),May-2028,3D Visualization,Release 29 (14.0.5),Supported,461,Y,Y461
+Release 37 | (Build 14.37.0.44844),May-2028,Process Engine,Release 18 | (14.0.1),Supported,461,Z,Z461
+Release 37 | (Build 14.37.0.44844),May-2028,Event Handling Framework,Release 32 | (14.0.2),Supported,461,AA,AA461
+Release 37 | (Build 14.37.0.44844),May-2028,Reporting,Release 28 (14.0.1),Supported,461,AB,AB461
+Release 37 | (Build 14.37.0.44844),May-2028,OAuth Registry,Release 32 | (14.0.1),Supported,461,AC,AC461
+Release 37 | (Build 14.37.0.44844),May-2028,AI Assistant,Release 35 [3] | (14.0.1),Supported,461,AD,AD461
+Release 37 | (Build 14.37.0.44844),May-2028,Import Manager,Release 33 | (14.0.1),Supported,461,AE,AE461
+Release 37 | (Build 14.37.0.44844),May-2028,Workflow UI,Release 37 (14.1.0),Certified,461,AF,AF461
+Release 37 | (Build 14.37.0.44844),May-2028,IOM SDK,15.0.1,Supported,461,AG,AG461
+Release 37 | (Build 14.37.0.44844),May-2028,Package Import/Export Utility,15.0.0,Supported,461,AH,AH461
+Release 37 | (Build 14.37.0.44844),May-2028,3D Visualization,Release 31 (14.0.6),Supported,465,Y,Y465
+Release 37 | (Build 14.37.0.44844),May-2028,Reporting,Release 29 (14.0.2),Supported,465,AB,AB465
+Release 37 | (Build 14.37.0.44844),May-2028,Simulation Management,Release 23 (14.0.2),Supported,469,H,H469
+Release 37 | (Build 14.37.0.44844),May-2028,Component Engineering,Release 22 | (14.0.2),Supported,469,I,I469
+Release 37 | (Build 14.37.0.44844),May-2028,Variant Management,Release 33 (14.0.3),Supported,469,P,P469
+Release 37 | (Build 14.37.0.44844),May-2028,Office Connector,Release 31 (14.0.5),Supported,469,U,U469
+Release 37 | (Build 14.37.0.44844),May-2028,Enterprise Search,Release 32 (14.0.3),Supported,469,X,X469
+Release 37 | (Build 14.37.0.44844),May-2028,3D Visualization,Release 33 (14.0.7),Supported,469,Y,Y469
+Release 37 | (Build 14.37.0.44844),May-2028,Reporting,Release 36 (14.0.3),Supported,469,AB,AB469
+Release 37 | (Build 14.37.0.44844),May-2028,3D Visualization,Release 35 (14.0.8),Supported,473,Y,Y473
+Release 37 | (Build 14.37.0.44844),May-2028,Reporting,Release 37 (14.0.4),Certified,473,AB,AB473
