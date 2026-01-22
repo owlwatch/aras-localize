@@ -1147,6 +1147,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 166px;
+
   
   @include breakpoint(medium only) {
     scroll-padding-top: 145px;
