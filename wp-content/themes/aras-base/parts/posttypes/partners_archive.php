@@ -2,11 +2,15 @@
 $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $background_image = get_field('partner_archive_hero_background_image', 'option');
 ?>
+<?php if( $background_image ) { ?>
+<style>
+.partners-hero-banner::after {
+  background-image: url('<?php echo esc_url($background_image['url']); ?>');
+}
+</style>
+<?php } ?>
 <section 
   class="partners-hero-banner largetoppadding largebottompadding bg-dblue"
-  <?php if( $background_image ) { ?>
-  style="background-image: url('<?php echo esc_url($background_image['url']); ?>');"
-  <?php } ?>
 >
   <div class="grid-container">
     <div class="grid-x grid-padding-x">
