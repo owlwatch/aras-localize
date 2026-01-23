@@ -1,7 +1,13 @@
 <?php $default_post_archive_url = get_permalink(get_option('page_for_posts'));
 $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$background_image = get_field('partner_archive_hero_background_image', 'option');
 ?>
-<section class="partners-hero-banner largetoppadding largebottompadding bg-dblue">
+<section 
+  class="partners-hero-banner largetoppadding largebottompadding bg-dblue"
+  <?php if( $background_image ) { ?>
+  style="background-image: url('<?php echo esc_url($background_image['url']); ?>');"
+  <?php } ?>
+>
   <div class="grid-container">
     <div class="grid-x grid-padding-x">
       <div class="cell small-12 medium-8 large-6 hero-content">
