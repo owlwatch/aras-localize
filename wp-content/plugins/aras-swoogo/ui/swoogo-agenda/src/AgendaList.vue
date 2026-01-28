@@ -13,6 +13,11 @@ const props = defineProps<{
     filterByTrack: string,
     hideTrack?: boolean,
     hideDateAndTime?: boolean,
+    ink?: string,
+    muted?: string,
+    border?: string,
+    card?: string,
+    accent?: string,
   }
 }>();
 
@@ -24,6 +29,21 @@ const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
 
 const hideTrack = props.config.hideTrack || false;
 provide('hideTrack', hideTrack);
+
+const agendaStyles = computed(() => {
+  const styles: Record<string, string> = {};
+  const setVar = (name: string, value?: string) => {
+    if (value && value.trim() !== '') {
+      styles[name] = value.trim();
+    }
+  };
+  setVar('--agenda-ink', props.config.ink);
+  setVar('--agenda-muted', props.config.muted);
+  setVar('--agenda-border', props.config.border);
+  setVar('--agenda-card', props.config.card);
+  setVar('--agenda-accent', props.config.accent);
+  return styles;
+});
 
 // utility function to test a string against another string that can contain
   // * as a wildcard
@@ -161,7 +181,7 @@ const shortDescriptionFor = (session: Session) => {
 </script>
 
 <template lang="pug">
-.swoogo-agenda
+.swoogo-agenda(:style="agendaStyles")
   ul.swoogo-agenda__tabs(
     v-if="!hideDateAndTime"
   )
@@ -405,7 +425,7 @@ session-modal(
     box-shadow: none;
   }
   &__tag {
-    background: rgba(207, 75, 46, 0.12);
+    background: color-mix(in srgb, var(--agenda-accent) 18%, transparent);
     color: var(--agenda-accent);
     border-radius: 999px;
     padding: 0.2rem 0.7rem;

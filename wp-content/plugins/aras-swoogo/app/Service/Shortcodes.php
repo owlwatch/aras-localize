@@ -36,6 +36,11 @@ class Shortcodes
 			'filter_by_track' => "",
 			'hide_track' => "false",
 			'hide_date_and_time' => "false",
+			'ink' => "",
+			'muted' => "",
+			'border' => "",
+			'card' => "",
+			'accent' => "",
 		]);
 	}
 
@@ -45,6 +50,11 @@ class Shortcodes
 			'filter_by_track' => "",
 			'hide_track' => "false",
 			'hide_date_and_time' => "false",
+			'ink' => "",
+			'muted' => "",
+			'border' => "",
+			'card' => "",
+			'accent' => "",
 		]);
 	}
 
