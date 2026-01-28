@@ -21,6 +21,7 @@ class Shortcodes
 	{
 		$this->agendaUI = $agendaUI;
 		add_shortcode( 'swoogo-agenda', array( $this, 'agenda' ) );
+		add_shortcode( 'swoogo-agenda-list', array( $this, 'agendaList' ) );
 		add_shortcode( 'swoogo-speakers', array( $this, 'speakers' ) );
 		add_shortcode( 'swoogo-speaker-carousel', array( $this, 'speakerCarousel' ) );
 		add_shortcode( 'swoogo-sponsors', array( $this, 'sponsors' ) );
@@ -32,6 +33,15 @@ class Shortcodes
 	public function agenda( $atts )
 	{
 		return $this->shortcode('agenda', $atts, [
+			'filter_by_track' => "",
+			'hide_track' => "false",
+			'hide_date_and_time' => "false",
+		]);
+	}
+
+	public function agendaList( $atts )
+	{
+		return $this->shortcode('agenda-list', $atts, [
 			'filter_by_track' => "",
 			'hide_track' => "false",
 			'hide_date_and_time' => "false",

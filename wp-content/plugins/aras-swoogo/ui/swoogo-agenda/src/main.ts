@@ -10,6 +10,7 @@ let widgets = document.querySelectorAll('[data-aras-widget^="swoogo-"]');
 let widgetPromises: Map<string, Component> = new Map();
 
 widgetPromises.set('agenda', defineAsyncComponent(() => import('./Agenda.vue')));
+widgetPromises.set('agenda-list', defineAsyncComponent(() => import('./AgendaList.vue')));
 widgetPromises.set('speakers', defineAsyncComponent(() => import('./Speakers.vue')));
 widgetPromises.set('speaker-carousel', defineAsyncComponent(() => import('./SpeakerCarousel.vue')));
 widgetPromises.set('sponsors', defineAsyncComponent(() => import('./Sponsors.vue')));
