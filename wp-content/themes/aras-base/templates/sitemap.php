@@ -20,7 +20,46 @@ get_header(); ?>
                     'walker' => new Aras\Sitemap_Walker()
                 );
                 wp_list_pages($args);
+                $resources_link = get_post_type_archive_link('resources');
                 ?>
+                <li>
+                    <a href="<?php echo get_post_type_archive_link('resources') ?>">
+                        Resources - Reports, Demos, & More
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo add_query_arg( 'format', 'demo-series', get_post_type_archive_link('resources')) ?>">
+                        Demo Series Resources
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo add_query_arg( 'format', 'customer-story', get_post_type_archive_link('resources')) ?>">
+                        Customer Stories &amp; Case Studies
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo get_post_type_archive_link('event') ?>">
+                        Events &amp; Webinars
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo get_post_type_archive_link('news') ?>">
+                        News
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo get_post_type_archive_link('glossary') ?>">
+                        Glossary
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo get_post_type_archive_link('partners') ?>">
+                        Find a Partner
+                    </a>
+                </li>
             </ul>
 
 
