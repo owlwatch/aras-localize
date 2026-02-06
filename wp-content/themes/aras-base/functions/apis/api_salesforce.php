@@ -36,6 +36,19 @@ function update_salesforce_data()
 	$partners_data = fetch_data_from_salesforce_api($partners_url);
 	if ($partners_data) {
 		save_salesforce_data_to_file($partners_data, 'Salesforce_Partners_00BUM000000arH72AI.json');
+		// we need to purge the partner post type caches
+		$all_partners = get_posts(array('post_type' => 'partners', 'posts_per_page' => -1, 'fields' => 'ids'));
+		foreach ($all_partners as $partner_id) {
+			aras_purge_post_url_caches($partner_id);
+			$partner_archive_url = get_post_type_archive_link('partners');
+			if ( $partner_archive_url && function_exists( 'nitropack_sdk_purge' ) ) {
+				$reason = sprintf( 'Manual purge of %s via Aras helper', $partner_archive_url);
+				if ( nitropack_sdk_purge( $partner_archive_url, null, $reason ) ) {
+					// Purged successfully
+				}
+			}
+		}
+
 	}
 
 	else {
