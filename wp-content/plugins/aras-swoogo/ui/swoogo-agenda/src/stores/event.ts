@@ -325,7 +325,7 @@ export const useEventStore = defineStore('event', () => {
 		if( typeof event !== 'number' ) event = event.id;
 		return sessions.value.filter( s => s.eventIds?.includes( event ) )
 			.filter( s => !s.name.match(/speaker\sdinner/i) )
-			.filter( s => !['Partner Session','Transition'].includes(getSessionTrack(s)?.name || '') );
+			.filter( s => !['Transition'].includes(getSessionTrack(s)?.name || '') );
 	}
 
 	function getEventDetails( eventId: number ) {
