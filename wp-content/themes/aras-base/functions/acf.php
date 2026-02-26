@@ -109,3 +109,13 @@ function aras_acf_hide_on_screen_fix( $style, $field_group )
 	return $style;
 }
 add_filter('acf/get_field_group_style', 'aras_acf_hide_on_screen_fix', 10, 2);
+
+// lets disable the acfe author
+// Or using acfe/init
+add_action('acfe/init', 'my_acfe_modules');
+function my_acfe_modules(){
+    
+    // Disable Ajax Author box
+    acfe_update_setting('modules/author', false);
+    
+}
