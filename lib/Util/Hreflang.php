@@ -31,6 +31,7 @@ class Hreflang {
         }
 
         echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($this->get_current_url($this->sourceLanguage)) . '" />' . "\n";
+        echo '<link rel="alternate" hreflang="'.esc_attr($this->sourceLanguage).'" href="' . esc_url($this->get_current_url($this->sourceLanguage)) . '" />' . "\n";
         foreach ($languages as $code) {
             $url = $this->get_current_url($code);
             if (empty($url)) {
