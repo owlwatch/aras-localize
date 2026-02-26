@@ -6,7 +6,10 @@ import { storeToRefs } from 'pinia';
 import SessionModal from './components/SessionModal.vue';
 import SpeakerModal from './components/SpeakerModal.vue';
 
+
 const eventStore = useEventStore();
+
+
 const props = defineProps<{ 
   eventId: number
   config: {
@@ -18,8 +21,10 @@ const props = defineProps<{
     border?: string,
     card?: string,
     accent?: string,
+    columns?: number,
   }
 }>();
+
 
 const hideDateAndTime = props.config.hideDateAndTime || false;
 provide('hideDateAndTime', hideDateAndTime);
@@ -42,6 +47,7 @@ const agendaStyles = computed(() => {
   setVar('--agenda-border', props.config.border);
   setVar('--agenda-card', props.config.card);
   setVar('--agenda-accent', props.config.accent);
+  setVar('--agenda-columns', props.config.columns ? props.config.columns.toString() : '2');
   return styles;
 });
 
@@ -213,36 +219,36 @@ const shortDescriptionFor = (session: Session) => {
       :class="{ 'is-active': date === activeTab }"
     )
       ul.swoogo-agenda__list
-        li.swoogo-agenda__group(
+        template(
           v-for="(sessions, time) in times"
-          :key="time"
         )
-          ul.swoogo-agenda__cards
-            li.swoogo-agenda__card(
-              v-for="session in sessions"
-              :key="session.id"
+        
+        
+          li.swoogo-agenda__card(
+            v-for="session in sessions"
+            :key="session.id"
+          )
+            a.swoogo-agenda__card-link(
+              href="#"
+              @click.prevent="activeModalSession = session"
             )
-              a.swoogo-agenda__card-link(
-                href="#"
-                @click.prevent="activeModalSession = session"
-              )
-                span.swoogo-agenda__tag(
-                  v-if="session.track && !hideTrack"
-                ) {{ session.track.name }}
-                span.swoogo-agenda__title {{ session.name }}
-                p.swoogo-agenda__description(
-                  v-if="shortDescriptionFor(session)"
-                ) {{ shortDescriptionFor(session) }}
-                .swoogo-agenda__time
-                  svg.swoogo-agenda__time-icon(
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+              span.swoogo-agenda__tag(
+                v-if="session.track && !hideTrack"
+              ) {{ session.track.name }}
+              span.swoogo-agenda__title {{ session.name }}
+              p.swoogo-agenda__description(
+                v-if="shortDescriptionFor(session)"
+              ) {{ shortDescriptionFor(session) }}
+              .swoogo-agenda__time
+                svg.swoogo-agenda__time-icon(
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                )
+                  path(
+                    d="M12 1.75c5.66 0 10.25 4.59 10.25 10.25S17.66 22.25 12 22.25 1.75 17.66 1.75 12 6.34 1.75 12 1.75Zm0 1.5a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5Zm.75 4.5v4.4l3.2 2.1-.82 1.23-3.88-2.53V7.75h1.5Z"
                   )
-                    path(
-                      d="M12 1.75c5.66 0 10.25 4.59 10.25 10.25S17.66 22.25 12 22.25 1.75 17.66 1.75 12 6.34 1.75 12 1.75Zm0 1.5a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5Zm.75 4.5v4.4l3.2 2.1-.82 1.23-3.88-2.53V7.75h1.5Z"
-                    )
-                  span {{ time }}
+                span {{ time }}
   // If hideDateAndTime is true, show all sessions in a single list
   ul.swoogo-agenda__days(
     v-else
@@ -285,16 +291,20 @@ session-modal(
 
 <style scoped lang="scss">
 .swoogo-agenda { 
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.5rem 0;
-  border-radius: 20px;
+
   --agenda-ink: #1f1b16;
   --agenda-muted: #6d6760;
   --agenda-border: #e3dfd7;
   --agenda-card: #ffffff;
   --agenda-accent: #cf4b2e;
+  --agenda-columns: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-radius: 20px;
+  container: agenda / inline-size;
 
   &__tabs {
     display: flex;
@@ -303,18 +313,29 @@ session-modal(
     margin: 0;
     padding: 0;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: clip;
     scrollbar-width: thin;
     justify-content: center;
     border-bottom: 1px solid var(--agenda-border);
     padding-bottom: 0.5rem;
+    
   }
+
+  & &__tabs {
+    font-size: 1rem;
+    @container( max-width: 800px ){
+      gap: 0;
+      font-size: 0.8rem;
+    }
+  }
+
   &__tab {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     align-items: stretch;
+    font-size: inherit;
     button {
       display: flex;
       flex-direction: column;
@@ -324,12 +345,12 @@ session-modal(
       min-width: 120px;
       background: #fff;
       color: var(--agenda-ink);
-      padding: 0.6rem 1.25rem;
+      padding: 0.6em 1.25em;
       border: 0;
       border-radius: 0;
       box-shadow: none;
       cursor: pointer;
-      gap: 0.15rem;
+      gap: 0.15em;
       transition: color 160ms ease;
       &:hover, &:focus {
         color: var(--agenda-accent);
@@ -337,16 +358,31 @@ session-modal(
       &.is-active {
         color: var(--agenda-ink);
       }
+
+      @container( max-width: 800px ){
+        min-width: auto;
+        padding: 0.6em 1em;
+      }
     }
   }
   &__tab-day {
-    font-size: 0.9rem;
+    font-size: 0.9em;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
   &__tab-date {
-    font-size: 1.5rem;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  &__tab-day {
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  &__tab-date {
+    font-size: 1.5em;
     font-weight: 600;
   }
   &__tab button {
@@ -388,6 +424,10 @@ session-modal(
     padding: 0;
     display: grid;
     gap: 1.25rem;
+    grid-template-columns: repeat(var(--agenda-columns), 1fr);
+    @container ( max-width: 800px ) {
+      grid-template-columns: 1fr;
+    }
   }
   &__group {
     list-style: none;
@@ -400,6 +440,7 @@ session-modal(
     padding: 0;
     display: grid;
     gap: 1rem;
+    height: 100%;
   }
   &__card {
     list-style: none;
@@ -409,12 +450,16 @@ session-modal(
     border: 1px solid var(--agenda-border);
     border-radius: 18px;
     box-shadow: 0 14px 30px rgba(24, 20, 16, 0.06);
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 0.75rem;
     transition: transform 140ms ease, box-shadow 140ms ease;
+    min-height: 100%;
   }
   &__card-link {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     gap: 0.75rem;
     color: inherit;
     text-decoration: none;
@@ -440,6 +485,7 @@ session-modal(
     font-weight: 600;
     color: var(--agenda-ink);
     text-decoration: none;
+
   }
   &__title:hover,
   &__title:focus {
@@ -452,6 +498,7 @@ session-modal(
     margin: 0;
   }
   &__time {
+    margin-top: auto;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
