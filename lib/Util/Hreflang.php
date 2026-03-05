@@ -130,20 +130,21 @@ class Hreflang {
             return $scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
 
+        $request_path = $_SERVER['REQUEST_URI'];
+        $parts = explode('/', $request_path);
+
         // if $code is provided, we want to add the language code to the url
         // unless its $this->sourceLanguage, in which case we want to remove any language code from the url
         if( $code === $this->sourceLanguage ) {
             // remove the first part of the path if it matches any of the languages
-            $parts = explode('/', $_SERVER['REQUEST_URI']);
             if( isset( $parts[1] ) && in_array($parts[1], $this->get_languages(), true) ){
                 // remove the language code from the url
-                return $scheme . '://' . $_SERVER['HTTP_HOST'] . implode( '/', array_slice($parts, 2) );
+                return $scheme . '://' . $_SERVER['HTTP_HOST'] . '/' . ltrim(implode('/', array_slice($parts, 2)), '/');
             }
-            return $scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            return $scheme . '://' . $_SERVER['HTTP_HOST'] . $request_path;
         }
 
         // add the language code to the url
-        $parts = explode('/', $_SERVER['REQUEST_URI']);
         if( isset( $parts[1] ) && in_array($parts[1], $this->get_languages(), true) ){
             // replace the language code in the url
             $parts[1] = $code;
@@ -151,7 +152,7 @@ class Hreflang {
         }
         else {
             // add the language code to the url
-            return $scheme . '://' . $_SERVER['HTTP_HOST'] . '/' . $code . $_SERVER['REQUEST_URI'];
+            return $scheme . '://' . $_SERVER['HTTP_HOST'] . '/' . $code . $request_path;
         }
     }
 }
