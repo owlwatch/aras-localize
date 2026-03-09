@@ -74,7 +74,7 @@ add_filter('gform_field_validation', function($result, $value, $form, $field) {
 
     if (aras_email_validation_is_personal_domain($value)) {
         $result['is_valid'] = false;
-        $result['message'] = __('Please use your company email address.', 'aras-email-validation');
+        $result['message'] = __('Personal email addresses are not allowed. Please use your company email address.', 'aras-email-validation');
     }
 
     return $result;

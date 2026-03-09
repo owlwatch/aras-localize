@@ -21,7 +21,8 @@ const props = defineProps<{
     border?: string,
     card?: string,
     accent?: string,
-    columns?: number,
+    column1?: string,
+    column2?: string,
   }
 }>();
 
@@ -47,7 +48,6 @@ const agendaStyles = computed(() => {
   setVar('--agenda-border', props.config.border);
   setVar('--agenda-card', props.config.card);
   setVar('--agenda-accent', props.config.accent);
-  setVar('--agenda-columns', props.config.columns ? props.config.columns.toString() : '2');
   return styles;
 });
 
@@ -67,6 +67,8 @@ const testString = (str: string, test: string) => {
   }
   return str === test;
 };
+
+
 
 // we want to sort these into days and times...
 const sessionsByDay = ref<Record<string, Record<string, Session[]>>>({});
