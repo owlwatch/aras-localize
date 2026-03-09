@@ -152,12 +152,18 @@ function aras_acf_google_map_api( $api ){
 add_filter('acf/fields/google_map/api', 'aras_acf_google_map_api');
 
 function aras_acf_input_disable_autocomplete() {
-	?>
-	<script type="text/javascript">
-		  (function($) {
-			$('.acf-input-wrap input, .acf-input textarea').attr('autocomplete', 'new-password'); // use a random string other than off to disable it completely
-		  })(jQuery);
-	</script>
-	<?php
-  }
-  add_action('acf/input/admin_footer', 'aras_acf_input_disable_autocomplete');
+?>
+<script type="text/javascript">
+		(function($) {
+		$('.acf-input-wrap input, .acf-input textarea').attr('autocomplete', 'new-password'); // use a random string other than off to disable it completely
+		})(jQuery);
+</script>
+<?php
+}
+add_action('acf/input/admin_footer', 'aras_acf_input_disable_autocomplete');
+
+
+// filter the option 'toolset-access-is-roles-protected' to return false
+add_filter('option_toolset-access-is-roles-protected', function($value) {
+	return false;
+});
