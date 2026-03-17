@@ -266,9 +266,7 @@ const speakerName = (speaker: Speaker) =>
                 v-if="session.track && !hideTrack"
               ) {{ session.track.name }}
               span.swoogo-agenda__title {{ session.name }}
-              p.swoogo-agenda__description(
-                v-if="showSessionDescriptions && shortDescriptionFor(session)"
-              ) {{ shortDescriptionFor(session) }}
+
               .swoogo-agenda__time
                 svg.swoogo-agenda__time-icon(
                   xmlns="http://www.w3.org/2000/svg"
@@ -279,6 +277,11 @@ const speakerName = (speaker: Speaker) =>
                     d="M12 1.75c5.66 0 10.25 4.59 10.25 10.25S17.66 22.25 12 22.25 1.75 17.66 1.75 12 6.34 1.75 12 1.75Zm0 1.5a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5Zm.75 4.5v4.4l3.2 2.1-.82 1.23-3.88-2.53V7.75h1.5Z"
                   )
                 span {{ time }}
+                
+              p.swoogo-agenda__description(
+                v-if="showSessionDescriptions && shortDescriptionFor(session)"
+              ) {{ shortDescriptionFor(session) }}
+              
             ul.swoogo-agenda__speakers(
               v-if="showSpeakers && sessionSpeakersFor(session).length"
             )
