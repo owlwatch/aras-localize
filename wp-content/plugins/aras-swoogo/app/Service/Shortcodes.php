@@ -50,6 +50,8 @@ class Shortcodes
 			'filter_by_track' => "",
 			'hide_track' => "false",
 			'hide_date_and_time' => "false",
+			'show_session_descriptions' => "true",
+			'show_speakers' => "false",
 			'ink' => "",
 			'muted' => "",
 			'border' => "",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed, provide } from 'vue'
 import { useEventStore } from './stores/event';
-import type {Session, Event} from './stores/event';
+import type {Session, Event, Speaker} from './stores/event';
 import { storeToRefs } from 'pinia';
 import SessionModal from './components/SessionModal.vue';
 import SpeakerModal from './components/SpeakerModal.vue';
@@ -16,6 +16,8 @@ const props = defineProps<{
     filterByTrack: string,
     hideTrack?: boolean,
     hideDateAndTime?: boolean,
+    showSessionDescriptions?: boolean,
+    showSpeakers?: boolean,
     ink?: string,
     muted?: string,
     border?: string,
@@ -29,6 +31,9 @@ const props = defineProps<{
 
 const hideDateAndTime = props.config.hideDateAndTime || false;
 provide('hideDateAndTime', hideDateAndTime);
+
+const showSessionDescriptions = props.config.showSessionDescriptions !== false;
+const showSpeakers = props.config.showSpeakers || false;
 
 const event = eventStore.getEvent(props.eventId);
 const {activeModalSession, activeModalSpeaker} = storeToRefs(eventStore);
@@ -199,10 +204,16 @@ const formatTabDate = (date: string) => {
 };
 
 const shortDescriptionFor = (session: Session) => {
+  console.log( session );
   const raw = session.description || '';
   const text = raw.replace(/<[^>]+>/g, '');
   return text.length > 160 ? text.slice(0, 160) + '...' : text;
 };
+
+const sessionSpeakersFor = (session: Session) => eventStore.getSessionSpeakers(session);
+
+const speakerName = (speaker: Speaker) =>
+  [speaker.first_name, speaker.last_name].filter(Boolean).join(' ');
 
 </script>
 
@@ -256,7 +267,7 @@ const shortDescriptionFor = (session: Session) => {
               ) {{ session.track.name }}
               span.swoogo-agenda__title {{ session.name }}
               p.swoogo-agenda__description(
-                v-if="shortDescriptionFor(session)"
+                v-if="showSessionDescriptions && shortDescriptionFor(session)"
               ) {{ shortDescriptionFor(session) }}
               .swoogo-agenda__time
                 svg.swoogo-agenda__time-icon(
@@ -268,6 +279,23 @@ const shortDescriptionFor = (session: Session) => {
                     d="M12 1.75c5.66 0 10.25 4.59 10.25 10.25S17.66 22.25 12 22.25 1.75 17.66 1.75 12 6.34 1.75 12 1.75Zm0 1.5a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5Zm.75 4.5v4.4l3.2 2.1-.82 1.23-3.88-2.53V7.75h1.5Z"
                   )
                 span {{ time }}
+            ul.swoogo-agenda__speakers(
+              v-if="showSpeakers && sessionSpeakersFor(session).length"
+            )
+              li.swoogo-agenda__speaker(
+                v-for="speaker in sessionSpeakersFor(session)"
+                :key="speaker.id"
+              )
+                button.swoogo-agenda__speaker-button(
+                  type="button"
+                  @click="activeModalSpeaker = speaker"
+                )
+                  img.swoogo-agenda__speaker-image(
+                    v-if="speaker.profile_picture"
+                    :src="speaker.profile_picture"
+                    :alt="speakerName(speaker)"
+                  )
+                  span {{ speakerName(speaker) }}
   // If hideDateAndTime is true, show all sessions in a single list
   ul.swoogo-agenda__days(
     v-else
@@ -287,8 +315,25 @@ const shortDescriptionFor = (session: Session) => {
             ) {{ session.track.name }}
             span.swoogo-agenda__title {{ session.name }}
             p.swoogo-agenda__description(
-              v-if="shortDescriptionFor(session)"
+              v-if="showSessionDescriptions && shortDescriptionFor(session)"
             ) {{ shortDescriptionFor(session) }}
+          ul.swoogo-agenda__speakers(
+            v-if="showSpeakers && sessionSpeakersFor(session).length"
+          )
+            li.swoogo-agenda__speaker(
+              v-for="speaker in sessionSpeakersFor(session)"
+              :key="speaker.id"
+            )
+              button.swoogo-agenda__speaker-button(
+                type="button"
+                @click="activeModalSpeaker = speaker"
+              )
+                img.swoogo-agenda__speaker-image(
+                  v-if="speaker.profile_picture"
+                  :src="speaker.profile_picture"
+                  :alt="speakerName(speaker)"
+                )
+                span {{ speakerName(speaker) }}
         
 
 speaker-modal(
@@ -531,6 +576,50 @@ session-modal(
     color: var(--agenda-muted);
     font-size: 0.98rem;
     line-height: 1.5;
+    margin: 0;
+  }
+  &__speakers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  &__speaker {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  &__speaker-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--agenda-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: var(--agenda-ink);
+      span {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+      }
+    }
+  }
+  &__speaker-image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    object-fit: cover;
+    flex-shrink: 0;
     margin: 0;
   }
   &__time {
