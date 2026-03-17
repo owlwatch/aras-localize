@@ -68,51 +68,69 @@ const testString = (str: string, test: string) => {
   return str === test;
 };
 
+function applyTrackFilter(sessions: Session[], filter: string): Session[] {
+  const filterByTrack = filter.split(',').map( (track) => track.trim().toLowerCase() );
+    
+  const exclude = filterByTrack.filter( (track) => track.startsWith('!') );
+  const include = filterByTrack.filter( (track) => !track.startsWith('!') );
+  
+  return sessions.filter( session => {
+    const tracks = [eventStore.getSessionTrack(session)];
+
+    if( exclude.length > 0 ){
+      
+      let isExcluded = exclude.some( (track:string) => {
+        return tracks.some( (t) => t && testString(t.name, track.slice(1)) );
+      });
+      if( isExcluded ){
+        return false;
+      }
+    }
+    
+    if( include.length > 0 ){
+      return include.some( (track) => {
+        return tracks.some( (t) => t && testString(t.name, track) );
+      });
+    }
+
+    return true;
+  });
+}
 
 
 // we want to sort these into days and times...
 const sessionsByDay = ref<Record<string, Record<string, Session[]>>>({});
 const filteredSessions = computed( () => {
   let all = eventStore.getEventFilteredSessions(event as Event);
-  
-  if( props.config.filterByTrack ){
-    const filterByTrack = props.config.filterByTrack.split(',').map( (track) => track.trim().toLowerCase() );
-    
-    const exclude = filterByTrack.filter( (track) => track.startsWith('!') );
-    const include = filterByTrack.filter( (track) => !track.startsWith('!') );
-    
-    all = all.filter( session => {
-      // if one of the filterByTrack values starts with a ! and any
-      const tracks = [eventStore.getSessionTrack(session)];
-  
-      if( exclude.length > 0 ){
-        
-        let isExcluded = exclude.some( (track:string) => {
-          return tracks.some( (t) => t && testString(t.name, track.slice(1)) );
-        });
-        if( isExcluded ){
-          return false;
-        }
-      }
-      
-      if( include.length > 0 ){
-        return include.some( (track) => {
-          return tracks.some( (t) => t && testString(t.name, track) );
-        });
-      }
 
-      return true;
-    });
+  let filter = props.config.filterByTrack;
+  if( props.config.column1 && props.config.column2 ){
+    filter = [props.config.column1, props.config.column2].filter( col => col && col.trim() !== '' ).join(',');
+  }
+  
+  if( filter ){
+    return applyTrackFilter(all, filter);
   }
   return all;
 });
 
 filteredSessions.value?.forEach( (session : Session) => {
 
+  // if there are props for column1 and column2, 
+  // we want to run the filters for each and see if this session belongs in either column.
+  // If it doesn't belong in either column, it goes into column 1 by default
+  if( props.config.column1 && applyTrackFilter([session], props.config.column1 ).length > 0 ){
+    session.column = 1;
+  }
+  else if( props.config.column2 && applyTrackFilter([session], props.config.column2 ).length > 0 ){
+    session.column = 2;
+  }
+
 
   if (!sessionsByDay.value[session.date]) {
     sessionsByDay.value[session.date] = {};
   }
+
   const start = new Date(session.date+' '+session.start_time);
   const end = new Date(session.date+' '+session.end_time);
 
@@ -224,11 +242,10 @@ const shortDescriptionFor = (session: Session) => {
         template(
           v-for="(sessions, time) in times"
         )
-        
-        
           li.swoogo-agenda__card(
             v-for="session in sessions"
             :key="session.id"
+            :data-column="session.column"
           )
             a.swoogo-agenda__card-link(
               href="#"
@@ -427,7 +444,9 @@ session-modal(
     display: grid;
     gap: 1.25rem;
     grid-template-columns: repeat(var(--agenda-columns), 1fr);
-    @container ( max-width: 800px ) {
+    grid-auto-flow: column;
+    @container ( max-width: 600px ) {
+      grid-auto-flow: row;
       grid-template-columns: 1fr;
     }
   }
@@ -457,6 +476,21 @@ session-modal(
     gap: 0.75rem;
     transition: transform 140ms ease, box-shadow 140ms ease;
     min-height: 100%;
+    &[data-column="1"] {
+      grid-column: 1;
+      order: 1;
+    }
+    &[data-column="2"] {
+      grid-column: 2;
+      order: 2;
+    }
+
+    @container ( max-width: 600px ) {
+      &[data-column="1"],
+      &[data-column="2"] {
+        grid-column: 1;
+      }
+    }
   }
   &__card-link {
     display: flex;

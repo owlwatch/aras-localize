@@ -55,6 +55,8 @@ class Shortcodes
 			'border' => "",
 			'card' => "",
 			'accent' => "",
+			"column1" => "",
+			"column2" => "",
 		]);
 	}
 

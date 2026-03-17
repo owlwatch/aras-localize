@@ -45,6 +45,7 @@ interface Session {
 	end_time: string
 	location_id: number
 	track_id: number
+	column?: number
 	speaker_ids: number[]
 	eventIds?: number[]
 	translations?: {
