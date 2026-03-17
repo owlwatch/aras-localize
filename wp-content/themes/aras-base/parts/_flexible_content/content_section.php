@@ -440,7 +440,12 @@
 														<iframe loading="lazy" class="sl-demo" src="<?php echo $embed_url ?>" name="sl-embed" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:1px solid rgba(63,95,172,0.35);box-shadow: 0px 0px 18px rgba(26, 19, 72, 0.15);border-radius:10px;box-sizing:border-box;"></iframe>
 													</div>
 												</div>
-											<?php else : ?>
+											<?php elseif( get_sub_field('video_type') == 'storylane_overlay' ) : ?>
+												<?php
+												$embed = get_sub_field('storylane_embed_code');
+												echo $embed;
+												?>
+											<?php else: ?>
 												<?php
 												$iframe = get_sub_field('video_link');
 												preg_match('/src="(.+?)"/', $iframe, $matches);
