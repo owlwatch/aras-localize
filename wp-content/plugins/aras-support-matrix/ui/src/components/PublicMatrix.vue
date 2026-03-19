@@ -81,6 +81,18 @@ const selectedRelease = computed(() => {
   return orderedReleases.value.find((release) => release.id === selectedReleaseId.value) ?? null
 })
 
+const selectedReleaseIsPastEol = computed(() => {
+  if (!selectedRelease.value?.endOfLifeDate) {
+    return false
+  }
+
+  const today = new Date()
+  const currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const endOfLifeDate = new Date(`${selectedRelease.value.endOfLifeDate}T00:00:00`)
+
+  return !Number.isNaN(endOfLifeDate.getTime()) && endOfLifeDate < currentDate
+})
+
 const filteredEntries = computed(() => {
   return entriesState.value
     .filter((entry) => entry.innovatorReleaseId === selectedReleaseId.value)
@@ -239,8 +251,13 @@ async function submitEntry() {
         </v-select>
 
         <div v-if="selectedRelease" class="release-meta">
-          <span class="release-meta-label">EOL</span>
-          <span class="release-meta-value">{{ formatDate(selectedRelease.endOfLifeDate) }}</span>
+          <span class="release-meta-label release-meta-label--eol">EOL</span>
+          <span
+            class="release-meta-value"
+            :class="{ 'release-meta-value--expired': selectedReleaseIsPastEol }"
+          >
+            {{ formatDate(selectedRelease.endOfLifeDate) }}
+          </span>
           <v-btn
             v-if="selectedRelease.notes"
             icon="mdi-information-outline"
@@ -289,7 +306,10 @@ async function submitEntry() {
           <v-card-title>Release Information</v-card-title>
           <v-card-text>
             <div class="release-note-title">{{ selectedRelease?.name }}</div>
-            <div class="release-note-eol">EOL: {{ formatDate(selectedRelease?.endOfLifeDate || '') }}</div>
+            <div class="release-note-eol" :class="{ 'release-note-eol--expired': selectedReleaseIsPastEol }">
+              <span class="release-note-eol-label">EOL:</span>
+              {{ formatDate(selectedRelease?.endOfLifeDate || '') }}
+            </div>
             <p class="release-note-copy">{{ selectedRelease?.notes }}</p>
           </v-card-text>
           <v-card-actions>
@@ -374,8 +394,16 @@ async function submitEntry() {
   color: #48627f;
 }
 
+.release-meta-label--eol {
+  font-size: 0.9rem;
+}
+
 .release-meta-value {
   font-size: 0.95rem;
+}
+
+.release-meta-value--expired {
+  color: #c62828;
 }
 
 .release-note-title {
@@ -386,6 +414,17 @@ async function submitEntry() {
 .release-note-eol {
   margin-bottom: 12px;
   color: #4d6179;
+  font-size: 0.95rem;
+}
+
+.release-note-eol-label {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.release-note-eol--expired {
+  color: #c62828;
 }
 
 .release-note-copy {

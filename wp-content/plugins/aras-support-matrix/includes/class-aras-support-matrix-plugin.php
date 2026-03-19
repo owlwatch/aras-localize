@@ -45,6 +45,7 @@ class ArasSupportMatrixPlugin
 				'nonce' => wp_create_nonce('wp_rest'),
 				'isAdmin' => current_user_can('edit_posts'),
 				'initialTab' => 'public',
+				'embedScriptUrl' => esc_url_raw(ARAS_SUPPORT_MATRIX_URL . 'ui/dist/embed.js'),
 			)
 		);
 	}
@@ -69,6 +70,7 @@ class ArasSupportMatrixPlugin
 			'nonce' => wp_create_nonce('wp_rest'),
 			'isAdmin' => true,
 			'initialTab' => 'admin',
+			'embedScriptUrl' => esc_url_raw(ARAS_SUPPORT_MATRIX_URL . 'ui/dist/embed.js'),
 		);
 
 		echo $this->render_app($config); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

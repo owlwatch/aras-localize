@@ -1,5 +1,5 @@
-const cssFiles = ["assets/embed-B0iGsO84.css","assets/main-CybE-Hjj.css"];
-const scriptPath = "assets/embed-BUUh98u6.js";
+const cssFiles = ["assets/embed-B0iGsO84.css","assets/main-DLKmV0zJ.css"];
+const scriptPath = "assets/embed-D8nNxYng.js";
 
 for (const href of cssFiles) {
   const fullHref = new URL(href, import.meta.url).href;

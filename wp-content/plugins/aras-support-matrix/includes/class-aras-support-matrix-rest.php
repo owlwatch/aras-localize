@@ -471,13 +471,34 @@ class ArasSupportMatrixRest
 			return null;
 		}
 
-		$groups = wp_get_post_terms($post->ID, ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY, array('fields' => 'names'));
+		$groups = wp_get_post_terms(
+			$post->ID,
+			ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY,
+			array(
+				'hide_empty' => false,
+			)
+		);
+
+		$mapped_groups = array();
+
+		if (! is_wp_error($groups)) {
+			$mapped_groups = array_map(
+				function ($term) {
+					return array(
+						'id' => (int) $term->term_id,
+						'name' => $term->name,
+						'slug' => $term->slug,
+					);
+				},
+				$groups
+			);
+		}
 
 		return array(
 			'id' => $post->ID,
 			'name' => $post->post_title,
 			'description' => $post->post_content,
-			'groups' => is_wp_error($groups) ? array() : $groups,
+			'groups' => $mapped_groups,
 		);
 	}
 
@@ -526,8 +547,67 @@ class ArasSupportMatrixRest
 
 	private function save_component_groups($post_id, array $groups)
 	{
-		$group_names = array_values(array_filter(array_map('sanitize_text_field', $groups)));
-		wp_set_post_terms($post_id, $group_names, ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY, false);
+		$group_term_ids = array();
+
+		foreach ($groups as $group) {
+			$term_id = 0;
+
+			if (is_array($group)) {
+				if (! empty($group['id'])) {
+					$term_id = absint($group['id']);
+				} elseif (! empty($group['name'])) {
+					$term_id = $this->resolve_component_group_term_id($group['name']);
+				}
+			} elseif (is_numeric($group)) {
+				$term_id = absint($group);
+			} elseif (is_string($group)) {
+				$term_id = $this->resolve_component_group_term_id($group);
+			}
+
+			if ($term_id) {
+				$group_term_ids[] = $term_id;
+			}
+		}
+
+		wp_set_post_terms(
+			$post_id,
+			array_values(array_unique($group_term_ids)),
+			ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY,
+			false
+		);
+	}
+
+	private function resolve_component_group_term_id($name)
+	{
+		$sanitized_name = sanitize_text_field((string) $name);
+
+		if ($sanitized_name === '') {
+			return 0;
+		}
+
+		$existing_term = term_exists($sanitized_name, ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY);
+
+		if (is_array($existing_term) && ! empty($existing_term['term_id'])) {
+			return (int) $existing_term['term_id'];
+		}
+
+		if (is_int($existing_term)) {
+			return $existing_term;
+		}
+
+		$created_term = wp_insert_term(
+			$sanitized_name,
+			ArasSupportMatrixPostTypes::COMPONENT_GROUP_TAXONOMY,
+			array(
+				'slug' => sanitize_title($sanitized_name),
+			)
+		);
+
+		if (is_wp_error($created_term) || empty($created_term['term_id'])) {
+			return 0;
+		}
+
+		return (int) $created_term['term_id'];
 	}
 
 	private function save_release_meta($post_id, WP_REST_Request $request)

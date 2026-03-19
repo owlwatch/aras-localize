@@ -4,7 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import AdminComponentsTab from '@/components/admin/AdminComponentsTab.vue'
 import AdminEntriesTab from '@/components/admin/AdminEntriesTab.vue'
 import AdminReleasesTab from '@/components/admin/AdminReleasesTab.vue'
-import { api } from '@/composables/api'
+import { api, getConfig } from '@/composables/api'
 import type { ComponentRecord, EntryRecord, ImportStatus, ReleaseRecord, StatusRecord } from '@/types/models'
 
 const props = defineProps<{
@@ -23,6 +23,7 @@ const importLoading = ref(false)
 const importLoopActive = ref(false)
 const showIdColumns = ref(false)
 const dismissedImportFingerprint = ref('')
+const settingsMenuOpen = ref(false)
 const componentsState = ref<ComponentRecord[]>([])
 const releasesState = ref<ReleaseRecord[]>([])
 const entriesState = ref<EntryRecord[]>([])
@@ -45,6 +46,7 @@ const importStatus = ref<ImportStatus>({
   reset: false,
 })
 const importDismissStorageKey = 'aras-support-matrix.import-dismissed'
+const config = getConfig()
 
 componentsState.value = [...props.components]
 releasesState.value = [...props.releases]
@@ -71,6 +73,44 @@ const importFingerprint = computed(() => {
 const showImportAlert = computed(() => {
   return importStatus.value.status !== 'idle' && dismissedImportFingerprint.value !== importFingerprint.value
 })
+
+const embedSnippet = computed(() => {
+  const embedScriptUrl = new URL(config.embedScriptUrl, window.location.origin).toString()
+
+  return [
+    '<script id="aras-support-matrix-loader">',
+    "  (function () {",
+    "    var script = document.getElementById('aras-support-matrix-loader');",
+    "    var mount = document.getElementById('aras-support-matrix-embed');",
+    '',
+    '    if (!mount) {',
+    "      mount = document.createElement('div');",
+    "      mount.id = 'aras-support-matrix-embed';",
+    '',
+    '      if (script && script.parentNode) {',
+    "        script.parentNode.insertBefore(mount, script);",
+    '      } else {',
+    "        document.body.appendChild(mount);",
+    '      }',
+    '    }',
+    '',
+    '    window.ArasSupportMatrixEmbedConfig = {',
+    `      restBase: '${config.restBase}',`,
+    "      mountSelector: '#aras-support-matrix-embed'",
+    '    };',
+    '',
+    "    var embedScript = document.createElement('script');",
+    "    embedScript.type = 'module';",
+    `    embedScript.src = '${embedScriptUrl}?t=' + Date.now();`,
+    "    document.head.appendChild(embedScript);",
+    '  })();',
+    '<\\/script>',
+  ].join('\n')
+})
+
+async function copyEmbedSnippet() {
+  await navigator.clipboard.writeText(embedSnippet.value)
+}
 
 function dismissImportAlert() {
   if (!importFingerprint.value) {
@@ -155,12 +195,12 @@ onMounted(async () => {
         </p>
       </div>
 
-      <v-menu location="bottom end">
+      <v-menu v-model="settingsMenuOpen" :close-on-content-click="false" location="bottom end">
         <template #activator="{ props: menuProps }">
           <v-btn v-bind="menuProps" icon="mdi-cog-outline" variant="text" />
         </template>
 
-        <v-card class="admin-settings-menu" min-width="320">
+        <v-card class="admin-settings-menu" min-width="520">
           <v-card-title>Admin Options</v-card-title>
           <v-card-text class="matrix-stack">
             <v-switch
@@ -189,6 +229,21 @@ onMounted(async () => {
                 </v-btn>
               </div>
             </div>
+
+            <v-alert density="comfortable" type="info" variant="tonal">
+              <div class="embed-note">
+                <div class="embed-note-header">
+                  <div class="text-subtitle-2">Embed Snippet</div>
+                  <v-btn size="small" variant="text" @click="copyEmbedSnippet">
+                    Copy
+                  </v-btn>
+                </div>
+                <div class="text-body-2 text-medium-emphasis">
+                  Copy this into the third-party site where the matrix should render.
+                </div>
+                <pre class="embed-snippet" @click.stop><code>{{ embedSnippet }}</code></pre>
+              </div>
+            </v-alert>
           </v-card-text>
         </v-card>
       </v-menu>
@@ -292,12 +347,36 @@ onMounted(async () => {
 }
 
 .admin-settings-menu {
-  max-width: 360px;
+  max-width: min(680px, calc(100vw - 32px));
 }
 
 .hero-copy {
   max-width: 720px;
   font-size: 1rem;
   color: #4d6179;
+}
+
+.embed-note {
+  display: grid;
+  gap: 10px;
+}
+
+.embed-note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.embed-snippet {
+  margin: 0;
+  padding: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 10px;
+  background: rgba(17, 24, 39, 0.06);
+  font-size: 0.7rem;
+  line-height: 1.45;
 }
 </style>

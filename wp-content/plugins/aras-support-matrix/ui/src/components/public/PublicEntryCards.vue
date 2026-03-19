@@ -23,27 +23,29 @@ function statusColor(status: EntryRecord['status']) {
       class="result-card"
       variant="outlined"
     >
-      <v-card-item>
-        <v-card-title>{{ group.component.name }}</v-card-title>
-        <v-card-subtitle>{{ group.component.description }}</v-card-subtitle>
+      <v-card-item class="component-card-header">
+        <v-card-title :title="group.component.name">{{ group.component.name }}</v-card-title>
+        <v-card-subtitle :title="group.component.description">{{ group.component.description }}</v-card-subtitle>
       </v-card-item>
-      <v-divider />
+      <v-divider class="component-card-divider" />
       <v-list>
         <v-list-item v-for="entry in group.versions" :key="entry.id">
-          <v-list-item-title>{{ entry.componentVersionNumber }}</v-list-item-title>
+          <div class="entry-header-row">
+            <v-list-item-title class="entry-title" :title="entry.componentVersionNumber">{{ entry.componentVersionNumber }}</v-list-item-title>
+            <v-chip :color="statusColor(entry.status)" size="small" variant="tonal">
+              {{ entry.status }}
+            </v-chip>
+          </div>
           <v-list-item-subtitle>
             <div class="entry-meta-row">
               <div class="entry-meta-left">
-                <span>Build {{ entry.componentVersionNumber || 'Not specified' }}</span>
+                <span :title="`Build ${entry.componentVersionNumber || 'Not specified'}`">Build {{ entry.componentVersionNumber || 'Not specified' }}</span>
               </div>
               <div class="entry-meta-right">
-                <v-chip :color="statusColor(entry.status)" size="small" variant="tonal">
-                  {{ entry.status }}
-                </v-chip>
               </div>
             </div>
             <div v-if="entry.notes" class="entry-detail-row">
-              <span v-if="entry.notes">{{ entry.notes }}</span>
+              <span v-if="entry.notes" :title="entry.notes">{{ entry.notes }}</span>
             </div>
           </v-list-item-subtitle>
         </v-list-item>
@@ -61,6 +63,37 @@ function statusColor(status: EntryRecord['status']) {
 
 .result-card {
   background: rgba(255, 255, 255, 0.88);
+}
+
+.component-card-header {
+  background: linear-gradient(180deg, rgba(12, 95, 244, 0.06) 0%, rgba(12, 95, 244, 0.02) 100%);
+}
+
+.component-card-divider {
+  opacity: 0.7;
+}
+
+:deep(.component-card-header .v-card-title) {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+:deep(.component-card-header .v-card-subtitle) {
+  font-size: 0.82rem;
+}
+
+.entry-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.entry-title {
+  flex: 1 1 auto;
+  font-size: 0.95rem;
+  line-height: 1.3;
 }
 
 .entry-meta-row {
@@ -85,6 +118,7 @@ function statusColor(status: EntryRecord['status']) {
 
 .entry-detail-row {
   margin-top: 6px;
+  font-size: 0.82rem;
 }
 
 </style>

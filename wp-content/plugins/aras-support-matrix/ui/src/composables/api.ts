@@ -1,4 +1,5 @@
 import type {
+  ComponentGroupRecord,
   ComponentRecord,
   EmbedConfig,
   EntryRecord,
@@ -7,6 +8,10 @@ import type {
   ReleaseRecord,
   WordPressConfig,
 } from '@/types/models'
+
+type ComponentPayload = Omit<ComponentRecord, 'id' | 'groups'> & {
+  groups: Array<ComponentGroupRecord | number | string>
+}
 
 declare global {
   interface Window {
@@ -20,6 +25,7 @@ const fallbackConfig: WordPressConfig = {
   nonce: '',
   isAdmin: true,
   initialTab: 'public',
+  embedScriptUrl: '/wp-content/plugins/aras-support-matrix/ui/dist/embed.js',
 }
 
 export function getConfig(): WordPressConfig {
@@ -64,13 +70,13 @@ export const api = {
   getMatrix() {
     return request<MatrixPayload>('/matrix')
   },
-  createComponent(payload: Omit<ComponentRecord, 'id'>) {
+  createComponent(payload: ComponentPayload) {
     return request<ComponentRecord>('/components', {
       method: 'POST',
       body: JSON.stringify(payload),
     })
   },
-  updateComponent(payload: ComponentRecord) {
+  updateComponent(payload: Omit<ComponentRecord, 'groups'> & { id: number; groups: Array<ComponentGroupRecord | number | string> }) {
     return request<ComponentRecord>(`/components/${payload.id}`, {
       method: 'PUT',
       body: JSON.stringify(payload),

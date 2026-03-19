@@ -1,11 +1,17 @@
 export type SupportStatus = 'Certified' | 'Supported' | 'End of Life'
 export type PublicationStatus = 'draft' | 'publish'
 
+export interface ComponentGroupRecord {
+  id: number
+  name: string
+  slug: string
+}
+
 export interface ComponentRecord {
   id: number
   name: string
   description: string
-  groups: string[]
+  groups: ComponentGroupRecord[]
 }
 
 export interface ReleaseRecord {
@@ -71,6 +77,7 @@ export interface WordPressConfig {
   nonce: string
   isAdmin: boolean
   initialTab: 'public' | 'admin'
+  embedScriptUrl: string
 }
 
 export interface EmbedConfig {

@@ -3,7 +3,7 @@ import { computed, reactive, ref, watch } from 'vue'
 
 import ComponentFormFields from '@/components/shared/ComponentFormFields.vue'
 import { api } from '@/composables/api'
-import type { ComponentRecord, EntryRecord } from '@/types/models'
+import type { ComponentGroupRecord, ComponentRecord, EntryRecord } from '@/types/models'
 
 type SortDirection = 'asc' | 'desc'
 type ComponentSortKey = 'name' | 'description' | 'groups'
@@ -26,8 +26,6 @@ const confirmDeleteOpen = ref(false)
 const confirmDeleteTitle = ref('')
 const confirmDeleteMessage = ref('')
 const confirmDeleteAction = ref<null | (() => Promise<void>)>(null)
-const selectedIds = ref<number[]>([])
-const batchGroupName = ref('')
 
 const sortState = reactive<{ key: ComponentSortKey; direction: SortDirection }>({
   key: 'name',
@@ -49,24 +47,28 @@ watch(() => props.entries, (value) => { entriesState.value = [...value] }, { imm
 
 const sortedComponents = computed(() => {
   return [...componentsState.value].sort((left, right) => {
-    const leftValue = sortState.key === 'groups' ? left.groups.join(', ') : left[sortState.key]
-    const rightValue = sortState.key === 'groups' ? right.groups.join(', ') : right[sortState.key]
+    const leftValue = sortState.key === 'groups' ? groupNames(left.groups) : left[sortState.key]
+    const rightValue = sortState.key === 'groups' ? groupNames(right.groups) : right[sortState.key]
     const result = String(leftValue).localeCompare(String(rightValue), undefined, { numeric: true, sensitivity: 'base' })
     return sortState.direction === 'asc' ? result : -result
   })
 })
 
 const groupOptions = computed(() => {
-  return Array.from(new Set(componentsState.value.flatMap((component) => component.groups).filter(Boolean))).sort(
-    (left, right) => left.localeCompare(right, undefined, { sensitivity: 'base' }),
+  const uniqueGroups = new Map<number, ComponentGroupRecord>()
+
+  componentsState.value.forEach((component) => {
+    component.groups.forEach((group) => {
+      uniqueGroups.set(group.id, group)
+    })
+  })
+
+  return Array.from(uniqueGroups.values()).sort((left, right) =>
+    left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }),
   )
 })
 
-const allVisibleSelected = computed(() => {
-  return sortedComponents.value.length > 0 && sortedComponents.value.every((item) => selectedIds.value.includes(item.id))
-})
-
-const columnCount = computed(() => (props.showIdColumns ? 5 : 4))
+const columnCount = computed(() => (props.showIdColumns ? 4 : 3))
 
 function sortIndicator(active: boolean, direction: SortDirection) {
   if (!active) return ''
@@ -81,6 +83,10 @@ function syncComponents(nextComponents: ComponentRecord[]) {
 function syncEntries(nextEntries: EntryRecord[]) {
   entriesState.value = nextEntries
   emit('update:entries', nextEntries)
+}
+
+function groupNames(groups: ComponentGroupRecord[]) {
+  return groups.map((group) => group.name).join(', ')
 }
 
 function resetForm() {
@@ -111,16 +117,6 @@ function toggleSort(key: ComponentSortKey) {
 
   sortState.key = key
   sortState.direction = 'asc'
-}
-
-function toggleAll(selected: boolean | null) {
-  selectedIds.value = selected ? sortedComponents.value.map((item) => item.id) : []
-}
-
-function toggleOne(id: number, selected: boolean | null) {
-  selectedIds.value = selected
-    ? Array.from(new Set([...selectedIds.value, id]))
-    : selectedIds.value.filter((current) => current !== id)
 }
 
 async function runWithLoading<T>(action: () => Promise<T>) {
@@ -200,53 +196,8 @@ function removeItem(item: ComponentRecord) {
       await runWithLoading(() => api.deleteComponent(item.id))
       syncComponents(componentsState.value.filter((component) => component.id !== item.id))
       syncEntries(entriesState.value.filter((entry) => entry.componentId !== item.id))
-      selectedIds.value = selectedIds.value.filter((id) => id !== item.id)
     },
   )
-}
-
-function removeSelected() {
-  const selectedItems = componentsState.value.filter((component) => selectedIds.value.includes(component.id))
-  if (!selectedItems.length) {
-    return
-  }
-
-  openDeleteDialog(
-    'Delete Components',
-    `Delete ${selectedItems.length} selected components and all related compatibility entries?`,
-    async () => {
-      for (const item of selectedItems) {
-        await runWithLoading(() => api.deleteComponent(item.id))
-      }
-
-      const removedIds = new Set(selectedItems.map((item) => item.id))
-      syncComponents(componentsState.value.filter((component) => !removedIds.has(component.id)))
-      syncEntries(entriesState.value.filter((entry) => !removedIds.has(entry.componentId)))
-      selectedIds.value = []
-    },
-  )
-}
-
-async function addSelectedToGroup() {
-  const groupName = batchGroupName.value.trim()
-  const selectedItems = componentsState.value.filter((component) => selectedIds.value.includes(component.id))
-
-  if (!groupName || !selectedItems.length) {
-    return
-  }
-
-  const nextComponents = [...componentsState.value]
-
-  await runWithLoading(async () => {
-    for (const item of selectedItems) {
-      const groups = Array.from(new Set([...item.groups, groupName]))
-      const saved = await api.updateComponent({ ...item, groups })
-      upsertById(nextComponents, saved)
-    }
-  })
-
-  syncComponents(nextComponents)
-  batchGroupName.value = ''
 }
 </script>
 
@@ -255,26 +206,9 @@ async function addSelectedToGroup() {
     <v-btn color="primary" @click="openNew">Add Component</v-btn>
   </div>
 
-  <div v-if="selectedIds.length" class="button-row">
-    <v-chip color="primary" variant="tonal">{{ selectedIds.length }} selected</v-chip>
-    <v-combobox
-      v-model="batchGroupName"
-      class="batch-group-input"
-      hide-details
-      :items="groupOptions"
-      label="Add To Group"
-      variant="outlined"
-    />
-    <v-btn :disabled="!batchGroupName.trim()" color="primary" variant="outlined" @click="addSelectedToGroup">Add To Group</v-btn>
-    <v-btn color="error" variant="outlined" @click="removeSelected">Delete Selected</v-btn>
-  </div>
-
   <v-table>
     <thead>
       <tr>
-        <th class="checkbox-cell">
-          <v-checkbox-btn :model-value="allVisibleSelected" @update:model-value="toggleAll" />
-        </th>
         <th v-if="showIdColumns">ID</th>
         <th><button class="sort-button" type="button" @click="toggleSort('name')"><span>Name</span><v-icon v-if="sortState.key === 'name'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
         <th><button class="sort-button" type="button" @click="toggleSort('description')"><span>Description</span><v-icon v-if="sortState.key === 'description'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
@@ -296,13 +230,10 @@ async function addSelectedToGroup() {
           </td>
         </tr>
         <tr v-else>
-          <td class="checkbox-cell">
-            <v-checkbox-btn :model-value="selectedIds.includes(item.id)" @update:model-value="toggleOne(item.id, $event)" />
-          </td>
           <td v-if="showIdColumns">{{ item.id }}</td>
           <td><button class="admin-link-button" type="button" @click="editItem(item)">{{ item.name }}</button></td>
           <td>{{ item.description }}</td>
-          <td>{{ item.groups.join(', ') }}</td>
+          <td>{{ groupNames(item.groups) }}</td>
           <td class="actions-cell">
             <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
             <v-btn size="small" variant="text" color="error" @click="removeItem(item)">Delete</v-btn>
@@ -345,15 +276,6 @@ async function addSelectedToGroup() {
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.checkbox-cell {
-  width: 48px;
-}
-
-.batch-group-input {
-  min-width: 240px;
-  max-width: 320px;
 }
 
 .actions-cell {

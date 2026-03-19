@@ -1,23 +1,47 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import type { ComponentRecord } from '@/types/models'
+import type { ComponentGroupRecord, ComponentRecord } from '@/types/models'
 
 const props = defineProps<{
-  model: Pick<ComponentRecord, 'name' | 'description' | 'groups'>
-  groupOptions?: string[]
+  model: Pick<ComponentRecord, 'name' | 'description'> & {
+    groups: Array<ComponentGroupRecord | string>
+  }
+  groupOptions?: ComponentGroupRecord[]
 }>()
 
 const groupSearch = ref('')
 
-function normalizeGroups(groups: string[]) {
-  return Array.from(
-    new Set(
-      groups
-        .map((group) => group.trim())
-        .filter(Boolean),
-    ),
-  )
+function normalizeGroups(groups: Array<ComponentGroupRecord | string>) {
+  const seen = new Set<string>()
+
+  return groups.reduce<Array<ComponentGroupRecord | string>>((result, group) => {
+    if (typeof group === 'string') {
+      const name = group.trim()
+
+      if (! name) {
+        return result
+      }
+
+      const key = `name:${name.toLowerCase()}`
+      if (seen.has(key)) {
+        return result
+      }
+
+      seen.add(key)
+      result.push(name)
+      return result
+    }
+
+    const key = group.id ? `id:${group.id}` : `name:${group.name.toLowerCase()}`
+    if (seen.has(key)) {
+      return result
+    }
+
+    seen.add(key)
+    result.push(group)
+    return result
+  }, [])
 }
 
 function commitGroupSearch() {
@@ -42,11 +66,12 @@ function commitGroupSearch() {
     closable-chips
     hide-details
     :items="groupOptions ?? []"
+    item-title="name"
     label="Groups"
     multiple
     variant="outlined"
     @blur="commitGroupSearch"
     @keydown.enter.prevent="commitGroupSearch"
-    @update:model-value="model.groups = normalizeGroups($event as string[])"
+    @update:model-value="model.groups = normalizeGroups($event as Array<ComponentGroupRecord | string>)"
   />
 </template>
