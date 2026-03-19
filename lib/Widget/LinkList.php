@@ -75,11 +75,11 @@ class LinkList extends BaseLocalize {
             }
 
             $output .= '<li class="' . esc_attr($item_class) . '">';
-            if ($is_current) {
-                $output .= '<span>' . esc_html($label) . '</span>';
-            } else {
+            // if ($is_current) {
+            //     $output .= '<span>' . esc_html($label) . '</span>';
+            // } else {
                 $output .= '<a href="' . esc_url($url) . '" hreflang="' . esc_attr($code) . '">' . esc_html($label) . '</a>';
-            }
+            // }
             $output .= '</li>';
         }
 
