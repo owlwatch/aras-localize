@@ -1,7 +1,6 @@
 import type {
   ComponentGroupRecord,
   ComponentRecord,
-  EmbedConfig,
   EntryRecord,
   ImportStatus,
   MatrixPayload,
@@ -16,7 +15,6 @@ type ComponentPayload = Omit<ComponentRecord, 'id' | 'groups'> & {
 declare global {
   interface Window {
     ArasSupportMatrixConfig?: Partial<WordPressConfig>
-    ArasSupportMatrixEmbedConfig?: Partial<EmbedConfig>
   }
 }
 
@@ -26,24 +24,13 @@ const fallbackConfig: WordPressConfig = {
   isAdmin: true,
   initialTab: 'public',
   embedScriptUrl: '/wp-content/plugins/aras-support-matrix/ui/dist/embed.js',
+  mountSelector: '#aras-support-matrix-app',
 }
 
 export function getConfig(): WordPressConfig {
   return {
     ...fallbackConfig,
     ...window.ArasSupportMatrixConfig,
-  }
-}
-
-const fallbackEmbedConfig: EmbedConfig = {
-  restBase: '/wp-json/aras-support-matrix/v1',
-  mountSelector: '#aras-support-matrix-embed',
-}
-
-export function getEmbedConfig(): EmbedConfig {
-  return {
-    ...fallbackEmbedConfig,
-    ...window.ArasSupportMatrixEmbedConfig,
   }
 }
 

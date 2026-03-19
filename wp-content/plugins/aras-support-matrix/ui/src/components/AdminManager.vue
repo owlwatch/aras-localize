@@ -75,6 +75,7 @@ const showImportAlert = computed(() => {
 })
 
 const embedSnippet = computed(() => {
+  const closingScriptTag = '</' + 'script>'
   const embedScriptUrl = new URL(config.embedScriptUrl, window.location.origin).toString()
 
   return [
@@ -94,7 +95,7 @@ const embedSnippet = computed(() => {
     '      }',
     '    }',
     '',
-    '    window.ArasSupportMatrixEmbedConfig = {',
+    '    window.ArasSupportMatrixConfig = {',
     `      restBase: '${config.restBase}',`,
     "      mountSelector: '#aras-support-matrix-embed'",
     '    };',
@@ -104,7 +105,7 @@ const embedSnippet = computed(() => {
     `    embedScript.src = '${embedScriptUrl}?t=' + Date.now();`,
     "    document.head.appendChild(embedScript);",
     '  })();',
-    '<\\/script>',
+    closingScriptTag,
   ].join('\n')
 })
 

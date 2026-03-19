@@ -19,7 +19,7 @@ class ArasSupportMatrixRest
 	{
 		$route = $request instanceof WP_REST_Request ? $request->get_route() : '';
 
-		if (strpos($route, '/aras-support-matrix/v1/') !== 0) {
+		if (strpos($route, '/aras-support-matrix/v1') !== 0) {
 			return $served;
 		}
 

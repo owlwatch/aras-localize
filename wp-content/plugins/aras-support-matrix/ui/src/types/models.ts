@@ -78,9 +78,5 @@ export interface WordPressConfig {
   isAdmin: boolean
   initialTab: 'public' | 'admin'
   embedScriptUrl: string
-}
-
-export interface EmbedConfig {
-  restBase: string
   mountSelector: string
 }

@@ -2,13 +2,13 @@ import { createApp } from 'vue'
 import '@mdi/font/css/materialdesignicons.css'
 
 import EmbeddedApp from './EmbeddedApp.vue'
-import { getEmbedConfig } from './composables/api'
+import { getConfig } from './composables/api'
 import { vuetify } from './plugins/vuetify'
 import './styles/main.scss'
 
 function mount(selector?: string) {
-  const config = getEmbedConfig()
-  const target = document.querySelector(selector ?? config.mountSelector)
+  const config = getConfig()
+  const target = document.querySelector(selector ?? config.mountSelector ?? '#aras-support-matrix-embed')
 
   if (!target) {
     console.warn('Aras Support Matrix embed target not found.')

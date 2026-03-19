@@ -1,6 +1,6 @@
 {
-  "_main-BIolkdDy.js": {
-    "file": "assets/main-BIolkdDy.js",
+  "_main-C95vGRmD.js": {
+    "file": "assets/main-C95vGRmD.js",
     "name": "main",
     "css": [
       "assets/main-DLKmV0zJ.css"
@@ -33,27 +33,27 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "src/embed.ts": {
-    "file": "assets/embed-D8nNxYng.js",
+    "file": "assets/embed-T43f5yZy.js",
     "name": "embed",
     "src": "src/embed.ts",
     "isEntry": true,
     "imports": [
-      "_main-BIolkdDy.js"
+      "_main-C95vGRmD.js"
     ],
     "css": [
       "assets/embed-B0iGsO84.css"
     ]
   },
   "src/main.ts": {
-    "file": "assets/main-nKdqt4cF.js",
+    "file": "assets/main-BOhn3ixS.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "imports": [
-      "_main-BIolkdDy.js"
+      "_main-C95vGRmD.js"
     ],
     "css": [
-      "assets/main-DH9BT84c.css"
+      "assets/main-BOet2WUm.css"
     ]
   }
 }
