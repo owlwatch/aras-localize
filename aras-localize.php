@@ -12,7 +12,9 @@ if (!defined('ABSPATH')) {
 
 const ARAS_LOCALIZE_VERSION = '1.0.0';
 
+require_once __DIR__ . '/lib/Util/BaseLocalize.php';
 require_once __DIR__ . '/lib/Widget/LanguageSwitcher.php';
+require_once __DIR__ . '/lib/Widget/LinkList.php';
 require_once __DIR__ . '/lib/Util/Hreflang.php';
 require_once __DIR__ . '/lib/ACF.php';
 
@@ -22,6 +24,9 @@ add_action('plugins_loaded', function() {
 
     $widget = new \Aras\Localize\Widget\LanguageSwitcher();
     $widget->register();
+
+    $linkList = new \Aras\Localize\Widget\LinkList();
+    $linkList->register();
 
     $hreflang = new \Aras\Localize\Util\Hreflang();
     $hreflang->register();
