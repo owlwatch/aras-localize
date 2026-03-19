@@ -114,7 +114,11 @@ abstract class BaseLocalize {
             // remove the first part of the path if it matches any of the languages
             if (isset($parts[1]) && in_array($parts[1], $this->get_languages(), true)) {
                 // remove the language code from the url
-                return $scheme . '://' . $_SERVER['HTTP_HOST'] . '/' . ltrim(implode('/', array_slice($parts, 2)), '/');
+                $remaining_parts = array_slice($parts, 2);
+                $clean_path = '/' . implode('/', $remaining_parts);
+                // Clean up any double slashes
+                $clean_path = preg_replace('#/+#', '/', $clean_path);
+                return $scheme . '://' . $_SERVER['HTTP_HOST'] . $clean_path;
             }
             return $scheme . '://' . $_SERVER['HTTP_HOST'] . $request_path;
         }
