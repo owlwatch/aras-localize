@@ -104,20 +104,44 @@ class ArasSupportMatrixViteService
 			return '';
 		}
 
-		$manifest = $this->manifest();
-		$item = $manifest[$entry] ?? null;
+		$css_files = $this->collect_css_files($entry);
 
-		if (! $item || empty($item['css'])) {
+		if (empty($css_files)) {
 			return '';
 		}
 
 		$tags = '';
 
-		foreach ($item['css'] as $file) {
+		foreach ($css_files as $file) {
 			$tags .= '<link rel="stylesheet" href="' . esc_url($this->url . $file) . '">';
 		}
 
 		return $tags;
+	}
+
+	private function collect_css_files($entry, &$seen = array())
+	{
+		$manifest = $this->manifest();
+		$item = $manifest[$entry] ?? null;
+
+		if (! $item || isset($seen[$entry])) {
+			return array();
+		}
+
+		$seen[$entry] = true;
+		$files = array();
+
+		if (! empty($item['css']) && is_array($item['css'])) {
+			$files = array_merge($files, $item['css']);
+		}
+
+		if (! empty($item['imports']) && is_array($item['imports'])) {
+			foreach ($item['imports'] as $import) {
+				$files = array_merge($files, $this->collect_css_files($import, $seen));
+			}
+		}
+
+		return array_values(array_unique($files));
 	}
 
 	private function manifest()

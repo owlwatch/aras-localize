@@ -15,6 +15,9 @@ defineProps<{
   statusOptions: SupportStatus[]
   componentError?: string
   releaseError?: string
+  versionError?: string
+  releaseNumberError?: string
+  statusError?: string
 }>()
 </script>
 
@@ -32,6 +35,22 @@ defineProps<{
     placeholder="Please Select Component"
     variant="outlined"
   />
+  <v-text-field
+    v-model="model.componentVersionNumber"
+    class="entry-field"
+    density="comfortable"
+    :error-messages="versionError ? [versionError] : []"
+    label="Version"
+    variant="outlined"
+  />
+  <v-text-field
+    v-model="model.componentReleaseNumber"
+    class="entry-field"
+    density="comfortable"
+    :error-messages="releaseNumberError ? [releaseNumberError] : []"
+    label="Release Number"
+    variant="outlined"
+  />
   <v-select
     v-model="model.innovatorReleaseId"
     class="entry-field"
@@ -40,13 +59,25 @@ defineProps<{
     item-title="name"
     item-value="id"
     :items="releases"
-    label="Release"
+    label="Aras Innovator Release"
     variant="outlined"
   />
-  <v-text-field v-model="model.componentVersionNumber" class="entry-field" density="comfortable" hide-details label="Version" variant="outlined" />
-  <v-text-field v-model="model.componentReleaseNumber" class="entry-field" density="comfortable" hide-details label="Release Number" variant="outlined" />
-  <v-select v-model="model.status" class="entry-field" density="comfortable" hide-details :items="statusOptions" label="Support Status" variant="outlined" />
-  <v-textarea v-model="model.notes" hide-details class="inline-form-span" label="Notes" rows="2" variant="outlined" />
+  <v-select
+    v-model="model.status"
+    class="entry-field"
+    density="comfortable"
+    :error-messages="statusError ? [statusError] : []"
+    :items="statusOptions"
+    label="Support Status"
+    variant="outlined"
+  />
+  <v-textarea
+    v-model="model.notes"
+    class="inline-form-span"
+    label="Notes"
+    rows="2"
+    variant="outlined"
+  />
 </template>
 
 <style scoped>
@@ -57,6 +88,10 @@ defineProps<{
 .entry-field :deep(.v-field__input) {
   min-height: 56px;
   align-items: center;
+}
+
+.entry-field :deep(.v-input--horizontal) {
+  align-items: flex-start;
 }
 
 .inline-form-span {

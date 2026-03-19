@@ -49,6 +49,9 @@ const rowsPerPageOptions = [25, 50, 100, 250]
 const formErrors = reactive({
   componentId: '',
   innovatorReleaseId: '',
+  componentVersionNumber: '',
+  componentReleaseNumber: '',
+  status: '',
 })
 
 const sortState = reactive<{ key: EntrySortKey; direction: SortDirection }>({
@@ -154,6 +157,9 @@ function editItem(item: EntryRecord) {
 function clearFormErrors() {
   formErrors.componentId = ''
   formErrors.innovatorReleaseId = ''
+  formErrors.componentVersionNumber = ''
+  formErrors.componentReleaseNumber = ''
+  formErrors.status = ''
 }
 
 function validateForm() {
@@ -167,7 +173,23 @@ function validateForm() {
     formErrors.innovatorReleaseId = 'Please select a release.'
   }
 
-  return !formErrors.componentId && !formErrors.innovatorReleaseId
+  if (!form.componentVersionNumber.trim()) {
+    formErrors.componentVersionNumber = 'Please enter a version.'
+  }
+
+  if (!form.componentReleaseNumber.trim()) {
+    formErrors.componentReleaseNumber = 'Please enter a release number.'
+  }
+
+  if (!form.status) {
+    formErrors.status = 'Please select a support status.'
+  }
+
+  return !formErrors.componentId
+    && !formErrors.innovatorReleaseId
+    && !formErrors.componentVersionNumber
+    && !formErrors.componentReleaseNumber
+    && !formErrors.status
 }
 
 function toggleSort(key: EntrySortKey) {
@@ -284,6 +306,24 @@ watch(() => form.innovatorReleaseId, () => {
     formErrors.innovatorReleaseId = ''
   }
 })
+
+watch(() => form.componentVersionNumber, () => {
+  if (form.componentVersionNumber.trim()) {
+    formErrors.componentVersionNumber = ''
+  }
+})
+
+watch(() => form.componentReleaseNumber, () => {
+  if (form.componentReleaseNumber.trim()) {
+    formErrors.componentReleaseNumber = ''
+  }
+})
+
+watch(() => form.status, () => {
+  if (form.status) {
+    formErrors.status = ''
+  }
+})
 </script>
 
 <template>
@@ -302,7 +342,7 @@ watch(() => form.innovatorReleaseId, () => {
         <tr>
           <th v-if="showIdColumns">ID</th>
           <th><button class="sort-button" type="button" @click="toggleSort('componentName')"><span>Component</span><v-icon v-if="sortState.key === 'componentName'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
-          <th><button class="sort-button" type="button" @click="toggleSort('releaseName')"><span>Release</span><v-icon v-if="sortState.key === 'releaseName'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
+          <th><button class="sort-button" type="button" @click="toggleSort('releaseName')"><span>Aras Innovator Release</span><v-icon v-if="sortState.key === 'releaseName'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th><button class="sort-button" type="button" @click="toggleSort('componentVersionNumber')"><span>Version</span><v-icon v-if="sortState.key === 'componentVersionNumber'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th><button class="sort-button" type="button" @click="toggleSort('status')"><span>Support Status</span><v-icon v-if="sortState.key === 'status'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th>Notes</th>
@@ -320,7 +360,10 @@ watch(() => form.innovatorReleaseId, () => {
                   :component-error="formErrors.componentId"
                   :releases="releases"
                   :release-error="formErrors.innovatorReleaseId"
+                  :release-number-error="formErrors.componentReleaseNumber"
+                  :status-error="formErrors.status"
                   :status-options="entryStatusOptions"
+                  :version-error="formErrors.componentVersionNumber"
                 />
                 <div class="button-row inline-form-actions">
                   <v-btn :loading="loading" color="primary" @click="submit">Save</v-btn>
@@ -380,7 +423,10 @@ watch(() => form.innovatorReleaseId, () => {
           :component-error="formErrors.componentId"
           :releases="releases"
           :release-error="formErrors.innovatorReleaseId"
+          :release-number-error="formErrors.componentReleaseNumber"
+          :status-error="formErrors.status"
           :status-options="entryStatusOptions"
+          :version-error="formErrors.componentVersionNumber"
         />
       </v-card-text>
       <v-card-actions>
