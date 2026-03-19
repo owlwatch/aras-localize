@@ -1,0 +1,59 @@
+{
+  "_main-BrzFb4e8.js": {
+    "file": "assets/main-BrzFb4e8.js",
+    "name": "main",
+    "css": [
+      "assets/main-CI-lZj0K.css"
+    ],
+    "assets": [
+      "assets/materialdesignicons-webfont-CSr8KVlo.eot",
+      "assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+      "assets/materialdesignicons-webfont-PXm3-2wK.woff",
+      "assets/materialdesignicons-webfont-B7mPwVP_.ttf"
+    ]
+  },
+  "_main-CI-lZj0K.css": {
+    "file": "assets/main-CI-lZj0K.css",
+    "src": "_main-CI-lZj0K.css"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
+    "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": {
+    "file": "assets/materialdesignicons-webfont-B7mPwVP_.ttf",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": {
+    "file": "assets/materialdesignicons-webfont-PXm3-2wK.woff",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": {
+    "file": "assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
+  },
+  "src/embed.ts": {
+    "file": "assets/embed-Bx_7-ftt.js",
+    "name": "embed",
+    "src": "src/embed.ts",
+    "isEntry": true,
+    "imports": [
+      "_main-BrzFb4e8.js"
+    ],
+    "css": [
+      "assets/embed-B0iGsO84.css"
+    ]
+  },
+  "src/main.ts": {
+    "file": "assets/main-CJAb44V9.js",
+    "name": "main",
+    "src": "src/main.ts",
+    "isEntry": true,
+    "imports": [
+      "_main-BrzFb4e8.js"
+    ],
+    "css": [
+      "assets/main-hp1wQfy8.css"
+    ]
+  }
+}

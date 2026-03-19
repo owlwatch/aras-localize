@@ -1,0 +1,119 @@
+.aras-support-matrix-root {
+  all: revert;
+  display: block;
+  color: #10233d;
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.aras-support-matrix-root,
+.aras-support-matrix-dialog,
+.aras-support-matrix-root *,
+.aras-support-matrix-dialog *,
+.aras-support-matrix-root *::before,
+.aras-support-matrix-dialog *::before,
+.aras-support-matrix-root *::after,
+.aras-support-matrix-dialog *::after {
+  box-sizing: border-box;
+}
+
+.aras-support-matrix-dialog .v-card {
+  color: #10233d;
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.aras-support-matrix-root input,
+.aras-support-matrix-dialog input,
+.aras-support-matrix-root textarea,
+.aras-support-matrix-dialog textarea,
+.aras-support-matrix-root select,
+.aras-support-matrix-dialog select,
+.aras-support-matrix-root button,
+.aras-support-matrix-dialog button {
+  margin: 0;
+  min-height: 0;
+  height: auto;
+}
+
+.aras-support-matrix-root .v-field input,
+.aras-support-matrix-dialog .v-field input,
+.aras-support-matrix-root .v-field textarea,
+.aras-support-matrix-dialog .v-field textarea,
+.aras-support-matrix-root .v-field select,
+.aras-support-matrix-dialog .v-field select,
+.aras-support-matrix-root .v-field .v-field__input {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0;
+  background: transparent !important;
+}
+
+.aras-support-matrix-root .v-input .v-field__input,
+.aras-support-matrix-dialog .v-input .v-field__input {
+  min-height: 56px;
+}
+
+.aras-support-matrix-root .v-field--variant-outlined .v-label.v-field-label--floating,
+.aras-support-matrix-dialog .v-field--variant-outlined .v-label.v-field-label--floating {
+  background: rgb(var(--v-theme-surface));
+  padding-inline: 4px;
+}
+
+.aras-support-matrix-root .v-field--variant-outlined fieldset,
+.aras-support-matrix-dialog .v-field--variant-outlined fieldset {
+  margin: 0;
+  min-width: 0;
+}
+
+.aras-support-matrix-root .v-field--variant-outlined legend,
+.aras-support-matrix-dialog .v-field--variant-outlined legend {
+  border: 0;
+  margin: 0;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.aras-support-matrix-root .v-field--variant-outlined legend,
+.aras-support-matrix-dialog .v-field--variant-outlined legend,
+.aras-support-matrix-root .v-field--variant-outlined legend span,
+.aras-support-matrix-dialog .v-field--variant-outlined legend span {
+  max-width: 100%;
+}
+
+:root {
+  color: #10233d;
+  background: #ffffff;
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #ffffff;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.aras-support-matrix-root .v-table,
+.aras-support-matrix-root .v-table__wrapper {
+  overflow: visible !important;
+}
+
+.aras-support-matrix-root .v-table table thead {
+  position: sticky;
+  top: var(--wp-admin--admin-bar--height, 0px);
+  z-index: 2;
+}
+
+.aras-support-matrix-root .v-table table thead th {
+  background: rgb(var(--v-theme-surface));
+}
+
+.aras-support-matrix-root .v-window,
+.aras-support-matrix-root .v-window__container,
+.aras-support-matrix-root .v-window-item {
+  overflow: visible !important;
+}
