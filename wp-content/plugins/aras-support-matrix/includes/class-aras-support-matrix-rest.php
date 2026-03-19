@@ -12,6 +12,24 @@ class ArasSupportMatrixRest
 	{
 		$this->importer = new ArasSupportMatrixImporter();
 		add_action('rest_api_init', array($this, 'register_routes'));
+		add_filter('rest_pre_serve_request', array($this, 'send_cors_headers'), 10, 4);
+	}
+
+	public function send_cors_headers($served, $result, $request, $server)
+	{
+		$route = $request instanceof WP_REST_Request ? $request->get_route() : '';
+
+		if (strpos($route, '/aras-support-matrix/v1/') !== 0) {
+			return $served;
+		}
+
+		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+		header('Access-Control-Allow-Headers: Authorization, X-WP-Nonce, Content-Type');
+		header('Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, Link');
+		header('Vary: Origin', false);
+
+		return $served;
 	}
 
 	public function register_routes()
