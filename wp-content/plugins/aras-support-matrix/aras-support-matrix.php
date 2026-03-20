@@ -36,4 +36,7 @@ foreach ($aras_support_matrix_includes as $aras_support_matrix_include) {
 	require_once $aras_support_matrix_include;
 }
 
+register_activation_hook(__FILE__, array('ArasSupportMatrixPlugin', 'activate'));
+register_deactivation_hook(__FILE__, array('ArasSupportMatrixPlugin', 'deactivate'));
+
 ArasSupportMatrixPlugin::instance();

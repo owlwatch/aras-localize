@@ -87,7 +87,7 @@ export const api = {
   deleteRelease(id: number) {
     return request<{ deleted: boolean }>(`/releases/${id}`, { method: 'DELETE' })
   },
-  createEntry(payload: Omit<EntryRecord, 'id' | 'componentName' | 'releaseName' | 'publicationStatus'>) {
+  createEntry(payload: Omit<EntryRecord, 'id' | 'componentName' | 'releaseName'>) {
     return request<EntryRecord>('/entries', {
       method: 'POST',
       body: JSON.stringify(payload),

@@ -23,7 +23,7 @@ const selectedReleaseId = ref<number | null>(
   props.releases.length ? props.releases[props.releases.length - 1].id : null,
 )
 const selectedComponentIds = ref<number[]>([])
-const viewMode = ref<'cards' | 'table'>('table')
+const viewMode = ref<'cards' | 'table'>('cards')
 const componentSearch = ref('')
 const componentMenuOpen = ref(false)
 const sortBy = ref<'component' | 'version'>('component')

@@ -8,16 +8,23 @@
 
 .aras-support-matrix-root,
 .aras-support-matrix-dialog,
+.aras-support-matrix-overlay,
 .aras-support-matrix-root *,
 .aras-support-matrix-dialog *,
+.aras-support-matrix-overlay *,
 .aras-support-matrix-root *::before,
 .aras-support-matrix-dialog *::before,
+.aras-support-matrix-overlay *::before,
 .aras-support-matrix-root *::after,
-.aras-support-matrix-dialog *::after {
+.aras-support-matrix-dialog *::after,
+.aras-support-matrix-overlay *::after {
   box-sizing: border-box;
 }
 
-.aras-support-matrix-dialog .v-card {
+.aras-support-matrix-dialog .v-card,
+.aras-support-matrix-overlay .v-card,
+.aras-support-matrix-overlay .v-list,
+.aras-support-matrix-overlay .v-sheet {
   color: #10233d;
   font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
   line-height: 1.5;
@@ -25,12 +32,16 @@
 
 .aras-support-matrix-root input,
 .aras-support-matrix-dialog input,
+.aras-support-matrix-overlay input,
 .aras-support-matrix-root textarea,
 .aras-support-matrix-dialog textarea,
+.aras-support-matrix-overlay textarea,
 .aras-support-matrix-root select,
 .aras-support-matrix-dialog select,
+.aras-support-matrix-overlay select,
 .aras-support-matrix-root button,
-.aras-support-matrix-dialog button {
+.aras-support-matrix-dialog button,
+.aras-support-matrix-overlay button {
   margin: 0;
   min-height: 0;
   height: auto;
@@ -38,11 +49,16 @@
 
 .aras-support-matrix-root .v-field input,
 .aras-support-matrix-dialog .v-field input,
+.aras-support-matrix-overlay .v-field input,
 .aras-support-matrix-root .v-field textarea,
 .aras-support-matrix-dialog .v-field textarea,
+.aras-support-matrix-overlay .v-field textarea,
 .aras-support-matrix-root .v-field select,
 .aras-support-matrix-dialog .v-field select,
-.aras-support-matrix-root .v-field .v-field__input {
+.aras-support-matrix-overlay .v-field select,
+.aras-support-matrix-root .v-field .v-field__input,
+.aras-support-matrix-dialog .v-field .v-field__input,
+.aras-support-matrix-overlay .v-field .v-field__input {
   border: 0 !important;
   box-shadow: none !important;
   outline: 0;
@@ -50,24 +66,28 @@
 }
 
 .aras-support-matrix-root .v-input .v-field__input,
-.aras-support-matrix-dialog .v-input .v-field__input {
+.aras-support-matrix-dialog .v-input .v-field__input,
+.aras-support-matrix-overlay .v-input .v-field__input {
   min-height: 56px;
 }
 
 .aras-support-matrix-root .v-field--variant-outlined .v-label.v-field-label--floating,
-.aras-support-matrix-dialog .v-field--variant-outlined .v-label.v-field-label--floating {
+.aras-support-matrix-dialog .v-field--variant-outlined .v-label.v-field-label--floating,
+.aras-support-matrix-overlay .v-field--variant-outlined .v-label.v-field-label--floating {
   background: rgb(var(--v-theme-surface));
   padding-inline: 4px;
 }
 
 .aras-support-matrix-root .v-field--variant-outlined fieldset,
-.aras-support-matrix-dialog .v-field--variant-outlined fieldset {
+.aras-support-matrix-dialog .v-field--variant-outlined fieldset,
+.aras-support-matrix-overlay .v-field--variant-outlined fieldset {
   margin: 0;
   min-width: 0;
 }
 
 .aras-support-matrix-root .v-field--variant-outlined legend,
-.aras-support-matrix-dialog .v-field--variant-outlined legend {
+.aras-support-matrix-dialog .v-field--variant-outlined legend,
+.aras-support-matrix-overlay .v-field--variant-outlined legend {
   border: 0;
   margin: 0;
   padding: 0 4px;
@@ -76,8 +96,10 @@
 
 .aras-support-matrix-root .v-field--variant-outlined legend,
 .aras-support-matrix-dialog .v-field--variant-outlined legend,
+.aras-support-matrix-overlay .v-field--variant-outlined legend,
 .aras-support-matrix-root .v-field--variant-outlined legend span,
-.aras-support-matrix-dialog .v-field--variant-outlined legend span {
+.aras-support-matrix-dialog .v-field--variant-outlined legend span,
+.aras-support-matrix-overlay .v-field--variant-outlined legend span {
   max-width: 100%;
 }
 

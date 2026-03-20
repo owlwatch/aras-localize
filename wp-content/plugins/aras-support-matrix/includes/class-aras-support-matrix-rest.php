@@ -134,7 +134,7 @@ class ArasSupportMatrixRest
 
 	public function can_edit()
 	{
-		return current_user_can('edit_posts');
+		return ArasSupportMatrixPlugin::current_user_can_manage();
 	}
 
 	public function import_status()
@@ -166,7 +166,7 @@ class ArasSupportMatrixRest
 	{
 		$release_id = absint($request->get_param('release'));
 		$component_ids = array_filter(array_map('absint', (array) $request->get_param('components')));
-		$include_drafts = current_user_can('edit_posts');
+		$include_drafts = ArasSupportMatrixPlugin::current_user_can_manage();
 
 		$data = array(
 			'components' => $this->get_components(),
@@ -237,7 +237,7 @@ class ArasSupportMatrixRest
 
 	public function releases()
 	{
-		return rest_ensure_response($this->get_releases(current_user_can('edit_posts')));
+		return rest_ensure_response($this->get_releases(ArasSupportMatrixPlugin::current_user_can_manage()));
 	}
 
 	public function release(WP_REST_Request $request)
@@ -302,7 +302,7 @@ class ArasSupportMatrixRest
 			$new_entry_id = wp_insert_post(
 				array(
 					'post_type' => ArasSupportMatrixPostTypes::ENTRY_POST_TYPE,
-					'post_status' => 'publish',
+					'post_status' => 'draft',
 					'post_title' => $this->duplicate_entry_title($entry->ID, $new_release_id),
 				),
 				true
@@ -337,7 +337,7 @@ class ArasSupportMatrixRest
 
 	public function entries()
 	{
-		return rest_ensure_response($this->get_entries(0, array(), current_user_can('edit_posts')));
+		return rest_ensure_response($this->get_entries(0, array(), ArasSupportMatrixPlugin::current_user_can_manage()));
 	}
 
 	public function entry(WP_REST_Request $request)
@@ -347,11 +347,10 @@ class ArasSupportMatrixRest
 
 	public function save_entry(WP_REST_Request $request)
 	{
-		$release_id = absint($request['innovatorReleaseId']);
 		$post_id = wp_insert_post(
 			array(
 				'post_type' => ArasSupportMatrixPostTypes::ENTRY_POST_TYPE,
-				'post_status' => 'publish',
+				'post_status' => $this->sanitize_publication_status((string) $request['publicationStatus']),
 				'post_title' => $this->entry_title_from_request($request),
 			),
 			true
@@ -369,13 +368,12 @@ class ArasSupportMatrixRest
 	public function update_entry(WP_REST_Request $request)
 	{
 		$post_id = (int) $request['id'];
-		$release_id = absint($request['innovatorReleaseId']);
 
 		wp_update_post(
 			array(
 				'ID' => $post_id,
 				'post_title' => $this->entry_title_from_request($request),
-				'post_status' => 'publish',
+				'post_status' => $this->sanitize_publication_status((string) $request['publicationStatus']),
 			)
 		);
 
@@ -651,13 +649,6 @@ class ArasSupportMatrixRest
 		if ($status !== '') {
 			wp_set_post_terms($post_id, array($status), ArasSupportMatrixPostTypes::STATUS_TAXONOMY, false);
 		}
-
-		wp_update_post(
-			array(
-				'ID' => $post_id,
-				'post_status' => 'publish',
-			)
-		);
 	}
 
 	private function entry_title_from_request(WP_REST_Request $request)

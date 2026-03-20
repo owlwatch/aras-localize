@@ -44,8 +44,8 @@ function statusColor(status: EntryRecord['status']) {
               <div class="entry-meta-right">
               </div>
             </div>
-            <div v-if="entry.notes" class="entry-detail-row">
-              <span v-if="entry.notes" :title="entry.notes">{{ entry.notes }}</span>
+            <div v-if="entry.notes" class="entry-note-row">
+              <span :title="entry.notes">{{ entry.notes }}</span>
             </div>
           </v-list-item-subtitle>
         </v-list-item>
@@ -104,8 +104,7 @@ function statusColor(status: EntryRecord['status']) {
 }
 
 .entry-meta-left,
-.entry-meta-right,
-.entry-detail-row {
+.entry-meta-right {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -116,9 +115,14 @@ function statusColor(status: EntryRecord['status']) {
   justify-content: flex-end;
 }
 
-.entry-detail-row {
+.entry-note-row {
+  display: block;
+  width: 100%;
   margin-top: 6px;
   font-size: 0.82rem;
+  line-height: 1.45;
+  white-space: normal;
+  color: #4d6179;
 }
 
 </style>

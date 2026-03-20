@@ -19,11 +19,6 @@ defineProps<{
 </script>
 
 <template>
-  <v-text-field v-model="model.name" hide-details label="Name" variant="outlined" />
-  <v-text-field v-model="model.buildNumber" hide-details label="Build Number" variant="outlined" />
-  <DatePickerField v-model="model.releaseDate" label="Release Date" />
-  <DatePickerField v-model="model.endOfLifeDate" label="End of Life Date" />
-  <v-textarea v-model="model.notes" hide-details class="inline-form-span" label="Notes" rows="2" variant="outlined" />
   <v-select
     v-if="showCopyFrom"
     v-model="model.copyFromReleaseId"
@@ -36,6 +31,22 @@ defineProps<{
     variant="outlined"
   />
   <v-select
+    v-if="showCopyFrom"
+    v-model="model.publicationStatus"
+    hide-details
+    :items="publicationStatusOptions"
+    item-title="title"
+    item-value="value"
+    label="Status"
+    variant="outlined"
+  />
+  <v-text-field v-model="model.name" hide-details label="Name" variant="outlined" />
+  <v-text-field v-model="model.buildNumber" hide-details label="Build Number" variant="outlined" />
+  <DatePickerField v-model="model.releaseDate" label="Release Date" />
+  <DatePickerField v-model="model.endOfLifeDate" label="End of Life Date" />
+  <v-textarea v-model="model.notes" hide-details class="inline-form-span" label="Notes" rows="2" variant="outlined" />
+  <v-select
+    v-if="!showCopyFrom"
     v-model="model.publicationStatus"
     hide-details
     :items="publicationStatusOptions"

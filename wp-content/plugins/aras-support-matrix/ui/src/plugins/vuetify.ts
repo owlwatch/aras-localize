@@ -8,6 +8,9 @@ export const vuetify = createVuetify({
     VDialog: {
       contentClass: 'aras-support-matrix-dialog',
     },
+    VMenu: {
+      contentClass: 'aras-support-matrix-overlay',
+    },
   },
   icons: {
     defaultSet: 'mdi',

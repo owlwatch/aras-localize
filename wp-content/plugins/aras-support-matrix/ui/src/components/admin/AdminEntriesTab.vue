@@ -4,10 +4,10 @@ import { computed, reactive, ref, watch } from 'vue'
 import AdminEntryFilters from '@/components/admin/AdminEntryFilters.vue'
 import EntryFormFields from '@/components/shared/EntryFormFields.vue'
 import { api } from '@/composables/api'
-import type { ComponentRecord, EntryRecord, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, EntryRecord, PublicationStatus, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
 
 type SortDirection = 'asc' | 'desc'
-type EntrySortKey = 'componentName' | 'releaseName' | 'componentVersionNumber' | 'status'
+type EntrySortKey = 'componentName' | 'releaseName' | 'componentVersionNumber' | 'status' | 'publicationStatus'
 
 interface EntryFormState {
   id: number
@@ -15,10 +15,19 @@ interface EntryFormState {
   componentName: string
   innovatorReleaseId: number | null
   releaseName: string
+  publicationStatus: PublicationStatus
   componentVersionNumber: string
   componentReleaseNumber: string
   status: SupportStatus
   endOfLifeDate: string
+  notes: string
+}
+
+interface InlineEntryDraft {
+  componentVersionNumber: string
+  componentReleaseNumber: string
+  status: SupportStatus | null
+  publicationStatus: PublicationStatus
   notes: string
 }
 
@@ -48,6 +57,7 @@ const rowsPerPage = ref(50)
 const rowsPerPageOptions = [25, 50, 100, 250]
 const formErrors = reactive({
   componentId: '',
+  publicationStatus: '',
   innovatorReleaseId: '',
   componentVersionNumber: '',
   componentReleaseNumber: '',
@@ -60,6 +70,9 @@ const sortState = reactive<{ key: EntrySortKey; direction: SortDirection }>({
 })
 
 const entriesState = ref<EntryRecord[]>([])
+const inlineDrafts = reactive<Record<number, InlineEntryDraft>>({})
+const savingRowIds = reactive<Record<number, boolean>>({})
+const cellMenus = reactive<Record<string, boolean>>({})
 
 const form = reactive<EntryFormState>({
   id: 0,
@@ -67,6 +80,7 @@ const form = reactive<EntryFormState>({
   componentName: '',
   innovatorReleaseId: null,
   releaseName: '',
+  publicationStatus: 'draft',
   componentVersionNumber: '',
   componentReleaseNumber: '',
   status: 'Supported',
@@ -75,8 +89,37 @@ const form = reactive<EntryFormState>({
 })
 
 watch(() => props.entries, (value) => { entriesState.value = [...value] }, { immediate: true })
+watch(
+  entriesState,
+  (value) => {
+    const activeIds = new Set<number>()
+
+    value.forEach((entry) => {
+      activeIds.add(entry.id)
+      inlineDrafts[entry.id] = {
+        componentVersionNumber: entry.componentVersionNumber,
+        componentReleaseNumber: entry.componentReleaseNumber,
+        status: entry.status || null,
+        publicationStatus: entry.publicationStatus,
+        notes: entry.notes,
+      }
+    })
+
+    Object.keys(inlineDrafts).forEach((id) => {
+      if (!activeIds.has(Number(id))) {
+        delete inlineDrafts[Number(id)]
+        delete savingRowIds[Number(id)]
+      }
+    })
+  },
+  { immediate: true },
+)
 
 const entryStatusOptions = computed(() => props.statuses.map((status) => status.name))
+const publicationStatusOptions = [
+  { title: 'Draft', value: 'draft' as const },
+  { title: 'Published', value: 'publish' as const },
+]
 const filteredAndSortedEntries = computed(() => {
   return entriesState.value
     .filter((entry) => !componentFilter.value || entry.componentId === componentFilter.value)
@@ -109,7 +152,7 @@ const orderedReleases = computed(() => {
 })
 const latestReleaseId = computed<number | null>(() => orderedReleases.value[0]?.id ?? null)
 
-const columnCount = computed(() => (props.showIdColumns ? 7 : 6))
+const columnCount = computed(() => (props.showIdColumns ? 8 : 7))
 
 function sortIndicator(active: boolean, direction: SortDirection) {
   if (!active) return ''
@@ -121,6 +164,84 @@ function syncEntries(next: EntryRecord[]) {
   emit('update:entries', next)
 }
 
+function statusLabel(publicationStatus: PublicationStatus) {
+  return publicationStatus === 'publish' ? 'Published' : 'Draft'
+}
+
+function statusColor(publicationStatus: PublicationStatus) {
+  return publicationStatus === 'publish' ? 'success' : 'error'
+}
+
+function rowDraft(item: EntryRecord) {
+  return inlineDrafts[item.id]
+}
+
+function cellMenuKey(itemId: number, field: 'version' | 'status' | 'notes') {
+  return `${itemId}:${field}`
+}
+
+function closeCellMenu(itemId: number, field: 'version' | 'status' | 'notes') {
+  cellMenus[cellMenuKey(itemId, field)] = false
+}
+
+async function saveInlineCell(item: EntryRecord, field: 'version' | 'status' | 'notes') {
+  await saveInlineItem(item)
+  closeCellMenu(item.id, field)
+}
+
+function buildEntryUpdatePayload(item: EntryRecord, draft: InlineEntryDraft): EntryRecord {
+  return {
+    ...item,
+    componentVersionNumber: draft.componentVersionNumber.trim(),
+    componentReleaseNumber: draft.componentReleaseNumber.trim(),
+    status: draft.status ?? '',
+    publicationStatus: draft.publicationStatus,
+    notes: draft.notes,
+  }
+}
+
+async function saveInlineItem(item: EntryRecord) {
+  const draft = rowDraft(item)
+
+  if (!draft || savingRowIds[item.id]) {
+    return
+  }
+
+  const nextPayload = buildEntryUpdatePayload(item, draft)
+
+  if (
+    nextPayload.componentVersionNumber === item.componentVersionNumber
+    && nextPayload.componentReleaseNumber === item.componentReleaseNumber
+    && nextPayload.status === item.status
+    && nextPayload.publicationStatus === item.publicationStatus
+    && nextPayload.notes === item.notes
+  ) {
+    return
+  }
+
+  savingRowIds[item.id] = true
+
+  try {
+    const saved = await api.updateEntry(nextPayload)
+    const nextEntries = [...entriesState.value]
+    upsertById(nextEntries, saved)
+    syncEntries(nextEntries)
+  } finally {
+    savingRowIds[item.id] = false
+  }
+}
+
+function onPublicationToggle(item: EntryRecord, value: boolean | null) {
+  const draft = rowDraft(item)
+
+  if (!draft) {
+    return
+  }
+
+  draft.publicationStatus = value ? 'publish' : 'draft'
+  void saveInlineItem(item)
+}
+
 function resetForm() {
   Object.assign(form, {
     id: 0,
@@ -128,6 +249,7 @@ function resetForm() {
     componentName: '',
     innovatorReleaseId: latestReleaseId.value,
     releaseName: '',
+    publicationStatus: 'draft',
     componentVersionNumber: '',
     componentReleaseNumber: '',
     status: 'Supported',
@@ -154,8 +276,19 @@ function editItem(item: EntryRecord) {
   editingId.value = item.id
 }
 
+function copyItem(item: EntryRecord) {
+  cancelEdit()
+  Object.assign(form, {
+    ...item,
+    id: 0,
+  })
+  clearFormErrors()
+  showNewDialog.value = true
+}
+
 function clearFormErrors() {
   formErrors.componentId = ''
+  formErrors.publicationStatus = ''
   formErrors.innovatorReleaseId = ''
   formErrors.componentVersionNumber = ''
   formErrors.componentReleaseNumber = ''
@@ -173,12 +306,16 @@ function validateForm() {
     formErrors.innovatorReleaseId = 'Please select a release.'
   }
 
+  if (!form.publicationStatus) {
+    formErrors.publicationStatus = 'Please select a status.'
+  }
+
   if (!form.componentVersionNumber.trim()) {
-    formErrors.componentVersionNumber = 'Please enter a version.'
+    formErrors.componentVersionNumber = 'Please enter a release.'
   }
 
   if (!form.componentReleaseNumber.trim()) {
-    formErrors.componentReleaseNumber = 'Please enter a release number.'
+    formErrors.componentReleaseNumber = 'Please enter a build.'
   }
 
   if (!form.status) {
@@ -186,6 +323,7 @@ function validateForm() {
   }
 
   return !formErrors.componentId
+    && !formErrors.publicationStatus
     && !formErrors.innovatorReleaseId
     && !formErrors.componentVersionNumber
     && !formErrors.componentReleaseNumber
@@ -230,6 +368,7 @@ async function submit() {
   const payload = {
     componentId: Number(form.componentId),
     innovatorReleaseId: Number(form.innovatorReleaseId),
+    publicationStatus: form.publicationStatus,
     componentVersionNumber: form.componentVersionNumber,
     componentReleaseNumber: form.componentReleaseNumber,
     status: form.status,
@@ -307,6 +446,12 @@ watch(() => form.innovatorReleaseId, () => {
   }
 })
 
+watch(() => form.publicationStatus, () => {
+  if (form.publicationStatus) {
+    formErrors.publicationStatus = ''
+  }
+})
+
 watch(() => form.componentVersionNumber, () => {
   if (form.componentVersionNumber.trim()) {
     formErrors.componentVersionNumber = ''
@@ -346,6 +491,7 @@ watch(() => form.status, () => {
           <th><button class="sort-button" type="button" @click="toggleSort('componentVersionNumber')"><span>Version</span><v-icon v-if="sortState.key === 'componentVersionNumber'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th><button class="sort-button" type="button" @click="toggleSort('status')"><span>Support Status</span><v-icon v-if="sortState.key === 'status'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th>Notes</th>
+          <th><button class="sort-button" type="button" @click="toggleSort('publicationStatus')"><span>Status</span><v-icon v-if="sortState.key === 'publicationStatus'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
           <th></th>
         </tr>
       </thead>
@@ -358,6 +504,8 @@ watch(() => form.status, () => {
                   :model="form"
                   :components="components"
                   :component-error="formErrors.componentId"
+                  :publication-status-error="formErrors.publicationStatus"
+                  :publication-status-options="publicationStatusOptions"
                   :releases="releases"
                   :release-error="formErrors.innovatorReleaseId"
                   :release-number-error="formErrors.componentReleaseNumber"
@@ -376,10 +524,120 @@ watch(() => form.status, () => {
             <td v-if="showIdColumns">{{ item.id }}</td>
             <td><button class="admin-link-button" type="button" @click="editItem(item)">{{ item.componentName }}</button></td>
             <td>{{ item.releaseName }}</td>
-            <td>{{ item.componentVersionNumber }}<template v-if="item.componentReleaseNumber"> / {{ item.componentReleaseNumber }}</template></td>
-            <td>{{ item.status }}</td>
-            <td>{{ item.notes || '—' }}</td>
+            <td class="entry-inline-cell">
+              <v-menu
+                v-model="cellMenus[cellMenuKey(item.id, 'version')]"
+                :close-on-content-click="false"
+                location="bottom start"
+              >
+                <template #activator="{ props: menuProps }">
+                  <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                    <span>{{ item.componentVersionNumber }}<template v-if="item.componentReleaseNumber"> / {{ item.componentReleaseNumber }}</template></span>
+                    <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                  </button>
+                </template>
+                <v-card class="entry-edit-menu" min-width="280">
+                  <v-card-text class="entry-edit-grid">
+                    <v-text-field
+                      v-model="rowDraft(item).componentVersionNumber"
+                      density="compact"
+                      hide-details
+                      label="Release"
+                      variant="outlined"
+                    />
+                    <v-text-field
+                      v-model="rowDraft(item).componentReleaseNumber"
+                      density="compact"
+                      hide-details
+                      label="Build"
+                      variant="outlined"
+                    />
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn variant="text" @click="closeCellMenu(item.id, 'version')">Cancel</v-btn>
+                    <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'version')">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-menu>
+            </td>
+            <td class="entry-inline-cell">
+              <v-menu
+                v-model="cellMenus[cellMenuKey(item.id, 'status')]"
+                :close-on-content-click="false"
+                location="bottom start"
+              >
+                <template #activator="{ props: menuProps }">
+                  <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                    <span>{{ item.status || '—' }}</span>
+                    <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                  </button>
+                </template>
+                <v-card class="entry-edit-menu" min-width="240">
+                  <v-card-text>
+                    <v-select
+                      v-model="rowDraft(item).status"
+                      density="compact"
+                      hide-details
+                      :items="entryStatusOptions"
+                      label="Support Status"
+                      variant="outlined"
+                    />
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn variant="text" @click="closeCellMenu(item.id, 'status')">Cancel</v-btn>
+                    <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'status')">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-menu>
+            </td>
+            <td class="entry-inline-cell">
+              <v-menu
+                v-model="cellMenus[cellMenuKey(item.id, 'notes')]"
+                :close-on-content-click="false"
+                location="bottom start"
+              >
+                <template #activator="{ props: menuProps }">
+                  <button class="entry-edit-trigger entry-edit-trigger--notes" type="button" v-bind="menuProps">
+                    <span>{{ item.notes || '—' }}</span>
+                    <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                  </button>
+                </template>
+                <v-card class="entry-edit-menu" min-width="320">
+                  <v-card-text>
+                    <v-textarea
+                      v-model="rowDraft(item).notes"
+                      density="compact"
+                      hide-details
+                      label="Notes"
+                      rows="3"
+                      variant="outlined"
+                    />
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn variant="text" @click="closeCellMenu(item.id, 'notes')">Cancel</v-btn>
+                    <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'notes')">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-menu>
+            </td>
+            <td class="entry-inline-cell">
+              <div class="entry-publish-cell">
+                <v-switch
+                  :color="statusColor(rowDraft(item).publicationStatus)"
+                  density="compact"
+                  hide-details
+                  inset
+                  :loading="savingRowIds[item.id]"
+                  :model-value="rowDraft(item).publicationStatus === 'publish'"
+                  @update:model-value="onPublicationToggle(item, $event)"
+                />
+              </div>
+            </td>
             <td class="actions-cell">
+              <v-btn size="small" variant="text" @click="copyItem(item)">Copy</v-btn>
               <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
               <v-btn size="small" variant="text" color="error" @click="removeItem(item)">Delete</v-btn>
             </td>
@@ -421,6 +679,8 @@ watch(() => form.status, () => {
           :model="form"
           :components="components"
           :component-error="formErrors.componentId"
+          :publication-status-error="formErrors.publicationStatus"
+          :publication-status-options="publicationStatusOptions"
           :releases="releases"
           :release-error="formErrors.innovatorReleaseId"
           :release-number-error="formErrors.componentReleaseNumber"
@@ -461,6 +721,67 @@ watch(() => form.status, () => {
 .actions-cell {
   white-space: nowrap;
   text-align: right;
+}
+
+.entry-inline-cell {
+  min-width: 170px;
+  vertical-align: middle;
+}
+
+.entry-publish-cell {
+  display: flex;
+  align-items: center;
+  min-width: 90px;
+}
+
+.entry-edit-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.entry-edit-trigger > span {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-edit-trigger--notes {
+  display: flex;
+}
+
+.entry-edit-icon {
+  flex: 0 0 auto;
+  opacity: 0;
+  color: #6b7a90;
+  transition: opacity 0.15s ease;
+}
+
+.entry-edit-trigger:hover .entry-edit-icon,
+.entry-edit-trigger:focus-visible .entry-edit-icon {
+  opacity: 1;
+}
+
+.entry-edit-menu {
+  max-width: min(360px, calc(100vw - 32px));
+}
+
+.entry-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .table-pagination-row {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import EntryFormFields from '@/components/shared/EntryFormFields.vue'
-import type { ComponentRecord, EntryRecord, ReleaseRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, EntryRecord, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
 
 defineProps<{
   components: ComponentRecord[]
@@ -9,6 +9,7 @@ defineProps<{
   entryForm: {
     componentId: number
     innovatorReleaseId: number
+    publicationStatus: PublicationStatus
     componentVersionNumber: string
     componentReleaseNumber: string
     status: SupportStatus
@@ -27,6 +28,11 @@ const emit = defineEmits<{
   save: []
   sort: [column: 'component' | 'version']
 }>()
+
+const publicationStatusOptions = [
+  { title: 'Draft', value: 'draft' as const },
+  { title: 'Published', value: 'publish' as const },
+]
 
 function statusColor(status: EntryRecord['status']) {
   if (status === 'Certified') return 'success'
@@ -64,6 +70,7 @@ function statusColor(status: EntryRecord['status']) {
               <EntryFormFields
                 :model="entryForm"
                 :components="components"
+                :publication-status-options="publicationStatusOptions"
                 :releases="releases"
                 :status-options="statusOptions"
               />

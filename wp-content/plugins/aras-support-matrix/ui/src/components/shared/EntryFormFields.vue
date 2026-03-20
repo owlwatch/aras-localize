@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { ComponentRecord, ReleaseRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
 
 defineProps<{
   model: {
     componentId: number | null
     innovatorReleaseId: number | null
+    publicationStatus: PublicationStatus
     componentVersionNumber: string
     componentReleaseNumber: string
     status: SupportStatus
@@ -13,7 +14,9 @@ defineProps<{
   components: ComponentRecord[]
   releases: ReleaseRecord[]
   statusOptions: SupportStatus[]
+  publicationStatusOptions: Array<{ title: string; value: PublicationStatus }>
   componentError?: string
+  publicationStatusError?: string
   releaseError?: string
   versionError?: string
   releaseNumberError?: string
@@ -35,20 +38,13 @@ defineProps<{
     placeholder="Please Select Component"
     variant="outlined"
   />
-  <v-text-field
-    v-model="model.componentVersionNumber"
+  <v-select
+    v-model="model.publicationStatus"
     class="entry-field"
     density="comfortable"
-    :error-messages="versionError ? [versionError] : []"
-    label="Version"
-    variant="outlined"
-  />
-  <v-text-field
-    v-model="model.componentReleaseNumber"
-    class="entry-field"
-    density="comfortable"
-    :error-messages="releaseNumberError ? [releaseNumberError] : []"
-    label="Release Number"
+    :error-messages="publicationStatusError ? [publicationStatusError] : []"
+    :items="publicationStatusOptions"
+    label="Status"
     variant="outlined"
   />
   <v-select
@@ -59,7 +55,23 @@ defineProps<{
     item-title="name"
     item-value="id"
     :items="releases"
-    label="Aras Innovator Release"
+    label="Aras Innovator Version"
+    variant="outlined"
+  />
+  <v-text-field
+    v-model="model.componentVersionNumber"
+    class="entry-field"
+    density="comfortable"
+    :error-messages="versionError ? [versionError] : []"
+    label="Release"
+    variant="outlined"
+  />
+  <v-text-field
+    v-model="model.componentReleaseNumber"
+    class="entry-field"
+    density="comfortable"
+    :error-messages="releaseNumberError ? [releaseNumberError] : []"
+    label="Build"
     variant="outlined"
   />
   <v-select
