@@ -9,7 +9,13 @@ $types = get_terms( array(
 	'hide_empty' => true,
 ));
 
-$essid = get_field('marketplace_essid', 'option');
+$essid = get_query_var('wpessid');
+if( !$essid && isset($_GET['wpessid']) ){
+	$essid = sanitize_text_field( wp_unslash( $_GET['wpessid'] ) );
+}
+if( !$essid ){
+	$essid = get_field('marketplace_essid', 'option');
+}
 
 // show a select box for both taxonomies,
 // and check for the current term to set the selected
@@ -75,7 +81,7 @@ $essid = get_field('marketplace_essid', 'option');
 				type="search"
 				name="mp-search"
 				placeholder="<?php _e('Search Marketplace', 'aras-marketplace'); ?>"
-				value="<?php echo get_search_query(); ?>"
+				value="<?php echo esc_attr( get_query_var('mp-search') ); ?>"
 			/>
 		</fieldset>
 		<?php if( $essid ): ?>
