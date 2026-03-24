@@ -119,7 +119,7 @@
       window.Localize.hideWidget();
       // we also want to remove the default listener to setLanguage
       if (typeof window.Localize.off === 'function') {
-        // window.Localize.off('setLanguage');
+        window.Localize.off('setLanguage');
       }
     }
 
