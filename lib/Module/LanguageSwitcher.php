@@ -38,6 +38,8 @@ class LanguageSwitcher {
 
         wp_localize_script($handle, 'ArasLocalize', [
             'selector' => '.aras-localize-switcher',
+            'availableLanguages' => array_values(Common::get_languages()),
+            'sourceLanguage' => Common::get_source_language(),
         ]);
     }
 

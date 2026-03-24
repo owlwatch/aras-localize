@@ -1,6 +1,10 @@
 (function () {
   const settings = window.ArasLocalize || {};
   const selector = settings.selector || '.aras-localize-switcher';
+  const availableLanguages = Array.isArray(settings.availableLanguages)
+    ? settings.availableLanguages.filter(Boolean)
+    : [];
+  const sourceLanguage = settings.sourceLanguage || 'en';
 
   function formatCode(code) {
     if (!code) return '--';
@@ -65,6 +69,8 @@
     if (window.Localize && typeof window.Localize.setLanguage === 'function') {
       window.Localize.setLanguage(code);
     }
+
+    localStorage.setItem('loadedLang', code);
   }
 
   function attachSwitcher(container) {
@@ -111,6 +117,59 @@
     });
   }
 
+  function getUrlWithLanguage(input, lang, knownLanguages, sourceLang) {
+    const url = input instanceof URL ? new URL(input.href) : new URL(input, window.location.origin);
+    const languages = Array.from(
+      new Set([...(Array.isArray(knownLanguages) ? knownLanguages : []), sourceLang].filter(Boolean)),
+    );
+    const targetLanguage = lang || sourceLang;
+    const pathSegments = url.pathname.split('/').filter(Boolean);
+    const hadTrailingSlash = url.pathname.length > 1 && url.pathname.endsWith('/');
+
+    if (pathSegments.length && languages.includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+
+    if (targetLanguage && targetLanguage !== sourceLang) {
+      pathSegments.unshift(targetLanguage);
+    }
+
+    let pathname = '/' + pathSegments.join('/');
+    if (pathname !== '/' && hadTrailingSlash) {
+      pathname += '/';
+    }
+
+    url.pathname = pathname;
+
+    return url.toString();
+  }
+
+  window.getUrlWithLanguage = getUrlWithLanguage;
+
+  function updateLinks() {
+    const EXCLUDED_PATHS = ['/wp-admin', '/wp-login', '/wp-content', '/wp-includes'];
+    const currentLang = document.querySelector(selector)?.getAttribute('data-current-lang');
+
+    if (URL_OPTIONS == '1' && localize_conf.permalink_plain != '1') {
+      const links = document.querySelectorAll('a:not([data-localize-ignore])');
+      links.forEach((link) => {
+        if (link.href) {
+          let url = new URL(link.href);
+          if (url.hostname === document.domain) {
+            if (url.pathname) {
+              for (let i = 0; i < EXCLUDED_PATHS.length; i++) {
+                if (url.pathname.includes(EXCLUDED_PATHS[i])) {
+                  return;
+                }
+              }
+              link.href = getUrlWithLanguage(url, currentLang, availableLanguages, sourceLanguage);
+            }
+          }
+        }
+      });
+    }
+  }
+
   function init() {
     const containers = document.querySelectorAll(selector);
     if (!containers.length) return;
@@ -126,7 +185,7 @@
     attachGlobalHandlers();
 
     if (window.Localize && typeof window.Localize.on === 'function') {
-      setTimeout( () => {
+      setTimeout(() => {
         // we also want to remove the default listener to setLanguage
         if (typeof window.Localize.off === 'function') {
           window.Localize.off('setLanguage');
@@ -134,9 +193,11 @@
         window.Localize.on('setLanguage', function (data) {
           if (data && data.to) {
             updateCurrentLanguage(data.to);
+            // we need to implement our own link replacing logic
+            updateLinks();
           }
         });
-      },100);
+      }, 100);
     }
   }
 
