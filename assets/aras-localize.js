@@ -1,17 +1,10 @@
 (function () {
   const settings = window.ArasLocalize || {};
   const selector = settings.selector || '.aras-localize-switcher';
-  const maxRetries = 20;
-  const retryDelay = 250;
 
   function formatCode(code) {
     if (!code) return '--';
     return code.split('-')[0].toUpperCase();
-  }
-
-  function normalizeLanguages(languages) {
-    if (!Array.isArray(languages)) return [];
-    return languages.filter((lang) => lang && lang.code && lang.name);
   }
 
   function closeAll(except) {
@@ -24,82 +17,86 @@
     });
   }
 
-  function renderSwitcher(container, languages, currentLang) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'aras-localize';
+  function updateCurrentLanguage(code) {
+    document.querySelectorAll(selector).forEach((container) => {
+      container.setAttribute('data-current-lang', code);
 
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'aras-localize__toggle';
-    toggle.setAttribute('aria-haspopup', 'listbox');
-    toggle.setAttribute('aria-expanded', 'false');
+      const wrapper = container.querySelector('.aras-localize');
+      const label = container.querySelector('.aras-localize__code');
+      const options = container.querySelectorAll('.aras-localize__option');
 
-    const label = document.createElement('span');
-    label.className = 'aras-localize__code';
-    label.textContent = formatCode(currentLang);
-
-    const chevron = document.createElement('span');
-    chevron.className = 'aras-localize__chevron';
-
-    toggle.appendChild(label);
-    toggle.appendChild(chevron);
-
-    const menu = document.createElement('ul');
-    menu.className = 'aras-localize__menu';
-    menu.setAttribute('role', 'listbox');
-
-    languages.forEach((lang) => {
-      const item = document.createElement('li');
-      item.className = 'aras-localize__item';
-      item.setAttribute('role', 'option');
-      item.setAttribute('aria-selected', lang.code === currentLang ? 'true' : 'false');
-
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'aras-localize__option';
-      button.textContent = lang.name;
-      button.setAttribute('data-lang', lang.code);
-      if (lang.code === currentLang) {
-        button.classList.add('is-active');
+      if (label) {
+        label.textContent = formatCode(code);
       }
 
-      button.addEventListener('click', () => {
-        if (window.Localize && typeof window.Localize.setLanguage === 'function') {
-          window.Localize.setLanguage(lang.code);
+      options.forEach((option) => {
+        const isActive = option.getAttribute('data-lang') === code;
+        option.classList.toggle('is-active', isActive);
+
+        const item = option.closest('.aras-localize__item');
+        if (item) {
+          item.setAttribute('aria-selected', isActive ? 'true' : 'false');
         }
-        wrapper.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
       });
 
-      item.appendChild(button);
-      menu.appendChild(item);
+      if (wrapper) {
+        wrapper.classList.remove('is-open');
+      }
+
+      const toggle = container.querySelector('.aras-localize__toggle');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
     });
+  }
+
+  function applyLanguage(option) {
+    const code = option.getAttribute('data-lang');
+    const url = option.getAttribute('data-url') || option.getAttribute('href');
+
+    if (!code || !url) {
+      return;
+    }
+
+    console.log( code, url );
+
+    if (window.history && typeof window.history.replaceState === 'function') {
+      window.history.replaceState({}, '', url);
+    }
+
+    updateCurrentLanguage(code);
+
+    if (window.Localize && typeof window.Localize.setLanguage === 'function') {
+      window.Localize.setLanguage(code);
+    }
+  }
+
+  function attachSwitcher(container) {
+    const wrapper = container.querySelector('.aras-localize');
+    const toggle = container.querySelector('.aras-localize__toggle');
+    const options = container.querySelectorAll('.aras-localize__option');
+
+    if (!wrapper || !toggle || !options.length) {
+      return;
+    }
 
     toggle.addEventListener('click', () => {
       const isOpen = wrapper.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
       if (isOpen) {
         closeAll(wrapper);
       }
     });
 
-    wrapper.appendChild(toggle);
-    wrapper.appendChild(menu);
-
-    container.innerHTML = '';
-    container.appendChild(wrapper);
-  }
-
-  function updateCurrentLanguage(code) {
-    document.querySelectorAll('.aras-localize').forEach((wrapper) => {
-      const label = wrapper.querySelector('.aras-localize__code');
-      const options = wrapper.querySelectorAll('.aras-localize__option');
-      if (label) label.textContent = formatCode(code);
-      options.forEach((option) => {
-        const isActive = option.getAttribute('data-lang') === code;
-        option.classList.toggle('is-active', isActive);
-        const item = option.closest('.aras-localize__item');
-        if (item) item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    options.forEach((option) => {
+      option.addEventListener('click', (event) => {
+        if (!window.Localize || typeof window.Localize.setLanguage !== 'function') {
+          return;
+        }
+        event.stopPropagation();
+        event.preventDefault();
+        applyLanguage(option);
       });
     });
   }
@@ -118,57 +115,36 @@
     });
   }
 
-  function init(retryCount) {
+  function init() {
     const containers = document.querySelectorAll(selector);
     if (!containers.length) return;
 
-    if (!window.Localize || typeof window.Localize.getAvailableLanguages !== 'function') {
-      if (retryCount < maxRetries) {
-        setTimeout(() => init(retryCount + 1), retryDelay);
-      }
-      return;
-    }
-
-    if (typeof window.Localize.hideWidget === 'function') {
+    if (window.Localize && typeof window.Localize.hideWidget === 'function') {
       window.Localize.hideWidget();
+      // we also want to remove the default listener to setLanguage
+      if (typeof window.Localize.off === 'function') {
+        // window.Localize.off('setLanguage');
+      }
     }
 
-    window.Localize.getAvailableLanguages(function (err, languages) {
-      if (err) return;
-
-      const normalized = normalizeLanguages(languages);
-      if (!normalized.length) return;
-
-      let current = null;
-      if (typeof window.Localize.getLanguage === 'function') {
-        current = window.Localize.getLanguage();
-      }
-      if (!current && typeof window.Localize.getSourceLanguage === 'function') {
-        current = window.Localize.getSourceLanguage();
-      }
-      if (!current && normalized[0]) {
-        current = normalized[0].code;
-      }
-
-      containers.forEach((container) => {
-        renderSwitcher(container, normalized, current);
-      });
-
-      attachGlobalHandlers();
-
-      if (typeof window.Localize.on === 'function') {
-        window.Localize.on('setLanguage', function (data) {
-          if (data && data.to) {
-            updateCurrentLanguage(data.to);
-          }
-        });
-      }
+    containers.forEach((container) => {
+      attachSwitcher(container);
     });
+
+    attachGlobalHandlers();
+
+    if (window.Localize && typeof window.Localize.on === 'function') {
+      window.Localize.on('setLanguage', function (data) {
+        if (data && data.to) {
+          updateCurrentLanguage(data.to);
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => init(0));
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    init(0);
+    init();
   }
 })();

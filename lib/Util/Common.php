@@ -3,6 +3,7 @@ namespace Aras\Localize\Util;
 
 class Common {
     const TRANSIENT_KEY = 'aras_localize_hreflang_languages';
+    const SOURCE_LANGUAGE_TRANSIENT_KEY = 'aras_localize_source_language';
     const TRANSIENT_TTL = 21600;
 
     protected static $sourceLanguage = 'en';
@@ -15,6 +16,11 @@ class Common {
         $filtered = apply_filters('aras_localize_hreflang_languages', null);
         if (is_array($filtered)) {
             return $filtered;
+        }
+
+        $cached_source_language = get_transient(self::SOURCE_LANGUAGE_TRANSIENT_KEY);
+        if (is_string($cached_source_language) && $cached_source_language !== '') {
+            self::$sourceLanguage = $cached_source_language;
         }
 
         $cached = get_transient(self::TRANSIENT_KEY);
@@ -71,6 +77,8 @@ class Common {
         if (!empty($codes)) {
             set_transient(self::TRANSIENT_KEY, $codes, self::TRANSIENT_TTL);
         }
+
+        set_transient(self::SOURCE_LANGUAGE_TRANSIENT_KEY, self::$sourceLanguage, self::TRANSIENT_TTL);
 
         return $codes;
     }
