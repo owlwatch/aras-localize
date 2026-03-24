@@ -117,10 +117,6 @@
 
     if (window.Localize && typeof window.Localize.hideWidget === 'function') {
       window.Localize.hideWidget();
-      // we also want to remove the default listener to setLanguage
-      if (typeof window.Localize.off === 'function') {
-        window.Localize.off('setLanguage');
-      }
     }
 
     containers.forEach((container) => {
@@ -130,11 +126,17 @@
     attachGlobalHandlers();
 
     if (window.Localize && typeof window.Localize.on === 'function') {
-      window.Localize.on('setLanguage', function (data) {
-        if (data && data.to) {
-          updateCurrentLanguage(data.to);
+      setTimeout( () => {
+        // we also want to remove the default listener to setLanguage
+        if (typeof window.Localize.off === 'function') {
+          window.Localize.off('setLanguage');
         }
-      });
+        window.Localize.on('setLanguage', function (data) {
+          if (data && data.to) {
+            updateCurrentLanguage(data.to);
+          }
+        });
+      },100);
     }
   }
 
