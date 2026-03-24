@@ -17,6 +17,7 @@ require_once __DIR__ . '/lib/Module/LanguageSwitcher.php';
 require_once __DIR__ . '/lib/Module/LinkList.php';
 require_once __DIR__ . '/lib/Module/Hreflang.php';
 require_once __DIR__ . '/lib/Module/Sitemap.php';
+require_once __DIR__ . '/lib/Module/Prerender.php';
 require_once __DIR__ . '/lib/ACF.php';
 
 add_action('plugins_loaded', function() {
@@ -34,4 +35,7 @@ add_action('plugins_loaded', function() {
 
     $sitemap = new \Aras\Localize\Module\Sitemap();
     $sitemap->register();
+
+    $prerender = new \Aras\Localize\Module\Prerender();
+    $prerender->register();
 });
