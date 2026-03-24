@@ -58,13 +58,9 @@
       return;
     }
 
-    console.log( code, url );
-
     if (window.history && typeof window.history.replaceState === 'function') {
       window.history.replaceState({}, '', url);
     }
-
-    updateCurrentLanguage(code);
 
     if (window.Localize && typeof window.Localize.setLanguage === 'function') {
       window.Localize.setLanguage(code);
