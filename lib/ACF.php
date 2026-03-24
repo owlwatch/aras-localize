@@ -1,7 +1,7 @@
 <?php
 namespace Aras\Localize;
 
-use Aras\Localize\Widget\LanguageSwitcher;
+use Aras\Localize\Module\LanguageSwitcher;
 
 class ACF {
     public function register() {

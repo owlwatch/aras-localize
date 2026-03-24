@@ -1,7 +1,9 @@
 <?php
-namespace Aras\Localize\Util;
+namespace Aras\Localize\Module;
 
-class Hreflang extends BaseLocalize {
+use Aras\Localize\Util\Common;
+
+class Hreflang {
 
     public function register() {
         add_action('wp_head', [$this, 'render'], 5);
@@ -16,20 +18,22 @@ class Hreflang extends BaseLocalize {
             return;
         }
 
-        $languages = $this->get_languages();
+        $languages = Common::get_languages();
         if (empty($languages)) {
             return;
         }
 
-        $current_url = $this->get_current_url();
+        $current_url = Common::get_current_url();
         if (empty($current_url)) {
             return;
         }
 
-        echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($this->get_current_url($this->sourceLanguage)) . '" />' . "\n";
-        echo '<link rel="alternate" hreflang="'.esc_attr($this->sourceLanguage).'" href="' . esc_url($this->get_current_url($this->sourceLanguage)) . '" />' . "\n";
+        $source_language = Common::get_source_language();
+
+        echo '<link rel="alternate" hreflang="x-default" href="' . esc_url(Common::get_current_url($source_language)) . '" />' . "\n";
+        echo '<link rel="alternate" hreflang="'.esc_attr($source_language).'" href="' . esc_url(Common::get_current_url($source_language)) . '" />' . "\n";
         foreach ($languages as $code) {
-            $url = $this->get_current_url($code);
+            $url = Common::get_current_url($code);
             if (empty($url)) {
                 continue;
             }

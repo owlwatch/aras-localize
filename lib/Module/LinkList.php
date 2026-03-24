@@ -1,10 +1,10 @@
 <?php
 
-namespace Aras\Localize\Widget;
+namespace Aras\Localize\Module;
 
-use Aras\Localize\Util\BaseLocalize;
+use Aras\Localize\Util\Common;
 
-class LinkList extends BaseLocalize
+class LinkList
 {
 	const SHORTCODE = 'aras_localize_link_list';
 	const OPTIONS_PAGE = 'aras-localize';
@@ -29,12 +29,12 @@ class LinkList extends BaseLocalize
 			return '';
 		}
 
-		$languages = $this->get_all_languages();
+		$languages = Common::get_all_languages();
 		if (empty($languages)) {
 			return '';
 		}
 
-		$current_url = $this->get_current_url();
+		$current_url = Common::get_current_url();
 		if (empty($current_url)) {
 			return '';
 		}
@@ -61,7 +61,7 @@ class LinkList extends BaseLocalize
 		$output = '<ul class="' . esc_attr($class) . '">';
 
 		foreach ($languages as $code) {
-			$url = $this->get_current_url($code);
+			$url = Common::get_current_url($code);
 			if (empty($url)) {
 				continue;
 			}
@@ -95,19 +95,19 @@ class LinkList extends BaseLocalize
 	private function get_current_language()
 	{
 		if (empty($_SERVER['REQUEST_URI'])) {
-			return $this->sourceLanguage;
+			return Common::get_source_language();
 		}
 
 		$request_path = $_SERVER['REQUEST_URI'];
 		$parts = explode('/', $request_path);
 
-		$languages = $this->get_languages();
+		$languages = Common::get_languages();
 
 		if (isset($parts[1]) && in_array($parts[1], $languages, true)) {
 			return $parts[1];
 		}
 
-		return $this->sourceLanguage;
+		return Common::get_source_language();
 	}
 
 	/**

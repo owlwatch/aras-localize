@@ -1,17 +1,17 @@
 <?php
 namespace Aras\Localize\Util;
 
-abstract class BaseLocalize {
+class Common {
     const TRANSIENT_KEY = 'aras_localize_hreflang_languages';
     const TRANSIENT_TTL = 21600;
 
-    protected $sourceLanguage = 'en';
+    protected static $sourceLanguage = 'en';
 
     /**
      * Get all available languages (excluding source language)
      * @return array
      */
-    protected function get_languages() {
+    public static function get_languages() {
         $filtered = apply_filters('aras_localize_hreflang_languages', null);
         if (is_array($filtered)) {
             return $filtered;
@@ -27,7 +27,7 @@ abstract class BaseLocalize {
             return [];
         }
 
-        $api_key = $this->get_api_key();
+        $api_key = self::get_api_key();
         if (empty($api_key)) {
             return [];
         }
@@ -61,8 +61,8 @@ abstract class BaseLocalize {
             $languages = $payload['data']['project']['enabledLanguages'];
 
             // codes is languages without source language
-            $this->sourceLanguage = $payload['data']['project']['sourceLanguage'] ?? 'en';
-            $codes = array_diff($languages, [$this->sourceLanguage]);
+            self::$sourceLanguage = $payload['data']['project']['sourceLanguage'] ?? 'en';
+            $codes = array_diff($languages, [self::$sourceLanguage]);
         }
         else {
             return [];
@@ -79,10 +79,18 @@ abstract class BaseLocalize {
      * Get all languages including source language
      * @return array
      */
-    protected function get_all_languages() {
-        $languages = $this->get_languages();
-        array_unshift($languages, $this->sourceLanguage);
+    public static function get_all_languages() {
+        $languages = self::get_languages();
+        array_unshift($languages, self::$sourceLanguage);
         return $languages;
+    }
+
+    /**
+     * Get the source language
+     * @return string
+     */
+    public static function get_source_language() {
+        return self::$sourceLanguage;
     }
 
     /**
@@ -90,7 +98,7 @@ abstract class BaseLocalize {
      * @param string|false $code Language code, false for current URL without language
      * @return string
      */
-    protected function get_current_url($code = false) {
+    public static function get_current_url($code = false) {
         if (empty($_SERVER['HTTP_HOST']) || empty($_SERVER['REQUEST_URI'])) {
             return '';
         }
@@ -109,10 +117,10 @@ abstract class BaseLocalize {
         $parts = explode('/', $request_path);
 
         // if $code is provided, we want to add the language code to the url
-        // unless its $this->sourceLanguage, in which case we want to remove any language code from the url
-        if ($code === $this->sourceLanguage) {
+        // unless its self::$sourceLanguage, in which case we want to remove any language code from the url
+        if ($code === self::$sourceLanguage) {
             // remove the first part of the path if it matches any of the languages
-            if (isset($parts[1]) && in_array($parts[1], $this->get_languages(), true)) {
+            if (isset($parts[1]) && in_array($parts[1], self::get_languages(), true)) {
                 // remove the language code from the url
                 $remaining_parts = array_slice($parts, 2);
                 $clean_path = '/' . implode('/', $remaining_parts);
@@ -124,7 +132,7 @@ abstract class BaseLocalize {
         }
 
         // add the language code to the url
-        if (isset($parts[1]) && in_array($parts[1], $this->get_languages(), true)) {
+        if (isset($parts[1]) && in_array($parts[1], self::get_languages(), true)) {
             // replace the language code in the url
             $parts[1] = $code;
             return $scheme . '://' . $_SERVER['HTTP_HOST'] . implode('/', $parts);
@@ -139,7 +147,7 @@ abstract class BaseLocalize {
      * Get the API key from ACF or options
      * @return string
      */
-    private function get_api_key() {
+    public static function get_api_key() {
         $api_key = '';
         if (function_exists('get_field')) {
             $api_key = get_field('localize_api_key', 'option');

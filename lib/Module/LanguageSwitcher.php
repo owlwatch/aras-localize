@@ -1,5 +1,5 @@
 <?php
-namespace Aras\Localize\Widget;
+namespace Aras\Localize\Module;
 
 class LanguageSwitcher {
     const SHORTCODE = 'aras_localize_switcher';
