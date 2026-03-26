@@ -472,7 +472,7 @@ watch(() => form.status, () => {
 </script>
 
 <template>
-  <div class="button-row">
+  <div class="button-row align-start">
     <v-btn color="primary" @click="openNew">Add Entry</v-btn>
     <AdminEntryFilters
       v-model:component-filter="componentFilter"

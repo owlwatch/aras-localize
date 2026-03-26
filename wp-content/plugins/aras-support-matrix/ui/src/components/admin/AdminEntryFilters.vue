@@ -23,6 +23,7 @@ function formatReleaseTitle(release: ReleaseRecord) {
     <v-select
       :model-value="componentFilter"
       clearable
+      density="compact"
       hide-details
       class="entry-filter"
       item-title="name"
@@ -35,6 +36,7 @@ function formatReleaseTitle(release: ReleaseRecord) {
     <v-select
       :model-value="releaseFilter"
       clearable
+      density="compact"
       hide-details
       class="entry-filter"
       item-value="id"
@@ -70,5 +72,13 @@ function formatReleaseTitle(release: ReleaseRecord) {
   width: 100%;
   min-width: 260px;
   max-width: 360px;
+}
+
+.entry-filter :deep(.v-field) {
+  background: #ffffff;
+}
+
+.entry-filter :deep(.v-field__input) {
+  min-height: 40px;
 }
 </style>

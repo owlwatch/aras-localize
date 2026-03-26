@@ -58,10 +58,7 @@ onMounted(loadData)
           <div class="hero-bar">
             <div>
               <div class="eyebrow">Aras Innovator</div>
-              <h1 class="text-h3 font-weight-bold">Compatibility Matrix</h1>
-              <p class="hero-copy">
-                Vue 3 and Vuetify frontend with WordPress-managed releases, components, and support entries over the REST API.
-              </p>
+              <h1 class="text-h3 font-weight-bold mt-0 mb-0">Support Matrix</h1>
             </div>
           </div>
 
@@ -86,7 +83,7 @@ onMounted(loadData)
           </v-btn-toggle>
 
           <template v-if="isAdmin">
-            <v-window v-model="activeTab">
+            <v-window v-model="activeTab" :crossfade="true" :transition-duration="200">
               <v-window-item value="admin">
                 <AdminManager
                   :components="data.components"

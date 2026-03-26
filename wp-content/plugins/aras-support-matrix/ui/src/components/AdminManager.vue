@@ -188,7 +188,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="matrix-stack">
+  <div class="matrix-stack admin-manager">
     <div class="admin-header-row">
       <div>
         <p class="hero-copy">
@@ -285,13 +285,13 @@ onMounted(async () => {
       </div>
     </v-alert>
 
-    <v-tabs v-model="adminTab" color="primary">
+    <v-tabs v-model="adminTab" color="primary" bg-color="grey-lighten-3">
       <v-tab value="components">Components</v-tab>
       <v-tab value="releases">Releases</v-tab>
       <v-tab value="entries">Entries</v-tab>
     </v-tabs>
 
-    <v-window v-model="adminTab">
+    <v-window v-model="adminTab" :crossfade="true" :transition-duration="0.2">
       <v-window-item value="components">
         <AdminComponentsTab
           :components="componentsState"

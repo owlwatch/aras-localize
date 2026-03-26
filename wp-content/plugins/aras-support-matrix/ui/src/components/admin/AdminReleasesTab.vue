@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 
+import DatePickerField from '@/components/shared/DatePickerField.vue'
 import ReleaseFormFields from '@/components/shared/ReleaseFormFields.vue'
 import { api } from '@/composables/api'
 import type { EntryRecord, PublicationStatus, ReleaseRecord } from '@/types/models'
@@ -39,6 +40,9 @@ const sortState = reactive<{ key: ReleaseSortKey; direction: SortDirection }>({
 
 const releasesState = ref<ReleaseRecord[]>([])
 const entriesState = ref<EntryRecord[]>([])
+const inlineDrafts = reactive<Record<number, Omit<ReleaseRecord, 'id'>>>({})
+const savingRowIds = reactive<Record<number, boolean>>({})
+const cellMenus = reactive<Record<string, boolean>>({})
 
 const form = reactive<ReleaseFormState>({
   id: 0,
@@ -58,6 +62,32 @@ const publicationStatusOptions: { title: string; value: PublicationStatus }[] = 
 
 watch(() => props.releases, (value) => { releasesState.value = [...value] }, { immediate: true })
 watch(() => props.entries, (value) => { entriesState.value = [...value] }, { immediate: true })
+watch(
+  releasesState,
+  (value) => {
+    const activeIds = new Set<number>()
+
+    value.forEach((release) => {
+      activeIds.add(release.id)
+      inlineDrafts[release.id] = {
+        name: release.name,
+        buildNumber: release.buildNumber,
+        releaseDate: release.releaseDate,
+        endOfLifeDate: release.endOfLifeDate,
+        notes: release.notes,
+        publicationStatus: release.publicationStatus,
+      }
+    })
+
+    Object.keys(inlineDrafts).forEach((id) => {
+      if (!activeIds.has(Number(id))) {
+        delete inlineDrafts[Number(id)]
+        delete savingRowIds[Number(id)]
+      }
+    })
+  },
+  { immediate: true },
+)
 
 const orderedReleases = computed(() => {
   return [...releasesState.value].sort((left, right) => {
@@ -93,6 +123,36 @@ function syncReleases(next: ReleaseRecord[]) {
 function syncEntries(next: EntryRecord[]) {
   entriesState.value = next
   emit('update:entries', next)
+}
+
+function statusColor(publicationStatus: PublicationStatus) {
+  return publicationStatus === 'publish' ? 'success' : 'error'
+}
+
+function rowDraft(item: ReleaseRecord) {
+  return inlineDrafts[item.id]
+}
+
+function cellMenuKey(itemId: number, field: 'name' | 'buildNumber' | 'releaseDate' | 'endOfLifeDate' | 'notes') {
+  return `${itemId}:${field}`
+}
+
+function closeCellMenu(itemId: number, field: 'name' | 'buildNumber' | 'releaseDate' | 'endOfLifeDate' | 'notes') {
+  cellMenus[cellMenuKey(itemId, field)] = false
+}
+
+function buildReleaseUpdatePayload(item: ReleaseRecord) {
+  const draft = rowDraft(item)
+
+  return {
+    ...item,
+    name: draft.name.trim(),
+    buildNumber: draft.buildNumber.trim(),
+    releaseDate: draft.releaseDate,
+    endOfLifeDate: draft.endOfLifeDate,
+    notes: draft.notes,
+    publicationStatus: draft.publicationStatus,
+  }
 }
 
 function resetForm() {
@@ -227,6 +287,96 @@ function removeItem(item: ReleaseRecord) {
     },
   )
 }
+
+async function onPublicationToggle(item: ReleaseRecord, value: boolean | null) {
+  if (savingRowIds[item.id]) {
+    return
+  }
+
+  const publicationStatus: PublicationStatus = value ? 'publish' : 'draft'
+
+  if (item.publicationStatus === publicationStatus) {
+    return
+  }
+
+  savingRowIds[item.id] = true
+
+  try {
+    const saved = await api.updateRelease({
+      ...item,
+      publicationStatus,
+    })
+
+    syncReleases(
+      releasesState.value.map((release) => (release.id === saved.id ? saved : release)),
+    )
+    syncEntries(
+      entriesState.value.map((entry) => {
+        if (entry.innovatorReleaseId !== saved.id) {
+          return entry
+        }
+
+        return {
+          ...entry,
+          publicationStatus: saved.publicationStatus,
+        }
+      }),
+    )
+  } finally {
+    savingRowIds[item.id] = false
+  }
+}
+
+async function saveInlineItem(item: ReleaseRecord) {
+  const draft = rowDraft(item)
+
+  if (!draft || savingRowIds[item.id]) {
+    return
+  }
+
+  const nextPayload = buildReleaseUpdatePayload(item)
+
+  if (
+    nextPayload.name === item.name
+    && nextPayload.buildNumber === item.buildNumber
+    && nextPayload.releaseDate === item.releaseDate
+    && nextPayload.endOfLifeDate === item.endOfLifeDate
+    && nextPayload.notes === item.notes
+    && nextPayload.publicationStatus === item.publicationStatus
+  ) {
+    return
+  }
+
+  savingRowIds[item.id] = true
+
+  try {
+    const saved = await api.updateRelease(nextPayload)
+
+    syncReleases(
+      releasesState.value.map((release) => (release.id === saved.id ? saved : release)),
+    )
+    syncEntries(
+      entriesState.value.map((entry) => {
+        if (entry.innovatorReleaseId !== saved.id) {
+          return entry
+        }
+
+        return {
+          ...entry,
+          releaseName: saved.name,
+          publicationStatus: saved.publicationStatus,
+        }
+      }),
+    )
+  } finally {
+    savingRowIds[item.id] = false
+  }
+}
+
+async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber' | 'releaseDate' | 'endOfLifeDate' | 'notes') {
+  await saveInlineItem(item)
+  closeCellMenu(item.id, field)
+}
 </script>
 
 <template>
@@ -266,12 +416,156 @@ function removeItem(item: ReleaseRecord) {
         </tr>
         <tr v-else>
           <td v-if="showIdColumns">{{ item.id }}</td>
-          <td><button class="admin-link-button" type="button" @click="editItem(item)">{{ item.name }}</button></td>
-          <td>{{ item.buildNumber }}</td>
-          <td>{{ item.releaseDate }}</td>
-          <td>{{ item.endOfLifeDate }}</td>
-          <td>{{ item.notes || '—' }}</td>
-          <td>{{ item.publicationStatus === 'publish' ? 'Published' : 'Draft' }}</td>
+          <td class="entry-inline-cell">
+            <v-menu
+              v-model="cellMenus[cellMenuKey(item.id, 'name')]"
+              :close-on-content-click="false"
+              location="bottom start"
+            >
+              <template #activator="{ props: menuProps }">
+                <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                  <span>{{ item.name }}</span>
+                  <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                </button>
+              </template>
+              <v-card class="entry-edit-menu" min-width="280">
+                <v-card-text>
+                  <v-text-field
+                    v-model="rowDraft(item).name"
+                    density="compact"
+                    hide-details
+                    label="Name"
+                    variant="outlined"
+                  />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn variant="text" @click="closeCellMenu(item.id, 'name')">Cancel</v-btn>
+                  <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'name')">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
+          </td>
+          <td class="entry-inline-cell">
+            <v-menu
+              v-model="cellMenus[cellMenuKey(item.id, 'buildNumber')]"
+              :close-on-content-click="false"
+              location="bottom start"
+            >
+              <template #activator="{ props: menuProps }">
+                <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                  <span>{{ item.buildNumber || '—' }}</span>
+                  <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                </button>
+              </template>
+              <v-card class="entry-edit-menu" min-width="260">
+                <v-card-text>
+                  <v-text-field
+                    v-model="rowDraft(item).buildNumber"
+                    density="compact"
+                    hide-details
+                    label="Build Number"
+                    variant="outlined"
+                  />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn variant="text" @click="closeCellMenu(item.id, 'buildNumber')">Cancel</v-btn>
+                  <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'buildNumber')">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
+          </td>
+          <td class="entry-inline-cell">
+            <v-menu
+              v-model="cellMenus[cellMenuKey(item.id, 'releaseDate')]"
+              :close-on-content-click="false"
+              location="bottom start"
+            >
+              <template #activator="{ props: menuProps }">
+                <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                  <span>{{ item.releaseDate || '—' }}</span>
+                  <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                </button>
+              </template>
+              <v-card class="entry-edit-menu" min-width="260">
+                <v-card-text>
+                  <DatePickerField v-model="rowDraft(item).releaseDate" label="Release Date" />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn variant="text" @click="closeCellMenu(item.id, 'releaseDate')">Cancel</v-btn>
+                  <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'releaseDate')">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
+          </td>
+          <td class="entry-inline-cell">
+            <v-menu
+              v-model="cellMenus[cellMenuKey(item.id, 'endOfLifeDate')]"
+              :close-on-content-click="false"
+              location="bottom start"
+            >
+              <template #activator="{ props: menuProps }">
+                <button class="entry-edit-trigger" type="button" v-bind="menuProps">
+                  <span>{{ item.endOfLifeDate || '—' }}</span>
+                  <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                </button>
+              </template>
+              <v-card class="entry-edit-menu" min-width="260">
+                <v-card-text>
+                  <DatePickerField v-model="rowDraft(item).endOfLifeDate" label="End of Life Date" />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn variant="text" @click="closeCellMenu(item.id, 'endOfLifeDate')">Cancel</v-btn>
+                  <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'endOfLifeDate')">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
+          </td>
+          <td class="entry-inline-cell">
+            <v-menu
+              v-model="cellMenus[cellMenuKey(item.id, 'notes')]"
+              :close-on-content-click="false"
+              location="bottom start"
+            >
+              <template #activator="{ props: menuProps }">
+                <button class="entry-edit-trigger entry-edit-trigger--notes" type="button" v-bind="menuProps">
+                  <span>{{ item.notes || '—' }}</span>
+                  <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
+                </button>
+              </template>
+              <v-card class="entry-edit-menu" min-width="320">
+                <v-card-text>
+                  <v-textarea
+                    v-model="rowDraft(item).notes"
+                    density="compact"
+                    hide-details
+                    label="Notes"
+                    rows="3"
+                    variant="outlined"
+                  />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn variant="text" @click="closeCellMenu(item.id, 'notes')">Cancel</v-btn>
+                  <v-btn :loading="savingRowIds[item.id]" color="primary" @click="saveInlineCell(item, 'notes')">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-menu>
+          </td>
+          <td class="entry-publish-cell">
+            <v-switch
+              :color="statusColor(item.publicationStatus)"
+              density="compact"
+              hide-details
+              inset
+              :loading="savingRowIds[item.id]"
+              :model-value="item.publicationStatus === 'publish'"
+              @update:model-value="onPublicationToggle(item, $event)"
+            />
+          </td>
           <td class="actions-cell">
             <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
             <v-btn size="small" variant="text" color="error" @click="removeItem(item)">Delete</v-btn>
@@ -324,6 +618,61 @@ function removeItem(item: ReleaseRecord) {
 .actions-cell {
   white-space: nowrap;
   text-align: right;
+}
+
+.entry-inline-cell {
+  min-width: 150px;
+  vertical-align: middle;
+}
+
+.entry-publish-cell {
+  display: flex;
+  align-items: center;
+  min-width: 90px;
+}
+
+.entry-edit-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.entry-edit-trigger > span {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-edit-trigger--notes {
+  display: flex;
+}
+
+.entry-edit-icon {
+  flex: 0 0 auto;
+  opacity: 0;
+  color: #6b7a90;
+  transition: opacity 0.15s ease;
+}
+
+.entry-edit-trigger:hover .entry-edit-icon,
+.entry-edit-trigger:focus-visible .entry-edit-icon {
+  opacity: 1;
+}
+
+.entry-edit-menu {
+  max-width: min(360px, calc(100vw - 32px));
 }
 
 .sort-button {

@@ -218,6 +218,7 @@ async function submitEntry() {
       variant="tonal"
       title="How to use this tool"
       text="Select an Aras Innovator release, then filter components to review certified, supported, and end-of-life versions."
+      class="matrix-intro"
     />
 
     <div class="matrix-stack">

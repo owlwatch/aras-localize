@@ -63,10 +63,11 @@ function statusColor(status: EntryRecord['status']) {
 
 .result-card {
   background: rgba(255, 255, 255, 0.88);
+  border-color: #E0E0E0;
 }
 
 .component-card-header {
-  background: linear-gradient(180deg, rgba(12, 95, 244, 0.06) 0%, rgba(12, 95, 244, 0.02) 100%);
+  background: #F3F3F3;
 }
 
 .component-card-divider {
@@ -76,6 +77,7 @@ function statusColor(status: EntryRecord['status']) {
 :deep(.component-card-header .v-card-title) {
   font-size: 1.05rem;
   line-height: 1.3;
+  color: rgb(var(--v-theme-primary));
 }
 
 :deep(.component-card-header .v-card-subtitle) {

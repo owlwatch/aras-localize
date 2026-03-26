@@ -39,7 +39,7 @@ onMounted(loadData)
             {{ error }}
           </v-alert>
 
-          <v-skeleton-loader v-if="loading" type="article, table, article" />
+          <v-skeleton-loader v-if="loading" type="article, table" />
 
           <PublicMatrix
             v-else

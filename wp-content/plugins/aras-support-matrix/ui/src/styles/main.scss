@@ -62,7 +62,7 @@
   border: 0 !important;
   box-shadow: none !important;
   outline: 0;
-  background: transparent !important;
+  background: #ffffff !important;
 }
 
 .aras-support-matrix-root .v-input .v-field__input,
@@ -126,12 +126,28 @@ body {
 
 .aras-support-matrix-root .v-table table thead {
   position: sticky;
-  top: var(--wp-admin--admin-bar--height, 0px);
+  top: calc( var(--wp-admin--admin-bar--height, 0px) - 1px );
   z-index: 2;
 }
 
 .aras-support-matrix-root .v-table table thead th {
   background: rgb(var(--v-theme-surface));
+}
+
+.aras-support-matrix-root .admin-manager .v-table {
+  margin-top: 1.5rem;
+}
+
+.aras-support-matrix-root .admin-manager .v-table table thead tr th{
+  border-top: 1px solid #cccccc;
+}
+
+.aras-support-matrix-root .admin-manager .v-table table tbody tr:nth-child(odd) {
+  background: #f8f8f8;
+}
+
+.aras-support-matrix-root .admin-manager .v-table table tbody tr:nth-child(even) {
+  background: #ffffff;
 }
 
 .aras-support-matrix-root .v-window,
