@@ -242,6 +242,14 @@ function onPublicationToggle(item: EntryRecord, value: boolean | null) {
   void saveInlineItem(item)
 }
 
+function togglePublicationCell(item: EntryRecord) {
+  if (savingRowIds[item.id]) {
+    return
+  }
+
+  onPublicationToggle(item, rowDraft(item).publicationStatus !== 'publish')
+}
+
 function resetForm() {
   Object.assign(form, {
     id: 0,
@@ -624,17 +632,23 @@ watch(() => form.status, () => {
               </v-menu>
             </td>
             <td class="entry-inline-cell">
-              <div class="entry-publish-cell">
+              <button
+                class="entry-publish-cell"
+                type="button"
+                @click="togglePublicationCell(item)"
+              >
                 <v-switch
+                  class="entry-publish-switch"
                   :color="statusColor(rowDraft(item).publicationStatus)"
                   density="compact"
                   hide-details
                   inset
                   :loading="savingRowIds[item.id]"
                   :model-value="rowDraft(item).publicationStatus === 'publish'"
+                  @click.stop
                   @update:model-value="onPublicationToggle(item, $event)"
                 />
-              </div>
+              </button>
             </td>
             <td class="actions-cell">
               <v-btn size="small" variant="text" @click="copyItem(item)">Copy</v-btn>
@@ -731,7 +745,17 @@ watch(() => form.status, () => {
 .entry-publish-cell {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   min-width: 90px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.entry-publish-switch {
+  pointer-events: none;
 }
 
 .entry-edit-trigger {

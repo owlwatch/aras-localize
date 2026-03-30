@@ -327,6 +327,14 @@ async function onPublicationToggle(item: ReleaseRecord, value: boolean | null) {
   }
 }
 
+function togglePublicationCell(item: ReleaseRecord) {
+  if (savingRowIds[item.id]) {
+    return
+  }
+
+  void onPublicationToggle(item, item.publicationStatus !== 'publish')
+}
+
 async function saveInlineItem(item: ReleaseRecord) {
   const draft = rowDraft(item)
 
@@ -555,16 +563,19 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
               </v-card>
             </v-menu>
           </td>
-          <td class="entry-publish-cell">
+          <td>
+            <button class="entry-publish-cell" type="button" @click="togglePublicationCell(item)">
             <v-switch
+              class="entry-publish-switch"
               :color="statusColor(item.publicationStatus)"
               density="compact"
               hide-details
-              inset
               :loading="savingRowIds[item.id]"
               :model-value="item.publicationStatus === 'publish'"
+              @click.stop
               @update:model-value="onPublicationToggle(item, $event)"
             />
+            </button>
           </td>
           <td class="actions-cell">
             <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
@@ -628,7 +639,17 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
 .entry-publish-cell {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   min-width: 90px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.entry-publish-switch {
+  pointer-events: none;
 }
 
 .entry-edit-trigger {

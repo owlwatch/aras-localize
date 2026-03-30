@@ -9,8 +9,8 @@ defineProps<{
 }>()
 
 function statusColor(status: EntryRecord['status']) {
-  if (status === 'Certified') return 'success'
-  if (status === 'Supported') return 'info'
+  if (status === 'Certified') return '#0F66CB'
+  if (status === 'Supported') return '#1F9B42'
   return 'error'
 }
 </script>
@@ -31,20 +31,18 @@ function statusColor(status: EntryRecord['status']) {
       <v-list>
         <v-list-item v-for="entry in group.versions" :key="entry.id">
           <div class="entry-header-row">
-            <v-list-item-title class="entry-title" :title="entry.componentVersionNumber">{{ entry.componentVersionNumber }}</v-list-item-title>
+            <v-list-item-title class="entry-title" :title="entry.componentVersionNumber">
+              {{ entry.componentVersionNumber || 'No Release Specified' }}
+              <span class="entry-build">
+                {{ entry.componentReleaseNumber ? `(Build ${entry.componentReleaseNumber})` : '' }}
+              </span>
+            </v-list-item-title>
             <v-chip :color="statusColor(entry.status)" size="small" variant="tonal">
               {{ entry.status }}
             </v-chip>
           </div>
-          <v-list-item-subtitle>
-            <div class="entry-meta-row">
-              <div class="entry-meta-left">
-                <span :title="`Build ${entry.componentVersionNumber || 'Not specified'}`">Build {{ entry.componentVersionNumber || 'Not specified' }}</span>
-              </div>
-              <div class="entry-meta-right">
-              </div>
-            </div>
-            <div v-if="entry.notes" class="entry-note-row">
+          <v-list-item-subtitle v-if="entry.notes">
+            <div class="entry-note-row">
               <span :title="entry.notes">{{ entry.notes }}</span>
             </div>
           </v-list-item-subtitle>
@@ -77,7 +75,7 @@ function statusColor(status: EntryRecord['status']) {
 :deep(.component-card-header .v-card-title) {
   font-size: 1.05rem;
   line-height: 1.3;
-  color: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-secondary));
 }
 
 :deep(.component-card-header .v-card-subtitle) {
@@ -96,6 +94,12 @@ function statusColor(status: EntryRecord['status']) {
   flex: 1 1 auto;
   font-size: 0.95rem;
   line-height: 1.3;
+}
+
+.entry-build {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  
 }
 
 .entry-meta-row {
