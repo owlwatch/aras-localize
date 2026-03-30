@@ -38,6 +38,10 @@ class Prerender {
 
         $server = $this->get_prerender_server();
         $current_url = Common::get_current_url(false);
+        // for testing, lets make sure that xplm.local is converted to xplm.com
+        if (strpos($current_url, 'xplm.local') !== false) {
+            $current_url = str_replace('xplm.local', 'xplm.com', $current_url);
+        }
         if ($current_url !== '') {
             $current_url = remove_query_arg('prerender', $current_url);
         }
@@ -54,6 +58,7 @@ class Prerender {
         ]);
 
         if (is_wp_error($response)) {
+            // error_log( 'Prerender request failed: ' . $response->get_error_message() );
             return;
         }
 
@@ -65,8 +70,11 @@ class Prerender {
             status_header($status_code);
         }
 
-        $this->send_response_headers($headers);
+        error_log( 'Prerender response: ' . $status_code . ' for ' . $current_url );
+        error_log( 'Response headers: ' . print_r($headers, true) );
+        error_log( 'Response body: ' . substr($body, 0, 500) ); // log first 500 chars of body for debugging
 
+        $this->send_response_headers($headers);
         echo $body;
         exit;
     }
