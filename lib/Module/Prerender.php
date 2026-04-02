@@ -71,13 +71,13 @@ class Prerender {
         if ($current_url !== '') {
             $current_url = $this->remove_prerender_path_suffix($current_url);
             $current_url = remove_query_arg('prerender', $current_url);
+            $current_url = remove_query_arg('nocache', $current_url);
         }
 
         if ($server === '' || $current_url === '') {
             return;
         }
 
-        $current_url = add_query_arg( '_nocache', time(), $current_url ); // prevent caching of the prerender request
         
         $target_url = $server . rawurlencode($current_url);
 
