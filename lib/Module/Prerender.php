@@ -50,6 +50,8 @@ class Prerender {
             return;
         }
 
+        $current_url = add_query_arg( '_nocache', time(), $current_url ); // prevent caching of the prerender request
+        
         $target_url = $server . rawurlencode($current_url);
         $response = wp_remote_get($target_url, [
             'timeout' => 20,
@@ -58,9 +60,11 @@ class Prerender {
         ]);
 
         if (is_wp_error($response)) {
-            // error_log( 'Prerender request failed: ' . $response->get_error_message() );
+            error_log( 'Prerender request failed: ' . $response->get_error_message() );
             return;
         }
+
+        error_log('hi');
 
         $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
@@ -74,7 +78,7 @@ class Prerender {
         error_log( 'Response headers: ' . print_r($headers, true) );
         error_log( 'Response body: ' . substr($body, 0, 500) ); // log first 500 chars of body for debugging
 
-        $this->send_response_headers($headers);
+        // $this->send_response_headers($headers);
         echo $body;
         exit;
     }
