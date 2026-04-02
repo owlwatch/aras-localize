@@ -4,18 +4,22 @@ import { computed, reactive, ref, watch } from 'vue'
 import PublicEntryCards from '@/components/public/PublicEntryCards.vue'
 import PublicEntryTable from '@/components/public/PublicEntryTable.vue'
 import { api } from '@/composables/api'
-import type { ComponentRecord, EntryRecord, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, EntryRecord, NoteRecord, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
 
 const props = defineProps<{
   components: ComponentRecord[]
   entries: EntryRecord[]
   isAdmin: boolean
+  notes: NoteRecord[]
   releases: ReleaseRecord[]
   statuses: StatusRecord[]
 }>()
 
 interface EntryFormState extends Omit<EntryRecord, 'status'> {
   status: SupportStatus
+  newNoteTitle: string
+  newNoteContent: string
+  newNoteType: 'info' | 'warning'
 }
 
 const entriesState = ref<EntryRecord[]>([])
@@ -32,6 +36,14 @@ const entryEditingId = ref<number | null>(null)
 const releaseNoteDialogOpen = ref(false)
 const loading = ref(false)
 const entryStatusOptions = computed(() => props.statuses.map((status) => status.name))
+const publishedEntries = computed(() => entriesState.value.filter((entry) => entry.publicationStatus === 'publish'))
+const publishedComponents = computed(() => {
+  const publishedComponentIds = new Set(publishedEntries.value.map((entry) => entry.componentId))
+
+  return props.components.filter((component) => {
+    return component.publicationStatus === 'publish' && publishedComponentIds.has(component.id)
+  })
+})
 
 const entryForm = reactive<EntryFormState>({
   id: 0,
@@ -44,7 +56,12 @@ const entryForm = reactive<EntryFormState>({
   status: 'Supported',
   publicationStatus: 'draft',
   endOfLifeDate: '',
+  noteId: null,
+  noteTitle: '',
   notes: '',
+  newNoteTitle: '',
+  newNoteContent: '',
+  newNoteType: 'info',
 })
 
 watch(
@@ -61,12 +78,12 @@ watch(selectedComponentIds, () => {
 
 const visibleComponents = computed(() => {
   const componentIdsWithData = new Set(
-    entriesState.value
+    publishedEntries.value
       .filter((entry) => entry.innovatorReleaseId === selectedReleaseId.value)
       .map((entry) => entry.componentId),
   )
 
-  return props.components.filter((component) => componentIdsWithData.has(component.id))
+  return publishedComponents.value.filter((component) => componentIdsWithData.has(component.id))
 })
 
 const orderedReleases = computed(() => {
@@ -94,7 +111,7 @@ const selectedReleaseIsPastEol = computed(() => {
 })
 
 const filteredEntries = computed(() => {
-  return entriesState.value
+  return publishedEntries.value
     .filter((entry) => entry.innovatorReleaseId === selectedReleaseId.value)
     .filter((entry) => {
       return selectedComponentIds.value.length === 0 || selectedComponentIds.value.includes(entry.componentId)
@@ -168,10 +185,21 @@ function formatDate(value: string) {
   })
 }
 
+function noteIcon(type?: 'info' | 'warning') {
+  return type === 'warning' ? 'mdi-alert-outline' : 'mdi-information-outline'
+}
+
+function releaseNoteToneClass(type?: 'info' | 'warning') {
+  return type === 'warning' ? 'release-note-icon--warning' : 'release-note-icon--info'
+}
+
 function editEntry(entry: EntryRecord) {
   Object.assign(entryForm, {
     ...entry,
     status: entry.status || 'Supported',
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
   })
   entryEditingId.value = entry.id
 }
@@ -188,7 +216,12 @@ function cancelEntryEdit() {
     componentReleaseNumber: '',
     status: 'Supported',
     publicationStatus: 'draft',
+    noteId: null,
+    noteTitle: '',
     notes: '',
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
   })
 }
 
@@ -231,7 +264,7 @@ async function submitEntry() {
           item-title="name"
           item-value="id"
           :items="orderedReleases"
-          label="Innovator Release"
+          label="Aras Innovator Release"
           variant="outlined"
         >
           <template #selection="{ item }">
@@ -261,7 +294,7 @@ async function submitEntry() {
           </span>
           <v-btn
             v-if="selectedRelease.notes"
-            icon="mdi-information-outline"
+            :icon="noteIcon(selectedRelease.note?.type)"
             size="small"
             variant="text"
             @click="releaseNoteDialogOpen = true"
@@ -306,7 +339,10 @@ async function submitEntry() {
         <v-card>
           <v-card-title>Release Information</v-card-title>
           <v-card-text>
-            <div class="release-note-title">{{ selectedRelease?.name }}</div>
+            <div class="release-note-title">
+              <v-icon class="release-note-icon" :class="releaseNoteToneClass(selectedRelease?.note?.type)" :icon="noteIcon(selectedRelease?.note?.type)" size="18" />
+              <span>{{ selectedRelease?.name }}</span>
+            </div>
             <div class="release-note-eol" :class="{ 'release-note-eol--expired': selectedReleaseIsPastEol }">
               <span class="release-note-eol-label">EOL:</span>
               {{ formatDate(selectedRelease?.endOfLifeDate || '') }}
@@ -335,6 +371,7 @@ async function submitEntry() {
           :entry-form="entryForm"
           :is-admin="isAdmin"
           :loading="loading"
+          :notes="notes"
           :releases="releases"
           :sort-icon="tableSortIcon"
           :status-options="entryStatusOptions"
@@ -408,8 +445,23 @@ async function submitEntry() {
 }
 
 .release-note-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   margin-bottom: 4px;
+}
+
+.release-note-icon {
+  flex: 0 0 auto;
+}
+
+.release-note-icon--info {
+  color: #0F66CB;
+}
+
+.release-note-icon--warning {
+  color: #D49623;
 }
 
 .release-note-eol {

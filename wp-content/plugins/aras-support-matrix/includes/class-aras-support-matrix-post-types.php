@@ -9,6 +9,7 @@ class ArasSupportMatrixPostTypes
 	const COMPONENT_POST_TYPE = 'asm_component';
 	const RELEASE_POST_TYPE = 'asm_release';
 	const ENTRY_POST_TYPE = 'asm_entry';
+	const NOTE_POST_TYPE = 'asm_note';
 	const STATUS_TAXONOMY = 'asm_support_status';
 	const COMPONENT_GROUP_TAXONOMY = 'asm_component_group';
 
@@ -93,6 +94,19 @@ class ArasSupportMatrixPostTypes
 				'supports' => array('title'),
 			)
 		);
+
+		register_post_type(
+			self::NOTE_POST_TYPE,
+			array(
+				'label' => __('Support Matrix Notes', 'aras-support-matrix'),
+				'public' => false,
+				'show_ui' => false,
+				'show_in_rest' => true,
+				'menu_position' => 28,
+				'menu_icon' => 'dashicons-edit-page',
+				'supports' => array('title', 'editor'),
+			)
+		);
 	}
 
 	public function register_meta()
@@ -106,15 +120,19 @@ class ArasSupportMatrixPostTypes
 			},
 		);
 
+		register_post_meta(self::NOTE_POST_TYPE, 'note_type', $meta_config);
+
 		register_post_meta(self::RELEASE_POST_TYPE, 'build_number', $meta_config);
 		register_post_meta(self::RELEASE_POST_TYPE, 'release_date', $meta_config);
 		register_post_meta(self::RELEASE_POST_TYPE, 'end_of_life_date', $meta_config);
+		register_post_meta(self::RELEASE_POST_TYPE, 'note_post_id', array_merge($meta_config, array('type' => 'integer')));
 
 		register_post_meta(self::ENTRY_POST_TYPE, 'component_post_id', array_merge($meta_config, array('type' => 'integer')));
 		register_post_meta(self::ENTRY_POST_TYPE, 'release_post_id', array_merge($meta_config, array('type' => 'integer')));
 		register_post_meta(self::ENTRY_POST_TYPE, 'component_version_number', $meta_config);
 		register_post_meta(self::ENTRY_POST_TYPE, 'component_release_number', $meta_config);
 		register_post_meta(self::ENTRY_POST_TYPE, 'entry_end_of_life_date', $meta_config);
+		register_post_meta(self::ENTRY_POST_TYPE, 'note_post_id', array_merge($meta_config, array('type' => 'integer')));
 		register_post_meta(self::ENTRY_POST_TYPE, 'notes', $meta_config);
 	}
 

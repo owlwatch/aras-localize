@@ -2,19 +2,30 @@
 import { computed, reactive, ref, watch } from 'vue'
 
 import DatePickerField from '@/components/shared/DatePickerField.vue'
+import NoteReferenceFields from '@/components/shared/NoteReferenceFields.vue'
 import ReleaseFormFields from '@/components/shared/ReleaseFormFields.vue'
 import { api } from '@/composables/api'
-import type { EntryRecord, PublicationStatus, ReleaseRecord } from '@/types/models'
+import type { EntryRecord, NoteRecord, NoteType, PublicationStatus, ReleaseRecord } from '@/types/models'
 
 type SortDirection = 'asc' | 'desc'
 type ReleaseSortKey = 'name' | 'buildNumber' | 'releaseDate' | 'endOfLifeDate' | 'notes' | 'publicationStatus'
 
 interface ReleaseFormState extends ReleaseRecord {
   copyFromReleaseId: number | null
+  newNoteTitle: string
+  newNoteContent: string
+  newNoteType: NoteType
+}
+
+interface InlineReleaseDraft extends Omit<ReleaseRecord, 'id'> {
+  newNoteTitle: string
+  newNoteContent: string
+  newNoteType: NoteType
 }
 
 const props = defineProps<{
   entries: EntryRecord[]
+  notes: NoteRecord[]
   releases: ReleaseRecord[]
   showIdColumns: boolean
 }>()
@@ -22,6 +33,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   'request:refresh': []
   'update:entries': [value: EntryRecord[]]
+  'update:notes': [value: NoteRecord[]]
   'update:releases': [value: ReleaseRecord[]]
 }>()
 
@@ -40,7 +52,7 @@ const sortState = reactive<{ key: ReleaseSortKey; direction: SortDirection }>({
 
 const releasesState = ref<ReleaseRecord[]>([])
 const entriesState = ref<EntryRecord[]>([])
-const inlineDrafts = reactive<Record<number, Omit<ReleaseRecord, 'id'>>>({})
+const inlineDrafts = reactive<Record<number, InlineReleaseDraft>>({})
 const savingRowIds = reactive<Record<number, boolean>>({})
 const cellMenus = reactive<Record<string, boolean>>({})
 
@@ -50,7 +62,12 @@ const form = reactive<ReleaseFormState>({
   buildNumber: '',
   releaseDate: '',
   endOfLifeDate: '',
+  noteId: null,
+  noteTitle: '',
   notes: '',
+  newNoteTitle: '',
+  newNoteContent: '',
+  newNoteType: 'info',
   publicationStatus: 'draft',
   copyFromReleaseId: null,
 })
@@ -74,7 +91,12 @@ watch(
         buildNumber: release.buildNumber,
         releaseDate: release.releaseDate,
         endOfLifeDate: release.endOfLifeDate,
+        noteId: release.noteId,
+        noteTitle: release.noteTitle,
         notes: release.notes,
+        newNoteTitle: '',
+        newNoteContent: '',
+        newNoteType: 'info',
         publicationStatus: release.publicationStatus,
       }
     })
@@ -125,6 +147,10 @@ function syncEntries(next: EntryRecord[]) {
   emit('update:entries', next)
 }
 
+function syncNotes(next: NoteRecord[]) {
+  emit('update:notes', next)
+}
+
 function statusColor(publicationStatus: PublicationStatus) {
   return publicationStatus === 'publish' ? 'success' : 'error'
 }
@@ -150,7 +176,12 @@ function buildReleaseUpdatePayload(item: ReleaseRecord) {
     buildNumber: draft.buildNumber.trim(),
     releaseDate: draft.releaseDate,
     endOfLifeDate: draft.endOfLifeDate,
+    noteId: draft.noteId,
+    noteTitle: draft.noteTitle,
     notes: draft.notes,
+    newNoteTitle: draft.newNoteTitle,
+    newNoteContent: draft.newNoteContent,
+    newNoteType: draft.newNoteType,
     publicationStatus: draft.publicationStatus,
   }
 }
@@ -162,7 +193,12 @@ function resetForm() {
     buildNumber: '',
     releaseDate: '',
     endOfLifeDate: '',
+    noteId: null,
+    noteTitle: '',
     notes: '',
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
     publicationStatus: 'draft',
     copyFromReleaseId: latestReleaseId.value,
   })
@@ -180,7 +216,13 @@ function openNew() {
 }
 
 function editItem(item: ReleaseRecord) {
-  Object.assign(form, { ...item, copyFromReleaseId: null })
+  Object.assign(form, {
+    ...item,
+    copyFromReleaseId: null,
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
+  })
   editingId.value = item.id
 }
 
@@ -220,34 +262,52 @@ async function submit() {
     buildNumber: form.buildNumber,
     releaseDate: form.releaseDate,
     endOfLifeDate: form.endOfLifeDate,
+    noteId: form.noteId,
+    noteTitle: form.noteTitle,
     notes: form.notes,
+    newNoteTitle: form.newNoteTitle,
+    newNoteContent: form.newNoteContent,
+    newNoteType: form.newNoteType,
     publicationStatus: form.publicationStatus,
     copyFromReleaseId: form.id ? null : form.copyFromReleaseId,
   }
 
-  const saved = await runWithLoading(() =>
-    form.id ? api.updateRelease({ ...form }) : api.createRelease(payload),
+  const releaseResponse = await runWithLoading(() =>
+    form.id
+      ? api.updateRelease({ ...form }).then((release) => ({ release, entries: [] }))
+      : api.createRelease(payload),
   )
+  const saved = releaseResponse.release
 
   const nextReleases = [...releasesState.value]
   upsertById(nextReleases, saved)
   syncReleases(nextReleases)
-  syncEntries(
-    entriesState.value.map((entry) => {
-      if (entry.innovatorReleaseId !== saved.id) {
-        return entry
-      }
+  const nextEntries = entriesState.value.map((entry) => {
+    if (entry.innovatorReleaseId !== saved.id) {
+      return entry
+    }
 
-      return {
-        ...entry,
-        releaseName: saved.name,
-        publicationStatus: saved.publicationStatus,
-      }
-    }),
-  )
+    return {
+      ...entry,
+      releaseName: saved.name,
+      publicationStatus: saved.publicationStatus,
+    }
+  })
 
-  if (!form.id && form.copyFromReleaseId) {
-    emit('request:refresh')
+  releaseResponse.entries.forEach((entry) => {
+    upsertById(nextEntries, entry)
+  })
+  syncEntries(nextEntries)
+
+  if (saved.note) {
+    const nextNotes = [...props.notes]
+    const index = nextNotes.findIndex((note) => note.id === saved.note!.id)
+    if (index === -1) {
+      nextNotes.unshift(saved.note)
+    } else {
+      nextNotes.splice(index, 1, saved.note)
+    }
+    syncNotes(nextNotes)
   }
 
   cancelEdit()
@@ -327,14 +387,6 @@ async function onPublicationToggle(item: ReleaseRecord, value: boolean | null) {
   }
 }
 
-function togglePublicationCell(item: ReleaseRecord) {
-  if (savingRowIds[item.id]) {
-    return
-  }
-
-  void onPublicationToggle(item, item.publicationStatus !== 'publish')
-}
-
 async function saveInlineItem(item: ReleaseRecord) {
   const draft = rowDraft(item)
 
@@ -349,8 +401,11 @@ async function saveInlineItem(item: ReleaseRecord) {
     && nextPayload.buildNumber === item.buildNumber
     && nextPayload.releaseDate === item.releaseDate
     && nextPayload.endOfLifeDate === item.endOfLifeDate
+    && nextPayload.noteId === item.noteId
     && nextPayload.notes === item.notes
     && nextPayload.publicationStatus === item.publicationStatus
+    && nextPayload.newNoteTitle.trim() === ''
+    && nextPayload.newNoteContent.trim() === ''
   ) {
     return
   }
@@ -376,6 +431,17 @@ async function saveInlineItem(item: ReleaseRecord) {
         }
       }),
     )
+
+    if (saved.note) {
+      const nextNotes = [...props.notes]
+      const index = nextNotes.findIndex((note) => note.id === saved.note!.id)
+      if (index === -1) {
+        nextNotes.unshift(saved.note)
+      } else {
+        nextNotes.splice(index, 1, saved.note)
+      }
+      syncNotes(nextNotes)
+    }
   } finally {
     savingRowIds[item.id] = false
   }
@@ -412,6 +478,7 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
             <div class="inline-form-grid inline-form-grid--two">
               <ReleaseFormFields
                 :model="form"
+                :notes="notes"
                 :ordered-releases="orderedReleases"
                 :publication-status-options="publicationStatusOptions"
               />
@@ -540,20 +607,13 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
             >
               <template #activator="{ props: menuProps }">
                 <button class="entry-edit-trigger entry-edit-trigger--notes" type="button" v-bind="menuProps">
-                  <span>{{ item.notes || '—' }}</span>
+                  <span>{{ item.noteTitle || item.notes || '—' }}</span>
                   <v-icon class="entry-edit-icon" icon="mdi-pencil-outline" size="14" />
                 </button>
               </template>
-              <v-card class="entry-edit-menu" min-width="320">
+              <v-card class="entry-edit-menu" min-width="360">
                 <v-card-text>
-                  <v-textarea
-                    v-model="rowDraft(item).notes"
-                    density="compact"
-                    hide-details
-                    label="Notes"
-                    rows="3"
-                    variant="outlined"
-                  />
+                  <NoteReferenceFields :model="rowDraft(item)" :notes="notes" />
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer />
@@ -564,7 +624,6 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
             </v-menu>
           </td>
           <td>
-            <button class="entry-publish-cell" type="button" @click="togglePublicationCell(item)">
             <v-switch
               class="entry-publish-switch"
               :color="statusColor(item.publicationStatus)"
@@ -572,10 +631,8 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
               hide-details
               :loading="savingRowIds[item.id]"
               :model-value="item.publicationStatus === 'publish'"
-              @click.stop
               @update:model-value="onPublicationToggle(item, $event)"
             />
-            </button>
           </td>
           <td class="actions-cell">
             <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
@@ -592,6 +649,7 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
       <v-card-text class="inline-form-grid inline-form-grid--two">
         <ReleaseFormFields
           :model="form"
+          :notes="notes"
           :ordered-releases="orderedReleases"
           :publication-status-options="publicationStatusOptions"
           show-copy-from
@@ -636,20 +694,8 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
   vertical-align: middle;
 }
 
-.entry-publish-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-width: 90px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
 .entry-publish-switch {
-  pointer-events: none;
+  min-width: 90px;
 }
 
 .entry-edit-trigger {

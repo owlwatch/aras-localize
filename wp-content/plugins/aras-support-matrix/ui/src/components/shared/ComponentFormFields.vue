@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import type { ComponentGroupRecord, ComponentRecord } from '@/types/models'
+import type { ComponentGroupRecord, ComponentRecord, PublicationStatus } from '@/types/models'
 
 const props = defineProps<{
   model: Pick<ComponentRecord, 'name' | 'description'> & {
     groups: Array<ComponentGroupRecord | string>
+    publicationStatus: PublicationStatus
   }
   groupOptions?: ComponentGroupRecord[]
+  publicationStatusOptions?: { title: string; value: PublicationStatus }[]
 }>()
 
 const groupSearch = ref('')
@@ -59,6 +61,15 @@ function commitGroupSearch() {
 <template>
   <v-text-field v-model="model.name" hide-details label="Name" variant="outlined" />
   <v-textarea v-model="model.description" hide-details label="Description" rows="2" variant="outlined" />
+  <v-select
+    v-model="model.publicationStatus"
+    hide-details
+    :items="publicationStatusOptions ?? []"
+    item-title="title"
+    item-value="value"
+    label="Status"
+    variant="outlined"
+  />
   <v-combobox
     v-model="model.groups"
     v-model:search="groupSearch"

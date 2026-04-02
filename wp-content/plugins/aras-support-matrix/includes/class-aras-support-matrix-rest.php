@@ -51,6 +51,8 @@ class ArasSupportMatrixRest
 		$this->register_item_route('releases', array($this, 'release'), array($this, 'update_release'), array($this, 'delete_release'));
 		$this->register_collection_route('entries', array($this, 'entries'), array($this, 'save_entry'));
 		$this->register_item_route('entries', array($this, 'entry'), array($this, 'update_entry'), array($this, 'delete_entry'));
+		$this->register_collection_route('notes', array($this, 'notes'), array($this, 'save_note'));
+		$this->register_item_route('notes', array($this, 'note'), array($this, 'update_note'), array($this, 'delete_note'));
 		$this->register_import_routes();
 	}
 
@@ -172,6 +174,7 @@ class ArasSupportMatrixRest
 			'components' => $this->get_components(),
 			'releases' => $this->get_releases($include_drafts),
 			'entries' => $this->get_entries($release_id, $component_ids, $include_drafts),
+			'notes' => $this->get_notes(),
 			'statuses' => $this->get_statuses(),
 		);
 
@@ -193,7 +196,7 @@ class ArasSupportMatrixRest
 		$post_id = wp_insert_post(
 			array(
 				'post_type' => ArasSupportMatrixPostTypes::COMPONENT_POST_TYPE,
-				'post_status' => 'publish',
+				'post_status' => $this->sanitize_publication_status((string) $request['publicationStatus']),
 				'post_title' => sanitize_text_field($request['name']),
 				'post_content' => wp_kses_post((string) $request['description']),
 			),
@@ -218,6 +221,7 @@ class ArasSupportMatrixRest
 				'ID' => $post_id,
 				'post_title' => sanitize_text_field($request['name']),
 				'post_content' => wp_kses_post((string) $request['description']),
+				'post_status' => $this->sanitize_publication_status((string) $request['publicationStatus']),
 			)
 		);
 
@@ -248,6 +252,7 @@ class ArasSupportMatrixRest
 	public function save_release(WP_REST_Request $request)
 	{
 		$copy_from_release_id = absint($request['copyFromReleaseId']);
+		$created_entries = array();
 		$post_id = wp_insert_post(
 			array(
 				'post_type' => ArasSupportMatrixPostTypes::RELEASE_POST_TYPE,
@@ -263,10 +268,15 @@ class ArasSupportMatrixRest
 
 		$this->save_release_meta($post_id, $request);
 		if ($copy_from_release_id) {
-			$this->duplicate_release_entries($copy_from_release_id, $post_id);
+			$created_entries = $this->duplicate_release_entries($copy_from_release_id, $post_id);
 		}
 
-		return rest_ensure_response($this->map_release(get_post($post_id)));
+		return rest_ensure_response(
+			array(
+				'release' => $this->map_release(get_post($post_id)),
+				'entries' => $created_entries,
+			)
+		);
 	}
 
 	public function update_release(WP_REST_Request $request)
@@ -288,6 +298,7 @@ class ArasSupportMatrixRest
 
 	private function duplicate_release_entries($source_release_id, $new_release_id)
 	{
+		$created_entries = array();
 		$entries = get_posts(
 			array(
 				'post_type' => ArasSupportMatrixPostTypes::ENTRY_POST_TYPE,
@@ -317,13 +328,21 @@ class ArasSupportMatrixRest
 			update_post_meta($new_entry_id, 'component_version_number', (string) get_post_meta($entry->ID, 'component_version_number', true));
 			update_post_meta($new_entry_id, 'component_release_number', (string) get_post_meta($entry->ID, 'component_release_number', true));
 			update_post_meta($new_entry_id, 'entry_end_of_life_date', (string) get_post_meta($entry->ID, 'entry_end_of_life_date', true));
+			update_post_meta($new_entry_id, 'note_post_id', (int) get_post_meta($entry->ID, 'note_post_id', true));
 			update_post_meta($new_entry_id, 'notes', (string) get_post_meta($entry->ID, 'notes', true));
 
 			$status_terms = wp_get_post_terms($entry->ID, ArasSupportMatrixPostTypes::STATUS_TAXONOMY, array('fields' => 'names'));
 			if (! is_wp_error($status_terms) && ! empty($status_terms)) {
 				wp_set_post_terms($new_entry_id, $status_terms, ArasSupportMatrixPostTypes::STATUS_TAXONOMY, false);
 			}
+
+			$mapped_entry = $this->map_entry(get_post($new_entry_id));
+			if ($mapped_entry) {
+				$created_entries[] = $mapped_entry;
+			}
 		}
+
+		return $created_entries;
 	}
 
 	public function delete_release(WP_REST_Request $request)
@@ -338,6 +357,63 @@ class ArasSupportMatrixRest
 	public function entries()
 	{
 		return rest_ensure_response($this->get_entries(0, array(), ArasSupportMatrixPlugin::current_user_can_manage()));
+	}
+
+	public function notes()
+	{
+		return rest_ensure_response($this->get_notes());
+	}
+
+	public function note(WP_REST_Request $request)
+	{
+		return rest_ensure_response($this->map_note(get_post((int) $request['id'])));
+	}
+
+	public function save_note(WP_REST_Request $request)
+	{
+		$post_id = wp_insert_post(
+			array(
+				'post_type' => ArasSupportMatrixPostTypes::NOTE_POST_TYPE,
+				'post_status' => 'publish',
+				'post_title' => sanitize_text_field((string) $request['title']),
+				'post_content' => wp_kses_post((string) $request['content']),
+			),
+			true
+		);
+
+		if (is_wp_error($post_id)) {
+			return $post_id;
+		}
+
+		update_post_meta($post_id, 'note_type', $this->sanitize_note_type((string) $request['type']));
+
+		return rest_ensure_response($this->map_note(get_post($post_id)));
+	}
+
+	public function update_note(WP_REST_Request $request)
+	{
+		$post_id = (int) $request['id'];
+
+		wp_update_post(
+			array(
+				'ID' => $post_id,
+				'post_title' => sanitize_text_field((string) $request['title']),
+				'post_content' => wp_kses_post((string) $request['content']),
+			)
+		);
+
+		update_post_meta($post_id, 'note_type', $this->sanitize_note_type((string) $request['type']));
+
+		return rest_ensure_response($this->map_note(get_post($post_id)));
+	}
+
+	public function delete_note(WP_REST_Request $request)
+	{
+		$note_id = (int) $request['id'];
+		$this->remove_note_references($note_id);
+		wp_delete_post($note_id, true);
+
+		return rest_ensure_response(array('deleted' => true));
 	}
 
 	public function entry(WP_REST_Request $request)
@@ -391,10 +467,11 @@ class ArasSupportMatrixRest
 
 	private function get_components()
 	{
+		$include_drafts = ArasSupportMatrixPlugin::current_user_can_manage();
 		$posts = get_posts(
 			array(
 				'post_type' => ArasSupportMatrixPostTypes::COMPONENT_POST_TYPE,
-				'post_status' => 'publish',
+				'post_status' => $include_drafts ? array('publish', 'draft') : 'publish',
 				'numberposts' => -1,
 				'orderby' => 'title',
 				'order' => 'ASC',
@@ -456,6 +533,21 @@ class ArasSupportMatrixRest
 		return array_values(array_filter(array_map(array($this, 'map_entry'), $posts)));
 	}
 
+	private function get_notes()
+	{
+		$posts = get_posts(
+			array(
+				'post_type' => ArasSupportMatrixPostTypes::NOTE_POST_TYPE,
+				'post_status' => 'publish',
+				'numberposts' => -1,
+				'orderby' => 'title',
+				'order' => 'ASC',
+			)
+		);
+
+		return array_values(array_filter(array_map(array($this, 'map_note'), $posts)));
+	}
+
 	private function get_statuses()
 	{
 		$terms = get_terms(
@@ -515,6 +607,7 @@ class ArasSupportMatrixRest
 			'name' => $post->post_title,
 			'description' => $post->post_content,
 			'groups' => $mapped_groups,
+			'publicationStatus' => $post->post_status,
 		);
 	}
 
@@ -524,13 +617,18 @@ class ArasSupportMatrixRest
 			return null;
 		}
 
+		$note = $this->resolve_note_for_post($post->ID);
+
 		return array(
 			'id' => $post->ID,
 			'name' => $post->post_title,
 			'buildNumber' => (string) get_post_meta($post->ID, 'build_number', true),
 			'releaseDate' => (string) get_post_meta($post->ID, 'release_date', true),
 			'endOfLifeDate' => (string) get_post_meta($post->ID, 'end_of_life_date', true),
-			'notes' => (string) get_post_meta($post->ID, 'notes', true),
+			'noteId' => $note ? $note['id'] : null,
+			'noteTitle' => $note ? $note['title'] : '',
+			'notes' => $note ? $note['content'] : '',
+			'note' => $note,
 			'publicationStatus' => $post->post_status,
 		);
 	}
@@ -543,6 +641,7 @@ class ArasSupportMatrixRest
 
 		$component_id = (int) get_post_meta($post->ID, 'component_post_id', true);
 		$release_id = (int) get_post_meta($post->ID, 'release_post_id', true);
+		$note = $this->resolve_note_for_post($post->ID);
 		$status_terms = wp_get_post_terms($post->ID, ArasSupportMatrixPostTypes::STATUS_TAXONOMY);
 		$status = (! is_wp_error($status_terms) && ! empty($status_terms)) ? $status_terms[0]->name : '';
 
@@ -557,7 +656,24 @@ class ArasSupportMatrixRest
 			'status' => $status,
 			'publicationStatus' => $post->post_status,
 			'endOfLifeDate' => (string) get_post_meta($post->ID, 'entry_end_of_life_date', true),
-			'notes' => (string) get_post_meta($post->ID, 'notes', true),
+			'noteId' => $note ? $note['id'] : null,
+			'noteTitle' => $note ? $note['title'] : '',
+			'notes' => $note ? $note['content'] : '',
+			'note' => $note,
+		);
+	}
+
+	private function map_note($post)
+	{
+		if (! $post instanceof WP_Post) {
+			return null;
+		}
+
+		return array(
+			'id' => $post->ID,
+			'title' => $post->post_title,
+			'content' => $post->post_content,
+			'type' => $this->sanitize_note_type((string) get_post_meta($post->ID, 'note_type', true)),
 		);
 	}
 
@@ -631,7 +747,7 @@ class ArasSupportMatrixRest
 		update_post_meta($post_id, 'build_number', sanitize_text_field((string) $request['buildNumber']));
 		update_post_meta($post_id, 'release_date', sanitize_text_field((string) $request['releaseDate']));
 		update_post_meta($post_id, 'end_of_life_date', sanitize_text_field((string) $request['endOfLifeDate']));
-		update_post_meta($post_id, 'notes', wp_kses_post((string) $request['notes']));
+		$this->save_note_reference($post_id, $request, true);
 	}
 
 	private function save_entry_data($post_id, WP_REST_Request $request)
@@ -643,7 +759,7 @@ class ArasSupportMatrixRest
 		update_post_meta($post_id, 'component_version_number', sanitize_text_field((string) $request['componentVersionNumber']));
 		update_post_meta($post_id, 'component_release_number', sanitize_text_field((string) $request['componentReleaseNumber']));
 		update_post_meta($post_id, 'entry_end_of_life_date', sanitize_text_field((string) $request['endOfLifeDate']));
-		update_post_meta($post_id, 'notes', sanitize_textarea_field((string) $request['notes']));
+		$this->save_note_reference($post_id, $request, false);
 
 		$status = sanitize_text_field((string) $request['status']);
 		if ($status !== '') {
@@ -677,9 +793,101 @@ class ArasSupportMatrixRest
 		}
 	}
 
+	private function remove_note_references($note_id)
+	{
+		$posts = get_posts(
+			array(
+				'post_type' => array(
+					ArasSupportMatrixPostTypes::RELEASE_POST_TYPE,
+					ArasSupportMatrixPostTypes::ENTRY_POST_TYPE,
+				),
+				'post_status' => 'any',
+				'numberposts' => -1,
+				'meta_key' => 'note_post_id',
+				'meta_value' => $note_id,
+			)
+		);
+
+		foreach ($posts as $post) {
+			delete_post_meta($post->ID, 'note_post_id');
+		}
+	}
+
 	private function sanitize_publication_status($status)
 	{
 		return $status === 'publish' ? 'publish' : 'draft';
+	}
+
+	private function sanitize_note_type($type)
+	{
+		return $type === 'warning' ? 'warning' : 'info';
+	}
+
+	private function save_note_reference($post_id, WP_REST_Request $request, $allow_rich_content = false)
+	{
+		$note_id = $this->resolve_note_id_from_request($request, $allow_rich_content);
+
+		if ($note_id > 0) {
+			update_post_meta($post_id, 'note_post_id', $note_id);
+			delete_post_meta($post_id, 'notes');
+			return;
+		}
+
+		delete_post_meta($post_id, 'note_post_id');
+		delete_post_meta($post_id, 'notes');
+	}
+
+	private function resolve_note_id_from_request(WP_REST_Request $request, $allow_rich_content = false)
+	{
+		$note_id = absint($request['noteId']);
+
+		if ($note_id > 0 && get_post_type($note_id) === ArasSupportMatrixPostTypes::NOTE_POST_TYPE) {
+			return $note_id;
+		}
+
+		$new_note_title = sanitize_text_field((string) $request['newNoteTitle']);
+		if ($new_note_title === '') {
+			return 0;
+		}
+
+		$existing_note = $this->find_post_by_title(ArasSupportMatrixPostTypes::NOTE_POST_TYPE, $new_note_title);
+		if ($existing_note instanceof WP_Post) {
+			return $existing_note->ID;
+		}
+
+		$new_note_content = (string) $request['newNoteContent'];
+		$created_note_id = wp_insert_post(
+			array(
+				'post_type' => ArasSupportMatrixPostTypes::NOTE_POST_TYPE,
+				'post_status' => 'publish',
+				'post_title' => $new_note_title,
+				'post_content' => $allow_rich_content ? wp_kses_post($new_note_content) : sanitize_textarea_field($new_note_content),
+			),
+			true
+		);
+
+		if (is_wp_error($created_note_id)) {
+			return 0;
+		}
+
+		update_post_meta($created_note_id, 'note_type', $this->sanitize_note_type((string) $request['newNoteType']));
+
+		return (int) $created_note_id;
+	}
+
+	private function resolve_note_for_post($post_id)
+	{
+		$note_id = (int) get_post_meta($post_id, 'note_post_id', true);
+		if ($note_id <= 0) {
+			return null;
+		}
+
+		$note_post = get_post($note_id);
+		if (! $note_post instanceof WP_Post || $note_post->post_type !== ArasSupportMatrixPostTypes::NOTE_POST_TYPE) {
+			return null;
+		}
+
+		return $this->map_note($note_post);
 	}
 
 	private function get_latest_release_post()

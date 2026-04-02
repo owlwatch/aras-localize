@@ -3,10 +3,10 @@ import { computed, reactive, ref, watch } from 'vue'
 
 import ComponentFormFields from '@/components/shared/ComponentFormFields.vue'
 import { api } from '@/composables/api'
-import type { ComponentGroupRecord, ComponentRecord, EntryRecord } from '@/types/models'
+import type { ComponentGroupRecord, ComponentRecord, EntryRecord, PublicationStatus } from '@/types/models'
 
 type SortDirection = 'asc' | 'desc'
-type ComponentSortKey = 'name' | 'description' | 'groups'
+type ComponentSortKey = 'name' | 'description' | 'groups' | 'publicationStatus'
 
 const props = defineProps<{
   components: ComponentRecord[]
@@ -34,17 +34,22 @@ const sortState = reactive<{ key: ComponentSortKey; direction: SortDirection }>(
 
 const componentsState = ref<ComponentRecord[]>([])
 const entriesState = ref<EntryRecord[]>([])
-const inlineDrafts = reactive<Record<number, Pick<ComponentRecord, 'name' | 'description'> & {
+const inlineDrafts = reactive<Record<number, Pick<ComponentRecord, 'name' | 'description' | 'publicationStatus'> & {
   groups: Array<ComponentGroupRecord | string>
 }>>({})
 const savingRowIds = reactive<Record<number, boolean>>({})
 const cellMenus = reactive<Record<string, boolean>>({})
+const publicationStatusOptions = [
+  { title: 'Draft', value: 'draft' as const },
+  { title: 'Published', value: 'publish' as const },
+]
 
 const form = reactive<ComponentRecord>({
   id: 0,
   name: '',
   description: '',
   groups: [],
+  publicationStatus: 'draft',
 })
 
 watch(() => props.components, (value) => { componentsState.value = [...value] }, { immediate: true })
@@ -60,6 +65,7 @@ watch(
         name: component.name,
         description: component.description,
         groups: [...component.groups],
+        publicationStatus: component.publicationStatus,
       }
     })
 
@@ -96,7 +102,7 @@ const groupOptions = computed(() => {
   )
 })
 
-const columnCount = computed(() => (props.showIdColumns ? 4 : 3))
+const columnCount = computed(() => (props.showIdColumns ? 5 : 4))
 
 function sortIndicator(active: boolean, direction: SortDirection) {
   if (!active) return ''
@@ -117,15 +123,23 @@ function groupNames(groups: ComponentGroupRecord[]) {
   return groups.map((group) => group.name).join(', ')
 }
 
+function publicationStatusLabel(status: PublicationStatus) {
+  return status === 'publish' ? 'Published' : 'Draft'
+}
+
+function publicationStatusColor(status: PublicationStatus) {
+  return status === 'publish' ? 'success' : 'error'
+}
+
 function rowDraft(item: ComponentRecord) {
   return inlineDrafts[item.id]
 }
 
-function cellMenuKey(itemId: number, field: 'name' | 'description' | 'groups') {
+function cellMenuKey(itemId: number, field: 'name' | 'description' | 'groups' | 'publicationStatus') {
   return `${itemId}:${field}`
 }
 
-function closeCellMenu(itemId: number, field: 'name' | 'description' | 'groups') {
+function closeCellMenu(itemId: number, field: 'name' | 'description' | 'groups' | 'publicationStatus') {
   cellMenus[cellMenuKey(itemId, field)] = false
 }
 
@@ -137,6 +151,7 @@ function buildComponentUpdatePayload(item: ComponentRecord) {
     name: draft.name.trim(),
     description: draft.description.trim(),
     groups: draft.groups,
+    publicationStatus: draft.publicationStatus,
   }
 }
 
@@ -153,6 +168,7 @@ async function saveInlineItem(item: ComponentRecord) {
     nextPayload.name === item.name
     && nextPayload.description === item.description
     && JSON.stringify(nextPayload.groups) === JSON.stringify(item.groups)
+    && nextPayload.publicationStatus === item.publicationStatus
   ) {
     return
   }
@@ -174,13 +190,24 @@ async function saveInlineItem(item: ComponentRecord) {
   }
 }
 
-async function saveInlineCell(item: ComponentRecord, field: 'name' | 'description' | 'groups') {
+async function saveInlineCell(item: ComponentRecord, field: 'name' | 'description' | 'groups' | 'publicationStatus') {
   await saveInlineItem(item)
   closeCellMenu(item.id, field)
 }
 
+async function onPublicationToggle(item: ComponentRecord, value: boolean | null) {
+  const draft = rowDraft(item)
+
+  if (!draft) {
+    return
+  }
+
+  draft.publicationStatus = value ? 'publish' : 'draft'
+  await saveInlineItem(item)
+}
+
 function resetForm() {
-  Object.assign(form, { id: 0, name: '', description: '', groups: [] })
+  Object.assign(form, { id: 0, name: '', description: '', groups: [], publicationStatus: 'draft' })
 }
 
 function cancelEdit() {
@@ -234,6 +261,7 @@ async function submit() {
     name: form.name,
     description: form.description,
     groups: form.groups,
+    publicationStatus: form.publicationStatus,
   }
 
   const saved = await runWithLoading(() =>
@@ -303,6 +331,7 @@ function removeItem(item: ComponentRecord) {
         <th><button class="sort-button" type="button" @click="toggleSort('name')"><span>Name</span><v-icon v-if="sortState.key === 'name'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
         <th><button class="sort-button" type="button" @click="toggleSort('description')"><span>Description</span><v-icon v-if="sortState.key === 'description'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
         <th><button class="sort-button" type="button" @click="toggleSort('groups')"><span>Groups</span><v-icon v-if="sortState.key === 'groups'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
+        <th><button class="sort-button" type="button" @click="toggleSort('publicationStatus')"><span>Status</span><v-icon v-if="sortState.key === 'publicationStatus'" class="sort-icon" :icon="sortIndicator(true, sortState.direction)" size="16" /></button></th>
         <th></th>
       </tr>
     </thead>
@@ -311,7 +340,7 @@ function removeItem(item: ComponentRecord) {
         <tr v-if="editingId === item.id">
           <td :colspan="columnCount + 1">
             <div class="inline-form-grid">
-              <ComponentFormFields :model="form" :group-options="groupOptions" />
+              <ComponentFormFields :model="form" :group-options="groupOptions" :publication-status-options="publicationStatusOptions" />
               <div class="button-row inline-form-actions">
                 <v-btn :loading="loading" color="primary" @click="submit">Save</v-btn>
                 <v-btn variant="text" @click="cancelEdit">Cancel</v-btn>
@@ -417,6 +446,17 @@ function removeItem(item: ComponentRecord) {
               </v-card>
             </v-menu>
           </td>
+          <td>
+            <v-switch
+              class="entry-publish-switch"
+              :color="publicationStatusColor(rowDraft(item).publicationStatus)"
+              density="compact"
+              hide-details
+              :loading="savingRowIds[item.id]"
+              :model-value="rowDraft(item).publicationStatus === 'publish'"
+              @update:model-value="onPublicationToggle(item, $event)"
+            />
+          </td>
           <td class="actions-cell">
             <v-btn size="small" variant="text" @click="editItem(item)">Edit</v-btn>
             <v-btn size="small" variant="text" color="error" @click="removeItem(item)">Delete</v-btn>
@@ -430,7 +470,7 @@ function removeItem(item: ComponentRecord) {
     <v-card>
       <v-card-title>Add Component</v-card-title>
       <v-card-text class="inline-form-grid">
-        <ComponentFormFields :model="form" :group-options="groupOptions" />
+        <ComponentFormFields :model="form" :group-options="groupOptions" :publication-status-options="publicationStatusOptions" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />

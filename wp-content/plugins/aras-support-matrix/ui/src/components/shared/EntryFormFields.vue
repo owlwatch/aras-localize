@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ComponentRecord, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
+import NoteReferenceFields from '@/components/shared/NoteReferenceFields.vue'
+import type { ComponentRecord, NoteRecord, NoteType, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
 
 defineProps<{
   model: {
@@ -9,9 +10,14 @@ defineProps<{
     componentVersionNumber: string
     componentReleaseNumber: string
     status: SupportStatus
+    noteId: number | null
     notes: string
+    newNoteTitle: string
+    newNoteContent: string
+    newNoteType: NoteType
   }
   components: ComponentRecord[]
+  notes: NoteRecord[]
   releases: ReleaseRecord[]
   statusOptions: SupportStatus[]
   publicationStatusOptions: Array<{ title: string; value: PublicationStatus }>
@@ -83,13 +89,9 @@ defineProps<{
     label="Support Status"
     variant="outlined"
   />
-  <v-textarea
-    v-model="model.notes"
-    class="inline-form-span"
-    label="Notes"
-    rows="2"
-    variant="outlined"
-  />
+  <div class="inline-form-span">
+    <NoteReferenceFields :model="model" :notes="notes" />
+  </div>
 </template>
 
 <style scoped>

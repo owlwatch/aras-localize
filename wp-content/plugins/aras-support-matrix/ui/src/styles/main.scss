@@ -150,6 +150,14 @@ body {
   background: #ffffff;
 }
 
+.aras-support-matrix-root .v-table.table-shell table tbody tr:nth-child(odd) {
+  background: #f8f8f8;
+}
+
+.aras-support-matrix-root .v-table.table-shell table tbody tr:nth-child(even) {
+  background: #ffffff;
+}
+
 .aras-support-matrix-root .v-window,
 .aras-support-matrix-root .v-window__container,
 .aras-support-matrix-root .v-window-item {

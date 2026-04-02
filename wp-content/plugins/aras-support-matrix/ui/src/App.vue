@@ -4,12 +4,13 @@ import { computed, onMounted, ref } from 'vue'
 import AdminManager from '@/components/AdminManager.vue'
 import PublicMatrix from '@/components/PublicMatrix.vue'
 import { api, getConfig } from '@/composables/api'
-import type { MatrixPayload } from '@/types/models'
+import type { EntryRecord, MatrixPayload, NoteRecord, ReleaseRecord } from '@/types/models'
 
 const data = ref<MatrixPayload>({
   components: [],
   releases: [],
   entries: [],
+  notes: [],
   statuses: [],
 })
 const loading = ref(true)
@@ -29,6 +30,7 @@ const publicData = computed<MatrixPayload>(() => {
     components: data.value.components,
     releases: data.value.releases.filter((release) => publishedReleaseIds.has(release.id)),
     entries: data.value.entries.filter((entry) => publishedReleaseIds.has(entry.innovatorReleaseId)),
+    notes: data.value.notes,
     statuses: data.value.statuses,
   }
 })
@@ -44,6 +46,78 @@ async function loadData() {
   } finally {
     loading.value = false
   }
+}
+
+function handleComponentsUpdate(components: MatrixPayload['components']) {
+  data.value.components = components
+}
+
+function handleEntriesUpdate(entries: EntryRecord[]) {
+  data.value.entries = entries
+}
+
+function handleReleasesUpdate(releases: ReleaseRecord[]) {
+  data.value.releases = releases
+}
+
+function handleNotesUpdate(notes: NoteRecord[]) {
+  const noteMap = new Map(notes.map((note) => [note.id, note]))
+
+  data.value.notes = notes
+  data.value.releases = data.value.releases.map((release) => {
+    if (!release.noteId) {
+      return {
+        ...release,
+        note: undefined,
+      }
+    }
+
+    const nextNote = noteMap.get(release.noteId)
+
+    if (!nextNote) {
+      return {
+        ...release,
+        noteId: null,
+        noteTitle: '',
+        notes: '',
+        note: undefined,
+      }
+    }
+
+    return {
+      ...release,
+      noteTitle: nextNote.title,
+      notes: nextNote.content,
+      note: nextNote,
+    }
+  })
+  data.value.entries = data.value.entries.map((entry) => {
+    if (!entry.noteId) {
+      return {
+        ...entry,
+        note: undefined,
+      }
+    }
+
+    const nextNote = noteMap.get(entry.noteId)
+
+    if (!nextNote) {
+      return {
+        ...entry,
+        noteId: null,
+        noteTitle: '',
+        notes: '',
+        note: undefined,
+      }
+    }
+
+    return {
+      ...entry,
+      noteTitle: nextNote.title,
+      notes: nextNote.content,
+      note: nextNote,
+    }
+  })
 }
 
 onMounted(loadData)
@@ -88,8 +162,13 @@ onMounted(loadData)
                 <AdminManager
                   :components="data.components"
                   :entries="data.entries"
+                  :notes="data.notes"
                   :releases="data.releases"
                   :statuses="data.statuses"
+                  @update:components="handleComponentsUpdate"
+                  @update:entries="handleEntriesUpdate"
+                  @update:notes="handleNotesUpdate"
+                  @update:releases="handleReleasesUpdate"
                   @refresh="loadData"
                 />
               </v-window-item>
@@ -99,6 +178,7 @@ onMounted(loadData)
                   :components="publicData.components"
                   :entries="publicData.entries"
                   :is-admin="isAdmin"
+                  :notes="publicData.notes"
                   :releases="publicData.releases"
                   :statuses="publicData.statuses"
                 />
@@ -111,6 +191,7 @@ onMounted(loadData)
             :components="publicData.components"
             :entries="publicData.entries"
             :is-admin="false"
+            :notes="publicData.notes"
             :releases="publicData.releases"
             :statuses="publicData.statuses"
           />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import EntryFormFields from '@/components/shared/EntryFormFields.vue'
-import type { ComponentRecord, EntryRecord, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, EntryRecord, NoteRecord, NoteType, PublicationStatus, ReleaseRecord, SupportStatus } from '@/types/models'
 
 defineProps<{
   components: ComponentRecord[]
@@ -13,10 +13,15 @@ defineProps<{
     componentVersionNumber: string
     componentReleaseNumber: string
     status: SupportStatus
+    noteId: number | null
     notes: string
+    newNoteTitle: string
+    newNoteContent: string
+    newNoteType: NoteType
   }
   isAdmin: boolean
   loading: boolean
+  notes: NoteRecord[]
   releases: ReleaseRecord[]
   sortIcon: (column: 'component' | 'version') => string
   statusOptions: SupportStatus[]
@@ -38,6 +43,14 @@ function statusColor(status: EntryRecord['status']) {
   if (status === 'Certified') return 'success'
   if (status === 'Supported') return 'info'
   return 'error'
+}
+
+function noteIcon(entry: EntryRecord) {
+  return entry.note?.type === 'warning' ? 'mdi-alert-outline' : 'mdi-information-outline'
+}
+
+function noteIconClass(entry: EntryRecord) {
+  return entry.note?.type === 'warning' ? 'entry-note-icon--warning' : 'entry-note-icon--info'
 }
 </script>
 
@@ -70,6 +83,7 @@ function statusColor(status: EntryRecord['status']) {
               <EntryFormFields
                 :model="entryForm"
                 :components="components"
+                :notes="notes"
                 :publication-status-options="publicationStatusOptions"
                 :releases="releases"
                 :status-options="statusOptions"
@@ -100,7 +114,13 @@ function statusColor(status: EntryRecord['status']) {
               {{ entry.status }}
             </v-chip>
           </td>
-          <td>{{ entry.notes || '—' }}</td>
+          <td>
+            <div v-if="entry.notes" class="entry-note-cell">
+              <v-icon class="entry-note-icon" :class="noteIconClass(entry)" :icon="noteIcon(entry)" size="16" />
+              <span>{{ entry.notes }}</span>
+            </div>
+            <template v-else>—</template>
+          </td>
         </tr>
       </template>
     </tbody>
@@ -151,6 +171,25 @@ function statusColor(status: EntryRecord['status']) {
 
 .inline-form-grid--three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.entry-note-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.entry-note-icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.entry-note-icon--info {
+  color: #0F66CB;
+}
+
+.entry-note-icon--warning {
+  color: #D49623;
 }
 
 .inline-form-actions {
