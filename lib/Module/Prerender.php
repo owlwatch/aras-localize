@@ -15,7 +15,33 @@ class Prerender {
      * @return void
      */
     public function register() {
+        add_action('init', [$this, 'register_rewrite_endpoint']);
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
+        add_filter('redirect_canonical', [$this, 'maybe_disable_canonical_redirect'], 10, 2);
+    }
+
+    /**
+     * Register the /prerender endpoint with WordPress rewrites.
+     *
+     * @return void
+     */
+    public function register_rewrite_endpoint() {
+        add_rewrite_endpoint('prerender', EP_ALL);
+    }
+
+    /**
+     * Avoid canonical redirects changing /prerender requests before proxying.
+     *
+     * @param string|false $redirect_url
+     * @param string $requested_url
+     * @return string|false
+     */
+    public function maybe_disable_canonical_redirect($redirect_url, $requested_url) {
+        if ($this->request_has_prerender_path_suffix() || isset($_REQUEST['prerender'])) {
+            return false;
+        }
+
+        return $redirect_url;
     }
 
     /**

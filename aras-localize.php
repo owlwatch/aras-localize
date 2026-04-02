@@ -20,6 +20,16 @@ require_once __DIR__ . '/lib/Module/Sitemap.php';
 require_once __DIR__ . '/lib/Module/Prerender.php';
 require_once __DIR__ . '/lib/ACF.php';
 
+register_activation_hook(__FILE__, function() {
+    $prerender = new \Aras\Localize\Module\Prerender();
+    $prerender->register_rewrite_endpoint();
+    flush_rewrite_rules();
+});
+
+register_deactivation_hook(__FILE__, function() {
+    flush_rewrite_rules();
+});
+
 add_action('plugins_loaded', function() {
     $acf = new \Aras\Localize\ACF();
     $acf->register();
