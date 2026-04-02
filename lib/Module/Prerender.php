@@ -121,6 +121,10 @@ class Prerender {
      * @return bool
      */
     private function should_prerender_request() {
+        if ($this->get_current_language() === Common::get_source_language()) {
+            return false;
+        }
+
         if (isset($_REQUEST['prerender'])) {
             return true;
         }
@@ -146,6 +150,31 @@ class Prerender {
         }
 
         return false;
+    }
+
+    /**
+     * Get the current language code from the request URL.
+     *
+     * @return string
+     */
+    private function get_current_language() {
+        if (empty($_SERVER['REQUEST_URI'])) {
+            return Common::get_source_language();
+        }
+
+        $request_path = wp_parse_url((string) $_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        if (!is_string($request_path) || $request_path === '') {
+            return Common::get_source_language();
+        }
+
+        $parts = explode('/', $request_path);
+        $languages = Common::get_languages();
+
+        if (isset($parts[1]) && in_array($parts[1], $languages, true)) {
+            return $parts[1];
+        }
+
+        return Common::get_source_language();
     }
 
     /**
