@@ -80,6 +80,12 @@ class Prerender {
         $current_url = add_query_arg( '_nocache', time(), $current_url ); // prevent caching of the prerender request
         
         $target_url = $server . rawurlencode($current_url);
+
+        // if $_REQUEST['nocache'] is set, add cache=false to the url
+        if (isset($_REQUEST['nocache'])) {
+            $target_url = add_query_arg('cache', 'false', $target_url);
+        }
+
         $response = wp_remote_get($target_url, [
             'timeout' => 20,
             'redirection' => 5,
@@ -91,7 +97,6 @@ class Prerender {
             return;
         }
 
-        error_log('hi');
 
         $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
