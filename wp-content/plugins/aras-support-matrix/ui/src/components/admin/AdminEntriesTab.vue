@@ -114,6 +114,10 @@ watch(
 
     value.forEach((entry) => {
       activeIds.add(entry.id)
+      if (savingRowIds[entry.id] && inlineDrafts[entry.id]) {
+        return
+      }
+
       inlineDrafts[entry.id] = {
         componentVersionNumber: entry.componentVersionNumber,
         componentReleaseNumber: entry.componentReleaseNumber,
@@ -298,6 +302,18 @@ async function saveInlineItem(item: EntryRecord) {
 
   try {
     const saved = await api.updateEntry(nextPayload)
+    inlineDrafts[item.id] = {
+      componentVersionNumber: saved.componentVersionNumber,
+      componentReleaseNumber: saved.componentReleaseNumber,
+      status: saved.status || null,
+      publicationStatus: saved.publicationStatus,
+      noteId: saved.noteId,
+      noteTitle: saved.noteTitle,
+      notes: saved.notes,
+      newNoteTitle: '',
+      newNoteContent: '',
+      newNoteType: 'info',
+    }
     const nextEntries = [...entriesState.value]
     upsertById(nextEntries, saved)
     syncEntries(nextEntries)
@@ -738,6 +754,7 @@ watch(() => form.status, () => {
                 class="entry-publish-switch"
                 :color="statusColor(rowDraft(item).publicationStatus)"
                 density="compact"
+                :disabled="savingRowIds[item.id]"
                 hide-details
                 :loading="savingRowIds[item.id]"
                 :model-value="rowDraft(item).publicationStatus === 'publish'"

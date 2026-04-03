@@ -86,6 +86,10 @@ watch(
 
     value.forEach((release) => {
       activeIds.add(release.id)
+      if (savingRowIds[release.id] && inlineDrafts[release.id]) {
+        return
+      }
+
       inlineDrafts[release.id] = {
         name: release.name,
         buildNumber: release.buildNumber,
@@ -349,42 +353,14 @@ function removeItem(item: ReleaseRecord) {
 }
 
 async function onPublicationToggle(item: ReleaseRecord, value: boolean | null) {
-  if (savingRowIds[item.id]) {
+  const draft = rowDraft(item)
+
+  if (!draft) {
     return
   }
 
-  const publicationStatus: PublicationStatus = value ? 'publish' : 'draft'
-
-  if (item.publicationStatus === publicationStatus) {
-    return
-  }
-
-  savingRowIds[item.id] = true
-
-  try {
-    const saved = await api.updateRelease({
-      ...item,
-      publicationStatus,
-    })
-
-    syncReleases(
-      releasesState.value.map((release) => (release.id === saved.id ? saved : release)),
-    )
-    syncEntries(
-      entriesState.value.map((entry) => {
-        if (entry.innovatorReleaseId !== saved.id) {
-          return entry
-        }
-
-        return {
-          ...entry,
-          publicationStatus: saved.publicationStatus,
-        }
-      }),
-    )
-  } finally {
-    savingRowIds[item.id] = false
-  }
+  draft.publicationStatus = value ? 'publish' : 'draft'
+  void saveInlineItem(item)
 }
 
 async function saveInlineItem(item: ReleaseRecord) {
@@ -414,6 +390,19 @@ async function saveInlineItem(item: ReleaseRecord) {
 
   try {
     const saved = await api.updateRelease(nextPayload)
+    inlineDrafts[item.id] = {
+      name: saved.name,
+      buildNumber: saved.buildNumber,
+      releaseDate: saved.releaseDate,
+      endOfLifeDate: saved.endOfLifeDate,
+      noteId: saved.noteId,
+      noteTitle: saved.noteTitle,
+      notes: saved.notes,
+      newNoteTitle: '',
+      newNoteContent: '',
+      newNoteType: 'info',
+      publicationStatus: saved.publicationStatus,
+    }
 
     syncReleases(
       releasesState.value.map((release) => (release.id === saved.id ? saved : release)),
@@ -626,11 +615,12 @@ async function saveInlineCell(item: ReleaseRecord, field: 'name' | 'buildNumber'
           <td>
             <v-switch
               class="entry-publish-switch"
-              :color="statusColor(item.publicationStatus)"
+              :color="statusColor(rowDraft(item).publicationStatus)"
               density="compact"
+              :disabled="savingRowIds[item.id]"
               hide-details
               :loading="savingRowIds[item.id]"
-              :model-value="item.publicationStatus === 'publish'"
+              :model-value="rowDraft(item).publicationStatus === 'publish'"
               @update:model-value="onPublicationToggle(item, $event)"
             />
           </td>

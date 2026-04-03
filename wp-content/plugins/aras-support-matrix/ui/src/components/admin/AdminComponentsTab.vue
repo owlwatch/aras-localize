@@ -61,6 +61,10 @@ watch(
 
     value.forEach((component) => {
       activeIds.add(component.id)
+      if (savingRowIds[component.id] && inlineDrafts[component.id]) {
+        return
+      }
+
       inlineDrafts[component.id] = {
         name: component.name,
         description: component.description,
@@ -177,6 +181,12 @@ async function saveInlineItem(item: ComponentRecord) {
 
   try {
     const saved = await api.updateComponent(nextPayload)
+    inlineDrafts[item.id] = {
+      name: saved.name,
+      description: saved.description,
+      groups: [...saved.groups],
+      publicationStatus: saved.publicationStatus,
+    }
     const nextComponents = [...componentsState.value]
     upsertById(nextComponents, saved)
     syncComponents(nextComponents)
@@ -451,6 +461,7 @@ function removeItem(item: ComponentRecord) {
               class="entry-publish-switch"
               :color="publicationStatusColor(rowDraft(item).publicationStatus)"
               density="compact"
+              :disabled="savingRowIds[item.id]"
               hide-details
               :loading="savingRowIds[item.id]"
               :model-value="rowDraft(item).publicationStatus === 'publish'"

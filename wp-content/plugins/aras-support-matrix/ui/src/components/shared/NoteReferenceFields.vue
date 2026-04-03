@@ -63,19 +63,22 @@ function setNoteMode(mode: 'none' | 'existing' | 'new') {
 
 <template>
   <div class="note-reference-fields">
-    <v-btn-toggle
-      :model-value="noteMode"
-      color="primary"
-      density="compact"
-      class="note-mode-toggle"
-      mandatory
-      variant="outlined"
-      @update:model-value="setNoteMode($event)"
-    >
-      <v-btn value="none">None</v-btn>
-      <v-btn value="existing">Choose Existing</v-btn>
-      <v-btn value="new">New Note</v-btn>
-    </v-btn-toggle>
+    <div class="note-mode-row">
+      <span class="note-mode-label">Notes</span>
+      <v-btn-toggle
+        :model-value="noteMode"
+        color="primary"
+        density="compact"
+        class="note-mode-toggle"
+        mandatory
+        variant="outlined"
+        @update:model-value="setNoteMode($event)"
+      >
+        <v-btn value="none">None</v-btn>
+        <v-btn value="existing">Existing</v-btn>
+        <v-btn value="new">New</v-btn>
+      </v-btn-toggle>
+    </div>
 
     <v-select
       v-if="noteMode === 'existing'"
@@ -135,6 +138,19 @@ function setNoteMode(mode: 'none' | 'existing' | 'new') {
 .note-reference-fields {
   display: grid;
   gap: 12px;
+}
+
+.note-mode-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.note-mode-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4d6179;
 }
 
 .note-mode-toggle {
