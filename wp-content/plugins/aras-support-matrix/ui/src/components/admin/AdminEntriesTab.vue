@@ -858,6 +858,10 @@ watch(() => form.status, () => {
   min-width: 90px;
 }
 
+.entry-publish-switch :deep(.v-selection-control__input input) {
+  height: 100% !important;
+}
+
 .entry-edit-trigger {
   display: flex;
   align-items: center;
