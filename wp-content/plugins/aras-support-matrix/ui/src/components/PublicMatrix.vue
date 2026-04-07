@@ -413,20 +413,6 @@ async function submitEntry() {
 .public-matrix :deep([tabindex]:focus),
 .public-matrix :deep([tabindex]:focus-visible) {
   outline: none;
-  box-shadow: none;
-}
-
-.public-matrix :deep(.v-btn--focused),
-.public-matrix :deep(.v-field--focused),
-.public-matrix :deep(.v-selection-control--focused) {
-  box-shadow: none;
-}
-
-.public-matrix :deep(.v-field--focused .v-field__outline),
-.public-matrix :deep(.v-btn__overlay),
-.public-matrix :deep(.v-btn__underlay) {
-  --v-theme-overlay-multiplier: 0;
-  opacity: 0;
 }
 
 .controls-row {
