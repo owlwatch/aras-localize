@@ -245,7 +245,7 @@ async function submitEntry() {
 </script>
 
 <template>
-  <div class="matrix-stack">
+  <div class="matrix-stack public-matrix">
     <v-alert
       type="info"
       variant="tonal"
@@ -398,6 +398,35 @@ async function submitEntry() {
 .matrix-stack {
   display: grid;
   gap: 20px;
+}
+
+.public-matrix :deep(a:focus),
+.public-matrix :deep(a:focus-visible),
+.public-matrix :deep(button:focus),
+.public-matrix :deep(button:focus-visible),
+.public-matrix :deep(input:focus),
+.public-matrix :deep(input:focus-visible),
+.public-matrix :deep(select:focus),
+.public-matrix :deep(select:focus-visible),
+.public-matrix :deep(textarea:focus),
+.public-matrix :deep(textarea:focus-visible),
+.public-matrix :deep([tabindex]:focus),
+.public-matrix :deep([tabindex]:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+.public-matrix :deep(.v-btn--focused),
+.public-matrix :deep(.v-field--focused),
+.public-matrix :deep(.v-selection-control--focused) {
+  box-shadow: none;
+}
+
+.public-matrix :deep(.v-field--focused .v-field__outline),
+.public-matrix :deep(.v-btn__overlay),
+.public-matrix :deep(.v-btn__underlay) {
+  --v-theme-overlay-multiplier: 0;
+  opacity: 0;
 }
 
 .controls-row {
