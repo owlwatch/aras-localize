@@ -73,6 +73,15 @@ function noteIconClass(entry: EntryRecord) {
   border-color: #E0E0E0;
 }
 
+.result-card :deep(hr) {
+  border: 0;
+  margin: 0;
+  height: 0;
+  box-shadow: none;
+  background-image: none;
+  color: inherit;
+}
+
 .component-card-header {
   background: #F3F3F3;
 }

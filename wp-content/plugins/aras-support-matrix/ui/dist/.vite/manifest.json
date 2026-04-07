@@ -1,13 +1,13 @@
 {
-  "_main-B_nhoD6O.css": {
-    "file": "assets/main-B_nhoD6O.css",
-    "src": "_main-B_nhoD6O.css"
+  "_main-BWUwoNG_.css": {
+    "file": "assets/main-BWUwoNG_.css",
+    "src": "_main-BWUwoNG_.css"
   },
-  "_main-e58G7ds2.js": {
-    "file": "assets/main-e58G7ds2.js",
+  "_main-D3xk6CWJ.js": {
+    "file": "assets/main-D3xk6CWJ.js",
     "name": "main",
     "css": [
-      "assets/main-B_nhoD6O.css"
+      "assets/main-BWUwoNG_.css"
     ],
     "assets": [
       "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -33,24 +33,24 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "src/embed.ts": {
-    "file": "assets/embed--5-gfR2l.js",
+    "file": "assets/embed-BovcfUjT.js",
     "name": "embed",
     "src": "src/embed.ts",
     "isEntry": true,
     "imports": [
-      "_main-e58G7ds2.js"
+      "_main-D3xk6CWJ.js"
     ],
     "css": [
       "assets/embed-CRF3QBRb.css"
     ]
   },
   "src/main.ts": {
-    "file": "assets/main-DyFa7jbU.js",
+    "file": "assets/main-CnGcQ2hn.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
     "imports": [
-      "_main-e58G7ds2.js"
+      "_main-D3xk6CWJ.js"
     ],
     "css": [
       "assets/main-BHLPFaEN.css"
