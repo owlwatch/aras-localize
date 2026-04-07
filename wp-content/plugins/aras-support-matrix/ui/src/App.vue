@@ -213,6 +213,13 @@ onMounted(loadData)
   }
 }
 
+.v-overlay-container {
+  &:deep(:focus-visible:not(button):not(input)){
+    outline: initial;
+    outline-offset: initial;
+  }
+}
+
 .app-background {
   display: none;
 }
