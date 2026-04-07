@@ -132,6 +132,40 @@ function noteIconClass(entry: EntryRecord) {
   background: rgba(255, 255, 255, 0.88);
 }
 
+.table-shell :deep(.v-table__wrapper) {
+  border: 0;
+  box-shadow: none;
+}
+
+.table-shell :deep(table) {
+  border: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.table-shell :deep(caption),
+.table-shell :deep(colgroup),
+.table-shell :deep(col),
+.table-shell :deep(thead),
+.table-shell :deep(tbody),
+.table-shell :deep(tfoot),
+.table-shell :deep(tr),
+.table-shell :deep(th),
+.table-shell :deep(td) {
+  border: 0;
+  box-shadow: none;
+  background-image: none;
+}
+
+.table-shell :deep(th::before),
+.table-shell :deep(th::after),
+.table-shell :deep(td::before),
+.table-shell :deep(td::after) {
+  display: none;
+}
+
 .sort-button {
   display: inline-flex;
   align-items: center;
