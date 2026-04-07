@@ -206,6 +206,11 @@ onMounted(loadData)
 .app-shell {
   position: relative;
   min-height: 100vh;
+
+  &:deep(:focus-visible:not(button):not(input)){
+    outline: initial;
+    outline-offset: initial;
+  }
 }
 
 .app-background {
