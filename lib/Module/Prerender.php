@@ -58,21 +58,10 @@ class Prerender {
             return;
         }
 
-        // lets log the user agent and request URI for debugging prerender
-        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '';
-        $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
-        error_log( 'Prerender check - User Agent: ' . $user_agent . ' Request URI: ' . $request_uri );
-
         if (!$this->should_prerender_request()) {
-
-            // log that we aren't prerendering this request for debugging
-            error_log( 'Not prerendering request: ' . $request_uri );
             return;
         }
-
-        // log that we are prerendering this request for debugging
-        error_log( 'Prerendering request: ' . $request_uri );
-
+        
         $server = $this->get_prerender_server();
         $current_url = Common::get_current_url(false);
         // for testing, lets make sure that xplm.local is converted to xplm.com
@@ -121,10 +110,6 @@ class Prerender {
         if ($status_code > 0) {
             status_header($status_code);
         }
-
-        error_log( 'Prerender response: ' . $status_code . ' for ' . $current_url );
-        error_log( 'Response headers: ' . print_r($headers, true) );
-        error_log( 'Response body: ' . substr($body, 0, 500) ); // log first 500 chars of body for debugging
 
         // $this->send_response_headers($headers);
         echo $body;
