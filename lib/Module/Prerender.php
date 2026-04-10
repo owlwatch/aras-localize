@@ -58,9 +58,20 @@ class Prerender {
             return;
         }
 
+        // lets log the user agent and request URI for debugging prerender
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '';
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+        error_log( 'Prerender check - User Agent: ' . $user_agent . ' Request URI: ' . $request_uri );
+
         if (!$this->should_prerender_request()) {
+
+            // log that we aren't prerendering this request for debugging
+            error_log( 'Not prerendering request: ' . $request_uri );
             return;
         }
+
+        // log that we are prerendering this request for debugging
+        error_log( 'Prerendering request: ' . $request_uri );
 
         $server = $this->get_prerender_server();
         $current_url = Common::get_current_url(false);
@@ -101,6 +112,11 @@ class Prerender {
         $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
         $headers = wp_remote_retrieve_headers($response);
+
+        if( $status_code !== 200 ){
+            error_log( 'Prerender request returned non-200 status: ' . $status_code . ' for ' . $current_url );
+            return;
+        }
 
         if ($status_code > 0) {
             status_header($status_code);
