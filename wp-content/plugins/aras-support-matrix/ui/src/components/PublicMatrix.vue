@@ -285,20 +285,27 @@ async function submitEntry() {
         </v-select>
 
         <div v-if="selectedRelease" class="release-meta">
-          <span class="release-meta-label release-meta-label--eol">EOL</span>
-          <span
-            class="release-meta-value"
-            :class="{ 'release-meta-value--expired': selectedReleaseIsPastEol }"
-          >
-            {{ formatDate(selectedRelease.endOfLifeDate) }}
-          </span>
-          <v-btn
-            v-if="selectedRelease.notes"
-            :icon="noteIcon(selectedRelease.note?.type)"
-            size="small"
-            variant="text"
-            @click="releaseNoteDialogOpen = true"
-          />
+          <div class="release-meta-row release-meta-row--eol">
+            <span class="release-meta-label release-meta-label--eol">EOL</span>
+            <span
+              class="release-meta-value"
+              :class="{ 'release-meta-value--expired': selectedReleaseIsPastEol }"
+            >
+              {{ formatDate(selectedRelease.endOfLifeDate) }}
+            </span>
+          </div>
+          <div v-if="selectedRelease.notes" class="release-meta-row release-meta-row--note">
+            <v-btn
+              class="release-note-trigger"
+              :icon="noteIcon(selectedRelease.note?.type)"
+              size="x-small"
+              variant="text"
+              @click="releaseNoteDialogOpen = true"
+            />
+            <span class="release-meta-note-text" :title="selectedRelease.notes">
+              {{ selectedRelease.notes }}
+            </span>
+          </div>
         </div>
 
         <v-btn-toggle v-model="viewMode" color="primary" density="comfortable" mandatory variant="outlined">
@@ -337,17 +344,16 @@ async function submitEntry() {
 
       <v-dialog v-model="releaseNoteDialogOpen" max-width="420">
         <v-card>
-          <v-card-title>Release Information</v-card-title>
+          <v-card-title>
+            <v-icon class="release-note-icon" :class="releaseNoteToneClass(selectedRelease?.note?.type)" :icon="noteIcon(selectedRelease?.note?.type)" size="30" />
+            {{ selectedRelease?.name }} Information
+          </v-card-title>
           <v-card-text>
-            <div class="release-note-title">
-              <v-icon class="release-note-icon" :class="releaseNoteToneClass(selectedRelease?.note?.type)" :icon="noteIcon(selectedRelease?.note?.type)" size="18" />
-              <span>{{ selectedRelease?.name }}</span>
-            </div>
+            <p class="release-note-copy">{{ selectedRelease?.notes }}</p>
             <div class="release-note-eol" :class="{ 'release-note-eol--expired': selectedReleaseIsPastEol }">
               <span class="release-note-eol-label">EOL:</span>
               {{ formatDate(selectedRelease?.endOfLifeDate || '') }}
             </div>
-            <p class="release-note-copy">{{ selectedRelease?.notes }}</p>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -423,10 +429,28 @@ async function submitEntry() {
 
 .release-meta {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   padding: 0 4px;
   color: #4d6179;
+  min-width: 0;
+  max-width: 320px;
+}
+
+.release-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.release-meta-row--eol {
+  flex-wrap: wrap;
+}
+
+.release-meta-row--note {
+  width: 100%;
 }
 
 .release-meta-label {
@@ -447,6 +471,23 @@ async function submitEntry() {
 
 .release-meta-value--expired {
   color: #c62828;
+}
+
+.release-note-trigger {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+}
+
+.release-note-trigger :deep(.v-btn__content > .v-icon) {
+  font-size: 16px;
+}
+
+.release-meta-note-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .release-note-title {
@@ -486,7 +527,8 @@ async function submitEntry() {
 }
 
 .release-note-copy {
-  margin: 0;
+  font-size: 1rem;
+  margin: 0 0 1rem;
   white-space: pre-wrap;
 }
 
@@ -531,6 +573,7 @@ async function submitEntry() {
   .release-meta {
     width: 100%;
     padding-inline: 0;
+    max-width: none;
   }
 }
 </style>
