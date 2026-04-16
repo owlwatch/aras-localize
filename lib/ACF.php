@@ -88,6 +88,22 @@ class ACF {
                     ],
                 ],
                 [
+                    'key' => 'field_aras_localize_prerender_auth_token',
+                    'label' => 'Prerender Authorization Token',
+                    'name' => Prerender::FIELD_PRERENDER_AUTH_TOKEN,
+                    'type' => 'password',
+                    'instructions' => 'Optional bearer token sent as the Authorization header to the prerender service.',
+                    'conditional_logic' => [
+                        [
+                            [
+                                'field' => 'field_aras_localize_enable_prerender',
+                                'operator' => '==',
+                                'value' => '1',
+                            ],
+                        ],
+                    ],
+                ],
+                [
                     'key' => 'field_aras_localize_prerender_user_agents',
                     'label' => 'User Agents',
                     'name' => Prerender::FIELD_PRERENDER_USER_AGENTS,

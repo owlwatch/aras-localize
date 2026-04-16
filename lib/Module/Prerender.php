@@ -6,6 +6,7 @@ use Aras\Localize\Util\Common;
 class Prerender {
     const FIELD_ENABLE_PRERENDER = 'enable_prerender';
     const FIELD_PRERENDER_SERVER = 'prerender_server';
+    const FIELD_PRERENDER_AUTH_TOKEN = 'prerender_auth_token';
     const FIELD_PRERENDER_USER_AGENTS = 'prerender_user_agents';
     const SUB_FIELD_USER_AGENT_PATTERN = 'pattern';
 
@@ -288,6 +289,15 @@ class Prerender {
     }
 
     /**
+     * Get prerender authorization token setting.
+     *
+     * @return string
+     */
+    private function get_prerender_auth_token() {
+        return trim((string) $this->get_option_field(self::FIELD_PRERENDER_AUTH_TOKEN));
+    }
+
+    /**
      * Check whether prerendering is enabled.
      *
      * @return bool
@@ -317,6 +327,11 @@ class Prerender {
      */
     private function get_forward_headers() {
         $headers = [];
+
+        $auth_token = $this->get_prerender_auth_token();
+        if ($auth_token !== '') {
+            $headers['Authorization'] = 'Bearer ' . $auth_token;
+        }
 
         if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $headers['User-Agent'] = (string) $_SERVER['HTTP_USER_AGENT'];
