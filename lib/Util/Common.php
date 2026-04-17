@@ -116,12 +116,13 @@ class Common {
             $scheme = 'https';
         }
 
+        // Always remove /prerender/ path suffix from URLs to ensure clean hreflangs
+        $request_path = self::remove_prerender_path_suffix($_SERVER['REQUEST_URI']);
+
         // if $code is false, we want to remove the language code from the url
         if ($code === false) {
-            return $scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            return $scheme . '://' . $_SERVER['HTTP_HOST'] . $request_path;
         }
-
-        $request_path = $_SERVER['REQUEST_URI'];
         $parts = explode('/', $request_path);
 
         // if $code is provided, we want to add the language code to the url
@@ -164,5 +165,31 @@ class Common {
             $api_key = get_option('localize_api_key');
         }
         return $api_key;
+    }
+
+    /**
+     * Remove a trailing /prerender segment from a URL path.
+     *
+     * @param string $path
+     * @return string
+     */
+    private static function remove_prerender_path_suffix($path) {
+        if (!is_string($path) || $path === '') {
+            return $path;
+        }
+
+        // Remove /prerender or /prerender/ from the end of the path
+        $normalized_path = preg_replace('#/prerender/?$#', '', $path);
+        
+        if (!is_string($normalized_path)) {
+            return $path;
+        }
+
+        // If the path became empty, make it a root path
+        if ($normalized_path === '') {
+            $normalized_path = '/';
+        }
+
+        return $normalized_path;
     }
 }
