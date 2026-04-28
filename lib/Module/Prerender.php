@@ -59,6 +59,9 @@ class Prerender {
             return;
         }
 
+        // error log to see the raw url with the query string
+        error_log('Prerender maybe_proxy_request: ' . (isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : ''));
+
         if (!$this->should_prerender_request()) {
             return;
         }
