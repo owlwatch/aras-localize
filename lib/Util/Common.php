@@ -1,6 +1,8 @@
 <?php
 namespace Aras\Localize\Util;
 
+use Aras\Localize\API\LocalizeAPI;
+
 class Common {
     const TRANSIENT_KEY = 'aras_localize_hreflang_languages';
     const SOURCE_LANGUAGE_TRANSIENT_KEY = 'aras_localize_source_language';
@@ -33,41 +35,22 @@ class Common {
             return [];
         }
 
-        $api_key = self::get_api_key();
-        if (empty($api_key)) {
+        $api = LocalizeAPI::create_from_options();
+        if ($api === null) {
             return [];
         }
 
-        $endpoint = 'https://api.localizejs.com/v2.0/projects/' . rawurlencode($project_key);
-        $response = wp_remote_get($endpoint, [
-            'timeout' => 6,
-            'headers' => [
-                'Authorization' => 'Bearer ' . $api_key,
-                'Accept' => 'application/json',
-            ],
-        ]);
-
-        if (is_wp_error($response)) {
+        $project_data = $api->get_project();
+        if ($project_data === false) {
             return [];
         }
 
-        $body = wp_remote_retrieve_body($response);
-        if (empty($body)) {
-            return [];
-        }
-
-        $payload = json_decode($body, true);
-
-        if (!is_array($payload)) {
-            return [];
-        }
-
-        // languages are found in the $payload['data']['project']['enabledLanguages'] array
-        if (isset($payload['data']['project']['enabledLanguages']) && is_array($payload['data']['project']['enabledLanguages'])) {
-            $languages = $payload['data']['project']['enabledLanguages'];
+        // languages are found in the project data enabledLanguages array
+        if (isset($project_data['project']['enabledLanguages']) && is_array($project_data['project']['enabledLanguages'])) {
+            $languages = $project_data['project']['enabledLanguages'];
 
             // codes is languages without source language
-            self::$sourceLanguage = $payload['data']['project']['sourceLanguage'] ?? 'en';
+            self::$sourceLanguage = $project_data['project']['sourceLanguage'] ?? 'en';
             $codes = array_diff($languages, [self::$sourceLanguage]);
         }
         else {
@@ -191,5 +174,77 @@ class Common {
         }
 
         return $normalized_path;
+    }
+    
+    /**
+     * Get language code with default country code.
+     *
+     * @param string $language The language code
+     * @return string The language code with country code (e.g., 'en-US', 'es-ES')
+     */
+    public static function get_language_with_country_code($language) {
+        // Default country codes for common languages
+        $language_country_map = [
+            'en' => 'en-US',
+            'es' => 'es-ES', 
+            'fr' => 'fr-FR',
+            'de' => 'de-DE',
+            'it' => 'it-IT',
+            'pt' => 'pt-PT',
+            'ja' => 'ja-JP',
+            'ko' => 'ko-KR', 
+            'zh' => 'zh-CN',
+            'ru' => 'ru-RU',
+            'ar' => 'ar-SA',
+            'nl' => 'nl-NL',
+            'pl' => 'pl-PL',
+            'sv' => 'sv-SE',
+            'da' => 'da-DK',
+            'no' => 'no-NO',
+            'fi' => 'fi-FI',
+            'cs' => 'cs-CZ',
+            'sk' => 'sk-SK',
+            'hu' => 'hu-HU',
+            'ro' => 'ro-RO',
+            'bg' => 'bg-BG',
+            'hr' => 'hr-HR',
+            'sl' => 'sl-SI',
+            'et' => 'et-EE',
+            'lv' => 'lv-LV',
+            'lt' => 'lt-LT',
+            'el' => 'el-GR',
+            'tr' => 'tr-TR',
+            'he' => 'he-IL',
+            'th' => 'th-TH',
+            'vi' => 'vi-VN',
+            'id' => 'id-ID',
+            'ms' => 'ms-MY',
+            'hi' => 'hi-IN',
+            'bn' => 'bn-BD',
+            'ur' => 'ur-PK'
+        ];
+        
+        // Return mapped language-country code or fallback to original if not found
+        return isset($language_country_map[$language]) ? $language_country_map[$language] : $language;
+    }
+    
+    /**
+     * Get translated phrases from Localize API
+     *
+     * @param array $phrases Array of phrases to translate
+     * @param string $target_language Target language code
+     * @return array Associative array mapping original phrases to translations
+     */
+    public static function get_phrases($phrases, $target_language) {
+        if (empty($phrases) || empty($target_language)) {
+            return [];
+        }
+        
+        $api = LocalizeAPI::create_from_options();
+        if ($api === null) {
+            return [];
+        }
+        
+        return $api->get_phrases($phrases, $target_language);
     }
 }

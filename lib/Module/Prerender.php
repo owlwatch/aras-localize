@@ -59,9 +59,6 @@ class Prerender {
             return;
         }
 
-        // error log to see the raw url with the query string
-        error_log('Prerender maybe_proxy_request: ' . (isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : ''));
-
         if (!$this->should_prerender_request()) {
             return;
         }
@@ -116,7 +113,11 @@ class Prerender {
         }
 
         // $this->send_response_headers($headers);
-        echo $body;
+        
+        // Post-process the response to fix JSON-LD inLanguage values
+        $processed_body = $this->process_json_ld_response($body);
+        
+        echo $processed_body;
         exit;
     }
 
@@ -347,6 +348,159 @@ class Prerender {
         return $headers;
     }
 
+    /**
+     * Post-process the prerender response to fix JSON-LD inLanguage values.
+     *
+     * @param string $html The HTML response body
+     * @return string The processed HTML with corrected inLanguage values
+     */
+    private function process_json_ld_response($html) {
+        $current_language = $this->get_current_language();
+        
+        // Find all JSON-LD script tags
+        $pattern = '/<script\s+type=["\']application\/ld\+json["\'][^>]*>\s*({.*?})\s*<\/script>/is';
+        
+        $processed_html = preg_replace_callback($pattern, function($matches) use ($current_language) {
+            $json_content = $matches[1];
+            
+            // Decode the JSON
+            $data = json_decode($json_content, true);
+            
+            if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+                // If JSON is invalid, return original
+                return $matches[0];
+            }
+            
+            // Update inLanguage values recursively
+            $updated_data = $this->update_in_language_recursive($data, $current_language);
+            
+            // Translate text content in the JSON-LD
+            $translated_data = $this->translate_json_ld_content($updated_data, $current_language);
+            
+            // Encode back to JSON
+            $updated_json = json_encode($translated_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            
+            if ($updated_json === false) {
+                // If encoding fails, return original
+                return $matches[0];
+            }
+            
+            // Replace the JSON content in the script tag
+            $script_tag = str_replace($json_content, $updated_json, $matches[0]);
+            
+            return $script_tag;
+        }, $html);
+        
+        return $processed_html ?: $html;
+    }
+    
+    /**
+     * Recursively update inLanguage values in JSON-LD data.
+     *
+     * @param mixed $data The data to process
+     * @param string $language The target language code
+     * @return mixed The processed data
+     */
+    private function update_in_language_recursive($data, $language) {
+        if (is_array($data)) {
+            $result = [];
+            
+            foreach ($data as $key => $value) {
+                if ($key === 'inLanguage') {
+                    // Update inLanguage to the current language with country code
+                    $result[$key] = Common::get_language_with_country_code($language);
+                } else {
+                    // Recursively process nested data
+                    $result[$key] = $this->update_in_language_recursive($value, $language);
+                }
+            }
+            
+            return $result;
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * Translate text content in JSON-LD data.
+     *
+     * @param mixed $data The JSON-LD data to process
+     * @param string $language The target language code
+     * @return mixed The processed data with translations
+     */
+    private function translate_json_ld_content($data, $language) {
+        // Skip translation for source language
+        if ($language === Common::get_source_language()) {
+            return $data;
+        }
+        
+        // Collect all translatable text
+        $translatable_text = [];
+        $this->collect_translatable_text($data, $translatable_text);
+        
+        if (empty($translatable_text)) {
+            return $data;
+        }
+        
+        // Get translations from API
+        $translations = Common::get_phrases($translatable_text, $language);
+
+        if (empty($translations)) {
+            return $data;
+        }
+        
+        // Apply translations to the data
+        return $this->apply_translations($data, $translations);
+    }
+    
+    /**
+     * Recursively collect translatable text from JSON-LD data.
+     *
+     * @param mixed $data The data to process
+     * @param array &$translatable_text Reference to array collecting translatable strings
+     * @return void
+     */
+    private function collect_translatable_text($data, &$translatable_text) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                // Check if this is a translatable field
+                if (in_array($key, ['name', 'description', 'text'], true) && is_string($value) && !empty($value)) {
+                    $translatable_text[] = $value;
+                } else {
+                    // Recursively process nested data
+                    $this->collect_translatable_text($value, $translatable_text);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Recursively apply translations to JSON-LD data.
+     *
+     * @param mixed $data The data to process
+     * @param array $translations Translation mapping
+     * @return mixed The processed data with translations applied
+     */
+    private function apply_translations($data, $translations) {
+        if (is_array($data)) {
+            $result = [];
+            
+            foreach ($data as $key => $value) {
+                // Check if this is a translatable field with available translation
+                if (in_array($key, ['name', 'description', 'text'], true) && is_string($value) && isset($translations[$value])) {
+                    $result[$key] = $translations[$value];
+                } else {
+                    // Recursively process nested data
+                    $result[$key] = $this->apply_translations($value, $translations);
+                }
+            }
+            
+            return $result;
+        }
+        
+        return $data;
+    }
+    
     /**
      * Send response headers from the upstream prerender response.
      *
