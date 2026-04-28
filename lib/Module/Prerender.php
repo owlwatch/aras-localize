@@ -62,6 +62,9 @@ class Prerender {
         if (!$this->should_prerender_request()) {
             return;
         }
+
+        // we need the full url with the query string
+        error_log( 'Prerendering request for URL: ' . Common::get_current_url() );
         
         $server = $this->get_prerender_server();
         $current_url = Common::get_current_url(false);
