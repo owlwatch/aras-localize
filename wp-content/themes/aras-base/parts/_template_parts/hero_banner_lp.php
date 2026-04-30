@@ -203,7 +203,7 @@
 
                     <?php $image = get_sub_field('poster_image');
                     if (!empty($image)) : ?>
-                      <button aria-label="open video in pop-up container" class="" data-open="left_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
+                      <button aria-label="<?php echo esc_attr__('open video in pop-up container', 'aras'); ?>" class="" data-open="left_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
                         <?php if ($overlay == 'overlay') : ?>
                           <img class="video-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
                         <?php endif; ?>

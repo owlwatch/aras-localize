@@ -46,7 +46,7 @@ $tags = get_the_tags($current_post_id);
 						</div>
 					<?php endif; ?>
 					<div style="margin-top: 2rem">
-						<a class="card-link" href="<?php echo get_post_type_archive_link( 'post' ) ?>">← Back to Blog</a>
+						<a class="card-link" href="<?php echo get_post_type_archive_link( 'post' ) ?>">&larr; <?php esc_html_e('Back to Blog', 'aras'); ?></a>
 					</div>
 				</div>
 				<div class="cell small-12 medium-shrink postsidebar blogpostsidebar">

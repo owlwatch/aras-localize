@@ -175,7 +175,7 @@
 																echo $bio; ?>
 															<?php endif; ?>
 														</div>
-														<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+														<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>

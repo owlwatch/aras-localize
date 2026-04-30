@@ -229,7 +229,7 @@
 															<div class="video-container <?= "$shadow $greyscale $overlay $icon" ?>">
 																<?php $image = get_sub_field('poster_image');
 																if (!empty($image)) : ?>
-																	<button aria-label="Open video in pop-up container" class="" data-open="video_popup_<?php echo $modnum; ?>_<?php echo $rowcount; ?>">
+																	<button aria-label="<?php echo esc_attr__('Open video in pop-up container', 'aras'); ?>" class="" data-open="video_popup_<?php echo $modnum; ?>_<?php echo $rowcount; ?>">
 																		<?php if ($overlay == 'overlay') : ?>
 																			<img class="video-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
 																		<?php endif; ?>
@@ -265,7 +265,7 @@
 																	echo $iframe;
 																	?>
 																<?php endif; ?>
-																<button aria-label="Close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+																<button aria-label="<?php echo esc_attr__('Close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 																	<span aria-hidden="true">&times;</span>
 																</button>
 															</div>

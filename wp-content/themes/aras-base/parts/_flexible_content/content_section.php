@@ -494,7 +494,7 @@
 							<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
 								<div class="reveal large" id="popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>" data-reveal data-reset-on-close="true">
 									<?php echo get_sub_field('popup_content'); ?>
-									<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+									<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>

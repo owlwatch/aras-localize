@@ -260,7 +260,7 @@
 
 												<?php $image = get_sub_field('poster_image');
 												if (!empty($image)) : ?>
-													<button aria-label="open video in pop-up container" class="" data-open="left_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
+													<button aria-label="<?php echo esc_attr__('open video in pop-up container', 'aras'); ?>" class="" data-open="left_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
 														<?php if ($overlay == 'overlay') : ?>
 															<img class="video-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
 														<?php endif; ?>
@@ -499,7 +499,7 @@
 
 												<?php $image = get_sub_field('poster_image');
 												if (!empty($image)) : ?>
-													<button aria-label="open video in pop-up container" class="" data-open="right_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
+													<button aria-label="<?php echo esc_attr__('open video in pop-up container', 'aras'); ?>" class="" data-open="right_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>">
 														<?php if ($overlay == 'overlay') : ?>
 															<img class="video-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
 														<?php endif; ?>
@@ -595,7 +595,7 @@ Split into Left and Right, Text and Video
 							<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
 								<div class="reveal medium" id="left_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>" data-reveal data-reset-on-close="true">
 									<?php echo get_sub_field('popup_content'); ?>
-									<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+									<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
@@ -634,7 +634,7 @@ Split into Left and Right, Text and Video
 									echo $iframe;
 									?>
 								<?php endif; ?>
-								<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+								<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -658,7 +658,7 @@ Duplicate of Left popup content, change 'left' to 'right'
 							<?php if (get_sub_field('popup_label') && get_sub_field('popup_content')) : ?>
 								<div class="reveal medium" id="right_popup_<?php echo $modnum; ?>_<?php echo $rownum; ?>" data-reveal data-reset-on-close="true">
 									<?php echo get_sub_field('popup_content'); ?>
-									<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+									<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
@@ -697,7 +697,7 @@ Duplicate of Left popup content, change 'left' to 'right'
 									echo $iframe;
 									?>
 								<?php endif; ?>
-								<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+								<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
