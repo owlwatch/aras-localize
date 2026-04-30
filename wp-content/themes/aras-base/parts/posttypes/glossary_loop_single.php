@@ -12,8 +12,8 @@ $tags = get_the_tags($current_post_id);
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x align-middle">
 				<div class="cell small-12">
-					<a aria-label="Back to Glossary" class="backlink-link" href="<?php echo $default_glossary_archive_url; ?>">
-						<h6>Glossary&nbsp;→</h6>
+				<a aria-label="<?php esc_attr_e('Back to Glossary', 'aras'); ?>" class="backlink-link" href="<?php echo $default_glossary_archive_url; ?>">
+					<h6><?php esc_html_e('Glossary', 'aras'); ?>&nbsp;→</h6>
 					</a>
 				</div>
 			</div>
@@ -30,7 +30,7 @@ $tags = get_the_tags($current_post_id);
 							<?php if (get_field('glossary_toc_headline', 'option')) : ?>
 								<h2><?php echo get_field('glossary_toc_headline', 'option'); ?></h2>
 							<?php else : ?>
-								<h2>In this article:</h2>
+							<h2><?php esc_html_e('In this article:', 'aras'); ?></h2>
 							<?php endif; ?>
 							<ul id="toc"></ul>
 						</div>
@@ -41,7 +41,7 @@ $tags = get_the_tags($current_post_id);
 					$featured_posts = get_field('related_terms');
 					if ($featured_posts) : ?>
 						<div class="gloss-related desktopsize">
-							<h6>Related Terms</h6>
+						<h6><?php esc_html_e('Related Terms', 'aras'); ?></h6>
 							<ul>
 								<?php foreach ($featured_posts as $post) :
 									setup_postdata($post); ?>

@@ -9,7 +9,7 @@ get_header(); ?>
         <?php if (get_field('academic_users_archive_headline', 'option')) : ?>
           <h1 class="hero-headline"><?php echo get_field('academic_users_archive_headline', 'option'); ?></h1>
         <?php else : ?>
-          <h1 class="hero-headline">Academic Users</h1>
+          <h1 class="hero-headline"><?php esc_html_e('Academic Users', 'aras'); ?></h1>
         <?php endif; ?>
       </div>
     </div>

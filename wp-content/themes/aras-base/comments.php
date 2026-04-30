@@ -37,10 +37,10 @@ if (post_password_required()) {
 
 							$fields['author'] = '<input type="hidden" class="commentfield" id="author" name="author" required>';
 							// Create new fields for first name and last name
-							$first_name_field = '<input class="commentfield" id="first_name" name="first_name" placeholder="First Name*" required>';
-							$last_name_field = '<input class="commentfield" id="last_name" name="last_name" placeholder="Last Name*" required>';
-							$fields['email'] = '<input class="commentfield" id="email" name="email" placeholder="Email*" required>';
-							$comment_field = '<textarea id="comment" name="comment" placeholder="Comment"></textarea>';
+							$first_name_field = '<input class="commentfield" id="first_name" name="first_name" placeholder="' . esc_attr__('First Name*', 'aras') . '" required>';
+							$last_name_field = '<input class="commentfield" id="last_name" name="last_name" placeholder="' . esc_attr__('Last Name*', 'aras') . '" required>';
+							$fields['email'] = '<input class="commentfield" id="email" name="email" placeholder="' . esc_attr__('Email*', 'aras') . '" required>';
+							$comment_field = '<textarea id="comment" name="comment" placeholder="' . esc_attr__('Comment', 'aras') . '"></textarea>';
 
 							// Add custom fields in the desired order
 							$new_fields['first_name'] = $first_name_field;
@@ -56,7 +56,7 @@ if (post_password_required()) {
 						comment_form(array(
 							'comment_notes_before' => '',
 							'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="%3$s aras-button" value="%4$s">',
-							'title_reply' => 'Leave a Comment',
+							'title_reply' => __('Leave a Comment', 'aras'),
 						));
 						?>
 					</div>

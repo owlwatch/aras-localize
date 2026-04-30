@@ -11,7 +11,7 @@ get_header(); ?>
     <div class="grid-x grid-margin-x grid-padding-x align-center">
         <div class="large-12 medium-12 small-12 cell">
 
-            <h2>Pages</h2>
+            <h2><?php esc_html_e('Pages', 'aras'); ?></h2>
             <ul>
                 <?php
                 $args = array(
@@ -63,7 +63,7 @@ get_header(); ?>
             </ul>
 
 
-            <h2>Resources</h2>
+            <h2><?php esc_html_e('Resources', 'aras'); ?></h2>
             <ul>
                 <?php
                 $args = array(
@@ -76,7 +76,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>Blog</h2>
+            <h2><?php esc_html_e('Blog', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(
@@ -89,7 +89,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>News</h2>
+            <h2><?php esc_html_e('News', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(
@@ -102,7 +102,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>Documentation</h2>
+            <h2><?php esc_html_e('Documentation', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(

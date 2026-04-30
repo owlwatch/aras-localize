@@ -24,7 +24,7 @@ $tags = get_the_tags($current_post_id);
 					<?php get_template_part('parts/_flexible_post_content/_flexible_post_content'); ?>
 					<?php if ($tags) : ?>
 						<div class="tag-container">
-							<h6>Related:</h6>
+						<h6><?php esc_html_e('Related:', 'aras'); ?></h6>
 							<?php foreach ($tags as $tag) :
 								$tag_link = get_category_link($tag->term_id);
 								$tag_name = $tag->name;
@@ -98,7 +98,7 @@ $tags = get_the_tags($current_post_id);
 										<?php if (get_sub_field('cta_headline', 'option')) : ?>
 											<h5><?php echo get_sub_field('cta_headline', 'option'); ?></h5>
 										<?php else : ?>
-											<h5>STAY UP TO DATE</h5>
+										<h5><?php esc_html_e('STAY UP TO DATE', 'aras'); ?></h5>
 										<?php endif; ?>
 										<button class="aras-button" data-open="blog-sidebar-form">
 											<?php if (get_sub_field('cta_form_label', 'option')) {
