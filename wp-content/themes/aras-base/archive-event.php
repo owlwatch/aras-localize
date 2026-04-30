@@ -123,17 +123,25 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         eventTypeOption.selected = true;
       }
     }
+    var isJaJp = <?php echo str_contains( $site_url, '/ja-jp/' ) ? 'true' : 'false'; ?>;
     var eventRegionParam = params.get('event_region');
-    if (eventRegionParam) {
-      var eventRegionOption = document.querySelector('#event-region-filter option[value="' + eventRegionParam + '"]');
+    // On ja-jp, pre-select APAC when no event_region param is present in the URL
+    var defaultRegion = ( isJaJp && ! params.has('event_region') ) ? 'apac' : eventRegionParam;
+    if (defaultRegion) {
+      var eventRegionOption = document.querySelector('#event-region-filter option[value="' + defaultRegion + '"]');
       if (eventRegionOption) {
         eventRegionOption.selected = true;
       }
     }
     // Clear button
+    // On ja-jp, navigate to ?event_region= (explicit empty) so the default APAC filter is not re-applied
     clearButton.addEventListener('click', function(event) {
       event.preventDefault();
+      <?php if ( str_contains( $site_url, '/ja-jp/' ) ) : ?>
+      window.location.href = '<?php echo esc_url($default_event_archive_url); ?>?event_region=';
+      <?php else : ?>
       window.location.href = '<?php echo esc_url($default_event_archive_url); ?>';
+      <?php endif; ?>
     });
     /*Custom Select Script
 			  var x, i, j, l, ll, selElmnt, a, b, c;
@@ -229,7 +237,17 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
       parse_str($query_string, $variables);
       // Retrieve the variables
       $typetax = $variables['event_type'] ?? null;
-      $regiontax = $variables['event_region'] ?? null;
+
+      // When on ja-jp and no event_region param is present, default to APAC.
+      // An explicit ?event_region= (empty string) means "show all regions".
+      if ( array_key_exists( 'event_region', $variables ) ) {
+        $regiontax = $variables['event_region']; // empty string = all regions
+      } elseif ( str_contains( $site_url, '/ja-jp/' ) ) {
+        $regiontax = 'apac'; // default slug — adjust if your term slug differs
+      } else {
+        $regiontax = null;
+      }
+
       $tax_queries = array();
       if ($typetax !== null) {
         $tax_queries[] = array(
@@ -237,7 +255,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           'taxterm' => $typetax,
         );
       }
-      if ($regiontax !== null) {
+      if ($regiontax !== null && $regiontax !== '') {
         $tax_queries[] = array(
           'taxtype' => 'event_region',
           'taxterm' => $regiontax,
