@@ -9,12 +9,12 @@ get_header(); ?>
           <?php if (get_field('news_archive_headline', 'option')) : ?>
             <h1 class="hero-headline <?php echo $h1color; ?>"><?php echo get_field('news_archive_headline', 'option'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>">News</h1>
+            <h1 class="hero-headline <?php echo $h1color; ?>"><?php esc_html_e('News', 'aras'); ?></h1>
           <?php endif; ?>
           <?php if (get_field('news_archive_subheadline', 'option')) : ?>
             <h2 class="hero-subhead <?php echo $h1color; ?>"><?php echo get_field('news_archive_subheadline', 'option'); ?></h2>
           <?php else : ?>
-            <h2 class="hero-subhead <?php echo $h1color; ?>">Latest News & Press Coverage</h2>
+            <h2 class="hero-subhead <?php echo $h1color; ?>"><?php esc_html_e('Latest News & Press Coverage', 'aras'); ?></h2>
           <?php endif; ?>
         </div>
       </div>
@@ -32,7 +32,7 @@ get_header(); ?>
           'hide_empty' => true,
         ));
         echo '<select id="news-type-dropdown">';
-        echo '<option value="' . get_post_type_archive_link('news') . '">All News</option>';
+        echo '<option value="' . get_post_type_archive_link('news') . '">' . esc_html__('All News', 'aras') . '</option>';
         foreach ($terms as $term) {
           echo '<option value="' . get_term_link($term) . '">' . $term->name . '</option>';
         }
@@ -61,11 +61,11 @@ get_header(); ?>
         </script>
         <form role="search" method="get" class="news-search-form" action="<?php echo home_url('/'); ?>">
           <label>
-            <span class="screen-reader-text"><?php echo _x('Search for:', 'label', 'jointswp') ?></span>
+            <span class="screen-reader-text"><?php echo _x('Search for:', 'label', 'aras') ?></span>
             <input type="hidden" name="post_type" value="news" />
-            <input aria-label="search" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'jointswp') ?>" />
+            <input aria-label="<?php echo esc_attr__('Search', 'aras'); ?>" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'label', 'aras') ?>" />
           </label>
-          <input class="search-arrow-icon" type="submit" value=" " alt="Search" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
+          <input class="search-arrow-icon" type="submit" value=" " alt="<?php echo esc_attr__('Search', 'aras'); ?>" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
         </form>
       </div>
     </div>
@@ -91,7 +91,7 @@ get_header(); ?>
       <?php if (get_field('load_more_news_label', 'option')) : ?>
         <button aria-label="<?php echo get_field('load_more_news_label', 'option'); ?>" class="aras-button" id="load-more-posts"><?php echo get_field('load_more_news_label', 'option'); ?></button>
       <?php else : ?>
-        <button aria-label="load more news" class="aras-button" id="load-more-posts">Load More</button>
+        <button aria-label="<?php echo esc_attr__('Load more news', 'aras'); ?>" class="aras-button" id="load-more-posts"><?php esc_html_e('Load More', 'aras'); ?></button>
       <?php endif; ?>
     </section>
   </div>

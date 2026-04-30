@@ -32,8 +32,8 @@ $default_news_archive_url = get_post_type_archive_link('news'); ?>
 								<h6><?php echo get_field('news_archive_backlink_label', 'option'); ?>&nbsp;→</h6>
 							</a>
 						<?php } else { ?>
-							<a aria-label="All News" class="backlink-link" href="<?php echo $default_news_archive_url; ?>">
-								<h6>All News&nbsp;→</h6>
+							<a aria-label="<?php echo esc_attr__('All News', 'aras'); ?>" class="backlink-link" href="<?php echo $default_news_archive_url; ?>">
+								<h6><?php esc_html_e('All News', 'aras'); ?>&nbsp;→</h6>
 							</a>
 						<?php } ?>
 					</div>
@@ -50,7 +50,7 @@ $default_news_archive_url = get_post_type_archive_link('news'); ?>
 					<?php endif; ?>
 					<?php if (get_field('press_contact_information')) : ?>
 						<div class="cell small-12  press-contact-info wysiwyg-content">
-							<h3>Aras Press Contact</h3>
+							<h3><?php esc_html_e('Aras Press Contact', 'aras'); ?></h3>
 							<?php echo get_field('press_contact_information'); ?>
 						</div>
 					<?php endif; ?>

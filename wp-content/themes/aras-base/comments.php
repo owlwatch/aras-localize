@@ -66,7 +66,7 @@ if (post_password_required()) {
 							<h4 class="comments-title">
 								<?php
 								printf(
-									esc_html(_nx('Comments: %1$s', 'Comments: %1$s', get_comments_number(), 'comments title', 'jointswp')),
+									esc_html(_nx('Comments: %1$s', 'Comments: %1$s', get_comments_number(), 'comments title', 'aras')),
 									number_format_i18n(get_comments_number()),
 									'<span>' . get_the_title() . '</span>'
 								);
@@ -78,10 +78,10 @@ if (post_password_required()) {
 							<?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // Are there comments to navigate through? 
 							?>
 								<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-									<h2 class="screen-reader-text"><?php esc_html_e('Comment navigation', 'jointswp'); ?></h2>
+									<h2 class="screen-reader-text"><?php esc_html_e('Comment navigation', 'aras'); ?></h2>
 									<div class="nav-links">
-										<div class="nav-previous"><?php previous_comments_link(esc_html__('Older Comments', 'jointswp')); ?></div>
-										<div class="nav-next"><?php next_comments_link(esc_html__('Newer Comments', 'jointswp')); ?></div>
+										<div class="nav-previous"><?php previous_comments_link(esc_html__('Older Comments', 'aras')); ?></div>
+										<div class="nav-next"><?php next_comments_link(esc_html__('Newer Comments', 'aras')); ?></div>
 									</div>
 								</nav>
 							<?php endif; ?>

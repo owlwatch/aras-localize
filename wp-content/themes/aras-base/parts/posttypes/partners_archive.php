@@ -18,7 +18,7 @@ $background_image = get_field('partner_archive_hero_background_image', 'option')
         <?php if (get_field('partners_archive_title', 'option')) : ?>
           <h1 class="hero-headline"><?php echo get_field('partners_archive_title', 'option'); ?></h1>
         <?php else : ?>
-          <h1 class="hero-headline">Find a Partner</h1>
+		  <h1 class="hero-headline"><?php esc_html_e('Find a Partner', 'aras'); ?></h1>
         <?php endif; ?>
         <?php if (get_field('partners_archive_description', 'option')) : ?>
           <p><?php echo get_field('partners_archive_description', 'option'); ?></p>
@@ -60,16 +60,16 @@ function generate_slug($termname)
             <?php if (get_field('partner_filter_headline', 'option')) : ?>
               <?php echo get_field('partner_filter_headline', 'option'); ?>
             <?php else : ?>
-              Filter
+			  <?php esc_html_e('Filter', 'aras'); ?>
             <?php endif; ?>
 
           </h2>
           <div class="partner-filters__clear">
-            <button aria-label="Clear Filters" id="clear-button" type="reset" disabled>
+      		  <button aria-label="<?php echo esc_attr__('Clear Filters', 'aras'); ?>" id="clear-button" type="reset" disabled>
               <?php if (get_field('partner_clear_filters_label', 'option')) : ?>
                 <?php echo get_field('partner_clear_filters_label', 'option'); ?>
               <?php else : ?>
-                Clear Filters
+      				<?php esc_html_e('Clear Filters', 'aras'); ?>
               <?php endif; ?>
             </button>
           </div>
@@ -78,11 +78,11 @@ function generate_slug($termname)
 
           <fieldset class="partner-filters__item" data-filter-group="certification" data-logic="and">
             <label for="partner-certification">
-                <?php echo get_field('partner_certification_filter_label', 'option') ?: 'Certification' ?>
+				<?php echo get_field('partner_certification_filter_label', 'option') ?: esc_html__('Certification', 'aras'); ?>
             </label>
               <select id="certification">
                 <option value="">
-                  <?php echo get_field('partner_certification_filter_label_all', 'option') ?: 'All Certifications' ?>
+				  <?php echo get_field('partner_certification_filter_label_all', 'option') ?: esc_html__('All Certifications', 'aras'); ?>
                 </option>
                 <?php foreach ($filter_data['Certifications__c'] as $termname) : ?>
                   <?php if (!empty($termname)) : ?>
@@ -95,11 +95,11 @@ function generate_slug($termname)
           
           <fieldset class="partner-filters__item" data-filter-group="partner-type" data-logic="and">
             <label for="partner-type">
-                <?php echo get_field('partner_type_label', 'option') ?: 'Type' ?>
+				<?php echo get_field('partner_type_label', 'option') ?: esc_html__('Type', 'aras'); ?>
             </label>
               <select id="partner-type">
                 <option value="">
-                  <?php echo get_field('partner_type_label_all', 'option') ?: 'All Types' ?>
+				  <?php echo get_field('partner_type_label_all', 'option') ?: esc_html__('All Types', 'aras'); ?>
                 </option>
                 <?php foreach ($filter_data['Type_Partner__c'] as $termname) : ?>
                   <?php if (!empty($termname)) : ?>
@@ -112,11 +112,11 @@ function generate_slug($termname)
 
           <fieldset class="partner-filters__item" style="display: none;" data-filter-group="partner-solution" data-logic="and">
             <label for="partner-solution">
-              <?php echo get_field('partner_solution_filter_label', 'option') ?: 'Solution' ?>
+			  <?php echo get_field('partner_solution_filter_label', 'option') ?: esc_html__('Solution', 'aras'); ?>
             </label>
             <select id="partner-solution">
               <option value="">
-                <?php echo get_field('partner_solution_filter_label_all', 'option') ?: 'All Solutions'; ?>
+				<?php echo get_field('partner_solution_filter_label_all', 'option') ?: esc_html__('All Solutions', 'aras'); ?>
               </option>
               <?php foreach ($filter_data['Partner_Solutions__c'] as $termname) : ?>
                 <?php if (!empty($termname)) : ?>

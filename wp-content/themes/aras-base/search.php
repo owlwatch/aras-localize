@@ -14,12 +14,12 @@ get_header(); ?>
 			<div class="grid-x grid-padding-x align-top">
 				<div class="cell small-12 medium-10 hero-content">
 					<div class="hero-content-inner">
-						<h1 class="hero-headline">Search Results for: <?php echo esc_attr(get_search_query()); ?></h1>
+						<h1 class="hero-headline"><?php echo sprintf(esc_html__('Search Results for: %s', 'aras'), esc_html(get_search_query())); ?></h1>
 					</div>
 					<div class="cell small-12 medium-10">
 						<form role="search" method="get" class="blog-search-form" action="<?php echo home_url('/'); ?>">
 							<label>
-								<span class="screen-reader-text"><?php echo _x('Search for:', 'label', 'jointswp') ?></span>
+								<span class="screen-reader-text"><?php echo esc_html_x('Search for:', 'label', 'aras'); ?></span>
 
 								<?php if ($search_refer == 'resource') : ?>
 									<input type="hidden" name="post_type" value="resource" />
@@ -28,11 +28,11 @@ get_header(); ?>
 								<?php else : ?>
 									<input type="hidden" name="post_type" value="*" />
 								<?php endif; ?>
-								<input aria-label="search" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'jointswp') ?>" />
+								<input aria-label="<?php echo esc_attr__('Search', 'aras'); ?>" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'label', 'aras'); ?>" />
 
 
 							</label>
-							<input class="search-arrow-icon" type="submit" value=" " alt="Search" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
+							<input class="search-arrow-icon" type="submit" value=" " alt="<?php echo esc_attr__('Search', 'aras'); ?>" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
 						</form>
 					</div>
 				</div>
@@ -45,8 +45,8 @@ get_header(); ?>
 			<div class="grid-container">
 				<div class="grid-x grid-padding-x align-middle">
 					<div class="cell small-12">
-						<a aria-label="All Resources" class="backlink-link" href="<?php echo $resource_archive_url; ?>">
-							<h6>All Resources&nbsp;→</h6>
+						<a aria-label="<?php echo esc_attr__('All Resources', 'aras'); ?>" class="backlink-link" href="<?php echo $resource_archive_url; ?>">
+							<h6><?php esc_html_e('All Resources', 'aras'); ?>&nbsp;→</h6>
 						</a>
 					</div>
 				</div>
@@ -58,8 +58,8 @@ get_header(); ?>
 			<div class="grid-container">
 				<div class="grid-x grid-padding-x align-middle">
 					<div class="cell small-12">
-						<a aria-label="All Blogs" class="backlink-link" href="<?php echo $blog_archive_url; ?>">
-							<h6>All Blogs&nbsp;→</h6>
+						<a aria-label="<?php echo esc_attr__('All Blogs', 'aras'); ?>" class="backlink-link" href="<?php echo $blog_archive_url; ?>">
+							<h6><?php esc_html_e('All Blogs', 'aras'); ?>&nbsp;→</h6>
 						</a>
 					</div>
 				</div>

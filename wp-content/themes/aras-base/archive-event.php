@@ -11,7 +11,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           <?php if (get_field('events_archive_headline', 'option')) : ?>
             <h1 class="hero-headline"><?php echo get_field('events_archive_headline', 'option'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline">Events</h1>
+            <h1 class="hero-headline"><?php esc_html_e('Events', 'aras'); ?></h1>
           <?php endif; ?>
         </div>
       </div>
@@ -44,7 +44,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         ?>
           <div class="custom-select events">
             <select style="margin: 0;" id="event-type-filter" name="event_type">
-              <option value="">All Event Types</option>
+              <option value=""><?php esc_html_e('All Event Types', 'aras'); ?></option>
               <?php foreach ($event_type_terms as $term) : ?>
                 <?php
                 $termname = $term->name;
@@ -67,7 +67,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         ?>
           <div class="custom-select events">
             <select style="margin: 0;" id="event-region-filter" name="event_region">
-              <option value="">All Event Regions</option>
+              <option value=""><?php esc_html_e('All Event Regions', 'aras'); ?></option>
               <?php foreach ($event_region_terms as $term) : ?>
                 <?php
                 $termname = $term->name;
@@ -84,7 +84,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           </div>
         <?php endif; ?>
 
-        <button aria-label="clear filters" class="aras-button" id="clear-filters">Clear</button>
+        <button aria-label="<?php echo esc_attr__('Clear filters', 'aras'); ?>" class="aras-button" id="clear-filters"><?php esc_html_e('Clear', 'aras'); ?></button>
       </div>
     </div>
   </div>
@@ -300,7 +300,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                 <?php if (get_sub_field('subscribe_form_cta', 'option')) : ?>
                   <h2><?php echo get_sub_field('subscribe_form_cta', 'option'); ?></h2>
                 <?php else : ?>
-                  <h2>Subscribe for Updates</h2>
+                  <h2><?php esc_html_e('Subscribe for Updates', 'aras'); ?></h2>
                 <?php endif; ?>
               </div>
               <div class="cell small-12 medium-shrink">
@@ -308,7 +308,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                   <?php if (get_sub_field('subscribe_form_label', 'option')) {
                     echo get_sub_field('subscribe_form_label', 'option');
                   } else {
-                    echo 'Subscribe';
+                    echo esc_html__('Subscribe', 'aras');
                   } ?>
                 </button>
               </div>

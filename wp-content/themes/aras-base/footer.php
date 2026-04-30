@@ -10,7 +10,7 @@
 		<div class="grid-container">
 			<div class="grid-x grid-margin-x">
 				<div class="cell small-12 medium-shrink copyrightinfo">
-					<p>Copyright &copy; <?php echo date('Y'); ?>&nbsp;Aras. All rights reserved.</p>
+					<p><?php echo sprintf(esc_html__('Copyright © %1$s Aras. All rights reserved.', 'aras'), esc_html(date('Y'))); ?></p>
 				</div>
 				<div class="cell small-12 medium-auto copyrightinfo">
 					<?php if (get_field('footer_copyright_content', 'option')) : ?><?php echo get_field('footer_copyright_content', 'option'); ?><?php endif; ?>
@@ -26,7 +26,7 @@
 				<div class="cell small-12 medium-shrink footer-intro small-order-1 medium-order-1 large-order-1">
 					<?php $footerlogo = get_field('website_logo', 'option');
 					if (!empty($footerlogo)) : ?>
-						<a aria-label="Homepage" class="footer-logo-link" href="<?php echo home_url(); ?>">
+						<a aria-label="<?php echo esc_attr__('Homepage', 'aras'); ?>" class="footer-logo-link" href="<?php echo home_url(); ?>">
 							<img class="nav-logo" src="<?php echo esc_url($footerlogo['url']); ?>" alt="<?php if (esc_attr($footerlogo['alt'])) : ?> <?php echo esc_attr($footerlogo['alt']); ?> <?php else :	?> <?php the_title(); ?> <?php endif; ?>" />
 						</a>
 					<?php endif; ?>
@@ -78,7 +78,7 @@
 					<?php endif; ?>
 				</div>
 				<div class="cell small-12 medium-10 large-8 copyrightinfo small-order-4 medium-order-4 large-order-4">
-					<p>Copyright &copy; <?php echo date('Y'); ?>&nbsp;Aras. All rights reserved.</p>
+					<p><?php echo sprintf(esc_html__('Copyright © %1$s Aras. All rights reserved.', 'aras'), esc_html(date('Y'))); ?></p>
 				</div>
 			</div>
 		</div>

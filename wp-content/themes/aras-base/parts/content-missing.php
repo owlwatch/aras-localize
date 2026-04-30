@@ -6,11 +6,11 @@
 ?>
 <div class="cell post-not-found">
 	<?php if (is_search()) : ?>
-		<h2>Sorry, no results.</h2>
-		<p>Please try your search again using different terms.</p>
+		<h2><?php esc_html_e('Sorry, no results.', 'aras'); ?></h2>
+		<p><?php esc_html_e('Please try your search again using different terms.', 'aras'); ?></p>
 	<?php else : ?>
-		<h2>Sorry, no results.</h2>
-		<p>Please try your search again using different terms.</p>
+		<h2><?php esc_html_e('Sorry, no results.', 'aras'); ?></h2>
+		<p><?php esc_html_e('Please try your search again using different terms.', 'aras'); ?></p>
 		<?php // get_search_form(); 
 		?>
 	<?php endif; ?>

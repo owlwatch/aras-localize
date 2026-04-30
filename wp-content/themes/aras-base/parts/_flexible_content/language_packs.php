@@ -65,18 +65,18 @@ if ($post->post_parent == 20987) { ?>
             <div class="grid-x grid-margin-x align-top">
                 <div class="large-5 medium-6 small-12 cell language-pack-description">
                     <?php echo $description; ?>
-                    <h3>Project Info</h3>
+					<h3><?php esc_html_e('Project Info', 'aras'); ?></h3>
                     <?php if ($owner) {
-                        echo '<p><strong>Owner:</strong> ' . $owner . '</p>';
+						echo '<p><strong>' . esc_html__('Owner:', 'aras') . '</strong> ' . $owner . '</p>';
                     } ?>
                     <?php if ($license) {
-                        echo '<p><strong>License:</strong> ' . $license . '</p>';
+						echo '<p><strong>' . esc_html__('License:', 'aras') . '</strong> ' . $license . '</p>';
                     } ?>
                     <?php if ($versions) {
-                        echo '<p><strong>Supported Versions:</strong> ' . $versions . '</p>';
+						echo '<p><strong>' . esc_html__('Supported Versions:', 'aras') . '</strong> ' . $versions . '</p>';
                     } ?>
                     <?php if ($last_modified_date) {
-                        echo '<p><strong>Last Modified:</strong> ' . $last_modified_date . ' ' . $last_modified_time . '</p>';
+						echo '<p><strong>' . esc_html__('Last Modified:', 'aras') . '</strong> ' . $last_modified_date . ' ' . $last_modified_time . '</p>';
                     } ?>
                 </div>
                 <div class="large-6 medium-6 small-12 large-offset-1 cell">
@@ -99,14 +99,14 @@ if ($post->post_parent == 20987) { ?>
                                     <a href="#" class="accordion-title"><?php echo $title; ?></a>
                                     <div class="accordion-content" data-tab-content>
                                         <?php if ($build) {
-                                            echo '<p><strong>Build:</strong> ' . $build . '</p>';
+							echo '<p><strong>' . esc_html__('Build:', 'aras') . '</strong> ' . $build . '</p>';
                                         } ?>
                                         <?php if ($created) {
-                                            echo '<p><strong>Created On:</strong> ' . $created . '</p>';
+							echo '<p><strong>' . esc_html__('Created On:', 'aras') . '</strong> ' . $created . '</p>';
                                         } ?>
                                         <?php if ($download) { ?><p><a aria-label="<?php echo $download_short; ?>" href="<?php echo $download; ?>" target="_blank"><?php echo $download_short; ?></a></p><?php } ?>
                                         <?php if ($file_size) {
-                                            echo '<p><strong>File Size:</strong> ' . $file_size . '</p>';
+							echo '<p><strong>' . esc_html__('File Size:', 'aras') . '</strong> ' . $file_size . '</p>';
                                         } ?>
                                     </div>
                                 </li>

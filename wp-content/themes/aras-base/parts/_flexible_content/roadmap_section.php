@@ -37,12 +37,12 @@ if ($data != null) {
     <div class="grid-container">
       <form id="roadmap-filter-controls" class="grid-x grid-margin-x">
         <div class="cell small-12">
-          <h3>Filter</h3>
+		  <h3><?php esc_html_e('Filter', 'aras'); ?></h3>
         </div>
         <div class="cell small-12 medium-6 roadmap-filter-flex">
           <fieldset class="product-area custom-select roadmap" data-filter-group="product-area">
             <select id="product-area">
-              <option value="">All Product Areas</option>
+            <option value=""><?php esc_html_e('All Product Areas', 'aras'); ?></option>
               <?php foreach ($unique_product_area as $uproduct_area => $value) :
                 $css_class_uproduct_area = sanitize_css_class($uproduct_area);
               ?>
@@ -56,7 +56,7 @@ if ($data != null) {
             </select>
           </fieldset>
           <fieldset>
-            <button aria-label="Reset filters" id="clear-button" class="aras-button" type="reset">Reset</button>
+          <button aria-label="<?php echo esc_attr__('Reset filters', 'aras'); ?>" id="clear-button" class="aras-button" type="reset"><?php esc_html_e('Reset', 'aras'); ?></button>
           </fieldset>
         </div>
       </form>
@@ -123,7 +123,7 @@ if ($data != null) {
                                     ">
                       <h4 class="epic"><?php echo $epic_name; ?></h4>
                       <?php if ($product_area != '') : ?>
-                        <p class="product-area pa">Platform: <?php echo $product_area; ?></p>
+                      <p class="product-area pa"><?php esc_html_e('Platform:', 'aras'); ?> <?php echo $product_area; ?></p>
                       <?php else : ?>
                         <p class="product-area pn"><?php echo $product_name; ?></p>
                       <?php endif; ?>
@@ -131,7 +131,7 @@ if ($data != null) {
                         <?php
                         $formattedTargetReleaseDate = date("F Y", strtotime($target_release_date));
                         if( strpos( $formattedTargetReleaseDate, '2100' ) == -1 ){
-                          $formattedTargetReleaseDate = 'TBD';
+                          $formattedTargetReleaseDate = __('TBD', 'aras');
                         }
                         ?>
                         <p class="product-date"><strong><?php echo $release_name; ?></strong> - <?php echo $formattedTargetReleaseDate; ?></p>
@@ -183,11 +183,11 @@ if ($rrq_data != null) {
     <div class="grid-container">
       <div class="grid-x grid-margin-x">
         <div class="cell small-12 medium-6">
-          <h3>Recent Releases</h3>
+          <h3><?php esc_html_e('Recent Releases', 'aras'); ?></h3>
           <table>
             <tr>
-              <th style="width:60%">Release</th>
-              <th>Date</th>
+            <th style="width:60%"><?php esc_html_e('Release', 'aras'); ?></th>
+            <th><?php esc_html_e('Date', 'aras'); ?></th>
             </tr>
             <?php //var_dump($rrq_data); 
             foreach ($rrq_data['SOAP-ENV:Envelope']['SOAP-ENV:Body']['ApplyItemResponse']['Result']['Item'] as $record) : ?>
@@ -229,11 +229,11 @@ if ($rrq_data != null) {
           </table>
         </div>
         <div class="cell small-12 medium-6">
-          <h3>Upcoming Releases</h3>
+          <h3><?php esc_html_e('Upcoming Releases', 'aras'); ?></h3>
           <table>
             <tr>
-              <th style="width:60%">Release</th>
-              <th>Date</th>
+            <th style="width:60%"><?php esc_html_e('Release', 'aras'); ?></th>
+            <th><?php esc_html_e('Date', 'aras'); ?></th>
             </tr>
             <?php
             // var_dump($rrq_data); 
@@ -258,7 +258,7 @@ if ($rrq_data != null) {
                 $sa_is_released = '';
               };
               if( strpos( $formattedReleaseDate, '2100' ) == -1 ){
-                $formattedReleaseDate = 'TBD';
+              $formattedReleaseDate = __('TBD', 'aras');
               }
               ?>
               <?php if ($sa_is_released == '0') : ?>

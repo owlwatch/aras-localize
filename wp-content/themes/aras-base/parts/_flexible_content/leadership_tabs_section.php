@@ -148,7 +148,7 @@
 														if( $use_excerpt ){
 															?>
 															<span class="bio-readmore" data-open="leader-<?php echo $contentnum; ?>-<?php echo $leadernum; ?>-<?php echo $modnum; ?>">
-																READ&nbsp;BIO
+																<?php esc_html_e('READ BIO', 'aras'); ?>
 															</span>
 															<?php
 														}

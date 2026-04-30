@@ -11,13 +11,13 @@ $has_eyebrow = $eyebrow_enabled && $eyebrow_content;
 <div class="nav-bar<?php if( $has_eyebrow){ ?> has-eyebrow<?php } ?>">
 	<div class="grid-container">
 		<div class="hidden-nav">
-			<a aria-label="Skip to Intro" id="skip-link" href="#page-intro">Skip to Intro</a>
+			<a aria-label="<?php echo esc_attr__('Skip to Intro', 'aras'); ?>" id="skip-link" href="#page-intro"><?php esc_html_e('Skip to Intro', 'aras'); ?></a>
 		</div>
 		<div class="grid-x grid-margin-x align-bottom">
 			<div class="cell shrink nav-logo-container">
 				<?php $image = get_field('website_logo', 'option');
 				if (!empty($image)) : ?>
-					<a aria-label="Homepage" class="nav-logo-link" href="<?php echo home_url(); ?>">
+					<a aria-label="<?php echo esc_attr__('Homepage', 'aras'); ?>" class="nav-logo-link" href="<?php echo home_url(); ?>">
 						<img class="nav-logo" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
 					</a>
 				<?php endif; ?>
