@@ -16,9 +16,9 @@ class Prerender {
      * @return void
      */
     public function register() {
-        add_action('init', [$this, 'register_rewrite_endpoint']);
+        // add_action('init', [$this, 'register_rewrite_endpoint']);
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
-        add_filter('redirect_canonical', [$this, 'maybe_disable_canonical_redirect'], 10, 2);
+        // add_filter('redirect_canonical', [$this, 'maybe_disable_canonical_redirect'], 10, 2);
     }
 
     /**
