@@ -16,33 +16,7 @@ class Prerender {
      * @return void
      */
     public function register() {
-        // add_action('init', [$this, 'register_rewrite_endpoint']);
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
-        // add_filter('redirect_canonical', [$this, 'maybe_disable_canonical_redirect'], 10, 2);
-    }
-
-    /**
-     * Register the /prerender endpoint with WordPress rewrites.
-     *
-     * @return void
-     */
-    public function register_rewrite_endpoint() {
-        add_rewrite_endpoint('prerender', EP_ALL);
-    }
-
-    /**
-     * Avoid canonical redirects changing /prerender requests before proxying.
-     *
-     * @param string|false $redirect_url
-     * @param string $requested_url
-     * @return string|false
-     */
-    public function maybe_disable_canonical_redirect($redirect_url, $requested_url) {
-        if ($this->request_has_prerender_path_suffix() || isset($_REQUEST['prerender'])) {
-            return false;
-        }
-
-        return $redirect_url;
     }
 
     /**
@@ -73,8 +47,6 @@ class Prerender {
             $current_url = str_replace('xplm.local', 'xplm.com', $current_url);
         }
         if ($current_url !== '') {
-            $current_url = $this->remove_prerender_path_suffix($current_url);
-            $current_url = remove_query_arg('prerender', $current_url);
             $current_url = remove_query_arg('nocache', $current_url);
         }
 
@@ -134,14 +106,6 @@ class Prerender {
             return false;
         }
 
-        if (isset($_REQUEST['prerender'])) {
-            return true;
-        }
-
-        if ($this->request_has_prerender_path_suffix()) {
-            return true;
-        }
-
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '';
         if ($user_agent === '') {
             return false;
@@ -184,82 +148,6 @@ class Prerender {
         }
 
         return Common::get_source_language();
-    }
-
-    /**
-     * Check whether the request path ends with /prerender or /prerender/.
-     *
-     * @return bool
-     */
-    private function request_has_prerender_path_suffix() {
-        if (empty($_SERVER['REQUEST_URI'])) {
-            return false;
-        }
-
-        $path = wp_parse_url((string) $_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        if (!is_string($path) || $path === '') {
-            return false;
-        }
-
-        return preg_match('#/prerender/?$#', $path) === 1;
-    }
-
-    /**
-     * Remove a trailing /prerender segment from a URL path.
-     *
-     * @param string $url
-     * @return string
-     */
-    private function remove_prerender_path_suffix($url) {
-        $parts = wp_parse_url($url);
-        if (!is_array($parts)) {
-            return $url;
-        }
-
-        $path = isset($parts['path']) ? (string) $parts['path'] : '';
-        $normalized_path = preg_replace('#/prerender/?$#', '', $path);
-
-        if (!is_string($normalized_path) || $normalized_path === $path) {
-            return $url;
-        }
-
-        if ($normalized_path === '') {
-            $normalized_path = '/';
-        }
-
-        $rebuilt_url = '';
-
-        if (isset($parts['scheme'])) {
-            $rebuilt_url .= $parts['scheme'] . '://';
-        }
-
-        if (isset($parts['user'])) {
-            $rebuilt_url .= $parts['user'];
-            if (isset($parts['pass'])) {
-                $rebuilt_url .= ':' . $parts['pass'];
-            }
-            $rebuilt_url .= '@';
-        }
-
-        if (isset($parts['host'])) {
-            $rebuilt_url .= $parts['host'];
-        }
-
-        if (isset($parts['port'])) {
-            $rebuilt_url .= ':' . $parts['port'];
-        }
-
-        $rebuilt_url .= $normalized_path;
-
-        if (isset($parts['query']) && $parts['query'] !== '') {
-            $rebuilt_url .= '?' . $parts['query'];
-        }
-
-        if (isset($parts['fragment']) && $parts['fragment'] !== '') {
-            $rebuilt_url .= '#' . $parts['fragment'];
-        }
-
-        return $rebuilt_url;
     }
 
     /**
