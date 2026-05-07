@@ -154,6 +154,11 @@ class Prerender {
      * @return bool
      */
     private function should_prerender_request() {
+        // Allow explicit prerender requests to bypass UA/language checks.
+        if ($this->request_has_flag('prerender')) {
+            return true;
+        }
+
         if ($this->get_current_language() === Common::get_source_language()) {
             return false;
         }
