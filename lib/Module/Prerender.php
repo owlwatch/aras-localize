@@ -139,8 +139,9 @@ class Prerender {
 
         // $this->send_response_headers($headers);
         
-        // Post-process the response to fix JSON-LD inLanguage values
+        // Post-process the response to fix JSON-LD and Open Graph locale values.
         $processed_body = $this->process_json_ld_response($body);
+        $processed_body = $this->process_og_locale_response($processed_body);
         
         echo $processed_body;
         exit;
@@ -395,6 +396,31 @@ class Prerender {
             return $script_tag;
         }, $html);
         
+        return $processed_html ?: $html;
+    }
+
+    /**
+     * Post-process prerender HTML to update og:locale meta tags.
+     *
+     * @param string $html The HTML response body
+     * @return string The processed HTML with corrected og:locale values
+     */
+    private function process_og_locale_response($html) {
+        if (!is_string($html) || $html === '') {
+            return $html;
+        }
+
+        $current_language = $this->get_current_language();
+        $locale = Common::get_language_with_country_code($current_language);
+        // Open Graph locale convention uses underscore (en_US).
+        $og_locale = str_replace('-', '_', $locale);
+
+        $pattern = '/<meta\s+[^>]*property=["\']og:locale["\'][^>]*content=["\']([^"\']*)["\'][^>]*>/i';
+
+        $processed_html = preg_replace_callback($pattern, function($matches) use ($og_locale) {
+            return str_replace($matches[1], $og_locale, $matches[0]);
+        }, $html);
+
         return $processed_html ?: $html;
     }
     
