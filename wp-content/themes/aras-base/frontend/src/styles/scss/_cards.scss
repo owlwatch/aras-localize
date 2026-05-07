@@ -478,9 +478,10 @@
         .card-flex {
             display: flex;
             flex-direction: row;
+            align-items: center;
 
             .card-icon-container {
-                width: calc(2.1rem + 60px);
+                width: calc(60px);
                 padding: 2.1rem 0 2.1rem 0rem;
 
                 .card-icon {
