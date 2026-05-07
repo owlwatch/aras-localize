@@ -139,9 +139,10 @@ class Prerender {
 
         // $this->send_response_headers($headers);
         
-        // Post-process the response to fix JSON-LD and Open Graph locale values.
+        // Post-process the response to fix JSON-LD and Open Graph values.
         $processed_body = $this->process_json_ld_response($body);
         $processed_body = $this->process_og_locale_response($processed_body);
+        $processed_body = $this->process_og_text_response($processed_body);
         
         echo $processed_body;
         exit;
@@ -419,6 +420,62 @@ class Prerender {
 
         $processed_html = preg_replace_callback($pattern, function($matches) use ($og_locale) {
             return str_replace($matches[1], $og_locale, $matches[0]);
+        }, $html);
+
+        return $processed_html ?: $html;
+    }
+
+    /**
+     * Post-process prerender HTML to translate og:title and og:description.
+     *
+     * @param string $html The HTML response body
+     * @return string The processed HTML with translated Open Graph text fields
+     */
+    private function process_og_text_response($html) {
+        if (!is_string($html) || $html === '') {
+            return $html;
+        }
+
+        $current_language = $this->get_current_language();
+        if ($current_language === Common::get_source_language()) {
+            return $html;
+        }
+
+        $pattern = '/(<meta\s+[^>]*property=["\'](og:title|og:description)["\'][^>]*content=["\'])([^"\']*)(["\'][^>]*>)/i';
+
+        if (!preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
+            return $html;
+        }
+
+        $phrases = [];
+        foreach ($matches as $match) {
+            if (!isset($match[3])) {
+                continue;
+            }
+
+            $text = trim((string) $match[3]);
+            if ($text !== '') {
+                $phrases[] = $text;
+            }
+        }
+
+        $phrases = array_values(array_unique($phrases));
+        if (empty($phrases)) {
+            return $html;
+        }
+
+        $translations = Common::get_phrases($phrases, $current_language);
+        if (!is_array($translations) || empty($translations)) {
+            return $html;
+        }
+
+        $processed_html = preg_replace_callback($pattern, function($matches) use ($translations) {
+            $original = isset($matches[3]) ? trim((string) $matches[3]) : '';
+            if ($original === '' || !isset($translations[$original])) {
+                return $matches[0];
+            }
+
+            return $matches[1] . $translations[$original] . $matches[4];
         }, $html);
 
         return $processed_html ?: $html;
