@@ -11,12 +11,62 @@ class Prerender {
     const SUB_FIELD_USER_AGENT_PATTERN = 'pattern';
 
     /**
+     * Preserve flag intent after sanitizing global request vars.
+     *
+     * @var array<string, bool>
+     */
+    private $request_flags = [
+        'prerender' => false,
+        'nocache' => false,
+    ];
+
+    /**
      * Register the prerender request handler.
      *
      * @return void
      */
     public function register() {
+        add_action('init', [$this, 'sanitize_request_flags'], 0);
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
+    }
+
+    /**
+     * Remove internal query flags from global request state.
+     *
+     * This ensures WordPress canonical, hreflang and other URL builders do not
+     * include operational params like `prerender` and `nocache`.
+     *
+     * @return void
+     */
+    public function sanitize_request_flags() {
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+        if ($request_uri !== '') {
+            $uri_parts = wp_parse_url($request_uri);
+            $query = [];
+
+            if (isset($uri_parts['query']) && is_string($uri_parts['query']) && $uri_parts['query'] !== '') {
+                parse_str($uri_parts['query'], $query);
+            }
+
+            $this->capture_request_flags($query);
+
+            if ($this->strip_request_flags($query)) {
+                $path = isset($uri_parts['path']) ? (string) $uri_parts['path'] : '/';
+                $normalized_query = http_build_query($query);
+                $_SERVER['REQUEST_URI'] = $normalized_query !== '' ? $path . '?' . $normalized_query : $path;
+                $_SERVER['QUERY_STRING'] = $normalized_query;
+            }
+        }
+
+        if (is_array($_GET)) {
+            $this->capture_request_flags($_GET);
+            $this->strip_request_flags($_GET);
+        }
+
+        if (is_array($_REQUEST)) {
+            $this->capture_request_flags($_REQUEST);
+            $this->strip_request_flags($_REQUEST);
+        }
     }
 
     /**
@@ -57,8 +107,8 @@ class Prerender {
         
         $target_url = $server . rawurlencode($current_url);
 
-        // if $_REQUEST['nocache'] is set, add cache=false to the url
-        if (isset($_REQUEST['nocache'])) {
+        // Preserve nocache behavior after sanitizing global request vars.
+        if ($this->request_has_flag('nocache')) {
             $target_url = add_query_arg('cache', 'false', $target_url);
         }
 
@@ -237,6 +287,69 @@ class Prerender {
         }
 
         return $headers;
+    }
+
+    /**
+     * Capture known internal flags before they are removed from globals.
+     *
+     * @param array $params
+     * @return void
+     */
+    private function capture_request_flags($params) {
+        if (!is_array($params)) {
+            return;
+        }
+
+        foreach (['prerender', 'nocache'] as $flag) {
+            if (!array_key_exists($flag, $params)) {
+                continue;
+            }
+
+            $value = $params[$flag];
+            if ($value === '' || $value === null) {
+                $this->request_flags[$flag] = true;
+                continue;
+            }
+
+            $normalized = strtolower((string) $value);
+            if (in_array($normalized, ['0', 'false', 'no', 'off'], true)) {
+                continue;
+            }
+
+            $this->request_flags[$flag] = true;
+        }
+    }
+
+    /**
+     * Remove internal flags from a parameter array.
+     *
+     * @param array $params
+     * @return bool Whether any params were removed.
+     */
+    private function strip_request_flags(&$params) {
+        if (!is_array($params)) {
+            return false;
+        }
+
+        $removed = false;
+        foreach (['prerender', 'nocache'] as $flag) {
+            if (array_key_exists($flag, $params)) {
+                unset($params[$flag]);
+                $removed = true;
+            }
+        }
+
+        return $removed;
+    }
+
+    /**
+     * Check if an internal request flag was present/enabled.
+     *
+     * @param string $flag
+     * @return bool
+     */
+    private function request_has_flag($flag) {
+        return !empty($this->request_flags[$flag]);
     }
 
     /**
