@@ -23,12 +23,12 @@ get_header(); ?>
                 $resources_link = get_post_type_archive_link('resources');
                 ?>
                 <li>
-                    <a href="<?php echo get_post_type_archive_link('resources') ?>">
+                    <a href="<?php echo $resources_link ?>">
                         Resources - Reports, Demos, & More
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( 'format', 'demo-series', get_post_type_archive_link('resources')) ?>">
+                    <a href="<?php echo add_query_arg( 'format', 'demo-series', $resources_link) ?>">
                         Demo Series Resources
                     </a>
                 </li>
