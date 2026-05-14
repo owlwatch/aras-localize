@@ -20,7 +20,7 @@ get_header(); ?>
                     'walker' => new Aras\Sitemap_Walker()
                 );
                 wp_list_pages($args);
-                $resources_link = get_post_type_archive_link('resources');
+                $resources_link = home_url('/resources/');
                 ?>
                 <li>
                     <a href="<?php echo $resources_link ?>">
@@ -33,7 +33,7 @@ get_header(); ?>
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( 'format', 'customer-story', get_post_type_archive_link('resources')) ?>">
+                    <a href="<?php echo add_query_arg( 'format', 'customer-story', $resources_link) ?>">
                         Customer Stories &amp; Case Studies
                     </a>
                 </li>
