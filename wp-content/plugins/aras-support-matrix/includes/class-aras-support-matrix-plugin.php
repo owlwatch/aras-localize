@@ -206,7 +206,9 @@ class ArasSupportMatrixPlugin
 			return false;
 		}
 
-		return in_array(self::ROLE, (array) $user->roles, true) && ! user_can($user, 'manage_options');
+		$roles = array_values(array_filter((array) $user->roles));
+
+		return count($roles) === 1 && $roles[0] === self::ROLE;
 	}
 
 	public function render_admin_page()
