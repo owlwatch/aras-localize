@@ -33,7 +33,9 @@
             "ajax": 0,
             "placeholder": "",
             "create_options": 0,
-            "save_options": 0
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_667dbf22aa25a",
@@ -49,7 +51,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "none": "No background visual",
                 "left": "Left half background image",
@@ -61,11 +63,14 @@
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
             "placeholder": "",
             "create_options": 0,
-            "save_options": 0
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_667dbfa7aa25b",
@@ -94,9 +99,11 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
+            "uploader": "",
             "return_format": "array",
             "library": "all",
+            "acfe_thumbnail": 0,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -104,6 +111,7 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
+            "allow_in_bindings": 1,
             "preview_size": "medium"
         },
         {
@@ -148,7 +156,9 @@
             "ajax": 0,
             "placeholder": "",
             "create_options": 0,
-            "save_options": 0
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_667dbfedaa25d",
@@ -244,7 +254,9 @@
             "ajax": 0,
             "placeholder": "",
             "create_options": 0,
-            "save_options": 0
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_6879b9eb795a8",
@@ -292,6 +304,15 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "acfe_autosync": [
+        "json"
+    ],
     "acfml_field_group_mode": "advanced",
-    "modified": 1752807975
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1779116875
 }
