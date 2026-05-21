@@ -348,7 +348,7 @@ function aras_delete_labs_posts()
 
 function aras_archive_deprecated_pages()
 {
-	$csv_path = get_stylesheet_directory() . '/data/deprecated-pages.csv';
+	$csv_path = get_template_directory() . '/data/deprecated-pages.csv';
 	if( !file_exists( $csv_path ) ){
 		wp_die( 'Deprecated pages CSV not found: ' . esc_html( $csv_path ) );
 	}
