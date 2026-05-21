@@ -257,7 +257,7 @@ function aras_delete_labs_posts()
 {
 	global $wpdb;
 	// we want to find any posts that had the 'aras-labs' tag and
-	// have a status of "archived" and delete them permanently
+	// have a status of "archive" and delete them permanently
 	// along with any thumbnail images or images in the content
 	// that are not used anywhere else on the site
 	$labs_term = get_term_by( 'slug', 'aras-labs', 'category' );
@@ -267,7 +267,7 @@ function aras_delete_labs_posts()
 	header('content-type: text/plain; charset=utf-8');
 	$labs_query = new WP_Query([
 		'post_type' => 'post',
-		'post_status' => 'archived',
+		'post_status' => 'archive',
 		'posts_per_page' => -1,
 		'tax_query' => [
 			[
@@ -390,7 +390,7 @@ function aras_archive_deprecated_pages()
 			continue;
 		}
 
-		if( $post->post_status === 'archived' ){
+		if( $post->post_status === 'archive' ){
 			$totals['already_archived']++;
 			echo "already_archived\t{$url}\t{$post_id}\t{$post->post_type}\n";
 			continue;
@@ -398,7 +398,7 @@ function aras_archive_deprecated_pages()
 
 		$updated = wp_update_post([
 			'ID' => $post_id,
-			'post_status' => 'archived',
+			'post_status' => 'archive',
 		], true );
 
 		if( is_wp_error( $updated ) ){
