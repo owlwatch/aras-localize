@@ -133,14 +133,17 @@ function aras_gravity_forms_submit_button_override( $input, $form )
 	if( !is_singular() ){
 		return $input;
 	}
-	
-	$shortcode = get_field('form_shortcode');
+
+	$shortcode = get_field('form_shortcode') ?: get_sub_field('form_shortcode');
 	if( !$shortcode ){
 		return $input;
 	}
 	
 	if( $shortcode == $form['id'] ){
 		$override = get_field('form_button_text');
+		if( !$override ){
+			$override = get_sub_field('form_button_text_override');
+		}
 		if( $override ){
 			$input = preg_replace("/value='.+?'/", "value='".esc_attr( $override )."'", $input );
 		}

@@ -64,6 +64,62 @@
             "append": ""
         },
         {
+            "key": "field_6a10bda0c94ee",
+            "label": "Form Button Text Override",
+            "name": "form_button_text_override",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Leave blank for default submit button text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6a10bdc7c94ef",
+            "label": "Form Button Color Override",
+            "name": "form_button_color_override",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Leave blank for default submit button text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "default": "Default (Black)",
+                "red": "Red",
+                "blue": "Blue",
+                "orange": "Orange"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_custom": 0,
+            "search_placeholder": "",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_667d77b80604a",
             "label": "Includes Salesforce Campaign",
             "name": "create_salesforce_campaign",
@@ -189,7 +245,11 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_667d78ad0604f",
@@ -290,7 +350,11 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0,
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_668f049a5146a",
@@ -407,6 +471,15 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "acfe_autosync": [
+        "json"
+    ],
     "acfml_field_group_mode": "advanced",
-    "modified": 1720649457
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1779482798
 }
