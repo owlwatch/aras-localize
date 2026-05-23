@@ -162,7 +162,7 @@
 									<?php else : ?>
 										<?php $poster = (''); ?>
 									<?php endif; ?>
-									<div class="cell video-block small-12 medium-order-1 <?= "$size $mobile" ?>">
+									<div class="cell video-block small-12 medium-order-<?php echo $side == 'left' ? '1' : '2'; ?> <?= "$size $mobile" ?>">
 										<?php if (get_sub_field('video_display')) :	?>
 											<div class="video-container <?= "$shadow $greyscale $overlay $icon" ?>">
 
