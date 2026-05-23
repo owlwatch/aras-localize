@@ -115,7 +115,7 @@
 									<?php $shadow = is_array( $image_options ) && in_array('shadow', $image_options) ? 'shadow' : ''; ?>
 									<?php $image = get_sub_field('image');
 									if (!empty($image)) : ?>
-										<div class="cell image-block small-12 medium-order-1 <?= "$size $mobile" ?> >">
+										<div class="cell image-block small-12 medium-order-<?php echo $side == 'left' ? '1' : '2'; ?> <?= "$size $mobile" ?> >">
 											<div class="image-container <?= "$greyscale $overlay $shadow" ?>">
 												<?php if ($overlay == 'overlay') : ?>
 													<img class="image-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
@@ -217,7 +217,7 @@
 
 
 							<?php if (have_rows('form_block')) : ?>
-								<div class="cell form-block small-12 medium-order-1 <?= "$rightsize $rightmobile" ?>">
+								<div class="cell form-block small-12 medium-order-<?php echo $side == 'left' ? '1' : '2'; ?> <?= "$rightsize $rightmobile" ?>">
 									<?php while (have_rows('form_block')) : the_row(); ?>
 										<?php $button_color = get_sub_field('form_button_color_override') ?: 'default'; ?>
 
