@@ -20,6 +20,8 @@ class Feed {
 
         remove_action('wp_head', 'feed_links', 2);
         remove_action('wp_head', 'feed_links_extra', 3);
+        remove_action('wp_head', 'wp_oembed_add_discovery_links', 4);
+        remove_action('wp_head', 'wp_oembed_add_discovery_links');
     }
 
     public function maybe_disable_feed() {
