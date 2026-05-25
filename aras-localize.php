@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Aras - Localize
  * Description: Custom LocalizeJS language switcher styled to match Aras branding.
- * Version: 1.0.0
+ * Version: 1.0.3
  * Author: Aras
  */
 
@@ -10,13 +10,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-const ARAS_LOCALIZE_VERSION = '1.0.2';
+const ARAS_LOCALIZE_VERSION = '1.0.3';
 
 require_once __DIR__ . '/lib/API/LocalizeAPI.php';
 require_once __DIR__ . '/lib/Util/Common.php';
 require_once __DIR__ . '/lib/Module/LanguageSwitcher.php';
 require_once __DIR__ . '/lib/Module/LinkList.php';
 require_once __DIR__ . '/lib/Module/Hreflang.php';
+require_once __DIR__ . '/lib/Module/Feed.php';
 require_once __DIR__ . '/lib/Module/Sitemap.php';
 require_once __DIR__ . '/lib/Module/Prerender.php';
 require_once __DIR__ . '/lib/ACF.php';
@@ -43,6 +44,9 @@ add_action('plugins_loaded', function() {
 
     $hreflang = new \Aras\Localize\Module\Hreflang();
     $hreflang->register();
+
+    $feed = new \Aras\Localize\Module\Feed();
+    $feed->register();
 
     $sitemap = new \Aras\Localize\Module\Sitemap();
     $sitemap->register();
