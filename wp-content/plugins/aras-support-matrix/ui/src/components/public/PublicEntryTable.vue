@@ -40,8 +40,8 @@ const publicationStatusOptions = [
 ]
 
 function statusColor(status: EntryRecord['status']) {
-  if (status === 'Certified') return 'success'
-  if (status === 'Supported') return 'info'
+  if (status === 'Certified') return '#0F66CB'
+  if (status === 'Supported') return '#1F9B42'
   return 'error'
 }
 

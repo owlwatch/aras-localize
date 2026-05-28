@@ -435,7 +435,7 @@ async function submitEntry() {
   padding: 0 4px;
   color: #4d6179;
   min-width: 0;
-  max-width: 320px;
+  /* max-width: 320px; */
 }
 
 .release-meta-row {
@@ -486,7 +486,6 @@ async function submitEntry() {
 .release-meta-note-text {
   min-width: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
