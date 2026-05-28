@@ -200,6 +200,15 @@ class GravityForms
 
 	public function clear_db_fields($form)
 	{
+		GFCommon::log_debug("Form Submission: {$form['title']} ({$form['id']})");
+		foreach ($form['fields'] as $field) {
+			$field_id = $field->id;
+			$field_value = rgpost("input_{$field_id}");
+			// we also want the label of the field for better logging
+			$field_label = $field->label;
+			GFCommon::log_debug("Value submitted for field {$field_id} ({$field_label}) => {$field_value}");
+		}
+
 		foreach ($form['fields'] as $field) {
 			$field_id = $field->id;
 			$field_value = rgpost("input_{$field_id}");
