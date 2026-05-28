@@ -178,7 +178,7 @@ if ($data != null) {
 								</select>
 							<?php } else { ?>
 								<select id="location" name="location">
-									<option value="">Choose a Location</option>
+									<option value=""><?php esc_html_e('Choose a Location', 'aras'); ?></option>
 									<?php foreach ($locations as $location) : ?>
 										<?php if (!empty($location)) : ?>
 											<?php $sanitizedLocation = preg_replace('/[^a-zA-Z0-9\s]/', '', $location); ?>
@@ -210,7 +210,7 @@ if ($data != null) {
 								</select>
 							<?php } else { ?>
 								<select id="delivery_method" name="delivery_method">
-									<option value="">Choose a Delivery Method</option>
+									<option value=""><?php esc_html_e('Choose a Delivery Method', 'aras'); ?></option>
 									<?php foreach ($deliveryMethods as $deliveryMethod) : ?>
 										<?php if (!empty($deliveryMethod)) : ?>
 											<?php $sanitizedDeliveryMethod = preg_replace('/[^a-zA-Z0-9\s]/', '', $deliveryMethod); ?>
@@ -225,7 +225,7 @@ if ($data != null) {
 								<?php if (str_contains($site_url, '/ja-jp/')) { ?>
 									<option value="">セッション</option>
 								<?php } else { ?>
-									<option value="">Choose a Course</option>
+									<option value=""><?php esc_html_e('Choose a Course', 'aras'); ?></option>
 								<?php	}; ?>
 								<?php foreach ($classNames as $className) : ?>
 									<?php if (!empty($className)) : ?>
@@ -256,7 +256,7 @@ if ($data != null) {
 								</select>
 							<?php } else { ?>
 								<select id="class_language" name="class_language">
-									<option value="">Choose a Language</option>
+									<option value=""><?php esc_html_e('Choose a Language', 'aras'); ?></option>
 									<?php foreach ($classLanguages as $classLanguage) : ?>
 										<?php if (!empty($classLanguage)) : ?>
 											<?php $sanitizedClassLanguage = preg_replace('/[^a-zA-Z0-9\s]/', '', $classLanguage); ?>
@@ -287,7 +287,7 @@ if ($data != null) {
 								</select>
 							<?php } else { ?>
 								<select id="student_role" name="student_role">
-									<option value="">Choose a Student Role</option>
+									<option value=""><?php esc_html_e('Choose a Student Role', 'aras'); ?></option>
 									<?php foreach ($studentRoles as $studentRole) : ?>
 										<?php if (!empty($studentRole)) : ?>
 											<?php $sanitizedStudentRole = preg_replace('/[^a-zA-Z0-9\s]/', '', $studentRole); ?>
@@ -305,8 +305,8 @@ if ($data != null) {
 								</select>
 							<?php } else { ?>
 								<select id="order-select">
-									<option value="asc">Ascending</option>
-									<option value="desc">Descending</option>
+									<option value="asc"><?php esc_html_e('Ascending', 'aras'); ?></option>
+									<option value="desc"><?php esc_html_e('Descending', 'aras'); ?></option>
 								</select>
 							<?php } ?>
 						</fieldset>
@@ -314,7 +314,7 @@ if ($data != null) {
 							<?php if (str_contains($site_url, '/ja-jp/')) { ?>
 								<button aria-label="クリア" id="clear-button" class="aras-button" type="reset">クリア</button>
 							<?php } else { ?>
-								<button aria-label="Reset" id="clear-button" class="aras-button" type="reset">Reset</button>
+								<button aria-label="<?php echo esc_attr__('Reset', 'aras'); ?>" id="clear-button" class="aras-button" type="reset"><?php esc_html_e('Reset', 'aras'); ?></button>
 							<?php } ?>
 						</fieldset>
 					</form>

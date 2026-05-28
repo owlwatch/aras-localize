@@ -9,6 +9,7 @@ const data = ref<MatrixPayload>({
   components: [],
   releases: [],
   entries: [],
+  notes: [],
   statuses: [],
 })
 const loading = ref(true)
@@ -46,6 +47,7 @@ onMounted(loadData)
             :components="data.components"
             :entries="data.entries"
             :is-admin="false"
+            :notes="data.notes"
             :releases="data.releases"
             :statuses="data.statuses"
           />

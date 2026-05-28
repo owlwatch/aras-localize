@@ -11,7 +11,7 @@ get_header(); ?>
     <div class="grid-x grid-margin-x grid-padding-x align-center">
         <div class="large-12 medium-12 small-12 cell">
 
-            <h2>Pages</h2>
+            <h2><?php esc_html_e('Pages', 'aras'); ?></h2>
             <ul>
                 <?php
                 $args = array(
@@ -20,20 +20,20 @@ get_header(); ?>
                     'walker' => new Aras\Sitemap_Walker()
                 );
                 wp_list_pages($args);
-                $resources_link = get_post_type_archive_link('resources');
+                $resources_link = home_url('/resources/');
                 ?>
                 <li>
-                    <a href="<?php echo get_post_type_archive_link('resources') ?>">
+                    <a href="<?php echo $resources_link ?>">
                         Resources - Reports, Demos, & More
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( 'format', 'demo-series', get_post_type_archive_link('resources')) ?>">
+                    <a href="<?php echo add_query_arg( 'format', 'demo-series', $resources_link) ?>">
                         Demo Series Resources
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( 'format', 'customer-story', get_post_type_archive_link('resources')) ?>">
+                    <a href="<?php echo add_query_arg( 'format', 'customer-story', $resources_link) ?>">
                         Customer Stories &amp; Case Studies
                     </a>
                 </li>
@@ -63,7 +63,7 @@ get_header(); ?>
             </ul>
 
 
-            <h2>Resources</h2>
+            <h2><?php esc_html_e('Resources', 'aras'); ?></h2>
             <ul>
                 <?php
                 $args = array(
@@ -76,7 +76,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>Blog</h2>
+            <h2><?php esc_html_e('Blog', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(
@@ -89,7 +89,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>News</h2>
+            <h2><?php esc_html_e('News', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(
@@ -102,7 +102,7 @@ get_header(); ?>
                 ?>
             </ul>
 
-            <h2>Documentation</h2>
+            <h2><?php esc_html_e('Documentation', 'aras'); ?></h2>
             <ul>
             <?php
                 $args = array(

@@ -200,10 +200,40 @@ class GravityForms
 
 	public function clear_db_fields($form)
 	{
+		GFCommon::log_debug("Form Submission: {$form['title']} ({$form['id']})");
+		$first_name = '';
+		$last_name = '';
 		foreach ($form['fields'] as $field) {
 			$field_id = $field->id;
 			$field_value = rgpost("input_{$field_id}");
+			// we also want the label of the field for better logging
+			$field_label = $field->label;
+			GFCommon::log_debug("Value submitted for field {$field_id} ({$field_label}) => {$field_value}");
+
+			// we need to find the first and last name fields by inputName (first_name, last_name)
+			if( $field->inputName == 'first_name' ){
+				$first_name = $field_value;
+			}
+			if( $field->inputName == 'last_name' ){
+				$last_name = $field_value;
+			}
+		}
+
+		$full_name = '';
+		if( $first_name && $last_name ){
+			$full_name = $first_name . ' ' . $last_name;
+		}
+
+		foreach ($form['fields'] as $field) {
+			$field_id = $field->id;
+			$field_value = rgpost("input_{$field_id}");
+
 			if (preg_match('/^db_/i', $field_value)) {
+				$_POST["input_{$field_id}"] = '';
+			}
+
+			// if we have full_name and the submitted value is = full_name, clear it
+			if( $full_name && $field_value == $full_name ){
 				$_POST["input_{$field_id}"] = '';
 			}
 		}

@@ -13,6 +13,14 @@ function statusColor(status: EntryRecord['status']) {
   if (status === 'Supported') return '#1F9B42'
   return 'error'
 }
+
+function noteIcon(entry: EntryRecord) {
+  return entry.note?.type === 'warning' ? 'mdi-alert-outline' : 'mdi-information-outline'
+}
+
+function noteIconClass(entry: EntryRecord) {
+  return entry.note?.type === 'warning' ? 'entry-note-icon--warning' : 'entry-note-icon--info'
+}
 </script>
 
 <template>
@@ -43,6 +51,7 @@ function statusColor(status: EntryRecord['status']) {
           </div>
           <v-list-item-subtitle v-if="entry.notes">
             <div class="entry-note-row">
+              <v-icon class="entry-note-icon" :class="noteIconClass(entry)" :icon="noteIcon(entry)" size="16" />
               <span :title="entry.notes">{{ entry.notes }}</span>
             </div>
           </v-list-item-subtitle>
@@ -62,6 +71,15 @@ function statusColor(status: EntryRecord['status']) {
 .result-card {
   background: rgba(255, 255, 255, 0.88);
   border-color: #E0E0E0;
+}
+
+.result-card :deep(hr) {
+  border: 0;
+  margin: 0;
+  height: 0;
+  box-shadow: none;
+  background-image: none;
+  color: inherit;
 }
 
 .component-card-header {
@@ -122,13 +140,28 @@ function statusColor(status: EntryRecord['status']) {
 }
 
 .entry-note-row {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   width: 100%;
   margin-top: 6px;
   font-size: 0.82rem;
   line-height: 1.45;
   white-space: normal;
   color: #4d6179;
+}
+
+.entry-note-icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.entry-note-icon--info {
+  color: #0F66CB;
+}
+
+.entry-note-icon--warning {
+  color: #D49623;
 }
 
 </style>

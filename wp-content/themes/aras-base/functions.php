@@ -254,8 +254,6 @@ if( is_aras_feature_enabled('quotes') ) {
 //WPML DB Insert - complete, keeping this here and commented out for history. Associated folder - "./functions/wpml-resources"
 //require_once(get_template_directory() . '/functions/wpml-resources/resource_update.php');
 
-require_once(get_template_directory() . '/functions/scripts/index.php');
-
 require_once(get_template_directory() . '/functions/shortcodes.php');
 
 require_once(get_template_directory() . '/functions/filters.php');

@@ -309,8 +309,8 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
                 <?php echo get_field('blog_filter_clear_button_label', 'option'); ?>
               </button>
             <?php else : ?>
-              <button aria-label="<?php esc_attr__('Clear Filters', 'aras'); ?>" class="aras-button" id="clear-filters">
-                <?php _e('Clear', 'aras'); ?>
+              <button aria-label="<?php echo esc_attr__('Clear Filters', 'aras'); ?>" class="aras-button" id="clear-filters">
+				<?php esc_html_e('Clear', 'aras'); ?>
               </button>
             <?php endif; ?>
           </form>
@@ -318,11 +318,11 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
           <div class="cell small-12 medium-shrink">
             <form role="search" method="get" class="blog-search-form" action="<?php echo home_url('/'); ?>">
               <label>
-                <span class="screen-reader-text"><?php echo _x('Search for:', 'label', 'jointswp') ?></span>
+        <span class="screen-reader-text"><?php echo esc_html_x('Search for:', 'label', 'aras'); ?></span>
                 <input type="hidden" name="post_type" value="post" />
-                <input aria-label="search" type="search" class="search-field" placeholder="Search" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'jointswp') ?>" />
+        <input aria-label="<?php echo esc_attr__('Search', 'aras'); ?>" type="search" class="search-field" placeholder="<?php echo esc_attr_x('Search', 'placeholder', 'aras'); ?>" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'label', 'aras') ?>" />
               </label>
-              <input class="search-arrow-icon" type="submit" value=" " alt="Search" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
+        <input class="search-arrow-icon" type="submit" value=" " alt="<?php echo esc_attr__('Search', 'aras'); ?>" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
             </form>
           </div>
         </div>
@@ -723,7 +723,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
                 <?php if (get_sub_field('subscribe_form_cta', 'option')) : ?>
                   <h2><?php echo get_sub_field('subscribe_form_cta', 'option'); ?></h2>
                 <?php else : ?>
-                  <h2>Subscribe for Updates</h2>
+				  <h2><?php esc_html_e('Subscribe for Updates', 'aras'); ?></h2>
                 <?php endif; ?>
               </div>
               <div class="cell small-12 medium-shrink">
@@ -731,7 +731,7 @@ $blog_backlink = get_field('blog_backlink_label', 'option') ?: $blog_backlink;
                   <?php if (get_sub_field('subscribe_form_label', 'option')) {
                     echo get_sub_field('subscribe_form_label', 'option');
                   } else {
-                    echo 'Subscribe';
+					echo esc_html__('Subscribe', 'aras');
                   } ?>
                 </button>
               </div>

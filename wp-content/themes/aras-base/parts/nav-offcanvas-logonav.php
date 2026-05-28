@@ -1,7 +1,7 @@
 <div class="nav-bar nav-bar-logo">
 	<div class="grid-container">
 		<div class="hidden-nav">
-			<a aria-label="Skip to Intro" id="skip-link" href="#page-intro">Skip to Intro</a>
+			<a aria-label="<?php echo esc_attr__('Skip to Intro', 'aras'); ?>" id="skip-link" href="#page-intro"><?php esc_html_e('Skip to Intro', 'aras'); ?></a>
 		</div>
 		<div class="grid-x grid-margin-x align-bottom">
 			<div class="cell shrink nav-logo-container logo-only-container">
@@ -13,7 +13,7 @@
 					$link = get_field('logo_link_override');
 					$link_url = $link['url'] ?? home_url();
 					$link_target = $link['target'] ?? '_self';
-					$link_aria_label = $link_target != '_self' ? esc_attr($link_target) : 'Homepage';
+					$link_aria_label = $link_target != '_self' ? esc_attr($link_target) : esc_attr__('Homepage', 'aras');
 					$image_alt = !empty($image['alt']) ? esc_attr($image['alt']) : get_the_title();
 				?>
 					<?php if ($logo_link_type == 'custom' && $link) : ?>
@@ -25,7 +25,7 @@
 							<img class="nav-logo" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo $image_alt; ?>" />
 						</span>
 					<?php else : ?>
-						<a aria-label="Homepage" class="nav-logo-link" href="<?php echo home_url(); ?>">
+						<a aria-label="<?php echo esc_attr__('Homepage', 'aras'); ?>" class="nav-logo-link" href="<?php echo home_url(); ?>">
 							<img class="nav-logo" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo $image_alt; ?>" />
 						</a>
 					<?php endif; ?>

@@ -4,12 +4,18 @@ import type {
   EntryRecord,
   ImportStatus,
   MatrixPayload,
+  NoteRecord,
   ReleaseRecord,
   WordPressConfig,
 } from '@/types/models'
 
 type ComponentPayload = Omit<ComponentRecord, 'id' | 'groups'> & {
   groups: Array<ComponentGroupRecord | number | string>
+}
+
+type CreateReleaseResponse = {
+  release: ReleaseRecord
+  entries: EntryRecord[]
 }
 
 declare global {
@@ -73,7 +79,7 @@ export const api = {
     return request<{ deleted: boolean }>(`/components/${id}`, { method: 'DELETE' })
   },
   createRelease(payload: Omit<ReleaseRecord, 'id'>) {
-    return request<ReleaseRecord>('/releases', {
+    return request<CreateReleaseResponse>('/releases', {
       method: 'POST',
       body: JSON.stringify(payload),
     })
@@ -101,6 +107,21 @@ export const api = {
   },
   deleteEntry(id: number) {
     return request<{ deleted: boolean }>(`/entries/${id}`, { method: 'DELETE' })
+  },
+  createNote(payload: Omit<NoteRecord, 'id'>) {
+    return request<NoteRecord>('/notes', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+  updateNote(payload: NoteRecord) {
+    return request<NoteRecord>(`/notes/${payload.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    })
+  },
+  deleteNote(id: number) {
+    return request<{ deleted: boolean }>(`/notes/${id}`, { method: 'DELETE' })
   },
   getImportStatus() {
     return request<ImportStatus>('/import/status')

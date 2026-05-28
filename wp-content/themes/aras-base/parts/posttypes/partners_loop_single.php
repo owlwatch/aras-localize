@@ -34,11 +34,11 @@ if (str_contains($site_url, '/ja-jp/')) {
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x align-middle">
 				<div class="cell small-12">
-					<a aria-label="See All Partners" class="archive-link" href="<?php echo $default_partners_archive_url; ?>">
+					<a aria-label="<?php esc_attr_e('See All Partners', 'aras'); ?>" class="archive-link" href="<?php echo $default_partners_archive_url; ?>">
 						<?php if (get_field('partner_single_breadcrumb_label', 'option')) : ?>
 							<h6><?php echo get_field('partner_single_breadcrumb_label', 'option'); ?>&nbsp;→</h6>
 						<?php else : ?>
-							<h6>All Partners&nbsp;→</h6>
+								<h6><?php esc_html_e('All Partners', 'aras'); ?>&nbsp;→</h6>
 						<?php endif; ?>
 					</a>
 				</div>
@@ -63,11 +63,11 @@ if (str_contains($site_url, '/ja-jp/')) {
 					} ?>
 
 					<?php if (get_field('partners_url_link__c')) : ?>
-						<a aria-label="Visit Website" class="aras-button" href="<?php echo get_field('partners_url_link__c'); ?>" target="_blank">
-							<?php if (get_field('partner_single_button_label', 'option')) : ?>
-								<?php echo get_field('partner_single_button_label', 'option'); ?>
-							<?php else : ?>
-								Visit Website
+					<a aria-label="<?php esc_attr_e('Visit Website', 'aras'); ?>" class="aras-button" href="<?php echo get_field('partners_url_link__c'); ?>" target="_blank">
+						<?php if (get_field('partner_single_button_label', 'option')) : ?>
+							<?php echo get_field('partner_single_button_label', 'option'); ?>
+						<?php else : ?>
+							<?php esc_html_e('Visit Website', 'aras'); ?>
 							<?php endif; ?>
 						</a>
 					<?php endif; ?>
@@ -85,7 +85,7 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<?php if (get_field('partner_single_certifications_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_certifications_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Certifications</h6>
+							<h6><?php esc_html_e('Certifications', 'aras'); ?></h6>
 							<?php endif; ?>
 							<p><?= "$partner_certifications_formatted" ?></p>
 						</div>
@@ -98,7 +98,7 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<?php if (get_field('partner_single_types_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_types_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Types</h6>
+							<h6><?php esc_html_e('Types', 'aras'); ?></h6>
 							<?php endif; ?>
 							<p><?= "$partner_type_formatted" ?></p>
 						</div>
@@ -110,7 +110,7 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<?php if (get_field('partner_single_regions_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_regions_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Regions</h6>
+							<h6><?php esc_html_e('Regions', 'aras'); ?></h6>
 							<?php endif; ?>
 							<p><?= "$partner_regions_formatted" ?></p>
 						</div>
@@ -122,7 +122,7 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<?php if (get_field('partner_single_industries_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_industries_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Industries</h6>
+							<h6><?php esc_html_e('Industries', 'aras'); ?></h6>
 							<?php endif; ?>
 							<p><?= "$partner_industries_formatted" ?></p>
 						</div>
@@ -134,7 +134,7 @@ if (str_contains($site_url, '/ja-jp/')) {
 							<?php if (get_field('partner_single_solutions_label', 'option')) : ?>
 								<h6><?php echo get_field('partner_single_solutions_label', 'option'); ?></h6>
 							<?php else : ?>
-								<h6>Solution Types</h6>
+							<h6><?php esc_html_e('Solution Types', 'aras'); ?></h6>
 							<?php endif; ?>
 							<p><?= "$partner_solutions_formatted" ?></p>
 						</div>

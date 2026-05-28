@@ -2,9 +2,9 @@
 // Register menus
 register_nav_menus(
 	array(
-		'main-nav'		=> __( 'The Main Menu', 'jointswp' ),		// Main nav in header
-		'offcanvas-nav'	=> __( 'The Off-Canvas Menu', 'jointswp' ),	// Off-Canvas nav
-		'footer-links'	=> __( 'Footer Links', 'jointswp' )			// Secondary nav in footer
+		'main-nav'		=> esc_html__( 'The Main Menu', 'aras' ),		// Main nav in header
+		'offcanvas-nav'	=> esc_html__( 'The Off-Canvas Menu', 'aras' ),	// Off-Canvas nav
+		'footer-links'	=> esc_html__( 'Footer Links', 'aras' )			// Secondary nav in footer
 	)
 );
 

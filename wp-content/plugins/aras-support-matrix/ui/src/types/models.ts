@@ -1,5 +1,6 @@
 export type SupportStatus = 'Certified' | 'Supported' | 'End of Life'
 export type PublicationStatus = 'draft' | 'publish'
+export type NoteType = 'info' | 'warning'
 
 export interface ComponentGroupRecord {
   id: number
@@ -12,6 +13,7 @@ export interface ComponentRecord {
   name: string
   description: string
   groups: ComponentGroupRecord[]
+  publicationStatus: PublicationStatus
 }
 
 export interface ReleaseRecord {
@@ -20,7 +22,10 @@ export interface ReleaseRecord {
   buildNumber: string
   releaseDate: string
   endOfLifeDate: string
+  noteId: number | null
+  noteTitle: string
   notes: string
+  note?: NoteRecord | null
   publicationStatus: PublicationStatus
 }
 
@@ -35,7 +40,17 @@ export interface EntryRecord {
   status: SupportStatus | ''
   publicationStatus: PublicationStatus
   endOfLifeDate: string
+  noteId: number | null
+  noteTitle: string
   notes: string
+  note?: NoteRecord | null
+}
+
+export interface NoteRecord {
+  id: number
+  title: string
+  content: string
+  type: NoteType
 }
 
 export interface StatusRecord {
@@ -48,6 +63,7 @@ export interface MatrixPayload {
   components: ComponentRecord[]
   releases: ReleaseRecord[]
   entries: EntryRecord[]
+  notes: NoteRecord[]
   statuses: StatusRecord[]
 }
 

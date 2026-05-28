@@ -11,7 +11,7 @@ get_header(); ?>
           <?php if (get_field('glossary_archive_headline', 'option')) : ?>
             <h1 class="hero-headline <?php echo $h1color; ?>"><?php echo get_field('glossary_archive_headline', 'option'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>">Glossary</h1>
+            <h1 class="hero-headline <?php echo $h1color; ?>"><?php esc_html_e('Glossary', 'aras'); ?></h1>
           <?php endif; ?>
         </div>
       </div>

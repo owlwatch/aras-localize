@@ -478,10 +478,11 @@
         .card-flex {
             display: flex;
             flex-direction: row;
+            align-items: flex-start;
 
             .card-icon-container {
-                width: calc(2.1rem + 60px);
-                padding: 2.1rem 0 2.1rem 2.1rem;
+                width: calc(60px);
+                padding: 2.1rem 0 2.1rem 0rem;
 
                 .card-icon {
                     width: 60px;
@@ -494,6 +495,8 @@
             }
 
             .card-content-container {
+                padding-top: 2.1rem;
+                padding-left: 2rem;
                 flex: 1;
             }
         }

@@ -13,8 +13,8 @@ function joints_comments($comment, $args, $depth)
 				}
 				?>
 				<?php echo esc_html($first_name); ?> on
-				<time datetime="<?php echo comment_time('Y-m-j'); ?>"><?php comment_time(__(' F jS, Y', 'jointswp')); ?></time>
-				<?php edit_comment_link(__('(Edit)', 'jointswp'), '  ', '') ?>
+				<time datetime="<?php echo comment_time('Y-m-j'); ?>"><?php comment_time(__(' F jS, Y', 'aras')); ?></time>
+				<?php edit_comment_link(__('(Edit)', 'aras'), '  ', '') ?>
 			</header>
 			<?php if ($comment->comment_approved == '0') : ?>
 				<div class="alert alert-info">

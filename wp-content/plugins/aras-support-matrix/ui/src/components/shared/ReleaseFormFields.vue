@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DatePickerField from '@/components/shared/DatePickerField.vue'
-import type { PublicationStatus, ReleaseRecord } from '@/types/models'
+import NoteReferenceFields from '@/components/shared/NoteReferenceFields.vue'
+import type { NoteRecord, NoteType, PublicationStatus, ReleaseRecord } from '@/types/models'
 
 defineProps<{
   model: {
@@ -8,10 +9,15 @@ defineProps<{
     buildNumber: string
     releaseDate: string
     endOfLifeDate: string
+    noteId: number | null
     notes: string
+    newNoteTitle: string
+    newNoteContent: string
+    newNoteType: NoteType
     publicationStatus: PublicationStatus
     copyFromReleaseId?: number | null
   }
+  notes: NoteRecord[]
   orderedReleases: ReleaseRecord[]
   publicationStatusOptions: { title: string; value: PublicationStatus }[]
   showCopyFrom?: boolean
@@ -44,7 +50,9 @@ defineProps<{
   <v-text-field v-model="model.buildNumber" hide-details label="Build Number" variant="outlined" />
   <DatePickerField v-model="model.releaseDate" label="Release Date" />
   <DatePickerField v-model="model.endOfLifeDate" label="End of Life Date" />
-  <v-textarea v-model="model.notes" hide-details class="inline-form-span" label="Notes" rows="2" variant="outlined" />
+  <div class="inline-form-span">
+    <NoteReferenceFields :model="model" :notes="notes" />
+  </div>
   <v-select
     v-if="!showCopyFrom"
     v-model="model.publicationStatus"

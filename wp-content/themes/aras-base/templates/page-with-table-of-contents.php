@@ -13,7 +13,7 @@ get_header(); ?>
           <?php if (get_field('page_toc_headline', 'option')) : ?>
             <h2><?php echo get_field('page_toc_headline', 'option'); ?></h2>
           <?php else : ?>
-            <h2>Table of Contents</h2>
+            <h2><?php esc_html_e('Table of Contents', 'aras'); ?></h2>
           <?php endif; ?>
           <ul id="toc"></ul>
         </div>

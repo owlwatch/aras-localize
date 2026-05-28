@@ -14,7 +14,8 @@ add_action('init', function () {
 	$script = $_REQUEST['aras-script'];
 	$file = get_stylesheet_directory() . '/src/scripts/' . $script . '.php';
 	if (!file_exists($file)) {
-		die('no file found for script: ' . $script. ' file: ' . $file);
+		/* translators: 1: script slug, 2: full file path */
+		wp_die(sprintf(__('No file found for script: %1$s file: %2$s', 'aras'), $script, $file));
 		return;
 	}
 	require_once($file);

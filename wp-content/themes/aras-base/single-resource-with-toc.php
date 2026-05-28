@@ -16,7 +16,7 @@ get_header(); ?>
     <div class="grid-container">
       <div class="resource-toc__toc-scroller">
         <div id="toc_container" class="resource-toc__toc tableofcontents">
-          <h2>Table of Contents</h2>
+          <h2><?php esc_html_e('Table of Contents', 'aras'); ?></h2>
           <ul id="toc">
             <!-- Table of Contents will be populated here -->
           </ul>

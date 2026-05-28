@@ -10,15 +10,15 @@ get_header(); ?>
   <div class="grid-container">
     <div class="grid-x grid-padding-x align-middle">
       <div class="cell small-12 medium-6 large-7 share-links">
-        <h6>Share this post:</h6>
-        <a aria-label="Share on LinkedIn" class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo get_permalink(); ?>" target="_blank">
-          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-linkedin.svg" alt="Share on LinkedIn" />
+        <h6><?php esc_html_e('Share this post:', 'aras'); ?></h6>
+        <a aria-label="<?php echo esc_attr__('Share on LinkedIn', 'aras'); ?>" class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo get_permalink(); ?>" target="_blank">
+          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-linkedin.svg" alt="<?php echo esc_attr__('Share on LinkedIn', 'aras'); ?>" />
         </a>
-        <a aria-label="Share on Twitter" class="share-link" href="http://www.twitter.com/share?url=<?php echo get_permalink(); ?>" target="_blank">
-          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-x.svg" alt="Share on Twitter" />
+        <a aria-label="<?php echo esc_attr__('Share on Twitter', 'aras'); ?>" class="share-link" href="http://www.twitter.com/share?url=<?php echo get_permalink(); ?>" target="_blank">
+          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-x.svg" alt="<?php echo esc_attr__('Share on Twitter', 'aras'); ?>" />
         </a>
-        <a aria-label="Share on LinkedIn" class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink(); ?>" target="_blank">
-          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-facebook.svg" alt="Share on FaceBook" />
+        <a aria-label="<?php echo esc_attr__('Share on Facebook', 'aras'); ?>" class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink(); ?>" target="_blank">
+          <img class="share-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/social/social-facebook.svg" alt="<?php echo esc_attr__('Share on Facebook', 'aras'); ?>" />
         </a>
       </div>
     </div>
@@ -32,7 +32,7 @@ get_header(); ?>
           <?php if (get_field('resources_customer_story_toc_headline', 'option')) : ?>
             <h2><?php echo get_field('resources_customer_story_toc_headline', 'option'); ?></h2>
           <?php else : ?>
-            <h2>Explore this Story</h2>
+            <h2><?php esc_html_e('Explore this Story', 'aras'); ?></h2>
           <?php endif; ?>
           <ul id="toc"></ul>
         </div>

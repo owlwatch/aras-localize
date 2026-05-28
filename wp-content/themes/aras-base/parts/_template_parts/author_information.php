@@ -35,7 +35,7 @@ foreach( $authors as $author_id ){
 									<img class="author-headshot" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" />
 								<?php endif; ?>
 								<div class="author-bio">
-									<h3>About <?php echo get_the_title( $profile_id ); ?></h3>
+									<h3><?php echo sprintf(esc_html__('About %s', 'aras'), get_the_title($profile_id)); ?></h3>
 									<?php echo get_sub_field('author_bio'); ?>
 								</div>
 							</div>

@@ -11,7 +11,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           <?php if (get_field('news_archive_headline', 'option')) : ?>
             <h1 class="hero-headline"><?php echo get_field('news_archive_headline', 'option'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline">News</h1>
+            <h1 class="hero-headline"><?php esc_html_e('News', 'aras'); ?></h1>
           <?php endif; ?>
           <?php if (get_field('news_archive_subheadline', 'option')) : ?>
             <h2 class="hero-subhead"><?php echo get_field('news_archive_subheadline', 'option'); ?></h2>
@@ -50,11 +50,11 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         </script>
         <form role="search" method="get" class="news-search-form" action="<?php echo home_url('/'); ?>">
           <label>
-            <span class="screen-reader-text"><?php echo _x('Search for:', 'label', 'jointswp') ?></span>
+          <span class="screen-reader-text"><?php echo esc_html_x('Search for:', 'label', 'aras'); ?></span>
             <input type="hidden" name="post_type" value="news" />
-            <input aria-label="search" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'jointswp') ?>" />
+          <input aria-label="<?php echo esc_attr__('Search', 'aras'); ?>" type="search" class="search-field" placeholder="" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x('Search for:', 'label', 'aras') ?>" />
           </label>
-          <input class="search-arrow-icon" type="submit" value=" " alt="Search" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
+          <input class="search-arrow-icon" type="submit" value=" " alt="<?php echo esc_attr__('Search', 'aras'); ?>" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/icons/searchicon.svg)" />
         </form>
       </div>
     </div>
@@ -105,7 +105,7 @@ $site_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     </section>
     <section class="grid-x grid-margin-x text-center align-center">
       <?php
-      $load_more_label = get_field('load_more_news_label', 'option') ?: 'Load More';
+      $load_more_label = get_field('load_more_news_label', 'option') ?: __('Load More', 'aras');
       $next_link = next_posts(0, false);
       ?>
         <a href="<?php echo $next_link ?>" aria-label="<?php echo esc_attr( $load_more_label ) ?>" class="aras-button" id="load-more-posts"><?php echo $load_more_label ?></a>

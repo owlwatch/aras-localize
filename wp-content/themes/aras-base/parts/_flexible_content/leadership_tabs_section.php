@@ -148,7 +148,7 @@
 														if( $use_excerpt ){
 															?>
 															<span class="bio-readmore" data-open="leader-<?php echo $contentnum; ?>-<?php echo $leadernum; ?>-<?php echo $modnum; ?>">
-																READ&nbsp;BIO
+																<?php esc_html_e('READ BIO', 'aras'); ?>
 															</span>
 															<?php
 														}
@@ -175,7 +175,7 @@
 																echo $bio; ?>
 															<?php endif; ?>
 														</div>
-														<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+														<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>

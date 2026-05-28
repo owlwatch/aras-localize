@@ -4,18 +4,22 @@ import { computed, reactive, ref, watch } from 'vue'
 import PublicEntryCards from '@/components/public/PublicEntryCards.vue'
 import PublicEntryTable from '@/components/public/PublicEntryTable.vue'
 import { api } from '@/composables/api'
-import type { ComponentRecord, EntryRecord, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
+import type { ComponentRecord, EntryRecord, NoteRecord, ReleaseRecord, StatusRecord, SupportStatus } from '@/types/models'
 
 const props = defineProps<{
   components: ComponentRecord[]
   entries: EntryRecord[]
   isAdmin: boolean
+  notes: NoteRecord[]
   releases: ReleaseRecord[]
   statuses: StatusRecord[]
 }>()
 
 interface EntryFormState extends Omit<EntryRecord, 'status'> {
   status: SupportStatus
+  newNoteTitle: string
+  newNoteContent: string
+  newNoteType: 'info' | 'warning'
 }
 
 const entriesState = ref<EntryRecord[]>([])
@@ -32,6 +36,14 @@ const entryEditingId = ref<number | null>(null)
 const releaseNoteDialogOpen = ref(false)
 const loading = ref(false)
 const entryStatusOptions = computed(() => props.statuses.map((status) => status.name))
+const publishedEntries = computed(() => entriesState.value.filter((entry) => entry.publicationStatus === 'publish'))
+const publishedComponents = computed(() => {
+  const publishedComponentIds = new Set(publishedEntries.value.map((entry) => entry.componentId))
+
+  return props.components.filter((component) => {
+    return component.publicationStatus === 'publish' && publishedComponentIds.has(component.id)
+  })
+})
 
 const entryForm = reactive<EntryFormState>({
   id: 0,
@@ -44,7 +56,12 @@ const entryForm = reactive<EntryFormState>({
   status: 'Supported',
   publicationStatus: 'draft',
   endOfLifeDate: '',
+  noteId: null,
+  noteTitle: '',
   notes: '',
+  newNoteTitle: '',
+  newNoteContent: '',
+  newNoteType: 'info',
 })
 
 watch(
@@ -61,12 +78,12 @@ watch(selectedComponentIds, () => {
 
 const visibleComponents = computed(() => {
   const componentIdsWithData = new Set(
-    entriesState.value
+    publishedEntries.value
       .filter((entry) => entry.innovatorReleaseId === selectedReleaseId.value)
       .map((entry) => entry.componentId),
   )
 
-  return props.components.filter((component) => componentIdsWithData.has(component.id))
+  return publishedComponents.value.filter((component) => componentIdsWithData.has(component.id))
 })
 
 const orderedReleases = computed(() => {
@@ -94,7 +111,7 @@ const selectedReleaseIsPastEol = computed(() => {
 })
 
 const filteredEntries = computed(() => {
-  return entriesState.value
+  return publishedEntries.value
     .filter((entry) => entry.innovatorReleaseId === selectedReleaseId.value)
     .filter((entry) => {
       return selectedComponentIds.value.length === 0 || selectedComponentIds.value.includes(entry.componentId)
@@ -168,10 +185,21 @@ function formatDate(value: string) {
   })
 }
 
+function noteIcon(type?: 'info' | 'warning') {
+  return type === 'warning' ? 'mdi-alert-outline' : 'mdi-information-outline'
+}
+
+function releaseNoteToneClass(type?: 'info' | 'warning') {
+  return type === 'warning' ? 'release-note-icon--warning' : 'release-note-icon--info'
+}
+
 function editEntry(entry: EntryRecord) {
   Object.assign(entryForm, {
     ...entry,
     status: entry.status || 'Supported',
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
   })
   entryEditingId.value = entry.id
 }
@@ -188,7 +216,12 @@ function cancelEntryEdit() {
     componentReleaseNumber: '',
     status: 'Supported',
     publicationStatus: 'draft',
+    noteId: null,
+    noteTitle: '',
     notes: '',
+    newNoteTitle: '',
+    newNoteContent: '',
+    newNoteType: 'info',
   })
 }
 
@@ -212,7 +245,7 @@ async function submitEntry() {
 </script>
 
 <template>
-  <div class="matrix-stack">
+  <div class="matrix-stack public-matrix">
     <v-alert
       type="info"
       variant="tonal"
@@ -231,7 +264,7 @@ async function submitEntry() {
           item-title="name"
           item-value="id"
           :items="orderedReleases"
-          label="Innovator Release"
+          label="Aras Innovator Release"
           variant="outlined"
         >
           <template #selection="{ item }">
@@ -252,20 +285,27 @@ async function submitEntry() {
         </v-select>
 
         <div v-if="selectedRelease" class="release-meta">
-          <span class="release-meta-label release-meta-label--eol">EOL</span>
-          <span
-            class="release-meta-value"
-            :class="{ 'release-meta-value--expired': selectedReleaseIsPastEol }"
-          >
-            {{ formatDate(selectedRelease.endOfLifeDate) }}
-          </span>
-          <v-btn
-            v-if="selectedRelease.notes"
-            icon="mdi-information-outline"
-            size="small"
-            variant="text"
-            @click="releaseNoteDialogOpen = true"
-          />
+          <div class="release-meta-row release-meta-row--eol">
+            <span class="release-meta-label release-meta-label--eol">EOL</span>
+            <span
+              class="release-meta-value"
+              :class="{ 'release-meta-value--expired': selectedReleaseIsPastEol }"
+            >
+              {{ formatDate(selectedRelease.endOfLifeDate) }}
+            </span>
+          </div>
+          <div v-if="selectedRelease.notes" class="release-meta-row release-meta-row--note">
+            <v-btn
+              class="release-note-trigger"
+              :icon="noteIcon(selectedRelease.note?.type)"
+              size="x-small"
+              variant="text"
+              @click="releaseNoteDialogOpen = true"
+            />
+            <span class="release-meta-note-text" :title="selectedRelease.notes">
+              {{ selectedRelease.notes }}
+            </span>
+          </div>
         </div>
 
         <v-btn-toggle v-model="viewMode" color="primary" density="comfortable" mandatory variant="outlined">
@@ -304,14 +344,16 @@ async function submitEntry() {
 
       <v-dialog v-model="releaseNoteDialogOpen" max-width="420">
         <v-card>
-          <v-card-title>Release Information</v-card-title>
+          <v-card-title>
+            <v-icon class="release-note-icon" :class="releaseNoteToneClass(selectedRelease?.note?.type)" :icon="noteIcon(selectedRelease?.note?.type)" size="30" />
+            {{ selectedRelease?.name }} Information
+          </v-card-title>
           <v-card-text>
-            <div class="release-note-title">{{ selectedRelease?.name }}</div>
+            <p class="release-note-copy">{{ selectedRelease?.notes }}</p>
             <div class="release-note-eol" :class="{ 'release-note-eol--expired': selectedReleaseIsPastEol }">
               <span class="release-note-eol-label">EOL:</span>
               {{ formatDate(selectedRelease?.endOfLifeDate || '') }}
             </div>
-            <p class="release-note-copy">{{ selectedRelease?.notes }}</p>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -335,6 +377,7 @@ async function submitEntry() {
           :entry-form="entryForm"
           :is-admin="isAdmin"
           :loading="loading"
+          :notes="notes"
           :releases="releases"
           :sort-icon="tableSortIcon"
           :status-options="entryStatusOptions"
@@ -363,6 +406,11 @@ async function submitEntry() {
   gap: 20px;
 }
 
+.public-matrix :deep(:focus-visible:not(button):not(input)) {
+  outline: initial;
+  outline-offset: initial;
+}
+
 .controls-row {
   display: flex;
   gap: 12px;
@@ -381,10 +429,28 @@ async function submitEntry() {
 
 .release-meta {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   padding: 0 4px;
   color: #4d6179;
+  min-width: 0;
+  max-width: 320px;
+}
+
+.release-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.release-meta-row--eol {
+  flex-wrap: wrap;
+}
+
+.release-meta-row--note {
+  width: 100%;
 }
 
 .release-meta-label {
@@ -407,9 +473,41 @@ async function submitEntry() {
   color: #c62828;
 }
 
+.release-note-trigger {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+}
+
+.release-note-trigger :deep(.v-btn__content > .v-icon) {
+  font-size: 16px;
+}
+
+.release-meta-note-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .release-note-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   margin-bottom: 4px;
+}
+
+.release-note-icon {
+  flex: 0 0 auto;
+}
+
+.release-note-icon--info {
+  color: #0F66CB;
+}
+
+.release-note-icon--warning {
+  color: #D49623;
 }
 
 .release-note-eol {
@@ -429,7 +527,8 @@ async function submitEntry() {
 }
 
 .release-note-copy {
-  margin: 0;
+  font-size: 1rem;
+  margin: 0 0 1rem;
   white-space: pre-wrap;
 }
 
@@ -474,6 +573,7 @@ async function submitEntry() {
   .release-meta {
     width: 100%;
     padding-inline: 0;
+    max-width: none;
   }
 }
 </style>

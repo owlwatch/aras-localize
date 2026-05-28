@@ -137,7 +137,7 @@ if ($data != null) {
 										<?php if (get_field('training_course_headline')) : ?>
 											<h1 class="hero-headline"><?php echo get_field('training_course_headline'); ?></h1>
 										<?php else : ?>
-											<h1 class="hero-headline">Register for Training</h1>
+										<h1 class="hero-headline"><?php esc_html_e('Register for Training', 'aras'); ?></h1>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -207,8 +207,8 @@ if ($data != null) {
 										<h6><?php echo esc_html($link_title); ?>&nbsp;→</h6>
 									</a>
 								<?php else : ?>
-									<button aria-label="Back to Training Classes" class="backlink-link" onclick="reloadWithoutParams()">
-										<h6>Back to Training Classes&nbsp;→</h6>
+								<button aria-label="<?php echo esc_attr__('Back to Training Classes', 'aras'); ?>" class="backlink-link" onclick="reloadWithoutParams()">
+									<h6><?php esc_html_e('Back to Training Classes', 'aras'); ?>&nbsp;→</h6>
 									</button>
 								<?php endif; ?>
 
@@ -254,25 +254,25 @@ if ($data != null) {
 										*/ ?>
 									</div>
 								<?php } else { ?>
-									<p class="training-data">Session: <strong><?php echo $item['_class_name']; ?></strong></p>
-									<p class="training-data">Dates: <strong><?php echo $classdates; ?></strong></p>
+									<p class="training-data"><?php esc_html_e('Session:', 'aras'); ?> <strong><?php echo $item['_class_name']; ?></strong></p>
+									<p class="training-data"><?php esc_html_e('Dates:', 'aras'); ?> <strong><?php echo $classdates; ?></strong></p>
 									<div class="training-single-twocol">
-										<p class="training-data">Time Zone: <strong><?php echo $timezone_locale; ?></strong></p>
-										<p class="training-data">Days: <strong><?php echo isset($item['_class_duration']) ? $item['_class_duration'] : ''; ?></strong></p>
-										<p class="training-data">Location: <strong><?php echo isset($item['location']) ? $item['location'] : ''; ?></strong></p>
-										<p class="training-data">Cost: <strong><?php echo isset($item['currency']) ? $item['currency'] : ''; ?><?php echo isset($item['coursecost']) ? $item['coursecost'] : ''; ?></strong></p>
-										<p class="training-data">Delivery Method: <strong><?php echo isset($item['_delivery_method']) ? $item['_delivery_method'] : ''; ?></strong></p>
-										<p class="training-data">Student Role: <strong><?php echo isset($item['_student_role']) ? $item['_student_role'] : ''; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Time Zone:', 'aras'); ?> <strong><?php echo $timezone_locale; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Days:', 'aras'); ?> <strong><?php echo isset($item['_class_duration']) ? $item['_class_duration'] : ''; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Location:', 'aras'); ?> <strong><?php echo isset($item['location']) ? $item['location'] : ''; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Cost:', 'aras'); ?> <strong><?php echo isset($item['currency']) ? $item['currency'] : ''; ?><?php echo isset($item['coursecost']) ? $item['coursecost'] : ''; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Delivery Method:', 'aras'); ?> <strong><?php echo isset($item['_delivery_method']) ? $item['_delivery_method'] : ''; ?></strong></p>
+										<p class="training-data"><?php esc_html_e('Student Role:', 'aras'); ?> <strong><?php echo isset($item['_student_role']) ? $item['_student_role'] : ''; ?></strong></p>
 									</div>
 									<?php $upload_dir = wp_upload_dir(); ?>
 									<a
-										aria-label="Download the Course PDF"
+										aria-label="<?php echo esc_attr__('Download the Course PDF', 'aras'); ?>"
 										class="aras-button"
 										target="_blank"
 										href="<?php echo $upload_dir['baseurl']; ?>/training/<?php echo $item['pdf_id']; ?>.pdf"
-									>Download the Course PDF</a>
+									><?php esc_html_e('Download the Course PDF', 'aras'); ?></a>
 									<div class="training-single-description wysiwyg-content">
-										<h6><strong>Description</strong></h6>
+										<h6><strong><?php esc_html_e('Description', 'aras'); ?></strong></h6>
 										<?php echo isset($item['_class_description']) ? $item['_class_description'] : ''; ?>
 										<?php if (get_field('post_description_content')) {
 											echo get_field('post_description_content');

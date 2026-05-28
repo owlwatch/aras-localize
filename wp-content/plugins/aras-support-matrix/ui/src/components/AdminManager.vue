@@ -1,32 +1,36 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import AdminComponentsTab from '@/components/admin/AdminComponentsTab.vue'
 import AdminEntriesTab from '@/components/admin/AdminEntriesTab.vue'
+import AdminNotesTab from '@/components/admin/AdminNotesTab.vue'
 import AdminReleasesTab from '@/components/admin/AdminReleasesTab.vue'
 import { api, getConfig } from '@/composables/api'
-import type { ComponentRecord, EntryRecord, ImportStatus, ReleaseRecord, StatusRecord } from '@/types/models'
+import type { ComponentRecord, EntryRecord, ImportStatus, NoteRecord, ReleaseRecord, StatusRecord } from '@/types/models'
 
 const props = defineProps<{
   components: ComponentRecord[]
   releases: ReleaseRecord[]
   entries: EntryRecord[]
+  notes: NoteRecord[]
   statuses: StatusRecord[]
 }>()
 
 const emit = defineEmits<{
   refresh: []
+  'update:components': [value: ComponentRecord[]]
+  'update:entries': [value: EntryRecord[]]
+  'update:notes': [value: NoteRecord[]]
+  'update:releases': [value: ReleaseRecord[]]
 }>()
 
 const adminTab = ref('components')
 const importLoading = ref(false)
 const importLoopActive = ref(false)
 const showIdColumns = ref(false)
-const dismissedImportFingerprint = ref('')
+const dismissedImportInstanceKey = ref('')
+const initiatedImportInstanceKey = ref('')
 const settingsMenuOpen = ref(false)
-const componentsState = ref<ComponentRecord[]>([])
-const releasesState = ref<ReleaseRecord[]>([])
-const entriesState = ref<EntryRecord[]>([])
 const importStatus = ref<ImportStatus>({
   status: 'idle',
   phase: 'idle',
@@ -46,32 +50,24 @@ const importStatus = ref<ImportStatus>({
   reset: false,
 })
 const importDismissStorageKey = 'aras-support-matrix.import-dismissed'
+const importInitiatedStorageKey = 'aras-support-matrix.import-initiated'
 const config = getConfig()
 
-componentsState.value = [...props.components]
-releasesState.value = [...props.releases]
-entriesState.value = [...props.entries]
-
-const importFingerprint = computed(() => {
+const importInstanceKey = computed(() => {
   if (importStatus.value.status === 'idle') {
     return ''
   }
 
   return JSON.stringify({
-    status: importStatus.value.status,
-    phase: importStatus.value.phase,
     startedAt: importStatus.value.startedAt,
-    finishedAt: importStatus.value.finishedAt,
-    message: importStatus.value.message,
-    lastError: importStatus.value.lastError,
-    progress: importStatus.value.progress,
-    counts: importStatus.value.counts,
     reset: importStatus.value.reset,
   })
 })
 
 const showImportAlert = computed(() => {
-  return importStatus.value.status !== 'idle' && dismissedImportFingerprint.value !== importFingerprint.value
+  return importStatus.value.status !== 'idle'
+    && initiatedImportInstanceKey.value === importInstanceKey.value
+    && dismissedImportInstanceKey.value !== importInstanceKey.value
 })
 
 const embedSnippet = computed(() => {
@@ -114,12 +110,23 @@ async function copyEmbedSnippet() {
 }
 
 function dismissImportAlert() {
-  if (!importFingerprint.value) {
+  if (!importInstanceKey.value) {
     return
   }
 
-  dismissedImportFingerprint.value = importFingerprint.value
-  window.localStorage.setItem(importDismissStorageKey, importFingerprint.value)
+  dismissedImportInstanceKey.value = importInstanceKey.value
+  window.localStorage.setItem(importDismissStorageKey, importInstanceKey.value)
+}
+
+function markImportInitiated() {
+  if (!importInstanceKey.value) {
+    return
+  }
+
+  initiatedImportInstanceKey.value = importInstanceKey.value
+  dismissedImportInstanceKey.value = ''
+  window.localStorage.setItem(importInitiatedStorageKey, importInstanceKey.value)
+  window.localStorage.removeItem(importDismissStorageKey)
 }
 
 async function refreshImportStatus() {
@@ -131,6 +138,7 @@ async function runImport(reset: boolean) {
 
   try {
     importStatus.value = await api.startImport(reset)
+    markImportInitiated()
     await continueImport()
   } finally {
     importLoading.value = false
@@ -162,23 +170,14 @@ async function continueImport() {
   }
 }
 
-watch(importFingerprint, (value) => {
-  if (!value) {
-    dismissedImportFingerprint.value = ''
-    window.localStorage.removeItem(importDismissStorageKey)
-    return
-  }
-
-  if (dismissedImportFingerprint.value === value) {
-    return
-  }
-
-  const storedValue = window.localStorage.getItem(importDismissStorageKey) ?? ''
-  dismissedImportFingerprint.value = storedValue
-})
+async function resumeImport() {
+  markImportInitiated()
+  await continueImport()
+}
 
 onMounted(async () => {
-  dismissedImportFingerprint.value = window.localStorage.getItem(importDismissStorageKey) ?? ''
+  dismissedImportInstanceKey.value = window.localStorage.getItem(importDismissStorageKey) ?? ''
+  initiatedImportInstanceKey.value = window.localStorage.getItem(importInitiatedStorageKey) ?? ''
   await refreshImportStatus()
 
   if (importStatus.value.status === 'running') {
@@ -224,7 +223,7 @@ onMounted(async () => {
                 <v-btn
                   v-if="importStatus.status === 'running' && !importLoopActive"
                   variant="text"
-                  @click="continueImport"
+                  @click="resumeImport"
                 >
                   Resume
                 </v-btn>
@@ -289,38 +288,50 @@ onMounted(async () => {
       <v-tab value="components">Components</v-tab>
       <v-tab value="releases">Releases</v-tab>
       <v-tab value="entries">Entries</v-tab>
+      <v-tab value="notes">Notes</v-tab>
     </v-tabs>
 
     <v-window v-model="adminTab" :crossfade="true" :transition-duration="0.2">
       <v-window-item value="components">
         <AdminComponentsTab
-          :components="componentsState"
-          :entries="entriesState"
+          :components="components"
+          :entries="entries"
           :show-id-columns="showIdColumns"
-          @update:components="componentsState = $event"
-          @update:entries="entriesState = $event"
+          @update:components="emit('update:components', $event)"
+          @update:entries="emit('update:entries', $event)"
         />
       </v-window-item>
 
       <v-window-item value="releases">
         <AdminReleasesTab
-          :entries="entriesState"
-          :releases="releasesState"
+          :entries="entries"
+          :notes="notes"
+          :releases="releases"
           :show-id-columns="showIdColumns"
-          @request:refresh="emit('refresh')"
-          @update:entries="entriesState = $event"
-          @update:releases="releasesState = $event"
+          @update:entries="emit('update:entries', $event)"
+          @update:notes="emit('update:notes', $event)"
+          @update:releases="emit('update:releases', $event)"
         />
       </v-window-item>
 
       <v-window-item value="entries">
         <AdminEntriesTab
-          :components="componentsState"
-          :entries="entriesState"
-          :releases="releasesState"
+          :components="components"
+          :entries="entries"
+          :notes="notes"
+          :releases="releases"
           :show-id-columns="showIdColumns"
           :statuses="statuses"
-          @update:entries="entriesState = $event"
+          @update:entries="emit('update:entries', $event)"
+          @update:notes="emit('update:notes', $event)"
+        />
+      </v-window-item>
+
+      <v-window-item value="notes">
+        <AdminNotesTab
+          :notes="notes"
+          :show-id-columns="showIdColumns"
+          @update:notes="emit('update:notes', $event)"
         />
       </v-window-item>
     </v-window>

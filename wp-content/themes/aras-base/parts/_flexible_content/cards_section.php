@@ -391,7 +391,7 @@
 							<img style="width: 100%; margin: auto; display: block;" class="vidyard-player-embed" alt="vidyard video player" src="https://play.vidyard.com/<?php echo get_sub_field('card_popup_vidyard_id'); ?>.jpg" data-uuid="<?php echo get_sub_field('card_popup_vidyard_id'); ?>" data-v="4" data-type="inline" />
 						<?php endif; ?>
 					<?php endif; ?>
-					<button aria-label="close pop-up container" class="close-button" data-close aria-label="Close modal" type="button">
+					<button aria-label="<?php echo esc_attr__('close pop-up container', 'aras'); ?>" class="close-button" data-close aria-label="Close modal" type="button">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>

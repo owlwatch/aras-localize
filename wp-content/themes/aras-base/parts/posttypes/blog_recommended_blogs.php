@@ -5,7 +5,7 @@
         <?php if (get_field('recommended_posts_headline', 'option')) : ?>
           <h2 class="recommended-title"><?php the_field('recommended_posts_headline', 'option'); ?></h2>
         <?php else : ?>
-          <h2 class="recommended-title">More Blog Posts</h2>
+          <h2 class="recommended-title"><?php esc_html_e('More Blog Posts', 'aras'); ?></h2>
         <?php endif; ?>
       </div>
       <?php
