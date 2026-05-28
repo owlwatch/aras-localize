@@ -25,7 +25,6 @@ $gtm_id = (is_singular('post') || is_home() || is_category() || is_author() || i
 	<!-- Mobile Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta class="foundation-mq">
-		<meta name="google-site-verification" content="mzZYCFXkN3wu0oIDBEQyEkq5T_JrsRC5Oma4WxWBkz0" />
 	<?php get_template_part('parts/head'); ?>
 
 	<?php if (!function_exists('has_site_icon') || !has_site_icon()) { ?>
