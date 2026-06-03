@@ -57,12 +57,14 @@
                         "text": "Text Block",
                         "image": "Image",
                         "video": "Video",
-                        "form": "Form"
+                        "form": "Form",
+                        "storylane": "Storylane"
                     },
                     "default_value": "text",
                     "return_format": "value",
                     "multiple": 0,
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
@@ -483,6 +485,75 @@
                     ],
                     "acfe_seamless_style": 0,
                     "acfe_group_modal": 0,
+                    "acfe_group_modal_close": 0,
+                    "acfe_group_modal_button": "",
+                    "acfe_group_modal_size": "large"
+                },
+                {
+                    "key": "field_6a207779d9072",
+                    "label": "Storylane Block",
+                    "name": "storylane_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "layout": "block",
+                    "acfe_seamless_style": 0,
+                    "acfe_group_modal": 0,
+                    "sub_fields": [
+                        {
+                            "key": "field_6a209363f8ec1",
+                            "label": "Storylane Info",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "message": "Please copy the the embed code from the \"Overlay\" option. This will then display the thumbnail with the button and will open the demo in a modal overlay. We cannot use inline for split content because they area is not wide enough.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        },
+                        {
+                            "key": "field_6a2079b1d9075",
+                            "label": "Embed Code",
+                            "name": "storylane_embed_code",
+                            "aria-label": "",
+                            "type": "acfe_code_editor",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "mode": "text\/html",
+                            "lines": 1,
+                            "indent_unit": 4,
+                            "maxlength": "",
+                            "rows": 4,
+                            "max_rows": "",
+                            "return_format": [],
+                            "allow_in_bindings": 0
+                        }
+                    ],
                     "acfe_group_modal_close": 0,
                     "acfe_group_modal_button": "",
                     "acfe_group_modal_size": "large"
@@ -978,6 +1049,75 @@
                     "acfe_group_modal_close": 0,
                     "acfe_group_modal_button": "",
                     "acfe_group_modal_size": "large"
+                },
+                {
+                    "key": "field_6a207a2c7fc2a",
+                    "label": "Storylane Block",
+                    "name": "storylane_block",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "layout": "block",
+                    "acfe_seamless_style": 0,
+                    "acfe_group_modal": 0,
+                    "sub_fields": [
+                        {
+                            "key": "field_6a2093d0f8ec2",
+                            "label": "Storylane Info",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "message": "Please copy the the embed code from the \"Overlay\" option. This will then display the thumbnail with the button and will open the demo in a modal overlay. We cannot use inline for split content because they area is not wide enough.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        },
+                        {
+                            "key": "field_6a207a2c7fc2d",
+                            "label": "Embed Code",
+                            "name": "storylane_embed_code",
+                            "aria-label": "",
+                            "type": "acfe_code_editor",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "mode": "text\/html",
+                            "lines": 1,
+                            "indent_unit": 4,
+                            "maxlength": "",
+                            "rows": 4,
+                            "max_rows": "",
+                            "return_format": [],
+                            "allow_in_bindings": 0
+                        }
+                    ],
+                    "acfe_group_modal_close": 0,
+                    "acfe_group_modal_button": "",
+                    "acfe_group_modal_size": "large"
                 }
             ],
             "acfe_seamless_style": 0,
@@ -1199,5 +1339,5 @@
         ]
     },
     "acfml_field_group_mode": "advanced",
-    "modified": 1780512577
+    "modified": 1780519912
 }

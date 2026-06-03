@@ -56,6 +56,7 @@
 		$rightsize = 'medium-6';
 	} 
 	$sides = ['left', 'right'];
+	$storylane_script_printed = false;
 	?>
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 	<section class="content-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
@@ -242,7 +243,55 @@
 								</div>
 							<?php endif; ?>
 
+						<?php elseif( get_sub_field('content_type') == 'storylane' ) : 
+							//STORYLANE BLOCK
+						?>
+							<div class="cell storylane-block small-12 medium-order-<?php echo $side == 'left' ? '1' : '2'; ?> <?= "$size $mobile" ?>">
+							<?php if (have_rows('storylane_block')) : ?>
+								<?php while (have_rows('storylane_block')) : the_row(); ?>
+									<?php
+									$embed_code = get_sub_field('storylane_embed_code');
 
+									preg_match('/Storylane\.Play\((\{.+\})\)/', $embed_code, $matches);
+									if( $matches && isset($matches[1]) ){
+										try {
+											// get rid of the "this" keyword as it will break the json decoding
+											$args = str_replace('this', 'null', $matches[1]);
+											// we need to replace unquoted keys with quoted keys, but make sure we don't capture https://, and some 
+											// properties don't have a space after the :
+											$args = preg_replace('/(\w+):(?=\s*[^\/])/', '"$1":', $args);
+											
+											// we also need to convert single quotes to double quotes
+											$args = str_replace("'", '"', $args);
+											$args = json_decode($args, true, 512, JSON_THROW_ON_ERROR);
+
+										} catch (JsonException $e) {
+											error_log('Failed to decode Storylane embed arguments: ' . $e->getMessage().' Original string: ' . $args. 'Original Match: ' . $matches[1]);
+											$args = null;
+										}
+										
+										if( $args ){
+											$args['type'] = 'popup';
+											$args['demo_url'] = str_replace('embed=inline', 'embed=popup', $args['demo_url']);
+											$args['scale'] = '0.95';
+											$args['padding_bottom'] = '56.25%';
+											// remove the unused elements
+											unset($args['element']);
+											// convert back to json
+											$new_args = esc_attr( json_encode($args) );
+											$embed_code = str_replace($matches[1], $new_args, $embed_code);
+
+											// lets also get rid of any iframes in the embed code
+											$embed_code = preg_replace('/<iframe.*?<\/iframe>/', '', $embed_code);
+										}
+									}
+									echo $embed_code;
+									?>
+								<?php endwhile; ?>
+								</div>
+							<?php endif; ?>
+
+							
 						<?php endif; ?>
 					<?php endwhile; ?>
 				<?php endif; ?>
