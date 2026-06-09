@@ -22,6 +22,8 @@
   <?php $minheight = ''; ?>
 <?php endif; ?>
 
+<?php $home_font_styling = get_field('enable_home_page_font_styling') ? ' home-page-font-styling' : ''; ?>
+
 
     <?php if (get_field('hero_background_background_style') != 'solid') : ?>
       <?php if (get_field('hero_background_background_options') == 'darkoverlay') : ?>
@@ -59,7 +61,7 @@
       }
       ?>
     <?php endif; ?>
-<section class="hero-banner lp-hero <? echo $minheight; ?> <? echo $positionbuffer; ?> <? echo $bg_color; ?> <? echo $navformat; ?> " id="page-intro">
+<section class="hero-banner lp-hero <? echo $minheight; ?> <? echo $positionbuffer; ?> <? echo $bg_color; ?> <? echo $navformat; ?><?php echo $home_font_styling; ?>" id="page-intro">
 
       <?php if (get_field('hero_background_background_style') == 'image') : ?>
 
@@ -124,11 +126,20 @@
         //VISUAL: IMAGE OR VIDEO
       ?>
 
-        <?php $content_style = 'small-12 medium-6 large-6 hero-content'; ?>
+        <?php $visual_column_split = get_field('visual_column_split') ?: 'half_half'; ?>
+        <?php if ($visual_column_split == 'two_thirds_one_third') : ?>
+          <?php $content_style = 'small-12 medium-8 large-8 hero-content'; ?>
+          <?php $image_visual_style = 'small-12 medium-4 large-4 image-block'; ?>
+          <?php $video_visual_style = 'small-12 medium-4 large-4 video-block'; ?>
+        <?php else : ?>
+          <?php $content_style = 'small-12 medium-6 large-6 hero-content'; ?>
+          <?php $image_visual_style = 'small-12 medium-6 large-6 image-block'; ?>
+          <?php $video_visual_style = 'small-12 medium-6 large-6 video-block'; ?>
+        <?php endif; ?>
         <?php if (get_field('visual_style') == 'image') : ?>
-          <?php $visual_style = 'small-12 medium-6 large-6 image-block'; ?>
+          <?php $visual_style = $image_visual_style; ?>
         <?php elseif (get_field('visual_style') == 'video') : ?>
-          <?php $visual_style = 'small-12 medium-6 large-6 video-block'; ?>
+          <?php $visual_style = $video_visual_style; ?>
         <?php else : ?>
           <?php $visual_style = 'hero-visual-none'; ?>
         <?php endif; ?>
@@ -151,7 +162,7 @@
               <?php else : ?>
                 <?php $shadow = '' ?>
               <?php endif; ?>
-              <?php if ((get_sub_field('video_display') != '') && (get_sub_field('poster_image') != '')) : ?>
+              <?php if ((get_sub_field('video_display') != '') && (get_sub_field('poster_image') != '') && (get_sub_field('video_type') != 'uploaded')) : ?>
                 <?php $pop_image_options = get_sub_field('popup_image_settings'); ?>
                 <?php if ($pop_image_options && in_array('greyscale', $pop_image_options)) : ?>
                   <?php $greyscale = 'greyscale' ?>
@@ -198,7 +209,7 @@
                 <?php $poster = (''); ?>
               <?php endif; ?>
               <div class="cell  <?= "$visual_style $visual_side" ?>">
-                <?php if (get_sub_field('video_display')) :  ?>
+                <?php if (get_sub_field('video_display') && get_sub_field('video_type') != 'uploaded') :  ?>
                   <div class="video-container <?= "$shadow $greyscale $overlay $icon" ?>">
 
                     <?php $image = get_sub_field('poster_image');
@@ -220,6 +231,11 @@
                   <div class="video-container <?= "$shadow" ?>">
                     <?php if (get_sub_field('video_type') == 'id') : ?>
                       <img style="width: 100%; margin: auto; display: block;" class="vidyard-player-embed" src="https://play.vidyard.com/<?php echo get_sub_field('vidyard_id'); ?>.jpg" data-uuid="<?php echo get_sub_field('vidyard_id'); ?>" data-v="4" data-type="inline" data-autoplay="<?= "$autoplay" ?>" data-loop="<?= "$loop" ?>" data-controls="<?= "$controls" ?>" />
+                    <?php elseif (get_sub_field('video_type') == 'uploaded') : ?>
+                      <?php $uploaded_video = get_sub_field('uploaded_video'); ?>
+                      <?php if (!empty($uploaded_video['url'])) : ?>
+                        <video playsinline <?php echo $autoplay == '1' ? 'autoplay muted ' : ''; ?><?php echo $loop == '1' ? 'loop ' : ''; ?><?php echo $controls == '1' ? 'controls ' : ''; ?>style="width: 100%; margin: auto; display: block;" src="<?php echo esc_url($uploaded_video['url']); ?>"></video>
+                      <?php endif; ?>
                     <?php else : ?>
                       <?php
                       $iframe = get_sub_field('video_link');
@@ -310,9 +326,9 @@
           <?php endif; ?>
 
           <?php if (get_field('hero_headline')) : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>"><?php echo get_field('hero_headline'); ?></h1>
+            <h1 class="hero-headline <?php echo $h1color; ?><?php echo get_field('enable_home_page_font_styling') ? ' home-hero-headline' : ''; ?>"><?php echo get_field('hero_headline'); ?></h1>
           <?php else : ?>
-            <h1 class="hero-headline <?php echo $h1color; ?>"><?php the_title(''); ?></h1>
+            <h1 class="hero-headline <?php echo $h1color; ?><?php echo get_field('enable_home_page_font_styling') ? ' home-hero-headline' : ''; ?>"><?php the_title(''); ?></h1>
           <?php endif; ?>
           <?php if (get_field('hero_content')) : ?>
             <div role="heading" role="heading" aria-level="2">

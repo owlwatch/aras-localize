@@ -166,6 +166,60 @@
   }
 }
 
+.hero-banner.lp-hero.home-page-font-styling {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  .grid-container {
+    .grid-x {
+      .hero-content-inner {
+        max-width: 400px;
+        margin-right: auto;
+
+        @include breakpoint(small only) {
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+        }
+
+        p {
+          font-size: 1.6rem;
+          line-height: 1.2;
+          font-weight: 300;
+          color: $grey;
+
+          @include breakpoint(medium only) {
+            font-size: 1.3rem;
+          }
+
+          @include breakpoint(small only) {
+            font-size: 1.15rem;
+          }
+        }
+      }
+
+      .home-hero-headline {
+        @include breakpoint(small only) {
+          text-align: center;
+        }
+      }
+
+      .video-block {
+        .video-container {
+          margin-right: auto;
+          width: auto;
+          aspect-ratio: 1;
+          max-width: none;
+          max-height: 50vh;
+          @include breakpoint(small only) {
+            max-height: none;
+            max-width: 85%;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 
 .hero-banner {

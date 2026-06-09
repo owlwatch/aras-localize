@@ -311,8 +311,8 @@
         "author",
         "send-trackbacks"
     ],
-    "active": true,
+    "active": false,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756826219
+    "modified": 1781712001
 }
