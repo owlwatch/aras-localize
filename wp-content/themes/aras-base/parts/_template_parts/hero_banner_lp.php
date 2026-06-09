@@ -282,6 +282,7 @@
               <?php else : ?>
                 <?php $shadow = '' ?>
               <?php endif; ?>
+              <?php $enable_image_zoom = get_sub_field('enable_image_zoom'); ?>
               <?php $image = get_sub_field('image');
               if (!empty($image)) : ?>
                 <div class="cell  <?= "$visual_style $visual_side" ?>">
@@ -289,7 +290,13 @@
                     <?php if ($overlay == 'overlay') : ?>
                       <img class="image-overlay" src="<?php echo get_template_directory_uri(); ?>/assets/images/orange_overlay.svg" alt="orange overlay layer" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>" />
                     <?php endif; ?>
+                    <?php if ($enable_image_zoom) : ?>
+                      <a href="<?php echo esc_url($image['url']); ?>" data-pswp-width="<?php echo esc_attr($image['width']); ?>" data-pswp-height="<?php echo esc_attr($image['height']); ?>" class="zoomable-image">
+                    <?php endif; ?>
                     <img class="split-image" src="<?php echo esc_url($image['url']); ?>" alt="<?php if (esc_attr($image['alt'])) : ?> <?php echo esc_attr($image['alt']); ?> <?php else : ?> <?php the_title(); ?> <?php endif; ?>" width="<?php echo ($image['width']); ?>" height="<?php echo ($image['height']); ?>">
+                    <?php if ($enable_image_zoom) : ?>
+                      </a>
+                    <?php endif; ?>
                   </div>
                 </div>
               <?php endif; ?>

@@ -18,6 +18,7 @@
   "dependencies": {
     "foundation-sites": "^6.9.0",
     "motion-ui": "^2.0.8",
+    "photoswipe": "^5.4.4",
     "sass": "^1.86.2"
   }
 }

@@ -324,6 +324,27 @@
                     "toggle": 0,
                     "save_custom": 0,
                     "custom_choice_button_text": "Add new choice"
+                },
+                {
+                    "key": "field_68508f8a11c01",
+                    "label": "Enable Image Zoom",
+                    "name": "enable_image_zoom",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "When enabled, clicking the image opens a larger view.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
                 }
             ]
         },
