@@ -7,7 +7,6 @@ use Aras\Localize\Util\Common;
 class LinkList
 {
 	const SHORTCODE = 'aras_localize_link_list';
-	const OPTIONS_PAGE = 'aras-localize';
 	const FIELD_ENABLE_LINK_LIST = 'enable_link_list';
 
 	public function register()
@@ -86,6 +85,26 @@ class LinkList
 		$output .= '</ul>';
 
 		return $output;
+	}
+
+	public function get_acf_fields()
+	{
+		return [
+			[
+				'key' => 'field_aras_localize_link_list_tab',
+				'label' => 'Link List',
+				'type' => 'tab',
+				'placement' => 'top',
+			],
+			[
+				'key' => 'field_aras_localize_enable_link_list',
+				'label' => 'Enable link list',
+				'name' => self::FIELD_ENABLE_LINK_LIST,
+				'type' => 'true_false',
+				'ui' => 1,
+				'default_value' => 1,
+			],
+		];
 	}
 
 	/**

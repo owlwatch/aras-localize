@@ -30,6 +30,82 @@ class Prerender {
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
     }
 
+    public function get_acf_fields() {
+        return [
+            [
+                'key' => 'field_aras_localize_prerender_tab',
+                'label' => 'Prerender',
+                'type' => 'tab',
+                'placement' => 'top',
+            ],
+            [
+                'key' => 'field_aras_localize_enable_prerender',
+                'label' => 'Enable prerender',
+                'name' => self::FIELD_ENABLE_PRERENDER,
+                'type' => 'true_false',
+                'ui' => 1,
+                'default_value' => 0,
+            ],
+            [
+                'key' => 'field_aras_localize_prerender_server',
+                'label' => 'Prerender server',
+                'name' => self::FIELD_PRERENDER_SERVER,
+                'type' => 'text',
+                'instructions' => 'Append-only base URL. The current URL will be URL encoded and added to the end of this value.',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_aras_localize_enable_prerender',
+                            'operator' => '==',
+                            'value' => '1',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'key' => 'field_aras_localize_prerender_auth_token',
+                'label' => 'Prerender authorization token',
+                'name' => self::FIELD_PRERENDER_AUTH_TOKEN,
+                'type' => 'password',
+                'instructions' => 'Optional bearer token sent as the Authorization header to the prerender service.',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_aras_localize_enable_prerender',
+                            'operator' => '==',
+                            'value' => '1',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'key' => 'field_aras_localize_prerender_user_agents',
+                'label' => 'User agents',
+                'name' => self::FIELD_PRERENDER_USER_AGENTS,
+                'type' => 'repeater',
+                'layout' => 'table',
+                'button_label' => 'Add User Agent Regex',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_aras_localize_enable_prerender',
+                            'operator' => '==',
+                            'value' => '1',
+                        ],
+                    ],
+                ],
+                'sub_fields' => [
+                    [
+                        'key' => 'field_aras_localize_prerender_user_agent_pattern',
+                        'label' => 'Regular expression',
+                        'name' => self::SUB_FIELD_USER_AGENT_PATTERN,
+                        'type' => 'text',
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Remove internal query flags from global request state.
      *

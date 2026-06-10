@@ -1,6 +1,7 @@
 <?php
 namespace Aras\Localize\Util;
 
+use Aras\Localize\ACF;
 use Aras\Localize\API\LocalizeAPI;
 
 class Common {
@@ -142,10 +143,10 @@ class Common {
     public static function get_api_key() {
         $api_key = '';
         if (function_exists('get_field')) {
-            $api_key = get_field('localize_api_key', 'option');
+            $api_key = get_field(ACF::FIELD_API_KEY, 'option');
         }
         if (empty($api_key)) {
-            $api_key = get_option('localize_api_key');
+            $api_key = get_option(ACF::FIELD_API_KEY);
         }
         return $api_key;
     }

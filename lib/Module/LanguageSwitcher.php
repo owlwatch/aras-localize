@@ -5,7 +5,6 @@ use Aras\Localize\Util\Common;
 
 class LanguageSwitcher {
     const SHORTCODE = 'aras_localize_switcher';
-    const OPTIONS_PAGE = 'aras-localize';
     const FIELD_ENABLE_SWITCHER = 'enable_switcher';
 
     public function register() {
@@ -108,6 +107,25 @@ class LanguageSwitcher {
     public function replace_theme_shortcode() {
         remove_shortcode('custom_language_dropdown');
         add_shortcode('custom_language_dropdown', [$this, 'render_shortcode']);
+    }
+
+    public function get_acf_fields() {
+        return [
+            [
+                'key' => 'field_aras_localize_switcher_tab',
+                'label' => 'Language Switcher',
+                'type' => 'tab',
+                'placement' => 'top',
+            ],
+            [
+                'key' => 'field_aras_localize_enable_switcher',
+                'label' => 'Enable switcher',
+                'name' => self::FIELD_ENABLE_SWITCHER,
+                'type' => 'true_false',
+                'ui' => 1,
+                'default_value' => 1,
+            ],
+        ];
     }
 
     private function is_enabled() {

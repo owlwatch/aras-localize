@@ -2,6 +2,8 @@
 
 namespace Aras\Localize\API;
 
+use Aras\Localize\ACF;
+
 class LocalizeAPI
 {
 	const BASE_URL = 'https://api.localizejs.com/v2.0';
@@ -174,10 +176,10 @@ class LocalizeAPI
 
 		$api_key = '';
 		if (function_exists('get_field')) {
-			$api_key = get_field('localize_api_key', 'option');
+			$api_key = get_field(ACF::FIELD_API_KEY, 'option');
 		}
 		if (empty($api_key)) {
-			$api_key = get_option('localize_api_key');
+			$api_key = get_option(ACF::FIELD_API_KEY);
 		}
 
 		if (empty($api_key)) {

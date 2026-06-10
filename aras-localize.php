@@ -33,24 +33,19 @@ register_deactivation_hook(__FILE__, function() {
 });
 
 add_action('plugins_loaded', function() {
-    $acf = new \Aras\Localize\ACF();
+    $modules = [
+        new \Aras\Localize\Module\LanguageSwitcher(),
+        new \Aras\Localize\Module\LinkList(),
+        new \Aras\Localize\Module\Hreflang(),
+        new \Aras\Localize\Module\Feed(),
+        new \Aras\Localize\Module\Sitemap(),
+        new \Aras\Localize\Module\Prerender(),
+    ];
+
+    $acf = new \Aras\Localize\ACF($modules);
     $acf->register();
 
-    $module = new \Aras\Localize\Module\LanguageSwitcher();
-    $module->register();
-
-    $linkList = new \Aras\Localize\Module\LinkList();
-    $linkList->register();
-
-    $hreflang = new \Aras\Localize\Module\Hreflang();
-    $hreflang->register();
-
-    $feed = new \Aras\Localize\Module\Feed();
-    $feed->register();
-
-    $sitemap = new \Aras\Localize\Module\Sitemap();
-    $sitemap->register();
-
-    $prerender = new \Aras\Localize\Module\Prerender();
-    $prerender->register();
+    foreach ($modules as $module) {
+        $module->register();
+    }
 });
