@@ -136,6 +136,33 @@
 	<?php $text_color = get_sub_field('text_color') ?: 'text-dark' ?>
 	<?php
 	$card_link_class = get_sub_field('use_buttons_on_cards') ? 'aras-button' : 'card-link';
+	$content_before_position = get_sub_field('content_before_position') ?: 'left';
+	$content_after_position = get_sub_field('content_after_position') ?: 'left';
+	$buttons_position = get_sub_field('content_after') ? $content_after_position : $content_before_position;
+
+	$get_content_layout = static function ($position) {
+		if ($position === 'center') {
+			return [
+				'alignment_class' => 'align-center',
+				'width_class' => 'small-12 medium-11 large-10',
+			];
+		}
+
+		if ($position === 'full_width') {
+			return [
+				'alignment_class' => '',
+				'width_class' => 'small-12',
+			];
+		}
+
+		return [
+			'alignment_class' => '',
+			'width_class' => 'small-12 medium-11 large-10',
+		];
+	};
+
+	$content_before_layout = $get_content_layout($content_before_position);
+	$content_after_layout = $get_content_layout($content_after_position);
 	?>
 
 	<section class="cards-section <?= "$toppadding $bottompadding $bg_color $text_color" ?>" <?= "$anchor" ?>>
@@ -143,8 +170,8 @@
 		<div class="grid-container">
 
 			<?php if (get_sub_field('content_before')) : ?>
-				<div class="grid-x grid-padding-x <?php if (get_sub_field('content_before_position') == 'center') : ?>align-center<?php endif; ?>">
-					<div class="cell small-12 medium-11 large-10 content-before">
+				<div class="grid-x grid-padding-x <?php echo $content_before_layout['alignment_class']; ?>">
+					<div class="cell <?php echo $content_before_layout['width_class']; ?> content-before">
 						<div class="wysiwyg-content"><?php echo get_sub_field('content_before'); ?></div>
 					</div>
 				</div>
@@ -350,9 +377,17 @@
 				<?php endif; ?>
 			<?php endif; ?>
 
+			<?php if (get_sub_field('content_after')) : ?>
+				<div class="grid-x grid-padding-x <?php echo $content_after_layout['alignment_class']; ?>">
+					<div class="cell <?php echo $content_after_layout['width_class']; ?> content-after">
+						<div class="wysiwyg-content"><?php echo get_sub_field('content_after'); ?></div>
+					</div>
+				</div>
+			<?php endif; ?>
+
 
 			<?php if (get_sub_field('buttons_after_cards')) : ?>
-				<div class="card-buttons-section <?php if (get_sub_field('content_before_position') == 'center') : ?>grid-x grid-padding-x align-center<?php endif; ?>">
+				<div class="card-buttons-section <?php if ($buttons_position == 'center') : ?>grid-x grid-padding-x align-center<?php endif; ?>">
 					<?php if (have_rows('buttons_after_cards')) : ?>
 						<?php while (have_rows('buttons_after_cards')) : the_row(); ?>
 							<?php $link = get_sub_field('button_link');

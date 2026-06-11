@@ -19,7 +19,8 @@
             "wpml_cf_preferences": 3,
             "choices": {
                 "left": "Left",
-                "center": "Centered"
+                "center": "Centered",
+                "full_width": "Full Width"
             },
             "default_value": "left",
             "return_format": "value",
