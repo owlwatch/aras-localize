@@ -19,6 +19,17 @@ class LanguageSwitcher {
             return;
         }
 
+        $handle = 'aras-localize-switcher';
+        $script_url = plugins_url('assets/aras-localize.js', $this->get_plugin_file());
+        $style_url = plugins_url('assets/aras-localize.css', $this->get_plugin_file());
+
+        wp_enqueue_script($handle, $script_url, ['localizeFallback'], \ARAS_LOCALIZE_VERSION, true);
+        wp_localize_script($handle, 'ArasLocalize', [
+            'selector' => '.aras-localize-switcher',
+            'availableLanguages' => array_values(Common::get_languages()),
+            'sourceLanguage' => Common::get_source_language(),
+        ]);
+
         if (!$this->is_enabled()) {
             return;
         }
@@ -28,18 +39,7 @@ class LanguageSwitcher {
             return;
         }
 
-        $handle = 'aras-localize-switcher';
-        $script_url = plugins_url('assets/aras-localize.js', $this->get_plugin_file());
-        $style_url = plugins_url('assets/aras-localize.css', $this->get_plugin_file());
-
         wp_enqueue_style($handle, $style_url, [], \ARAS_LOCALIZE_VERSION);
-        wp_enqueue_script($handle, $script_url, ['localizeFallback'], \ARAS_LOCALIZE_VERSION, true);
-
-        wp_localize_script($handle, 'ArasLocalize', [
-            'selector' => '.aras-localize-switcher',
-            'availableLanguages' => array_values(Common::get_languages()),
-            'sourceLanguage' => Common::get_source_language(),
-        ]);
     }
 
     public function render_shortcode($atts = []) {
@@ -105,6 +105,10 @@ class LanguageSwitcher {
     }
 
     public function replace_theme_shortcode() {
+        // only do this if enabled
+        if (!$this->is_enabled()) {
+            return;
+        }
         remove_shortcode('custom_language_dropdown');
         add_shortcode('custom_language_dropdown', [$this, 'render_shortcode']);
     }
@@ -124,7 +128,7 @@ class LanguageSwitcher {
                 'type' => 'true_false',
                 'ui' => 1,
                 'default_value' => 1,
-            ],
+            ]
         ];
     }
 

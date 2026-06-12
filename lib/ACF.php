@@ -69,6 +69,15 @@ class ACF {
             $fields = array_merge($fields, $module_fields);
         }
 
+        // loop through the fields and set "wpml_cf_preferences": 0
+        foreach ($fields as &$field) {
+            if (!isset($field['name'])) {
+                continue;
+            }
+
+            $field['wpml_cf_preferences'] = 1;
+        }
+
         acf_add_local_field_group([
             'key' => 'group_aras_localize_settings',
             'title' => 'Aras Localize Settings',
