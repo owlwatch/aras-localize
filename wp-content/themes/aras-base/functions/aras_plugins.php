@@ -145,7 +145,7 @@ function custom_language_dropdown_filter()
 			} elseif ($current_language == 'ja-jp') {
 				echo 'JP';
 			// add a zh-hant option here if needed in the future
-			} elseif ($current_language == 'zh-hant' || $current_language == 'zh-hans') {
+			} elseif ($current_language == 'zh-tw' || $current_language == 'zh-hans' || $current_language == 'zh-hant') {
 				echo 'ZH';
 			} else {
 				echo strtoupper($current_language);
@@ -154,7 +154,7 @@ function custom_language_dropdown_filter()
 		<div class="language-dropdown-pane dropdown-pane language-dropdown-container" data-dropdown data-auto-focus="true" data-hover="true" data-hover-pane="true">
 			<?php foreach ($languages as $code => $language) : ?>
 				<?php
-				$newURL = preg_replace('~/(en|fr-fr|de-de|ja-jp|zh-hant|zh-hans)(/|\?.*)?~', '/' . $code . '$2', $currentURL, 1);
+				$newURL = preg_replace('~/(en|fr-fr|de-de|ja-jp|zh-tw|zh-hant|zh-hans)(/|\?.*)?~', '/' . $code . '$2', $currentURL, 1);
 				?>
 				<a aria-label="<?php echo $language['native_name']; ?>" href="<?php echo $newURL; ?>"><img src="<?php echo $language['country_flag_url']; ?>" alt="<?php echo $language['native_name']; ?> Flag"><?php echo $language['native_name']; ?></a>
 			<?php endforeach; ?>
