@@ -151,20 +151,7 @@ class LanguageSwitcher {
      * @return string
      */
     private function get_current_language() {
-        $languages = Common::get_languages();
-        $source_language = Common::get_source_language();
-
-        if (empty($_SERVER['REQUEST_URI'])) {
-            return $source_language;
-        }
-
-        $parts = explode('/', $_SERVER['REQUEST_URI']);
-
-        if (isset($parts[1]) && in_array($parts[1], $languages, true)) {
-            return $parts[1];
-        }
-
-        return $source_language;
+        return Common::get_request_language();
     }
 
     /**

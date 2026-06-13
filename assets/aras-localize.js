@@ -2,9 +2,13 @@
   const settings = window.ArasLocalize || {};
   const selector = settings.selector || '.aras-localize-switcher';
   const availableLanguages = Array.isArray(settings.availableLanguages)
-    ? settings.availableLanguages.filter(Boolean)
+    ? settings.availableLanguages.map((code) => normalizeCode(code)).filter(Boolean)
     : [];
-  const sourceLanguage = settings.sourceLanguage || 'en';
+  const sourceLanguage = normalizeCode(settings.sourceLanguage || 'en');
+
+  function normalizeCode(code) {
+    return typeof code === 'string' ? code.trim().toLowerCase() : '';
+  }
 
   function formatCode(code) {
     if (!code) return '--';
@@ -22,6 +26,8 @@
   }
 
   function updateCurrentLanguage(code) {
+    code = normalizeCode(code);
+
     document.querySelectorAll(selector).forEach((container) => {
       container.setAttribute('data-current-lang', code);
 
@@ -55,7 +61,7 @@
   }
 
   function applyLanguage(option) {
-    const code = option.getAttribute('data-lang');
+    const code = normalizeCode(option.getAttribute('data-lang'));
     const url = option.getAttribute('data-url') || option.getAttribute('href');
 
     if (!code || !url) {
@@ -121,18 +127,20 @@
     const url = input instanceof URL ? new URL(input.href) : new URL(input, window.location.origin);
     
     const languages = Array.from(
-      new Set([...(Array.isArray(knownLanguages) ? knownLanguages : []), sourceLang].filter(Boolean)),
+      new Set([...(Array.isArray(knownLanguages) ? knownLanguages.map((code) => normalizeCode(code)) : []), normalizeCode(sourceLang)].filter(Boolean)),
     );
 
-    const targetLanguage = lang || sourceLang;
+    const targetLanguage = normalizeCode(lang || sourceLang);
     const pathSegments = url.pathname.split('/').filter(Boolean);
     const hadTrailingSlash = url.pathname.length > 1 && url.pathname.endsWith('/');
     const currentPathSegments = window.location.pathname.split('/').filter(Boolean);
+    const normalizedPathSegments = pathSegments.map((segment) => normalizeCode(segment));
+    const normalizedCurrentPathSegments = currentPathSegments.map((segment) => normalizeCode(segment));
     const hasExplicitSourceLanguage =
-      (pathSegments.length && pathSegments[0] === sourceLang) ||
-      (currentPathSegments.length && currentPathSegments[0] === sourceLang);
+      (normalizedPathSegments.length && normalizedPathSegments[0] === normalizeCode(sourceLang)) ||
+      (normalizedCurrentPathSegments.length && normalizedCurrentPathSegments[0] === normalizeCode(sourceLang));
 
-    if (pathSegments.length && languages.includes(pathSegments[0])) {
+    if (normalizedPathSegments.length && languages.includes(normalizedPathSegments[0])) {
       pathSegments.shift();
     }
 
@@ -154,7 +162,7 @@
 
   function updateLinks() {
     const EXCLUDED_PATHS = ['/wp-admin', '/wp-login', '/wp-content', '/wp-includes'];
-    const currentLang = OVERRIDE_LANG || localStorage.getItem('loadedLang') || sourceLanguage;
+    const currentLang = normalizeCode(OVERRIDE_LANG || localStorage.getItem('loadedLang') || sourceLanguage);
 
     
     const links = document.querySelectorAll('a:not([data-localize-ignore])');

@@ -18,12 +18,12 @@ class Common {
     public static function get_languages() {
         $filtered = apply_filters('aras_localize_hreflang_languages', null);
         if (is_array($filtered)) {
-            return $filtered;
+            return array_values(array_unique(array_map([self::class, 'normalize_language_code'], $filtered)));
         }
 
         $cached_source_language = get_transient(self::SOURCE_LANGUAGE_TRANSIENT_KEY);
         if (is_string($cached_source_language) && $cached_source_language !== '') {
-            self::$sourceLanguage = $cached_source_language;
+            self::$sourceLanguage = self::normalize_language_code($cached_source_language);
         }
 
         $cached = get_transient(self::TRANSIENT_KEY);
@@ -48,10 +48,10 @@ class Common {
 
         // languages are found in the project data enabledLanguages array
         if (isset($project_data['project']['enabledLanguages']) && is_array($project_data['project']['enabledLanguages'])) {
-            $languages = $project_data['project']['enabledLanguages'];
+            $languages = array_values(array_unique(array_map([self::class, 'normalize_language_code'], $project_data['project']['enabledLanguages'])));
 
             // codes is languages without source language
-            self::$sourceLanguage = $project_data['project']['sourceLanguage'] ?? 'en';
+            self::$sourceLanguage = self::normalize_language_code($project_data['project']['sourceLanguage'] ?? 'en');
             $codes = array_diff($languages, [self::$sourceLanguage]);
         }
         else {
@@ -82,7 +82,7 @@ class Common {
      * @return string
      */
     public static function get_source_language() {
-        return self::$sourceLanguage;
+        return self::normalize_language_code(self::$sourceLanguage);
     }
 
     /**
@@ -107,13 +107,15 @@ class Common {
         if ($code === false) {
             return $scheme . '://' . $_SERVER['HTTP_HOST'] . $request_path;
         }
+        $code = self::normalize_language_code((string) $code);
         $parts = explode('/', $request_path);
+        $request_language = isset($parts[1]) ? self::normalize_language_code($parts[1]) : '';
 
         // if $code is provided, we want to add the language code to the url
         // unless its self::$sourceLanguage, in which case we want to remove any language code from the url
         if ($code === self::$sourceLanguage) {
             // remove the first part of the path if it matches any of the languages
-            if (isset($parts[1]) && in_array($parts[1], self::get_languages(), true)) {
+            if ($request_language !== '' && in_array($request_language, self::get_languages(), true)) {
                 // remove the language code from the url
                 $remaining_parts = array_slice($parts, 2);
                 $clean_path = '/' . implode('/', $remaining_parts);
@@ -125,7 +127,7 @@ class Common {
         }
 
         // add the language code to the url
-        if (isset($parts[1]) && in_array($parts[1], self::get_languages(), true)) {
+        if ($request_language !== '' && in_array($request_language, self::get_languages(), true)) {
             // replace the language code in the url
             $parts[1] = $code;
             return $scheme . '://' . $_SERVER['HTTP_HOST'] . implode('/', $parts);
@@ -184,6 +186,8 @@ class Common {
      * @return string The language code with country code (e.g., 'en-US', 'es-ES')
      */
     public static function get_language_with_country_code($language) {
+        $language = self::normalize_language_code($language);
+
         // Default country codes for common languages
         $language_country_map = [
             'en' => 'en-US',
@@ -227,6 +231,45 @@ class Common {
         
         // Return mapped language-country code or fallback to original if not found
         return isset($language_country_map[$language]) ? $language_country_map[$language] : $language;
+    }
+
+    /**
+     * Normalize language codes to a consistent lowercase format.
+     *
+     * @param string $language
+     * @return string
+     */
+    public static function normalize_language_code($language) {
+        if (!is_string($language)) {
+            return '';
+        }
+
+        return strtolower(trim($language));
+    }
+
+    /**
+     * Read the current request language from the first path segment.
+     *
+     * @return string
+     */
+    public static function get_request_language() {
+        if (empty($_SERVER['REQUEST_URI'])) {
+            return self::get_source_language();
+        }
+
+        $request_path = wp_parse_url((string) $_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        if (!is_string($request_path) || $request_path === '') {
+            return self::get_source_language();
+        }
+
+        $parts = explode('/', $request_path);
+        $request_language = isset($parts[1]) ? self::normalize_language_code($parts[1]) : '';
+
+        if ($request_language !== '' && in_array($request_language, self::get_languages(), true)) {
+            return $request_language;
+        }
+
+        return self::get_source_language();
     }
     
     /**

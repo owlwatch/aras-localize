@@ -113,20 +113,7 @@ class LinkList
 	 */
 	private function get_current_language()
 	{
-		if (empty($_SERVER['REQUEST_URI'])) {
-			return Common::get_source_language();
-		}
-
-		$request_path = $_SERVER['REQUEST_URI'];
-		$parts = explode('/', $request_path);
-
-		$languages = Common::get_languages();
-
-		if (isset($parts[1]) && in_array($parts[1], $languages, true)) {
-			return $parts[1];
-		}
-
-		return Common::get_source_language();
+		return Common::get_request_language();
 	}
 
 	/**

@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-const ARAS_LOCALIZE_VERSION = '1.0.4';
+const ARAS_LOCALIZE_VERSION = '1.0.5';
 
 require_once __DIR__ . '/lib/API/LocalizeAPI.php';
 require_once __DIR__ . '/lib/Util/Common.php';
