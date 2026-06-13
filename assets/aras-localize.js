@@ -196,6 +196,7 @@
         // we also want to remove the default listener to setLanguage
         if (typeof window.Localize.off === 'function') {
           window.Localize.off('setLanguage');
+          console.log('Removed default setLanguage listener');
         }
         window.Localize.on('setLanguage', function (data) {
           console.log('setLanguage event received:', data);
