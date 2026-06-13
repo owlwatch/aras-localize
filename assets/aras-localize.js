@@ -2,13 +2,9 @@
   const settings = window.ArasLocalize || {};
   const selector = settings.selector || '.aras-localize-switcher';
   const availableLanguages = Array.isArray(settings.availableLanguages)
-    ? settings.availableLanguages.map((code) => normalizeCode(code)).filter(Boolean)
+    ? settings.availableLanguages.filter(Boolean)
     : [];
-  const sourceLanguage = normalizeCode(settings.sourceLanguage || 'en');
-
-  function normalizeCode(code) {
-    return typeof code === 'string' ? code.trim().toLowerCase() : '';
-  }
+  const sourceLanguage = settings.sourceLanguage || 'en';
 
   function formatCode(code) {
     if (!code) return '--';
@@ -26,8 +22,6 @@
   }
 
   function updateCurrentLanguage(code) {
-    code = normalizeCode(code);
-
     document.querySelectorAll(selector).forEach((container) => {
       container.setAttribute('data-current-lang', code);
 
@@ -61,7 +55,7 @@
   }
 
   function applyLanguage(option) {
-    const code = normalizeCode(option.getAttribute('data-lang'));
+    const code = option.getAttribute('data-lang');
     const url = option.getAttribute('data-url') || option.getAttribute('href');
 
     if (!code || !url) {
@@ -127,20 +121,18 @@
     const url = input instanceof URL ? new URL(input.href) : new URL(input, window.location.origin);
     
     const languages = Array.from(
-      new Set([...(Array.isArray(knownLanguages) ? knownLanguages.map((code) => normalizeCode(code)) : []), normalizeCode(sourceLang)].filter(Boolean)),
+      new Set([...(Array.isArray(knownLanguages) ? knownLanguages : []), sourceLang].filter(Boolean)),
     );
 
-    const targetLanguage = normalizeCode(lang || sourceLang);
+    const targetLanguage = lang || sourceLang;
     const pathSegments = url.pathname.split('/').filter(Boolean);
     const hadTrailingSlash = url.pathname.length > 1 && url.pathname.endsWith('/');
     const currentPathSegments = window.location.pathname.split('/').filter(Boolean);
-    const normalizedPathSegments = pathSegments.map((segment) => normalizeCode(segment));
-    const normalizedCurrentPathSegments = currentPathSegments.map((segment) => normalizeCode(segment));
     const hasExplicitSourceLanguage =
-      (normalizedPathSegments.length && normalizedPathSegments[0] === normalizeCode(sourceLang)) ||
-      (normalizedCurrentPathSegments.length && normalizedCurrentPathSegments[0] === normalizeCode(sourceLang));
+      (pathSegments.length && pathSegments[0] === sourceLang) ||
+      (currentPathSegments.length && currentPathSegments[0] === sourceLang);
 
-    if (normalizedPathSegments.length && languages.includes(normalizedPathSegments[0])) {
+    if (pathSegments.length && languages.includes(pathSegments[0])) {
       pathSegments.shift();
     }
 
@@ -162,7 +154,7 @@
 
   function updateLinks() {
     const EXCLUDED_PATHS = ['/wp-admin', '/wp-login', '/wp-content', '/wp-includes'];
-    const currentLang = normalizeCode(OVERRIDE_LANG || localStorage.getItem('loadedLang') || sourceLanguage);
+    const currentLang = OVERRIDE_LANG || localStorage.getItem('loadedLang') || sourceLanguage;
 
     
     const links = document.querySelectorAll('a:not([data-localize-ignore])');
@@ -200,22 +192,18 @@
 
 
     if (window.Localize && typeof window.Localize.on === 'function') {
-      setTimeout(() => {
-        // we also want to remove the default listener to setLanguage
-        if (typeof window.Localize.off === 'function') {
-          window.Localize.off('setLanguage');
-          console.log('Removed default setLanguage listener');
+      if (typeof window.Localize.off === 'function') {
+        window.Localize.off('setLanguage');
+      }
+      // we also want to remove the default listener to setLanguage
+      window.Localize.on('setLanguage', function (data) {
+        if (data && data.to) {
+          updateCurrentLanguage(data.to);
+          // we need to implement our own link replacing logic
+          updateLinks();
         }
-        window.Localize.on('setLanguage', function (data) {
-          console.log('setLanguage event received:', data);
-          if (data && data.to) {
-            updateCurrentLanguage(data.to);
-            // we need to implement our own link replacing logic
-            updateLinks();
-          }
-        });
-        updateLinks();
-      }, 100);
+      });
+      updateLinks();
     }
   }
 
