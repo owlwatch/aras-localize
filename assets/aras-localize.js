@@ -124,10 +124,16 @@
       new Set([...(Array.isArray(knownLanguages) ? knownLanguages : []), sourceLang].filter(Boolean)),
     );
 
+    // the languages should all be lowercased
+    languages.forEach((lang, index) => {
+      languages[index] = lang.toLowerCase();
+    });
+
     const targetLanguage = lang || sourceLang;
     const pathSegments = url.pathname.split('/').filter(Boolean);
     const hadTrailingSlash = url.pathname.length > 1 && url.pathname.endsWith('/');
     const currentPathSegments = window.location.pathname.split('/').filter(Boolean);
+  
     const hasExplicitSourceLanguage =
       (pathSegments.length && pathSegments[0] === sourceLang) ||
       (currentPathSegments.length && currentPathSegments[0] === sourceLang);
