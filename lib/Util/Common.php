@@ -52,7 +52,7 @@ class Common {
 
             // codes is languages without source language
             self::$sourceLanguage = $project_data['project']['sourceLanguage'] ?? 'en';
-            $codes = array_diff($languages, [self::$sourceLanguage]);
+            $codes = array_map('strtolower', array_diff($languages, [self::$sourceLanguage]));
         }
         else {
             return [];
