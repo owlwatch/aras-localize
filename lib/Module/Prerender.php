@@ -231,9 +231,8 @@ class Prerender {
      * @return bool
      */
     private function should_prerender_request() {
-        
         if ($this->get_current_language() === Common::get_source_language()) {
-            return false;
+            return apply_filters('aras_should_prerender_request', false);
         }
 
         // Allow explicit prerender requests to bypass UA/language checks.
