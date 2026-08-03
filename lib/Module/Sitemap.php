@@ -5,10 +5,59 @@ use Aras\Localize\Util\Common;
 
 class Sitemap {
     const ALTERNATES_KEY = 'aras_localize_alternates';
+    const FIELD_ENABLE_SITEMAP = 'enable_sitemap';
+    const FIELD_SITEMAP_URL_FORMAT = 'sitemap_url_format';
+    const URL_FORMAT_ALTERNATES = 'alternates';
+    const URL_FORMAT_SEPARATE = 'separate';
 
     public function register() {
         add_action( 'init', [ $this, 'init_sitemap_hooks' ], 99 );
         add_action( 'init', [ $this, 'check_yoast_compatibility' ] );
+    }
+
+    /**
+     * Get the sitemap settings fields.
+     *
+     * @return array
+     */
+    public function get_acf_fields() {
+        return [
+            [
+                'key' => 'field_aras_localize_sitemap_tab',
+                'label' => 'Sitemap',
+                'type' => 'tab',
+                'placement' => 'top',
+            ],
+            [
+                'key' => 'field_aras_localize_enable_sitemap',
+                'label' => 'Enable sitemap localization',
+                'name' => self::FIELD_ENABLE_SITEMAP,
+                'type' => 'true_false',
+                'ui' => 1,
+                'default_value' => 1,
+            ],
+            [
+                'key' => 'field_aras_localize_sitemap_url_format',
+                'label' => 'Localized URL format',
+                'name' => self::FIELD_SITEMAP_URL_FORMAT,
+                'type' => 'radio',
+                'choices' => [
+                    self::URL_FORMAT_ALTERNATES => 'Alternate links',
+                    self::URL_FORMAT_SEPARATE => 'Separate sitemap entries',
+                ],
+                'default_value' => self::URL_FORMAT_ALTERNATES,
+                'layout' => 'vertical',
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_aras_localize_enable_sitemap',
+                            'operator' => '==',
+                            'value' => '1',
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -17,11 +66,14 @@ class Sitemap {
      * @return void
      */
     public function init_sitemap_hooks() {
-        if ( ! $this->is_yoast_active() ) {
+        if ( ! $this->is_enabled() || ! $this->is_yoast_active() ) {
             return;
         }
 
-        add_filter( 'wpseo_sitemap_urlset', [ $this, 'add_xhtml_namespace' ] );
+        if ( self::URL_FORMAT_ALTERNATES === $this->get_url_format() ) {
+            add_filter( 'wpseo_sitemap_urlset', [ $this, 'add_xhtml_namespace' ] );
+        }
+
         add_filter( 'wpseo_sitemap_entry', [ $this, 'add_language_variants_to_entry' ], 10, 3 );
         add_filter( 'wpseo_sitemap_url', [ $this, 'add_language_variants_to_url' ], 10, 2 );
     }
@@ -32,7 +84,7 @@ class Sitemap {
      * @return void
      */
     public function check_yoast_compatibility() {
-        if ( ! $this->is_yoast_active() ) {
+        if ( $this->is_enabled() && ! $this->is_yoast_active() ) {
             add_action( 'admin_notices', [ $this, 'yoast_missing_notice' ] );
         }
     }
@@ -121,6 +173,10 @@ class Sitemap {
             return $output;
         }
 
+        if ( self::URL_FORMAT_SEPARATE === $this->get_url_format() ) {
+            return $this->add_separate_language_entries( $output, $url[ self::ALTERNATES_KEY ] );
+        }
+
         $alternate_links = [];
 
         foreach ( $url[ self::ALTERNATES_KEY ] as $lang_code => $localized_url ) {
@@ -140,6 +196,39 @@ class Sitemap {
         }
 
         return preg_replace( '/(\s*<\/url>\s*)$/', implode( '', $alternate_links ) . '$1', $output, 1 ) ?: $output;
+    }
+
+    /**
+     * Append each translated URL as its own sitemap entry.
+     *
+     * @param string               $output     The rendered source-language <url> XML.
+     * @param array<string,string> $alternates Localized URLs keyed by language code.
+     * @return string
+     */
+    private function add_separate_language_entries( $output, $alternates ) {
+        $entries = [];
+        $source_language = Common::get_source_language();
+
+        foreach ( $alternates as $lang_code => $localized_url ) {
+            if ( 'x-default' === $lang_code || $source_language === $lang_code || empty( $localized_url ) || ! is_string( $localized_url ) ) {
+                continue;
+            }
+
+            $entry = preg_replace_callback(
+                '/(<loc>).*?(<\/loc>)/s',
+                function ( $matches ) use ( $localized_url ) {
+                    return $matches[1] . esc_url( $localized_url ) . $matches[2];
+                },
+                $output,
+                1
+            );
+
+            if ( is_string( $entry ) && $entry !== $output ) {
+                $entries[] = $entry;
+            }
+        }
+
+        return $output . implode( '', $entries );
     }
 
     /**
@@ -219,5 +308,43 @@ class Sitemap {
      */
     private function is_yoast_active() {
         return defined( 'WPSEO_VERSION' ) && class_exists( 'WPSEO_Sitemaps' );
+    }
+
+    /**
+     * Check whether sitemap localization is enabled.
+     *
+     * @return bool
+     */
+    private function is_enabled() {
+        if ( ! function_exists( 'get_field' ) ) {
+            return true;
+        }
+
+        // Preserve the previously unconditional behavior until this new option
+        // has explicitly been saved on an existing installation.
+        if ( null === get_option( 'options_' . self::FIELD_ENABLE_SITEMAP, null ) ) {
+            return true;
+        }
+
+        $enabled = get_field( self::FIELD_ENABLE_SITEMAP, 'option' );
+
+        return (bool) $enabled;
+    }
+
+    /**
+     * Get the configured localized URL output format.
+     *
+     * @return string
+     */
+    private function get_url_format() {
+        if ( ! function_exists( 'get_field' ) ) {
+            return self::URL_FORMAT_ALTERNATES;
+        }
+
+        $format = get_field( self::FIELD_SITEMAP_URL_FORMAT, 'option' );
+
+        return self::URL_FORMAT_SEPARATE === $format
+            ? self::URL_FORMAT_SEPARATE
+            : self::URL_FORMAT_ALTERNATES;
     }
 }

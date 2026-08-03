@@ -23,7 +23,12 @@ Module settings:
 
 - `Language Switcher`
 - `Link List`
+- `Sitemap`
 - `Prerender`
+
+The sitemap module can be disabled entirely. When enabled, localized URLs can be
+included as hreflang alternate links on each source URL (the default) or as
+separate sitemap entries.
 
 ## Shortcodes
 
