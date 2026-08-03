@@ -161,7 +161,7 @@
   function updateLinks() {
     const EXCLUDED_PATHS = ['/wp-admin', '/wp-login', '/wp-content', '/wp-includes'];
     const currentLang = OVERRIDE_LANG || localStorage.getItem('loadedLang') || sourceLanguage;
-
+    const languagePattern = /^[a-z]{2}(?:-[a-z]{2})?$/i;
     
     const links = document.querySelectorAll('a:not([data-localize-ignore])');
     links.forEach((link) => {
@@ -169,6 +169,16 @@
         let url = new URL(link.href);
         if (url.hostname === document.domain) {
           if (url.pathname) {
+            const firstPathSegment = url.pathname.split('/').filter(Boolean)[0];
+            if (
+              firstPathSegment &&
+              languagePattern.test(firstPathSegment) &&
+              firstPathSegment.toLowerCase() !== currentLang.toLowerCase() &&
+              firstPathSegment.toLowerCase() !== sourceLanguage.toLowerCase()
+            ) {
+              return;
+            }
+
             for (let i = 0; i < EXCLUDED_PATHS.length; i++) {
               if (url.pathname.includes(EXCLUDED_PATHS[i])) {
                 return;
@@ -180,7 +190,6 @@
       }
     });
   }
-
   function init() {
     const containers = document.querySelectorAll(selector);
     if (containers.length ){
