@@ -216,6 +216,9 @@ class Prerender {
                 $ip = wp_remote_retrieve_body($ip_response);
                 error_log( 'Prerender request appears to be sending from IP: ' . $ip );
             }
+            else {
+                error_log( 'Could not determine our public IP address: ' . $ip_response->get_error_message() );
+            }
             return;
         }
 
