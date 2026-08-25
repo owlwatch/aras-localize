@@ -208,6 +208,9 @@ class Prerender {
         if( $status_code !== 200 ){
             error_log( 'Prerender request returned non-200 status: ' . $status_code . ' for ' . $current_url );
             error_log( 'Prerender response body: ' . $body );
+            // is there any way to debug the headers sent with the request? I'd like to know the 
+            // IP address that we appear to be sending from
+            error_log( 'Prerender response headers: ' . print_r($headers, true) );
             return;
         }
 
