@@ -207,6 +207,7 @@ class Prerender {
 
         if( $status_code !== 200 ){
             error_log( 'Prerender request returned non-200 status: ' . $status_code . ' for ' . $current_url );
+            error_log( 'Prerender response body: ' . $body );
             return;
         }
 
