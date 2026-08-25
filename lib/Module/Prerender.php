@@ -210,7 +210,12 @@ class Prerender {
             error_log( 'Prerender response body: ' . $body );
             // is there any way to debug the headers sent with the request? I'd like to know the 
             // IP address that we appear to be sending from
-            error_log( 'Prerender response headers: ' . print_r($headers, true) );
+            // what is our ip? lets ask canihazip.com
+            $ip_response = wp_remote_get('https://canihazip.com/s');
+            if (!is_wp_error($ip_response)) {
+                $ip = wp_remote_retrieve_body($ip_response);
+                error_log( 'Prerender request appears to be sending from IP: ' . $ip );
+            }
             return;
         }
 
