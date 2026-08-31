@@ -165,7 +165,6 @@ class Prerender {
         
         
         // we need the full url with the query string
-        error_log( 'Prerendering request for URL: ' . Common::get_current_url() );
         
         $server = $this->get_prerender_server();
         $current_url = Common::get_current_url(false);
@@ -205,27 +204,10 @@ class Prerender {
         $body = wp_remote_retrieve_body($response);
         $headers = wp_remote_retrieve_headers($response);
 
-        if( $status_code !== 200 ){
-            error_log( 'Prerender request returned non-200 status: ' . $status_code . ' for ' . $current_url );
-            error_log( 'Prerender response body: ' . $body );
-            // is there any way to debug the headers sent with the request? I'd like to know the 
-            // IP address that we appear to be sending from
-            $ip_response = wp_remote_get(
-                'https://api.ipify.org',
-                [
-                    'timeout' => 10,
-                    'redirection' => 5,
-                ]
-            );
-            if (!is_wp_error($ip_response)) {
-                $ip = wp_remote_retrieve_body($ip_response);
-                error_log( 'Prerender request appears to be sending from IP: ' . $ip );
-            }
-            else {
-                error_log( 'Could not determine our public IP address: ' . $ip_response->get_error_message() );
-            }
-            return;
-        }
+		if( $status_code !== 200 ){
+			error_log( 'Prerender request returned non-200 status: ' . $status_code . ' for ' . $current_url );
+			return;
+		}
 
         if ($status_code > 0) {
             status_header($status_code);
