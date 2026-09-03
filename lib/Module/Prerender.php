@@ -27,7 +27,48 @@ class Prerender {
      */
     public function register() {
         add_action('init', [$this, 'sanitize_request_flags'], 0);
+        add_action('template_redirect', [$this, 'maybe_redirect_malformed_prerender_url'], -1);
         add_action('template_redirect', [$this, 'maybe_proxy_request'], 0);
+    }
+
+    /**
+     * Redirect malformed prerender URLs whose query string starts with an ampersand.
+     *
+     * A URL such as `/zh-tw/contact&prerender=true&cache=true` is parsed entirely
+     * as a path and therefore resolves as a 404. Only repair confirmed 404s whose
+     * path contains a known prerender flag, preserving the rest of the request URI.
+     *
+     * @return void
+     */
+    public function maybe_redirect_malformed_prerender_url() {
+        if (!is_404() || empty($_SERVER['REQUEST_URI'])) {
+            return;
+        }
+
+        $request_uri = (string) $_SERVER['REQUEST_URI'];
+        $request_path = wp_parse_url($request_uri, PHP_URL_PATH);
+
+        if (!is_string($request_path) || $request_path === '') {
+            return;
+        }
+
+        $matched = preg_match(
+            '/&(prerender|nocache|cache)(?:=|&|$)/i',
+            $request_path,
+            $matches,
+            PREG_OFFSET_CAPTURE
+        );
+
+        if ($matched !== 1 || !isset($matches[0][1])) {
+            return;
+        }
+
+        $delimiter_offset = (int) $matches[0][1];
+        $corrected_uri = substr_replace($request_uri, '?', $delimiter_offset, 1);
+
+        if (wp_safe_redirect($corrected_uri, 301, 'Aras Localize')) {
+            exit;
+        }
     }
 
     public function get_acf_fields() {
